@@ -23,7 +23,15 @@ async function copy({ watch } = {}) {
     ncp('src/public', 'build/public'),
     ncp('src/content', 'build/content'),
     ncp('src/messages', 'build/messages'),
-  ]);
+    ncp('node_modules/admin-lte', 'build/public/AdminLTE'),
+  ]).then(() => {
+    // "/src/build/public/AdminLTE" must be existed before doing this step
+    ncp('node_modules/font-awesome', 'build/public/AdminLTE/plugins/font-awesome');
+    ncp('node_modules/ionicons', 'build/public/AdminLTE/plugins/ionicons');
+    ncp('node_modules/raphael', 'build/public/AdminLTE/plugins/raphael');
+    ncp('node_modules/moment', 'build/public/AdminLTE/plugins/moment');
+    ncp('node_modules/ckeditor', 'build/public/AdminLTE/plugins/ckeditor');
+  });
 
   await fs.writeFile('./build/package.json', JSON.stringify({
     private: true,

@@ -7,26 +7,102 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Layout.css';
 import Header from '../Header';
-import Feedback from '../Feedback';
+import AsideLeft from '../AsideLeft';
+import Content from '../Content';
+import AsideRight from '../AsideRight';
 import Footer from '../Footer';
 
-function Layout({ children }) {
-  return (
-    <div>
-      <Header />
-      {React.Children.only(children)}
-      <Feedback />
-      <Footer />
-    </div>
-  );
-}
+class Layout extends Component {
 
-Layout.propTypes = {
-  children: PropTypes.element.isRequired,
-};
+  static propTypes = {
+    childrenProps: PropTypes.object,
+    children: PropTypes.element.isRequired,
+    bodyClasses: PropTypes.string,
+    isBoxed: PropTypes.bool,
+    isCollapsedSidebar: PropTypes.bool,
+    isFixed: PropTypes.bool,
+    isTopNav: PropTypes.bool,
+    isFullWidth: PropTypes.bool,
+  };
+
+  componentDidMount() {
+    const BODY_CLASSES = 'hold-transition skin-blue sidebar-mini';
+    let classes = BODY_CLASSES;
+    const {
+      isBoxed,
+      isCollapsedSidebar,
+      isFixed,
+      isTopNav,
+      bodyClasses,
+    } = this.props;
+
+    if (isBoxed) {
+      classes += ' layout-boxed';
+    } else if (isCollapsedSidebar) {
+      classes += ' sidebar-collapse';
+    } else if (isFixed) {
+      classes += ' fixed';
+    } else if (isTopNav) {
+      classes += ' layout-top-nav';
+    }
+
+    if (typeof bodyClasses === 'string' && bodyClasses !== BODY_CLASSES) {
+      document.body.className = bodyClasses;
+    } else {
+      document.body.className = classes;
+    }
+  }
+
+  renderInnerPage() {
+    return (
+      <div className="wrapper">
+        <Header />
+        <AsideLeft />
+        <Content {...this.props.childrenProps}>
+          {React.Children.only(this.props.children)}
+        </Content>
+        <AsideRight />
+        <div className="control-sidebar-bg"/>
+        <Footer />
+      </div>
+    );
+  };
+
+  // Render page without Asides and with TopNav
+  renderTopNavPage() {
+    return (
+      <div className="wrapper">
+        <Header useNavigation/>
+        <Content {...this.props.childrenProps}>
+          {React.Children.only(this.props.children)}
+        </Content>
+        <Footer />
+      </div>
+    );
+  };
+
+  // Render without components
+  renderFullWidthPage() {
+    return React.Children.only(this.props.children);
+  };
+
+  render() {
+    const { isTopNav, isFullWidth } = this.props;
+
+    if (this.props.childrenProps && this.props.childrenProps.content && !isFullWidth) {
+      if (isTopNav) {
+        return this.renderTopNavPage();
+      } else {
+        return this.renderInnerPage();
+      }
+    }
+
+    return this.renderFullWidthPage();
+  }
+}
 
 export default withStyles(s)(Layout);

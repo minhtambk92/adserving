@@ -1,0 +1,6 @@
+{
+  "name": "AsideLeft",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./AsideLeft.js"
+}
