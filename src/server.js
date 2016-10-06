@@ -166,6 +166,7 @@ app.get('*', async (req, res, next) => {
     };
 
     const route = await UniversalRouter.resolve(routes, {
+      ...context,
       path: req.path,
       query: req.query,
     });
@@ -205,11 +206,13 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
       style={errorPageStyle._getCss()} // eslint-disable-line no-underscore-dangle
       lang={locale}
     >
-      <IntlProvider
-        locale={locale}
-      >
-        {ReactDOM.renderToString(<ErrorPageWithoutStyle error={err} />)}
-      </IntlProvider>
+      {ReactDOM.renderToString(
+        <IntlProvider
+          locale={locale}
+        >
+          <ErrorPageWithoutStyle error={err} />
+        </IntlProvider>
+      )}
     </Html>
   );
   res.status(err.status || 500);
