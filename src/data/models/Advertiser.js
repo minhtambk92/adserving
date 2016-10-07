@@ -14,12 +14,12 @@ const Advertisers = Model.define('Advertisers', {
 
   id: {
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV1,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
   email: {
     type: DataType.STRING(255),
-    validate: {isEmail: true},
+    validate: { isEmail: true },
   },
   name: {
     type: DataType.STRING(255),
@@ -46,7 +46,7 @@ const Advertisers = Model.define('Advertisers', {
   paranoid: true,
 
   indexes: [
-    {fields: ['email']},
+    { fields: ['email'] },
   ],
 
 });

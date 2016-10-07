@@ -13,7 +13,7 @@ import Model from "../sequelize";
 const Banner = Model.define('Banner', {
   id: {
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV1,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
   contentType: {

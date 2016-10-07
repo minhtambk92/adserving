@@ -17,10 +17,10 @@ import {
 const UserMetaType = new ObjectType({
   name: 'UserMeta',
   fields: {
-    id: {type: new NonNull(ID)},
-    userId: {type: new NonNull(ID)},
-    name: {type: StringType},
-    value: {type: StringType},
+    id: { type: new NonNull(ID) },
+    userId: { type: new NonNull(ID) },
+    name: { type: StringType },
+    value: { type: StringType },
 
   },
 });

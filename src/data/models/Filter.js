@@ -13,12 +13,12 @@ import Model from "../sequelize";
 const Filter = Model.define('Filter', {
   id: {
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV1,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
   userId: {
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV1,
+    defaultValue: DataType.UUIDV4,
   },
   name: {
     type: DataType.STRING(255),

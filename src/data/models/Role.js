@@ -13,7 +13,7 @@ import Model from '../sequelize';
 const Role = Model.define('Role', {
   id: {
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV1,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
   name: {

@@ -17,8 +17,8 @@ import {
 const PermissionType = new ObjectType({
   name: 'Permission',
   fields: {
-    id: {type: new NonNull(ID)},
-    name: {type: StringType}
+    id: { type: new NonNull(ID) },
+    name: { type: StringType }
 
   },
 });

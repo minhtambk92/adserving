@@ -6,14 +6,18 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-import {GraphQLObjectType as ObjectType, GraphQLID as ID, GraphQLNonNull as NonNull,} from 'graphql';
+import {
+  GraphQLObjectType as ObjectType,
+  GraphQLID as ID,
+  GraphQLNonNull as NonNull,
+} from 'graphql';
 
 const CampaignPlacementType = new ObjectType({
   name: 'CampaignPlacement',
   fields: {
-    id: {type: new NonNull(ID)},
-    campaignId: {type: new NonNull(ID)},
-    placementId: {type: new NonNull(ID)},
+    id: { type: new NonNull(ID) },
+    campaignId: { type: new NonNull(ID) },
+    placementId: { type: new NonNull(ID) },
 
 
   },

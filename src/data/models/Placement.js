@@ -14,7 +14,7 @@ const Placement = Model.define('Placement', {
 
   id: {
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV1,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
   name: {

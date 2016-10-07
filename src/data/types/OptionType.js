@@ -11,17 +11,17 @@ import {
   GraphQLObjectType as ObjectType,
   GraphQLID as ID,
   GraphQLString as StringType,
-GraphQLBoolean as BooleanType,
+  GraphQLBoolean as BooleanType,
   GraphQLNonNull as NonNull
 } from "graphql";
 
 const OptionType = new ObjectType({
   name: 'Option',
   fields: {
-    id: {type: new NonNull(ID)},
-    name: {type: StringType},
-    value: {type: StringType},
-    autoLoad: {type: BooleanType},
+    id: { type: new NonNull(ID) },
+    name: { type: StringType },
+    value: { type: StringType },
+    autoLoad: { type: BooleanType },
 
   },
 });

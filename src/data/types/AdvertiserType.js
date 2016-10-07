@@ -18,13 +18,13 @@ import {
 const AdvertiserType = new ObjectType({
   name: 'Advertiser',
   fields: {
-    id: {type: new NonNull(ID)},
-    email: {type: StringType},
-    name: {type: StringType},
-    contact: {type: StringType},
-    description: {type: StringType},
-    dateLastOnline: {type: DateType},
-    status: {type: StringType}
+    id: { type: new NonNull(ID) },
+    email: { type: StringType },
+    name: { type: StringType },
+    contact: { type: StringType },
+    description: { type: StringType },
+    dateLastOnline: { type: DateType },
+    status: { type: StringType }
   },
 });
 

@@ -1,6 +1,6 @@
-import {GraphQLInputObjectType as InputObjectType} from "graphql";
-import {attributeFields} from "graphql-sequelize";
-import {User} from "../models";
+import { GraphQLInputObjectType as InputObjectType } from "graphql";
+import { attributeFields } from "graphql-sequelize";
+import { User } from "../models";
 
 const UserInputType = new InputObjectType({
   name: 'UserInputType',

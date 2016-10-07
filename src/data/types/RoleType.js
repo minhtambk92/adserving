@@ -17,8 +17,8 @@ import {
 const RoleType = new ObjectType({
   name: 'Role',
   fields: {
-    id: {type: new NonNull(ID)},
-    name: {type: StringType}
+    id: { type: new NonNull(ID) },
+    name: { type: StringType }
 
   },
 });
