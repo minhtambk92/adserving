@@ -34,6 +34,7 @@ User.hasOne(UserProfile, {
   onDelete: 'cascade',
 });
 
+
 function sync(...args) {
   return sequelize.sync(...args);
 }
