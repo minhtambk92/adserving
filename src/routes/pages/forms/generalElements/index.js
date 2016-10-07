@@ -15,15 +15,9 @@ export default {
   path: '/pages/forms/general',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'General Form Elements | Admin Dev Kit',
-      pageTitle: 'General Form Elements',
-      pageSubTitle: 'Preview',
-    };
-
     return {
-      title: content.title,
-      component: <GeneralElements content={content} />,
+      title: 'General Form Elements | Admin Dev Kit',
+      component: <GeneralElements />,
     };
   },
 

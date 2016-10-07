@@ -3,19 +3,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../../../components/Layout';
 import s from './Flot.css';
 
-class Flot extends Component {
+const pageTitle = 'Flot Charts';
+const pageSubTitle = 'Preview sample';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class Flot extends Component {
 
   componentDidMount() {
     $(() => {
@@ -354,7 +345,7 @@ class Flot extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           <div className="row">
             <div className="col-xs-12">

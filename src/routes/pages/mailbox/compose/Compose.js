@@ -4,23 +4,14 @@ import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './Compose.css';
 
-class Compose extends Component {
+const pageTitle = 'Compose';
+const pageSubTitle = 'write new email';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class Compose extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           <div className="row">
             <div className="col-md-3">

@@ -4,19 +4,10 @@ import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
 import s from './Calendar.css';
 
-class Calendar extends Component {
+const pageTitle = 'Calendar';
+const pageSubTitle = 'Control panel';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class Calendar extends Component {
 
   componentDidMount() {
     $(function () {
@@ -183,7 +174,7 @@ class Calendar extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           <div className="row">
             <div className="col-md-3">

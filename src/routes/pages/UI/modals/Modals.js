@@ -4,23 +4,14 @@ import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './Modals.css';
 
-class Modals extends Component {
+const pageTitle = 'Modals';
+const pageSubTitle = 'new';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class Modals extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           <div className="callout callout-info">
             <h4>Reminder!</h4>

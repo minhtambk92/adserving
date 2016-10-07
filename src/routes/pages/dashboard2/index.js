@@ -27,17 +27,14 @@ export default {
       }),
       credentials: 'include',
     });
+
     const { data } = await resp.json();
+
     if (!data || !data.news) throw new Error('Failed to load the news feed.');
-    let content = { // eslint-disable-line prefer-const
-      title: 'Home 2 | Admin Dev Kit',
-      pageTitle: 'Home 2',
-      pageSubTitle: 'Version 2.0',
-      news: data.news,
-    };
+
     return {
-      title: content.title,
-      component: <Dashboard2 content={content} />,
+      title: 'Home 2 | Admin Dev Kit',
+      component: <Dashboard2 />,
     };
   },
 

@@ -19,8 +19,9 @@ import Footer from '../Footer';
 class Layout extends Component {
 
   static propTypes = {
-    childrenProps: PropTypes.object,
     children: PropTypes.element.isRequired,
+    pageTitle: PropTypes.string,
+    pageSubTitle: PropTypes.string,
     bodyClasses: PropTypes.string,
     isBoxed: PropTypes.bool,
     isCollapsedSidebar: PropTypes.bool,
@@ -62,43 +63,42 @@ class Layout extends Component {
       <div className="wrapper">
         <Header />
         <AsideLeft />
-        <Content {...this.props.childrenProps}>
+        <Content pageTitle={this.props.pageTitle} pageSubTitle={this.props.pageSubTitle}>
           {React.Children.only(this.props.children)}
         </Content>
         <AsideRight />
-        <div className="control-sidebar-bg"/>
+        <div className="control-sidebar-bg" />
         <Footer />
       </div>
     );
-  };
+  }
 
   // Render page without Asides and with TopNav
   renderTopNavPage() {
     return (
       <div className="wrapper">
-        <Header useNavigation/>
-        <Content {...this.props.childrenProps}>
+        <Header useNavigation />
+        <Content pageTitle={this.props.pageTitle} pageSubTitle={this.props.pageSubTitle}>
           {React.Children.only(this.props.children)}
         </Content>
         <Footer />
       </div>
     );
-  };
+  }
 
   // Render without components
   renderFullWidthPage() {
     return React.Children.only(this.props.children);
-  };
+  }
 
   render() {
     const { isTopNav, isFullWidth } = this.props;
 
-    if (this.props.childrenProps && this.props.childrenProps.content && !isFullWidth) {
+    if (this.props.pageTitle && !isFullWidth) {
       if (isTopNav) {
         return this.renderTopNavPage();
-      } else {
-        return this.renderInnerPage();
       }
+      return this.renderInnerPage();
     }
 
     return this.renderFullWidthPage();

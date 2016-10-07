@@ -15,15 +15,9 @@ export default {
   path: '/pages/mailbox/compose',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Compose | Admin Dev Kit',
-      pageTitle: 'Compose',
-      pageSubTitle: 'write new email',
-    };
-
     return {
-      title: content.title,
-      component: <Compose content={content} />,
+      title: 'Compose | Admin Dev Kit',
+      component: <Compose />,
     };
   },
 

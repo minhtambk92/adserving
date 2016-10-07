@@ -4,23 +4,14 @@ import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './General.css';
 
-class General extends Component {
+const pageTitle = 'General UI';
+const pageSubTitle = 'Preview of UI elements';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class General extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           { /* COLOR PALETTE */ }
           <div className={'box box-default '.concat(s['color-palette-box'])}>

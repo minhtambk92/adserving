@@ -4,23 +4,14 @@ import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './Blank.css';
 
-class Blank extends Component {
+const pageTitle = 'Blank page';
+const pageSubTitle = 'it all starts here';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class Blank extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           {/* Default box */}
           <div className="box">

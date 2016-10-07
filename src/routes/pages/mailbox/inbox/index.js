@@ -15,15 +15,9 @@ export default {
   path: '/pages/mailbox/inbox',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Mailbox | Admin Dev Kit',
-      pageTitle: 'Mailbox',
-      pageSubTitle: '13 new messages',
-    };
-
     return {
-      title: content.title,
-      component: <Inbox content={content} />,
+      title: 'Mailbox | Admin Dev Kit',
+      component: <Inbox />,
     };
   },
 

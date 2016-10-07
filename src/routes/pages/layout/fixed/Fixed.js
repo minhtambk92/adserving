@@ -3,23 +3,14 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../../../components/Layout';
 import s from './Fixed.css';
 
-class Fixed extends Component {
+const pageTitle = 'Fixed Layout';
+const pageSubTitle = 'Blank example to the fixed layout';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class Fixed extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props} isFixed>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle} isFixed>
         <div>
           <div className="callout callout-info">
             <h4>Tip!</h4>

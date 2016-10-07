@@ -6,14 +6,6 @@ import s from './Login.css';
 
 class Login extends Component {
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-    }).isRequired,
-  };
-
   componentDidMount() {
     $(function () {
       $('input').iCheck({
@@ -26,7 +18,7 @@ class Login extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props} bodyClasses="hold-transition login-page" isFullWidth>
+      <Layout bodyClasses="hold-transition login-page" isFullWidth>
         <div>
           <div className="login-box">
             <div className="login-logo">

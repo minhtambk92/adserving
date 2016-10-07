@@ -3,20 +3,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../../../components/Layout';
 import s from './Pace.css';
 
+const pageTitle = 'Pace page';
+const pageSubTitle = 'Loading example';
+
 class Pace extends Component {
-
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
-
   componentDidMount() {
     // To make Pace works on Ajax calls
     $(document).ajaxStart(function () {
@@ -33,7 +23,7 @@ class Pace extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           {/* Default box */}
           <div className="box">

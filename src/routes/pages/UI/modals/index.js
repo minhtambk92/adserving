@@ -15,15 +15,9 @@ export default {
   path: '/pages/UI/modals',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Modals | Admin Dev Kit',
-      pageTitle: 'Modals',
-      pageSubTitle: 'new',
-    };
-
     return {
-      title: content.title,
-      component: <Modals content={content} />,
+      title: 'Modals | Admin Dev Kit',
+      component: <Modals />,
     };
   },
 

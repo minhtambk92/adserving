@@ -15,15 +15,9 @@ export default {
   path: '/pages/examples/invoice',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Invoice | Admin Dev Kit',
-      pageTitle: 'Invoice',
-      pageSubTitle: '#007612',
-    };
-
     return {
-      title: content.title,
-      component: <Invoice content={content} />,
+      title: 'Invoice | Admin Dev Kit',
+      component: <Invoice />,
     };
   },
 

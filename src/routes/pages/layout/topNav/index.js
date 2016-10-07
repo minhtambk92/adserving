@@ -15,15 +15,9 @@ export default {
   path: '/pages/layout/top-nav',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Top Navigation | Admin Dev Kit',
-      pageTitle: 'Top Navigation',
-      pageSubTitle: 'it all starts here',
-    };
-
     return {
-      title: content.title,
-      component: <TopNav content={content} />,
+      title: 'Top Navigation | Admin Dev Kit',
+      component: <TopNav />,
     };
   },
 

@@ -15,15 +15,9 @@ export default {
   path: '/pages/charts/morris',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Morris.js Charts | Admin Dev Kit',
-      pageTitle: 'Morris Charts',
-      pageSubTitle: 'Preview sample',
-    };
-
     return {
-      title: content.title,
-      component: <Morris content={content} />,
+      title: 'Morris.js Charts | Admin Dev Kit',
+      component: <Morris />,
     };
   },
 

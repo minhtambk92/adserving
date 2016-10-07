@@ -15,15 +15,9 @@ export default {
   path: '/pages/widgets',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Widgets | Admin Dev Kit',
-      pageTitle: 'Widgets Page',
-      pageSubTitle: 'Optional description',
-    };
-
     return {
-      title: content.title,
-      component: <Widgets content={content} />,
+      title: 'Widgets | Admin Dev Kit',
+      component: <Widgets />,
     };
   },
 

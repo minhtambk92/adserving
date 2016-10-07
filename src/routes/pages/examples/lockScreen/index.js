@@ -15,13 +15,9 @@ export default {
   path: '/pages/examples/lockscreen',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Lock Screen | Admin Dev Kit',
-    };
-
     return {
-      title: content.title,
-      component: <LockScreen content={content} />,
+      title: 'Lock Screen | Admin Dev Kit',
+      component: <LockScreen />,
     };
   },
 

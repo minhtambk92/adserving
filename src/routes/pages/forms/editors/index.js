@@ -15,15 +15,9 @@ export default {
   path: '/pages/forms/editors',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Editors | Admin Dev Kit',
-      pageTitle: 'Text Editors',
-      pageSubTitle: 'Advanced form element',
-    };
-
     return {
-      title: content.title,
-      component: <Editors content={content} />,
+      title: 'Editors | Admin Dev Kit',
+      component: <Editors />,
     };
   },
 

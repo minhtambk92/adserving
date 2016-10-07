@@ -3,19 +3,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../../../components/Layout';
 import s from './Inline.css';
 
-class Inline extends Component {
+const pageTitle = 'Inline Charts';
+const pageSubTitle = 'Preview sample';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class Inline extends Component {
 
   componentDidMount() {
     $(() => {
@@ -342,7 +333,7 @@ class Inline extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           { /* row */ }
           <div className="row">

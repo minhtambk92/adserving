@@ -15,15 +15,9 @@ export default {
   path: '/pages/charts/inline',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Inline Charts | Admin Dev Kit',
-      pageTitle: 'Inline Charts',
-      pageSubTitle: 'Preview sample',
-    };
-
     return {
-      title: content.title,
-      component: <Inline content={content} />,
+      title: 'Inline Charts | Admin Dev Kit',
+      component: <Inline />,
     };
   },
 

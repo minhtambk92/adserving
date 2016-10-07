@@ -15,15 +15,9 @@ export default {
   path: '/pages/UI/general',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'General UI | Admin Dev Kit',
-      pageTitle: 'General UI',
-      pageSubTitle: 'Preview of UI elements',
-    };
-
     return {
-      title: content.title,
-      component: <General content={content} />,
+      title: 'General UI | Admin Dev Kit',
+      component: <General />,
     };
   },
 

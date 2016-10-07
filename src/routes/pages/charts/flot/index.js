@@ -15,15 +15,9 @@ export default {
   path: '/pages/charts/flot',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Flot Charts | Admin Dev Kit',
-      pageTitle: 'Flot Charts',
-      pageSubTitle: 'Preview sample',
-    };
-
     return {
-      title: content.title,
-      component: <Flot content={content} />,
+      title: 'Flot Charts | Admin Dev Kit',
+      component: <Flot />,
     };
   },
 

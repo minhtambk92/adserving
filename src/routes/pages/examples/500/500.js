@@ -4,23 +4,14 @@ import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './500.css';
 
-class Page500 extends Component {
+const pageTitle = '500 Error Page';
+const pageSubTitle = '';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class Page500 extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           <div className="error-page">
             <h2 className="headline text-red">500</h2>

@@ -15,15 +15,9 @@ export default {
   path: '/pages/examples/profile',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'User Profile | Admin Dev Kit',
-      pageTitle: 'User Profile',
-      pageSubTitle: '#007612',
-    };
-
     return {
-      title: content.title,
-      component: <Profile content={content} />,
+      title: 'User Profile | Admin Dev Kit',
+      component: <Profile />,
     };
   },
 

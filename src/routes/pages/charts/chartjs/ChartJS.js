@@ -3,19 +3,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../../../components/Layout';
 import s from './ChartJS.css';
 
-class ChartJS extends Component {
+const pageTitle = 'ChartJS Page';
+const pageSubTitle = 'Preview sample';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class ChartJS extends Component {
 
   componentDidMount() {
     $(() => {
@@ -231,7 +222,7 @@ class ChartJS extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           <div className="row">
             <div className="col-md-6">

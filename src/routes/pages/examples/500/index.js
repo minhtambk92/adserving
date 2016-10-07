@@ -15,15 +15,9 @@ export default {
   path: '/pages/examples/500',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: '500 Error | Admin Dev Kit',
-      pageTitle: '500 Error Page',
-      pageSubTitle: '',
-    };
-
     return {
-      title: content.title,
-      component: <Page500 content={content} />,
+      title: '500 Error | Admin Dev Kit',
+      component: <Page500 />,
     };
   },
 

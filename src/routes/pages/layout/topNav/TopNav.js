@@ -3,23 +3,14 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../../../components/Layout';
 import s from './TopNav.css';
 
-class TopNav extends Component {
+const pageTitle = 'Top Navigation';
+const pageSubTitle = 'it all starts here';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class TopNav extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props} isTopNav>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle} isTopNav>
         <div>
           <div className="callout callout-info">
             <h4>Tip!</h4>

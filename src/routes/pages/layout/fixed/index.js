@@ -15,15 +15,9 @@ export default {
   path: '/pages/layout/fixed',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Fixed Layout | Admin Dev Kit',
-      pageTitle: 'Fixed Layout',
-      pageSubTitle: 'Blank example to the fixed layout',
-    };
-
     return {
-      title: content.title,
-      component: <Fixed content={content} />,
+      title: 'Fixed Layout | Admin Dev Kit',
+      component: <Fixed />,
     };
   },
 

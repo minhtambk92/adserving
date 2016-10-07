@@ -15,15 +15,9 @@ export default {
   path: '/pages/charts/chartjs',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'ChartJS | Admin Dev Kit',
-      pageTitle: 'ChartJS Page',
-      pageSubTitle: 'Preview sample',
-    };
-
     return {
-      title: content.title,
-      component: <ChartJS content={content} />,
+      title: 'ChartJS | Admin Dev Kit',
+      component: <ChartJS />,
     };
   },
 

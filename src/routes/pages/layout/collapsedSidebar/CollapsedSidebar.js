@@ -3,23 +3,14 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../../../components/Layout';
 import s from './CollapsedSidebar.css';
 
-class CollapsedSidebar extends Component {
+const pageTitle = 'Sidebar Collapsed';
+const pageSubTitle = 'Layout with collapsed sidebar on load';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class CollapsedSidebar extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props} isCollapsedSidebar>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle} isCollapsedSidebar>
         <div>
           <div className="callout callout-info">
             <h4>Tip!</h4>

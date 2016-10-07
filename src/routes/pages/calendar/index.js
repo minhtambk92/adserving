@@ -15,15 +15,9 @@ export default {
   path: '/pages/calendar',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Calendar | Admin Dev Kit',
-      pageTitle: 'Calendar',
-      pageSubTitle: 'Control panel',
-    };
-
     return {
-      title: content.title,
-      component: <Calendar content={content} />,
+      title: 'Calendar | Admin Dev Kit',
+      component: <Calendar />,
     };
   },
 

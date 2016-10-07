@@ -15,15 +15,9 @@ export default {
   path: '/pages/examples/pace',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Pace page | Admin Dev Kit',
-      pageTitle: 'Pace page',
-      pageSubTitle: 'Loading example',
-    };
-
     return {
-      title: content.title,
-      component: <Pace content={content} />,
+      title: 'Pace page | Admin Dev Kit',
+      component: <Pace />,
     };
   },
 

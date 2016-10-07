@@ -15,15 +15,9 @@ export default {
   path: '/pages/forms/advanced',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Advanced Form Elements | Admin Dev Kit',
-      pageTitle: 'Advanced Form Elements',
-      pageSubTitle: 'Preview',
-    };
-
     return {
-      title: content.title,
-      component: <AdvancedElements content={content} />,
+      title: 'Advanced Form Elements | Admin Dev Kit',
+      component: <AdvancedElements />,
     };
   },
 

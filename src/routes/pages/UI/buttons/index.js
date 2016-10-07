@@ -15,15 +15,9 @@ export default {
   path: '/pages/UI/buttons',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Buttons | Admin Dev Kit',
-      pageTitle: 'Buttons',
-      pageSubTitle: 'Control Panel',
-    };
-
     return {
-      title: content.title,
-      component: <Buttons content={content} />,
+      title: 'Buttons | Admin Dev Kit',
+      component: <Buttons />,
     };
   },
 

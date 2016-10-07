@@ -15,15 +15,9 @@ export default {
   path: '/pages/layout/boxed',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Boxed Layout | Admin Dev Kit',
-      pageTitle: 'Boxed Layout',
-      pageSubTitle: 'Blank example to the boxed layout',
-    };
-
     return {
-      title: content.title,
-      component: <Boxed content={content} />,
+      title: 'Boxed Layout | Admin Dev Kit',
+      component: <Boxed />,
     };
   },
 

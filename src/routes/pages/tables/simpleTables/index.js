@@ -15,15 +15,9 @@ export default {
   path: '/pages/tables/simple',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Simple Tables | Admin Dev Kit',
-      pageTitle: 'Simple Tables',
-      pageSubTitle: 'preview of simple tables',
-    };
-
     return {
-      title: content.title,
-      component: <SimpleTables content={content} />,
+      title: 'Simple Tables | Admin Dev Kit',
+      component: <SimpleTables />,
     };
   },
 

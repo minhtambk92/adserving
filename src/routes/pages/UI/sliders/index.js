@@ -15,15 +15,9 @@ export default {
   path: '/pages/UI/sliders',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'UI Sliders | Admin Dev Kit',
-      pageTitle: 'Sliders',
-      pageSubTitle: 'range sliders',
-    };
-
     return {
-      title: content.title,
-      component: <Sliders content={content} />,
+      title: 'UI Sliders | Admin Dev Kit',
+      component: <Sliders />,
     };
   },
 

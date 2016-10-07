@@ -29,15 +29,10 @@ export default {
     });
     const { data } = await resp.json();
     if (!data || !data.news) throw new Error('Failed to load the news feed.');
-    let content = { // eslint-disable-line prefer-const
-      title: 'Home | Admin Dev Kit',
-      pageTitle: 'Home',
-      pageSubTitle: 'Control panel',
-      news: data.news,
-    };
+
     return {
-      title: 'React Starter Kit',
-      component: <Home content={content} />,
+      title: 'Home | Admin Dev Kit',
+      component: <Home news={data.news} />,
     };
   },
 

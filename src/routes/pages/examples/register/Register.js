@@ -6,14 +6,6 @@ import s from './Register.css';
 
 class Register extends Component {
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-    }).isRequired,
-  };
-
   componentDidMount() {
     $(function () {
       $('input').iCheck({
@@ -26,7 +18,7 @@ class Register extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props} bodyClasses="hold-transition register-page" isFullWidth>
+      <Layout bodyClasses="hold-transition register-page" isFullWidth>
         <div>
           <div className="register-box">
             <div className="register-logo">

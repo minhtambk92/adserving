@@ -15,13 +15,9 @@ export default {
   path: '/pages/examples/register',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Register | Admin Dev Kit',
-    };
-
     return {
-      title: content.title,
-      component: <Register content={content} />,
+      title: 'Register | Admin Dev Kit',
+      component: <Register />,
     };
   },
 

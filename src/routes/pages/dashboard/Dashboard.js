@@ -13,24 +13,17 @@ import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
 import s from './Dashboard.css';
 
+const pageTitle = 'Home';
+const pageSubTitle = 'Control panel';
+
 class Dashboard extends Component {
 
   static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
+    news: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-      // News object
-      news: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
-        contentSnippet: PropTypes.string,
-      })).isRequired,
-    }).isRequired,
+      link: PropTypes.string.isRequired,
+      contentSnippet: PropTypes.string,
+    })).isRequired,
   };
 
   componentDidMount() {
@@ -254,7 +247,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           {/* Small boxes (Stat box) */}
           <div className="row">

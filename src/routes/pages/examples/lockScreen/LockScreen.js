@@ -6,29 +6,9 @@ import s from './LockScreen.css';
 
 class LockScreen extends Component {
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-    }).isRequired,
-  };
-
-  static contextTypes = {
-    setBodyClasses: PropTypes.func.isRequired,
-  };
-
-  constructor(props, context) {
-    super(props, context);
-
-    if (context.setBodyClasses) {
-      context.setBodyClasses('hold-transition lockscreen');
-    }
-  }
-
   render() {
     return (
-      <Layout childrenProps={this.props} isFullWidth>
+      <Layout bodyClasses="hold-transition lockscreen" isFullWidth>
         <div>
           <div className="lockscreen-wrapper">
             <div className="lockscreen-logo">

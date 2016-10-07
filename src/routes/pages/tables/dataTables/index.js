@@ -15,15 +15,9 @@ export default {
   path: '/pages/tables/data',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Data Tables | Admin Dev Kit',
-      pageTitle: 'Data Tables',
-      pageSubTitle: 'advanced tables',
-    };
-
     return {
-      title: content.title,
-      component: <DataTables content={content} />,
+      title: 'Data Tables | Admin Dev Kit',
+      component: <DataTables />,
     };
   },
 

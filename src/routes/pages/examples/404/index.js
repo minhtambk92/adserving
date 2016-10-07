@@ -15,15 +15,9 @@ export default {
   path: '/pages/examples/404',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: '404 Page not found | Admin Dev Kit',
-      pageTitle: '404 Error Page',
-      pageSubTitle: '',
-    };
-
     return {
-      title: content.title,
-      component: <Page404 content={content} />,
+      title: '404 Page not found | Admin Dev Kit',
+      component: <Page404 />,
     };
   },
 

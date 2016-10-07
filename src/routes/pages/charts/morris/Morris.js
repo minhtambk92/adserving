@@ -3,19 +3,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../../../components/Layout';
 import s from './Morris.css';
 
-class Morris extends Component {
+const pageTitle = 'Morris Charts';
+const pageSubTitle = 'Preview sample';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class Morris extends Component {
 
   componentDidMount() {
     $(function () {
@@ -104,7 +95,7 @@ class Morris extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           <div className="callout callout-warning">
             <h4>Warning!</h4>

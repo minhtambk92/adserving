@@ -15,15 +15,9 @@ export default {
   path: '/pages/UI/icons',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Icons | Admin Dev Kit',
-      pageTitle: 'Icons',
-      pageSubTitle: 'a set of beautiful icons',
-    };
-
     return {
-      title: content.title,
-      component: <Icons content={content} />,
+      title: 'Icons | Admin Dev Kit',
+      component: <Icons />,
     };
   },
 

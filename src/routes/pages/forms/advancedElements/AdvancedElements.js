@@ -4,19 +4,10 @@ import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './AdvancedElements.css';
 
-class AdvancedElements extends Component {
+const pageTitle = 'Advanced Form Elements';
+const pageSubTitle = 'Preview';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class AdvancedElements extends Component {
 
   componentDidMount() {
     $(function () {
@@ -96,7 +87,7 @@ class AdvancedElements extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           {/* SELECT2 EXAMPLE */}
           <div className="box box-default">

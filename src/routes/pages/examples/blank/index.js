@@ -15,15 +15,9 @@ export default {
   path: '/pages/examples/blank',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Blank page | Admin Dev Kit',
-      pageTitle: 'Blank page',
-      pageSubTitle: 'it all starts here',
-    };
-
     return {
-      title: content.title,
-      component: <Blank content={content} />,
+      title: 'Blank page | Admin Dev Kit',
+      component: <Blank />,
     };
   },
 

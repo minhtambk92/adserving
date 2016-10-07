@@ -15,15 +15,9 @@ export default {
   path: '/pages/UI/timeline',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Timeline | Admin Dev Kit',
-      pageTitle: 'Timeline',
-      pageSubTitle: 'example',
-    };
-
     return {
-      title: content.title,
-      component: <Timeline content={content} />,
+      title: 'Timeline | Admin Dev Kit',
+      component: <Timeline />,
     };
   },
 

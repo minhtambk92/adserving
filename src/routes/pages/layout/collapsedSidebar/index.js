@@ -15,15 +15,9 @@ export default {
   path: '/pages/layout/collapsed-sidebar',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Collapsed Sidebar | Admin Dev Kit',
-      pageTitle: 'Sidebar Collapsed',
-      pageSubTitle: 'Layout with collapsed sidebar on load',
-    };
-
     return {
-      title: content.title,
-      component: <CollapsedSidebar content={content} />,
+      title: 'Collapsed Sidebar | Admin Dev Kit',
+      component: <CollapsedSidebar />,
     };
   },
 

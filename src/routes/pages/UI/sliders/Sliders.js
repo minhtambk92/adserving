@@ -3,19 +3,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../../../components/Layout';
 import s from './Sliders.css';
 
-class Sliders extends Component {
+const pageTitle = 'Sliders';
+const pageSubTitle = 'range sliders';
 
-  static propTypes = {
-    // Wrap all props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-      // Page title
-      pageTitle: PropTypes.string.isRequired,
-      // Page subtitle
-      pageSubTitle: PropTypes.string,
-    }).isRequired,
-  };
+class Sliders extends Component {
 
   componentDidMount() {
     $(function () { // eslint-disable-line func-names, prefer-arrow-callback
@@ -91,7 +82,7 @@ class Sliders extends Component {
 
   render() {
     return (
-      <Layout childrenProps={this.props}>
+      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
           <div className="row">
             <div className="col-xs-12">

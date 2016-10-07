@@ -15,13 +15,9 @@ export default {
   path: '/pages/examples/login',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Login | Admin Dev Kit',
-    };
-
     return {
-      title: content.title,
-      component: <Login content={content} />,
+      title: 'Login | Admin Dev Kit',
+      component: <Login />,
     };
   },
 

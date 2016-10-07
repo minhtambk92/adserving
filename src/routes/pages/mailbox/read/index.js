@@ -15,15 +15,9 @@ export default {
   path: '/pages/mailbox/read',
 
   action() {
-    let content = { // eslint-disable-line prefer-const
-      title: 'Read | Admin Dev Kit',
-      pageTitle: 'Read',
-      pageSubTitle: '13 new messages',
-    };
-
     return {
-      title: content.title,
-      component: <Read content={content} />,
+      title: 'Read | Admin Dev Kit',
+      component: <Read />,
     };
   },
 
