@@ -312,7 +312,7 @@ function Navigation({ className }) {
             </li>
             {/* Control Sidebar Toggle Button */}
             <li>
-              <Link to="#" data-toggle="control-sidebar"><i className="fa fa-gears"/></Link>
+              <a href="#" data-toggle="control-sidebar"><i className="fa fa-gears"/></a>
             </li>
           </ul>
         </div>
