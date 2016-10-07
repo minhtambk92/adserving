@@ -19,14 +19,6 @@ const pageSubTitle = 'Control panel';
 
 class Home extends Component {
 
-  static propTypes = {
-    news: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-      contentSnippet: PropTypes.string,
-    })).isRequired,
-  };
-
   componentDidMount() {
     $(() => {
       'use strict';
