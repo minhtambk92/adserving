@@ -26,13 +26,10 @@ const UserAdvertiser = Model.define('UserAdvertiser', {
     defaultValue: DataType.UUIDV4,
   },
 
-
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default UserAdvertiser;

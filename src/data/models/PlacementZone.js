@@ -26,13 +26,10 @@ const PlacementZone = Model.define('PlacementZone', {
     defaultValue: DataType.UUIDV4,
   },
 
-
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default PlacementZone;

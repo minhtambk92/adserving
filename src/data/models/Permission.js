@@ -11,21 +11,21 @@ import DataType from 'sequelize';
 import Model from '../sequelize';
 
 const Permission = Model.define('Permission', {
+
   id: {
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
   name: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
+
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default Permission;

@@ -7,26 +7,25 @@ const UserProfile = Model.define('UserProfile', {
     type: DataType.UUID,
     primaryKey: true,
   },
-
   displayName: {
     type: DataType.STRING(100),
   },
-
   picture: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
   },
-
   gender: {
     type: DataType.STRING(50),
   },
-
   location: {
     type: DataType.STRING(100),
   },
-
   website: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
   },
+
+}, {
+
+  // additional options
 
 });
 

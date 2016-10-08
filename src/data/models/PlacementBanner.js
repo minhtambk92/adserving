@@ -26,13 +26,10 @@ const PlacementBanner = Model.define('PlacementBanner', {
     defaultValue: DataType.UUIDV4,
   },
 
-
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default PlacementBanner;

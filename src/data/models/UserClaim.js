@@ -12,13 +12,21 @@ import Model from '../sequelize';
 
 const UserClaim = Model.define('UserClaim', {
 
+  id: {
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+    primaryKey: true,
+  },
   type: {
     type: DataType.STRING,
   },
-
   value: {
     type: DataType.INTEGER,
   },
+
+}, {
+
+  // additional options
 
 });
 

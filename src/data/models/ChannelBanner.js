@@ -7,8 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import DataType from "sequelize";
-import Model from "../sequelize";
+import DataType from 'sequelize';
+import Model from '../sequelize';
 
 const ChannelBanner = Model.define('ChannelBanner', {
 
@@ -26,13 +26,10 @@ const ChannelBanner = Model.define('ChannelBanner', {
     defaultValue: DataType.UUIDV4,
   },
 
-
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default ChannelBanner;

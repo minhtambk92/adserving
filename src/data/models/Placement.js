@@ -9,6 +9,10 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const Placement = Model.define('Placement', {
 
@@ -18,27 +22,23 @@ const Placement = Model.define('Placement', {
     primaryKey: true,
   },
   name: {
-    type: DataType.STRING(255),
-    defaultValue: '',
-  },
-  campaignName: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   description: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   size: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   weight: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   location: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   startTime: {
@@ -49,21 +49,15 @@ const Placement = Model.define('Placement', {
     type: DataType.DATE,
     defaultValue: DataType.NOW,
   },
-  dateCreated: {
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  },
-  dateUpdated: {
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
+  status: {
+    type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
+    defaultValue: STATUS_INACTIVE,
   },
 
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default Placement;

@@ -12,15 +12,23 @@ import Model from '../sequelize';
 
 const UserLogin = Model.define('UserLogin', {
 
+  id: {
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+    primaryKey: true,
+  },
   name: {
     type: DataType.STRING(50),
     primaryKey: true,
   },
-
   key: {
     type: DataType.STRING(100),
     primaryKey: true,
   },
+
+}, {
+
+  // additional options
 
 });
 

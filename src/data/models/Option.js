@@ -7,33 +7,33 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import DataType from "sequelize";
-import Model from "../sequelize";
+import DataType from 'sequelize';
+import Model from '../sequelize';
 
 const Option = Model.define('Option', {
+
   id: {
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
   name: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   value: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   autoLoad: {
     type: DataType.BOOLEAN,
-    defaultValue: true,
+    defaultValue: false,
   },
+
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default Option;

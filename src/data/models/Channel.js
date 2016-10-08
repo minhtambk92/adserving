@@ -9,6 +9,10 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const Channel = Model.define('Channel', {
 
@@ -17,26 +21,24 @@ const Channel = Model.define('Channel', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
-
   userId: {
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
   },
   name: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
-
   },
   description: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   status: {
-    type: DataType.STRING(255),
-    defaultValue: '',
+    type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
+    defaultValue: STATUS_INACTIVE,
   },
   compiledLimitation: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   updated: {
@@ -49,11 +51,9 @@ const Channel = Model.define('Channel', {
   },
 
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default Channel;

@@ -9,6 +9,10 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const Campaign = Model.define('Campaign', {
 
@@ -26,9 +30,8 @@ const Campaign = Model.define('Campaign', {
     defaultValue: DataType.UUIDV4,
   },
   name: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
-
   },
   activeTime: {
     type: DataType.DATE,
@@ -47,7 +50,7 @@ const Campaign = Model.define('Campaign', {
     defaultValue: 0,
   },
   weight: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   targetImpression: {
@@ -71,8 +74,8 @@ const Campaign = Model.define('Campaign', {
     defaultValue: 0,
   },
   status: {
-    type: DataType.STRING(255),
-    defaultValue: 'inactive',
+    type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
+    defaultValue: STATUS_INACTIVE,
   },
   hostedViews: {
     type: DataType.INTEGER,
@@ -97,14 +100,12 @@ const Campaign = Model.define('Campaign', {
   setPerDayCpm: {
     type: DataType.INTEGER,
     defaultValue: 0,
-  }
+  },
 
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default Campaign;

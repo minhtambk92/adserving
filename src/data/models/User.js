@@ -9,10 +9,15 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 import UserLogin from './UserLogin';
 import UserClaim from './UserClaim';
 import UserProfile from './UserProfile';
+import UserMeta from './UserMeta';
 
 const User = Model.define('User', {
 
@@ -21,15 +26,17 @@ const User = Model.define('User', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
-
   email: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     validate: { isEmail: true },
   },
-
   emailConfirmed: {
     type: DataType.BOOLEAN,
     defaultValue: false,
+  },
+  status: {
+    type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
+    defaultValue: STATUS_INACTIVE,
   },
 
 }, {
@@ -57,6 +64,13 @@ User.claim = User.hasMany(UserClaim, {
 User.profile = User.hasOne(UserProfile, {
   foreignKey: 'userId',
   as: 'profile',
+  onUpdate: 'cascade',
+  onDelete: 'cascade',
+});
+
+User.meta = User.hasMany(UserMeta, {
+  foreignKey: 'userId',
+  as: 'meta',
   onUpdate: 'cascade',
   onDelete: 'cascade',
 });

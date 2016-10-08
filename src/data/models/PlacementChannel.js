@@ -26,13 +26,10 @@ const PlacementChannel = Model.define('PlacementChannel', {
     defaultValue: DataType.UUIDV4,
   },
 
-
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default PlacementChannel;

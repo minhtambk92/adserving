@@ -7,10 +7,11 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import DataType from "sequelize";
-import Model from "../sequelize";
+import DataType from 'sequelize';
+import Model from '../sequelize';
 
 const FilterBanner = Model.define('FilterBanner', {
+
   id: {
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
@@ -26,11 +27,9 @@ const FilterBanner = Model.define('FilterBanner', {
   },
 
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default FilterBanner;

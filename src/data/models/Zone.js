@@ -7,8 +7,12 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import DataType from "sequelize";
-import Model from "../sequelize";
+import DataType from 'sequelize';
+import Model from '../sequelize';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const Zone = Model.define('Zone', {
 
@@ -22,35 +26,38 @@ const Zone = Model.define('Zone', {
     defaultValue: DataType.UUIDV4,
   },
   name: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   description: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   type: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   html: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   css: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   slot: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
+  status: {
+    type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
+    defaultValue: STATUS_INACTIVE,
+  },
+
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default Zone;

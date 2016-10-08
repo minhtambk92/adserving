@@ -7,33 +7,38 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import DataType from "sequelize";
-import Model from "../sequelize";
+import DataType from 'sequelize';
+import Model from '../sequelize';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const Banner = Model.define('Banner', {
+
   id: {
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
   contentType: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   name: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   fileUrl: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   urlClick: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   htmlTemplate: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   width: {
@@ -45,30 +50,29 @@ const Banner = Model.define('Banner', {
     defaultValue: 0,
   },
   weight: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   location: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   urlTarget: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   description: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   keyword: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   iframeFriendly: {
     type: DataType.INTEGER,
     defaultValue: 0,
   },
-
   typeBanner: {
     type: DataType.INTEGER,
     defaultValue: 0,
@@ -106,15 +110,14 @@ const Banner = Model.define('Banner', {
     defaultValue: 0,
   },
   status: {
-    type: DataType.STRING(255),
-    defaultValue: '',
+    type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
+    defaultValue: STATUS_INACTIVE,
   },
+
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default Banner;

@@ -7,8 +7,12 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import DataType from "sequelize";
-import Model from "../sequelize";
+import DataType from 'sequelize';
+import Model from '../sequelize';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const Advertisers = Model.define('Advertisers', {
 
@@ -18,32 +22,27 @@ const Advertisers = Model.define('Advertisers', {
     primaryKey: true,
   },
   email: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     validate: { isEmail: true },
   },
   name: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
-
   },
   contact: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   description: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   status: {
-    type: DataType.STRING(255),
-    defaultValue: 'inactive',
+    type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
+    defaultValue: STATUS_INACTIVE,
   },
+
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
 
   indexes: [
     { fields: ['email'] },

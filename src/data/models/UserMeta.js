@@ -11,6 +11,7 @@ import DataType from 'sequelize';
 import Model from '../sequelize';
 
 const UserMeta = Model.define('UserMeta', {
+
   id: {
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
@@ -21,19 +22,18 @@ const UserMeta = Model.define('UserMeta', {
     defaultValue: DataType.UUIDV4,
   },
   name: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   value: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
+
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default UserMeta;

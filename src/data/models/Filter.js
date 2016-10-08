@@ -7,33 +7,29 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import DataType from "sequelize";
-import Model from "../sequelize";
+import DataType from 'sequelize';
+import Model from '../sequelize';
 
 const Filter = Model.define('Filter', {
+
   id: {
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
-  userId: {
-    type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
-  },
   name: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
   value: {
-    type: DataType.STRING(255),
+    type: DataType.STRING,
     defaultValue: '',
   },
+
 }, {
-  timestamps: true,
-  createdAt: true,
-  updatedAt: 'updateTimestamp',
-  deletedAt: 'destroyTime',
-  paranoid: true,
+
+  // additional options
+
 });
 
 export default Filter;
