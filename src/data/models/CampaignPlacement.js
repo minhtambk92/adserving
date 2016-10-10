@@ -28,7 +28,7 @@ const CampaignPlacement = Model.define('CampaignPlacement', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

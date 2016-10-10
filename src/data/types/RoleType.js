@@ -11,7 +11,7 @@ import { Role } from '../models';
 const RoleType = new ObjectType({
   name: 'Role',
   fields: Object.assign(attributeFields(Role, {
-    // additional options
+    // Additional options
   }), {
     // additional fields
   }),

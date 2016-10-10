@@ -11,7 +11,7 @@ import { Placement } from '../models';
 const PlacementType = new ObjectType({
   name: 'Placement',
   fields: Object.assign(attributeFields(Placement, {
-    // additional options
+    // Additional options
   }), {
     // additional fields
   }),

@@ -32,7 +32,7 @@ const Option = Model.define('Option', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

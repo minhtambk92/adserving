@@ -28,7 +28,7 @@ const PlacementChannel = Model.define('PlacementChannel', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

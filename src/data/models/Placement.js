@@ -56,7 +56,7 @@ const Placement = Model.define('Placement', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

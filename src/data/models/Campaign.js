@@ -104,7 +104,7 @@ const Campaign = Model.define('Campaign', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

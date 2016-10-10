@@ -11,7 +11,7 @@ import { Banner } from '../models';
 const BannerType = new ObjectType({
   name: 'Banner',
   fields: Object.assign(attributeFields(Banner, {
-    // additional options
+    // Additional options
   }), {
     // additional fields
   }),

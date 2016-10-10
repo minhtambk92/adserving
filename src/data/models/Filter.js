@@ -28,7 +28,7 @@ const Filter = Model.define('Filter', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

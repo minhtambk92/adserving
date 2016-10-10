@@ -56,7 +56,7 @@ const Zone = Model.define('Zone', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

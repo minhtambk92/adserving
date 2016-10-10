@@ -26,7 +26,7 @@ const UserClaim = Model.define('UserClaim', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

@@ -11,7 +11,7 @@ import { Zone } from '../models';
 const ZoneType = new ObjectType({
   name: 'Zone',
   fields: Object.assign(attributeFields(Zone, {
-    // additional options
+    // Additional options
   }), {
     // additional fields
   }),

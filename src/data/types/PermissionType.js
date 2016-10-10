@@ -11,7 +11,7 @@ import { Permission } from '../models';
 const PermissionType = new ObjectType({
   name: 'Permission',
   fields: Object.assign(attributeFields(Permission, {
-    // additional options
+    // Additional options
   }), {
     // additional fields
   }),

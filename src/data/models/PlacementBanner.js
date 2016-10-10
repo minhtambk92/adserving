@@ -28,7 +28,7 @@ const PlacementBanner = Model.define('PlacementBanner', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

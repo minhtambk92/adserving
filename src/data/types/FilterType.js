@@ -11,7 +11,7 @@ import { Filter } from '../models';
 const FilterType = new ObjectType({
   name: 'Filter',
   fields: Object.assign(attributeFields(Filter, {
-    // additional options
+    // Additional options
   }), {
     // additional fields
   }),

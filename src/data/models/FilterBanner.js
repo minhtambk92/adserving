@@ -28,7 +28,7 @@ const FilterBanner = Model.define('FilterBanner', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

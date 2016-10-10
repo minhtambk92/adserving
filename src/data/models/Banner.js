@@ -116,7 +116,7 @@ const Banner = Model.define('Banner', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

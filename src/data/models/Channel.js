@@ -52,7 +52,7 @@ const Channel = Model.define('Channel', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

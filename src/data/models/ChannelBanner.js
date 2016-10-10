@@ -28,7 +28,7 @@ const ChannelBanner = Model.define('ChannelBanner', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

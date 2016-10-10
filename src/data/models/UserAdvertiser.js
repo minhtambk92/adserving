@@ -19,16 +19,14 @@ const UserAdvertiser = Model.define('UserAdvertiser', {
   },
   userId: {
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
   },
   advertiserId: {
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
   },
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

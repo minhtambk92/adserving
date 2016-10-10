@@ -11,7 +11,7 @@ import { Option } from '../models';
 const OptionType = new ObjectType({
   name: 'Option',
   fields: Object.assign(attributeFields(Option, {
-    // additional options
+    // Additional options
   }), {
     // additional fields
   }),

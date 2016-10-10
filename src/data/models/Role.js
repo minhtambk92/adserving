@@ -24,7 +24,7 @@ const Role = Model.define('Role', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

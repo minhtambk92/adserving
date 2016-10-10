@@ -28,7 +28,7 @@ const UserLogin = Model.define('UserLogin', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

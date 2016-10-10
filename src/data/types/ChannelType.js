@@ -11,7 +11,7 @@ import { Channel } from '../models';
 const ChannelType = new ObjectType({
   name: 'Channel',
   fields: Object.assign(attributeFields(Channel, {
-    // additional options
+    // Additional options
   }), {
     // additional fields
   }),

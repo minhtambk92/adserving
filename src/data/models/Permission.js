@@ -24,7 +24,7 @@ const Permission = Model.define('Permission', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

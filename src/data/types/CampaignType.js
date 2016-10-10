@@ -11,7 +11,7 @@ import { Campaign } from '../models';
 const CampaignType = new ObjectType({
   name: 'Campaign',
   fields: Object.assign(attributeFields(Campaign, {
-    // additional options
+    // Additional options
   }), {
     // additional fields
   }),

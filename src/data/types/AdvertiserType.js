@@ -11,7 +11,7 @@ import { Advertiser } from '../models';
 const AdvertiserType = new ObjectType({
   name: 'Advertiser',
   fields: Object.assign(attributeFields(Advertiser, {
-    // additional options
+    // Additional options
   }), {
     // additional fields
   }),

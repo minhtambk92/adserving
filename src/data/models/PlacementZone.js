@@ -28,7 +28,7 @@ const PlacementZone = Model.define('PlacementZone', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 

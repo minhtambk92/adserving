@@ -32,7 +32,7 @@ const UserMeta = Model.define('UserMeta', {
 
 }, {
 
-  // additional options
+  // Additional options
 
 });
 
