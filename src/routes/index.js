@@ -18,6 +18,11 @@ export default {
   children: [
     require('./home').default,
 
+    require('./campaigns').default,
+    require('./placements').default,
+    require('./banners').default,
+    require('./zones').default,
+
     // place new routes before...
     require('./notFound').default,
   ],

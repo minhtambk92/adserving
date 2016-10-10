@@ -12,18 +12,13 @@ import Model from '../sequelize';
 
 const CampaignPlacement = Model.define('CampaignPlacement', {
 
-  id: {
-    type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
-    primaryKey: true,
-  },
   campaignId: {
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
+    primaryKey: true,
   },
   placementId: {
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
+    primaryKey: true,
   },
 
 }, {

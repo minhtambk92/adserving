@@ -19,7 +19,9 @@ import UserRole from './UserRole';
 import Role from './Role';
 import Permission from './Permission';
 import Campaign from './Campaign';
+import CampaignPlacement from './CampaignPlacement';
 import Placement from './Placement';
+import PlacementBannerZone from './PlacementBannerZone';
 import Banner from './Banner';
 import Advertiser from './Advertiser';
 import Zone from './Zone';
@@ -68,6 +70,52 @@ Role.users = Role.belongsToMany(User, {
   },
   foreignKey: 'roleId',
 });
+
+Campaign.placements = Campaign.belongsToMany(Placement, {
+  through: {
+    model: CampaignPlacement,
+  },
+  foreignKey: 'campaignId',
+});
+
+Placement.campaigns = Placement.belongsToMany(Campaign, {
+  through: {
+    model: CampaignPlacement,
+  },
+  foreignKey: 'placementId',
+});
+
+Placement.banners = Placement.belongsToMany(Banner, {
+  through: {
+    model: PlacementBannerZone,
+  },
+  foreignKey: 'placementId',
+});
+
+// Placement.zones = Placement.belongsToMany(Zone, {
+//   through: {
+//     model: PlacementBannerZone,
+//   },
+//   foreignKey: 'placementId',
+// });
+
+Banner.placements = Banner.belongsToMany(Placement, {
+  through: {
+    model: PlacementBannerZone,
+  },
+  foreignKey: 'bannerId',
+});
+
+Zone.placements = Zone.hasMany(PlacementBannerZone, {
+  foreignKey: 'zoneId',
+});
+
+// Zone.banners = Zone.belongsToMany(Banner, {
+//   through: {
+//     model: PlacementBannerZone,
+//   },
+//   foreignKey: 'zoneId',
+// });
 // End of associations
 
 function sync(...args) {
