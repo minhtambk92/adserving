@@ -13,7 +13,7 @@ const PlacementType = new ObjectType({
   fields: Object.assign(attributeFields(Placement, {
     // Additional options
   }), {
-    // additional fields
+    // Additional fields
   }),
 });
 

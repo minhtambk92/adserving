@@ -147,16 +147,16 @@ class Sites extends Component {
                   </div>
                   {/* /.box-body */}
                   <div className="box-footer">
-                    <button
+                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+                    <a
                       className={'btn btn-default pull-right '.concat(s.btn)}
                       onClick={event => this.clearInput(event)}
-                    >Clear
-                    </button>
-                    <button
+                    >Clear</a>
+                    <a
                       className={'btn btn-primary pull-right '.concat(s.btn)}
                       onClick={event => this.createSite(event)}
-                    >Confirm
-                    </button>
+                    >Confirm</a>
+                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                   </div>
                   {/* /.box-footer */}
                 </form>
@@ -184,7 +184,7 @@ class Sites extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.sites.latest.map(site => (
+                      {this.props.sites.latest && this.props.sites.latest.map(site => (
                         <tr>
                           <td>{site.name}</td>
                           <td>{site.domain}</td>

@@ -9,10 +9,10 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
-import {
-  STATUS_ACTIVE,
-  STATUS_INACTIVE,
-} from '../../constants';
+// import {
+//   STATUS_ACTIVE,
+//   STATUS_INACTIVE,
+// } from '../../constants';
 
 const Site = Model.define('Site', {
 
@@ -31,14 +31,21 @@ const Site = Model.define('Site', {
     type: DataType.STRING,
     defaultValue: '',
   },
+  email: {
+    type: DataType.STRING,
+    defaultValue: '',
+    validate: {
+      isEmail: true,
+    },
+  },
   description: {
     type: DataType.STRING,
     defaultValue: '',
   },
-  status: {
-    type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
-    defaultValue: STATUS_ACTIVE,
-  },
+  // status: {
+  //   type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
+  //   defaultValue: STATUS_ACTIVE,
+  // },
 
 }, {
 

@@ -4,18 +4,17 @@
 
 import {
   GraphQLList as List,
-  GraphQLString as StringType,
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import ZoneType from '../types/ZoneType';
-import { Site } from '../models';
+import { Zone } from '../models';
 
 const zones = {
   type: new List(ZoneType),
   args: Object.assign(defaultListArgs(), {
     // additional params
   }),
-  resolve: resolver(Site, {
+  resolve: resolver(Zone, {
     before(options) {
       const opts = options;
       opts.order = options.order || [];

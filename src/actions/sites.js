@@ -14,9 +14,10 @@ query {
   sites {
     id
     userId
+    domain
     name
+    email
     description
-    status
   }
 }`;
 
@@ -37,20 +38,22 @@ mutation ($site: SiteInputWithoutId!) {
   createdSite(site: $site) {
     id
     userId
+    domain
     name
+    email
     description
-    status
   }
 }`;
 
-export function createSite({ userId, name, description, status }) {
+export function createSite({ domain, name, email, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const { data } = await graphqlRequest(queryCreateSite, {
       site: {
-        userId,
+        userId: '567daf97-d24d-4b7c-9b44-153534efc101',
+        domain,
         name,
+        email,
         description,
-        status,
       },
     });
     dispatch({

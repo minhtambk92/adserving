@@ -13,7 +13,7 @@ const ZoneType = new ObjectType({
   fields: Object.assign(attributeFields(Site, {
     // Additional options
   }), {
-    // additional fields
+    // Additional fields
   }),
 });
 

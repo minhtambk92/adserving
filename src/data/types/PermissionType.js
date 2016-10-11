@@ -13,7 +13,7 @@ const PermissionType = new ObjectType({
   fields: Object.assign(attributeFields(Permission, {
     // Additional options
   }), {
-    // additional fields
+    // Additional fields
   }),
 });
 

@@ -13,7 +13,7 @@ const CampaignType = new ObjectType({
   fields: Object.assign(attributeFields(Campaign, {
     // Additional options
   }), {
-    // additional fields
+    // Additional fields
   }),
 });
 

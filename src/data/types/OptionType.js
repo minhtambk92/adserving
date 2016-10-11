@@ -13,7 +13,7 @@ const OptionType = new ObjectType({
   fields: Object.assign(attributeFields(Option, {
     // Additional options
   }), {
-    // additional fields
+    // Additional fields
   }),
 });
 

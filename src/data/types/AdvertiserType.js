@@ -13,7 +13,7 @@ const AdvertiserType = new ObjectType({
   fields: Object.assign(attributeFields(Advertiser, {
     // Additional options
   }), {
-    // additional fields
+    // Additional fields
   }),
 });
 

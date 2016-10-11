@@ -112,7 +112,7 @@ Banner.placements = Banner.belongsToMany(Placement, {
   foreignKey: 'bannerId',
 });
 
-Site.placements = Site.hasMany(PlacementBannerZone, {
+Zone.placements = Zone.hasMany(PlacementBannerZone, {
   foreignKey: 'zoneId',
 });
 

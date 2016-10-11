@@ -13,7 +13,7 @@ const FilterType = new ObjectType({
   fields: Object.assign(attributeFields(Filter, {
     // Additional options
   }), {
-    // additional fields
+    // Additional fields
   }),
 });
 

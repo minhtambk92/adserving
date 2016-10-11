@@ -13,7 +13,7 @@ const ChannelType = new ObjectType({
   fields: Object.assign(attributeFields(Channel, {
     // Additional options
   }), {
-    // additional fields
+    // Additional fields
   }),
 });
 

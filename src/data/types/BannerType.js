@@ -13,7 +13,7 @@ const BannerType = new ObjectType({
   fields: Object.assign(attributeFields(Banner, {
     // Additional options
   }), {
-    // additional fields
+    // Additional fields
   }),
 });
 

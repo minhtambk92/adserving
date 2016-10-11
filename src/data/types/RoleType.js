@@ -13,7 +13,7 @@ const RoleType = new ObjectType({
   fields: Object.assign(attributeFields(Role, {
     // Additional options
   }), {
-    // additional fields
+    // Additional fields
   }),
 });
 
