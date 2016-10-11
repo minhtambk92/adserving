@@ -7,13 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import { GraphQLSchema as Schema } from 'graphql';
-import queries from './queries';
-import mutations from './mutations';
+@import '../../components/variables.css';
 
-const schema = new Schema({
-  query: queries,
-  mutation: mutations,
-});
-
-export default schema;
+.btn {
+  margin-left: 5px;
+}

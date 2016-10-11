@@ -3,11 +3,12 @@
  */
 
 import { GraphQLObjectType as ObjectType } from 'graphql';
+import sites from './sites';
 
 const mutations = new ObjectType({
   name: 'Mutation',
   fields: {
-    // additional fields
+    ...sites,
   },
 });
 

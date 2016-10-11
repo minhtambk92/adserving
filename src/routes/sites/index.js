@@ -7,13 +7,18 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import { GraphQLSchema as Schema } from 'graphql';
-import queries from './queries';
-import mutations from './mutations';
+import React from 'react';
+import Sites from './Sites';
 
-const schema = new Schema({
-  query: queries,
-  mutation: mutations,
-});
+export default {
 
-export default schema;
+  path: '/sites',
+
+  async action() {
+    return {
+      title: 'Sites Management | Admin Dev Kit',
+      component: <Sites />,
+    };
+  },
+
+};

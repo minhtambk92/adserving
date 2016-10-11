@@ -4,14 +4,13 @@
 
 import {
   GraphQLList as List,
-  GraphQLString as StringType,
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import ZoneType from '../types/ZoneType';
+import SiteType from '../types/SiteType';
 import { Site } from '../models';
 
-const zones = {
-  type: new List(ZoneType),
+const sites = {
+  type: new List(SiteType),
   args: Object.assign(defaultListArgs(), {
     // additional params
   }),
@@ -25,4 +24,4 @@ const zones = {
   }),
 };
 
-export default zones;
+export default sites;

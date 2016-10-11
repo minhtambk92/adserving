@@ -31,6 +31,7 @@ function Html({ title, description, style, script, state, lang, children, classe
         <link rel="stylesheet" href="/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.min.css" />
         <link rel="stylesheet" href="/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css" />
         <link rel="stylesheet" href="/AdminLTE/plugins/select2/select2.min.css" />
+        <link rel="stylesheet" href="/AdminLTE/plugins/datatables/dataTables.bootstrap.css" />
         <link rel="stylesheet" href="/AdminLTE/dist/css/AdminLTE.min.css" />
         <link rel="stylesheet" href="/AdminLTE/dist/css/skins/skin-blue.min.css" />
         <link rel="stylesheet" href="/AdminLTE/plugins/iCheck/all.css" />
@@ -62,6 +63,8 @@ function Html({ title, description, style, script, state, lang, children, classe
         <script src="/AdminLTE/plugins/datepicker/bootstrap-datepicker.js" />
         <script src="/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.min.js" />
         <script src="/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.js" />
+        <script src="/AdminLTE/plugins/datatables/jquery.dataTables.min.js" />
+        <script src="/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js" />
         {/* <script src="/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js" /> */}
         {/* <script src="/AdminLTE/plugins/fastclick/fastclick.js" /> */}
         <script src="/AdminLTE/plugins/chartjs/Chart.min.js" />

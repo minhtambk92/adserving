@@ -8,8 +8,8 @@ import {
 import { attributeFields } from 'graphql-sequelize';
 import { Site } from '../models';
 
-const ZoneType = new ObjectType({
-  name: 'Zone',
+const SiteType = new ObjectType({
+  name: 'Site',
   fields: Object.assign(attributeFields(Site, {
     // Additional options
   }), {
@@ -17,4 +17,4 @@ const ZoneType = new ObjectType({
   }),
 });
 
-export default ZoneType;
+export default SiteType;

@@ -15,6 +15,7 @@ import options from './options';
 import permissions from './permissions';
 import roles from './roles';
 import advertisers from './advertisers';
+import sites from './sites';
 import zones from './zones';
 import channels from './channels';
 import filters from './filters';
@@ -33,6 +34,7 @@ const queries = new ObjectType({
     placements,
     banners,
     advertisers,
+    sites,
     zones,
     channels,
     filters,

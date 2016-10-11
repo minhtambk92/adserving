@@ -12,12 +12,12 @@ import { FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
-import s from './Campaigns.css';
+import s from './Advertisers.css';
 
 const pageTitle = 'Home';
 const pageSubTitle = 'Control panel';
 
-class Campaigns extends Component {
+class Advertisers extends Component {
 
   componentDidMount() {
     // somethings happens at client side
@@ -128,4 +128,4 @@ class Campaigns extends Component {
 
 }
 
-export default withStyles(s)(Campaigns);
+export default withStyles(s)(Advertisers);

@@ -21,13 +21,11 @@ const Campaign = Model.define('Campaign', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
-  advertiserId: {
-    type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
-  },
   userId: {
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
+  },
+  advertiserId: {
+    type: DataType.UUID,
   },
   name: {
     type: DataType.STRING,

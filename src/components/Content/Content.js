@@ -8,10 +8,7 @@ function Content({ pageTitle, pageSubTitle, children }) {
     <div className="content-wrapper" style={{ minHeight: '1048px' }}>
       {/* Content Header (Page header) */}
       <section className="content-header">
-        <h1>
-          {pageTitle || ''}
-          <small>{pageSubTitle || ''}</small>
-        </h1>
+        <h1>{pageTitle || ''} <small>{pageSubTitle || ''}</small></h1>
 
         <ol className="breadcrumb">
           <li><Link to="#"><i className="fa fa-dashboard" /> Level</Link></li>

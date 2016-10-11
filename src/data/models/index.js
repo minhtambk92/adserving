@@ -24,6 +24,7 @@ import Placement from './Placement';
 import PlacementBannerZone from './PlacementBannerZone';
 import Banner from './Banner';
 import Advertiser from './Advertiser';
+import Site from './Site';
 import Zone from './Zone';
 import Channel from './Channel';
 import Filter from './Filter';
@@ -62,6 +63,11 @@ User.roles = User.belongsToMany(Role, {
     model: UserRole,
   },
   foreignKey: 'userId',
+});
+
+User.sites = User.hasMany(Site, {
+  foreignKey: 'userId',
+  as: 'sites',
 });
 
 Role.users = Role.belongsToMany(User, {
@@ -106,7 +112,7 @@ Banner.placements = Banner.belongsToMany(Placement, {
   foreignKey: 'bannerId',
 });
 
-Zone.placements = Zone.hasMany(PlacementBannerZone, {
+Site.placements = Site.hasMany(PlacementBannerZone, {
   foreignKey: 'zoneId',
 });
 
@@ -132,6 +138,7 @@ export {
   Placement,
   Banner,
   Advertiser,
+  Site,
   Zone,
   Channel,
   Filter,
