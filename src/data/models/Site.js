@@ -29,18 +29,15 @@ const Site = Model.define('Site', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   email: {
     type: DataType.STRING,
-    defaultValue: '',
     validate: {
       isEmail: true,
     },
   },
   description: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   // status: {
   //   type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),

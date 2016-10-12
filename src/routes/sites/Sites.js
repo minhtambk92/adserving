@@ -34,8 +34,8 @@ class Sites extends Component {
 
   componentDidMount() {
     /* eslint-disable no-undef */
-    $('.select2').select2();
-    $('#example1').DataTable(); // eslint-disable-line new-cap
+    // $('.select2').select2();
+    // $('#example1').DataTable(); // eslint-disable-line new-cap
     /* eslint-enable no-undef */
   }
 
@@ -123,27 +123,6 @@ class Sites extends Component {
                         />
                       </div>
                     </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputSiteTags"
-                        className="col-sm-2 control-label"
-                      >Tags</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputSiteTags"
-                          className="form-control select2" multiple="multiple"
-                          data-placeholder="some, tags..." style={{ width: '100%' }}
-                        >
-                          <option>Alabama</option>
-                          <option>Alaska</option>
-                          <option>California</option>
-                          <option>Delaware</option>
-                          <option>Tennessee</option>
-                          <option>Texas</option>
-                          <option>Washington</option>
-                        </select>
-                      </div>
-                    </div>
                   </div>
                   {/* /.box-body */}
                   <div className="box-footer">
@@ -177,18 +156,18 @@ class Sites extends Component {
                   <table id="example1" className="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Name</th>
                         <th>Domain</th>
-                        <th>Status</th>
+                        <th>Name</th>
+                        <th>Email</th>
                         <th>Description</th>
                       </tr>
                     </thead>
                     <tbody>
                       {this.props.sites.latest && this.props.sites.latest.map(site => (
-                        <tr>
-                          <td>{site.name}</td>
+                        <tr key={site.id}>
                           <td>{site.domain}</td>
-                          <td>{site.status}</td>
+                          <td>{site.name}</td>
+                          <td>{site.email}</td>
                           <td>{site.description}</td>
                         </tr>
                       ))}

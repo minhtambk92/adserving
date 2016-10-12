@@ -30,99 +30,84 @@ import Channel from './Channel';
 import Filter from './Filter';
 
 // Associations
-User.login = User.hasMany(UserLogin, {
-  foreignKey: 'userId',
-  as: 'logins',
-  onUpdate: 'cascade',
-  onDelete: 'cascade',
-});
-
-User.claim = User.hasMany(UserClaim, {
-  foreignKey: 'userId',
-  as: 'claims',
-  onUpdate: 'cascade',
-  onDelete: 'cascade',
-});
-
-User.profile = User.hasOne(UserProfile, {
-  foreignKey: 'userId',
-  as: 'profile',
-  onUpdate: 'cascade',
-  onDelete: 'cascade',
-});
-
-User.meta = User.hasMany(UserMeta, {
-  foreignKey: 'userId',
-  as: 'meta',
-  onUpdate: 'cascade',
-  onDelete: 'cascade',
-});
-
-User.roles = User.belongsToMany(Role, {
-  through: {
-    model: UserRole,
-  },
-  foreignKey: 'userId',
-});
-
-User.sites = User.hasMany(Site, {
-  foreignKey: 'userId',
-  as: 'sites',
-});
-
-Role.users = Role.belongsToMany(User, {
-  through: {
-    model: UserRole,
-  },
-  foreignKey: 'roleId',
-});
-
-Campaign.placements = Campaign.belongsToMany(Placement, {
-  through: {
-    model: CampaignPlacement,
-  },
-  foreignKey: 'campaignId',
-});
-
-Placement.campaigns = Placement.belongsToMany(Campaign, {
-  through: {
-    model: CampaignPlacement,
-  },
-  foreignKey: 'placementId',
-});
-
-Placement.banners = Placement.belongsToMany(Banner, {
-  through: {
-    model: PlacementBannerZone,
-  },
-  foreignKey: 'placementId',
-});
-
-// Placement.zones = Placement.belongsToMany(Zone, {
+// User.login = User.hasMany(UserLogin, {
+//   foreignKey: 'userId',
+//   as: 'logins',
+//   onUpdate: 'cascade',
+//   onDelete: 'cascade',
+// });
+//
+// User.claim = User.hasMany(UserClaim, {
+//   foreignKey: 'userId',
+//   as: 'claims',
+//   onUpdate: 'cascade',
+//   onDelete: 'cascade',
+// });
+//
+// User.profile = User.hasOne(UserProfile, {
+//   foreignKey: 'userId',
+//   as: 'profile',
+//   onUpdate: 'cascade',
+//   onDelete: 'cascade',
+// });
+//
+// User.meta = User.hasMany(UserMeta, {
+//   foreignKey: 'userId',
+//   as: 'meta',
+//   onUpdate: 'cascade',
+//   onDelete: 'cascade',
+// });
+//
+// User.roles = User.belongsToMany(Role, {
+//   through: {
+//     model: UserRole,
+//   },
+//   foreignKey: 'userId',
+// });
+//
+// User.sites = User.hasMany(Site, {
+//   foreignKey: 'userId',
+//   as: 'sites',
+// });
+//
+// Role.users = Role.belongsToMany(User, {
+//   through: {
+//     model: UserRole,
+//   },
+//   foreignKey: 'roleId',
+// });
+//
+// Campaign.placements = Campaign.belongsToMany(Placement, {
+//   through: {
+//     model: CampaignPlacement,
+//   },
+//   foreignKey: 'campaignId',
+// });
+//
+// Placement.campaigns = Placement.belongsToMany(Campaign, {
+//   through: {
+//     model: CampaignPlacement,
+//   },
+//   foreignKey: 'placementId',
+// });
+//
+// Placement.banners = Placement.belongsToMany(Banner, {
 //   through: {
 //     model: PlacementBannerZone,
 //   },
 //   foreignKey: 'placementId',
 // });
-
-Banner.placements = Banner.belongsToMany(Placement, {
-  through: {
-    model: PlacementBannerZone,
-  },
-  foreignKey: 'bannerId',
-});
-
-Zone.placements = Zone.hasMany(PlacementBannerZone, {
-  foreignKey: 'zoneId',
-});
-
-// Zone.banners = Zone.belongsToMany(Banner, {
+//
+// Banner.placements = Banner.belongsToMany(Placement, {
 //   through: {
 //     model: PlacementBannerZone,
 //   },
+//   foreignKey: 'bannerId',
+// });
+//
+// Zone.placements = Zone.hasMany(PlacementBannerZone, {
 //   foreignKey: 'zoneId',
 // });
-// End of associations
 
 function sync(...args) {
   return sequelize.sync(...args);
