@@ -8,5 +8,6 @@ export const SET_LOCALE_ERROR = 'SET_LOCALE_ERROR';
 export const STATUS_ACTIVE = 'active';
 export const STATUS_INACTIVE = 'inactive';
 
+export const GET_SITE = 'GET_SITE';
 export const GET_SITES = 'GET_SITES';
 export const CREATE_SITE = 'CREATE_SITE';

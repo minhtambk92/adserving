@@ -11,11 +11,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getSites, createSite } from '../../actions/sites';
-
+import { getSite } from '../../actions/sites';
 import Layout from '../../components/Layout';
-import Link from '../../components/Link';
-import s from './Sites.css';
+import s from './Site.css';
 
 const pageTitle = 'Sites Management';
 const pageSubTitle = 'Control panel';
@@ -23,44 +21,15 @@ const pageSubTitle = 'Control panel';
 class Sites extends Component {
 
   static propTypes = {
+    siteId: PropTypes.string.isRequired,
     sites: PropTypes.object,
-    getSites: PropTypes.func,
-    createSite: PropTypes.func,
+    getSite: PropTypes.func,
   };
 
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      searchText: '',
-    };
-  }
-
-  componentWillMount() {
-    this.props.getSites();
-  }
-
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    // $('.select2').select2();
-    // $('#example1').DataTable(); // eslint-disable-line new-cap
-
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseSite').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-    /* eslint-enable no-undef */
-  }
-
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseSite').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-    /* eslint-enable no-undef */
+    props.getSite({ id: props.siteId });
   }
 
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -77,26 +46,9 @@ class Sites extends Component {
     const description = document.getElementById('inputSiteDescription').value;
 
     if (domain && name && email && description) {
-      this.props.createSite({ domain, name, email, description });
+      // this.props.updateSite({ domain, name, email, description });
       this.clearInput();
     }
-  }
-
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
-  }
-
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
-      }
-    }
-    return false;
   }
 
   render() {
@@ -185,84 +137,6 @@ class Sites extends Component {
             </section>
           </div>
 
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: LIST OF WEBSITES */}
-              <div className="box">
-                <div className="box-header with-border">
-                  <h3 className="box-title">List of website</h3>
-
-                  <div className="box-tools">
-                    <div className="input-group input-group-sm" style={{ width: 150 }}>
-                      <input
-                        type="text" name="inputSearchSites"
-                        className="form-control pull-right"
-                        placeholder="Search..."
-                        onChange={event => this.searchFor(event)}
-                      />
-                      <div className="input-group-btn">
-                        <button
-                          type="submit" className="btn btn-default"
-                        ><i className="fa fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* /.box-header */}
-                <div className="box-body table-responsive no-padding">
-                  <table id="example1" className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseSite" /></th>
-                        <th>Name</th>
-                        <th>Domain</th>
-                        <th>Email</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.props.sites.latest && this.props.sites.latest.map(site => {
-                        if (this.isIndexOf(site.domain, site.name, site.email, site.description)) {
-                          return (
-                            <tr key={site.id}>
-                              <td><input type="checkbox" className="inputChooseSite" /></td>
-                              <td><Link to={`/site/${site.id}`}>{site.name}</Link></td>
-                              <td>{site.domain}</td>
-                              <td>{site.email}</td>
-                              <td>{site.description}</td>
-                            </tr>
-                          );
-                        }
-                        return false;
-                      })}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseSite" /></th>
-                        <th>Name</th>
-                        <th>Domain</th>
-                        <th>Status</th>
-                        <th>Description</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-                {/* /.box-body */}
-                <div className="box-footer clearfix">
-                  <ul className="pagination pagination-sm no-margin pull-right">
-                    <li><a>&laquo;</a></li>
-                    <li><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>&raquo;</a></li>
-                  </ul>
-                </div>
-              </div>
-              {/* /.box */}
-            </section>
-            {/* /.col */}
-          </div>
-
         </div>
       </Layout>
     );
@@ -275,8 +149,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = {
-  getSites,
-  createSite,
+  getSite,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Sites));

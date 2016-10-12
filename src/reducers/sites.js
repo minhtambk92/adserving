@@ -3,12 +3,20 @@
  */
 
 import {
+  GET_SITE,
   GET_SITES,
   CREATE_SITE,
 } from '../constants';
 
 export default function sites(state = {}, action) {
   switch (action.type) {
+    case GET_SITE: {
+      return {
+        ...state,
+        current: action.payload.site,
+      };
+    }
+
     case GET_SITES: {
       return {
         ...state,
