@@ -77,6 +77,8 @@ export function createSite({ domain, name, email, description }) {
           name
           email
           description
+          createdAt
+          updatedAt
         }
       }`;
 
@@ -110,6 +112,8 @@ export function updateSite({ id, userId, domain, name, email, description }) {
           name
           email
           description
+          createdAt
+          updatedAt
         }
       }`;
 
@@ -144,6 +148,8 @@ export function deleteSite(id) {
           name
           email
           description
+          createdAt
+          updatedAt
         }
       }`;
 
