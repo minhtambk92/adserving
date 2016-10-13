@@ -34,13 +34,11 @@ const sites = {
       site: { type: SiteInputType },
     },
     resolve: resolver(Site, {
-      before(options, args) {
+      async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.site.id };
-
-        Site.upsert(args.site);
-
+        await Site.upsert(args.site);
         return opts;
       },
     }),

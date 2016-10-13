@@ -6,6 +6,8 @@ import {
   GET_SITE,
   GET_SITES,
   CREATE_SITE,
+  UPDATE_SITE,
+  DELETE_SITE,
 } from '../constants';
 
 export default function sites(state = {}, action) {
@@ -27,6 +29,20 @@ export default function sites(state = {}, action) {
     case CREATE_SITE: {
       state.latest.unshift(action.payload.site);
       return { ...state };
+    }
+
+    case UPDATE_SITE: {
+      return {
+        ...state,
+        current: action.payload.site,
+      };
+    }
+
+    case DELETE_SITE: {
+      return {
+        ...state,
+        current: null,
+      };
     }
 
     default: {
