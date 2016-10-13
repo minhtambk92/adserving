@@ -67,7 +67,7 @@ class Site extends Component {
     }));
   }
 
-  updateSite() { // eslint-disable-line no-unused-vars
+  updateSite() {
     const { userId, domain, name, email, description } = this.state;
     const site = { id: this.props.siteId };
 
