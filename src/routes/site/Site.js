@@ -113,7 +113,7 @@ class Site extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW WEBSITE */}
-              <div className="box box-info">
+              <div className="box box-primary">
                 <div className="box-header with-border">
                   <h3 className="box-title">Change site information</h3>
                   <div className="box-tools pull-right">

@@ -107,7 +107,7 @@ class Sites extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW WEBSITE */}
-              <div className="box box-info">
+              <div className="box box-primary">
                 <div className="box-header with-border">
                   <h3 className="box-title">Create a new site for ads</h3>
                   <div className="box-tools pull-right">
@@ -188,7 +188,7 @@ class Sites extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: LIST OF WEBSITES */}
-              <div className="box">
+              <div className="box box-info">
                 <div className="box-header with-border">
                   <h3 className="box-title">List of website</h3>
 
