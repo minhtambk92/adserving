@@ -15,6 +15,7 @@ const sequelize = new Sequelize(databaseUrl, {
     freezeTableName: true,
     paranoid: true,
   },
+  benchmark: true,
 });
 
 export default sequelize;
