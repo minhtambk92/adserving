@@ -1,85 +1,98 @@
 /**
- * Created by Manhhailua on 10/11/16.
+ * Created by Manhhailua on 10/14/16.
  */
 
 /* eslint-disable import/prefer-default-export */
 
 import {
-  GET_SITE,
-  GET_SITES,
-  CREATE_SITE,
-  UPDATE_SITE,
-  DELETE_SITE,
+  GET_ZONE,
+  GET_ZONES,
+  CREATE_ZONE,
+  UPDATE_ZONE,
+  DELETE_ZONE,
 } from '../constants';
 
-export function getSite(id) {
+export function getZone(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        sites(where: {id: "${id}"}, limit: 1) {
+        zones(where: {id: "${id}"}, limit: 1) {
           id
           userId
-          domain
           name
-          email
           description
+          type
+          html
+          css
+          slot
+          status
           createdAt
-          updattedAt
+          updatedAt
         }
       }`;
 
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_SITE,
+      type: GET_ZONE,
       payload: {
-        site: data.sites.shift(),
+        zone: data.zones.shift(),
       },
     });
   };
 }
 
-export function getSites() {
+export function getZones() {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        sites {
+        zones {
           id
           userId
-          domain
           name
-          email
           description
+          type
+          html
+          css
+          slot
+          status
+          createdAt
+          updatedAt
         }
       }`;
 
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_SITES,
+      type: GET_ZONES,
       payload: {
-        sites: data.sites,
+        zones: data.zones,
       },
     });
   };
 }
 
-export function createSite({ domain, name, email, description }) {
+export function createZone({ domain, name, email, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($site: SiteInputWithoutId!) {
-        createdSite(site: $site) {
+      mutation ($zone: ZoneInputWithoutId!) {
+        createdZone(zone: $zone) {
           id
           userId
-          domain
           name
-          email
           description
+          type
+          html
+          css
+          slot
+          status
+          createdAt
+          updatedAt
         }
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      site: {
+      zone: {
         userId: '567daf97-d24d-4b7c-9b44-153534efc101',
         domain,
         name,
@@ -89,30 +102,35 @@ export function createSite({ domain, name, email, description }) {
     });
 
     dispatch({
-      type: CREATE_SITE,
+      type: CREATE_ZONE,
       payload: {
-        site: data.createdSite,
+        zone: data.createdZone,
       },
     });
   };
 }
 
-export function updateSite({ id, userId, domain, name, email, description }) {
+export function updateZone({ id, userId, domain, name, email, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($site: SiteInput!) {
-        updatedSite(site: $site) {
+      mutation ($zone: ZoneInput!) {
+        updatedZone(zone: $zone) {
           id
           userId
-          domain
           name
-          email
           description
+          type
+          html
+          css
+          slot
+          status
+          createdAt
+          updatedAt
         }
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      site: {
+      zone: {
         id,
         userId: userId || '567daf97-d24d-4b7c-9b44-153534efc101',
         domain,
@@ -123,34 +141,39 @@ export function updateSite({ id, userId, domain, name, email, description }) {
     });
 
     dispatch({
-      type: UPDATE_SITE,
+      type: UPDATE_ZONE,
       payload: {
-        site: data.updatedSite,
+        zone: data.updatedZone,
       },
     });
   };
 }
 
-export function deleteSite(id) {
+export function deleteZone(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
-        deletedSite(id: "${id}") {
+        deletedZone(id: "${id}") {
           id
           userId
-          domain
           name
-          email
           description
+          type
+          html
+          css
+          slot
+          status
+          createdAt
+          updatedAt
         }
       }`;
 
     const { data } = await graphqlRequest(mutation);
 
     dispatch({
-      type: DELETE_SITE,
+      type: DELETE_ZONE,
       payload: {
-        site: data.deletedSite,
+        zone: data.deletedZone,
       },
     });
   };

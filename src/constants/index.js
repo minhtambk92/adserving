@@ -13,3 +13,9 @@ export const GET_SITES = 'GET_SITES';
 export const CREATE_SITE = 'CREATE_SITE';
 export const UPDATE_SITE = 'UPDATE_SITE';
 export const DELETE_SITE = 'DELETE_SITE';
+
+export const GET_ZONE = 'GET_ZONE';
+export const GET_ZONES = 'GET_ZONES';
+export const CREATE_ZONE = 'CREATE_ZONE';
+export const UPDATE_ZONE = 'CREATE_ZONE';
+export const DELETE_ZONE = 'CREATE_ZONE';
