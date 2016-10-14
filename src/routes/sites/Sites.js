@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSites, createSite } from '../../actions/sites';
-
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './Sites.css';
@@ -106,13 +105,13 @@ class Sites extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: FORM OF CREATE NEW WEBSITE */}
-              <div className="box box-primary">
+              {/* BOX: FORM OF CREATE A NEW WEBSITE */}
+              <div className="box box-primary collapsed-box">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Create a new site for ads</h3>
+                  <h3 className="box-title">Create a new website</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-minus" />
+                      <i className="fa fa-plus" />
                     </button>
                   </div>
                 </div>
@@ -190,7 +189,7 @@ class Sites extends Component {
               {/* BOX: LIST OF WEBSITES */}
               <div className="box box-info">
                 <div className="box-header with-border">
-                  <h3 className="box-title">List of website</h3>
+                  <h3 className="box-title">List of websites</h3>
 
                   <div className="box-tools">
                     <div className="input-group input-group-sm" style={{ width: 150 }}>
