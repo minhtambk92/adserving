@@ -9,10 +9,10 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
-import {
-  STATUS_ACTIVE,
-  STATUS_INACTIVE,
-} from '../../constants';
+// import {
+//   STATUS_ACTIVE,
+//   STATUS_INACTIVE,
+// } from '../../constants';
 
 const Zone = Model.define('Zone', {
 
@@ -23,7 +23,9 @@ const Zone = Model.define('Zone', {
   },
   userId: {
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
+  },
+  siteId: {
+    type: DataType.UUID,
   },
   name: {
     type: DataType.STRING,
@@ -49,10 +51,10 @@ const Zone = Model.define('Zone', {
     type: DataType.STRING,
     defaultValue: '',
   },
-  status: {
-    type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
-    defaultValue: STATUS_INACTIVE,
-  },
+  // status: {
+  //   type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
+  //   defaultValue: STATUS_INACTIVE,
+  // },
 
 }, {
 

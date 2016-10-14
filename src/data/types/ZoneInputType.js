@@ -14,6 +14,7 @@ const ZoneInputType = new InputObjectType({
     only: [
       'id',
       'userId',
+      'siteId',
       'name',
       'description',
       'type',

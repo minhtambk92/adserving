@@ -27,7 +27,7 @@ export default function zones(state = {}, action) {
     }
 
     case CREATE_ZONE: {
-      state.latest.unshift(action.payload.zone);
+      state.list.unshift(action.payload.zone);
       return { ...state };
     }
 

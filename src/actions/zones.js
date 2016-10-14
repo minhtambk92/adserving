@@ -19,13 +19,13 @@ export function getZone(id) {
         zones(where: {id: "${id}"}, limit: 1) {
           id
           userId
+          siteId
           name
           description
           type
           html
           css
           slot
-          status
           createdAt
           updatedAt
         }
@@ -49,13 +49,13 @@ export function getZones() {
         zones {
           id
           userId
+          siteId
           name
           description
           type
           html
           css
           slot
-          status
           createdAt
           updatedAt
         }
@@ -72,20 +72,20 @@ export function getZones() {
   };
 }
 
-export function createZone({ domain, name, email, description }) {
+export function createZone({ siteId, name, description, type, html, css, slot }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($zone: ZoneInputWithoutId!) {
         createdZone(zone: $zone) {
           id
           userId
+          siteId
           name
           description
           type
           html
           css
           slot
-          status
           createdAt
           updatedAt
         }
@@ -94,10 +94,13 @@ export function createZone({ domain, name, email, description }) {
     const { data } = await graphqlRequest(mutation, {
       zone: {
         userId: '567daf97-d24d-4b7c-9b44-153534efc101',
-        domain,
+        siteId,
         name,
-        email,
         description,
+        type,
+        html,
+        css,
+        slot,
       },
     });
 
@@ -110,20 +113,20 @@ export function createZone({ domain, name, email, description }) {
   };
 }
 
-export function updateZone({ id, userId, domain, name, email, description }) {
+export function updateZone({ id, userId, siteId, name, description, type, html, css, slot }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($zone: ZoneInput!) {
         updatedZone(zone: $zone) {
           id
           userId
+          siteId
           name
           description
           type
           html
           css
           slot
-          status
           createdAt
           updatedAt
         }
@@ -133,10 +136,13 @@ export function updateZone({ id, userId, domain, name, email, description }) {
       zone: {
         id,
         userId: userId || '567daf97-d24d-4b7c-9b44-153534efc101',
-        domain,
+        siteId,
         name,
-        email,
         description,
+        type,
+        html,
+        css,
+        slot,
       },
     });
 
@@ -156,13 +162,13 @@ export function deleteZone(id) {
         deletedZone(id: "${id}") {
           id
           userId
+          siteId
           name
           description
           type
           html
           css
           slot
-          status
           createdAt
           updatedAt
         }

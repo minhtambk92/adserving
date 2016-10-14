@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSites } from '../../actions/sites';
+import { getZones, createZone } from '../../actions/zones';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './Zones.css';
@@ -24,15 +25,19 @@ class Zones extends Component {
   static propTypes = {
     sites: PropTypes.object,
     getSites: PropTypes.func,
+    zones: PropTypes.object,
+    getZones: PropTypes.func,
+    createZone: PropTypes.func,
   };
 
   componentWillMount() {
     this.props.getSites();
+    this.props.getZones();
   }
 
   componentDidMount() {
     /* eslint-disable no-undef */
-    $('.select2').select2();
+    // $(this.inputZoneType).select2();
 
     // iCheck for checkbox and radio inputs
     $('input[type="checkbox"].inputChooseSite').iCheck({
@@ -52,8 +57,36 @@ class Zones extends Component {
     /* eslint-enable no-undef */
   }
 
+  clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    document.getElementById('inputZoneName').value = null;
+    document.getElementById('inputZoneDescription').value = null;
+    document.getElementById('inputZoneHTML').value = null;
+    document.getElementById('inputZoneCSS').value = null;
+    document.getElementById('inputZoneSlot').value = null;
+  }
+
   createZone() {
-    //
+    const name = document.getElementById('inputZoneName').value;
+    const siteId = document.getElementById('inputZoneSite').value;
+    const type = document.getElementById('inputZoneType').value;
+    const description = document.getElementById('inputZoneDescription').value;
+    const html = document.getElementById('inputZoneHTML').value;
+    const css = document.getElementById('inputZoneCSS').value;
+    const slot = document.getElementById('inputZoneSlot').value;
+
+    if (name && siteId && type && description && slot) {
+      this.props.createZone({
+        name,
+        siteId,
+        type,
+        description,
+        html,
+        css,
+        slot,
+      });
+
+      this.clearInput();
+    }
   }
 
   render() {
@@ -114,7 +147,10 @@ class Zones extends Component {
                         className="col-sm-2 control-label"
                       >Type</label>
                       <div className="col-sm-10">
-                        <select id="inputZoneType" className="form-control">
+                        <select
+                          id="inputZoneType"
+                          className="form-control"
+                        >
                           <option>Type 1</option>
                           <option>Type 2</option>
                           <option>Type 3</option>
@@ -165,7 +201,9 @@ class Zones extends Component {
                         className="col-sm-2 control-label"
                       >Status</label>
                       <div className="col-sm-10">
-                        <select id="inputZoneStatus" className="form-control">
+                        <select
+                          id="inputZoneStatus" className="form-control"
+                        >
                           <option>Active</option>
                           <option>Inactive</option>
                         </select>
@@ -232,21 +270,33 @@ class Zones extends Component {
                     <thead>
                       <tr>
                         <th><input type="checkbox" className="inputChooseSite" /></th>
+                        <th>Site</th>
                         <th>Name</th>
-                        <th>Domain</th>
-                        <th>Email</th>
+                        <th>Type</th>
                         <th>Description</th>
+                        <th>Slot</th>
                       </tr>
                     </thead>
                     <tbody>
+                      {this.props.zones.list && this.props.zones.list.map(zone => (
+                        <tr key={zone.id}>
+                          <td><input type="checkbox" className="inputChooseSite" /></td>
+                          <td>{zone.siteId}</td>
+                          <td>{zone.name}</td>
+                          <td>{zone.type}</td>
+                          <td>{zone.description}</td>
+                          <td>{zone.slot}</td>
+                        </tr>
+                      ))}
                     </tbody>
                     <tfoot>
                       <tr>
                         <th><input type="checkbox" className="inputChooseSite" /></th>
+                        <th>Site</th>
                         <th>Name</th>
-                        <th>Domain</th>
-                        <th>Status</th>
+                        <th>Type</th>
                         <th>Description</th>
+                        <th>Slot</th>
                       </tr>
                     </tfoot>
                   </table>
@@ -276,10 +326,13 @@ class Zones extends Component {
 
 const mapState = (state) => ({
   sites: state.sites,
+  zones: state.zones,
 });
 
 const mapDispatch = {
   getSites,
+  getZones,
+  createZone,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zones));
