@@ -50,7 +50,7 @@ class Site extends Component {
       name,
       email,
       description,
-    } = nextProps.sites && (nextProps.sites.current || {});
+    } = nextProps.sites && (nextProps.sites.editing || {});
 
     document.getElementById('inputSiteDomain').value = domain;
     document.getElementById('inputSiteName').value = name;
@@ -71,23 +71,23 @@ class Site extends Component {
     const { userId, domain, name, email, description } = this.state;
     const site = { id: this.props.siteId };
 
-    if (userId && userId !== this.props.sites.current.userId) {
+    if (userId && userId !== this.props.sites.editing.userId) {
       site.userId = userId;
     }
 
-    if (domain && domain !== this.props.sites.current.domain) {
+    if (domain && domain !== this.props.sites.editing.domain) {
       site.domain = domain;
     }
 
-    if (name && name !== this.props.sites.current.name) {
+    if (name && name !== this.props.sites.editing.name) {
       site.name = name;
     }
 
-    if (email && email !== this.props.sites.current.email) {
+    if (email && email !== this.props.sites.editing.email) {
       site.email = email;
     }
 
-    if (description && description !== this.props.sites.current.description) {
+    if (description && description !== this.props.sites.editing.description) {
       site.description = description;
     }
 
@@ -104,9 +104,9 @@ class Site extends Component {
         pageTitle={
           pageTitle
             .concat(': ')
-            .concat(this.props.sites.current ? this.props.sites.current.name : '...')
+            .concat(this.props.sites.editing ? this.props.sites.editing.name : '...')
         }
-        pageSubTitle={this.props.sites.current ? this.props.sites.current.domain : ''}
+        pageSubTitle={this.props.sites.editing ? this.props.sites.editing.domain : ''}
       >
         <div>
 

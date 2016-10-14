@@ -15,33 +15,33 @@ export default function sites(state = {}, action) {
     case GET_SITE: {
       return {
         ...state,
-        current: action.payload.site,
+        editing: action.payload.site,
       };
     }
 
     case GET_SITES: {
       return {
         ...state,
-        latest: action.payload.sites,
+        list: action.payload.sites,
       };
     }
 
     case CREATE_SITE: {
-      state.latest.unshift(action.payload.site);
+      state.list.unshift(action.payload.site);
       return { ...state };
     }
 
     case UPDATE_SITE: {
       return {
         ...state,
-        current: action.payload.site,
+        editing: action.payload.site,
       };
     }
 
     case DELETE_SITE: {
       return {
         ...state,
-        current: null,
+        editing: null,
       };
     }
 

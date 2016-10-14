@@ -220,7 +220,7 @@ class Sites extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.sites.latest && this.props.sites.latest.map(site => {
+                      {this.props.sites.list && this.props.sites.list.map(site => {
                         if (this.isIndexOf(site.domain, site.name, site.email, site.description)) {
                           return (
                             <tr key={site.id}>

@@ -24,7 +24,7 @@ export function getSite(id) {
           email
           description
           createdAt
-          updattedAt
+          updatedAt
         }
       }`;
 
@@ -50,6 +50,8 @@ export function getSites() {
           name
           email
           description
+          createdAt
+          updatedAt
         }
       }`;
 
@@ -75,6 +77,8 @@ export function createSite({ domain, name, email, description }) {
           name
           email
           description
+          createdAt
+          updatedAt
         }
       }`;
 
@@ -108,6 +112,8 @@ export function updateSite({ id, userId, domain, name, email, description }) {
           name
           email
           description
+          createdAt
+          updatedAt
         }
       }`;
 
@@ -142,6 +148,9 @@ export function deleteSite(id) {
           name
           email
           description
+          createdAt
+          updatedAt
+          deletedAt
         }
       }`;
 
