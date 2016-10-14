@@ -8,23 +8,21 @@
  */
 
 import React from 'react';
-import Home from './Home';
-import fetch from '../../core/fetch';
+import Login from './Login';
 
 export default {
 
-  path: '/',
+  path: '/login',
 
   action() {
     const content = {
-      title: 'Home | Admin Dev Kit',
+      title: 'Login | Admin Dev Kit',
     };
 
     return {
-      title: 'Home | Admin Dev Kit',
-      component: <Home content={content} />,
+      title: 'Login | Admin Dev Kit',
+      component: <Login content={content} />,
     };
   },
-
 
 };

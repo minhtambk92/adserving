@@ -30,7 +30,9 @@ const context = {
   insertCss: (...styles) => {
     // eslint-disable-next-line no-underscore-dangle
     const removeCss = styles.map(x => x._insertCss());
-    return () => { removeCss.forEach(f => f()); };
+    return () => {
+      removeCss.forEach(f => f());
+    };
   },
   // Initialize a new Redux store
   // http://redux.js.org/docs/basics/UsageWithReact.html
@@ -118,7 +120,6 @@ FastClick.attach(document.body);
 const container = document.getElementById('app');
 let currentLocation = history.location;
 let routes = require('./routes').default;
-
 // Re-render the app when window.location changes
 async function onLocationChange(location) {
   // Remember the latest scroll position for the previous location

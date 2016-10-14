@@ -8,23 +8,17 @@
  */
 
 import React from 'react';
-import Home from './Home';
-import fetch from '../../core/fetch';
+import Advertiser from './Advertiser';
 
 export default {
 
-  path: '/',
+  path: '/advertiser/:id',
 
-  action() {
-    const content = {
-      title: 'Home | Admin Dev Kit',
-    };
-
+  async action({ params }) {
     return {
-      title: 'Home | Admin Dev Kit',
-      component: <Home content={content} />,
+      title: 'Advertiser Management | Admin Dev Kit',
+      component: <Advertiser advertiserId={params.id} />,
     };
   },
-
 
 };

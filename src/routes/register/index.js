@@ -8,23 +8,21 @@
  */
 
 import React from 'react';
-import Home from './Home';
-import fetch from '../../core/fetch';
+import Register from './Register';
 
 export default {
 
-  path: '/',
+  path: '/register',
 
   action() {
-    const content = {
-      title: 'Home | Admin Dev Kit',
+    let content = { // eslint-disable-line prefer-const
+      title: 'Register | Admin Dev Kit',
     };
 
     return {
-      title: 'Home | Admin Dev Kit',
-      component: <Home content={content} />,
+      title: content.title,
+      component: <Register content={content} />,
     };
   },
-
 
 };

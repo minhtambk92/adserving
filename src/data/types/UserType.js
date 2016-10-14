@@ -7,19 +7,18 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import {
-  GraphQLObjectType as ObjectType,
-  GraphQLID as ID,
-  GraphQLString as StringType,
-  GraphQLNonNull as NonNull,
-} from 'graphql';
 
+import {GraphQLObjectType as ObjectType} from "graphql";
+import {attributeFields} from "graphql-sequelize";
+import {User} from "../models";
 const UserType = new ObjectType({
   name: 'User',
-  fields: {
-    id: { type: new NonNull(ID) },
-    email: { type: StringType },
-  },
+  fields: Object.assign(attributeFields(User, {
+    // Additional options
+    only: ['id', 'username', 'email', 'password'],
+  }), {
+    // additional fields
+  }),
 });
 
 export default UserType;
