@@ -65,7 +65,7 @@ class Advertisers extends Component {
     }));
   }
 
-  createAdvertiser(event) { // eslint-disable-line no-unused-vars
+  createAdvertiser(event) {
     const contact = document.getElementById('inputAdvertiserContact').value;
     const name = document.getElementById('inputAdvertiserName').value;
     const email = document.getElementById('inputAdvertiserEmail').value;
@@ -213,7 +213,7 @@ class Advertisers extends Component {
                         if (this.isIndexOf(advertiser.email, advertiser.contact, advertiser.name, advertiser.description)) {
                           return (
                             <tr key={advertiser.id}>
-                              <td><input type="checkbox" className="inputChooseAdvertiser" /></td>
+                              <th><input type="checkbox" className="inputChooseAdvertiser" /></th>
                               <td><Link to={`/advertiser/${advertiser.id}`}>{advertiser.name}</Link>
                               </td>
                               <td>{advertiser.contact}</td>

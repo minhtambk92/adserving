@@ -21,6 +21,7 @@ export default {
     require('./login').default,
     require('./advertiser').default,
     require('./advertisers').default,
+    require('./campaign').default,
     require('./campaigns').default,
     require('./placements').default,
     require('./banners').default,
