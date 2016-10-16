@@ -17,9 +17,13 @@ export default {
   // Keep in mind, routes are evaluated in order
   children: [
     require('./home').default,
-
+    require('./register').default,
+    require('./login').default,
+    require('./advertiser').default,
     require('./advertisers').default,
+    require('./campaign').default,
     require('./campaigns').default,
+    require('./placement').default,
     require('./placements').default,
     require('./banners').default,
     require('./site').default,

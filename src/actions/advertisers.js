@@ -1,27 +1,20 @@
-/**
- * Created by Manhhailua on 10/11/16.
- */
-
-/* eslint-disable import/prefer-default-export */
-
 import {
-  GET_SITE,
-  GET_SITES,
-  CREATE_SITE,
-  UPDATE_SITE,
-  DELETE_SITE,
+  GET_ADVERTISERS,
+  CREATE_ADVERTISER,
+  GET_ADVERTISER,
+  UPDATE_ADVERTISER,
+  DELETE_ADVERTISER
 } from '../constants';
 
-export function getSite(id) {
+export function getAdvertiser(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        sites(where: {id: "${id}"}, limit: 1) {
+        advertisers(where: {id: "${id}"}, limit: 1) {
           id
-          userId
-          domain
-          name
           email
+          name
+          contact
           description
           createdAt
           updatedAt
@@ -31,25 +24,22 @@ export function getSite(id) {
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_SITE,
+      type: GET_ADVERTISER,
       payload: {
-        site: data.sites.shift(),
+        advertiser: data.advertisers.shift(),
       },
     });
   };
 }
-
-export function getSites() {
+export function getAdvertisers() {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        sites {
+        advertisers {
           id
-          userId
-          siteId
-          domain
-          name
           email
+          name
+          contact
           description
           createdAt
           updatedAt
@@ -59,24 +49,22 @@ export function getSites() {
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_SITES,
+      type: GET_ADVERTISERS,
       payload: {
-        sites: data.sites,
+        advertisers: data.advertisers,
       },
     });
   };
 }
-
-export function createSite({ domain, name, email, description }) {
+export function createAdvertiser({ email, name, contact, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($site: SiteInputWithoutId!) {
-        createdSite(site: $site) {
+      mutation ($advertiser: AdvertiserInputTypeWithoutId!) {
+        createdAdvertiser(advertiser: $advertiser) {
           id
-          userId
-          domain
-          name
           email
+          name
+          contact
           description
           createdAt
           updatedAt
@@ -84,34 +72,32 @@ export function createSite({ domain, name, email, description }) {
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      site: {
-        userId: '567daf97-d24d-4b7c-9b44-153534efc101',
-        domain,
-        name,
+      advertiser: {
         email,
+        name,
+        contact,
         description,
+
       },
     });
 
     dispatch({
-      type: CREATE_SITE,
+      type: CREATE_ADVERTISER,
       payload: {
-        site: data.createdSite,
+        advertiser: data.createdAdvertiser,
       },
     });
   };
 }
-
-export function updateSite({ id, userId, domain, name, email, description }) {
+export function updateAdvertiser({ id, email, name, contact, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($site: SiteInput!) {
-        updatedSite(site: $site) {
+      mutation ($advertiser: AdvertiserInputType!) {
+        updatedAdvertiser(advertiser: $advertiser) {
           id
-          userId
-          domain
-          name
           email
+          name
+          contact
           description
           createdAt
           updatedAt
@@ -119,48 +105,45 @@ export function updateSite({ id, userId, domain, name, email, description }) {
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      site: {
+      advertiser: {
         id,
-        userId: userId || '567daf97-d24d-4b7c-9b44-153534efc101',
-        domain,
-        name,
         email,
+        name,
+        contact,
         description,
       },
     });
 
     dispatch({
-      type: UPDATE_SITE,
+      type: UPDATE_ADVERTISER,
       payload: {
-        site: data.updatedSite,
+        advertiser: data.updatedAdvertiser,
       },
     });
   };
 }
 
-export function deleteSite(id) {
+export function deleteAdvertiser(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
-        deletedSite(id: "${id}") {
+        deletedAdvertiser(id: "${id}") {
           id
-          userId
-          domain
-          name
           email
+          name
+          contact
           description
           createdAt
           updatedAt
-          deletedAt
         }
       }`;
 
     const { data } = await graphqlRequest(mutation);
 
     dispatch({
-      type: DELETE_SITE,
+      type: DELETE_ADVERTISER,
       payload: {
-        site: data.deletedSite,
+        advertiser: data.deletedAdvertiser,
       },
     });
   };

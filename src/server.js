@@ -19,6 +19,7 @@ import jwt from 'jsonwebtoken';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import UniversalRouter from 'universal-router';
+import createMemoryHistory from 'history/createMemoryHistory';
 import PrettyError from 'pretty-error';
 import { IntlProvider } from 'react-intl';
 
@@ -35,7 +36,10 @@ import assets from './assets'; // eslint-disable-line import/no-unresolved
 import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './actions/runtime';
 import { setLocale } from './actions/intl';
+import { findById } from './actions/users';
 import { port, auth, locales } from './config';
+import 'babel-polyfill';
+import './serverIntlPolyfill'; // eslint-disable-line import/no-unresolved
 
 const app = express();
 
@@ -76,6 +80,24 @@ app.use(expressJwt({
 }));
 app.use(passport.initialize());
 
+app.use('*', (req, res, next) => {
+  // Middleware
+  const token = req.cookies.id_token;
+  if (token) {
+    jwt.verify(token, auth.jwt.secret, function (error, user) {
+      if (!error && user) {
+        // get information user and create new token
+        return next();
+      } else if (error) {
+        console.log(error);
+      }
+    });
+  } else {
+    return next();
+  }
+});
+
+
 app.get('/login/facebook',
   passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
 );
@@ -103,11 +125,31 @@ app.use('/graphql', expressGraphQL(req => ({
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
 app.get('*', async (req, res, next) => {
+  const history = createMemoryHistory({
+    initialEntries: [req.url],
+  });
+  // let currentLocation = history.getCurrentLocation();
+  let sent = false;
+  const removeHistoryListener = history.listen(location => {
+    const newUrl = `${location.pathname}${location.search}`;
+    if (req.originalUrl !== newUrl) {
+      // console.log(`R ${req.originalUrl} -> ${newUrl}`); // eslint-disable-line no-console
+      if (!sent) {
+        res.redirect(303, newUrl);
+        sent = true;
+        next();
+      } else {
+        console.error(`${req.path}: Already sent!`); // eslint-disable-line no-console
+      }
+    }
+  });
+
   try {
     const store = configureStore({
       user: req.user || null,
     }, {
       cookie: req.headers.cookie,
+      history,
     });
 
     store.dispatch(setRuntimeVariable({
@@ -130,6 +172,9 @@ app.get('*', async (req, res, next) => {
     // Global (context) variables that can be easily accessed from any React component
     // https://facebook.github.io/react/docs/context.html
     const context = {
+      // Navigation manager, e.g. history.push('/home')
+      // https://github.com/mjackson/history
+      history,
       // Enables critical path CSS rendering
       // https://github.com/kriasoft/isomorphic-style-loader
       insertCss: (...styles) => {
@@ -165,6 +210,8 @@ app.get('*', async (req, res, next) => {
     res.send(`<!doctype html>${html}`);
   } catch (err) {
     next(err);
+  } finally {
+    removeHistoryListener();
   }
 });
 
@@ -208,3 +255,13 @@ models.sync().catch(err => console.error(err.stack)).then(() => {
   });
 });
 /* eslint-enable no-console */
+app.post('/auth/getToken', (req, res) => {
+  const data = req.body.data;
+  if (data) {
+    req.user = data;
+    const expiresIn = 60 * 60 * 24 * 180; // 180 days
+    const token = jwt.sign(data, auth.jwt.secret, { expiresIn });
+    res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
+    return res.status(200).json({ token: token });
+  }
+});

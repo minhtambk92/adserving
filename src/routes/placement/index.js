@@ -8,23 +8,17 @@
  */
 
 import React from 'react';
-import Home from './Home';
-import fetch from '../../core/fetch';
+import Placement from './Placement';
 
 export default {
 
-  path: '/',
+  path: '/placement/:id',
 
-  action() {
-    const content = {
-      title: 'Home | Admin Dev Kit',
-    };
-
+  async action({ params }) {
     return {
-      title: 'Home | Admin Dev Kit',
-      component: <Home content={content} />,
+      title: 'Placement Management | Admin Dev Kit',
+      component: <Placement placementId={params.id} />,
     };
   },
-
 
 };

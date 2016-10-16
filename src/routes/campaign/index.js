@@ -8,23 +8,17 @@
  */
 
 import React from 'react';
-import Home from './Home';
-import fetch from '../../core/fetch';
+import Campaign from './Campaign';
 
 export default {
 
-  path: '/',
+  path: '/campaign/:id',
 
-  action() {
-    const content = {
-      title: 'Home | Admin Dev Kit',
-    };
-
+  async action({ params }) {
     return {
-      title: 'Home | Admin Dev Kit',
-      component: <Home content={content} />,
+      title: 'Campaign Management | Admin Dev Kit',
+      component: <Campaign campaignId={params.id} />,
     };
   },
-
 
 };

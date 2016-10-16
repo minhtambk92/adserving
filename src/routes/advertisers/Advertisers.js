@@ -8,8 +8,9 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import { FormattedRelative } from 'react-intl';
+import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { getAdvertisers, createAdvertiser } from '../../actions/advertisers';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './Advertisers.css';
@@ -18,9 +19,72 @@ const pageTitle = 'Home';
 const pageSubTitle = 'Control panel';
 
 class Advertisers extends Component {
+  static propTypes = {
+    advertisers: PropTypes.object,
+    getAdvertisers: PropTypes.func,
+    createAdvertiser: PropTypes.func,
+  };
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      searchText: '',
+    };
+  }
+
+  componentWillMount() {
+    this.props.getAdvertisers();
+  }
 
   componentDidMount() {
-    // somethings happens at client side
+    /* eslint-disable no-undef */
+    // $('.select2').select2();
+    // $('#example1').DataTable(); // eslint-disable-line new-cap
+
+    // iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].inputChooseAdvertiser').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue',
+    });
+    /* eslint-enable no-undef */
+  }
+
+  clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    document.getElementById('inputAdvertiserContact').value = null;
+    document.getElementById('inputAdvertiserName').value = null;
+    document.getElementById('inputAdvertiserEmail').value = null;
+    document.getElementById('inputAdvertiserDescription').value = null;
+  }
+
+  searchFor(event) {
+    event.persist();
+    this.setState((previousState) => ({
+      ...previousState,
+      searchText: event.target.value.trim(),
+    }));
+  }
+
+  createAdvertiser(event) {
+    const contact = document.getElementById('inputAdvertiserContact').value;
+    const name = document.getElementById('inputAdvertiserName').value;
+    const email = document.getElementById('inputAdvertiserEmail').value;
+    const description = document.getElementById('inputAdvertiserDescription').value;
+
+    if (contact && name && email && description) {
+      this.props.createAdvertiser({ email, name, contact, description }).then(() => {
+        this.clearInput();
+      });
+    }
+  }
+
+  isIndexOf(...args) {
+    for (let i = 0; i < args.length; i += 1) {
+      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
+        return true;
+      }
+    }
+    return false;
   }
 
   render() {
@@ -30,97 +94,164 @@ class Advertisers extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              <div className="box box-warning">
+              {/* BOX: FORM OF CREATE NEW WEB ADVERTISER */}
+              <div className="box box-primary collapsed-box">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Create campaign</h3>
+                  <h3 className="box-title">Create a new advertiser</h3>
+                  <div className="box-tools pull-right">
+                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                      <i className="fa fa-plus" />
+                    </button>
+                  </div>
                 </div>
                 {/* /.box-header */}
-                <div className="box-body">
-                  <form role="form">
-                    {/* text input */}
+                {/* form start */}
+                <form className="form-horizontal">
+                  <div className="box-body">
                     <div className="form-group">
-                      <label>Text</label>
-                      <input type="text" className="form-control" placeholder="Enter ..." />
+                      <label
+                        htmlFor="inputAdvertiserName" className="col-sm-2 control-label"
+                      >Name</label>
+                      <div className="col-sm-10">
+                        <input
+                          type="text" className="form-control" id="inputAdvertiserName"
+                          placeholder="Admicro"
+                        />
+                      </div>
                     </div>
                     <div className="form-group">
-                      <label>Text Disabled</label>
-                      <input type="text" className="form-control" placeholder="Enter ..." disabled />
+                      <label htmlFor="inputAdvertiserContact" className="col-sm-2 control-label">Contact</label>
+                      <div className="col-sm-10">
+                        <input
+                          type="text" className="form-control" id="inputAdvertiserContact"
+                          placeholder="0987654321"
+                        />
+                      </div>
                     </div>
-                    {/* textarea */}
                     <div className="form-group">
-                      <label>Textarea</label>
-                      <textarea className="form-control" rows={3} placeholder="Enter ..." defaultValue={''} />
+                      <label
+                        htmlFor="inputAdvertiserEmail"
+                        className="col-sm-2 control-label"
+                      >Email</label>
+                      <div className="col-sm-10">
+                        <input
+                          type="text" className="form-control" id="inputAdvertiserEmail"
+                          placeholder="contact@dantri.com.vn"
+                        />
+                      </div>
                     </div>
-                  </form>
-                </div>
-                {/* /.box-body */}
+
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputAdvertiserDescription"
+                        className="col-sm-2 control-label"
+                      >Description</label>
+                      <div className="col-sm-10">
+                        <textarea
+                          className="form-control" id="inputAdvertiserDescription"
+                          rows="5" placeholder="More info..."
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  {/* /.box-body */}
+                  <div className="box-footer">
+                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+                    <a
+                      className={'btn btn-app pull-right '.concat(s.btn)}
+                      onClick={event => this.clearInput(event)}
+                    ><i className="fa fa-eraser" /> Clear</a>
+                    <a
+                      className={'btn btn-app pull-right '.concat(s.btn)}
+                      onClick={event => this.createAdvertiser(event)}
+                    ><i className="fa fa-check" /> Confirm</a>
+                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+                  </div>
+                  {/* /.box-footer */}
+                </form>
               </div>
-              {/* /.box */}
+              {/* /.col */}
             </section>
           </div>
 
-          {/* Main row */}
           <div className="row">
-            {/* Left col */}
             <section className="col-lg-12">
-
-              {/* TABLE: LATEST ORDERS */}
+              {/* BOX: LIST OF ADVERTISERS */}
               <div className="box box-info">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Latest Orders</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-minus" />
-                    </button>
-                    <button type="button" className="btn btn-box-tool" data-widget="remove">
-                      <i className="fa fa-times" />
-                    </button>
+                  <h3 className="box-title">List Advertiser</h3>
+
+                  <div className="box-tools">
+                    <div className="input-group input-group-sm" style={{ width: 150 }}>
+                      <input
+                        type="text" name="inputSearchAdvertisers"
+                        className="form-control pull-right"
+                        placeholder="Search..." onChange={event => this.searchFor(event)}
+                      />
+                      <div className="input-group-btn">
+                        <button
+                          type="submit" className="btn btn-default"
+                        ><i className="fa fa-search" /></button>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 {/* /.box-header */}
-                <div className="box-body">
-                  <div className="table-responsive">
-                    <table className="table no-margin">
-                      <thead>
-                        <tr>
-                          <th>Order ID</th>
-                          <th>Item</th>
-                          <th>Status</th>
-                          <th>Popularity</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td><Link to="pages/examples/invoice.html">OR9842</Link></td>
-                          <td>Call of Duty IV</td>
-                          <td><span className="label label-success">Shipped</span></td>
-                          <td>
-                            <div className="sparkbar" data-color="#00a65a" data-height={20}>
-                              90,80,90,-70,61,-83,63
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  {/* /.table-responsive */}
+                <div className="box-body table-responsive no-padding">
+                  <table id="example1" className="table table-hover">
+                    <thead>
+                      <tr>
+                        <th><input type="checkbox" className="inputChooseAdvertiser" /></th>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      { this.props.advertisers.latest && this.props.advertisers.latest.map(advertiser => {
+                        if (this.isIndexOf(advertiser.email, advertiser.contact, advertiser.name, advertiser.description)) {
+                          return (
+                            <tr key={advertiser.id}>
+                              <th><input type="checkbox" className="inputChooseAdvertiser" /></th>
+                              <td><Link to={`/advertiser/${advertiser.id}`}>{advertiser.name}</Link>
+                              </td>
+                              <td>{advertiser.contact}</td>
+                              <td>{advertiser.email}</td>
+                              <td>{advertiser.description}</td>
+                            </tr>
+                          );
+                        }
+                        return false;
+                      })}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th><input type="checkbox" className="inputChooseAdvertiser" /></th>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Description</th>
+                      </tr>
+                    </tfoot>
+                  </table>
                 </div>
                 {/* /.box-body */}
                 <div className="box-footer clearfix">
-                  <button
-                    className="btn btn-sm btn-info btn-flat pull-left"
-                  >Place New Order</button>
-                  <button
-                    className="btn btn-sm btn-default btn-flat pull-right"
-                  >View All Orders</button>
+                  <ul className="pagination pagination-sm no-margin pull-right">
+                    <li><a>&laquo;</a></li>
+                    <li><a>1</a></li>
+                    <li><a>2</a></li>
+                    <li><a>3</a></li>
+                    <li><a>&raquo;</a></li>
+                  </ul>
                 </div>
-                {/* /.box-footer */}
               </div>
-
+              {/* /.box */}
             </section>
-            {/* right col */}
+            {/* /.col */}
           </div>
-          {/* /.row (main row) */}
+
         </div>
       </Layout>
     );
@@ -128,4 +259,14 @@ class Advertisers extends Component {
 
 }
 
-export default withStyles(s)(Advertisers);
+const mapState = (state) => ({
+  advertisers: state.advertisers,
+});
+
+const mapDispatch = {
+  getAdvertisers,
+  createAdvertiser,
+};
+
+export default withStyles(s)(connect(mapState, mapDispatch)(Advertisers));
+

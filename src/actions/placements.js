@@ -1,27 +1,22 @@
-/**
- * Created by Manhhailua on 10/11/16.
- */
-
-/* eslint-disable import/prefer-default-export */
-
 import {
-  GET_SITE,
-  GET_SITES,
-  CREATE_SITE,
-  UPDATE_SITE,
-  DELETE_SITE,
-} from '../constants';
-
-export function getSite(id) {
+  GET_PLACEMENTS,
+  CREATE_PLACEMENT,
+  GET_PLACEMENT,
+  UPDATE_PLACEMENT,
+  DELETE_PLACEMENT,
+} from '../constants/';
+export function getPlacement(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        sites(where: {id: "${id}"}, limit: 1) {
+        placements(where: {id: "${id}"}, limit: 1) {
           id
           userId
-          domain
           name
-          email
+          size
+          startTime
+          endTime
+          weight
           description
           createdAt
           updatedAt
@@ -31,52 +26,61 @@ export function getSite(id) {
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_SITE,
+      type: GET_PLACEMENT,
       payload: {
-        site: data.sites.shift(),
+        placement: data.placements.shift(),
       },
     });
   };
 }
-
-export function getSites() {
+export function getPlacements() {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        sites {
+        placements {
           id
           userId
-          siteId
-          domain
           name
-          email
+          size
+          startTime
+          endTime
+          weight
           description
           createdAt
           updatedAt
-        }
+          }
       }`;
 
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_SITES,
+      type: GET_PLACEMENTS,
       payload: {
-        sites: data.sites,
+        placements: data.placements,
       },
     });
   };
 }
-
-export function createSite({ domain, name, email, description }) {
+export function createPlacement({
+  userId,
+  name,
+  size,
+  startTime,
+  endTime,
+  weight,
+  description,
+}) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($site: SiteInputWithoutId!) {
-        createdSite(site: $site) {
+      mutation ($placement: PlacementInputTypeWithoutId!) {
+        createdPlacement(placement: $placement) {
           id
           userId
-          domain
           name
-          email
+          size
+          startTime
+          endTime
+          weight
           description
           createdAt
           updatedAt
@@ -84,34 +88,47 @@ export function createSite({ domain, name, email, description }) {
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      site: {
-        userId: '567daf97-d24d-4b7c-9b44-153534efc101',
-        domain,
+      placement: {
+        userId,
         name,
-        email,
+        size,
+        startTime,
+        endTime,
+        weight,
         description,
+
       },
     });
 
     dispatch({
-      type: CREATE_SITE,
+      type: CREATE_PLACEMENT,
       payload: {
-        site: data.createdSite,
+        placement: data.createdPlacement,
       },
     });
   };
 }
-
-export function updateSite({ id, userId, domain, name, email, description }) {
+export function updatePlacement({
+  id,
+  userId,
+  name,
+  size,
+  startTime,
+  endTime,
+  weight,
+  description,
+}) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($site: SiteInput!) {
-        updatedSite(site: $site) {
+      mutation ($placement: PlacementInputType!) {
+        updatedPlacement(placement: $placement) {
           id
           userId
-          domain
           name
-          email
+          size
+          startTime
+          endTime
+          weight
           description
           createdAt
           updatedAt
@@ -119,48 +136,51 @@ export function updateSite({ id, userId, domain, name, email, description }) {
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      site: {
+      placement: {
         id,
-        userId: userId || '567daf97-d24d-4b7c-9b44-153534efc101',
-        domain,
+        userId,
         name,
-        email,
+        size,
+        startTime,
+        endTime,
+        weight,
         description,
       },
     });
 
     dispatch({
-      type: UPDATE_SITE,
+      type: UPDATE_PLACEMENT,
       payload: {
-        site: data.updatedSite,
+        placement: data.updatedPlacement,
       },
     });
   };
 }
 
-export function deleteSite(id) {
+export function deletePlacement(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
-        deletedSite(id: "${id}") {
-          id
+        deletedPlacement(id: "${id}") {
+           id
           userId
-          domain
           name
-          email
+          size
+          startTime
+          endTime
+          weight
           description
           createdAt
           updatedAt
-          deletedAt
         }
       }`;
 
     const { data } = await graphqlRequest(mutation);
 
     dispatch({
-      type: DELETE_SITE,
+      type: DELETE_PLACEMENT,
       payload: {
-        site: data.deletedSite,
+        placement: data.deletedPlacement,
       },
     });
   };
