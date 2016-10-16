@@ -24,6 +24,7 @@ export default {
     require('./banners').default,
     require('./site').default,
     require('./sites').default,
+    require('./zone').default,
     require('./zones').default,
 
     // place new routes before...

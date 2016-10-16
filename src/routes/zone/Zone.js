@@ -9,100 +9,152 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { FormattedRelative } from 'react-intl';
+// import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSites } from '../../actions/sites';
-import { getZones, createZone } from '../../actions/zones';
+import { getZone, updateZone, deleteZone } from '../../actions/zones';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
-import s from './Zones.css';
+import s from './Zone.css';
 
-const pageTitle = 'Zone Management';
-const pageSubTitle = 'Control panel';
+const pageTitle = 'Zone';
 
-class Zones extends Component {
+class Zone extends Component {
 
   static propTypes = {
     sites: PropTypes.object,
     getSites: PropTypes.func,
+    zoneId: PropTypes.string.isRequired,
     zones: PropTypes.object,
-    getZones: PropTypes.func,
-    createZone: PropTypes.func,
+    getZone: PropTypes.func,
+    updateZone: PropTypes.func,
+    deleteZone: PropTypes.func,
   };
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      userId: '',
+      siteId: '',
+      name: '',
+      description: '',
+      type: '',
+      html: '',
+      css: '',
+      slot: '',
+    };
+  }
 
   componentWillMount() {
     this.props.getSites();
-    this.props.getZones();
+    this.props.getZone(this.props.zoneId);
   }
 
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    // $(this.inputZoneType).select2();
+  componentWillReceiveProps(nextProps) {
+    const {
+      siteId,
+      name,
+      description,
+      type,
+      html,
+      css,
+      slot,
+    } = nextProps.zones && (nextProps.zones.editing || {});
 
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseSite').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
+    document.getElementById('inputZoneSite').value = siteId;
+    document.getElementById('inputZoneName').value = name;
+    document.getElementById('inputZoneDescription').value = description;
+    document.getElementById('inputZoneType').value = type;
+    document.getElementById('inputZoneHtml').value = html;
+    document.getElementById('inputZoneCss').value = css;
+    document.getElementById('inputZoneSlot').value = slot;
+  }
+
+  onInputChange(event, field) {
+    event.persist();
+
+    this.setState(previousState => {
+      const nextState = previousState;
+      nextState[field] = event.target.value;
+      return nextState;
     });
-    /* eslint-enable no-undef */
   }
 
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseSite').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-    /* eslint-enable no-undef */
-  }
+  updateZone() {
+    const {
+      userId,
+      siteId,
+      name,
+      description,
+      type,
+      html,
+      css,
+      slot,
+    } = this.state;
 
-  clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    document.getElementById('inputZoneName').value = null;
-    document.getElementById('inputZoneDescription').value = null;
-    document.getElementById('inputZoneHTML').value = null;
-    document.getElementById('inputZoneCSS').value = null;
-    document.getElementById('inputZoneSlot').value = null;
-  }
+    const zone = { id: this.props.zoneId };
 
-  createZone() {
-    const name = document.getElementById('inputZoneName').value;
-    const siteId = document.getElementById('inputZoneSite').value;
-    const type = document.getElementById('inputZoneType').value;
-    const description = document.getElementById('inputZoneDescription').value;
-    const html = document.getElementById('inputZoneHTML').value;
-    const css = document.getElementById('inputZoneCSS').value;
-    const slot = document.getElementById('inputZoneSlot').value;
-
-    if (name && siteId && type && description && slot) {
-      this.props.createZone({
-        name,
-        siteId,
-        type,
-        description,
-        html,
-        css,
-        slot,
-      });
-
-      this.clearInput();
+    if (userId && userId !== this.props.zones.editing.userId) {
+      zone.userId = userId;
     }
+
+    if (siteId && siteId !== this.props.zones.editing.siteId) {
+      zone.siteId = siteId;
+    }
+
+    if (name && name !== this.props.zones.editing.name) {
+      zone.name = name;
+    }
+
+    if (description && description !== this.props.zones.editing.description) {
+      zone.description = description;
+    }
+
+    if (type && type !== this.props.zones.editing.type) {
+      zone.type = type;
+    }
+
+    if (html && html !== this.props.zones.editing.html) {
+      zone.html = html;
+    }
+
+    if (css && css !== this.props.zones.editing.css) {
+      zone.css = css;
+    }
+
+    if (slot && slot !== this.props.zones.editing.slot) {
+      zone.slot = slot;
+    }
+
+    this.props.updateZone(zone);
+  }
+
+  deleteZone() {
+    this.props.deleteZone(this.props.zoneId);
   }
 
   render() {
     return (
-      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
+      <Layout
+        pageTitle={
+          pageTitle
+            .concat(': ')
+            .concat(this.props.zones.editing ? this.props.zones.editing.name : '...')
+        }
+        pageSubTitle={this.props.zones.editing ? this.props.zones.editing.type : ''}
+      >
         <div>
 
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE A NEW ZONE */}
-              <div className="box box-primary collapsed-box">
+              <div className="box box-primary">
                 <div className="box-header with-border">
                   <h3 className="box-title">Create a new zone</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-plus" />
+                      <i className="fa fa-minus" />
                     </button>
                   </div>
                 </div>
@@ -119,6 +171,7 @@ class Zones extends Component {
                         <input
                           type="text" className="form-control" id="inputZoneName"
                           placeholder="Dan Tri"
+                          onChange={event => this.onInputChange(event, 'name')}
                         />
                       </div>
                     </div>
@@ -132,6 +185,7 @@ class Zones extends Component {
                           id="inputZoneSite"
                           className="form-control select2"
                           style={{ width: '100%' }}
+                          onChange={event => this.onInputChange(event, 'siteId')}
                         >
                           {this.props.sites.list && this.props.sites.list.map(site => (
                             <option
@@ -150,6 +204,7 @@ class Zones extends Component {
                         <select
                           id="inputZoneType"
                           className="form-control"
+                          onChange={event => this.onInputChange(event, 'type')}
                         >
                           <option>Type 1</option>
                           <option>Type 2</option>
@@ -161,25 +216,27 @@ class Zones extends Component {
                     </div>
                     <div className="form-group">
                       <label
-                        htmlFor="inputZoneHTML"
+                        htmlFor="inputZoneHtml"
                         className="col-sm-2 control-label"
                       >HTML</label>
                       <div className="col-sm-10">
                         <textarea
-                          className="form-control" id="inputZoneHTML"
+                          className="form-control" id="inputZoneHtml"
                           rows="5" placeholder="More info..."
+                          onChange={event => this.onInputChange(event, 'html')}
                         />
                       </div>
                     </div>
                     <div className="form-group">
                       <label
-                        htmlFor="inputZoneCSS"
+                        htmlFor="inputZoneCss"
                         className="col-sm-2 control-label"
                       >CSS</label>
                       <div className="col-sm-10">
                         <textarea
-                          className="form-control" id="inputZoneCSS"
+                          className="form-control" id="inputZoneCss"
                           rows="5" placeholder="More info..."
+                          onChange={event => this.onInputChange(event, 'css')}
                         />
                       </div>
                     </div>
@@ -192,6 +249,7 @@ class Zones extends Component {
                         <input
                           type="text" className="form-control" id="inputZoneSlot"
                           placeholder="..."
+                          onChange={event => this.onInputChange(event, 'slot')}
                         />
                       </div>
                     </div>
@@ -203,6 +261,7 @@ class Zones extends Component {
                       <div className="col-sm-10">
                         <select
                           id="inputZoneStatus" className="form-control"
+                          onChange={event => this.onInputChange(event, 'status')}
                         >
                           <option>Active</option>
                           <option>Inactive</option>
@@ -218,6 +277,7 @@ class Zones extends Component {
                         <textarea
                           className="form-control" id="inputZoneDescription"
                           rows="5" placeholder="More info..."
+                          onChange={event => this.onInputChange(event, 'description')}
                         />
                       </div>
                     </div>
@@ -225,14 +285,19 @@ class Zones extends Component {
                   {/* /.box-body */}
                   <div className="box-footer">
                     {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+                    <Link
+                      to="/zones"
+                      className={'btn btn-app pull-right '.concat(s.btn)}
+                    ><i className="fa fa-undo" /> Cancel</Link>
+                    <Link
+                      to="/zones"
+                      className={'btn btn-app pull-right '.concat(s.btn)}
+                      onClick={event => this.deleteZone(event)}
+                    ><i className="fa fa-trash-o" /> Delete</Link>
                     <a
                       className={'btn btn-app pull-right '.concat(s.btn)}
-                      onClick={event => this.clearInput(event)}
-                    ><i className="fa fa-eraser" /> Clear</a>
-                    <a
-                      className={'btn btn-app pull-right '.concat(s.btn)}
-                      onClick={event => this.createZone(event)}
-                    ><i className="fa fa-check" /> Confirm</a>
+                      onClick={event => this.updateZone(event)}
+                    ><i className="fa fa-floppy-o" /> Save</a>
                     {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                   </div>
                   {/* /.box-footer */}
@@ -240,81 +305,6 @@ class Zones extends Component {
               </div>
               {/* /.col */}
             </section>
-          </div>
-
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: LIST OF ZONES */}
-              <div className="box box-info">
-                <div className="box-header with-border">
-                  <h3 className="box-title">List of zones</h3>
-
-                  <div className="box-tools">
-                    <div className="input-group input-group-sm" style={{ width: 150 }}>
-                      <input
-                        type="text" name="inputSearchZones"
-                        className="form-control pull-right"
-                        placeholder="Search..."
-                      />
-                      <div className="input-group-btn">
-                        <button
-                          type="submit" className="btn btn-default"
-                        ><i className="fa fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* /.box-header */}
-                <div className="box-body table-responsive no-padding">
-                  <table id="example1" className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseSite" /></th>
-                        <th>Site</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Slot</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.props.zones.list && this.props.zones.list.map(zone => (
-                        <tr key={zone.id}>
-                          <td><input type="checkbox" className="inputChooseSite" /></td>
-                          <td>{zone.siteId}</td>
-                          <td><Link to={`/zone/${zone.id}`}>{zone.name}</Link></td>
-                          <td>{zone.type}</td>
-                          <td>{zone.description}</td>
-                          <td>{zone.slot}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseSite" /></th>
-                        <th>Site</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Slot</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-                {/* /.box-body */}
-                <div className="box-footer clearfix">
-                  <ul className="pagination pagination-sm no-margin pull-right">
-                    <li><a>&laquo;</a></li>
-                    <li><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>&raquo;</a></li>
-                  </ul>
-                </div>
-              </div>
-              {/* /.box */}
-            </section>
-            {/* /.col */}
           </div>
 
         </div>
@@ -331,8 +321,9 @@ const mapState = (state) => ({
 
 const mapDispatch = {
   getSites,
-  getZones,
-  createZone,
+  getZone,
+  updateZone,
+  deleteZone,
 };
 
-export default withStyles(s)(connect(mapState, mapDispatch)(Zones));
+export default withStyles(s)(connect(mapState, mapDispatch)(Zone));

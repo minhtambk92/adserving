@@ -17,5 +17,5 @@ export const DELETE_SITE = 'DELETE_SITE';
 export const GET_ZONE = 'GET_ZONE';
 export const GET_ZONES = 'GET_ZONES';
 export const CREATE_ZONE = 'CREATE_ZONE';
-export const UPDATE_ZONE = 'CREATE_ZONE';
-export const DELETE_ZONE = 'CREATE_ZONE';
+export const UPDATE_ZONE = 'UPDATE_ZONE';
+export const DELETE_ZONE = 'DELETE_ZONE';
