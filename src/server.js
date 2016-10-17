@@ -36,11 +36,7 @@ import assets from './assets'; // eslint-disable-line import/no-unresolved
 import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './actions/runtime';
 import { setLocale } from './actions/intl';
-import { findById } from './actions/users';
 import { port, auth, locales } from './config';
-import 'babel-polyfill';
-import './serverIntlPolyfill'; // eslint-disable-line import/no-unresolved
-
 const app = express();
 
 //
