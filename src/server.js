@@ -80,24 +80,6 @@ app.use(expressJwt({
 }));
 app.use(passport.initialize());
 
-app.use('*', (req, res, next) => {
-  // Middleware
-  const token = req.cookies.id_token;
-  if (token) {
-    jwt.verify(token, auth.jwt.secret, function (error, user) {
-      if (!error && user) {
-        // get information user and create new token
-        return next();
-      } else if (error) {
-        console.log(error);
-      }
-    });
-  } else {
-    return next();
-  }
-});
-
-
 app.get('/login/facebook',
   passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
 );
@@ -253,15 +235,4 @@ models.sync().catch(err => console.error(err.stack)).then(() => {
   app.listen(port, () => {
     console.log(`The server is running at http://localhost:${port}/`);
   });
-});
-/* eslint-enable no-console */
-app.post('/auth/getToken', (req, res) => {
-  const data = req.body.data;
-  if (data) {
-    req.user = data;
-    const expiresIn = 60 * 60 * 24 * 180; // 180 days
-    const token = jwt.sign(data, auth.jwt.secret, { expiresIn });
-    res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
-    return res.status(200).json({ token: token });
-  }
 });
