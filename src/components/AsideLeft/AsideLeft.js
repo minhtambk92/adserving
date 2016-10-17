@@ -73,9 +73,6 @@ function AsideLeft() {
               <li>
                 <Link to="/zones"><i className="fa fa-circle-o" /> Zones</Link>
               </li>
-              // <li>
-              //   <Link to="/channels"><i className="fa fa-circle-o" />Target Channels</Link>
-              // </li>
             </ul>
           </li>
 

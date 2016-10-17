@@ -171,6 +171,7 @@ export function deleteZone(id) {
           slot
           createdAt
           updatedAt
+          deletedAt
         }
       }`;
 

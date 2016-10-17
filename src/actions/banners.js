@@ -181,6 +181,7 @@ export function deleteBanner(id) {
           description
           createdAt
           updatedAt
+           deletedAt
         }
       }`;
 

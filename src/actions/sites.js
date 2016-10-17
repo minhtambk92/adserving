@@ -46,7 +46,6 @@ export function getSites() {
         sites {
           id
           userId
-          siteId
           domain
           name
           email
