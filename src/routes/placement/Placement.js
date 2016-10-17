@@ -56,12 +56,25 @@ class Placement extends Component {
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
+
+    const dateStart = new Date();
+    dateStart.setDate(dateStart.getDate());
+
     /* eslint-enable no-undef */
     $('#inputPlacementStartTime').datepicker({
       autoclose: true,
+      todayHighlight: 'TRUE',
+      startDate: dateStart,
+      defaultDate: new Date(),
     });
+
+    const dateEnd = new Date();
+    dateEnd.setDate(dateEnd.getDate());
     $('#inputPlacementEndTime').datepicker({
       autoclose: true,
+      todayHighlight: 'TRUE',
+      startDate: dateEnd,
+      defaultDate: new Date(),
     });
   }
 
@@ -129,7 +142,18 @@ class Placement extends Component {
     if (description && description !== this.props.placements.current.description) {
       placement.description = description;
     }
-    this.props.updatePlacement(placement);
+    if (moment(new Date(document.getElementById('inputPlacementStartTime').value)).format('x') < moment(new Date(document.getElementById('inputPlacementEndTime').value))) {
+      this.props.updatePlacement(Placement);
+    } else {
+      document.getElementById('inputPlacementEndTime').value = null;
+      document.getElementById('inputPlacementEndTime').focus();
+    }
+
+    // if (placement.startTime < placement.endTime) {
+    //   this.props.updatePlacement(placement);
+    // } else {
+    //   document.getElementById('inputPlacementEndTime').value = null;
+    // }
   }
 
   deletePlacement() {
@@ -203,7 +227,8 @@ class Placement extends Component {
                       <div className="col-sm-10">
                         <input
                           type="text" className="form-control" id="inputPlacementSize"
-                          placeholder="300x250" onChange={event => this.onInputChange(event, 'size')}
+                          placeholder="300x250"
+                          onChange={event => this.onInputChange(event, 'size')}
                         />
                       </div>
                     </div>

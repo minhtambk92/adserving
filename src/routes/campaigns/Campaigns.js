@@ -11,7 +11,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getCampaigns, createCampaign } from '../../actions/campaigns';
-import { getAdvertisers } from  '../../actions/advertisers';
+import { getAdvertisers } from '../../actions/advertisers';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './Campaigns.css';
@@ -50,12 +50,19 @@ class Campaigns extends Component {
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
+    const dateStart = new Date();
+    dateStart.setDate(dateStart.getDate());
+
     /* eslint-enable no-undef */
     $('#inputCampaignStartTime').datepicker({
       autoclose: true,
+      todayHighlight: 'TRUE',
+      startDate: dateStart,
     });
     $('#inputCampaignEndTime').datepicker({
       autoclose: true,
+      todayHighlight: 'TRUE',
+      startDate: dateStart,
     });
   }
 
@@ -100,20 +107,25 @@ class Campaigns extends Component {
     const weight = document.getElementById('inputCampaignWeight').value;
     const description = document.getElementById('inputCampaignDescription').value;
     if (userId && name && advertiserId && startTime && endTime && views && viewPerSession && timeResetViewCount && weight && description) {
-      this.props.createCampaign({
-        advertiserId,
-        userId,
-        name,
-        startTime,
-        endTime,
-        views,
-        viewPerSession,
-        timeResetViewCount,
-        weight,
-        description,
-      }).then(() => {
-        this.clearInput();
-      });
+      if (moment(startTime).format('x') < moment(endTime).format('x')) {
+        this.props.createCampaign({
+          advertiserId,
+          userId,
+          name,
+          startTime,
+          endTime,
+          views,
+          viewPerSession,
+          timeResetViewCount,
+          weight,
+          description,
+        }).then(() => {
+          this.clearInput();
+        });
+      } else {
+        document.getElementById('inputCampaignEndTime').value = null;
+        document.getElementById('inputCampaignEndTime').focus();
+      }
     }
   }
 

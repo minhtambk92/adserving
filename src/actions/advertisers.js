@@ -3,7 +3,7 @@ import {
   CREATE_ADVERTISER,
   GET_ADVERTISER,
   UPDATE_ADVERTISER,
-  DELETE_ADVERTISER
+  DELETE_ADVERTISER,
 } from '../constants';
 
 export function getAdvertiser(id) {

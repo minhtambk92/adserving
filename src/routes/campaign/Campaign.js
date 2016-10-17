@@ -25,7 +25,7 @@ class Campaign extends Component {
     campaignId: PropTypes.string.isRequired,
     campaigns: PropTypes.object,
     getCampaign: PropTypes.func,
-    getAdvertisers:PropTypes.func,
+    getAdvertisers: PropTypes.func,
     updateCampaign: PropTypes.func,
     deleteCampaign: PropTypes.func,
   };
@@ -33,22 +33,23 @@ class Campaign extends Component {
   constructor(props, context) {
     super(props, context);
 
-    // this.state = {
-    //   advertiserId: '',
-    //   userId: '',
-    //   name: '',
-    //   startTime: Date.now(),
-    //   endTime: Date.now(),
-    //   views: 0,
-    //   viewPerSession: 0,
-    //   timeResetViewCount: 0,
-    //   weight: 1,
-    //   description: '',
-    // };
+    this.state = {
+      advertiserId: '',
+      userId: '',
+      name: '',
+      startTime: Date.now(),
+      endTime: Date.now(),
+      views: 0,
+      viewPerSession: 0,
+      timeResetViewCount: 0,
+      weight: 1,
+      description: '',
+    };
   }
 
   componentWillMount() {
     this.props.getCampaign(this.props.campaignId);
+    this.props.getAdvertisers();
   }
 
   componentDidMount() {
@@ -61,12 +62,22 @@ class Campaign extends Component {
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
+    const dateStart = new Date();
+    dateStart.setDate(dateStart.getDate());
+
     /* eslint-enable no-undef */
     $('#inputCampaignStartTime').datepicker({
       autoclose: true,
+      todayHighlight: 'TRUE',
+      startDate: dateStart,
     });
+
+    const dateEnd = new Date();
+    dateEnd.setDate(dateEnd.getDate());
     $('#inputCampaignEndTime').datepicker({
       autoclose: true,
+      todayHighlight: 'TRUE',
+      startDate: dateEnd,
     });
   }
 
@@ -123,7 +134,7 @@ class Campaign extends Component {
       campaign.name = name;
     }
     if (advertiserId && advertiserId !== this.props.campaigns.current.advertiserId) {
-      campaign.advertiserId = advertiserId;
+      campaign.advertiserId = document.getElementById('inputAdvertiser').value;
     }
     if (userId && userId !== this.props.campaigns.current.userId) {
       campaign.userId = userId;
@@ -151,7 +162,12 @@ class Campaign extends Component {
     if (description && description !== this.props.campaigns.current.description) {
       campaign.description = description;
     }
-    this.props.updateCampaign(campaign);
+    if (moment(new Date(document.getElementById('inputCampaignStartTime').value)).format('x') < moment(new Date(document.getElementById('inputCampaignEndTime').value))) {
+      this.props.updateCampaign(campaign);
+    } else {
+      document.getElementById('inputCampaignEndTime').value = null;
+      document.getElementById('inputCampaignEndTime').focus();
+    }
   }
 
   deleteCampaign() {
@@ -203,10 +219,10 @@ class Campaign extends Component {
                              className="col-sm-2 control-label">Advertiser</label>
                       <div className="col-sm-10">
                         <select id="inputAdvertiser" className="form-control"
-                                onChange={event => this.onInputChange(event, 'advertiserId')}
-                                style={{ width: '100%' }}>
+                                onChange={event => this.onInputChange(event, 'advertiserId')}>
                           {this.props.advertisers.latest && this.props.advertisers.latest.map(advertiser => (
-                            <option key={advertiser.id} value={advertiser.id}>{advertiser.name}</option>
+                            <option key={advertiser.id}
+                                    value={advertiser.id}>{advertiser.name}</option>
                           ))}
                         </select>
                       </div>
@@ -326,7 +342,7 @@ class Campaign extends Component {
 
 const mapState = (state) => ({
   campaigns: state.campaigns,
-  advertisers:state.advertisers,
+  advertisers: state.advertisers,
 });
 
 const mapDispatch = {

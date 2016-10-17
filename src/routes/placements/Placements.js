@@ -47,12 +47,25 @@ class Placements extends Component {
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
+
+    const dateStart = new Date();
+    dateStart.setDate(dateStart.getDate());
+
     /* eslint-enable no-undef */
     $('#inputPlacementStartTime').datepicker({
       autoclose: true,
+      todayHighlight: 'TRUE',
+      startDate: dateStart,
+      defaultDate: new Date(),
     });
+
+    const dateEnd = new Date();
+    dateEnd.setDate(dateEnd.getDate() + 1);
     $('#inputPlacementEndTime').datepicker({
       autoclose: true,
+      todayHighlight: 'TRUE',
+      startDate: dateEnd,
+      defaultDate: new Date(),
     });
   }
 
@@ -91,17 +104,21 @@ class Placements extends Component {
     const weight = document.getElementById('inputPlacementWeight').value;
     const description = document.getElementById('inputPlacementDescription').value;
     if (userId && name && startTime && endTime && size && weight && description) {
-      this.props.createPlacement({
-        userId,
-        name,
-        startTime,
-        endTime,
-        size,
-        weight,
-        description,
-      }).then(() => {
-        this.clearInput();
-      });
+      if (endTime > startTime) {
+        this.props.createPlacement({
+          userId,
+          name,
+          startTime,
+          endTime,
+          size,
+          weight,
+          description,
+        }).then(() => {
+          this.clearInput();
+        });
+      } else {
+        document.getElementById('inputPlacementEndTime').value = null;
+      }
     }
   }
 

@@ -100,19 +100,6 @@ import Filter from './Filter';
 // Zone.placements = Zone.hasMany(PlacementBannerZone, {
 //   foreignKey: 'zoneId',
 // });
-
-Site.hasMany(Zone, {
-  foreignKey: 'sizeId',
-  constraints: false,
-  as: 'zoneSite',
-})
-Zone.belongsTo(Site, {
-  foreignKey: 'sizeId',
-  constraints: false,
-  as: 'zoneSite',
-});
-
-
 function sync(...args) {
   return sequelize.sync(...args);
 }
