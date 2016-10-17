@@ -68,7 +68,14 @@ class Site extends Component {
   }
 
   updateSite() {
-    const { userId, domain, name, email, description } = this.state;
+    const {
+      userId,
+      domain,
+      name,
+      email,
+      description,
+    } = this.state;
+
     const site = { id: this.props.siteId };
 
     if (userId && userId !== this.props.sites.editing.userId) {

@@ -22,6 +22,7 @@ import configureStore from './store/configureStore';
 
 [en, cs].forEach(addLocaleData);
 
+const store = configureStore(window.APP_STATE, { history });
 // Global (context) variables that can be easily accessed from any React component
 // https://facebook.github.io/react/docs/context.html
 const context = {
@@ -30,13 +31,11 @@ const context = {
   insertCss: (...styles) => {
     // eslint-disable-next-line no-underscore-dangle
     const removeCss = styles.map(x => x._insertCss());
-    return () => {
-      removeCss.forEach(f => f());
-    };
+    return () => { removeCss.forEach(f => f()); };
   },
   // Initialize a new Redux store
   // http://redux.js.org/docs/basics/UsageWithReact.html
-  store: configureStore(window.APP_STATE, { history }),
+  store,
 };
 
 function updateTag(tagName, keyName, keyValue, attrName, attrValue) {
@@ -120,6 +119,7 @@ FastClick.attach(document.body);
 const container = document.getElementById('app');
 let currentLocation = history.location;
 let routes = require('./routes').default;
+
 // Re-render the app when window.location changes
 async function onLocationChange(location) {
   // Remember the latest scroll position for the previous location
@@ -141,6 +141,7 @@ async function onLocationChange(location) {
       ...context,
       path: location.pathname,
       query: queryString.parse(location.search),
+      locale: store.getState().intl.locale,
     });
 
     // Prevent multiple page renders during the routing process

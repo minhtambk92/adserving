@@ -4,6 +4,9 @@ export const SET_RUNTIME_VARIABLE = 'SET_RUNTIME_VARIABLE';
 export const SET_LOCALE_START = 'SET_LOCALE_START';
 export const SET_LOCALE_SUCCESS = 'SET_LOCALE_SUCCESS';
 export const SET_LOCALE_ERROR = 'SET_LOCALE_ERROR';
+export const FETCH_CONTENT_START = 'FETCH_CONTENT_START';
+export const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';
+export const FETCH_CONTENT_ERROR = 'FETCH_CONTENT_ERROR';
 
 export const STATUS_ACTIVE = 'active';
 export const STATUS_INACTIVE = 'inactive';
@@ -17,8 +20,8 @@ export const DELETE_SITE = 'DELETE_SITE';
 export const GET_ZONE = 'GET_ZONE';
 export const GET_ZONES = 'GET_ZONES';
 export const CREATE_ZONE = 'CREATE_ZONE';
-export const UPDATE_ZONE = 'CREATE_ZONE';
-export const DELETE_ZONE = 'CREATE_ZONE';
+export const UPDATE_ZONE = 'UPDATE_ZONE';
+export const DELETE_ZONE = 'DELETE_ZONE';
 
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS';
 export const USER_REGISTER_ERROR = 'USER_REGISTER_ERROR';
@@ -57,5 +60,3 @@ export const GET_BANNERS = 'GET_BANNERS';
 export const CREATE_BANNER = 'CREATE_BANNER';
 export const UPDATE_BANNER = 'UPDATE_BANNER';
 export const DELETE_BANNER = 'DELETE_BANNER';
-
-

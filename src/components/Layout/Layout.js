@@ -7,7 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, Children } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Layout.css';
 import Header from '../Header';
@@ -64,7 +64,7 @@ class Layout extends Component {
         <Header />
         <AsideLeft />
         <Content pageTitle={this.props.pageTitle} pageSubTitle={this.props.pageSubTitle}>
-          {React.Children.only(this.props.children)}
+          {Children.only(this.props.children)}
         </Content>
         <AsideRight />
         <div className="control-sidebar-bg" />
@@ -79,7 +79,7 @@ class Layout extends Component {
       <div className="wrapper">
         <Header useNavigation />
         <Content pageTitle={this.props.pageTitle} pageSubTitle={this.props.pageSubTitle}>
-          {React.Children.only(this.props.children)}
+          {Children.only(this.props.children)}
         </Content>
         <Footer />
       </div>
@@ -88,7 +88,7 @@ class Layout extends Component {
 
   // Render without components
   renderFullWidthPage() {
-    return React.Children.only(this.props.children);
+    return Children.only(this.props.children);
   }
 
   render() {
