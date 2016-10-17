@@ -8,20 +8,12 @@
  */
 
 import sequelize from '../sequelize';
-
 import Option from './Option';
 import User from './User';
-import UserLogin from './UserLogin';
-import UserClaim from './UserClaim';
-import UserProfile from './UserProfile';
-import UserMeta from './UserMeta';
-import UserRole from './UserRole';
 import Role from './Role';
 import Permission from './Permission';
 import Campaign from './Campaign';
-import CampaignPlacement from './CampaignPlacement';
 import Placement from './Placement';
-import PlacementBannerZone from './PlacementBannerZone';
 import Banner from './Banner';
 import Advertiser from './Advertiser';
 import Site from './Site';
@@ -108,6 +100,18 @@ import Filter from './Filter';
 // Zone.placements = Zone.hasMany(PlacementBannerZone, {
 //   foreignKey: 'zoneId',
 // });
+
+Site.hasMany(Zone, {
+  foreignKey: 'sizeId',
+  constraints: false,
+  as: 'zoneSite',
+})
+Zone.belongsTo(Site, {
+  foreignKey: 'sizeId',
+  constraints: false,
+  as: 'zoneSite',
+});
+
 
 function sync(...args) {
   return sequelize.sync(...args);

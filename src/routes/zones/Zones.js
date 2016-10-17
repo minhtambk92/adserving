@@ -133,7 +133,7 @@ class Zones extends Component {
                           className="form-control select2"
                           style={{ width: '100%' }}
                         >
-                          {this.props.sites.latest && this.props.sites.latest.map(site => (
+                          {this.props.sites.list && this.props.sites.list.map(site => (
                             <option
                               key={site.id} value={site.id}
                             >{site.name} | {site.domain}</option>
@@ -282,7 +282,7 @@ class Zones extends Component {
                         <tr key={zone.id}>
                           <td><input type="checkbox" className="inputChooseSite" /></td>
                           <td>{zone.siteId}</td>
-                          <td>{zone.name}</td>
+                          <td><Link to={`/zone/${zone.id}`}>{zone.name}</Link></td>
                           <td>{zone.type}</td>
                           <td>{zone.description}</td>
                           <td>{zone.slot}</td>
