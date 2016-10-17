@@ -60,5 +60,3 @@ export const GET_BANNERS = 'GET_BANNERS';
 export const CREATE_BANNER = 'CREATE_BANNER';
 export const UPDATE_BANNER = 'UPDATE_BANNER';
 export const DELETE_BANNER = 'DELETE_BANNER';
-
-

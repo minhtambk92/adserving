@@ -7,7 +7,7 @@ import users from './users';
 import advertisers from './advertisers';
 import campaigns from './campaigns';
 import placements from './placements';
-import  banners from  './banners';
+import banners from './banners';
 import sites from './sites';
 import zones from './zones';
 
