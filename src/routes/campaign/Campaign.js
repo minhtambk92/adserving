@@ -31,18 +31,18 @@ class Campaign extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      advertiserId: '',
-      userId: '',
-      name: '',
-      startTime: Date.now(),
-      endTime: Date.now(),
-      views: 0,
-      viewPerSession: 0,
-      timeResetViewCount: 0,
-      weight: 1,
-      description: '',
-    };
+    // this.state = {
+    //   advertiserId: '',
+    //   userId: '',
+    //   name: '',
+    //   startTime: Date.now(),
+    //   endTime: Date.now(),
+    //   views: 0,
+    //   viewPerSession: 0,
+    //   timeResetViewCount: 0,
+    //   weight: 1,
+    //   description: '',
+    // };
   }
 
   componentWillMount() {

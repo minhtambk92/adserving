@@ -112,22 +112,22 @@ class Placement extends Component {
     if (userId && userId !== this.props.placements.current.userId) {
       placement.userId = userId;
     }
-    if (startTime && startTime !== this.props.Placements.current.startTime) {
+    if (startTime && startTime !== this.props.placements.current.startTime) {
       placement.startTime = new Date(document.getElementById('inputPlacementStartTime').value);
     }
 
-    if (endTime && endTime !== this.props.Placements.current.endTime) {
+    if (endTime && endTime !== this.props.placements.current.endTime) {
       placement.endTime = new Date(document.getElementById('inputPlacementEndTime').value);
     }
-    if (size && size !== this.props.Placements.current.size) {
-      Placement.size = size;
+    if (size && size !== this.props.placements.current.size) {
+      placement.size = size;
     }
-    if (weight && weight !== this.props.Placements.current.weight) {
-      Placement.weight = weight;
+    if (weight && weight !== this.props.placements.current.weight) {
+      placement.weight = weight;
     }
 
-    if (description && description !== this.props.Placements.current.description) {
-      Placement.description = description;
+    if (description && description !== this.props.placements.current.description) {
+      placement.description = description;
     }
     this.props.updatePlacement(placement);
   }

@@ -31,12 +31,12 @@ class Advertiser extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      contact: '',
-      name: '',
-      email: '',
-      description: '',
-    };
+    // this.state = {
+    //   contact: '',
+    //   name: '',
+    //   email: '',
+    //   description: '',
+    // };
   }
 
   componentWillMount() {

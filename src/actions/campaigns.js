@@ -1,4 +1,10 @@
-import { GET_CAMPAIGNS, CREATE_CAMPAIGN, GET_CAMPAIGN,UPDATE_CAMPAIGN,DELETE_CAMPAIGN } from '../constants/';
+import {
+  GET_CAMPAIGNS,
+  CREATE_CAMPAIGN,
+  GET_CAMPAIGN,
+  UPDATE_CAMPAIGN,
+  DELETE_CAMPAIGN
+} from '../constants/';
 export function getCampaign(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
@@ -130,6 +136,7 @@ export function updateCampaign({
   weight,
   description,
 }) {
+  console.log(userId);
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($campaign: CampaignInputType!) {

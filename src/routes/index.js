@@ -25,6 +25,7 @@ export default {
     require('./campaigns').default,
     require('./placement').default,
     require('./placements').default,
+    require('./banner').default,
     require('./banners').default,
     require('./site').default,
     require('./sites').default,

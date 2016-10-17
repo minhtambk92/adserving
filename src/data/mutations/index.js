@@ -9,6 +9,7 @@ import advertisers from './advertisers';
 import campaigns from './campaigns';
 import placements from './placements';
 import zones from './zones';
+import banners from './banners';
 const mutations = new ObjectType({
   name: 'Mutation',
   fields: {
@@ -17,6 +18,7 @@ const mutations = new ObjectType({
     ...advertisers,
     ...campaigns,
     ...placements,
+    ...banners,
     ...zones,
   },
 });
