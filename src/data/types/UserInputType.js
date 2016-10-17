@@ -1,11 +1,18 @@
-import { GraphQLInputObjectType as InputObjectType } from "graphql";
-import { attributeFields } from "graphql-sequelize";
-import { User } from "../models";
-
+import {
+  GraphQLInputObjectType as InputObjectType,
+  GraphQLNonNull as NonNull,
+  GraphQLID as ID,
+  GraphQLString as StringType
+} from "graphql";
+import {attributeFields} from "graphql-sequelize";
+import {User} from "../models";
 const UserInputType = new InputObjectType({
   name: 'UserInputType',
-  fields: attributeFields(User, {
-    only: ['id', 'username', 'email', 'password'],
+  fields: Object.assign(attributeFields(User, {
+    // Additional options
+    only: ['id', 'email','username', 'password'],
+  }), {
+    // additional fields
   }),
 });
 

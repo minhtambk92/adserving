@@ -15,11 +15,16 @@ export default {
 
   path: '/',
 
-  async action() {
+  action() {
+    const content = {
+      title: 'Home | Admin Dev Kit',
+    };
+
     return {
       title: 'Home | Admin Dev Kit',
-      component: <Home />,
+      component: <Home content={content} />,
     };
   },
+
 
 };

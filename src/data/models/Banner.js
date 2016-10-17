@@ -9,10 +9,10 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
-import {
-  STATUS_ACTIVE,
-  STATUS_INACTIVE,
-} from '../../constants';
+// import {
+//   STATUS_ACTIVE,
+//   STATUS_INACTIVE,
+// } from '../../constants';
 
 const Banner = Model.define('Banner', {
 
@@ -21,26 +21,19 @@ const Banner = Model.define('Banner', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
-  contentType: {
-    type: DataType.STRING,
+  userId: {
+    type: DataType.UUID,
     defaultValue: '',
   },
   name: {
     type: DataType.STRING,
     defaultValue: '',
   },
-  fileUrl: {
+  html: {
     type: DataType.STRING,
     defaultValue: '',
   },
-  urlClick: {
-    type: DataType.STRING,
-    defaultValue: '',
-  },
-  htmlTemplate: {
-    type: DataType.STRING,
-    defaultValue: '',
-  },
+
   width: {
     type: DataType.INTEGER,
     defaultValue: 0,
@@ -49,70 +42,22 @@ const Banner = Model.define('Banner', {
     type: DataType.INTEGER,
     defaultValue: 0,
   },
+  keyword: {
+    type: DataType.STRING,
+    defaultValue: '',
+  },
   weight: {
-    type: DataType.STRING,
-    defaultValue: '',
-  },
-  location: {
-    type: DataType.STRING,
-    defaultValue: '',
-  },
-  urlTarget: {
-    type: DataType.STRING,
-    defaultValue: '',
+    type: DataType.INTEGER,
+    defaultValue: 0,
   },
   description: {
     type: DataType.STRING,
     defaultValue: '',
   },
-  keyword: {
-    type: DataType.STRING,
-    defaultValue: '',
-  },
-  iframeFriendly: {
-    type: DataType.INTEGER,
-    defaultValue: 0,
-  },
-  typeBanner: {
-    type: DataType.INTEGER,
-    defaultValue: 0,
-  },
-  startTime: {
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  },
-  endTime: {
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  },
-  activationTime: {
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  },
-  expirationTime: {
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  },
-  bannerViews: {
-    type: DataType.INTEGER,
-    defaultValue: 0,
-  },
-  bannerClicks: {
-    type: DataType.INTEGER,
-    defaultValue: 0,
-  },
-  isCountViews: {
-    type: DataType.INTEGER,
-    defaultValue: 0,
-  },
-  isDefault: {
-    type: DataType.INTEGER,
-    defaultValue: 0,
-  },
-  status: {
-    type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
-    defaultValue: STATUS_INACTIVE,
-  },
+  // status: {
+  //   type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
+  //   defaultValue: STATUS_INACTIVE,
+  // },
 
 }, {
 

@@ -19,6 +19,7 @@ import jwt from 'jsonwebtoken';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import UniversalRouter from 'universal-router';
+import createMemoryHistory from 'history/createMemoryHistory';
 import PrettyError from 'pretty-error';
 import { IntlProvider } from 'react-intl';
 
@@ -36,7 +37,6 @@ import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './actions/runtime';
 import { setLocale } from './actions/intl';
 import { port, auth, locales } from './config';
-
 const app = express();
 
 //
@@ -103,11 +103,31 @@ app.use('/graphql', expressGraphQL(req => ({
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
 app.get('*', async (req, res, next) => {
+  const history = createMemoryHistory({
+    initialEntries: [req.url],
+  });
+  // let currentLocation = history.getCurrentLocation();
+  let sent = false;
+  const removeHistoryListener = history.listen(location => {
+    const newUrl = `${location.pathname}${location.search}`;
+    if (req.originalUrl !== newUrl) {
+      // console.log(`R ${req.originalUrl} -> ${newUrl}`); // eslint-disable-line no-console
+      if (!sent) {
+        res.redirect(303, newUrl);
+        sent = true;
+        next();
+      } else {
+        console.error(`${req.path}: Already sent!`); // eslint-disable-line no-console
+      }
+    }
+  });
+
   try {
     const store = configureStore({
       user: req.user || null,
     }, {
       cookie: req.headers.cookie,
+      history,
     });
 
     store.dispatch(setRuntimeVariable({
@@ -130,6 +150,9 @@ app.get('*', async (req, res, next) => {
     // Global (context) variables that can be easily accessed from any React component
     // https://facebook.github.io/react/docs/context.html
     const context = {
+      // Navigation manager, e.g. history.push('/home')
+      // https://github.com/mjackson/history
+      history,
       // Enables critical path CSS rendering
       // https://github.com/kriasoft/isomorphic-style-loader
       insertCss: (...styles) => {
@@ -166,6 +189,8 @@ app.get('*', async (req, res, next) => {
     res.send(`<!doctype html>${html}`);
   } catch (err) {
     next(err);
+  } finally {
+    removeHistoryListener();
   }
 });
 
@@ -208,4 +233,3 @@ models.sync().catch(err => console.error(err.stack)).then(() => {
     console.log(`The server is running at http://localhost:${port}/`);
   });
 });
-/* eslint-enable no-console */

@@ -2,12 +2,9 @@
  * Created by Manhhailua on 10/9/16.
  */
 
-import DataType from 'sequelize';
-import Model from '../sequelize';
-import {
-  STATUS_ACTIVE,
-  STATUS_INACTIVE,
-} from '../../constants';
+import DataType from "sequelize";
+import Model from "../sequelize";
+import {STATUS_ACTIVE, STATUS_INACTIVE} from "../../constants";
 
 const User = Model.define('User', {
 
@@ -18,7 +15,14 @@ const User = Model.define('User', {
   },
   email: {
     type: DataType.STRING,
-    validate: { isEmail: true },
+    validate: {isEmail: true},
+  },
+  username: {
+    type: DataType.STRING,
+
+  },
+  password: {
+    type: DataType.STRING,
   },
   emailConfirmed: {
     type: DataType.BOOLEAN,
@@ -32,7 +36,7 @@ const User = Model.define('User', {
 }, {
 
   indexes: [
-    { fields: ['email'] },
+    {fields: ['email']},
   ],
 
 });

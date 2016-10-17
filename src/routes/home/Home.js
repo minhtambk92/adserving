@@ -8,7 +8,6 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import { FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
@@ -18,11 +17,31 @@ const pageTitle = 'Home';
 const pageSubTitle = 'Control panel';
 
 class Home extends Component {
+  static propTypes = {
+    // Wrap all content props to one parent props
+    content: PropTypes.shape({
+      // Document title
+      title: PropTypes.string.isRequired,
+    }).isRequired,
+    // Define page layout
+    isFullWidth: PropTypes.bool,
+  };
+
+  constructor(props, context) {
+    super(props, context);
+
+    if (context.setTitle) {
+      context.setTitle(this.props.content.title);
+    }
+
+    if (context.setBodyClasses) {
+      context.setBodyClasses('hold-transition home-page');
+    }
+  }
 
   componentDidMount() {
     $(() => {
       'use strict';
-
       // Make the dashboard widgets sortable Using jquery UI
       $('.connectedSortable').sortable({
         placeholder: 'sort-highlight',
@@ -252,10 +271,10 @@ class Home extends Component {
                   <p>New Orders</p>
                 </div>
                 <div className="icon">
-                  <i className="ion ion-bag"/>
+                  <i className="ion ion-bag" />
                 </div>
                 <Link to="#" className="small-box-footer">
-                  More info <i className="fa fa-arrow-circle-right"/>
+                  More info <i className="fa fa-arrow-circle-right" />
                 </Link>
               </div>
             </div>
@@ -269,10 +288,10 @@ class Home extends Component {
                   <p>Bounce Rate</p>
                 </div>
                 <div className="icon">
-                  <i className="ion ion-stats-bars"/>
+                  <i className="ion ion-stats-bars" />
                 </div>
                 <Link to="#" className="small-box-footer">
-                  More info <i className="fa fa-arrow-circle-right"/>
+                  More info <i className="fa fa-arrow-circle-right" />
                 </Link>
               </div>
             </div>
@@ -285,10 +304,10 @@ class Home extends Component {
                   <p>User Registrations</p>
                 </div>
                 <div className="icon">
-                  <i className="ion ion-person-add"/>
+                  <i className="ion ion-person-add" />
                 </div>
                 <Link to="#" className="small-box-footer">
-                  More info <i className="fa fa-arrow-circle-right"/>
+                  More info <i className="fa fa-arrow-circle-right" />
                 </Link>
               </div>
             </div>
@@ -301,10 +320,10 @@ class Home extends Component {
                   <p>Unique Visitors</p>
                 </div>
                 <div className="icon">
-                  <i className="ion ion-pie-graph"/>
+                  <i className="ion ion-pie-graph" />
                 </div>
                 <Link to="#" className="small-box-footer">
-                  More info <i className="fa fa-arrow-circle-right"/>
+                  More info <i className="fa fa-arrow-circle-right" />
                 </Link>
               </div>
             </div>
@@ -326,7 +345,7 @@ class Home extends Component {
                     <Link to="#sales-chart" data-toggle="tab">Donut</Link>
                   </li>
                   <li className="pull-left header">
-                    <i className="fa fa-inbox"/>
+                    <i className="fa fa-inbox" />
                     Sales
                   </li>
                 </ul>
@@ -350,15 +369,15 @@ class Home extends Component {
               {/* Chat box */}
               <div className="box box-success">
                 <div className="box-header">
-                  <i className="fa fa-comments-o"/>
+                  <i className="fa fa-comments-o" />
                   <h3 className="box-title">Chat</h3>
                   <div className="box-tools pull-right" data-toggle="tooltip" title="Status">
                     <div className="btn-group" data-toggle="btn-toggle">
                       <button type="button" className="btn btn-default btn-sm active">
-                        <i className="fa fa-square text-green"/>
+                        <i className="fa fa-square text-green" />
                       </button>
                       <button type="button" className="btn btn-default btn-sm">
-                        <i className="fa fa-square text-red"/>
+                        <i className="fa fa-square text-red" />
                       </button>
                     </div>
                   </div>
@@ -366,11 +385,11 @@ class Home extends Component {
                 <div className="box-body chat" id="chat-box">
                   {/* chat item */}
                   <div className="item">
-                    <img src="AdminLTE/dist/img/user4-128x128.jpg" alt="user" className="online"/>
+                    <img src="AdminLTE/dist/img/user4-128x128.jpg" alt="user" className="online" />
                     <p className="message">
                       <Link to="#" className="name">
                         <small className="text-muted pull-right">
-                          <i className="fa fa-clock-o"/>
+                          <i className="fa fa-clock-o" />
                           2:15
                         </small>
                         Mike Doe
@@ -395,11 +414,11 @@ class Home extends Component {
                   {/* /.item */}
                   {/* chat item */}
                   <div className="item">
-                    <img src="AdminLTE/dist/img/user3-128x128.jpg" alt="user" className="offline"/>
+                    <img src="AdminLTE/dist/img/user3-128x128.jpg" alt="user" className="offline" />
                     <p className="message">
                       <Link to="#" className="name">
                         <small className="text-muted pull-right">
-                          <i className="fa fa-clock-o"/>
+                          <i className="fa fa-clock-o" />
                           5:15
                         </small>
                         Alexander Pierce
@@ -411,11 +430,11 @@ class Home extends Component {
                   {/* /.item */}
                   {/* chat item */}
                   <div className="item">
-                    <img src="AdminLTE/dist/img/user2-160x160.jpg" alt="user" className="offline"/>
+                    <img src="AdminLTE/dist/img/user2-160x160.jpg" alt="user" className="offline" />
                     <p className="message">
                       <Link to="#" className="name">
                         <small className="text-muted pull-right">
-                          <i className="fa fa-clock-o"/>
+                          <i className="fa fa-clock-o" />
                           5:30
                         </small>
                         Susan Doe
@@ -429,10 +448,10 @@ class Home extends Component {
                 {/* /.chat */}
                 <div className="box-footer">
                   <div className="input-group">
-                    <input className="form-control" placeholder="Type message..."/>
+                    <input className="form-control" placeholder="Type message..." />
                     <div className="input-group-btn">
                       <button type="button" className="btn btn-success">
-                        <i className="fa fa-plus"/>
+                        <i className="fa fa-plus" />
                       </button>
                     </div>
                   </div>
@@ -442,7 +461,7 @@ class Home extends Component {
               {/* TO DO List */}
               <div className="box box-primary">
                 <div className="box-header">
-                  <i className="ion ion-clipboard"/>
+                  <i className="ion ion-clipboard" />
                   <h3 className="box-title">
                     To Do List
                   </h3>
@@ -472,98 +491,98 @@ class Home extends Component {
                     <li>
                       {/* drag handle */}
                       <span className="handle">
-                      <i className="fa fa-ellipsis-v"/>
-                      <i className="fa fa-ellipsis-v"/>
+                      <i className="fa fa-ellipsis-v" />
+                      <i className="fa fa-ellipsis-v" />
                     </span>
                       {/* checkbox */}
-                      <input type="checkbox" defaultValue/> {/* todo text */}
+                      <input type="checkbox" defaultValue /> {/* todo text */}
                       <span className="text">
                       Design a nice theme
                     </span>
                       {/* Emphasis label */}
                       <small className="label label-danger">
-                        <i className="fa fa-clock-o"/>
+                        <i className="fa fa-clock-o" />
                         2 mins
                       </small>
                       {/* General tools such as edit or delete*/}
                       <div className="tools">
-                        <i className="fa fa-edit"/>
-                        <i className="fa fa-trash-o"/>
+                        <i className="fa fa-edit" />
+                        <i className="fa fa-trash-o" />
                       </div>
                     </li>
                     <li>
                     <span className="handle">
-                      <i className="fa fa-ellipsis-v"/>
-                      <i className="fa fa-ellipsis-v"/>
+                      <i className="fa fa-ellipsis-v" />
+                      <i className="fa fa-ellipsis-v" />
                     </span>
-                      <input type="checkbox" defaultValue/>
+                      <input type="checkbox" defaultValue />
                       <span className="text">Make the theme responsive</span>
                       <small className="label label-info">
-                        <i className="fa fa-clock-o"/>4 hours
+                        <i className="fa fa-clock-o" />4 hours
                       </small>
                       <div className="tools">
-                        <i className="fa fa-edit"/>
-                        <i className="fa fa-trash-o"/>
+                        <i className="fa fa-edit" />
+                        <i className="fa fa-trash-o" />
                       </div>
                     </li>
                     <li>
                     <span className="handle">
-                      <i className="fa fa-ellipsis-v"/>
-                      <i className="fa fa-ellipsis-v"/>
+                      <i className="fa fa-ellipsis-v" />
+                      <i className="fa fa-ellipsis-v" />
                     </span>
-                      <input type="checkbox" defaultValue/>
+                      <input type="checkbox" defaultValue />
                       <span className="text">Let theme shine like a star</span>
                       <small className="label label-warning">
-                        <i className="fa fa-clock-o"/>1 day
+                        <i className="fa fa-clock-o" />1 day
                       </small>
                       <div className="tools">
-                        <i className="fa fa-edit"/>
-                        <i className="fa fa-trash-o"/>
+                        <i className="fa fa-edit" />
+                        <i className="fa fa-trash-o" />
                       </div>
                     </li>
                     <li>
                     <span className="handle">
-                      <i className="fa fa-ellipsis-v"/>
-                      <i className="fa fa-ellipsis-v"/>
+                      <i className="fa fa-ellipsis-v" />
+                      <i className="fa fa-ellipsis-v" />
                     </span>
-                      <input type="checkbox" defaultValue/>
+                      <input type="checkbox" defaultValue />
                       <span className="text">Let theme shine like a star</span>
                       <small className="label label-success">
-                        <i className="fa fa-clock-o"/>3 days
+                        <i className="fa fa-clock-o" />3 days
                       </small>
                       <div className="tools">
-                        <i className="fa fa-edit"/>
-                        <i className="fa fa-trash-o"/>
+                        <i className="fa fa-edit" />
+                        <i className="fa fa-trash-o" />
                       </div>
                     </li>
                     <li>
                     <span className="handle">
-                      <i className="fa fa-ellipsis-v"/>
-                      <i className="fa fa-ellipsis-v"/>
+                      <i className="fa fa-ellipsis-v" />
+                      <i className="fa fa-ellipsis-v" />
                     </span>
-                      <input type="checkbox" defaultValue/>
+                      <input type="checkbox" defaultValue />
                       <span className="text">Check your messages and notifications</span>
                       <small className="label label-primary">
-                        <i className="fa fa-clock-o"/>1 week
+                        <i className="fa fa-clock-o" />1 week
                       </small>
                       <div className="tools">
-                        <i className="fa fa-edit"/>
-                        <i className="fa fa-trash-o"/>
+                        <i className="fa fa-edit" />
+                        <i className="fa fa-trash-o" />
                       </div>
                     </li>
                     <li>
                     <span className="handle">
-                      <i className="fa fa-ellipsis-v"/>
-                      <i className="fa fa-ellipsis-v"/>
+                      <i className="fa fa-ellipsis-v" />
+                      <i className="fa fa-ellipsis-v" />
                     </span>
-                      <input type="checkbox" defaultValue/>
+                      <input type="checkbox" defaultValue />
                       <span className="text">Let theme shine like a star</span>
                       <small className="label label-default">
-                        <i className="fa fa-clock-o"/>1 month
+                        <i className="fa fa-clock-o" />1 month
                       </small>
                       <div className="tools">
-                        <i className="fa fa-edit"/>
-                        <i className="fa fa-trash-o"/>
+                        <i className="fa fa-edit" />
+                        <i className="fa fa-trash-o" />
                       </div>
                     </li>
                   </ul>
@@ -571,7 +590,7 @@ class Home extends Component {
                 {/* /.box-body */}
                 <div className="box-footer clearfix no-border">
                   <button type="button" className="btn btn-default pull-right">
-                    <i className="fa fa-plus"/>Add item
+                    <i className="fa fa-plus" />Add item
                   </button>
                 </div>
               </div>
@@ -579,7 +598,7 @@ class Home extends Component {
               {/* quick email widget */}
               <div className="box box-info">
                 <div className="box-header">
-                  <i className="fa fa-envelope"/>
+                  <i className="fa fa-envelope" />
                   <h3 className="box-title">Quick Email</h3>
                   {/* tools box */}
                   <div className="pull-right box-tools">
@@ -587,7 +606,7 @@ class Home extends Component {
                       type="button" className="btn btn-info btn-sm"
                       data-widget="remove" data-toggle="tooltip" title="Remove"
                     >
-                      <i className="fa fa-times"/>
+                      <i className="fa fa-times" />
                     </button>
                   </div>
                   {/* /. tools */}
@@ -623,7 +642,7 @@ class Home extends Component {
                 <div className="box-footer clearfix">
                   <button type="button" className="pull-right btn btn-default" id="sendEmail">
                     Send
-                    <i className="fa fa-arrow-circle-right"/>
+                    <i className="fa fa-arrow-circle-right" />
                   </button>
                 </div>
               </div>
@@ -640,24 +659,24 @@ class Home extends Component {
                       type="button" className="btn btn-primary btn-sm daterange pull-right"
                       data-toggle="tooltip" title="Date range"
                     >
-                      <i className="fa fa-calendar"/>
+                      <i className="fa fa-calendar" />
                     </button>
                     <button
                       type="button" className="btn btn-primary btn-sm pull-right"
                       data-widget="collapse" data-toggle="tooltip" title="Collapse"
                       style={{ marginRight: 5 }}
                     >
-                      <i className="fa fa-minus"/>
+                      <i className="fa fa-minus" />
                     </button>
                   </div>
                   {/* /. tools */}
-                  <i className="fa fa-map-marker"/>
+                  <i className="fa fa-map-marker" />
                   <h3 className="box-title">
                     Visitors
                   </h3>
                 </div>
                 <div className="box-body">
-                  <div id="world-map" style={{ height: 250, width: '100%' }}/>
+                  <div id="world-map" style={{ height: 250, width: '100%' }} />
                 </div>
                 {/* /.box-body*/}
                 <div className="box-footer no-border">
@@ -667,7 +686,7 @@ class Home extends Component {
                       borderRight: '1px solid #f4f4f4',
                     }}
                     >
-                      <div id="sparkline-1"/>
+                      <div id="sparkline-1" />
                       <div className="knob-label">Visitors</div>
                     </div>
                     {/* ./col */}
@@ -676,12 +695,12 @@ class Home extends Component {
                       borderRight: '1px solid #f4f4f4',
                     }}
                     >
-                      <div id="sparkline-2"/>
+                      <div id="sparkline-2" />
                       <div className="knob-label">Online</div>
                     </div>
                     {/* ./col */}
                     <div className="col-xs-4 text-center">
-                      <div id="sparkline-3"/>
+                      <div id="sparkline-3" />
                       <div className="knob-label">Exists</div>
                     </div>
                     {/* ./col */}
@@ -693,21 +712,21 @@ class Home extends Component {
               {/* solid sales graph */}
               <div className="box box-solid bg-teal-gradient">
                 <div className="box-header">
-                  <i className="fa fa-th"/>
+                  <i className="fa fa-th" />
                   <h3 className="box-title">
                     Sales Graph
                   </h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn bg-teal btn-sm" data-widget="collapse">
-                      <i className="fa fa-minus"/>
+                      <i className="fa fa-minus" />
                     </button>
                     <button type="button" className="btn bg-teal btn-sm" data-widget="remove">
-                      <i className="fa fa-times"/>
+                      <i className="fa fa-times" />
                     </button>
                   </div>
                 </div>
                 <div className="box-body border-radius-none">
-                  <div className="chart" id="line-chart" style={{ height: 250 }}/>
+                  <div className="chart" id="line-chart" style={{ height: 250 }} />
                 </div>
                 {/* /.box-body */}
                 <div className="box-footer no-border">
@@ -756,7 +775,7 @@ class Home extends Component {
               {/* Calendar */}
               <div className="box box-solid bg-green-gradient">
                 <div className="box-header">
-                  <i className="fa fa-calendar"/>
+                  <i className="fa fa-calendar" />
                   <h3 className="box-title">Calendar</h3>
                   {/* tools box */}
                   <div className="pull-right box-tools">
@@ -766,7 +785,7 @@ class Home extends Component {
                         type="button" className="btn btn-success btn-sm dropdown-toggle"
                         data-toggle="dropdown"
                       >
-                        <i className="fa fa-bars"/>
+                        <i className="fa fa-bars" />
                       </button>
                       <ul className="dropdown-menu pull-right" role="menu">
                         <li>
@@ -779,7 +798,7 @@ class Home extends Component {
                             Clear events
                           </Link>
                         </li>
-                        <li className="divider"/>
+                        <li className="divider" />
                         <li>
                           <Link to="#">
                             View calendar
@@ -788,10 +807,10 @@ class Home extends Component {
                       </ul>
                     </div>
                     <button type="button" className="btn btn-success btn-sm" data-widget="collapse">
-                      <i className="fa fa-minus"/>
+                      <i className="fa fa-minus" />
                     </button>
                     <button type="button" className="btn btn-success btn-sm" data-widget="remove">
-                      <i className="fa fa-times"/>
+                      <i className="fa fa-times" />
                     </button>
                   </div>
                   {/* /. tools */}
@@ -799,7 +818,7 @@ class Home extends Component {
                 {/* /.box-header */}
                 <div className="box-body no-padding">
                   {/* The calendar */}
-                  <div id="calendar" style={{ width: '100%' }}/>
+                  <div id="calendar" style={{ width: '100%' }} />
                 </div>
                 {/* /.box-body */}
                 <div className="box-footer text-black">
