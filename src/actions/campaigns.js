@@ -136,7 +136,6 @@ export function updateCampaign({
   weight,
   description,
 }) {
-  console.log(userId);
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($campaign: CampaignInputType!) {

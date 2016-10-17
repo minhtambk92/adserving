@@ -11,6 +11,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getCampaign, updateCampaign, deleteCampaign } from '../../actions/campaigns';
+import { getAdvertisers } from '../../actions/advertisers';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './Campaign.css';
@@ -24,6 +25,7 @@ class Campaign extends Component {
     campaignId: PropTypes.string.isRequired,
     campaigns: PropTypes.object,
     getCampaign: PropTypes.func,
+    getAdvertisers:PropTypes.func,
     updateCampaign: PropTypes.func,
     deleteCampaign: PropTypes.func,
   };
@@ -200,9 +202,12 @@ class Campaign extends Component {
                       <label htmlFor="inputAdvertiser"
                              className="col-sm-2 control-label">Advertiser</label>
                       <div className="col-sm-10">
-                        <select id="inputAdvertiser" className="form-control">
-                          <option value="32b2b006-e17a-4254-b576-73130f015201">Admicro</option>
-                          <option value="92a4c58b-7ea0-42b1-ba5b-8eb70395714c">Zing</option>
+                        <select id="inputAdvertiser" className="form-control"
+                                onChange={event => this.onInputChange(event, 'advertiserId')}
+                                style={{ width: '100%' }}>
+                          {this.props.advertisers.latest && this.props.advertisers.latest.map(advertiser => (
+                            <option key={advertiser.id} value={advertiser.id}>{advertiser.name}</option>
+                          ))}
                         </select>
                       </div>
                     </div>
@@ -321,11 +326,13 @@ class Campaign extends Component {
 
 const mapState = (state) => ({
   campaigns: state.campaigns,
+  advertisers:state.advertisers,
 });
 
 const mapDispatch = {
   getCampaign,
   updateCampaign,
+  getAdvertisers,
   deleteCampaign,
 };
 

@@ -154,10 +154,9 @@ class Campaigns extends Component {
                              className="col-sm-2 control-label">Advertiser</label>
                       <div className="col-sm-10">
                         <select id="inputAdvertiser" className="form-control">
-                          {this.props.advertisers.latest && this.props.advertisers.latest.map(site => (
-                            <option
-                              key={site.id} value={site.id}
-                            >{site.name} | {site.domain}</option>
+                          {this.props.advertisers.latest && this.props.advertisers.latest.map(advertiser => (
+                            <option key={advertiser.id} value={advertiser.id}
+                            >{advertiser.name} </option>
                           ))}
                         </select>
                       </div>
