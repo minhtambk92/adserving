@@ -109,6 +109,16 @@ import Filter from './Filter';
 //   foreignKey: 'zoneId',
 // });
 
+Site.zones = Site.hasMany(Zone, {
+  foreignKey: 'siteId',
+  as: 'zones',
+});
+
+Zone.site = Zone.belongsTo(Site, {
+  foreignKey: 'siteId',
+  as: 'site',
+});
+
 function sync(...args) {
   return sequelize.sync(...args);
 }

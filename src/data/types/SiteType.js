@@ -7,13 +7,14 @@ import {
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Site } from '../models';
+import siteHasManyZones from '../queries/siteHasManyZones';
 
 const SiteType = new ObjectType({
   name: 'Site',
-  fields: Object.assign(attributeFields(Site, {
+  fields: () => Object.assign(attributeFields(Site, {
     // Additional options
   }), {
-    // Additional fields
+    zones: siteHasManyZones(),
   }),
 });
 

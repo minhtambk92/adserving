@@ -7,13 +7,14 @@ import {
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Zone } from '../models';
+import zoneBelongsToSite from '../queries/zoneBelongsToSite';
 
 const ZoneType = new ObjectType({
   name: 'Zone',
-  fields: Object.assign(attributeFields(Zone, {
+  fields: () => Object.assign(attributeFields(Zone, {
     // Additional options
   }), {
-    // Additional fields
+    testSite: zoneBelongsToSite(),
   }),
 });
 
