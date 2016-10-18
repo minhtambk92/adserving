@@ -11,6 +11,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanner, updateBanner, deleteBanner } from '../../actions/banners';
+import  { getAdvertisers } from '../../actions/advertisers';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './Banner.css';
@@ -26,6 +27,7 @@ class Banner extends Component {
     getBanner: PropTypes.func,
     updateBanner: PropTypes.func,
     deleteBanner: PropTypes.func,
+    getAdvertisers: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -45,6 +47,7 @@ class Banner extends Component {
 
   componentWillMount() {
     this.props.getBanner(this.props.bannerId);
+    this.props.getAdvertisers();
   }
 
   componentDidMount() {
@@ -68,9 +71,11 @@ class Banner extends Component {
       keyword,
       weight,
       description,
+      advertiserId,
     } = nextProps.banners && (nextProps.banners.current || {});
 
     document.getElementById('inputBannerName').value = name;
+    document.getElementById('inputAdvertiser').value = advertiserId;
     document.getElementById('inputBannerHTML').value = html;
     document.getElementById('inputBannerWidth').value = width;
     document.getElementById('inputBannerHeight').value = height;
@@ -98,6 +103,7 @@ class Banner extends Component {
       keyword,
       weight,
       description,
+      advertiserId,
     } = this.state;
     const banner = { id: this.props.bannerId };
 
@@ -127,6 +133,9 @@ class Banner extends Component {
     }
     if (description && description !== this.props.banners.current.description) {
       banner.description = description;
+    }
+    if (advertiserId && advertiserId !== this.props.banners.current.advertiserId) {
+      banner.advertiserId = document.getElementById('inputAdvertiser').value;
     }
 
     this.props.updateBanner(banner);
@@ -174,6 +183,19 @@ class Banner extends Component {
                           type="text" className="form-control" id="inputBannerName"
                           placeholder="Banner Top"
                           onChange={event => this.onInputChange(event,'name')} />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="inputAdvertiser"
+                             className="col-sm-2 control-label">Advertiser</label>
+                      <div className="col-sm-10">
+                        <select id="inputAdvertiser" className="form-control"
+                                onChange={event => this.onInputChange(event, 'advertiserId')}>
+                          {this.props.advertisers.latest && this.props.advertisers.latest.map(advertiser => (
+                            <option key={advertiser.id}
+                                    value={advertiser.id}>{advertiser.name}</option>
+                          ))}
+                        </select>
                       </div>
                     </div>
                     <div className="form-group">
@@ -285,12 +307,14 @@ class Banner extends Component {
 
 const mapState = (state) => ({
   banners: state.banners,
+  advertisers: state.advertisers,
 });
 
 const mapDispatch = {
   getBanner,
   updateBanner,
   deleteBanner,
+  getAdvertisers,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banner));

@@ -54,6 +54,10 @@ const Banner = Model.define('Banner', {
     type: DataType.STRING,
     defaultValue: '',
   },
+  // advertiserId: {
+  //   type: DataType.UUID,
+  //   defaultValue: '',
+  // },
   // status: {
   //   type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
   //   defaultValue: STATUS_INACTIVE,

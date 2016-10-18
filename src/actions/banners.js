@@ -3,7 +3,7 @@ import {
   CREATE_BANNER,
   GET_BANNER,
   UPDATE_BANNER,
-  DELETE_BANNER
+  DELETE_BANNER,
 } from '../constants/';
 export function getBanner(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
@@ -19,6 +19,7 @@ export function getBanner(id) {
           keyword
           weight
           description
+          advertiserId
           createdAt
           updatedAt
         }
@@ -48,6 +49,7 @@ export function getBanners() {
           keyword
           weight
           description
+          advertiserId
           createdAt
           updatedAt
           }
@@ -72,6 +74,7 @@ export function createBanner({
   keyword,
   weight,
   description,
+  advertiserId,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -86,6 +89,7 @@ export function createBanner({
           keyword
           weight
           description
+          advertiserId
           createdAt
           updatedAt
         }
@@ -101,6 +105,7 @@ export function createBanner({
         keyword,
         weight,
         description,
+        advertiserId,
 
       },
     });
@@ -123,6 +128,7 @@ export function updateBanner({
   keyword,
   weight,
   description,
+  advertiserId,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -137,6 +143,7 @@ export function updateBanner({
           keyword
           weight
           description
+          advertiserId
           createdAt
           updatedAt
         }
@@ -153,6 +160,7 @@ export function updateBanner({
         keyword,
         weight,
         description,
+        advertiserId,
       },
     });
 
@@ -179,9 +187,10 @@ export function deleteBanner(id) {
           keyword
           weight
           description
+          advertiserId
           createdAt
           updatedAt
-           deletedAt
+          deletedAt
         }
       }`;
 
