@@ -14,7 +14,7 @@ const ZoneType = new ObjectType({
   fields: () => Object.assign(attributeFields(Zone, {
     // Additional options
   }), {
-    testSite: zoneBelongsToSite(),
+    site: zoneBelongsToSite(),
   }),
 });
 
