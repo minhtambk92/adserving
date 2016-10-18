@@ -19,10 +19,12 @@ const UserLogin = Model.define('UserLogin', {
   },
   name: {
     type: DataType.STRING(50),
+    allowNull: false,
     primaryKey: true,
   },
   key: {
     type: DataType.STRING(100),
+    allowNull: false,
     primaryKey: true,
   },
 

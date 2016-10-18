@@ -19,11 +19,11 @@ const UserMeta = Model.define('UserMeta', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
+    allowNull: false,
   },
   value: {
     type: DataType.STRING,
-    defaultValue: '',
+    allowNull: false,
   },
 
 }, {
