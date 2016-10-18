@@ -31,6 +31,7 @@ export function getAdvertiser(id) {
     });
   };
 }
+
 export function getAdvertisers() {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
@@ -56,6 +57,7 @@ export function getAdvertisers() {
     });
   };
 }
+
 export function createAdvertiser({ email, name, contact, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -89,6 +91,7 @@ export function createAdvertiser({ email, name, contact, description }) {
     });
   };
 }
+
 export function updateAdvertiser({ id, email, name, contact, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `

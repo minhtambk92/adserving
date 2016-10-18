@@ -3,8 +3,9 @@ import {
   CREATE_BANNER,
   GET_BANNER,
   UPDATE_BANNER,
-  DELETE_BANNER
+  DELETE_BANNER,
 } from '../constants/';
+
 export function getBanner(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
@@ -34,6 +35,7 @@ export function getBanner(id) {
     });
   };
 }
+
 export function getBanners() {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
@@ -63,6 +65,7 @@ export function getBanners() {
     });
   };
 }
+
 export function createBanner({
   userId,
   name,
@@ -113,6 +116,7 @@ export function createBanner({
     });
   };
 }
+
 export function updateBanner({
   id,
   userId,

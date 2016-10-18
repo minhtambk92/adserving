@@ -3,8 +3,9 @@ import {
   CREATE_CAMPAIGN,
   GET_CAMPAIGN,
   UPDATE_CAMPAIGN,
-  DELETE_CAMPAIGN
+  DELETE_CAMPAIGN,
 } from '../constants/';
+
 export function getCampaign(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
@@ -36,6 +37,7 @@ export function getCampaign(id) {
     });
   };
 }
+
 export function getCampaigns() {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
@@ -67,6 +69,7 @@ export function getCampaigns() {
     });
   };
 }
+
 export function createCampaign({
   advertiserId,
   userId,
@@ -123,6 +126,7 @@ export function createCampaign({
     });
   };
 }
+
 export function updateCampaign({
   id,
   advertiserId,

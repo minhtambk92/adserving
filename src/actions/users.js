@@ -15,7 +15,9 @@ import {
 /*
  REGISTER USER
  */
-const queryRegisterUser = `mutation ($user: UserInputTypeWithoutId!) {userRegister(user: $user) { id email username password}}`;
+const queryRegisterUser = `
+mutation ($user: UserInputTypeWithoutId!) {userRegister(user: $user) { id email username password}
+}`;
 
 export function submitRegisterUser({ email, username, password }) {
   return async(dispatch, getState, { graphqlRequest }) => {
@@ -25,7 +27,7 @@ export function submitRegisterUser({ email, username, password }) {
           email,
           username,
           password,
-        }
+        },
       });
       dispatch({
         type: USER_REGISTER_SUCCESS,
@@ -51,20 +53,22 @@ export function submitRegisterUser({ email, username, password }) {
 /*
  LOGIN USER
  */
-const queryLoginUser = `mutation ($email:String!) {findByEmail(email:$email){id username email password}}`;
+const queryLoginUser = `
+mutation ($email:String!) {findByEmail(email:$email){id username email password}
+}`;
 function parseJSON(response) {
   return response.json();
 }
 export function submitLoginUser({ email, password }) {
   return async(dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(queryLoginUser, { email: email });
+    const { data } = await graphqlRequest(queryLoginUser, { email });
     if (data.findByEmail) {
       if (data.findByEmail.password === password) {
         return fetch('http://rsk.quynd.com/auth/getToken', {
           method: 'post',
           credentials: 'include',
           headers: {
-            'Accept': 'application/json',
+            Accept: 'application/json',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ data: data.findByEmail }),
@@ -106,10 +110,12 @@ export function submitLoginUser({ email, password }) {
 /*
  FIND BY ID
  */
-const useFindById = `mutation ($id:String!) {findById(id:$id){id username email password}}`;
+const useFindById = `
+mutation ($id:String!) {findById(id:$id){id username email password}
+}`;
 export function findById({ id }) {
   return async(dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(useFindById, { id: id });
+    const { data } = await graphqlRequest(useFindById, { id });
     if (data.findById) {
       dispatch({
         type: SUCCESS,
@@ -132,10 +138,12 @@ export function findById({ id }) {
 /*
  CHECK EMAIL EXIST
  */
-const checkEmail = `mutation ($email:String!) {findByEmail(email:$email){id username email password}}`;
+const checkEmail = `
+mutation ($email:String!) {findByEmail(email:$email){id username email password}
+}`;
 export function checkEmailExist({ email }) {
   return async(dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(checkEmail, { email: email });
+    const { data } = await graphqlRequest(checkEmail, { email });
     if (data.findByEmail) {
       dispatch({
         type: EMAIL_EXIST,

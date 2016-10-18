@@ -5,6 +5,7 @@ import {
   UPDATE_PLACEMENT,
   DELETE_PLACEMENT,
 } from '../constants/';
+
 export function getPlacement(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
@@ -33,6 +34,7 @@ export function getPlacement(id) {
     });
   };
 }
+
 export function getPlacements() {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
@@ -61,6 +63,7 @@ export function getPlacements() {
     });
   };
 }
+
 export function createPlacement({
   userId,
   name,
@@ -108,6 +111,7 @@ export function createPlacement({
     });
   };
 }
+
 export function updatePlacement({
   id,
   userId,
