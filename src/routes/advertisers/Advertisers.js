@@ -140,7 +140,6 @@ class Advertisers extends Component {
                         />
                       </div>
                     </div>
-
                     <div className="form-group">
                       <label
                         htmlFor="inputAdvertiserDescription"
