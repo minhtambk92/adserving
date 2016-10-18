@@ -111,6 +111,24 @@ Zone.site = Zone.belongsTo(Site, {
   as: 'site',
 });
 
+Advertiser.campaigns = Advertiser.hasMany(Campaign, {
+  foreignKey: 'advertiserId',
+  as: 'campaigns',
+});
+Campaign.advertiser = Campaign.belongsTo(Advertiser, {
+  foreignKey: 'advertiserId',
+  as: 'advertiser',
+});
+
+Advertiser.banners = Advertiser.hasMany(Banner, {
+  foreignKey: 'advertiserId',
+  as: 'banners',
+});
+Banner.advertiser = Banner.belongsTo(Advertiser, {
+  foreignKey: 'advertiserId',
+  as: 'advertiser',
+});
+
 function sync(...args) {
   return sequelize.sync(...args);
 }

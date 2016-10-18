@@ -69,11 +69,10 @@ class Advertisers extends Component {
     const contact = document.getElementById('inputAdvertiserContact').value;
     const name = document.getElementById('inputAdvertiserName').value;
     const email = document.getElementById('inputAdvertiserEmail').value;
-    const status = document.getElementById('inputAdvertiserStatus').value;
     const description = document.getElementById('inputAdvertiserDescription').value;
 
-    if (contact && name && email && description && status) {
-      this.props.createAdvertiser({ email, name, contact, description, status }).then(() => {
+    if (contact && name && email && description) {
+      this.props.createAdvertiser({ email, name, contact, description }).then(() => {
         this.clearInput();
       });
     }
@@ -139,15 +138,6 @@ class Advertisers extends Component {
                           type="text" className="form-control" id="inputAdvertiserEmail"
                           placeholder="contact@dantri.com.vn"
                         />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="inputAdvertiserStatus" className="col-sm-2 control-label">Status</label>
-                      <div className="col-sm-10">
-                        <select id="inputAdvertiserStatus" className="form-control">
-                          <option value="active">Active</option>
-                          <option value="inactive">Inactive</option>
-                        </select>
                       </div>
                     </div>
                     <div className="form-group">
