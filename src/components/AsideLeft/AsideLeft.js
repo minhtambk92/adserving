@@ -93,6 +93,24 @@ function AsideLeft() {
               </li>
             </ul>
           </li>
+
+          <li className="header">SYSTEM</li>
+          <li className="treeview">
+            <Link to="/users">
+              <i className="fa fa-user" /> <span>Users</span>
+              <span className="pull-right-container">
+                <i className="fa fa-angle-left pull-right" />
+              </span>
+            </Link>
+            <ul className="treeview-menu">
+              <li>
+                <Link to="/users"><i className="fa fa-users" /> All Users</Link>
+              </li>
+              <li>
+                <Link to="/profile"><i className="fa fa-info-circle" /> Your Profile</Link>
+              </li>
+            </ul>
+          </li>
         </ul>
       </section>
       {/* /.sidebar */}
