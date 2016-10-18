@@ -2,19 +2,12 @@
  * Created by Manhhailua on 10/9/16.
  */
 
-import DataType from 'sequelize';
+import DataType from 'sequelize'; // eslint-disable-line no-unused-vars
 import Model from '../sequelize';
 
 const UserRole = Model.define('UserRole', {
 
-  userId: {
-    type: DataType.UUID,
-    primaryKey: true,
-  },
-  roleId: {
-    type: DataType.UUID,
-    primaryKey: true,
-  },
+  // Additional fields
 
 }, {
 
