@@ -114,7 +114,7 @@ User.sites = User.hasMany(Site, {
 
 User.zones = User.hasMany(Zone, {
   foreignKey: {
-    name: 'zoneId',
+    name: 'userId',
     allowNull: false,
   },
 });
