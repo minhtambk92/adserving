@@ -9,6 +9,8 @@
 
 import sequelize from '../sequelize';
 import Option from './Option';
+import Resource from './Resource';
+import ResourcePermission from './ResourcePermission';
 import User from './User';
 import UserLogin from './UserLogin';
 import UserClaim from './UserClaim';
@@ -27,40 +29,94 @@ import Channel from './Channel';
 import Filter from './Filter';
 
 // Associations
+Resource.permissions = Resource.hasMany(ResourcePermission, {
+  foreignKey: {
+    name: 'resourceEntityId',
+    allowNull: false,
+  },
+  as: 'permissions',
+  scope: {
+    resource: 'Resource',
+  },
+  constraints: false,
+});
+
+Role.permissions = Role.hasMany(ResourcePermission, {
+  foreignKey: {
+    name: 'authorizedId',
+    allowNull: false,
+  },
+  as: 'permissions',
+  scope: {
+    authorizedFor: 'Role',
+  },
+  constraints: false,
+});
+
+User.permissions = User.hasMany(ResourcePermission, {
+  foreignKey: {
+    name: 'authorizedId',
+    allowNull: false,
+  },
+  as: 'permissions',
+  scope: {
+    authorizedFor: 'User',
+  },
+  constraints: false,
+});
+
 User.login = User.hasMany(UserLogin, {
-  foreignKey: 'userId',
+  foreignKey: {
+    name: 'userId',
+    allowNull: false,
+  },
   as: 'logins',
   onUpdate: 'cascade',
   onDelete: 'cascade',
 });
 
 User.claim = User.hasMany(UserClaim, {
-  foreignKey: 'userId',
+  foreignKey: {
+    name: 'userId',
+    allowNull: false,
+  },
   as: 'claims',
   onUpdate: 'cascade',
   onDelete: 'cascade',
 });
 
 User.profile = User.hasOne(UserProfile, {
-  foreignKey: 'userId',
+  foreignKey: {
+    name: 'userId',
+    allowNull: false,
+  },
   as: 'profile',
   onUpdate: 'cascade',
   onDelete: 'cascade',
 });
 
 User.meta = User.hasMany(UserMeta, {
-  foreignKey: 'userId',
+  foreignKey: {
+    name: 'userId',
+    allowNull: false,
+  },
   as: 'meta',
   onUpdate: 'cascade',
   onDelete: 'cascade',
 });
 
 User.sites = User.hasMany(Site, {
-  foreignKey: 'userId',
+  foreignKey: {
+    name: 'userId',
+    allowNull: false,
+  },
 });
 
 User.zones = User.hasMany(Zone, {
-  foreignKey: 'userId',
+  foreignKey: {
+    name: 'zoneId',
+    allowNull: false,
+  },
 });
 
 User.roles = User.belongsToMany(Role, {
@@ -110,19 +166,32 @@ Role.users = Role.belongsToMany(User, {
 // });
 
 Site.zones = Site.hasMany(Zone, {
-  foreignKey: 'siteId',
+  foreignKey: {
+    name: 'siteId',
+    allowNull: false,
+  },
 });
 
 Zone.site = Zone.belongsTo(Site, {
-  foreignKey: 'siteId',
+  foreignKey: {
+    name: 'siteId',
+    allowNull: false,
+  },
 });
 
 Advertiser.campaigns = Advertiser.hasMany(Campaign, {
-  foreignKey: 'advertiserId',
+  foreignKey: {
+    name: 'advertiserId',
+    allowNull: false,
+  },
   as: 'campaigns',
 });
+
 Campaign.advertiser = Campaign.belongsTo(Advertiser, {
-  foreignKey: 'advertiserId',
+  foreignKey: {
+    name: 'advertiserId',
+    allowNull: false,
+  },
   as: 'advertiser',
 });
 
@@ -130,6 +199,7 @@ Advertiser.banners = Advertiser.hasMany(Banner, {
   foreignKey: 'advertiserId',
   as: 'banners',
 });
+
 Banner.advertiser = Banner.belongsTo(Advertiser, {
   foreignKey: 'advertiserId',
   as: 'advertiser',
@@ -142,6 +212,7 @@ function sync(...args) {
 export default { sync };
 export {
   Option,
+  Resource,
   User,
   Role,
   Permission,

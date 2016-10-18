@@ -9,6 +9,10 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const Permission = Model.define('Permission', {
 
@@ -20,6 +24,13 @@ const Permission = Model.define('Permission', {
   name: {
     type: DataType.STRING,
     defaultValue: '',
+  },
+  status: {
+    type: DataType.STRING,
+    defaultValue: STATUS_INACTIVE,
+    validate: {
+      isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
+    },
   },
 
 }, {

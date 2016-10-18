@@ -1,10 +1,5 @@
 /**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
+ * Created by Manhhailua on 10/18/16.
  */
 
 import DataType from 'sequelize';
@@ -14,7 +9,7 @@ import {
   STATUS_INACTIVE,
 } from '../../constants';
 
-const Filter = Model.define('Filter', {
+const Resource = Model.define('Resource', {
 
   id: {
     type: DataType.UUID,
@@ -23,14 +18,15 @@ const Filter = Model.define('Filter', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
+    allowNull: false,
   },
-  value: {
-    type: DataType.STRING,
-    defaultValue: '',
+  hasMeta: {
+    type: DataType.BOOLEAN,
+    allowNull: false,
   },
   status: {
     type: DataType.STRING,
+    allowNull: false,
     defaultValue: STATUS_INACTIVE,
     validate: {
       isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
@@ -43,4 +39,4 @@ const Filter = Model.define('Filter', {
 
 });
 
-export default Filter;
+export default Resource;

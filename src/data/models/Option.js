@@ -9,6 +9,10 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const Option = Model.define('Option', {
 
@@ -28,6 +32,13 @@ const Option = Model.define('Option', {
   autoLoad: {
     type: DataType.BOOLEAN,
     defaultValue: false,
+  },
+  status: {
+    type: DataType.STRING,
+    defaultValue: STATUS_INACTIVE,
+    validate: {
+      isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
+    },
   },
 
 }, {

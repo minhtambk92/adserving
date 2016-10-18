@@ -21,9 +21,6 @@ const Placement = Model.define('Placement', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
-  userId: {
-    type: DataType.UUID,
-  },
   name: {
     type: DataType.STRING,
     defaultValue: '',
@@ -40,10 +37,6 @@ const Placement = Model.define('Placement', {
     type: DataType.INTEGER,
     defaultValue: 0,
   },
-  // location: {
-  //   type: DataType.STRING,
-  //   defaultValue: '',
-  // },
   startTime: {
     type: DataType.DATE,
     defaultValue: DataType.NOW,
@@ -52,10 +45,13 @@ const Placement = Model.define('Placement', {
     type: DataType.DATE,
     defaultValue: DataType.NOW,
   },
-  // status: {
-  //   type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
-  //   defaultValue: STATUS_INACTIVE,
-  // },
+  status: {
+    type: DataType.STRING,
+    defaultValue: STATUS_INACTIVE,
+    validate: {
+      isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
+    },
+  },
 
 }, {
 

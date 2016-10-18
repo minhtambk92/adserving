@@ -9,10 +9,10 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
-// import {
-//   STATUS_ACTIVE,
-//   STATUS_INACTIVE,
-// } from '../../constants';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const Zone = Model.define('Zone', {
 
@@ -45,10 +45,13 @@ const Zone = Model.define('Zone', {
     type: DataType.STRING,
     defaultValue: '',
   },
-  // status: {
-  //   type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
-  //   defaultValue: STATUS_INACTIVE,
-  // },
+  status: {
+    type: DataType.STRING,
+    defaultValue: STATUS_INACTIVE,
+    validate: {
+      isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
+    },
+  },
 
 }, {
 

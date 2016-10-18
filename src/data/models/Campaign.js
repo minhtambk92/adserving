@@ -9,6 +9,10 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const Campaign = Model.define('Campaign', {
 
@@ -16,14 +20,6 @@ const Campaign = Model.define('Campaign', {
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
-  },
-  advertiserId: {
-    type: DataType.UUID,
-    defaultValue: '',
-  },
-  userId: {
-    type: DataType.UUID,
-    defaultValue: '',
   },
   name: {
     type: DataType.STRING,
@@ -53,14 +49,18 @@ const Campaign = Model.define('Campaign', {
     type: DataType.INTEGER,
     defaultValue: 0,
   },
-  // status: {
-  //   type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
-  //   defaultValue: STATUS_INACTIVE,
-  // },
+  status: {
+    type: DataType.STRING,
+    defaultValue: STATUS_INACTIVE,
+    validate: {
+      isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
+    },
+  },
   description: {
     type: DataType.STRING,
     defaultValue: '',
   },
+
 }, {
 
   // Additional options

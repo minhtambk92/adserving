@@ -21,10 +21,6 @@ const Channel = Model.define('Channel', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
-  userId: {
-    type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
-  },
   name: {
     type: DataType.STRING,
     defaultValue: '',
@@ -32,10 +28,6 @@ const Channel = Model.define('Channel', {
   description: {
     type: DataType.STRING,
     defaultValue: '',
-  },
-  status: {
-    type: DataType.ENUM(STATUS_ACTIVE, STATUS_INACTIVE),
-    defaultValue: STATUS_INACTIVE,
   },
   compiledLimitation: {
     type: DataType.STRING,
@@ -48,6 +40,13 @@ const Channel = Model.define('Channel', {
   aclsUpdated: {
     type: DataType.DATE,
     defaultValue: DataType.NOW,
+  },
+  status: {
+    type: DataType.STRING,
+    defaultValue: STATUS_INACTIVE,
+    validate: {
+      isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
+    },
   },
 
 }, {

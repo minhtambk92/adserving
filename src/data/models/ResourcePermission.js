@@ -1,5 +1,5 @@
 /**
- * Created by Manhhailua on 10/9/16.
+ * Created by Manhhailua on 10/18/16.
  */
 
 import DataType from 'sequelize';
@@ -9,30 +9,32 @@ import {
   STATUS_INACTIVE,
 } from '../../constants';
 
-const User = Model.define('User', {
+const ResourcePermission = Model.define('ResourcePermission', {
 
   id: {
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
-  email: {
-    type: DataType.STRING,
-    validate: {
-      isEmail: true,
-    },
+  authorizedFor: {
+    type: DataType.UUID,
     allowNull: false,
   },
-  password: {
-    type: DataType.STRING,
+  authorizedId: {
+    type: DataType.UUID,
     allowNull: false,
   },
-  emailConfirmed: {
-    type: DataType.BOOLEAN,
-    defaultValue: false,
+  resource: { // Resource type id
+    type: DataType.UUID,
+    allowNull: false,
+  },
+  resourceEntityId: { // Resource entity id
+    type: DataType.UUID,
+    allowNull: false,
   },
   status: {
     type: DataType.STRING,
+    allowNull: false,
     defaultValue: STATUS_INACTIVE,
     validate: {
       isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
@@ -41,10 +43,8 @@ const User = Model.define('User', {
 
 }, {
 
-  indexes: [
-    { fields: ['email'] },
-  ],
+  // Additional options
 
 });
 
-export default User;
+export default ResourcePermission;

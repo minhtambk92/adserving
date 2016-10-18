@@ -17,10 +17,6 @@ const UserMeta = Model.define('UserMeta', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
-  userId: {
-    type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
-  },
   name: {
     type: DataType.STRING,
     defaultValue: '',
