@@ -30,7 +30,23 @@ const users = {
       },
     }),
   },
-  updateUser: {
+  createdUser: {
+    type: UserType,
+    args: {
+      site: { type: UserInputTypeWithoutId },
+    },
+    resolve: resolver(User, {
+      async before(options, args) {
+        const opts = options;
+        opts.where = options.where || {};
+        await User.create(args.site).then(site => {
+          opts.where.id = { $eq: site.id };
+        });
+        return opts;
+      },
+    }),
+  },
+  updatedUser: {
     type: UserType,
     args: {
       user: { type: UserInputType },
@@ -40,14 +56,12 @@ const users = {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.user.id };
-
         User.upsert(args.user);
-
         return opts;
       },
     }),
   },
-  deleteUser: {
+  deletedUser: {
     type: UserType,
     args: {
       id: { type: IDType },
@@ -57,12 +71,10 @@ const users = {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.id };
-
         return opts;
       },
       after(result, args) {
         User.destroy({ where: { id: args.id } });
-
         return result;
       },
     }),
