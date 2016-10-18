@@ -17,9 +17,14 @@ const Role = Model.define('Role', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
-  name: {
+  uniqueName: {
     type: DataType.STRING,
-    defaultValue: '',
+    allowNull: false,
+    unique: true,
+  },
+  name: {
+    type: DataType.TEXT,
+    allowNull: false,
   },
 
 }, {

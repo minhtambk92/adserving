@@ -23,7 +23,7 @@ const Campaign = Model.define('Campaign', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: 0,
+    defaultValue: '',
   },
   startTime: {
     type: DataType.DATE,
@@ -49,16 +49,17 @@ const Campaign = Model.define('Campaign', {
     type: DataType.INTEGER,
     defaultValue: 0,
   },
+  description: {
+    type: DataType.STRING,
+    defaultValue: '',
+  },
   status: {
     type: DataType.STRING,
+    allowNull: false,
     defaultValue: STATUS_INACTIVE,
     validate: {
       isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
     },
-  },
-  description: {
-    type: DataType.STRING,
-    defaultValue: '',
   },
 
 }, {

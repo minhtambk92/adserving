@@ -23,10 +23,11 @@ const Permission = Model.define('Permission', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
+    allowNull: false,
   },
   status: {
     type: DataType.STRING,
+    allowNull: false,
     defaultValue: STATUS_INACTIVE,
     validate: {
       isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],

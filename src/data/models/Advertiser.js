@@ -23,10 +23,12 @@ const Advertisers = Model.define('Advertisers', {
   },
   email: {
     type: DataType.STRING,
+    allowNull: false,
     validate: { isEmail: true },
   },
   name: {
     type: DataType.STRING,
+    allowNull: false,
     defaultValue: '',
   },
   contact: {

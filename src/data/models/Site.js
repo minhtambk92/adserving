@@ -23,21 +23,26 @@ const Site = Model.define('Site', {
   },
   domain: {
     type: DataType.STRING,
+    allowNull: false,
   },
   name: {
     type: DataType.STRING,
+    allowNull: false,
   },
   email: {
     type: DataType.STRING,
+    allowNull: false,
     validate: {
       isEmail: true,
     },
   },
   description: {
     type: DataType.STRING,
+    defaultValue: '',
   },
   status: {
     type: DataType.STRING,
+    allowNull: false,
     defaultValue: STATUS_INACTIVE,
     validate: {
       isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],

@@ -23,7 +23,7 @@ const Placement = Model.define('Placement', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
+    allowNull: false,
   },
   description: {
     type: DataType.STRING,
@@ -31,7 +31,7 @@ const Placement = Model.define('Placement', {
   },
   size: {
     type: DataType.STRING,
-    defaultValue: '',
+    allowNull: false,
   },
   weight: {
     type: DataType.INTEGER,
@@ -47,6 +47,7 @@ const Placement = Model.define('Placement', {
   },
   status: {
     type: DataType.STRING,
+    allowNull: false,
     defaultValue: STATUS_INACTIVE,
     validate: {
       isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],

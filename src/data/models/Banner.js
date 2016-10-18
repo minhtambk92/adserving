@@ -21,10 +21,6 @@ const Banner = Model.define('Banner', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
-  userId: {
-    type: DataType.UUID,
-    defaultValue: '',
-  },
   name: {
     type: DataType.STRING,
     defaultValue: '',
@@ -33,7 +29,6 @@ const Banner = Model.define('Banner', {
     type: DataType.STRING,
     defaultValue: '',
   },
-
   width: {
     type: DataType.INTEGER,
     defaultValue: 0,
@@ -56,6 +51,7 @@ const Banner = Model.define('Banner', {
   },
   status: {
     type: DataType.STRING,
+    allowNull: false,
     defaultValue: STATUS_INACTIVE,
     validate: {
       isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],

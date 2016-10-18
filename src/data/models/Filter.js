@@ -23,14 +23,15 @@ const Filter = Model.define('Filter', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
+    allowNull: false,
   },
   value: {
     type: DataType.STRING,
-    defaultValue: '',
+    allowNull: false,
   },
   status: {
     type: DataType.STRING,
+    allowNull: false,
     defaultValue: STATUS_INACTIVE,
     validate: {
       isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
