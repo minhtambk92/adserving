@@ -27,7 +27,7 @@ import Site from './Site';
 import Zone from './Zone';
 import Channel from './Channel';
 import Filter from './Filter';
-
+import PlacementBannerZone from './PlacementBannerZone';
 // Associations
 Resource.permissions = Resource.hasMany(ResourcePermission, {
   foreignKey: {
@@ -224,4 +224,5 @@ export {
   Zone,
   Channel,
   Filter,
+  PlacementBannerZone,
 };

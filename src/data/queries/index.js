@@ -3,7 +3,6 @@
  */
 
 import { GraphQLObjectType as ObjectType } from 'graphql';
-
 import me from './me';
 import content from './content';
 import news from './news';
@@ -20,6 +19,7 @@ import sites from './sites';
 import zones from './zones';
 import channels from './channels';
 import filters from './filters';
+import placementBannerZones from './placementBannerZones';
 
 const queries = new ObjectType({
   name: 'Query',
@@ -40,6 +40,7 @@ const queries = new ObjectType({
     zones,
     channels,
     filters,
+    placementBannerZones,
   },
 });
 

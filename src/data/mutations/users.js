@@ -14,22 +14,6 @@ import UserInputTypeWithoutId from '../types/UserInputTypeWithoutId';
 import { User } from '../models';
 
 const users = {
-  userRegister: {
-    type: UserType,
-    args: {
-      user: { type: UserInputTypeWithoutId },
-    },
-    resolve: resolver(User, {
-      async before(options, args) {
-        const opts = options;
-        opts.where = options.where || {};
-        await User.create(args.user).then(user => {
-          opts.where.id = { $eq: user.id };
-        });
-        return opts;
-      },
-    }),
-  },
   createdUser: {
     type: UserType,
     args: {
@@ -75,40 +59,6 @@ const users = {
       },
       after(result, args) {
         User.destroy({ where: { id: args.id } });
-        return result;
-      },
-    }),
-  },
-  findByEmail: {
-    type: UserType,
-    args: {
-      email: { type: StringType },
-    },
-    resolve: resolver(User, {
-      async before(options) {
-        const opts = options;
-        opts.where = options.where || {};
-        return opts;
-      },
-      after(result, args) {
-        User.find({ where: { email: args.email } });
-        return result;
-      },
-    }),
-  },
-  findById: {
-    type: UserType,
-    args: {
-      id: { type: StringType },
-    },
-    resolve: resolver(User, {
-      async before(options) {
-        const opts = options;
-        opts.where = options.where || {};
-        return opts;
-      },
-      after(result, args) {
-        User.find({ where: { id: args.id } });
         return result;
       },
     }),

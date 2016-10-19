@@ -21,6 +21,9 @@ const Site = Model.define('Site', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
+  userId: {
+    type: DataType.UUID,
+  },
   domain: {
     type: DataType.STRING,
     allowNull: false,
