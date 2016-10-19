@@ -8,7 +8,7 @@ const placementHasManyPlacementBannerZones = () => ({
   args: Object.assign(defaultListArgs(), {
     // additional params
   }),
-  resolve: resolver(Placement.placementbannerzones, {
+  resolve: resolver(Placement.placementBannerZones, {
     before(options) {
       const opts = options;
       opts.order = options.order || [];

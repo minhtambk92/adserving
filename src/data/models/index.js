@@ -160,10 +160,30 @@ Role.users = Role.belongsToMany(User, {
 //   },
 //   foreignKey: 'bannerId',
 // });
-//
-// Zone.placements = Zone.hasMany(PlacementBannerZone, {
-//   foreignKey: 'zoneId',
-// });
+
+PlacementBannerZone.placement = PlacementBannerZone.belongsTo(Placement, {
+  foreignKey: 'placementId',
+});
+
+PlacementBannerZone.banner = PlacementBannerZone.belongsTo(Banner, {
+  foreignKey: 'bannerId',
+});
+
+PlacementBannerZone.zone = PlacementBannerZone.belongsTo(Zone, {
+  foreignKey: 'zoneId',
+});
+
+Placement.placementBannerZones = Placement.hasMany(PlacementBannerZone, {
+  foreignKey: 'placementId',
+});
+
+Banner.placementBannerZones = Banner.hasMany(PlacementBannerZone, {
+  foreignKey: 'bannerId',
+});
+
+Zone.placementBannerZones = Zone.hasMany(PlacementBannerZone, {
+  foreignKey: 'zoneId',
+});
 
 Site.zones = Site.hasMany(Zone, {
   foreignKey: {
