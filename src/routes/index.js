@@ -27,6 +27,7 @@ export default {
     require('./banners').default,
     require('./site').default,
     require('./sites').default,
+    require('./users').default,
     require('./zone').default,
     require('./zones').default,
 

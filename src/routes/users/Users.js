@@ -140,6 +140,7 @@ class Users extends Component {
                       <div className="col-sm-10">
                         <input
                           type="password" className="form-control" id="inputUserPassword"
+                          placeholder="123456789"
                         />
                       </div>
                     </div>
@@ -147,11 +148,12 @@ class Users extends Component {
                       <label
                         htmlFor="inputUserPasswordConfirmation"
                         className="col-sm-2 control-label"
-                      >Password</label>
+                      >Password again</label>
                       <div className="col-sm-10">
                         <input
                           type="password" className="form-control"
                           id="inputUserPasswordConfirmation"
+                          placeholder="123456789"
                         />
                       </div>
                     </div>
@@ -159,7 +161,7 @@ class Users extends Component {
                       <label
                         htmlFor="inputUserEmailConfirmed"
                         className="col-sm-2 control-label"
-                      >Type</label>
+                      >Email confirmed</label>
                       <div className="col-sm-10">
                         <select
                           id="inputUserEmailConfirmed"
@@ -174,7 +176,7 @@ class Users extends Component {
                       <label
                         htmlFor="inputUserStatus"
                         className="col-sm-2 control-label"
-                      >Type</label>
+                      >Status</label>
                       <div className="col-sm-10">
                         <select
                           id="inputUserStatus"
@@ -208,10 +210,10 @@ class Users extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: LIST OF WEBSITES */}
+              {/* BOX: LIST OF USERS */}
               <div className="box box-info">
                 <div className="box-header with-border">
-                  <h3 className="box-title">List of webusers</h3>
+                  <h3 className="box-title">List of users</h3>
 
                   <div className="box-tools">
                     <div className="input-group input-group-sm" style={{ width: 150 }}>
@@ -235,35 +237,27 @@ class Users extends Component {
                     <thead>
                       <tr>
                         <th><input type="checkbox" className="inputChooseUser" /></th>
-                        <th>Name</th>
-                        <th>Domain</th>
                         <th>Email</th>
-                        <th>Description</th>
+                        <th>Email confirmed</th>
+                        <th>Status</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.users.list && this.props.users.list.map(site => {
-                        if (this.isIndexOf(site.domain, site.name, site.email, site.description)) {
-                          return (
-                            <tr key={site.id}>
-                              <td><input type="checkbox" className="inputChooseUser" /></td>
-                              <td><Link to={`/site/${site.id}`}>{site.name}</Link></td>
-                              <td>{site.domain}</td>
-                              <td>{site.email}</td>
-                              <td>{site.description}</td>
-                            </tr>
-                          );
-                        }
-                        return false;
-                      })}
+                      {this.props.users.list && this.props.users.list.map(user => (
+                        <tr key={user.id}>
+                          <td><input type="checkbox" className="inputChooseUser" /></td>
+                          <td><Link to={`/user/${user.id}`}>{user.email}</Link></td>
+                          <td>{user.emailConfirmed ? 'yes' : 'no'}</td>
+                          <td>{user.status}</td>
+                        </tr>
+                      ))}
                     </tbody>
                     <tfoot>
                       <tr>
                         <th><input type="checkbox" className="inputChooseUser" /></th>
-                        <th>Name</th>
-                        <th>Domain</th>
+                        <th>Email</th>
+                        <th>Email confirmed</th>
                         <th>Status</th>
-                        <th>Description</th>
                       </tr>
                     </tfoot>
                   </table>

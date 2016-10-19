@@ -203,7 +203,6 @@ export function getUsers() {
           email
           emailConfirmed
           status
-          description
           createdAt
           updatedAt
         }
