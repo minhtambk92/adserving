@@ -17,7 +17,6 @@ export function getUser(id) {
           email
           emailConfirmed
           status
-          description
           createdAt
           updatedAt
         }
@@ -94,13 +93,12 @@ export function createUser({ email, password, emailConfirmed, status }) {
 export function updateUser({ id, email, password, emailConfirmed, status }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($user: UserInput!) {
+      mutation ($user: UserInputType!) {
         updatedUser(user: $user) {
           id
           email
           emailConfirmed
           status
-          description
           createdAt
           updatedAt
         }
@@ -134,7 +132,6 @@ export function deleteUser(id) {
           email
           emailConfirmed
           status
-          description
           createdAt
           updatedAt
           deletedAt
