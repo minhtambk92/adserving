@@ -8,6 +8,7 @@ import campaigns from './campaigns';
 import placements from './placements';
 import banners from './banners';
 import sites from './sites';
+import users from './users';
 import zones from './zones';
 
 export default combineReducers({
@@ -20,5 +21,6 @@ export default combineReducers({
   campaigns,
   banners,
   sites,
+  users,
   zones,
 });
