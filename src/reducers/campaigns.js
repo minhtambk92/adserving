@@ -3,7 +3,7 @@ import {
   GET_CAMPAIGNS,
   CREATE_CAMPAIGN,
   UPDATE_CAMPAIGN,
-  DELETE_CAMPAIGN,
+  DELETE_CAMPAIGN
 } from '../constants';
 
 export default function campaigns(state = {}, action) {
@@ -26,8 +26,18 @@ export default function campaigns(state = {}, action) {
 
     case CREATE_CAMPAIGN:
       {
-        state.latest.unshift(action.payload.campaign);
-        return { ...state };
+        // state.latest.unshift(action.payload.campaign);
+        if (action.payload.status === 'createInAdvertiser') {
+          return {
+            ...state,
+            new: action.payload.campaign,
+          };
+        } else {
+          state.latest.unshift(action.payload.campaign);
+          return {
+            ...state,
+          }
+        }
       }
 
     case UPDATE_CAMPAIGN:

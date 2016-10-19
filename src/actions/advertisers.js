@@ -16,6 +16,19 @@ export function getAdvertiser(id) {
           name
           contact
           description
+          campaigns {
+            id
+            name
+            startTime
+            endTime
+            views
+            viewPerSession
+            timeResetViewCount
+            weight
+            description
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }

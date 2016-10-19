@@ -3,7 +3,7 @@ import {
   CREATE_CAMPAIGN,
   GET_CAMPAIGN,
   UPDATE_CAMPAIGN,
-  DELETE_CAMPAIGN,
+  DELETE_CAMPAIGN
 } from '../constants/';
 
 export function getCampaign(id) {
@@ -122,6 +122,7 @@ export function createCampaign({
       type: CREATE_CAMPAIGN,
       payload: {
         campaign: data.createdCampaign,
+        status: 'createInAdvertiser',
       },
     });
   };
