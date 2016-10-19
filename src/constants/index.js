@@ -32,12 +32,6 @@ export const CREATE_USER = 'CREATE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
 
-export const SUCCESS = 'SUCCESS';
-export const ERROR = 'ERROR';
-
-export const EMAIL_EXIST = 'EMAIL_EXIST';
-export const EMAIL_NOT_EXIST = 'EMAIL_NOT_EXIST';
-
 export const GET_ADVERTISER = 'GET_ADVERTISER';
 export const GET_ADVERTISERS = 'GET_ADVERTISERS';
 export const CREATE_ADVERTISER = 'CREATE_ADVERTISER';

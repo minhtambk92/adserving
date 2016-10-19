@@ -13,7 +13,10 @@ function list(state = [], action) {
       return action.payload.users;
     }
     case CREATE_USER: {
-      return state.unshift(action.payload.user);
+      return [
+        action.payload.user,
+        ...state,
+      ];
     }
     default: {
       return state;
@@ -33,7 +36,7 @@ function editing(state = {}, action) {
       return null;
     }
     default: {
-      return state;
+      return { ...state };
     }
   }
 }

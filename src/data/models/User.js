@@ -18,6 +18,7 @@ const User = Model.define('User', {
   },
   email: {
     type: DataType.STRING,
+    unique: true,
     validate: {
       isEmail: true,
     },
