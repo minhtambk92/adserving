@@ -10,11 +10,6 @@
 import sequelize from '../sequelize';
 import Option from './Option';
 import User from './User';
-import UserLogin from './UserLogin';
-import UserClaim from './UserClaim';
-import UserProfile from './UserProfile';
-import UserMeta from './UserMeta';
-import UserRole from './UserRole';
 import Role from './Role';
 import Permission from './Permission';
 import Campaign from './Campaign';
@@ -26,13 +21,11 @@ import Zone from './Zone';
 import Channel from './Channel';
 import Filter from './Filter';
 import PlacementBannerZone from './PlacementBannerZone';
-
 // Associations
 // User.login = User.hasMany(UserLogin, {
 //   foreignKey: 'userId',
 //   as: 'logins',
-//   onUpdate: 'cascade',
-//   onDelete: 'cascade',
+//   onUpdate: 'cascade',//   onDelete: 'cascade',
 // });
 //
 // User.claim = User.hasMany(UserClaim, {
@@ -78,26 +71,24 @@ import PlacementBannerZone from './PlacementBannerZone';
 //   foreignKey: 'roleId',
 // });
 
-
-Placement.banners = Placement.belongsToMany(Banner, {
-  through: {
-    model: PlacementBannerZone,
-  },
+PlacementBannerZone.placement = PlacementBannerZone.belongsTo(Placement, {
   foreignKey: 'placementId',
 });
-
-Banner.placements = Banner.belongsToMany(Placement, {
-  through: {
-    model: PlacementBannerZone,
-  },
+PlacementBannerZone.banner = PlacementBannerZone.belongsTo(Banner, {
   foreignKey: 'bannerId',
 });
-
-Zone.placements = Zone.hasMany(PlacementBannerZone, {
+PlacementBannerZone.zone = PlacementBannerZone.belongsTo(Zone, {
   foreignKey: 'zoneId',
 });
-
-
+Placement.placementbannerzones = Placement.hasMany(PlacementBannerZone, {
+  foreignKey: 'placementId',
+});
+Banner.placementbannerzones = Banner.hasMany(PlacementBannerZone, {
+  foreignKey: 'bannerId',
+});
+Zone.placementbannerzones = Zone.hasMany(PlacementBannerZone, {
+  foreignKey: 'zoneId',
+});
 
 
 Site.zones = Site.hasMany(Zone, {
@@ -108,6 +99,7 @@ Zone.site = Zone.belongsTo(Site, {
   foreignKey: 'siteId',
 });
 
+
 Advertiser.campaigns = Advertiser.hasMany(Campaign, {
   foreignKey: 'advertiserId',
   as: 'campaigns',
@@ -116,6 +108,7 @@ Campaign.advertiser = Campaign.belongsTo(Advertiser, {
   foreignKey: 'advertiserId',
   as: 'advertiser',
 });
+
 
 Advertiser.banners = Advertiser.hasMany(Banner, {
   foreignKey: 'advertiserId',
@@ -143,6 +136,6 @@ export {
   Site,
   Zone,
   Channel,
-  PlacementBannerZone,
   Filter,
+  PlacementBannerZone,
 };

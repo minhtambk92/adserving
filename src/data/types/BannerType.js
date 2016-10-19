@@ -6,6 +6,7 @@ import { GraphQLObjectType as ObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Banner } from '../models';
 import bannerBelongsToAdvertiser from '../queries/bannerBelongsToAdvertiser';
+import bannerHasManyPlacementBannerZones from '../queries/bannerHasManyPlacementBannerZones';
 
 const BannerType = new ObjectType({
   name: 'Banner',
@@ -14,6 +15,7 @@ const BannerType = new ObjectType({
   }), {
     // Additional fields
     advertiser: bannerBelongsToAdvertiser(),
+    pbzBanner: bannerHasManyPlacementBannerZones(),
   }),
 });
 

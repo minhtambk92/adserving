@@ -10,20 +10,21 @@ const PlacementBannerZone = Model.define('PlacementBannerZone', {
   placementId: {
     type: DataType.UUID,
     primaryKey: true,
+    unique: 'pbz',
   },
   bannerId: {
     type: DataType.UUID,
     primaryKey: true,
+    unique: 'pbz',
   },
   zoneId: {
     type: DataType.UUID,
     primaryKey: true,
+    unique: 'pbz',
   },
 
 }, {
-
   // Additional options
-
 });
 
 export default PlacementBannerZone;

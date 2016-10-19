@@ -3,7 +3,6 @@ import user from './user';
 import runtime from './runtime';
 import intl from './intl';
 import content from './content';
-import users from './users';
 import advertisers from './advertisers';
 import campaigns from './campaigns';
 import placements from './placements';
@@ -21,6 +20,5 @@ export default combineReducers({
   campaigns,
   banners,
   sites,
-  users,
   zones,
 });

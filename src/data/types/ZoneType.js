@@ -2,12 +2,11 @@
  * Created by Manhhailua on 10/8/16.
  */
 
-import {
-  GraphQLObjectType as ObjectType,
-} from 'graphql';
+import { GraphQLObjectType as ObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Zone } from '../models';
 import zoneBelongsToSite from '../queries/zoneBelongsToSite';
+import zoneHasManyPlacementBannerZones from '../queries/zoneHasManyPlacementBannerZones';
 
 const ZoneType = new ObjectType({
   name: 'Zone',
@@ -15,6 +14,7 @@ const ZoneType = new ObjectType({
     // Additional options
   }), {
     site: zoneBelongsToSite(),
+    pbzZone: zoneHasManyPlacementBannerZones(),
   }),
 });
 
