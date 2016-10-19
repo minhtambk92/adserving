@@ -6,15 +6,6 @@ import {
   CREATE_USER,
   UPDATE_USER,
   DELETE_USER,
-  USER_REGISTER_ERROR,
-  USER_REGISTER_SUCCESS,
-  SUCCESS,
-  ERROR,
-  EMAIL_NOT_EXIST,
-  EMAIL_EXIST,
-  USER_LOGIN_SUCCESS,
-  USER_LOGIN_NOT_EXISTS,
-  USER_LOGIN_FAIL_PASSWORD,
 } from '../constants';
 
 export function getUser(id) {
@@ -68,22 +59,28 @@ export function getUsers() {
   };
 }
 
-export function createUser({ email, password }) {
+export function createUser({ email, password, emailConfirmed, status }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($user: UserInputWithoutId!) {
+      mutation ($user: UserInputTypeWithoutId!) {
         createdUser(user: $user) {
           id
           email
           emailConfirmed
           status
-          description
           createdAt
           updatedAt
         }
       }`;
 
-    const { data } = await graphqlRequest(mutation, { user: { email, password } });
+    const { data } = await graphqlRequest(mutation, {
+      user: {
+        email,
+        password,
+        emailConfirmed,
+        status,
+      },
+    });
 
     dispatch({
       type: CREATE_USER,

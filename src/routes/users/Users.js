@@ -54,19 +54,17 @@ class Users extends Component {
     /* eslint-enable no-undef */
   }
 
-  clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+  clearInput() { // eslint-disable-line no-unused-vars, class-methods-use-this
     document.getElementById('inputUserEmail').value = null;
     document.getElementById('inputUserPassword').value = null;
     document.getElementById('inputUserPasswordConfirmation').value = null;
-    document.getElementById('inputUserEmailConfirmed').value = null;
-    document.getElementById('inputUserStatus').value = null;
   }
 
-  createUser(event) { // eslint-disable-line no-unused-vars
+  createUser() {
     const email = document.getElementById('inputUserEmail').value;
     const password = document.getElementById('inputUserPassword').value;
     const passwordConfirmation = document.getElementById('inputUserPasswordConfirmation').value;
-    const description = document.getElementById('inputUserEmailConfirmed').value;
+    const emailConfirmed = document.getElementById('inputUserEmailConfirmed').value;
     const status = document.getElementById('inputUserStatus').value;
 
     if (
@@ -74,10 +72,10 @@ class Users extends Component {
       password &&
       passwordConfirmation &&
       password === passwordConfirmation &&
-      description &&
+      emailConfirmed &&
       status
     ) {
-      this.props.createUser({ email, password, passwordConfirmation, description, status });
+      this.props.createUser({ email, password, emailConfirmed, status });
       this.clearInput();
     }
   }
@@ -140,7 +138,7 @@ class Users extends Component {
                       <div className="col-sm-10">
                         <input
                           type="password" className="form-control" id="inputUserPassword"
-                          placeholder="123456789"
+                          placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                         />
                       </div>
                     </div>
@@ -153,7 +151,7 @@ class Users extends Component {
                         <input
                           type="password" className="form-control"
                           id="inputUserPasswordConfirmation"
-                          placeholder="123456789"
+                          placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                         />
                       </div>
                     </div>
