@@ -43,16 +43,24 @@ const users = {
       user: { type: UserInputType },
     },
     resolve: resolver(User, {
-      before(options, args) {
+      async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.user.id };
 
-        const salt = genSaltSync(15);
-        const newUser = args.user;
-        newUser.password = hashSync(newUser.password, salt);
+        const newUser = Object.assign({}, args.user);
+        delete newUser.id; // Prevent update id
 
-        User.upsert(newUser);
+        if (newUser.password) {
+          const salt = genSaltSync();
+          newUser.password = hashSync(newUser.password, salt);
+        }
+
+        await User.update(newUser, {
+          where: {
+            id: args.user.id,
+          },
+        });
 
         return opts;
       },
