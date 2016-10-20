@@ -49,24 +49,23 @@ class Advertiser extends Component {
   }
 
   componentDidMount() {
-    /* eslint-enable no-undef */
+    const dateStart = new Date();
+    dateStart.setDate(dateStart.getDate());
+    const dateEnd = new Date();
+    dateEnd.setDate(dateEnd.getDate() + 1);
+
+    /* eslint-disable no-undef */
     $('input[type="checkbox"].inputChooseCampaign').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
 
-    const dateStart = new Date();
-    dateStart.setDate(dateStart.getDate());
-
-    /* eslint-enable no-undef */
     $('#inputCampaignStartTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',
       startDate: dateStart,
     });
 
-    const dateEnd = new Date();
-    dateEnd.setDate(dateEnd.getDate() + 1);
     $('#inputCampaignEndTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',
@@ -428,7 +427,8 @@ class Advertiser extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.advertisers.current && this.props.advertisers.current.campaigns.map(campaign => {
+                      {this.props.advertisers.current
+                      && this.props.advertisers.current.campaigns.map(campaign => {
                         if (this.isIndexOf(campaign.name, campaign.startTime, campaign.endTime,
                             campaign.views, campaign.viewPerSession, campaign.timeResetViewCount)) {
                           return (

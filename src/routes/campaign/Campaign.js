@@ -58,11 +58,11 @@ class Campaign extends Component {
   }
 
   componentDidMount() {
-    /* eslint-enable no-undef */
     const dateStart = new Date();
     dateStart.setDate(dateStart.getDate());
     const dateEnd = new Date();
     dateEnd.setDate(dateEnd.getDate() + 1);
+    /* eslint-disable no-undef */
     $('#inputCampaignStartTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',
