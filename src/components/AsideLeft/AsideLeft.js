@@ -56,22 +56,22 @@ function AsideLeft() {
             </Link>
             <ul className="treeview-menu">
               <li className="active">
-                <Link to="/advertisers"><i className="fa fa-circle-o" /> Advertisers</Link>
+                <Link to="/resource/advertiser"><i className="fa fa-circle-o" /> Advertisers</Link>
               </li>
               <li>
-                <Link to="/campaigns"><i className="fa fa-circle-o" /> Campaigns</Link>
+                <Link to="/resource/campaign"><i className="fa fa-circle-o" /> Campaigns</Link>
               </li>
               <li>
-                <Link to="/banners"><i className="fa fa-circle-o" /> Banners</Link>
+                <Link to="/resource/banner"><i className="fa fa-circle-o" /> Banners</Link>
               </li>
               <li>
-                <Link to="/placements"><i className="fa fa-circle-o" /> Placements</Link>
+                <Link to="/resource/placement"><i className="fa fa-circle-o" /> Placements</Link>
               </li>
               <li>
-                <Link to="/sites"><i className="fa fa-circle-o" /> Sites</Link>
+                <Link to="/resource/site"><i className="fa fa-circle-o" /> Sites</Link>
               </li>
               <li>
-                <Link to="/zones"><i className="fa fa-circle-o" /> Zones</Link>
+                <Link to="/resource/zone"><i className="fa fa-circle-o" /> Zones</Link>
               </li>
             </ul>
           </li>
@@ -96,7 +96,7 @@ function AsideLeft() {
 
           <li className="header">SYSTEM</li>
           <li className="treeview">
-            <Link to="/users">
+            <Link to="/resource/user">
               <i className="fa fa-user" /> <span>Users</span>
               <span className="pull-right-container">
                 <i className="fa fa-angle-left pull-right" />
@@ -104,7 +104,7 @@ function AsideLeft() {
             </Link>
             <ul className="treeview-menu">
               <li>
-                <Link to="/users"><i className="fa fa-users" /> All Users</Link>
+                <Link to="/resource/user"><i className="fa fa-users" /> All Users</Link>
               </li>
               <li>
                 <Link to="/profile"><i className="fa fa-info-circle" /> Your Profile</Link>
