@@ -59,10 +59,13 @@ class Campaigns extends Component {
       todayHighlight: 'TRUE',
       startDate: dateStart,
     });
+
+    const dateEnd = new Date();
+    dateEnd.setDate(dateEnd.getDate() + 1);
     $('#inputCampaignEndTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',
-      startDate: dateStart,
+      startDate: dateEnd,
     });
   }
 

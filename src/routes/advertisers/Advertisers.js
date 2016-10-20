@@ -218,7 +218,7 @@ class Advertisers extends Component {
                               </td>
                               <td>{advertiser.contact}</td>
                               <td>{advertiser.email}</td>
-                              <td><Link to={`/advertiser/${advertiser.id}/campaign`}>Add New Campaign</Link></td>
+                              <td><Link to={`/advertiser/${advertiser.id}`}>Add New Campaign</Link></td>
                               <td><Link to={`/advertiser/${advertiser.id}`}>Campaigns</Link></td>
                             </tr>
                           );
