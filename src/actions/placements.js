@@ -12,13 +12,13 @@ export function getPlacement(id) {
       query {
         placements(where: {id: "${id}"}, limit: 1) {
           id
-          userId
           name
           size
           startTime
           endTime
           weight
           description
+          campaignId
           createdAt
           updatedAt
         }
@@ -41,13 +41,13 @@ export function getPlacements() {
       query {
         placements {
           id
-          userId
           name
           size
           startTime
           endTime
           weight
           description
+           campaignId
           createdAt
           updatedAt
           }
@@ -65,26 +65,26 @@ export function getPlacements() {
 }
 
 export function createPlacement({
-  userId,
   name,
   size,
   startTime,
   endTime,
   weight,
   description,
+  campaignId,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($placement: PlacementInputTypeWithoutId!) {
         createdPlacement(placement: $placement) {
           id
-          userId
           name
           size
           startTime
           endTime
           weight
           description
+          campaignId
           createdAt
           updatedAt
         }
@@ -92,14 +92,13 @@ export function createPlacement({
 
     const { data } = await graphqlRequest(mutation, {
       placement: {
-        userId,
         name,
         size,
         startTime,
         endTime,
         weight,
         description,
-
+        campaignId,
       },
     });
 
@@ -114,27 +113,27 @@ export function createPlacement({
 
 export function updatePlacement({
   id,
-  userId,
   name,
   size,
   startTime,
   endTime,
   weight,
   description,
+  campaignId,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($placement: PlacementInputType!) {
         updatedPlacement(placement: $placement) {
           id
-          userId
           name
           size
           startTime
           endTime
           weight
           description
-          createdAt
+           campaignId
+           createdAt
           updatedAt
         }
       }`;
@@ -142,13 +141,13 @@ export function updatePlacement({
     const { data } = await graphqlRequest(mutation, {
       placement: {
         id,
-        userId,
         name,
         size,
         startTime,
         endTime,
         weight,
         description,
+        campaignId,
       },
     });
 
@@ -166,14 +165,14 @@ export function deletePlacement(id) {
     const mutation = `
       mutation {
         deletedPlacement(id: "${id}") {
-           id
-          userId
+          id
           name
           size
           startTime
           endTime
           weight
           description
+           campaignId
           createdAt
           updatedAt
         }

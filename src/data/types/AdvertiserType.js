@@ -6,7 +6,6 @@ import { GraphQLObjectType as ObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Advertiser } from '../models';
 import advertiserHasManyCampaigns from '../queries/advertiserHasManyCampaigns';
-import advertiserHasManyBanners from '../queries/advertiserHasManyBanners';
 const AdvertiserType = new ObjectType({
   name: 'Advertiser',
   fields: () => Object.assign(attributeFields(Advertiser, {
@@ -14,7 +13,6 @@ const AdvertiserType = new ObjectType({
   }), {
     // Additional fields
     campaigns: advertiserHasManyCampaigns(),
-    banners: advertiserHasManyBanners(),
   }),
 });
 

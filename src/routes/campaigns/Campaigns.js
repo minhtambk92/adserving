@@ -8,6 +8,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getCampaigns, createCampaign } from '../../actions/campaigns';
@@ -25,6 +26,7 @@ class Campaigns extends Component {
     getCampaigns: PropTypes.func,
     createCampaign: PropTypes.func,
     getAdvertisers: PropTypes.func,
+    advertisers: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -68,6 +70,14 @@ class Campaigns extends Component {
       startDate: dateEnd,
     });
   }
+  componentDidUpdate() {
+    /* eslint-disable no-undef */
+    $('input[type="checkbox"].inputChooseCampaign').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue',
+    });
+    /* eslint-enable no-undef */
+  }
 
   searchFor(event) {
     event.persist();
@@ -100,7 +110,6 @@ class Campaigns extends Component {
 
   createCampaign() {
     const name = document.getElementById('inputCampaignName').value;
-    const userId = 'da31ecf7-83ce-4c64-932a-ec165d42e65d';
     const advertiserId = document.getElementById('inputAdvertiser').value;
     const startTime = new Date(moment(new Date(document.getElementById('inputCampaignStartTime').value)).format('YYYY-MM-DD 00:00:00'));
     const endTime = new Date(moment(new Date(document.getElementById('inputCampaignEndTime').value)).format('YYYY-MM-DD 00:00:00'));
@@ -109,11 +118,11 @@ class Campaigns extends Component {
     const timeResetViewCount = document.getElementById('inputCampaignTimeResetViewCount').value;
     const weight = document.getElementById('inputCampaignWeight').value;
     const description = document.getElementById('inputCampaignDescription').value;
-    if (userId && name && advertiserId && startTime && endTime && views && viewPerSession && timeResetViewCount && weight && description) {
+    if (name && advertiserId && startTime && endTime && views && viewPerSession
+      && timeResetViewCount && weight && description) {
       if (moment(startTime).format('x') < moment(endTime).format('x')) {
         this.props.createCampaign({
           advertiserId,
-          userId,
           name,
           startTime,
           endTime,
@@ -165,39 +174,33 @@ class Campaigns extends Component {
                       </div>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="inputAdvertiser"
-                             className="col-sm-2 control-label">Advertiser</label>
+                      <label htmlFor="inputAdvertiser" className="col-sm-2 control-label">Advertiser</label>
                       <div className="col-sm-10">
                         <select id="inputAdvertiser" className="form-control">
-                          {this.props.advertisers.latest && this.props.advertisers.latest.map(advertiser => (
-                            <option key={advertiser.id} value={advertiser.id}
-                            >{advertiser.name} </option>
+                          {this.props.advertisers.latest
+                          && this.props.advertisers.latest.map(advertiser => (
+                            <option value={advertiser.id}>{advertiser.name}</option>
                           ))}
                         </select>
                       </div>
                     </div>
                     <div className="form-group has-feedback">
-                      <label htmlFor="inputCampaignStartTime" className="col-sm-2 control-label">
-                        Start Time:</label>
+                      <label htmlFor="inputCampaignStartTime" className="col-sm-2 control-label">Start Time:</label>
                       <div className=" col-sm-10 date">
                         <span className="fa fa-calendar form-control-feedback" />
-                        <input type="text" className="form-control pull-right"
-                               id="inputCampaignStartTime" />
+                        <input type="text" className="form-control pull-right" id="inputCampaignStartTime" />
                       </div>
                     </div>
                     <div className="form-group has-feedback">
-                      <label htmlFor="inputCampaignEndTime" className="col-sm-2 control-label">
-                        End Time:</label>
+                      <label htmlFor="inputCampaignEndTime" className="col-sm-2 control-label">End Time:</label>
                       <div className=" col-sm-10 date">
                         <span className="fa fa-calendar form-control-feedback" />
-                        <input type="text" className="form-control pull-right"
-                               id="inputCampaignEndTime" />
+                        <input type="text" className="form-control pull-right" id="inputCampaignEndTime" />
                       </div>
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="inputCampaignViews" className="col-sm-2 control-label">Total
-                        Views</label>
+                      <label htmlFor="inputCampaignViews" className="col-sm-2 control-label">Total Views</label>
                       <div className="col-sm-10">
                         <input
                           type="number" className="form-control" id="inputCampaignViews"
@@ -206,8 +209,7 @@ class Campaigns extends Component {
                       </div>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="inputCampaignViewPerSession"
-                             className="col-sm-2 control-label">Views/Session</label>
+                      <label htmlFor="inputCampaignViewPerSession" className="col-sm-2 control-label">Views/Session</label>
                       <div className="col-sm-10">
                         <input
                           type="number" className="form-control" id="inputCampaignViewPerSession"
@@ -216,8 +218,7 @@ class Campaigns extends Component {
                       </div>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="inputCampaignTimeResetViewCount"
-                             className="col-sm-2 control-label">Time reset view(h)</label>
+                      <label htmlFor="inputCampaignTimeResetViewCount" className="col-sm-2 control-label">Time reset view(h)</label>
                       <div className="col-sm-10">
                         <input
                           type="number" className="form-control"
@@ -310,7 +311,9 @@ class Campaigns extends Component {
                     </thead>
                     <tbody>
                       { this.props.campaigns.latest && this.props.campaigns.latest.map(campaign => {
-                        if (this.isIndexOf(campaign.name, campaign.startTime, campaign.endTime, campaign.views, campaign.viewPerSession, campaign.timeResetViewCount)) {
+                        if (this.isIndexOf(campaign.name, campaign.startTime,
+                            campaign.endTime, campaign.views, campaign.viewPerSession,
+                            campaign.timeResetViewCount)) {
                           return (
                             <tr key={campaign.id}>
                               <th><input type="checkbox" className="inputChooseCampaign" /></th>
@@ -321,6 +324,8 @@ class Campaigns extends Component {
                               <td>{campaign.views}</td>
                               <td>{campaign.viewPerSession}</td>
                               <td>{campaign.timeResetViewCount}</td>
+                              <th><Link to={`/campaign/${campaign.id}`}>Add New Placements</Link>
+                              </th>
                             </tr>
                           );
                         }
@@ -374,5 +379,3 @@ const mapDispatch = {
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Campaigns));
-
-

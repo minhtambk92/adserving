@@ -3,17 +3,17 @@ import {
   CREATE_CAMPAIGN,
   GET_CAMPAIGN,
   UPDATE_CAMPAIGN,
-  DELETE_CAMPAIGN
+  DELETE_CAMPAIGN,
+  UPDATE_CAMPAIGN_INCLUDE_PLACEMENT
 } from '../constants/';
 
 export function getCampaign(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        campaigns(where: {id: "${id}"}, limit: 1) {
+        campaigns(where: {id: "${id}"}) {
          id
           advertiserId
-          userId
           name
           startTime
           endTime
@@ -22,6 +22,15 @@ export function getCampaign(id) {
           timeResetViewCount
           weight
           description
+          placements {
+            id
+            name
+            size
+            startTime
+            endTime
+            weight
+            description
+          }
           createdAt
           updatedAt
         }
@@ -45,8 +54,7 @@ export function getCampaigns() {
         campaigns {
           id
           advertiserId
-          userId
-          name
+           name
           startTime
           endTime
           views
@@ -72,7 +80,6 @@ export function getCampaigns() {
 
 export function createCampaign({
   advertiserId,
-  userId,
   name,
   startTime,
   endTime,
@@ -88,7 +95,6 @@ export function createCampaign({
         createdCampaign(campaign: $campaign) {
           id
           advertiserId
-          userId
           name
           startTime
           endTime
@@ -105,7 +111,6 @@ export function createCampaign({
     const { data } = await graphqlRequest(mutation, {
       campaign: {
         advertiserId,
-        userId,
         name,
         startTime,
         endTime,
@@ -131,7 +136,6 @@ export function createCampaign({
 export function updateCampaign({
   id,
   advertiserId,
-  userId,
   name,
   startTime,
   endTime,
@@ -147,7 +151,6 @@ export function updateCampaign({
         updatedCampaign(campaign: $campaign) {
           id
           advertiserId
-          userId
           name
           startTime
           endTime
@@ -156,7 +159,7 @@ export function updateCampaign({
           timeResetViewCount
           weight
           description
-           createdAt
+          createdAt
           updatedAt
         }
       }`;
@@ -165,7 +168,6 @@ export function updateCampaign({
       campaign: {
         id,
         advertiserId,
-        userId,
         name,
         startTime,
         endTime,
@@ -186,6 +188,71 @@ export function updateCampaign({
   };
 }
 
+export function updateCampaignIncludePlacement({
+  id,
+  advertiserId,
+  name,
+  startTime,
+  endTime,
+  views,
+  viewPerSession,
+  timeResetViewCount,
+  weight,
+  description,
+}) {
+  return async(dispatch, getState, { graphqlRequest }) => {
+    const mutation = `
+      mutation ($campaign: CampaignInputType!) {
+        updatedCampaign(campaign: $campaign) {
+          id
+          advertiserId
+          name
+          startTime
+          endTime
+          views
+          viewPerSession
+          timeResetViewCount
+          weight
+          description
+           placements {
+            id
+            name
+            size
+            startTime
+            endTime
+            weight
+            description
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+
+    const { data } = await graphqlRequest(mutation, {
+      campaign: {
+        id,
+        advertiserId,
+        name,
+        startTime,
+        endTime,
+        views,
+        viewPerSession,
+        timeResetViewCount,
+        weight,
+        description,
+      },
+    });
+
+    dispatch({
+      type: UPDATE_CAMPAIGN_INCLUDE_PLACEMENT,
+      payload: {
+        campaign: data.updatedCampaign,
+      },
+    });
+  };
+}
+
+
 export function deleteCampaign(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -193,7 +260,6 @@ export function deleteCampaign(id) {
         deletedCampaign(id: "${id}") {
            id
           advertiserId
-          userId
           name
           startTime
           endTime

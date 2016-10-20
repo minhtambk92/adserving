@@ -7,7 +7,6 @@ const CampaignInputTypeWithoutId = new InputObjectType({
   fields: attributeFields(Campaign, {
     only: [
       'advertiserId',
-      'userId',
       'name',
       'startTime',
       'endTime',
