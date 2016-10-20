@@ -41,10 +41,6 @@ class Sites extends Component {
 
   componentDidMount() {
     /* eslint-disable no-undef */
-    // $('.select2').select2();
-    // $('#example1').DataTable(); // eslint-disable-line new-cap
-
-    // iCheck for checkbox and radio inputs
     $('input[type="checkbox"].inputChooseSite').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',

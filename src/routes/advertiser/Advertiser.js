@@ -8,11 +8,11 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getAdvertiser, updateAdvertiser, deleteAdvertiser } from '../../actions/advertisers';
+import { getAdvertiser, updateAdvertiserIncludeCampaign, deleteAdvertiser } from '../../actions/advertisers';
 import { createCampaign } from '../../actions/campaigns';
-import moment from 'moment';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './Advertiser.css';
@@ -25,10 +25,10 @@ class Advertiser extends Component {
   static propTypes = {
     advertiserId: PropTypes.string.isRequired,
     advertisers: PropTypes.object,
-    campaigns: PropTypes.object,
+    updateAdvertiserIncludeCampaign: PropTypes.func,
     getAdvertiser: PropTypes.func,
+    campaigns: PropTypes.object,
     createCampaign: PropTypes.func,
-    updateAdvertiser: PropTypes.func,
     deleteAdvertiser: PropTypes.func,
   };
 
@@ -37,6 +37,10 @@ class Advertiser extends Component {
 
     this.state = {
       searchText: '',
+      name: '',
+      email: '',
+      contact: '',
+      description: '',
     };
   }
 
@@ -45,7 +49,7 @@ class Advertiser extends Component {
   }
 
   componentDidMount() {
-
+    /* eslint-enable no-undef */
     $('input[type="checkbox"].inputChooseCampaign').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
@@ -68,63 +72,14 @@ class Advertiser extends Component {
       todayHighlight: 'TRUE',
       startDate: dateEnd,
     });
-  }
-
-  clearInput(event) {
-    document.getElementById('inputCampaignName').value = null;
-    document.getElementById('inputCampaignStartTime').value = null;
-    document.getElementById('inputCampaignEndTime').value = null;
-    document.getElementById('inputCampaignViews').value = null;
-    document.getElementById('inputCampaignViewPerSession').value = null;
-    document.getElementById('inputCampaignTimeResetViewCount').value = null;
-    document.getElementById('inputCampaignWeight').value = null;
-    document.getElementById('inputCampaignDescription').value = null;
-  }
-
-  createCampaign() {
-    const name = document.getElementById('inputCampaignName').value;
-    const userId = 'da31ecf7-83ce-4c64-932a-ec165d42e65d';
-    const advertiserId = this.props.advertiserId;
-    const startTime = new Date(moment(new Date(document.getElementById('inputCampaignStartTime').value)).format('YYYY-MM-DD 00:00:00'));
-    const endTime = new Date(moment(new Date(document.getElementById('inputCampaignEndTime').value)).format('YYYY-MM-DD 00:00:00'));
-    const views = document.getElementById('inputCampaignViews').value;
-    const viewPerSession = document.getElementById('inputCampaignViewPerSession').value;
-    const timeResetViewCount = document.getElementById('inputCampaignTimeResetViewCount').value;
-    const weight = document.getElementById('inputCampaignWeight').value;
-    const description = document.getElementById('inputCampaignDescription').value;
-    if (userId && name && advertiserId && startTime && endTime && views && viewPerSession
-      && timeResetViewCount && weight && description) {
-      if (moment(startTime).format('x') < moment(endTime).format('x')) {
-        this.props.createCampaign({
-          advertiserId,
-          userId,
-          name,
-          startTime,
-          endTime,
-          views,
-          viewPerSession,
-          timeResetViewCount,
-          weight,
-          description,
-        }).then(() => {
-          // location.reload();
-          if (this.props.campaigns.new) {
-            this.props.getAdvertiser(this.props.advertiserId);
-          }
-          this.clearInput();
-        });
-      } else {
-        document.getElementById('inputCampaignEndTime').value = null;
-        document.getElementById('inputCampaignEndTime').focus();
-      }
-    }
+    /* eslint-enable no-undef */
   }
 
   componentWillReceiveProps(nextProps) {
     const {
-      contact,
-      name,
       email,
+      name,
+      contact,
       description,
     } = nextProps.advertisers && (nextProps.advertisers.current || {});
 
@@ -142,6 +97,50 @@ class Advertiser extends Component {
     }));
   }
 
+  createCampaign() {
+    const name = document.getElementById('inputCampaignName').value;
+    const advertiserId = this.props.advertiserId;
+    const startTime = new Date(moment(new Date(document.getElementById('inputCampaignStartTime').value)).format('YYYY-MM-DD 00:00:00'));
+    const endTime = new Date(moment(new Date(document.getElementById('inputCampaignEndTime').value)).format('YYYY-MM-DD 00:00:00'));
+    const views = document.getElementById('inputCampaignViews').value;
+    const viewPerSession = document.getElementById('inputCampaignViewPerSession').value;
+    const timeResetViewCount = document.getElementById('inputCampaignTimeResetViewCount').value;
+    const weight = document.getElementById('inputCampaignWeight').value;
+    const description = document.getElementById('inputCampaignDescription').value;
+    if (name && advertiserId && startTime && endTime && views && viewPerSession
+      && timeResetViewCount && weight && description) {
+      if (moment(startTime).format('x') < moment(endTime).format('x')) {
+        this.props.createCampaign({
+          advertiserId,
+          name,
+          startTime,
+          endTime,
+          views,
+          viewPerSession,
+          timeResetViewCount,
+          weight,
+          description,
+        }).then(() => {
+          this.props.getAdvertiser(this.props.advertiserId);
+          this.clearInput();
+        });
+      } else {
+        document.getElementById('inputCampaignEndTime').value = null;
+        document.getElementById('inputCampaignEndTime').focus();
+      }
+    }
+  }
+
+  clearInput() { // eslint-disable-line no-unused-vars, class-methods-use-this
+    document.getElementById('inputCampaignName').value = null;
+    document.getElementById('inputCampaignStartTime').value = null;
+    document.getElementById('inputCampaignEndTime').value = null;
+    document.getElementById('inputCampaignViews').value = null;
+    document.getElementById('inputCampaignViewPerSession').value = null;
+    document.getElementById('inputCampaignTimeResetViewCount').value = null;
+    document.getElementById('inputCampaignWeight').value = null;
+    document.getElementById('inputCampaignDescription').value = null;
+  }
   searchFor(event) {
     event.persist();
     this.setState((previousState) => ({
@@ -159,27 +158,26 @@ class Advertiser extends Component {
     return false;
   }
 
-  updateAdvertiser() {
+  updateAdvertiserIncludeCampaign() {
     const { email, name, contact, description } = this.state;
     const advertiser = { id: this.props.advertiserId };
-
-    if (contact && contact !== this.props.advertisers.current.contact) {
-      advertiser.contact = contact;
+    if (email && email !== this.props.advertisers.current.email) {
+      advertiser.email = email;
     }
 
     if (name && name !== this.props.advertisers.current.name) {
       advertiser.name = name;
     }
 
-    if (email && email !== this.props.advertisers.current.email) {
-      advertiser.email = email;
+    if (contact && contact !== this.props.advertisers.current.contact) {
+      advertiser.contact = contact;
     }
 
     if (description && description !== this.props.advertisers.current.description) {
       advertiser.description = description;
     }
 
-    this.props.updateAdvertiser(advertiser);
+    this.props.updateAdvertiserIncludeCampaign(advertiser);
   }
 
   deleteAdvertiser() {
@@ -215,8 +213,7 @@ class Advertiser extends Component {
                   <form className="form-horizontal">
                     <div className="box-body">
                       <div className="form-group">
-                        <label htmlFor="inputAdvertiserName"
-                               className="col-sm-2 control-label">Name</label>
+                        <label htmlFor="inputAdvertiserName" className="col-sm-2 control-label">Name</label>
                         <div className="col-sm-10">
                           <input
                             type="text" className="form-control" id="inputAdvertiserName"
@@ -228,7 +225,7 @@ class Advertiser extends Component {
                       <div className="form-group">
                         <label
                           htmlFor="inputAdvertiserContact" className="col-sm-2 control-label"
-                        >Advertiser contact</label>
+                        >Contact</label>
                         <div className="col-sm-10">
                           <input
                             type="text" className="form-control" id="inputAdvertiserContact"
@@ -256,11 +253,7 @@ class Advertiser extends Component {
                           className="col-sm-2 control-label"
                         >Description</label>
                         <div className="col-sm-10">
-                        <textarea
-                          className="form-control" id="inputAdvertiserDescription"
-                          rows="5" placeholder="More info..."
-                          onChange={event => this.onInputChange(event, 'description')}
-                        />
+                          <textarea className="form-control" id="inputAdvertiserDescription" rows="5" placeholder="More info..." onChange={event => this.onInputChange(event, 'description')} />
                         </div>
                       </div>
                     </div>
@@ -278,7 +271,7 @@ class Advertiser extends Component {
                       ><i className="fa fa-trash-o" /> Delete</Link>
                       <a
                         className={'btn btn-app pull-right '.concat(s.btn)}
-                        onClick={event => this.updateAdvertiser(event)}
+                        onClick={event => this.updateAdvertiserIncludeCampaign(event)}
                       ><i className="fa fa-floppy-o" /> Save</a>
                       {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                     </div>
@@ -313,27 +306,22 @@ class Advertiser extends Component {
                         </div>
                       </div>
                       <div className="form-group has-feedback">
-                        <label htmlFor="inputCampaignStartTime" className="col-sm-3 control-label">
-                          Start Time:</label>
+                        <label htmlFor="inputCampaignStartTime" className="col-sm-3 control-label">Start Time:</label>
                         <div className=" col-sm-9 date">
                           <span className="fa fa-calendar form-control-feedback" />
-                          <input type="text" className="form-control pull-right"
-                                 id="inputCampaignStartTime" />
+                          <input type="text" className="form-control pull-right" id="inputCampaignStartTime" />
                         </div>
                       </div>
                       <div className="form-group has-feedback">
-                        <label htmlFor="inputCampaignEndTime" className="col-sm-3 control-label">
-                          End Time:</label>
+                        <label htmlFor="inputCampaignEndTime" className="col-sm-3 control-label">End Time:</label>
                         <div className=" col-sm-9 date">
                           <span className="fa fa-calendar form-control-feedback" />
-                          <input type="text" className="form-control pull-right"
-                                 id="inputCampaignEndTime" />
+                          <input type="text" className="form-control pull-right" id="inputCampaignEndTime" />
                         </div>
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="inputCampaignViews" className="col-sm-3 control-label">Total
-                          Views</label>
+                        <label htmlFor="inputCampaignViews" className="col-sm-3 control-label">Total Views</label>
                         <div className="col-sm-9">
                           <input
                             type="number" className="form-control" id="inputCampaignViews"
@@ -342,8 +330,7 @@ class Advertiser extends Component {
                         </div>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="inputCampaignViewPerSession"
-                               className="col-sm-3 control-label">Views/Session</label>
+                        <label htmlFor="inputCampaignViewPerSession" className="col-sm-3 control-label">Views/Session</label>
                         <div className="col-sm-9">
                           <input
                             type="number" className="form-control" id="inputCampaignViewPerSession"
@@ -352,8 +339,7 @@ class Advertiser extends Component {
                         </div>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="inputCampaignTimeResetViewCount"
-                               className="col-sm-3 control-label">Time reset view(h)</label>
+                        <label htmlFor="inputCampaignTimeResetViewCount" className="col-sm-3 control-label">Time reset view(h)</label>
                         <div className="col-sm-9">
                           <input
                             type="number" className="form-control"
@@ -381,10 +367,7 @@ class Advertiser extends Component {
                           className="col-sm-3 control-label"
                         >Description</label>
                         <div className="col-sm-9">
-                        <textarea
-                          className="form-control" id="inputCampaignDescription"
-                          rows="5" placeholder="More info..."
-                        />
+                          <textarea className="form-control" id="inputCampaignDescription" rows="5" placeholder="More info..." />
                         </div>
                       </div>
                     </div>
@@ -499,7 +482,7 @@ const mapState = (state) => ({
 
 const mapDispatch = {
   getAdvertiser,
-  updateAdvertiser,
+  updateAdvertiserIncludeCampaign,
   deleteAdvertiser,
   createCampaign,
 };

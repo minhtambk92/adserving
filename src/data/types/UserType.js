@@ -15,7 +15,7 @@ const UserType = new ObjectType({
   name: 'UserType',
   fields: Object.assign(attributeFields(User, {
     // Additional options
-    exclude: ['password'],
+    // exclude: ['password'],
   }), {
     // Additional fields
   }),

@@ -186,43 +186,30 @@ Zone.placementBannerZones = Zone.hasMany(PlacementBannerZone, {
 });
 
 Site.zones = Site.hasMany(Zone, {
-  foreignKey: {
-    name: 'siteId',
-    allowNull: false,
-  },
+  foreignKey: 'siteId',
 });
 
 Zone.site = Zone.belongsTo(Site, {
-  foreignKey: {
-    name: 'siteId',
-    allowNull: false,
-  },
+  foreignKey: 'siteId',
 });
 
 Advertiser.campaigns = Advertiser.hasMany(Campaign, {
-  foreignKey: {
-    name: 'advertiserId',
-    allowNull: false,
-  },
-  as: 'campaigns',
+  foreignKey: 'advertiserId',
+
 });
 
 Campaign.advertiser = Campaign.belongsTo(Advertiser, {
-  foreignKey: {
-    name: 'advertiserId',
-    allowNull: false,
-  },
-  as: 'advertiser',
+  foreignKey: 'advertiserId',
 });
 
-Advertiser.banners = Advertiser.hasMany(Banner, {
-  foreignKey: 'advertiserId',
-  as: 'banners',
+Campaign.placements = Campaign.hasMany(Placement, {
+  foreignKey: 'campaignId',
+  as: 'placements',
 });
 
-Banner.advertiser = Banner.belongsTo(Advertiser, {
-  foreignKey: 'advertiserId',
-  as: 'advertiser',
+Placement.campaign = Placement.belongsTo(Campaign, {
+  foreignKey: 'campaignId',
+  as: 'campaign',
 });
 
 function sync(...args) {

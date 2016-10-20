@@ -49,6 +49,14 @@ class Advertisers extends Component {
     });
     /* eslint-enable no-undef */
   }
+  componentDidUpdate() {
+    /* eslint-disable no-undef */
+    $('input[type="checkbox"].inputChooseAdvertiser').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue',
+    });
+    /* eslint-enable no-undef */
+  }
 
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     document.getElementById('inputAdvertiserContact').value = null;
@@ -65,7 +73,7 @@ class Advertisers extends Component {
     }));
   }
 
-  createAdvertiser(event) {
+  createAdvertiser(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const contact = document.getElementById('inputAdvertiserContact').value;
     const name = document.getElementById('inputAdvertiserName').value;
     const email = document.getElementById('inputAdvertiserEmail').value;
@@ -204,13 +212,13 @@ class Advertisers extends Component {
                         <th>Name</th>
                         <th>Contact</th>
                         <th>Email</th>
-                        <th></th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
-                      { this.props.advertisers.latest && this.props.advertisers.latest.map(advertiser => {
-                        if (this.isIndexOf(advertiser.email, advertiser.contact, advertiser.name, advertiser.description)) {
+                      { this.props.advertisers.latest &&
+                      this.props.advertisers.latest.map(advertiser => {
+                        if (this.isIndexOf(advertiser.email, advertiser.contact,
+                            advertiser.name, advertiser.description)) {
                           return (
                             <tr key={advertiser.id}>
                               <th><input type="checkbox" className="inputChooseAdvertiser" /></th>
@@ -232,8 +240,6 @@ class Advertisers extends Component {
                         <th>Name</th>
                         <th>Contact</th>
                         <th>Email</th>
-                        <th></th>
-                        <th></th>
                       </tr>
                     </tfoot>
                   </table>

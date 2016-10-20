@@ -7,13 +7,13 @@ const PlacementInputType = new InputObjectType({
   fields: attributeFields(Placement, {
     only: [
       'id',
-      'userId',
       'name',
       'size',
       'startTime',
       'endTime',
       'weight',
       'description',
+      'campaignId',
     ],
   }, {
     // Additional fields

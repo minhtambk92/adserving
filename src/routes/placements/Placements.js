@@ -8,6 +8,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getPlacements, createPlacement } from '../../actions/placements';
@@ -155,27 +156,22 @@ class Placements extends Component {
                       </div>
                     </div>
                     <div className="form-group has-feedback">
-                      <label htmlFor="inputPlacementStartTime" className="col-sm-2 control-label">
-                        Start Time:</label>
+                      <label htmlFor="inputPlacementStartTime" className="col-sm-2 control-label">Start Time:</label>
                       <div className=" col-sm-10 date">
                         <span className="fa fa-calendar form-control-feedback" />
-                        <input type="text" className="form-control pull-right"
-                               id="inputPlacementStartTime" />
+                        <input type="text" className="form-control pull-right" id="inputPlacementStartTime" />
                       </div>
                     </div>
                     <div className="form-group has-feedback">
-                      <label htmlFor="inputPlacementEndTime" className="col-sm-2 control-label">
-                        End Time:</label>
+                      <label htmlFor="inputPlacementEndTime" className="col-sm-2 control-label">End Time:</label>
                       <div className=" col-sm-10 date">
                         <span className="fa fa-calendar form-control-feedback" />
-                        <input type="text" className="form-control pull-right"
-                               id="inputPlacementEndTime" />
+                        <input type="text" className="form-control pull-right" id="inputPlacementEndTime" />
                       </div>
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="inputPlacementSize"
-                             className="col-sm-2 control-label">Size</label>
+                      <label htmlFor="inputPlacementSize" className="col-sm-2 control-label">Size</label>
                       <div className="col-sm-10">
                         <input
                           type="text" className="form-control"
@@ -267,8 +263,11 @@ class Placements extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      { this.props.placements.latest && this.props.placements.latest.map(placement => {
-                        if (this.isIndexOf(placement.name, placement.startTime, placement.endTime, placement.size, placement.description, placement.weight)) {
+                      { this.props.placements.latest &&
+                      this.props.placements.latest.map(placement => {
+                        if (this.isIndexOf(placement.name, placement.startTime,
+                            placement.endTime, placement.size,
+                            placement.description, placement.weight)) {
                           return (
                             <tr key={placement.id}>
                               <th><input type="checkbox" className="inputChoosePlacement" /></th>
@@ -330,5 +329,3 @@ const mapDispatch = {
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placements));
-
-

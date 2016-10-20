@@ -14,7 +14,7 @@ import banners from './banners';
 const mutations = new ObjectType({
   name: 'Mutation',
   fields: {
-    ...users,
+    // ...users,
     ...sites,
     ...advertisers,
     ...campaigns,

@@ -6,13 +6,13 @@ const PlacementInputTypeWithoutId = new InputObjectType({
   name: 'PlacementInputTypeWithoutId',
   fields: attributeFields(Placement, {
     only: [
-      'userId',
       'name',
       'size',
       'startTime',
       'endTime',
       'weight',
       'description',
+      'campaignId',
     ],
   }),
 });

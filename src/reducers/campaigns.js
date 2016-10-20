@@ -3,7 +3,8 @@ import {
   GET_CAMPAIGNS,
   CREATE_CAMPAIGN,
   UPDATE_CAMPAIGN,
-  DELETE_CAMPAIGN
+  DELETE_CAMPAIGN,
+  UPDATE_CAMPAIGN_INCLUDE_PLACEMENT,
 } from '../constants';
 
 export default function campaigns(state = {}, action) {
@@ -26,17 +27,16 @@ export default function campaigns(state = {}, action) {
 
     case CREATE_CAMPAIGN:
       {
-        // state.latest.unshift(action.payload.campaign);
-        if (action.payload.status === 'createInAdvertiser') {
+        if (state.latest) {
+          state.latest.unshift(action.payload.campaign);
+          return {
+            ...state,
+          };
+        } else if (!state.latest) {
           return {
             ...state,
             new: action.payload.campaign,
           };
-        } else {
-          state.latest.unshift(action.payload.campaign);
-          return {
-            ...state,
-          }
         }
       }
 
@@ -48,6 +48,13 @@ export default function campaigns(state = {}, action) {
         };
       }
 
+    case UPDATE_CAMPAIGN_INCLUDE_PLACEMENT:
+      {
+        return {
+          ...state,
+          current: action.payload.campaign,
+        };
+      }
     case DELETE_CAMPAIGN:
       {
         return {
