@@ -16,13 +16,27 @@ const Resource = Model.define('Resource', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
+  uniqueName: {
+    type: DataType.STRING,
+    unique: true,
+    allowNull: false,
+  },
+  modelName: {
+    type: DataType.STRING,
+    unique: true,
+    allowNull: false,
+  },
   name: {
     type: DataType.STRING,
     allowNull: false,
   },
   hasMeta: {
     type: DataType.BOOLEAN,
+    defaultValue: true,
     allowNull: false,
+  },
+  description: {
+    type: DataType.TEXT,
   },
   status: {
     type: DataType.STRING,
