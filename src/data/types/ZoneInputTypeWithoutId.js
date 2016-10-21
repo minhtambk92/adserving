@@ -19,7 +19,6 @@ const ZoneInputTypeWithoutId = new InputObjectType({
       'html',
       'css',
       'slot',
-      'status',
     ],
   }),
 });

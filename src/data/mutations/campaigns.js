@@ -35,7 +35,15 @@ const campaigns = {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.campaign.id };
-        await Campaign.upsert(args.campaign);
+        const newCampaign = Object.assign({}, args.campaign);
+        delete newCampaign.id; // Prevent update id
+
+        await Campaign.update(newCampaign, {
+          where: {
+            id: args.campaign.id,
+          },
+        });
+
         return opts;
       },
     }),

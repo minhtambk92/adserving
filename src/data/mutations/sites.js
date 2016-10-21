@@ -39,7 +39,10 @@ const sites = {
         opts.where = options.where || {};
         opts.where.id = { $eq: args.site.id };
 
-        await Site.update(args.site, {
+        const newSite = Object.assign({}, args.site);
+        delete newSite.id; // Prevent update id
+
+        await Site.update(newSite, {
           where: {
             id: args.site.id,
           },

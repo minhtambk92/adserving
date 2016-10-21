@@ -4,7 +4,8 @@ import {
   GET_CAMPAIGN,
   UPDATE_CAMPAIGN,
   DELETE_CAMPAIGN,
-  UPDATE_CAMPAIGN_INCLUDE_PLACEMENT
+  UPDATE_CAMPAIGN_INCLUDE_PLACEMENT,
+  CREATE_CAMPAIGN_INCLUDE_ADVERTISER,
 } from '../constants/';
 
 export function getCampaign(id) {
@@ -127,7 +128,59 @@ export function createCampaign({
       type: CREATE_CAMPAIGN,
       payload: {
         campaign: data.createdCampaign,
-        status: 'createInAdvertiser',
+      },
+    });
+  };
+}
+export function createCampaignIncludeAdvertiser({
+  advertiserId,
+  name,
+  startTime,
+  endTime,
+  views,
+  viewPerSession,
+  timeResetViewCount,
+  weight,
+  description,
+}) {
+  return async(dispatch, getState, { graphqlRequest }) => {
+    const mutation = `
+      mutation ($campaign: CampaignInputTypeWithoutId!) {
+        createdCampaign(campaign: $campaign) {
+          id
+          advertiserId
+          name
+          startTime
+          endTime
+          views
+          viewPerSession
+          timeResetViewCount
+          weight
+          description
+          createdAt
+          updatedAt
+        }
+      }`;
+
+    const { data } = await graphqlRequest(mutation, {
+      campaign: {
+        advertiserId,
+        name,
+        startTime,
+        endTime,
+        views,
+        viewPerSession,
+        timeResetViewCount,
+        weight,
+        description,
+
+      },
+    });
+
+    dispatch({
+      type: CREATE_CAMPAIGN_INCLUDE_ADVERTISER,
+      payload: {
+        campaign: data.createdCampaign,
       },
     });
   };

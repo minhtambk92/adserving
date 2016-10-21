@@ -10,6 +10,7 @@ import {
   CREATE_ZONE,
   UPDATE_ZONE,
   DELETE_ZONE,
+  CREATE_ZONE_INCLUDE_SITE,
 } from '../constants';
 
 export function getZone(id) {
@@ -108,6 +109,46 @@ export function createZone({ siteId, name, description, type, html, css, slot })
     });
   };
 }
+
+export function createZoneIncludeSite({ siteId, name, description, type, html, css, slot }) {
+  return async(dispatch, getState, { graphqlRequest }) => {
+    const mutation = `
+      mutation ($zone: ZoneInputWithoutId!) {
+        createdZone(zone: $zone) {
+          id
+          siteId
+          name
+          description
+          type
+          html
+          css
+          slot
+          createdAt
+          updatedAt
+        }
+      }`;
+
+    const { data } = await graphqlRequest(mutation, {
+      zone: {
+        siteId,
+        name,
+        description,
+        type,
+        html,
+        css,
+        slot,
+      },
+    });
+
+    dispatch({
+      type: CREATE_ZONE_INCLUDE_SITE,
+      payload: {
+        zone: data.createdZone,
+      },
+    });
+  };
+}
+
 
 export function updateZone({ id, siteId, name, description, type, html, css, slot }) {
   return async(dispatch, getState, { graphqlRequest }) => {

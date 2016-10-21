@@ -12,7 +12,6 @@ export function getBanner(id) {
       query {
         banners(where: {id: "${id}"}, limit: 1) {
           id
-          userId
           name
           html
           width
@@ -43,7 +42,6 @@ export function getBanners() {
       query {
         banners {
           id
-          userId
           name
           html
           width
@@ -69,7 +67,6 @@ export function getBanners() {
 }
 
 export function createBanner({
-  userId,
   name,
   html,
   width,
@@ -84,7 +81,6 @@ export function createBanner({
       mutation ($banner: BannerInputTypeWithoutId!) {
         createdBanner(banner: $banner) {
          id
-          userId
           name
           html
           width
@@ -100,7 +96,6 @@ export function createBanner({
 
     const { data } = await graphqlRequest(mutation, {
       banner: {
-        userId,
         name,
         html,
         width,
@@ -124,7 +119,6 @@ export function createBanner({
 
 export function updateBanner({
   id,
-  userId,
   name,
   html,
   width,
@@ -139,7 +133,6 @@ export function updateBanner({
       mutation ($banner: BannerInputType!) {
        updatedBanner(banner: $banner) {
           id
-          userId
           name
           html
           width
@@ -156,7 +149,6 @@ export function updateBanner({
     const { data } = await graphqlRequest(mutation, {
       banner: {
         id,
-        userId,
         name,
         html,
         width,
@@ -183,7 +175,6 @@ export function deleteBanner(id) {
       mutation {
         deletedBanner(id: "${id}") {
           id
-          userId
           name
           html
           width

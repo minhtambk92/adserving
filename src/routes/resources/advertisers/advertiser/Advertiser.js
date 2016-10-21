@@ -17,7 +17,7 @@ import {
   updateAdvertiserIncludeCampaign,
   deleteAdvertiser,
 } from '../../../../actions/advertisers';
-import { createCampaign } from '../../../../actions/campaigns';
+import { createCampaignIncludeAdvertiser } from '../../../../actions/campaigns';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './Advertiser.css';
@@ -32,7 +32,7 @@ class Advertiser extends Component {
     updateAdvertiserIncludeCampaign: PropTypes.func,
     getAdvertiser: PropTypes.func,
     campaigns: PropTypes.object,
-    createCampaign: PropTypes.func,
+    createCampaignIncludeAdvertiser: PropTypes.func,
     deleteAdvertiser: PropTypes.func,
   };
 
@@ -100,7 +100,7 @@ class Advertiser extends Component {
     }));
   }
 
-  createCampaign() {
+  createCampaignIncludeAdvertiser() {
     const name = document.getElementById('inputCampaignName').value;
     const advertiserId = this.props.advertiserId;
     const startTime = new Date(moment(new Date(document.getElementById('inputCampaignStartTime').value)).format('YYYY-MM-DD 00:00:00'));
@@ -113,7 +113,7 @@ class Advertiser extends Component {
     if (name && advertiserId && startTime && endTime && views && viewPerSession
       && timeResetViewCount && weight && description) {
       if (moment(startTime).format('x') < moment(endTime).format('x')) {
-        this.props.createCampaign({
+        this.props.createCampaignIncludeAdvertiser({
           advertiserId,
           name,
           startTime,
@@ -411,7 +411,7 @@ class Advertiser extends Component {
                       ><i className="fa fa-eraser" /> Clear</a>
                       <a
                         className="btn btn-app pull-right"
-                        onClick={event => this.createCampaign(event)}
+                        onClick={event => this.createCampaignIncludeAdvertiser(event)}
                       ><i className="fa fa-check" /> Confirm</a>
                       {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                     </div>
@@ -467,10 +467,11 @@ class Advertiser extends Component {
                           return (
                             <tr key={campaign.id}>
                               <th><input type="checkbox" className="inputChooseCampaign" /></th>
-                              <th><Link to={`/campaign/${campaign.id}`}>{campaign.name}</Link>
+                              <th><Link to={`/resource/campaign/${campaign.id}`}>{campaign.name}</Link>
                               </th>
                               <td>{moment(new Date(campaign.startTime)).format('L')}</td>
                               <td>{moment(new Date(campaign.endTime)).format('L')}</td>
+                              <td><Link to={`/resource/campaign/${campaign.id}`}>Add New Placement</Link></td>
                             </tr>
                           );
                         }
@@ -517,7 +518,7 @@ const mapDispatch = {
   getAdvertiser,
   updateAdvertiserIncludeCampaign,
   deleteAdvertiser,
-  createCampaign,
+  createCampaignIncludeAdvertiser,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Advertiser));

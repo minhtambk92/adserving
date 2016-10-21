@@ -43,17 +43,16 @@ class Campaigns extends Component {
   }
 
   componentDidMount() {
+    const dateEnd = new Date();
+    dateEnd.setDate(dateEnd.getDate() + 1);
+    const dateStart = new Date();
+    dateStart.setDate(dateStart.getDate());
     /* eslint-disable no-undef */
-    // $('.select2').select2();
-    // $('#example1').DataTable(); // eslint-disable-line new-cap
-
     // iCheck for checkbox and radio inputs
     $('input[type="checkbox"].inputChooseCampaign').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
-    const dateStart = new Date();
-    dateStart.setDate(dateStart.getDate());
 
     $('#inputCampaignStartTime').datepicker({
       autoclose: true,
@@ -61,8 +60,6 @@ class Campaigns extends Component {
       startDate: dateStart,
     });
 
-    const dateEnd = new Date();
-    dateEnd.setDate(dateEnd.getDate() + 1);
     $('#inputCampaignEndTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',
@@ -179,7 +176,7 @@ class Campaigns extends Component {
                         <select id="inputAdvertiser" className="form-control">
                           {this.props.advertisers.latest
                           && this.props.advertisers.latest.map(advertiser => (
-                            <option value={advertiser.id}>{advertiser.name}</option>
+                            <option key={advertiser.id} value={advertiser.id}>{advertiser.name}</option>
                           ))}
                         </select>
                       </div>

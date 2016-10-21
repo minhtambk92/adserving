@@ -35,7 +35,15 @@ const placements = {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.placement.id };
-        await Placement.upsert(args.placement);
+        const newPlacement = Object.assign({}, args.placement);
+        delete newPlacement.id; // Prevent update id
+
+        await Placement.update(newPlacement, {
+          where: {
+            id: args.placement.id,
+          },
+        });
+
         return opts;
       },
     }),

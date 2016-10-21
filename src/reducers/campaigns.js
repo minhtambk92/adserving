@@ -5,6 +5,7 @@ import {
   UPDATE_CAMPAIGN,
   DELETE_CAMPAIGN,
   UPDATE_CAMPAIGN_INCLUDE_PLACEMENT,
+  CREATE_CAMPAIGN_INCLUDE_ADVERTISER,
 } from '../constants';
 
 export default function campaigns(state = {}, action) {
@@ -27,19 +28,17 @@ export default function campaigns(state = {}, action) {
 
     case CREATE_CAMPAIGN:
       {
-        if (state.latest) {
-          state.latest.unshift(action.payload.campaign);
-          return {
-            ...state,
-          };
-        } else if (!state.latest) {
-          return {
-            ...state,
-            new: action.payload.campaign,
-          };
-        }
+        state.latest.unshift(action.payload.campaign);
+        return {
+          ...state,
+        };
       }
-
+    case CREATE_CAMPAIGN_INCLUDE_ADVERTISER: {
+      return {
+        ...state,
+        new: action.payload.campaign,
+      };
+    }
     case UPDATE_CAMPAIGN:
       {
         return {

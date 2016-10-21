@@ -8,6 +8,7 @@ import {
   CREATE_SITE,
   UPDATE_SITE,
   DELETE_SITE,
+  UPDATE_SITE_INCLUDE_ZONE,
 } from '../constants';
 
 export default function sites(state = {}, action) {
@@ -32,6 +33,12 @@ export default function sites(state = {}, action) {
     }
 
     case UPDATE_SITE: {
+      return {
+        ...state,
+        editing: action.payload.site,
+      };
+    }
+    case UPDATE_SITE_INCLUDE_ZONE: {
       return {
         ...state,
         editing: action.payload.site,

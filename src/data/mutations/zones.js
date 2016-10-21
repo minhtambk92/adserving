@@ -38,7 +38,15 @@ const zones = {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.zone.id };
-        await Zone.upsert(args.zone);
+        const newZone = Object.assign({}, args.zone);
+        delete newZone.id; // Prevent update id
+
+        await Zone.update(newZone, {
+          where: {
+            id: args.zone.id,
+          },
+        });
+
         return opts;
       },
     }),

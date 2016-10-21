@@ -18,7 +18,7 @@ import {
   deleteCampaign,
 } from '../../../../actions/campaigns';
 import { getAdvertisers } from '../../../../actions/advertisers';
-import { createPlacement } from '../../../../actions/placements';
+import { createPlacementIncludeCampaign } from '../../../../actions/placements';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './Campaign.css';
@@ -36,7 +36,7 @@ class Campaign extends Component {
     updateCampaignIncludePlacement: PropTypes.func,
     deleteCampaign: PropTypes.func,
     placements: PropTypes.object,
-    createPlacement: PropTypes.func,
+    createPlacementIncludeCampaign: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -142,7 +142,7 @@ class Campaign extends Component {
     }));
   }
 
-  createPlacement() {
+  createPlacementIncludeCampaign() {
     const name = document.getElementById('inputPlacementName').value;
     const startTime = new Date(moment(new Date(document.getElementById('inputPlacementStartTime').value)).format('YYYY-MM-DD 00:00:00'));
     const endTime = new Date(moment(new Date(document.getElementById('inputPlacementEndTime').value)).format('YYYY-MM-DD 00:00:00'));
@@ -152,7 +152,7 @@ class Campaign extends Component {
     const campaignId = this.props.campaignId;
     if (name && startTime && endTime && size && weight && description && campaignId) {
       if (endTime > startTime) {
-        this.props.createPlacement({
+        this.props.createPlacementIncludeCampaign({
           name,
           startTime,
           endTime,
@@ -527,7 +527,7 @@ class Campaign extends Component {
                       ><i className="fa fa-eraser" /> Clear</a>
                       <a
                         className={'btn btn-app pull-right '.concat(s.btn)}
-                        onClick={event => this.createPlacement(event)}
+                        onClick={event => this.createPlacementIncludeCampaign(event)}
                       ><i className="fa fa-check" /> Confirm</a>
                       {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                     </div>
@@ -647,7 +647,7 @@ const mapDispatch = {
   updateCampaignIncludePlacement,
   getAdvertisers,
   deleteCampaign,
-  createPlacement,
+  createPlacementIncludeCampaign,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Campaign));

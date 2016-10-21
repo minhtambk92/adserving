@@ -286,6 +286,7 @@ class Zones extends Component {
                           <td>{zone.type}</td>
                           <td>{zone.description}</td>
                           <td>{zone.slot}</td>
+                          <td><Link to={`/zone/${zone.id}`}>Add New Placements</Link></td>
                         </tr>
                       ))}
                     </tbody>

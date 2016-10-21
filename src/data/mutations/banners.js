@@ -35,7 +35,15 @@ const banners = {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.banner.id };
-        await Banner.upsert(args.banner);
+        const newBanner = Object.assign({}, args.banner);
+        delete newBanner.id; // Prevent update id
+
+        await Banner.update(newBanner, {
+          where: {
+            id: args.banner.id,
+          },
+        });
+
         return opts;
       },
     }),

@@ -240,6 +240,7 @@ class Sites extends Component {
                               <td>{site.domain}</td>
                               <td>{site.email}</td>
                               <td>{site.description}</td>
+                              <td><Link to={`/resource/site/${site.id}`}>Add New Zone</Link></td>
                             </tr>
                           );
                         }

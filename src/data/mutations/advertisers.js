@@ -35,7 +35,15 @@ const advertisers = {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.advertiser.id };
-        await Advertiser.upsert(args.advertiser);
+        const newAdvertiser = Object.assign({}, args.advertiser);
+        delete newAdvertiser.id; // Prevent update id
+
+        await Advertiser.update(newAdvertiser, {
+          where: {
+            id: args.advertiser.id,
+          },
+        });
+
         return opts;
       },
     }),
