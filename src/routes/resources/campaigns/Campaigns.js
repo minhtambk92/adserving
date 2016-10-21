@@ -257,10 +257,10 @@ class Campaigns extends Component {
                   <div className="box-footer">
                     {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                     <a
-                      className={'btn btn-app pull-right '.concat(s.btn)}
+                      className="btn btn-app pull-right"
                     ><i className="fa fa-eraser" /> Clear</a>
                     <a
-                      className={'btn btn-app pull-right '.concat(s.btn)}
+                      className="btn btn-app pull-right"
                       onClick={event => this.createCampaign(event)}
                     ><i className="fa fa-check" /> Confirm</a>
                     {/* eslint-enable jsx-a11y/no-static-element-interactions */}
