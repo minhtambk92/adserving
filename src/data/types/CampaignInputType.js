@@ -4,8 +4,10 @@ import { Campaign } from '../models';
 
 const CampaignInputType = new InputObjectType({
   name: 'CampaignInputType',
-  fields: attributeFields(Campaign, {
-    only: ['id',
+  fields: Object.assign(attributeFields(Campaign, {
+    // Additional options
+    only: [
+      'id',
       'advertiserId',
       'name',
       'startTime',
@@ -16,7 +18,7 @@ const CampaignInputType = new InputObjectType({
       'weight',
       'description',
     ],
-  }, {
+  }), {
     // Additional fields
   }),
 });

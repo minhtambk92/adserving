@@ -4,7 +4,8 @@ import { Placement } from '../models';
 
 const PlacementInputType = new InputObjectType({
   name: 'PlacementInputType',
-  fields: attributeFields(Placement, {
+  fields: Object.assign(attributeFields(Placement, {
+    // Additional options
     only: [
       'id',
       'name',
@@ -15,7 +16,7 @@ const PlacementInputType = new InputObjectType({
       'description',
       'campaignId',
     ],
-  }, {
+  }), {
     // Additional fields
   }),
 });

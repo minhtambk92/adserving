@@ -4,9 +4,10 @@ import { Advertiser } from '../models';
 
 const AdvertiserInputType = new InputObjectType({
   name: 'AdvertiserInputType',
-  fields: attributeFields(Advertiser, {
+  fields: Object.assign(attributeFields(Advertiser, {
+    // Additional options
     only: ['id', 'email', 'name', 'contact', 'description'],
-  }, {
+  }), {
     // Additional fields
   }),
 });
