@@ -27,6 +27,8 @@ export const CREATE_ZONE = 'CREATE_ZONE';
 export const UPDATE_ZONE = 'UPDATE_ZONE';
 export const DELETE_ZONE = 'DELETE_ZONE';
 export const CREATE_ZONE_INCLUDE_SITE = 'CREATE_ZONE_INCLUDE_SITE';
+export const GET_ZONES_FILTERS = 'GET_ZONES_FILTERS';
+export const SET_ZONES_FILTERS = 'SET_ZONES_FILTERS';
 
 export const GET_USER = 'GET_USER';
 export const GET_USERS = 'GET_USERS';

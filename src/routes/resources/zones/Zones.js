@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 // import { FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSites } from '../../../actions/sites';
-import { getZones, createZone } from '../../../actions/zones';
+import { getZonesFilters, getZones, createZone } from '../../../actions/zones';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
 import s from './Zones.css';
@@ -23,6 +23,7 @@ const pageSubTitle = 'Control panel';
 class Zones extends Component {
 
   static propTypes = {
+    getZonesFilters: PropTypes.func,
     sites: PropTypes.object,
     getSites: PropTypes.func,
     zones: PropTypes.object,
@@ -31,6 +32,7 @@ class Zones extends Component {
   };
 
   componentWillMount() {
+    this.props.getZonesFilters();
     this.props.getSites();
     this.props.getZones();
   }
@@ -96,8 +98,83 @@ class Zones extends Component {
 
           <div className="row">
             <section className="col-lg-12">
+              {/* BOX: FORM OF FILTER */}
+              <div className="box box-default">
+                <div className="box-header with-border">
+                  <h3 className="box-title">Zones in: </h3>
+                  <div className="box-tools pull-right">
+                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                      <i className="fa fa-minus" />
+                    </button>
+                  </div>
+                </div>
+                {/* /.box-header */}
+                {/* form start */}
+                <form className="form-horizontal">
+                  <div className="box-body">
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputZoneType"
+                        className="col-sm-2 control-label"
+                      >Website</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputZoneSite"
+                          className="form-control select2"
+                          style={{ width: '100%' }}
+                        >
+                          {this.props.sites.list && this.props.sites.list.map(site => (
+                            <option
+                              key={site.id} value={site.id}
+                            ><strong>{site.name}</strong> | {site.domain}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputZoneType"
+                        className="col-sm-2 control-label"
+                      >Type</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputZoneType"
+                          className="form-control"
+                        >
+                          <option>Type 1</option>
+                          <option>Type 2</option>
+                          <option>Type 3</option>
+                          <option>Type 4</option>
+                          <option>Type 5</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputZoneStatus"
+                        className="col-sm-2 control-label"
+                      >Status</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputZoneStatus" className="form-control"
+                        >
+                          <option>Active</option>
+                          <option>Inactive</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  {/* /.box-body */}
+                </form>
+              </div>
+              {/* /.col */}
+            </section>
+          </div>
+
+          <div className="row">
+            <section className="col-lg-12">
               {/* BOX: FORM OF CREATE A NEW ZONE */}
-              <div className="box box-primary collapsed-box">
+              <div className="box box-default collapsed-box">
                 <div className="box-header with-border">
                   <h3 className="box-title">Create a new zone</h3>
                   <div className="box-tools pull-right">
@@ -136,7 +213,7 @@ class Zones extends Component {
                           {this.props.sites.list && this.props.sites.list.map(site => (
                             <option
                               key={site.id} value={site.id}
-                            >{site.name} | {site.domain}</option>
+                            ><strong>{site.name}</strong> | {site.domain}</option>
                           ))}
                         </select>
                       </div>
@@ -270,7 +347,6 @@ class Zones extends Component {
                     <thead>
                       <tr>
                         <th><input type="checkbox" className="inputChooseZones" /></th>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Type</th>
                         <th>Description</th>
@@ -281,8 +357,11 @@ class Zones extends Component {
                       {this.props.zones.list && this.props.zones.list.map(zone => (
                         <tr key={zone.id}>
                           <td><input type="checkbox" className="inputChooseZone" /></td>
-                          <td>{zone.siteId}</td>
-                          <td><Link to={`/resource/zone/${zone.id}`}>{zone.name}</Link></td>
+                          <td>
+                            <Link to={`/resource/zone/${zone.id}`}>
+                              <strong>{zone.name}</strong>
+                            </Link>
+                          </td>
                           <td>{zone.type}</td>
                           <td>{zone.description}</td>
                           <td>{zone.slot}</td>
@@ -293,7 +372,6 @@ class Zones extends Component {
                     <tfoot>
                       <tr>
                         <th><input type="checkbox" className="inputChooseZones" /></th>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Type</th>
                         <th>Description</th>
@@ -331,6 +409,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = {
+  getZonesFilters,
   getSites,
   getZones,
   createZone,

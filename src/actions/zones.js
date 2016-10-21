@@ -11,7 +11,27 @@ import {
   UPDATE_ZONE,
   DELETE_ZONE,
   CREATE_ZONE_INCLUDE_SITE,
+  GET_ZONES_FILTERS,
+  SET_ZONES_FILTERS,
 } from '../constants';
+
+export function getZonesFilters() {
+  return async(dispatch) => {
+    dispatch({
+      type: GET_ZONES_FILTERS,
+      payload: {},
+    });
+  };
+}
+
+export function setZonesFilters({ filters }) {
+  return async(dispatch) => {
+    dispatch({
+      type: SET_ZONES_FILTERS,
+      payload: filters,
+    });
+  };
+}
 
 export function getZone(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
