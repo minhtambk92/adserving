@@ -11,10 +11,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getBanner, updateBanner, deleteBanner } from '../../../actions/banners';
-import  { getAdvertisers } from '../../../actions/advertisers';
-import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+import { getBanner, updateBanner, deleteBanner } from '../../../../actions/banners';
+import  { getAdvertisers } from '../../../../actions/advertisers';
+import Layout from '../../../../components/Layout';
+import Link from '../../../../components/Link';
 import s from './Banner.css';
 
 const pageTitle = 'Banner';

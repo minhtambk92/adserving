@@ -11,9 +11,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getPlacement, updatePlacement, deletePlacement } from '../../../actions/placements';
-import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+import { getPlacement, updatePlacement, deletePlacement } from '../../../../actions/placements';
+import Layout from '../../../../components/Layout';
+import Link from '../../../../components/Link';
 import s from './Placement.css';
 
 const pageTitle = 'Placement';

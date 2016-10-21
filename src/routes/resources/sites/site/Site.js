@@ -11,9 +11,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getSite, updateSite, deleteSite } from '../../../actions/sites';
-import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+import { getSite, updateSite, deleteSite } from '../../../../actions/sites';
+import Layout from '../../../../components/Layout';
+import Link from '../../../../components/Link';
 import s from './Site.css';
 
 const pageTitle = 'Site';

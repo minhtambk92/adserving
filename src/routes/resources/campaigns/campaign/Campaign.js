@@ -16,11 +16,11 @@ import {
   getCampaign,
   updateCampaignIncludePlacement,
   deleteCampaign,
-} from '../../../actions/campaigns';
-import { getAdvertisers } from '../../../actions/advertisers';
-import { createPlacement } from '../../../actions/placements';
-import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+} from '../../../../actions/campaigns';
+import { getAdvertisers } from '../../../../actions/advertisers';
+import { createPlacement } from '../../../../actions/placements';
+import Layout from '../../../../components/Layout';
+import Link from '../../../../components/Link';
 import s from './Campaign.css';
 
 const pageTitle = 'Campaign';

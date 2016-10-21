@@ -11,10 +11,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getSites } from '../../../actions/sites';
-import { getZone, updateZone, deleteZone } from '../../../actions/zones';
-import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+import { getSites } from '../../../../actions/sites';
+import { getZone, updateZone, deleteZone } from '../../../../actions/zones';
+import Layout from '../../../../components/Layout';
+import Link from '../../../../components/Link';
 import s from './Zone.css';
 
 const pageTitle = 'Zone';
