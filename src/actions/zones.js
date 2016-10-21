@@ -18,7 +18,6 @@ export function getZone(id) {
       query {
         zones(where: {id: "${id}"}, limit: 1) {
           id
-          userId
           siteId
           name
           description
@@ -48,7 +47,6 @@ export function getZones() {
       query {
         zones {
           id
-          userId
           siteId
           name
           description
@@ -78,7 +76,6 @@ export function createZone({ siteId, name, description, type, html, css, slot })
       mutation ($zone: ZoneInputWithoutId!) {
         createdZone(zone: $zone) {
           id
-          userId
           siteId
           name
           description
@@ -93,7 +90,6 @@ export function createZone({ siteId, name, description, type, html, css, slot })
 
     const { data } = await graphqlRequest(mutation, {
       zone: {
-        userId: '567daf97-d24d-4b7c-9b44-153534efc101',
         siteId,
         name,
         description,
@@ -113,13 +109,12 @@ export function createZone({ siteId, name, description, type, html, css, slot })
   };
 }
 
-export function updateZone({ id, userId, siteId, name, description, type, html, css, slot }) {
+export function updateZone({ id, siteId, name, description, type, html, css, slot }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($zone: ZoneInput!) {
         updatedZone(zone: $zone) {
           id
-          userId
           siteId
           name
           description
@@ -135,7 +130,6 @@ export function updateZone({ id, userId, siteId, name, description, type, html, 
     const { data } = await graphqlRequest(mutation, {
       zone: {
         id,
-        userId: userId || '567daf97-d24d-4b7c-9b44-153534efc101',
         siteId,
         name,
         description,
@@ -161,7 +155,6 @@ export function deleteZone(id) {
       mutation {
         deletedZone(id: "${id}") {
           id
-          userId
           siteId
           name
           description
