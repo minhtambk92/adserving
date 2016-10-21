@@ -9,15 +9,19 @@
 
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
+// import { defineMessages, FormattedRelative } from 'react-intl';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getCampaign, updateCampaignIncludePlacement, deleteCampaign } from '../../actions/campaigns';
-import { getAdvertisers } from '../../actions/advertisers';
-import { createPlacement } from '../../actions/placements';
-import Layout from '../../components/Layout';
-import Link from '../../components/Link';
+import {
+  getCampaign,
+  updateCampaignIncludePlacement,
+  deleteCampaign,
+} from '../../../../actions/campaigns';
+import { getAdvertisers } from '../../../../actions/advertisers';
+import { createPlacement } from '../../../../actions/placements';
+import Layout from '../../../../components/Layout';
+import Link from '../../../../components/Link';
 import s from './Campaign.css';
-// import { defineMessages, FormattedRelative } from 'react-intl';
 
 const pageTitle = 'Campaign';
 
@@ -58,11 +62,11 @@ class Campaign extends Component {
   }
 
   componentDidMount() {
+    /* eslint-disable no-undef */
     const dateStart = new Date();
     dateStart.setDate(dateStart.getDate());
     const dateEnd = new Date();
     dateEnd.setDate(dateEnd.getDate() + 1);
-    /* eslint-disable no-undef */
     $('#inputCampaignStartTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',
@@ -174,6 +178,7 @@ class Campaign extends Component {
     document.getElementById('inputPlacementWeight').value = null;
     document.getElementById('inputPlacementDescription').value = null;
   }
+
   isIndexOf(...args) {
     for (let i = 0; i < args.length; i += 1) {
       if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
@@ -292,9 +297,14 @@ class Campaign extends Component {
                         </div>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="inputAdvertiser" className="col-sm-3 control-label"> Advertiser </label>
+                        <label
+                          htmlFor="inputAdvertiser" className="col-sm-3 control-label"
+                        >Advertiser</label>
                         <div className="col-sm-9">
-                          <select id="inputAdvertiser" className="form-control" onChange={event => this.onInputChange(event, 'advertiserId')}>
+                          <select
+                            id="inputAdvertiser" className="form-control"
+                            onChange={event => this.onInputChange(event, 'advertiserId')}
+                          >
                             {this.props.advertisers.latest &&
                             this.props.advertisers.latest.map(advertiser => (
                               <option key={advertiser.id} value={advertiser.id}>
@@ -304,22 +314,36 @@ class Campaign extends Component {
                         </div>
                       </div>
                       <div className="form-group has-feedback">
-                        <label htmlFor="inputCampaignStartTime" className="col-sm-3 control-label">Start Time:</label>
+                        <label
+                          htmlFor="inputCampaignStartTime" className="col-sm-3 control-label"
+                        >Start Time:</label>
                         <div className=" col-sm-9 date">
                           <span className="fa fa-calendar form-control-feedback" />
-                          <input type="text" className="form-control pull-right" id="inputCampaignStartTime" onChange={event => this.onInputChange(event, 'startTime')} />
+                          <input
+                            type="text" className="form-control pull-right"
+                            id="inputCampaignStartTime"
+                            onChange={event => this.onInputChange(event, 'startTime')}
+                          />
                         </div>
                       </div>
                       <div className="form-group has-feedback">
-                        <label htmlFor="inputCampaignEndTime" className="col-sm-3 control-label">End Time:</label>
+                        <label
+                          htmlFor="inputCampaignEndTime" className="col-sm-3 control-label"
+                        >End Time:</label>
                         <div className=" col-sm-9 date">
                           <span className="fa fa-calendar form-control-feedback" />
-                          <input type="text" className="form-control pull-right" id="inputCampaignEndTime" onChange={event => this.onInputChange(event, 'endTime')} />
+                          <input
+                            type="text" className="form-control pull-right"
+                            id="inputCampaignEndTime"
+                            onChange={event => this.onInputChange(event, 'endTime')}
+                          />
                         </div>
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="inputCampaignViews" className="col-sm-3 control-label">Total Views</label>
+                        <label
+                          htmlFor="inputCampaignViews" className="col-sm-3 control-label"
+                        >Total Views</label>
                         <div className="col-sm-9">
                           <input
                             type="number" className="form-control" id="inputCampaignViews"
@@ -329,7 +353,10 @@ class Campaign extends Component {
                         </div>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="inputCampaignViewPerSession" className="col-sm-3 control-label">Views/Session</label>
+                        <label
+                          htmlFor="inputCampaignViewPerSession"
+                          className="col-sm-3 control-label"
+                        >Views/Session</label>
                         <div className="col-sm-9">
                           <input
                             type="number" className="form-control" id="inputCampaignViewPerSession"
@@ -339,7 +366,10 @@ class Campaign extends Component {
                         </div>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="inputCampaignTimeResetViewCount" className="col-sm-3 control-label">Time reset view(h)</label>
+                        <label
+                          htmlFor="inputCampaignTimeResetViewCount"
+                          className="col-sm-3 control-label"
+                        >Time reset view(h)</label>
                         <div className="col-sm-9">
                           <input
                             type="number" className="form-control"
@@ -368,7 +398,11 @@ class Campaign extends Component {
                           className="col-sm-3 control-label"
                         >Description</label>
                         <div className="col-sm-9">
-                          <textarea className="form-control" id="inputCampaignDescription" rows="5" placeholder="More info..." onChange={event => this.onInputChange(event, 'description')} />
+                          <textarea
+                            className="form-control" id="inputCampaignDescription" rows="5"
+                            placeholder="More info..."
+                            onChange={event => this.onInputChange(event, 'description')}
+                          />
                         </div>
                       </div>
                     </div>
@@ -376,11 +410,11 @@ class Campaign extends Component {
                     <div className="box-footer">
                       {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                       <Link
-                        to="/campaigns"
+                        to="/resource/campaign"
                         className={'btn btn-app pull-right '.concat(s.btn)}
                       ><i className="fa fa-undo" /> Cancel</Link>
                       <Link
-                        to="/campaigns"
+                        to="/resource/campaign"
                         className={'btn btn-app pull-right '.concat(s.btn)}
                         onClick={event => this.deleteCampaign(event)}
                       ><i className="fa fa-trash-o" /> Delete</Link>
@@ -422,22 +456,35 @@ class Campaign extends Component {
                         </div>
                       </div>
                       <div className="form-group has-feedback">
-                        <label htmlFor="inputPlacementStartTime" className="col-sm-3 control-label">Start Time:</label>
+                        <label
+                          htmlFor="inputPlacementStartTime" className="col-sm-3 control-label"
+                        >Start Time:</label>
                         <div className=" col-sm-9 date">
                           <span className="fa fa-calendar form-control-feedback" />
-                          <input type="text" className="form-control pull-right" id="inputPlacementStartTime" />
+                          <input
+                            type="text" className="form-control pull-right"
+                            id="inputPlacementStartTime"
+                          />
                         </div>
                       </div>
                       <div className="form-group has-feedback">
-                        <label htmlFor="inputPlacementEndTime" className="col-sm-3 control-label">End Time:</label>
+                        <label
+                          htmlFor="inputPlacementEndTime" className="col-sm-3 control-label"
+                        >End Time:</label>
                         <div className=" col-sm-9 date">
                           <span className="fa fa-calendar form-control-feedback" />
-                          <input type="text" className="form-control pull-right" id="inputPlacementEndTime" />
+                          <input
+                            type="text" className="form-control pull-right"
+                            id="inputPlacementEndTime"
+                          />
                         </div>
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="inputPlacementSize" className="col-sm-3 control-label">Size</label>
+                        <label
+                          htmlFor="inputPlacementSize"
+                          className="col-sm-3 control-label"
+                        >Size</label>
                         <div className="col-sm-9">
                           <input
                             type="text" className="form-control"
@@ -465,7 +512,10 @@ class Campaign extends Component {
                           className="col-sm-3 control-label"
                         >Description</label>
                         <div className="col-sm-9">
-                          <textarea className="form-control" id="inputPlacementDescription" rows="5" placeholder="More info..." />
+                          <textarea
+                            className="form-control" id="inputPlacementDescription" rows="5"
+                            placeholder="More info..."
+                          />
                         </div>
                       </div>
                     </div>
