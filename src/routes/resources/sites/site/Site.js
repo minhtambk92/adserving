@@ -39,6 +39,7 @@ class Site extends Component {
       name: '',
       email: '',
       description: '',
+      status: '',
     };
   }
 
@@ -52,12 +53,14 @@ class Site extends Component {
       name,
       email,
       description,
+      status,
     } = nextProps.sites && (nextProps.sites.editing || {});
 
     document.getElementById('inputSiteDomain').value = domain;
     document.getElementById('inputSiteName').value = name;
     document.getElementById('inputSiteEmail').value = email;
     document.getElementById('inputSiteDescription').value = description;
+    document.getElementById('inputSiteStatus').value = status;
   }
 
   onInputChange(event, field) {
@@ -108,6 +111,7 @@ class Site extends Component {
       name,
       email,
       description,
+      status,
     } = this.state;
 
     const site = { id: this.props.siteId };
@@ -127,7 +131,10 @@ class Site extends Component {
     if (description && description !== this.props.sites.editing.description) {
       site.description = description;
     }
-
+    if (status && status !== this.props.sites.editing.status) {
+      site.status = status;
+    }
+    site.status = document.getElementById('inputSiteStatus').value;
     this.props.updateSiteIncludeZone(site);
   }
 
@@ -210,6 +217,18 @@ class Site extends Component {
                             rows="5" placeholder="More info..."
                             onChange={event => this.onInputChange(event, 'description')}
                           />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputSiteStatus"
+                          className="col-sm-3 control-label"
+                        >Status</label>
+                        <div className="col-sm-9">
+                          <select id="inputSiteStatus" className="form-control">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                          </select>
                         </div>
                       </div>
                     </div>

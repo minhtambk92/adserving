@@ -34,6 +34,7 @@ export function getSite(id) {
             createdAt
             updatedAt
             }
+          status
           createdAt
           updatedAt
         }
@@ -60,6 +61,7 @@ export function getSites() {
           name
           email
           description
+          status
           createdAt
           updatedAt
         }
@@ -76,7 +78,7 @@ export function getSites() {
   };
 }
 
-export function createSite({ domain, name, email, description }) {
+export function createSite({ domain, name, email, description, status }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($site: SiteInputWithoutId!) {
@@ -86,6 +88,7 @@ export function createSite({ domain, name, email, description }) {
           name
           email
           description
+          status
           createdAt
           updatedAt
         }
@@ -97,6 +100,7 @@ export function createSite({ domain, name, email, description }) {
         name,
         email,
         description,
+        status,
       },
     });
 
@@ -143,7 +147,8 @@ export function updateSite({ id, domain, name, email, description }) {
   };
 }
 
-export function updateSiteIncludeZone({ id, domain, name, email, description }) {
+export function updateSiteIncludeZone({ id, domain, name, email, description, status }) {
+  console.log(status);
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($site: SiteInput!) {
@@ -153,6 +158,7 @@ export function updateSiteIncludeZone({ id, domain, name, email, description }) 
           name
           email
           description
+          status
            zones {
             id
             name
@@ -176,6 +182,7 @@ export function updateSiteIncludeZone({ id, domain, name, email, description }) 
         name,
         email,
         description,
+        status,
       },
     });
 
@@ -198,6 +205,7 @@ export function deleteSite(id) {
           name
           email
           description
+          status
           createdAt
           updatedAt
           deletedAt

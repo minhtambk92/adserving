@@ -70,9 +70,10 @@ class Sites extends Component {
     const name = document.getElementById('inputSiteName').value;
     const email = document.getElementById('inputSiteEmail').value;
     const description = document.getElementById('inputSiteDescription').value;
+    const status = document.getElementById('inputSiteStatus').value;
 
-    if (domain && name && email && description) {
-      this.props.createSite({ domain, name, email, description });
+    if (domain && name && email && description && status) {
+      this.props.createSite({ domain, name, email, description, status });
       this.clearInput();
     }
   }
@@ -157,6 +158,20 @@ class Sites extends Component {
                           className="form-control" id="inputSiteDescription"
                           rows="5" placeholder="More info..."
                         />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputSiteStatus"
+                        className="col-sm-2 control-label"
+                      >Status</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputSiteStatus" className="form-control"
+                        >
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
                       </div>
                     </div>
                   </div>
