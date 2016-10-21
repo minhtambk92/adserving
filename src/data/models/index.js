@@ -168,7 +168,6 @@ Zone.site = Zone.belongsTo(Site, {
 
 Advertiser.campaigns = Advertiser.hasMany(Campaign, {
   foreignKey: 'advertiserId',
-
 });
 
 Campaign.advertiser = Campaign.belongsTo(Advertiser, {
