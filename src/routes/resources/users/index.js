@@ -16,15 +16,17 @@ export default {
   path: '/user',
 
   children: [
+    {
+      path: '/',
+      async action() {
+        return {
+          title: 'Sites Management | Admin Dev Kit',
+          component: <Users />,
+        };
+      },
+    },
     require('./user').default,
   ],
-
-  async action() {
-    return {
-      title: 'Users Management | Admin Dev Kit',
-      component: <Users />,
-    };
-  },
 
 };
 /* eslint-disable global-require */
