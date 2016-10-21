@@ -16,15 +16,17 @@ export default {
   path: '/site',
 
   children: [
+    {
+      path: '/',
+      async action() {
+        return {
+          title: 'Sites Management | Admin Dev Kit',
+          component: <Sites />,
+        };
+      },
+    },
     require('./site').default,
   ],
-
-  async action() {
-    return {
-      title: 'Sites Management | Admin Dev Kit',
-      component: <Sites />,
-    };
-  },
 
 };
 /* eslint-disable global-require */

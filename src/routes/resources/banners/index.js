@@ -16,15 +16,17 @@ export default {
   path: '/banner',
 
   children: [
+    {
+      path: '/',
+      async action() {
+        return {
+          title: 'Sites Management | Admin Dev Kit',
+          component: <Banners />,
+        };
+      },
+    },
     require('./banner').default,
   ],
-
-  async action() {
-    return {
-      title: 'Banners Management | Admin Dev Kit',
-      component: <Banners />,
-    };
-  },
 
 };
 /* eslint-disable global-require */

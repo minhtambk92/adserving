@@ -16,15 +16,17 @@ export default {
   path: '/campaign',
 
   children: [
+    {
+      path: '/',
+      async action() {
+        return {
+          title: 'Sites Management | Admin Dev Kit',
+          component: <Campaigns />,
+        };
+      },
+    },
     require('./campaign').default,
   ],
-
-  async action() {
-    return {
-      title: 'Campaigns Management | Admin Dev Kit',
-      component: <Campaigns />,
-    };
-  },
 
 };
 /* eslint-disable global-require */

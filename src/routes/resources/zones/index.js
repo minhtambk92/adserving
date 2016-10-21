@@ -16,15 +16,17 @@ export default {
   path: '/zone',
 
   children: [
+    {
+      path: '/',
+      async action() {
+        return {
+          title: 'Sites Management | Admin Dev Kit',
+          component: <Zones />,
+        };
+      },
+    },
     require('./zone').default,
   ],
-
-  async action() {
-    return {
-      title: 'Zones Management | Admin Dev Kit',
-      component: <Zones />,
-    };
-  },
 
 };
 /* eslint-disable global-require */
