@@ -8,16 +8,16 @@
  */
 
 import React from 'react';
-import Site from './Site';
+import Advertiser from './Advertiser';
 
 export default {
 
-  path: '/site/:id',
+  path: '/:id',
 
   async action({ params }) {
     return {
-      title: 'Sites Management | Admin Dev Kit',
-      component: <Site siteId={params.id} />,
+      title: 'Advertiser Management | Admin Dev Kit',
+      component: <Advertiser advertiserId={params.id} />,
     };
   },
 

@@ -21,12 +21,6 @@ const Zone = Model.define('Zone', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
-  userId: {
-    type: DataType.UUID,
-  },
-  siteId: {
-    type: DataType.UUID,
-  },
   name: {
     type: DataType.STRING,
     defaultValue: '',
@@ -37,7 +31,7 @@ const Zone = Model.define('Zone', {
   },
   type: {
     type: DataType.STRING,
-    defaultValue: '',
+    allowNull: false,
   },
   html: {
     type: DataType.STRING,

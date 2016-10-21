@@ -28,6 +28,7 @@ import Zone from './Zone';
 import Channel from './Channel';
 import Filter from './Filter';
 import PlacementBannerZone from './PlacementBannerZone';
+
 // Associations
 Resource.permissions = Resource.hasMany(ResourcePermission, {
   foreignKey: {
@@ -105,20 +106,6 @@ User.meta = User.hasMany(UserMeta, {
   onDelete: 'cascade',
 });
 
-User.sites = User.hasMany(Site, {
-  foreignKey: {
-    name: 'userId',
-    allowNull: false,
-  },
-});
-
-User.zones = User.hasMany(Zone, {
-  foreignKey: {
-    name: 'userId',
-    allowNull: false,
-  },
-});
-
 User.roles = User.belongsToMany(Role, {
   through: {
     model: UserRole,
@@ -132,34 +119,6 @@ Role.users = Role.belongsToMany(User, {
   },
   foreignKey: 'roleId',
 });
-
-// Campaign.placements = Campaign.belongsToMany(Placement, {
-//   through: {
-//     model: CampaignPlacement,
-//   },
-//   foreignKey: 'campaignId',
-// });
-//
-// Placement.campaigns = Placement.belongsToMany(Campaign, {
-//   through: {
-//     model: CampaignPlacement,
-//   },
-//   foreignKey: 'placementId',
-// });
-//
-// Placement.banners = Placement.belongsToMany(Banner, {
-//   through: {
-//     model: PlacementBannerZone,
-//   },
-//   foreignKey: 'placementId',
-// });
-//
-// Banner.placements = Banner.belongsToMany(Placement, {
-//   through: {
-//     model: PlacementBannerZone,
-//   },
-//   foreignKey: 'bannerId',
-// });
 
 PlacementBannerZone.placement = PlacementBannerZone.belongsTo(Placement, {
   foreignKey: 'placementId',
@@ -195,7 +154,6 @@ Zone.site = Zone.belongsTo(Site, {
 
 Advertiser.campaigns = Advertiser.hasMany(Campaign, {
   foreignKey: 'advertiserId',
-
 });
 
 Campaign.advertiser = Campaign.belongsTo(Advertiser, {

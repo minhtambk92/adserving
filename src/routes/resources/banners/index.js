@@ -7,12 +7,17 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* eslint-disable global-require */
 import React from 'react';
 import Banners from './Banners';
 
 export default {
 
   path: '/banner',
+
+  children: [
+    require('./banner').default,
+  ],
 
   async action() {
     return {
@@ -22,3 +27,4 @@ export default {
   },
 
 };
+/* eslint-disable global-require */

@@ -10,13 +10,17 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getAdvertiser, updateAdvertiserIncludeCampaign, deleteAdvertiser } from '../../actions/advertisers';
-import { createCampaign } from '../../actions/campaigns';
-import Layout from '../../components/Layout';
-import Link from '../../components/Link';
-import s from './Advertiser.css';
 // import { defineMessages, FormattedRelative } from 'react-intl';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import {
+  getAdvertiser,
+  updateAdvertiserIncludeCampaign,
+  deleteAdvertiser,
+} from '../../../../actions/advertisers';
+import { createCampaign } from '../../../../actions/campaigns';
+import Layout from '../../../../components/Layout';
+import Link from '../../../../components/Link';
+import s from './Advertiser.css';
 
 const pageTitle = 'Advertiser';
 
@@ -49,16 +53,14 @@ class Advertiser extends Component {
   }
 
   componentDidMount() {
-    const dateStart = new Date();
-    dateStart.setDate(dateStart.getDate());
-    const dateEnd = new Date();
-    dateEnd.setDate(dateEnd.getDate() + 1);
-
     /* eslint-disable no-undef */
     $('input[type="checkbox"].inputChooseCampaign').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
+
+    const dateStart = new Date();
+    dateStart.setDate(dateStart.getDate());
 
     $('#inputCampaignStartTime').datepicker({
       autoclose: true,
@@ -66,6 +68,8 @@ class Advertiser extends Component {
       startDate: dateStart,
     });
 
+    const dateEnd = new Date();
+    dateEnd.setDate(dateEnd.getDate() + 1);
     $('#inputCampaignEndTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',
@@ -140,6 +144,7 @@ class Advertiser extends Component {
     document.getElementById('inputCampaignWeight').value = null;
     document.getElementById('inputCampaignDescription').value = null;
   }
+
   searchFor(event) {
     event.persist();
     this.setState((previousState) => ({
@@ -212,7 +217,10 @@ class Advertiser extends Component {
                   <form className="form-horizontal">
                     <div className="box-body">
                       <div className="form-group">
-                        <label htmlFor="inputAdvertiserName" className="col-sm-2 control-label">Name</label>
+                        <label
+                          htmlFor="inputAdvertiserName"
+                          className="col-sm-2 control-label"
+                        >Name</label>
                         <div className="col-sm-10">
                           <input
                             type="text" className="form-control" id="inputAdvertiserName"
@@ -252,7 +260,11 @@ class Advertiser extends Component {
                           className="col-sm-2 control-label"
                         >Description</label>
                         <div className="col-sm-10">
-                          <textarea className="form-control" id="inputAdvertiserDescription" rows="5" placeholder="More info..." onChange={event => this.onInputChange(event, 'description')} />
+                          <textarea
+                            className="form-control" id="inputAdvertiserDescription"
+                            rows="5" placeholder="More info..."
+                            onChange={event => this.onInputChange(event, 'description')}
+                          />
                         </div>
                       </div>
                     </div>
@@ -260,11 +272,11 @@ class Advertiser extends Component {
                     <div className="box-footer">
                       {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                       <Link
-                        to="/advertisers"
+                        to="/resource/advertiser"
                         className={'btn btn-app pull-right '.concat(s.btn)}
                       ><i className="fa fa-undo" /> Cancel</Link>
                       <Link
-                        to="/advertisers"
+                        to="/resource/advertiser"
                         className={'btn btn-app pull-right '.concat(s.btn)}
                         onClick={event => this.deleteAdvertiser(event)}
                       ><i className="fa fa-trash-o" /> Delete</Link>
@@ -305,22 +317,34 @@ class Advertiser extends Component {
                         </div>
                       </div>
                       <div className="form-group has-feedback">
-                        <label htmlFor="inputCampaignStartTime" className="col-sm-3 control-label">Start Time:</label>
+                        <label
+                          htmlFor="inputCampaignStartTime" className="col-sm-3 control-label"
+                        >Start Time:</label>
                         <div className=" col-sm-9 date">
                           <span className="fa fa-calendar form-control-feedback" />
-                          <input type="text" className="form-control pull-right" id="inputCampaignStartTime" />
+                          <input
+                            type="text" className="form-control pull-right"
+                            id="inputCampaignStartTime"
+                          />
                         </div>
                       </div>
                       <div className="form-group has-feedback">
-                        <label htmlFor="inputCampaignEndTime" className="col-sm-3 control-label">End Time:</label>
+                        <label
+                          htmlFor="inputCampaignEndTime" className="col-sm-3 control-label"
+                        >End Time:</label>
                         <div className=" col-sm-9 date">
                           <span className="fa fa-calendar form-control-feedback" />
-                          <input type="text" className="form-control pull-right" id="inputCampaignEndTime" />
+                          <input
+                            type="text" className="form-control pull-right"
+                            id="inputCampaignEndTime"
+                          />
                         </div>
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="inputCampaignViews" className="col-sm-3 control-label">Total Views</label>
+                        <label
+                          htmlFor="inputCampaignViews" className="col-sm-3 control-label"
+                        >Total Views</label>
                         <div className="col-sm-9">
                           <input
                             type="number" className="form-control" id="inputCampaignViews"
@@ -329,7 +353,10 @@ class Advertiser extends Component {
                         </div>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="inputCampaignViewPerSession" className="col-sm-3 control-label">Views/Session</label>
+                        <label
+                          htmlFor="inputCampaignViewPerSession"
+                          className="col-sm-3 control-label"
+                        >Views/Session</label>
                         <div className="col-sm-9">
                           <input
                             type="number" className="form-control" id="inputCampaignViewPerSession"
@@ -338,7 +365,10 @@ class Advertiser extends Component {
                         </div>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="inputCampaignTimeResetViewCount" className="col-sm-3 control-label">Time reset view(h)</label>
+                        <label
+                          htmlFor="inputCampaignTimeResetViewCount"
+                          className="col-sm-3 control-label"
+                        >Time reset view(h)</label>
                         <div className="col-sm-9">
                           <input
                             type="number" className="form-control"
@@ -366,7 +396,10 @@ class Advertiser extends Component {
                           className="col-sm-3 control-label"
                         >Description</label>
                         <div className="col-sm-9">
-                          <textarea className="form-control" id="inputCampaignDescription" rows="5" placeholder="More info..." />
+                          <textarea
+                            className="form-control" id="inputCampaignDescription" rows="5"
+                            placeholder="More info..."
+                          />
                         </div>
                       </div>
                     </div>
@@ -427,7 +460,8 @@ class Advertiser extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.advertisers.current && this.props.advertisers.current.campaigns.map(campaign => {
+                      {this.props.advertisers.current
+                      && this.props.advertisers.current.campaigns.map(campaign => {
                         if (this.isIndexOf(campaign.name, campaign.startTime, campaign.endTime,
                             campaign.views, campaign.viewPerSession, campaign.timeResetViewCount)) {
                           return (

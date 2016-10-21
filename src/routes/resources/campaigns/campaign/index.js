@@ -8,16 +8,16 @@
  */
 
 import React from 'react';
-import Advertiser from './Advertiser';
+import Campaign from './Campaign';
 
 export default {
 
-  path: '/advertiser/:id',
+  path: '/:id',
 
   async action({ params }) {
     return {
-      title: 'Advertiser Management | Admin Dev Kit',
-      component: <Advertiser advertiserId={params.id} />,
+      title: 'Campaign Management | Admin Dev Kit',
+      component: <Campaign campaignId={params.id} />,
     };
   },
 

@@ -18,7 +18,6 @@ export default {
   children: [
     require('./home').default,
     require('./resources').default,
-    require('./entities').default,
 
     // place new routes before...
     require('./notFound').default,
