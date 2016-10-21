@@ -282,7 +282,7 @@ class Zones extends Component {
                         <tr key={zone.id}>
                           <td><input type="checkbox" className="inputChooseSite" /></td>
                           <td>{zone.siteId}</td>
-                          <td><Link to={`/zone/${zone.id}`}>{zone.name}</Link></td>
+                          <td><Link to={`/resource/zone/${zone.id}`}>{zone.name}</Link></td>
                           <td>{zone.type}</td>
                           <td>{zone.description}</td>
                           <td>{zone.slot}</td>
