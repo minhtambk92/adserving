@@ -32,11 +32,11 @@ class Site extends Component {
     super(props, context);
 
     this.state = {
-      userId: '',
       domain: '',
       name: '',
       email: '',
       description: '',
+      status: '',
     };
   }
 
@@ -69,7 +69,6 @@ class Site extends Component {
 
   updateSite() {
     const {
-      userId,
       domain,
       name,
       email,
@@ -77,10 +76,6 @@ class Site extends Component {
     } = this.state;
 
     const site = { id: this.props.siteId };
-
-    if (userId && userId !== this.props.sites.editing.userId) {
-      site.userId = userId;
-    }
 
     if (domain && domain !== this.props.sites.editing.domain) {
       site.domain = domain;
@@ -96,6 +91,10 @@ class Site extends Component {
 
     if (description && description !== this.props.sites.editing.description) {
       site.description = description;
+    }
+
+    if (status && status !== this.props.sites.editing.status) {
+      site.status = status;
     }
 
     this.props.updateSite(site);
@@ -179,6 +178,21 @@ class Site extends Component {
                           rows="5" placeholder="More info..."
                           onChange={event => this.onInputChange(event, 'description')}
                         />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputSiteStatus"
+                        className="col-sm-2 control-label"
+                      >Status</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputSiteStatus" className="form-control"
+                          onChange={event => this.onInputChange(event, 'status')}
+                        >
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
                       </div>
                     </div>
                   </div>

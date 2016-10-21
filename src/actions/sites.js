@@ -64,7 +64,7 @@ export function getSites() {
   };
 }
 
-export function createSite({ domain, name, email, description }) {
+export function createSite({ domain, name, email, description, status }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($site: SiteInputWithoutId!) {
@@ -85,6 +85,7 @@ export function createSite({ domain, name, email, description }) {
         name,
         email,
         description,
+        status,
       },
     });
 
