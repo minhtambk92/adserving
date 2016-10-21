@@ -18,7 +18,6 @@ export function getSite(id) {
       query {
         sites(where: {id: "${id}"}, limit: 1) {
           id
-          userId
           domain
           name
           email
@@ -45,7 +44,6 @@ export function getSites() {
       query {
         sites {
           id
-          userId
           domain
           name
           email
@@ -72,7 +70,6 @@ export function createSite({ domain, name, email, description }) {
       mutation ($site: SiteInputWithoutId!) {
         createdSite(site: $site) {
           id
-          userId
           domain
           name
           email
@@ -84,7 +81,6 @@ export function createSite({ domain, name, email, description }) {
 
     const { data } = await graphqlRequest(mutation, {
       site: {
-        userId: '567daf97-d24d-4b7c-9b44-153534efc101',
         domain,
         name,
         email,
@@ -101,13 +97,12 @@ export function createSite({ domain, name, email, description }) {
   };
 }
 
-export function updateSite({ id, userId, domain, name, email, description }) {
+export function updateSite({ id, domain, name, email, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($site: SiteInput!) {
         updatedSite(site: $site) {
           id
-          userId
           domain
           name
           email
@@ -120,7 +115,6 @@ export function updateSite({ id, userId, domain, name, email, description }) {
     const { data } = await graphqlRequest(mutation, {
       site: {
         id,
-        userId: userId || '567daf97-d24d-4b7c-9b44-153534efc101',
         domain,
         name,
         email,
@@ -143,7 +137,6 @@ export function deleteSite(id) {
       mutation {
         deletedSite(id: "${id}") {
           id
-          userId
           domain
           name
           email
