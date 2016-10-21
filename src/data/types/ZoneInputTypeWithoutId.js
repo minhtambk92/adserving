@@ -10,7 +10,7 @@ import { Zone } from '../models';
 
 const ZoneInputTypeWithoutId = new InputObjectType({
   name: 'ZoneInputWithoutId',
-  fields: attributeFields(Zone, {
+  fields: () => Object.assign(attributeFields(Zone, {
     only: [
       'siteId',
       'name',
@@ -20,6 +20,8 @@ const ZoneInputTypeWithoutId = new InputObjectType({
       'css',
       'slot',
     ],
+  }),{
+    // Additional fields
   }),
 });
 

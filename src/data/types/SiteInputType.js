@@ -11,9 +11,9 @@ import { Site } from '../models';
 
 const SiteInputType = new InputObjectType({
   name: 'SiteInput',
-  fields: attributeFields(Site, {
+  fields: () => Object.assign(attributeFields(Site, {
     only: ['id', 'description'],
-  }, {
+  }), {
     // Additional fields
     domain: { type: StringType },
     name: { type: StringType },

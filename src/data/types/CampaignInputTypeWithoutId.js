@@ -4,7 +4,7 @@ import { Campaign } from '../models';
 
 const CampaignInputTypeWithoutId = new InputObjectType({
   name: 'CampaignInputTypeWithoutId',
-  fields: attributeFields(Campaign, {
+  fields: () => Object.assign(attributeFields(Campaign, {
     only: [
       'advertiserId',
       'name',
@@ -16,6 +16,8 @@ const CampaignInputTypeWithoutId = new InputObjectType({
       'weight',
       'description',
     ],
+  }), {
+    // Additional fields
   }),
 });
 
