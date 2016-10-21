@@ -145,7 +145,10 @@ Zone.placementBannerZones = Zone.hasMany(PlacementBannerZone, {
 });
 
 Site.zones = Site.hasMany(Zone, {
-  foreignKey: 'siteId',
+  foreignKey: {
+    name: 'siteId',
+    allowNull: false,
+  },
 });
 
 Zone.site = Zone.belongsTo(Site, {
