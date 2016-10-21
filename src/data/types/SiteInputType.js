@@ -11,7 +11,9 @@ import { Site } from '../models';
 const SiteInputType = new InputObjectType({
   name: 'SiteInput',
   fields: attributeFields(Site, {
-    only: ['id', 'userId', 'domain', 'name', 'email', 'description'],
+    // Additional options
+    only: ['id', 'domain', 'name', 'email', 'description', 'status'],
+    allowNull: false,
   }, {
     // Additional fields
   }),

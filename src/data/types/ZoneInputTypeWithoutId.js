@@ -12,7 +12,6 @@ const ZoneInputTypeWithoutId = new InputObjectType({
   name: 'ZoneInputWithoutId',
   fields: attributeFields(Zone, {
     only: [
-      'userId',
       'siteId',
       'name',
       'description',

@@ -40,7 +40,7 @@ class Zones extends Component {
     // $(this.inputZoneType).select2();
 
     // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseSite').iCheck({
+    $('input[type="checkbox"].inputChooseZones').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
@@ -50,7 +50,7 @@ class Zones extends Component {
   componentDidUpdate() {
     /* eslint-disable no-undef */
     // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseSite').iCheck({
+    $('input[type="checkbox"].inputChooseZone').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
@@ -269,8 +269,8 @@ class Zones extends Component {
                   <table id="example1" className="table table-hover">
                     <thead>
                       <tr>
-                        <th><input type="checkbox" className="inputChooseSite" /></th>
-                        <th>Site</th>
+                        <th><input type="checkbox" className="inputChooseZones" /></th>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Type</th>
                         <th>Description</th>
@@ -280,7 +280,7 @@ class Zones extends Component {
                     <tbody>
                       {this.props.zones.list && this.props.zones.list.map(zone => (
                         <tr key={zone.id}>
-                          <td><input type="checkbox" className="inputChooseSite" /></td>
+                          <td><input type="checkbox" className="inputChooseZone" /></td>
                           <td>{zone.siteId}</td>
                           <td><Link to={`/resource/zone/${zone.id}`}>{zone.name}</Link></td>
                           <td>{zone.type}</td>
@@ -291,8 +291,8 @@ class Zones extends Component {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th><input type="checkbox" className="inputChooseSite" /></th>
-                        <th>Site</th>
+                        <th><input type="checkbox" className="inputChooseZones" /></th>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Type</th>
                         <th>Description</th>
