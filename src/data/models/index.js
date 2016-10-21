@@ -28,6 +28,7 @@ import Zone from './Zone';
 import Channel from './Channel';
 import Filter from './Filter';
 import PlacementBannerZone from './PlacementBannerZone';
+
 // Associations
 Resource.permissions = Resource.hasMany(ResourcePermission, {
   foreignKey: {
@@ -132,34 +133,6 @@ Role.users = Role.belongsToMany(User, {
   },
   foreignKey: 'roleId',
 });
-
-// Campaign.placements = Campaign.belongsToMany(Placement, {
-//   through: {
-//     model: CampaignPlacement,
-//   },
-//   foreignKey: 'campaignId',
-// });
-//
-// Placement.campaigns = Placement.belongsToMany(Campaign, {
-//   through: {
-//     model: CampaignPlacement,
-//   },
-//   foreignKey: 'placementId',
-// });
-//
-// Placement.banners = Placement.belongsToMany(Banner, {
-//   through: {
-//     model: PlacementBannerZone,
-//   },
-//   foreignKey: 'placementId',
-// });
-//
-// Banner.placements = Banner.belongsToMany(Placement, {
-//   through: {
-//     model: PlacementBannerZone,
-//   },
-//   foreignKey: 'bannerId',
-// });
 
 PlacementBannerZone.placement = PlacementBannerZone.belongsTo(Placement, {
   foreignKey: 'placementId',
