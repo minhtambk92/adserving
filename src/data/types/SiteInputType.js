@@ -3,9 +3,8 @@
  */
 
 import {
-  GraphQLNonNull as NonNull,
   GraphQLInputObjectType as InputObjectType,
-  GraphQLID as ID,
+  GraphQLString as StringType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Site } from '../models';
@@ -13,12 +12,13 @@ import { Site } from '../models';
 const SiteInputType = new InputObjectType({
   name: 'SiteInput',
   fields: () => Object.assign(attributeFields(Site, {
-    // Additional options
-    only: ['domain', 'name', 'email', 'description', 'status'],
-    allowNull: true,
+    only: ['id', 'description'],
   }), {
     // Additional fields
-    id: { type: new NonNull(ID) },
+    domain: { type: StringType },
+    name: { type: StringType },
+    email: { type: StringType },
+    status: {type: StringType },
   }),
 });
 

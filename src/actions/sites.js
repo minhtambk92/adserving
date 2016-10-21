@@ -35,6 +35,7 @@ export function getSite(id) {
             createdAt
             updatedAt
             }
+          status
           createdAt
           updatedAt
         }
@@ -149,7 +150,7 @@ export function updateSite({ id, domain, name, email, description, status }) {
   };
 }
 
-export function updateSiteIncludeZone({ id, domain, name, email, description }) {
+export function updateSiteIncludeZone({ id, domain, name, email, description, status }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($site: SiteInput!) {
@@ -159,6 +160,7 @@ export function updateSiteIncludeZone({ id, domain, name, email, description }) 
           name
           email
           description
+          status
            zones {
             id
             name
@@ -182,6 +184,7 @@ export function updateSiteIncludeZone({ id, domain, name, email, description }) 
         name,
         email,
         description,
+        status,
       },
     });
 
