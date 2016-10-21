@@ -22,6 +22,7 @@ export function getSite(id) {
           name
           email
           description
+          status
           createdAt
           updatedAt
         }
@@ -48,6 +49,7 @@ export function getSites() {
           name
           email
           description
+          status
           createdAt
           updatedAt
         }
@@ -74,6 +76,7 @@ export function createSite({ domain, name, email, description, status }) {
           name
           email
           description
+          status
           createdAt
           updatedAt
         }
@@ -98,7 +101,7 @@ export function createSite({ domain, name, email, description, status }) {
   };
 }
 
-export function updateSite({ id, domain, name, email, description }) {
+export function updateSite({ id, domain, name, email, description, status }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($site: SiteInput!) {
@@ -108,6 +111,7 @@ export function updateSite({ id, domain, name, email, description }) {
           name
           email
           description
+          status
           createdAt
           updatedAt
         }
@@ -120,6 +124,7 @@ export function updateSite({ id, domain, name, email, description }) {
         name,
         email,
         description,
+        status,
       },
     });
 
@@ -142,6 +147,7 @@ export function deleteSite(id) {
           name
           email
           description
+          status
           createdAt
           updatedAt
           deletedAt

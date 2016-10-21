@@ -50,12 +50,14 @@ class Site extends Component {
       name,
       email,
       description,
+      status,
     } = nextProps.sites && (nextProps.sites.editing || {});
 
     document.getElementById('inputSiteDomain').value = domain;
     document.getElementById('inputSiteName').value = name;
     document.getElementById('inputSiteEmail').value = email;
     document.getElementById('inputSiteDescription').value = description;
+    document.getElementById('inputSiteStatus').value = status;
   }
 
   onInputChange(event, field) {
@@ -73,6 +75,7 @@ class Site extends Component {
       name,
       email,
       description,
+      status,
     } = this.state;
 
     const site = { id: this.props.siteId };

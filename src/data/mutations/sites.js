@@ -38,7 +38,13 @@ const sites = {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.site.id };
-        await Site.upsert(args.site);
+
+        await Site.update(args.site, {
+          where: {
+            id: args.site.id,
+          },
+        });
+
         return opts;
       },
     }),
