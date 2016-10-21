@@ -17,20 +17,8 @@ export default {
   // Keep in mind, routes are evaluated in order
   children: [
     require('./home').default,
-    require('./advertiser').default,
-    require('./advertisers').default,
-    require('./campaign').default,
-    require('./campaigns').default,
-    require('./placement').default,
-    require('./placements').default,
-    require('./banner').default,
-    require('./banners').default,
-    require('./site').default,
-    require('./sites').default,
-    require('./user').default,
-    require('./users').default,
-    require('./zone').default,
-    require('./zones').default,
+    require('./resources').default,
+    require('./entities').default,
 
     // place new routes before...
     require('./notFound').default,
