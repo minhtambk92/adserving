@@ -4,7 +4,7 @@ import { Placement } from '../models';
 
 const PlacementInputTypeWithoutId = new InputObjectType({
   name: 'PlacementInputTypeWithoutId',
-  fields: attributeFields(Placement, {
+  fields: () => Object.assign(attributeFields(Placement, {
     only: [
       'name',
       'size',
@@ -14,6 +14,8 @@ const PlacementInputTypeWithoutId = new InputObjectType({
       'description',
       'campaignId',
     ],
+  }), {
+    // Additional fields
   }),
 });
 

@@ -4,7 +4,7 @@ import { Banner } from '../models';
 
 const BannerInputType = new InputObjectType({
   name: 'BannerInputType',
-  fields: Object.assign(attributeFields(Banner, {
+  fields: () => Object.assign(attributeFields(Banner, {
     // Additional options
     only: [
       'id',

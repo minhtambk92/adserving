@@ -4,7 +4,7 @@ import { Campaign } from '../models';
 
 const CampaignInputType = new InputObjectType({
   name: 'CampaignInputType',
-  fields: Object.assign(attributeFields(Campaign, {
+  fields: () => Object.assign(attributeFields(Campaign, {
     // Additional options
     only: [
       'id',

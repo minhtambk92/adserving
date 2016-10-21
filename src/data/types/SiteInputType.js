@@ -12,7 +12,7 @@ import { Site } from '../models';
 
 const SiteInputType = new InputObjectType({
   name: 'SiteInput',
-  fields: Object.assign(attributeFields(Site, {
+  fields: () => Object.assign(attributeFields(Site, {
     // Additional options
     only: ['domain', 'name', 'email', 'description', 'status'],
     allowNull: true,

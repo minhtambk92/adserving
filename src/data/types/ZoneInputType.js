@@ -10,7 +10,7 @@ import { Zone } from '../models';
 
 const ZoneInputType = new InputObjectType({
   name: 'ZoneInput',
-  fields: Object.assign(attributeFields(Zone, {
+  fields: () => Object.assign(attributeFields(Zone, {
     // Additional options
     only: [
       'id',
