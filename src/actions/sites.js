@@ -148,7 +148,6 @@ export function updateSite({ id, domain, name, email, description }) {
 }
 
 export function updateSiteIncludeZone({ id, domain, name, email, description, status }) {
-  console.log(status);
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($site: SiteInput!) {
