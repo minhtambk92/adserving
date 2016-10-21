@@ -31,7 +31,7 @@ const Zone = Model.define('Zone', {
   },
   type: {
     type: DataType.STRING,
-    defaultValue: '',
+    allowNull: false,
   },
   html: {
     type: DataType.STRING,

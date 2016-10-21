@@ -8,16 +8,16 @@
  */
 
 import React from 'react';
-import Banner from './Banner';
+import Zone from './Zone';
 
 export default {
 
-  path: '/banner/:id',
+  path: '/:id',
 
   async action({ params }) {
     return {
-      title: 'Banner Management | Admin Dev Kit',
-      component: <Banner bannerId={params.id} />,
+      title: 'Zone Management | Admin Dev Kit',
+      component: <Zone zoneId={params.id} />,
     };
   },
 

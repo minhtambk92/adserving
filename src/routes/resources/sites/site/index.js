@@ -8,16 +8,16 @@
  */
 
 import React from 'react';
-import Campaign from './Campaign';
+import Site from './Site';
 
 export default {
 
-  path: '/campaign/:id',
+  path: '/:id',
 
   async action({ params }) {
     return {
-      title: 'Campaign Management | Admin Dev Kit',
-      component: <Campaign campaignId={params.id} />,
+      title: 'Sites Management | Admin Dev Kit',
+      component: <Site siteId={params.id} />,
     };
   },
 

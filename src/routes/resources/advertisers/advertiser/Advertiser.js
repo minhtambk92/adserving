@@ -16,10 +16,10 @@ import {
   getAdvertiser,
   updateAdvertiserIncludeCampaign,
   deleteAdvertiser,
-} from '../../../actions/advertisers';
-import { createCampaign } from '../../../actions/campaigns';
-import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+} from '../../../../actions/advertisers';
+import { createCampaign } from '../../../../actions/campaigns';
+import Layout from '../../../../components/Layout';
+import Link from '../../../../components/Link';
 import s from './Advertiser.css';
 
 const pageTitle = 'Advertiser';

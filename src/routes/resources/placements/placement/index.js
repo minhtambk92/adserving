@@ -12,7 +12,7 @@ import Placement from './Placement';
 
 export default {
 
-  path: '/placement/:id',
+  path: '/:id',
 
   async action({ params }) {
     return {

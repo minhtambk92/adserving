@@ -7,12 +7,17 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* eslint-disable global-require */
 import React from 'react';
 import Users from './Users';
 
 export default {
 
   path: '/user',
+
+  children: [
+    require('./user').default,
+  ],
 
   async action() {
     return {
@@ -22,3 +27,4 @@ export default {
   },
 
 };
+/* eslint-disable global-require */

@@ -12,7 +12,7 @@ import User from './User';
 
 export default {
 
-  path: '/user/:id',
+  path: '/:id',
 
   async action({ params }) {
     return {

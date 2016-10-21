@@ -106,20 +106,6 @@ User.meta = User.hasMany(UserMeta, {
   onDelete: 'cascade',
 });
 
-User.sites = User.hasMany(Site, {
-  foreignKey: {
-    name: 'userId',
-    allowNull: false,
-  },
-});
-
-User.zones = User.hasMany(Zone, {
-  foreignKey: {
-    name: 'userId',
-    allowNull: false,
-  },
-});
-
 User.roles = User.belongsToMany(Role, {
   through: {
     model: UserRole,
