@@ -39,18 +39,15 @@ class Placements extends Component {
   }
 
   componentDidMount() {
+    const dateStart = new Date();
+    dateStart.setDate(dateStart.getDate());
+    const dateEnd = new Date();
+    dateEnd.setDate(dateEnd.getDate() + 1);
     /* eslint-disable no-undef */
-    // $('.select2').select2();
-    // $('#example1').DataTable(); // eslint-disable-line new-cap
-
-    // iCheck for checkbox and radio inputs
     $('input[type="checkbox"].inputChoosePlacement').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
-
-    const dateStart = new Date();
-    dateStart.setDate(dateStart.getDate());
 
     $('#inputPlacementStartTime').datepicker({
       autoclose: true,
@@ -59,8 +56,6 @@ class Placements extends Component {
       defaultDate: new Date(),
     });
 
-    const dateEnd = new Date();
-    dateEnd.setDate(dateEnd.getDate() + 1);
     $('#inputPlacementEndTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',

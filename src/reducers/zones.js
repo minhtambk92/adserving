@@ -8,6 +8,7 @@ import {
   CREATE_ZONE,
   UPDATE_ZONE,
   DELETE_ZONE,
+  CREATE_ZONE_INCLUDE_SITE,
 } from '../constants';
 
 export default function zones(state = {}, action) {
@@ -30,7 +31,11 @@ export default function zones(state = {}, action) {
       state.list.unshift(action.payload.zone);
       return { ...state };
     }
-
+    case CREATE_ZONE_INCLUDE_SITE: {
+      return {
+        ...action.payload.zone,
+      };
+    }
     case UPDATE_ZONE: {
       return {
         ...state,

@@ -176,7 +176,7 @@ class Campaigns extends Component {
                         <select id="inputAdvertiser" className="form-control">
                           {this.props.advertisers.latest
                           && this.props.advertisers.latest.map(advertiser => (
-                            <option value={advertiser.id}>{advertiser.name}</option>
+                            <option key={advertiser.id} value={advertiser.id}>{advertiser.name}</option>
                           ))}
                         </select>
                       </div>

@@ -270,7 +270,6 @@ class Zones extends Component {
                     <thead>
                       <tr>
                         <th><input type="checkbox" className="inputChooseSite" /></th>
-                        <th>Site</th>
                         <th>Name</th>
                         <th>Type</th>
                         <th>Description</th>
@@ -281,18 +280,17 @@ class Zones extends Component {
                       {this.props.zones.list && this.props.zones.list.map(zone => (
                         <tr key={zone.id}>
                           <td><input type="checkbox" className="inputChooseSite" /></td>
-                          <td>{zone.siteId}</td>
                           <td><Link to={`/zone/${zone.id}`}>{zone.name}</Link></td>
                           <td>{zone.type}</td>
                           <td>{zone.description}</td>
                           <td>{zone.slot}</td>
+                          <td><Link to={`/zone/${zone.id}`}>Add New Placements</Link></td>
                         </tr>
                       ))}
                     </tbody>
                     <tfoot>
                       <tr>
                         <th><input type="checkbox" className="inputChooseSite" /></th>
-                        <th>Site</th>
                         <th>Name</th>
                         <th>Type</th>
                         <th>Description</th>

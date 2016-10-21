@@ -4,6 +4,7 @@
 
 import {
   GraphQLInputObjectType as InputObjectType,
+  GraphQLString as StringType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Site } from '../models';
@@ -11,9 +12,12 @@ import { Site } from '../models';
 const SiteInputType = new InputObjectType({
   name: 'SiteInput',
   fields: attributeFields(Site, {
-    only: ['id', 'userId', 'domain', 'name', 'email', 'description'],
+    only: ['id', 'description'],
   }, {
     // Additional fields
+    domain: { type: StringType },
+    name: { type: StringType },
+    email: { type: StringType },
   }),
 });
 

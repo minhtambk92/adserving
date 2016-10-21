@@ -38,7 +38,15 @@ const sites = {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.site.id };
-        await Site.upsert(args.site);
+        const newSite = Object.assign({}, args.site);
+        delete newSite.id; // Prevent update id
+
+        await Site.update(newSite, {
+          where: {
+            id: args.site.id,
+          },
+        });
+
         return opts;
       },
     }),

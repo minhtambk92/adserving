@@ -4,6 +4,7 @@ import {
   GET_PLACEMENT,
   UPDATE_PLACEMENT,
   DELETE_PLACEMENT,
+  CREATE_PLACEMENT_INCLUDE_CAMPAIGN,
 } from '../constants/';
 
 export function getPlacement(id) {
@@ -104,6 +105,53 @@ export function createPlacement({
 
     dispatch({
       type: CREATE_PLACEMENT,
+      payload: {
+        placement: data.createdPlacement,
+      },
+    });
+  };
+}
+
+export function createPlacementIncludeCampaign({
+  name,
+  size,
+  startTime,
+  endTime,
+  weight,
+  description,
+  campaignId,
+}) {
+  return async(dispatch, getState, { graphqlRequest }) => {
+    const mutation = `
+      mutation ($placement: PlacementInputTypeWithoutId!) {
+        createdPlacement(placement: $placement) {
+          id
+          name
+          size
+          startTime
+          endTime
+          weight
+          description
+          campaignId
+          createdAt
+          updatedAt
+        }
+      }`;
+
+    const { data } = await graphqlRequest(mutation, {
+      placement: {
+        name,
+        size,
+        startTime,
+        endTime,
+        weight,
+        description,
+        campaignId,
+      },
+    });
+
+    dispatch({
+      type: CREATE_PLACEMENT_INCLUDE_CAMPAIGN,
       payload: {
         placement: data.createdPlacement,
       },
