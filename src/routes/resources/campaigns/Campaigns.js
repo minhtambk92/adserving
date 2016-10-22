@@ -307,7 +307,7 @@ class Campaigns extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      { this.props.campaigns.latest && this.props.campaigns.latest.map(campaign => {
+                      { this.props.campaigns.list && this.props.campaigns.list.map(campaign => {
                         if (this.isIndexOf(campaign.name, campaign.startTime,
                             campaign.endTime, campaign.views, campaign.viewPerSession,
                             campaign.timeResetViewCount)) {

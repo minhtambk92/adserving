@@ -8,11 +8,14 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanner, updateBanner, deleteBanner } from '../../../../actions/banners';
-import  { getAdvertisers } from '../../../../actions/advertisers';
+import { getCampaigns } from '../../../../actions/campaigns';
+import { createPlacementIncludeCampaign } from '../../../../actions/placements';
+import { createPlacementBannerZone } from '../../../../actions/placementBannerZones';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './Banner.css';
@@ -27,44 +30,61 @@ class Banner extends Component {
     getBanner: PropTypes.func,
     updateBanner: PropTypes.func,
     deleteBanner: PropTypes.func,
-    getAdvertisers: PropTypes.func,
+    campaigns: PropTypes.object,
+    getCampaigns: PropTypes.func,
+    createPlacementIncludeCampaign: PropTypes.func,
+    placements: PropTypes.object,
+    createPlacementBannerZone: PropTypes.func,
+    placementBannerZones: PropTypes.object,
   };
 
   constructor(props, context) {
     super(props, context);
-
-    // this.state = {
-    //   userId: '',
-    //   name: '',
-    //   html: '',
-    //   width: 0,
-    //   height: 0,
-    //   keyword: '',
-    //   weight: 0,
-    //   description: '',
-    // };
+    this.state = {
+      name: '',
+      html: '',
+      width: 0,
+      height: 0,
+      keyword: '',
+      weight: 0,
+      description: '',
+    };
   }
 
   componentWillMount() {
     this.props.getBanner(this.props.bannerId);
-    this.props.getAdvertisers();
+    this.props.getCampaigns();
   }
 
   componentDidMount() {
+    const dateStart = new Date();
+    dateStart.setDate(dateStart.getDate());
+    const dateEnd = new Date();
+    dateEnd.setDate(dateEnd.getDate() + 1);
     /* eslint-disable no-undef */
-    // $('.select2').select2();
-    // $('#example1').DataTable(); // eslint-disable-line new-cap
-
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseCampaign').iCheck({
+    $('input[type="checkbox"].inputChoosePlacement').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
+
+    $('#inputPlacementStartTime').datepicker({
+      autoclose: true,
+      todayHighlight: 'TRUE',
+      startDate: dateStart,
+      defaultDate: new Date(),
+    });
+
+    $('#inputPlacementEndTime').datepicker({
+      autoclose: true,
+      todayHighlight: 'TRUE',
+      startDate: dateEnd,
+      defaultDate: new Date(),
+    });
+    /* eslint-enable no-undef */
   }
 
   componentWillReceiveProps(nextProps) {
     const {
-      userId = 'da31ecf7-83ce-4c64-932a-ec165d42e65d',
       name,
       html,
       width,
@@ -72,11 +92,9 @@ class Banner extends Component {
       keyword,
       weight,
       description,
-      advertiserId,
-    } = nextProps.banners && (nextProps.banners.current || {});
+    } = nextProps.banners && (nextProps.banners.editing || {});
 
     document.getElementById('inputBannerName').value = name;
-    document.getElementById('inputAdvertiser').value = advertiserId;
     document.getElementById('inputBannerHTML').value = html;
     document.getElementById('inputBannerWidth').value = width;
     document.getElementById('inputBannerHeight').value = height;
@@ -93,10 +111,46 @@ class Banner extends Component {
       [field]: event.target.value,
     }));
   }
-
+  createPlacement() {
+    const name = document.getElementById('inputPlacementName').value;
+    const startTime = new Date(moment(new Date(document.getElementById('inputPlacementStartTime').value)).format('YYYY-MM-DD 00:00:00'));
+    const endTime = new Date(moment(new Date(document.getElementById('inputPlacementEndTime').value)).format('YYYY-MM-DD 00:00:00'));
+    const size = document.getElementById('inputPlacementSize').value;
+    const weight = document.getElementById('inputPlacementWeight').value;
+    const description = document.getElementById('inputPlacementDescription').value;
+    const campaignId = document.getElementById('inputCampaign').value;
+    if (name && startTime && endTime && size && weight && description && campaignId) {
+      if (moment(startTime).format('x') < moment(endTime).format('x')) {
+        this.props.createPlacementIncludeCampaign({
+          name,
+          startTime,
+          endTime,
+          size,
+          weight,
+          description,
+          campaignId,
+        }).then(() => {
+          const placementId = this.props.placements.list.id;
+          const bannerId = this.props.bannerId;
+          const zoneId = null;
+          this.props.createPlacementBannerZone({ placementId, bannerId, zoneId });
+          this.clearInput();
+        });
+      } else {
+        document.getElementById('inputPlacementEndTime').value = null;
+      }
+    }
+  }
+  clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    document.getElementById('inputPlacementName').value = null;
+    document.getElementById('inputPlacementStartTime').value = null;
+    document.getElementById('inputPlacementEndTime').value = null;
+    document.getElementById('inputPlacementSize').value = null;
+    document.getElementById('inputPlacementWeight').value = null;
+    document.getElementById('inputPlacementDescription').value = null;
+  }
   updateBanner() {
     const {
-      userId,
       name,
       html,
       width,
@@ -104,39 +158,32 @@ class Banner extends Component {
       keyword,
       weight,
       description,
-      advertiserId,
     } = this.state;
     const banner = { id: this.props.bannerId };
 
-    if (userId && userId !== this.props.banners.current.userId) {
-      banner.userId = userId;
-    }
-    if (name && name !== this.props.banners.current.name) {
+    if (name && name !== this.props.banners.editing.name) {
       banner.name = name;
     }
-    if (html && html !== this.props.banners.current.html) {
+    if (html && html !== this.props.banners.editing.html) {
       banner.html = html;
     }
 
-    if (width && width !== this.props.banners.current.width) {
+    if (width && width !== this.props.banners.editing.width) {
       banner.width = width;
     }
 
-    if (height && height !== this.props.banners.current.height) {
+    if (height && height !== this.props.banners.editing.height) {
       banner.height = height;
     }
 
-    if (keyword && keyword !== this.props.banners.current.keyword) {
+    if (keyword && keyword !== this.props.banners.editing.keyword) {
       banner.keyword = keyword;
     }
-    if (weight && weight !== this.props.banners.current.weight) {
+    if (weight && weight !== this.props.banners.editing.weight) {
       banner.weight = weight;
     }
-    if (description && description !== this.props.banners.current.description) {
+    if (description && description !== this.props.banners.editing.description) {
       banner.description = description;
-    }
-    if (advertiserId && advertiserId !== this.props.banners.current.advertiserId) {
-      banner.advertiserId = document.getElementById('inputAdvertiser').value;
     }
 
     this.props.updateBanner(banner);
@@ -152,7 +199,7 @@ class Banner extends Component {
         pageTitle={
           pageTitle
             .concat(': ')
-            .concat(this.props.banners.current ? this.props.banners.current.name : '...')
+            .concat(this.props.banners.editing ? this.props.banners.editing.name : '...')
         }
         pageSubTitle=""
       >
@@ -160,148 +207,245 @@ class Banner extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: FORM OF CREATE NEW WEBSITE */}
-              <div className="box box-primary">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Change Banner information</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-minus" />
-                    </button>
+              <section className="col-lg-6">
+                {/* BOX: FORM OF CREATE NEW WEBSITE */}
+                <div className="box box-primary">
+                  <div className="box-header with-border">
+                    <h3 className="box-title">Change Banner information</h3>
+                    <div className="box-tools pull-right">
+                      <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                        <i className="fa fa-minus" />
+                      </button>
+                    </div>
                   </div>
+                  {/* /.box-header */}
+                  {/* form start */}
+                  <form className="form-horizontal">
+                    <div className="box-body">
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputBannerName"
+                          className="col-sm-2 control-label"
+                        >Name</label>
+                        <div className="col-sm-10">
+                          <input
+                            type="text" className="form-control" id="inputBannerName"
+                            placeholder="Banner Top"
+                            onChange={event => this.onInputChange(event, 'name')}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputBannerHTML"
+                          className="col-sm-2 control-label"
+                        >HTML</label>
+                        <div className="col-sm-10">
+                          <textarea
+                            className="form-control" id="inputBannerHTML"
+                            onChange={event => this.onInputChange(event, 'html')}
+                            rows="5" placeholder="More info..."
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputBannerWidth"
+                          className="col-sm-2 control-label"
+                        >Width(px)</label>
+                        <div className="col-sm-10">
+                          <input
+                            type="number" className="form-control" id="inputBannerWidth"
+                            placeholder="300" onChange={event => this.onInputChange(event, 'width')}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputBannerHeight"
+                          className="col-sm-2 control-label"
+                        >Height(px)</label>
+                        <div className="col-sm-10">
+                          <input
+                            type="number" className="form-control" id="inputBannerHeight"
+                            placeholder="300" onChange={event => this.onInputChange(event, 'height')}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputBannerKeyWord"
+                          className="col-sm-2 control-label"
+                        >KeyWord</label>
+                        <div className="col-sm-10">
+                          <input
+                            type="text" className="form-control" id="inputBannerKeyWord"
+                            placeholder="dantri"
+                            onChange={event => this.onInputChange(event, 'keyword')}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputBannerWeight"
+                          className="col-sm-2 control-label"
+                        >Weight</label>
+                        <div className="col-sm-10">
+                          <input
+                            type="number"
+                            className="form-control" id="inputBannerWeight" placeholder="1"
+                            onChange={event => this.onInputChange(event, 'weight')}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputBannerDescription"
+                          className="col-sm-2 control-label"
+                        >Description</label>
+                        <div className="col-sm-10">
+                          <textarea
+                            className="form-control" id="inputBannerDescription"
+                            rows="5" placeholder="More info..."
+                            onChange={event => this.onInputChange(event, 'description')}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    {/* /.box-body */}
+                    <div className="box-footer">
+                      {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+                      <Link
+                        to="/resource/banner"
+                        className="btn btn-app pull-right"
+                      ><i className="fa fa-undo" /> Cancel</Link>
+                      <Link
+                        to="/resource/banner"
+                        className="btn btn-app pull-right"
+                        onClick={event => this.deleteBanner(event)}
+                      ><i className="fa fa-trash-o" /> Delete</Link>
+                      <a
+                        className="btn btn-app pull-right"
+                        onClick={event => this.updateBanner(event)}
+                      ><i className="fa fa-floppy-o" /> Save</a>
+                      {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+                    </div>
+                    {/* /.box-footer */}
+                  </form>
                 </div>
-                {/* /.box-header */}
-                {/* form start */}
-                <form className="form-horizontal">
-                  <div className="box-body">
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputBannerName"
-                        className="col-sm-2 control-label"
-                      >Name</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="text" className="form-control" id="inputBannerName"
-                          placeholder="Banner Top"
-                          onChange={event => this.onInputChange(event, 'name')} />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputAdvertiser" className="col-sm-2 control-label"
-                      >Advertiser</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputAdvertiser" className="form-control"
-                          onChange={event => this.onInputChange(event, 'advertiserId')}
-                        >
-                          {this.props.advertisers.latest && this.props.advertisers.latest.map(advertiser => (
-                            <option
-                              key={advertiser.id} value={advertiser.id}
-                            >{advertiser.name}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputBannerHTML"
-                        className="col-sm-2 control-label"
-                      >HTML</label>
-                      <div className="col-sm-10">
-                        <textarea
-                          className="form-control" id="inputBannerHTML"
-                          onChange={event => this.onInputChange(event, 'html')}
-                          rows="5" placeholder="More info..."
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputBannerWidth"
-                        className="col-sm-2 control-label"
-                      >Width(px)</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="number" className="form-control" id="inputBannerWidth"
-                          placeholder="300" onChange={event => this.onInputChange(event, 'width')}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputBannerHeight"
-                        className="col-sm-2 control-label"
-                      >Height(px)</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="number" className="form-control" id="inputBannerHeight"
-                          placeholder="300" onChange={event => this.onInputChange(event, 'height')}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputBannerKeyWord"
-                        className="col-sm-2 control-label"
-                      >KeyWord</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="text" className="form-control" id="inputBannerKeyWord"
-                          placeholder="dantri"
-                          onChange={event => this.onInputChange(event, 'keyword')}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputBannerWeight"
-                        className="col-sm-2 control-label"
-                      >Weight</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="number"
-                          className="form-control" id="inputBannerWeight" placeholder="1"
-                          onChange={event => this.onInputChange(event, 'weight')}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputBannerDescription"
-                        className="col-sm-2 control-label"
-                      >Description</label>
-                      <div className="col-sm-10">
-                        <textarea
-                          className="form-control" id="inputBannerDescription"
-                          rows="5" placeholder="More info..."
-                          onChange={event => this.onInputChange(event, 'description')}
-                        />
-                      </div>
+                {/* /.col */}
+              </section>
+              <section className="col-lg-6">
+                {/* BOX: FORM OF CREATE NEW PlacementS */}
+                <div className="box box-primary">
+                  <div className="box-header with-border">
+                    <h3 className="box-title">Create New Placement</h3>
+                    <div className="box-tools pull-right">
+                      <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                        <i className="fa fa-plus" />
+                      </button>
                     </div>
                   </div>
-                  {/* /.box-body */}
-                  <div className="box-footer">
-                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                    <Link
-                      to="/resource/banner"
-                      className="btn btn-app pull-right"
-                    ><i className="fa fa-undo" /> Cancel</Link>
-                    <Link
-                      to="/resource/banner"
-                      className="btn btn-app pull-right"
-                      onClick={event => this.deleteBanner(event)}
-                    ><i className="fa fa-trash-o" /> Delete</Link>
-                    <a
-                      className="btn btn-app pull-right"
-                      onClick={event => this.updateBanner(event)}
-                    ><i className="fa fa-floppy-o" /> Save</a>
-                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                  </div>
-                  {/* /.box-footer */}
-                </form>
-              </div>
-              {/* /.col */}
+                  {/* /.box-header */}
+                  {/* form start */}
+                  <form className="form-horizontal">
+                    <div className="box-body">
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputPlacementName" className="col-sm-2 control-label"
+                        >Name</label>
+                        <div className="col-sm-10">
+                          <input
+                            type="text" className="form-control" id="inputPlacementName"
+                            placeholder="Admicro"
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group has-feedback">
+                        <label htmlFor="inputCampaign" className="col-sm-2 control-label">Campaign</label>
+                        <div className="col-sm-10">
+                          <select
+                            id="inputCampaign" className="form-control"
+                          >
+                            {this.props.campaigns.list
+                            && this.props.campaigns.list.map(campaign => (
+                              <option
+                                key={campaign.id} value={campaign.id}
+                              >
+                                {campaign.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                      <div className="form-group has-feedback">
+                        <label htmlFor="inputPlacementStartTime" className="col-sm-2 control-label">Start Time:</label>
+                        <div className=" col-sm-10 date">
+                          <span className="fa fa-calendar form-control-feedback" />
+                          <input type="text" className="form-control pull-right" id="inputPlacementStartTime" />
+                        </div>
+                      </div>
+                      <div className="form-group has-feedback">
+                        <label htmlFor="inputPlacementEndTime" className="col-sm-2 control-label">End Time:</label>
+                        <div className=" col-sm-10 date">
+                          <span className="fa fa-calendar form-control-feedback" />
+                          <input type="text" className="form-control pull-right" id="inputPlacementEndTime" />
+                        </div>
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="inputPlacementSize" className="col-sm-2 control-label">Size</label>
+                        <div className="col-sm-10">
+                          <input
+                            type="text" className="form-control"
+                            id="inputPlacementSize"
+                            placeholder="300x300"
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputPlacementWeight"
+                          className="col-sm-2 control-label"
+                        >Weight</label>
+                        <div className="col-sm-10">
+                          <input
+                            type="text" className="form-control" id="inputPlacementWeight"
+                            placeholder="1"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputPlacementDescription"
+                          className="col-sm-2 control-label"
+                        >Description</label>
+                        <div className="col-sm-10">
+                          <textarea
+                            className="form-control" id="inputPlacementDescription"
+                            rows="5" placeholder="More info..."
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    {/* /.box-body */}
+                    <div className="box-footer">
+                      {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+                      <a
+                        className="btn btn-app pull-right"
+                      ><i className="fa fa-eraser" /> Clear</a>
+                      <a
+                        className="btn btn-app pull-right"
+                        onClick={event => this.createPlacement(event)}
+                      ><i className="fa fa-check" /> Confirm</a>
+                      {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+                    </div>
+                    {/* /.box-footer */}
+                  </form>
+                </div>
+                {/* /.col */}
+              </section>
             </section>
           </div>
 
@@ -314,14 +458,18 @@ class Banner extends Component {
 
 const mapState = (state) => ({
   banners: state.banners,
-  advertisers: state.advertisers,
+  campaigns: state.campaigns,
+  placements: state.placements,
+  placementBannerZones: state.placementBannerZones,
 });
 
 const mapDispatch = {
   getBanner,
   updateBanner,
   deleteBanner,
-  getAdvertisers,
+  getCampaigns,
+  createPlacementIncludeCampaign,
+  createPlacementBannerZone,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banner));

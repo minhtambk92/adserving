@@ -48,7 +48,7 @@ export function getPlacements() {
           endTime
           weight
           description
-           campaignId
+          campaignId
           createdAt
           updatedAt
           }

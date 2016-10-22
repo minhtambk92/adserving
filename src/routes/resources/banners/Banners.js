@@ -11,7 +11,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanners, createBanner } from '../../../actions/banners';
-import { getAdvertisers } from '../../../actions/advertisers';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
 import s from './Banners.css';
@@ -24,7 +23,6 @@ class Banners extends Component {
     banners: PropTypes.object,
     getBanners: PropTypes.func,
     createBanner: PropTypes.func,
-    getAdvertisers: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -37,7 +35,6 @@ class Banners extends Component {
 
   componentWillMount() {
     this.props.getBanners();
-    this.props.getAdvertisers();
   }
 
   componentDidMount() {
@@ -52,7 +49,14 @@ class Banners extends Component {
     });
     /* eslint-enable no-undef */
   }
-
+  componentDidUpdate() {
+    /* eslint-disable no-undef */
+    $('input[type="checkbox"].inputChooseBanner').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue',
+    });
+    /* eslint-enable no-undef */
+  }
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     document.getElementById('inputBannerName').value = null;
     document.getElementById('inputBannerHTML').value = null;
@@ -71,19 +75,16 @@ class Banners extends Component {
     }));
   }
 
-  createBanner(event) {
-    const userId = 'da31ecf7-83ce-4c64-932a-ec165d42e65d';
+  createBanner(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const name = document.getElementById('inputBannerName').value;
-    const advertiserId = document.getElementById('inputAdvertiser').value;
     const html = document.getElementById('inputBannerHTML').value;
     const width = document.getElementById('inputBannerWidth').value;
     const height = document.getElementById('inputBannerHeight').value;
     const keyword = document.getElementById('inputBannerKeyWord').value;
     const weight = document.getElementById('inputBannerWeight').value;
     const description = document.getElementById('inputBannerDescription').value;
-    if (userId && name && html && height && weight && keyword && width && description && advertiserId) {
+    if (name && html && height && weight && keyword && width && description) {
       this.props.createBanner({
-        userId,
         name,
         html,
         width,
@@ -91,7 +92,6 @@ class Banners extends Component {
         keyword,
         weight,
         description,
-        advertiserId,
       }).then(() => {
         this.clearInput();
       });
@@ -140,19 +140,6 @@ class Banners extends Component {
                         />
                       </div>
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="inputAdvertiser"
-                             className="col-sm-2 control-label">Advertiser</label>
-                      <div className="col-sm-10">
-                        <select id="inputAdvertiser" className="form-control">
-                          {this.props.advertisers.latest && this.props.advertisers.latest.map(advertiser => (
-                            <option key={advertiser.id} value={advertiser.id}
-                            >{advertiser.name} </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
                     <div className="form-group">
                       <label
                         htmlFor="inputBannerHTML"
@@ -207,9 +194,7 @@ class Banners extends Component {
                         className="col-sm-2 control-label"
                       >Weight</label>
                       <div className="col-sm-10">
-                        <input type="number"
-                               className="form-control" id="inputBannerWeight" placeholder="1"
-                        />
+                        <input type="number" className="form-control" id="inputBannerWeight" placeholder="1" />
                       </div>
                     </div>
                     <div className="form-group">
@@ -280,8 +265,10 @@ class Banners extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      { this.props.banners.latest && this.props.banners.latest.map(banner => {
-                        if (this.isIndexOf(banner.name, banner.height, banner.width, banner.keyword, banner.weight, banner.html, banner.description)) {
+                      { this.props.banners.list && this.props.banners.list.map(banner => {
+                        if (this.isIndexOf(banner.name, banner.height,
+                            banner.width, banner.keyword, banner.weight,
+                            banner.html, banner.description)) {
                           return (
                             <tr key={banner.id}>
                               <th><input type="checkbox" className="inputChooseBanner" /></th>
@@ -332,13 +319,11 @@ class Banners extends Component {
 
 const mapState = (state) => ({
   banners: state.banners,
-  advertisers: state.advertisers,
 });
 
 const mapDispatch = {
   getBanners,
   createBanner,
-  getAdvertisers,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banners));
