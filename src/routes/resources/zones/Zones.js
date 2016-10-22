@@ -12,7 +12,12 @@ import { connect } from 'react-redux';
 // import { FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSites } from '../../../actions/sites';
-import { getZonesFilters, getZones, createZone } from '../../../actions/zones';
+import {
+  getZonesFilters,
+  setZonesFilters,
+  getZones,
+  createZone,
+} from '../../../actions/zones';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
 import s from './Zones.css';
@@ -24,6 +29,7 @@ class Zones extends Component {
 
   static propTypes = {
     getZonesFilters: PropTypes.func,
+    setZonesFilters: PropTypes.func,
     sites: PropTypes.object,
     getSites: PropTypes.func,
     zones: PropTypes.object,
@@ -59,6 +65,13 @@ class Zones extends Component {
     /* eslint-enable no-undef */
   }
 
+  onFilterChange(event, field) {
+    event.persist();
+    this.props.setZonesFilters({
+      [field]: event.target.value,
+    });
+  }
+
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     document.getElementById('inputZoneName').value = null;
     document.getElementById('inputZoneDescription').value = null;
@@ -91,6 +104,31 @@ class Zones extends Component {
     }
   }
 
+  isFiltered(zone) {
+    const { siteId, type, status } = this.props.zones.filters;
+    let displayable = false;
+
+    if (!siteId || siteId === 'all' || siteId === zone.siteId) {
+      displayable = true;
+    } else {
+      return false;
+    }
+
+    if (!type || type === 'all' || type === zone.type) {
+      displayable = true;
+    } else {
+      return false;
+    }
+
+    if (!status || status === 'all' || status === zone.status) {
+      displayable = true;
+    } else {
+      return false;
+    }
+
+    return displayable;
+  }
+
   render() {
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
@@ -101,7 +139,7 @@ class Zones extends Component {
               {/* BOX: FORM OF FILTER */}
               <div className="box box-default">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Zones in: </h3>
+                  <h3 className="box-title">Filter by:</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn btn-box-tool" data-widget="collapse">
                       <i className="fa fa-minus" />
@@ -114,52 +152,70 @@ class Zones extends Component {
                   <div className="box-body">
                     <div className="form-group">
                       <label
-                        htmlFor="inputZoneType"
+                        htmlFor="inputZonesFilterSite"
                         className="col-sm-2 control-label"
                       >Website</label>
                       <div className="col-sm-10">
                         <select
-                          id="inputZoneSite"
+                          id="inputZonesFilterSite"
                           className="form-control select2"
                           style={{ width: '100%' }}
+                          ref={c => {
+                            this.inputZonesFilterSite = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'siteId')}
+                          defaultValue={this.props.zones.filters && this.props.zones.filters.siteId}
                         >
+                          <option value="all">All sites</option>
                           {this.props.sites.list && this.props.sites.list.map(site => (
                             <option
                               key={site.id} value={site.id}
-                            ><strong>{site.name}</strong> | {site.domain}</option>
+                            >{site.name} | {site.domain}</option>
                           ))}
                         </select>
                       </div>
                     </div>
                     <div className="form-group">
                       <label
-                        htmlFor="inputZoneType"
+                        htmlFor="inputZonesFilterType"
                         className="col-sm-2 control-label"
                       >Type</label>
                       <div className="col-sm-10">
                         <select
-                          id="inputZoneType"
+                          id="inputZonesFilterType"
                           className="form-control"
+                          ref={c => {
+                            this.inputZonesFilterType = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'type')}
+                          defaultValue={this.props.zones.filters && this.props.zones.filters.type}
                         >
-                          <option>Type 1</option>
-                          <option>Type 2</option>
-                          <option>Type 3</option>
-                          <option>Type 4</option>
-                          <option>Type 5</option>
+                          <option value="all">All types</option>
+                          <option value="type-1">Type 1</option>
+                          <option value="type-2">Type 2</option>
+                          <option value="type-3">Type 3</option>
+                          <option value="type-4">Type 4</option>
+                          <option value="type-5">Type 5</option>
                         </select>
                       </div>
                     </div>
                     <div className="form-group">
                       <label
-                        htmlFor="inputZoneStatus"
+                        htmlFor="inputZonesFilterStatus"
                         className="col-sm-2 control-label"
                       >Status</label>
                       <div className="col-sm-10">
                         <select
-                          id="inputZoneStatus" className="form-control"
+                          id="inputZonesFilterStatus" className="form-control"
+                          ref={c => {
+                            this.inputZonesFilterStatus = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'status')}
+                          defaultValue={this.props.zones.filters && this.props.zones.filters.status}
                         >
-                          <option>Active</option>
-                          <option>Inactive</option>
+                          <option value="all">All states</option>
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
                         </select>
                       </div>
                     </div>
@@ -213,7 +269,7 @@ class Zones extends Component {
                           {this.props.sites.list && this.props.sites.list.map(site => (
                             <option
                               key={site.id} value={site.id}
-                            ><strong>{site.name}</strong> | {site.domain}</option>
+                            >{site.name} | {site.domain}</option>
                           ))}
                         </select>
                       </div>
@@ -228,11 +284,11 @@ class Zones extends Component {
                           id="inputZoneType"
                           className="form-control"
                         >
-                          <option>Type 1</option>
-                          <option>Type 2</option>
-                          <option>Type 3</option>
-                          <option>Type 4</option>
-                          <option>Type 5</option>
+                          <option value="type-1">Type 1</option>
+                          <option value="type-2">Type 2</option>
+                          <option value="type-3">Type 3</option>
+                          <option value="type-4">Type 4</option>
+                          <option value="type-5">Type 5</option>
                         </select>
                       </div>
                     </div>
@@ -354,20 +410,26 @@ class Zones extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.zones.list && this.props.zones.list.map(zone => (
-                        <tr key={zone.id}>
-                          <td><input type="checkbox" className="inputChooseZone" /></td>
-                          <td>
-                            <Link to={`/resource/zone/${zone.id}`}>
-                              <strong>{zone.name}</strong>
-                            </Link>
-                          </td>
-                          <td>{zone.type}</td>
-                          <td>{zone.description}</td>
-                          <td>{zone.slot}</td>
-                          <td><Link to={`/zone/${zone.id}`}>Add New Placements</Link></td>
-                        </tr>
-                      ))}
+                      {this.props.zones.list && this.props.zones.list.map(zone => {
+                        if (!this.isFiltered(zone)) {
+                          return false;
+                        }
+
+                        return (
+                          <tr key={zone.id}>
+                            <td><input type="checkbox" className="inputChooseZone" /></td>
+                            <td>
+                              <Link to={`/resource/zone/${zone.id}`}>
+                                <strong>{zone.name}</strong>
+                              </Link>
+                            </td>
+                            <td>{zone.type}</td>
+                            <td>{zone.description}</td>
+                            <td>{zone.slot}</td>
+                            <td><Link to={`/zone/${zone.id}`}>Add New Placements</Link></td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                     <tfoot>
                       <tr>
@@ -410,6 +472,7 @@ const mapState = (state) => ({
 
 const mapDispatch = {
   getZonesFilters,
+  setZonesFilters,
   getSites,
   getZones,
   createZone,

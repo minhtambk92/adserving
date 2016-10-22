@@ -24,11 +24,11 @@ export function getZonesFilters() {
   };
 }
 
-export function setZonesFilters({ filters }) {
+export function setZonesFilters(filter) {
   return async(dispatch) => {
     dispatch({
       type: SET_ZONES_FILTERS,
-      payload: filters,
+      payload: filter,
     });
   };
 }
@@ -46,6 +46,7 @@ export function getZone(id) {
           html
           css
           slot
+          status
           createdAt
           updatedAt
         }
@@ -75,6 +76,7 @@ export function getZones() {
           html
           css
           slot
+          status
           createdAt
           updatedAt
         }
@@ -104,6 +106,7 @@ export function createZone({ siteId, name, description, type, html, css, slot })
           html
           css
           slot
+          status
           createdAt
           updatedAt
         }
@@ -143,6 +146,7 @@ export function createZoneIncludeSite({ siteId, name, description, type, html, c
           html
           css
           slot
+          status
           createdAt
           updatedAt
         }
@@ -183,6 +187,7 @@ export function updateZone({ id, siteId, name, description, type, html, css, slo
           html
           css
           slot
+          status
           createdAt
           updatedAt
         }
@@ -223,6 +228,7 @@ export function deleteZone(id) {
           html
           css
           slot
+          status
           createdAt
           updatedAt
           deletedAt

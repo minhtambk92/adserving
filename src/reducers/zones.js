@@ -15,20 +15,22 @@ import {
 } from '../constants';
 
 const defaultFilters = {
-  website: '',
-  type: '',
-  status: 'active',
+  siteId: 'all',
+  type: 'all',
+  status: 'all',
 };
 
 function filters(state = defaultFilters, action) {
   switch (action.type) {
     case GET_ZONES_FILTERS: {
-      return state;
+      return {
+        ...state,
+      };
     }
     case SET_ZONES_FILTERS: {
       return {
-        state,
-        ...action.payload.filters,
+        ...state,
+        ...action.payload,
       };
     }
     default: {
