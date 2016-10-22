@@ -11,7 +11,27 @@ import {
   UPDATE_ZONE,
   DELETE_ZONE,
   CREATE_ZONE_INCLUDE_SITE,
+  GET_ZONES_FILTERS,
+  SET_ZONES_FILTERS,
 } from '../constants';
+
+export function getZonesFilters() {
+  return async(dispatch) => {
+    dispatch({
+      type: GET_ZONES_FILTERS,
+      payload: {},
+    });
+  };
+}
+
+export function setZonesFilters(filter) {
+  return async(dispatch) => {
+    dispatch({
+      type: SET_ZONES_FILTERS,
+      payload: filter,
+    });
+  };
+}
 
 export function getZone(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
@@ -26,6 +46,7 @@ export function getZone(id) {
           html
           css
           slot
+          status
           createdAt
           updatedAt
         }
@@ -55,6 +76,7 @@ export function getZones() {
           html
           css
           slot
+          status
           createdAt
           updatedAt
         }
@@ -84,6 +106,7 @@ export function createZone({ siteId, name, description, type, html, css, slot })
           html
           css
           slot
+          status
           createdAt
           updatedAt
         }
@@ -123,6 +146,7 @@ export function createZoneIncludeSite({ siteId, name, description, type, html, c
           html
           css
           slot
+          status
           createdAt
           updatedAt
         }
@@ -163,6 +187,7 @@ export function updateZone({ id, siteId, name, description, type, html, css, slo
           html
           css
           slot
+          status
           createdAt
           updatedAt
         }
@@ -203,6 +228,7 @@ export function deleteZone(id) {
           html
           css
           slot
+          status
           createdAt
           updatedAt
           deletedAt

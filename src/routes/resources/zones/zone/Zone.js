@@ -206,11 +206,11 @@ class Zone extends Component {
                           className="form-control"
                           onChange={event => this.onInputChange(event, 'type')}
                         >
-                          <option>Type 1</option>
-                          <option>Type 2</option>
-                          <option>Type 3</option>
-                          <option>Type 4</option>
-                          <option>Type 5</option>
+                          <option value="type-1">Type 1</option>
+                          <option value="type-2">Type 2</option>
+                          <option value="type-3">Type 3</option>
+                          <option value="type-4">Type 4</option>
+                          <option value="type-5">Type 5</option>
                         </select>
                       </div>
                     </div>
