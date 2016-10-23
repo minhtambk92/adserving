@@ -14,13 +14,14 @@ const ZoneInputTypeWithoutId = new InputObjectType({
     only: [
       'siteId',
       'name',
-      'description',
       'type',
       'html',
       'css',
       'slot',
+      'status',
+      'description',
     ],
-  }),{
+  }), {
     // Additional fields
   }),
 });

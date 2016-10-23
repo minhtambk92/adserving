@@ -88,7 +88,7 @@ class Zones extends Component {
     const html = this.inputZoneHTML.value;
     const css = this.inputZoneCSS.value;
     const slot = this.inputZoneSlot.value;
-    const status = this.inputZoneStatus.status;
+    const status = this.inputZoneStatus.value;
     const description = this.inputZoneDescription.value;
 
     if (name && siteId && type && description && slot) {
@@ -453,7 +453,7 @@ class Zones extends Component {
                             <td>{zone.type}</td>
                             <td>{zone.description}</td>
                             <td>{zone.slot}</td>
-                            <td><Link to={`/zone/${zone.id}`}>Add New Placements</Link></td>
+                            <td><Link to={`/resource/zone/${zone.id}`}>Add New Placements</Link></td>
                           </tr>
                         );
                       })}

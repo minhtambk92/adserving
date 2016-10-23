@@ -106,7 +106,7 @@ export function getZones(args = {
   };
 }
 
-export function createZone({ siteId, name, description, type, html, css, slot }) {
+export function createZone({ siteId, name, type, html, css, slot, status, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($zone: ZoneInputWithoutId!) {
@@ -129,11 +129,12 @@ export function createZone({ siteId, name, description, type, html, css, slot })
       zone: {
         siteId,
         name,
-        description,
         type,
         html,
         css,
         slot,
+        status,
+        description,
       },
     });
 
@@ -187,7 +188,7 @@ export function createZoneIncludeSite({ siteId, name, description, type, html, c
 }
 
 
-export function updateZone({ id, siteId, name, description, type, html, css, slot }) {
+export function updateZone({ id, siteId, name, type, html, css, slot, status, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($zone: ZoneInput!) {
@@ -211,11 +212,12 @@ export function updateZone({ id, siteId, name, description, type, html, css, slo
         id,
         siteId,
         name,
-        description,
         type,
         html,
         css,
         slot,
+        status,
+        description,
       },
     });
 
