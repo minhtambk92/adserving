@@ -434,6 +434,7 @@ class Zones extends Component {
                         <th>Type</th>
                         <th>Description</th>
                         <th>Slot</th>
+                        <th>&nbsp;</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -453,7 +454,8 @@ class Zones extends Component {
                             <td>{zone.type}</td>
                             <td>{zone.description}</td>
                             <td>{zone.slot}</td>
-                            <td><Link to={`/resource/zone/${zone.id}`}>Add New Placements</Link></td>
+                            <td><Link to={`/resource/zone/${zone.id}`}>Add New Placements</Link>
+                            </td>
                           </tr>
                         );
                       })}
@@ -465,6 +467,7 @@ class Zones extends Component {
                         <th>Type</th>
                         <th>Description</th>
                         <th>Slot</th>
+                        <th>&nbsp;</th>
                       </tr>
                     </tfoot>
                   </table>
