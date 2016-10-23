@@ -31,21 +31,6 @@ class Zone extends Component {
     deleteZone: PropTypes.func,
   };
 
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      userId: '',
-      siteId: '',
-      name: '',
-      description: '',
-      type: '',
-      html: '',
-      css: '',
-      slot: '',
-    };
-  }
-
   componentWillMount() {
     this.props.getSites();
     this.props.getZone(this.props.zoneId);
@@ -60,44 +45,30 @@ class Zone extends Component {
       html,
       css,
       slot,
+      status,
     } = nextProps.zones && (nextProps.zones.editing || {});
 
-    document.getElementById('inputZoneSite').value = siteId;
-    document.getElementById('inputZoneName').value = name;
-    document.getElementById('inputZoneDescription').value = description;
-    document.getElementById('inputZoneType').value = type;
-    document.getElementById('inputZoneHtml').value = html;
-    document.getElementById('inputZoneCss').value = css;
-    document.getElementById('inputZoneSlot').value = slot;
-  }
-
-  onInputChange(event, field) {
-    event.persist();
-
-    this.setState(previousState => {
-      const nextState = previousState;
-      nextState[field] = event.target.value;
-      return nextState;
-    });
+    this.inputZoneSite.value = siteId;
+    this.inputZoneName.value = name;
+    this.inputZoneType.value = type;
+    this.inputZoneHtml.value = html;
+    this.inputZoneCss.value = css;
+    this.inputZoneSlot.value = slot;
+    this.inputZoneStatus.value = status;
+    this.inputZoneDescription.value = description;
   }
 
   updateZone() {
-    const {
-      userId,
-      siteId,
-      name,
-      description,
-      type,
-      html,
-      css,
-      slot,
-    } = this.state;
+    const siteId = this.inputZoneSite.value;
+    const name = this.inputZoneName.value;
+    const type = this.inputZoneType.value;
+    const html = this.inputZoneHtml.value;
+    const css = this.inputZoneCss.value;
+    const slot = this.inputZoneSlot.value;
+    const status = this.inputZoneStatus.value;
+    const description = this.inputZoneDescription.value;
 
     const zone = { id: this.props.zoneId };
-
-    if (userId && userId !== this.props.zones.editing.userId) {
-      zone.userId = userId;
-    }
 
     if (siteId && siteId !== this.props.zones.editing.siteId) {
       zone.siteId = siteId;
@@ -105,10 +76,6 @@ class Zone extends Component {
 
     if (name && name !== this.props.zones.editing.name) {
       zone.name = name;
-    }
-
-    if (description && description !== this.props.zones.editing.description) {
-      zone.description = description;
     }
 
     if (type && type !== this.props.zones.editing.type) {
@@ -125,6 +92,14 @@ class Zone extends Component {
 
     if (slot && slot !== this.props.zones.editing.slot) {
       zone.slot = slot;
+    }
+
+    if (status && status !== this.props.zones.editing.status) {
+      zone.status = status;
+    }
+
+    if (description && description !== this.props.zones.editing.description) {
+      zone.description = description;
     }
 
     this.props.updateZone(zone);
@@ -171,13 +146,15 @@ class Zone extends Component {
                         <input
                           type="text" className="form-control" id="inputZoneName"
                           placeholder="Dan Tri"
-                          onChange={event => this.onInputChange(event, 'name')}
+                          ref={c => {
+                            this.inputZoneName = c;
+                          }}
                         />
                       </div>
                     </div>
                     <div className="form-group">
                       <label
-                        htmlFor="inputZoneType"
+                        htmlFor="inputZoneSite"
                         className="col-sm-2 control-label"
                       >Website</label>
                       <div className="col-sm-10">
@@ -185,7 +162,9 @@ class Zone extends Component {
                           id="inputZoneSite"
                           className="form-control select2"
                           style={{ width: '100%' }}
-                          onChange={event => this.onInputChange(event, 'siteId')}
+                          ref={c => {
+                            this.inputZoneSite = c;
+                          }}
                         >
                           {this.props.sites.list && this.props.sites.list.map(site => (
                             <option
@@ -204,7 +183,9 @@ class Zone extends Component {
                         <select
                           id="inputZoneType"
                           className="form-control"
-                          onChange={event => this.onInputChange(event, 'type')}
+                          ref={c => {
+                            this.inputZoneType = c;
+                          }}
                         >
                           <option value="type-1">Type 1</option>
                           <option value="type-2">Type 2</option>
@@ -223,7 +204,9 @@ class Zone extends Component {
                         <textarea
                           className="form-control" id="inputZoneHtml"
                           rows="5" placeholder="More info..."
-                          onChange={event => this.onInputChange(event, 'html')}
+                          ref={c => {
+                            this.inputZoneHtml = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -236,7 +219,9 @@ class Zone extends Component {
                         <textarea
                           className="form-control" id="inputZoneCss"
                           rows="5" placeholder="More info..."
-                          onChange={event => this.onInputChange(event, 'css')}
+                          ref={c => {
+                            this.inputZoneCss = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -249,7 +234,9 @@ class Zone extends Component {
                         <input
                           type="text" className="form-control" id="inputZoneSlot"
                           placeholder="..."
-                          onChange={event => this.onInputChange(event, 'slot')}
+                          ref={c => {
+                            this.inputZoneSlot = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -261,10 +248,12 @@ class Zone extends Component {
                       <div className="col-sm-10">
                         <select
                           id="inputZoneStatus" className="form-control"
-                          onChange={event => this.onInputChange(event, 'status')}
+                          ref={c => {
+                            this.inputZoneStatus = c;
+                          }}
                         >
-                          <option>Active</option>
-                          <option>Inactive</option>
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
                         </select>
                       </div>
                     </div>
@@ -277,7 +266,9 @@ class Zone extends Component {
                         <textarea
                           className="form-control" id="inputZoneDescription"
                           rows="5" placeholder="More info..."
-                          onChange={event => this.onInputChange(event, 'description')}
+                          ref={c => {
+                            this.inputZoneDescription = c;
+                          }}
                         />
                       </div>
                     </div>

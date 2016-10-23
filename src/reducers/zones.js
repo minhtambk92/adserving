@@ -15,9 +15,9 @@ import {
 } from '../constants';
 
 const defaultFilters = {
-  siteId: 'all',
-  type: 'all',
-  status: 'all',
+  siteId: null,
+  type: null,
+  status: null,
 };
 
 function filters(state = defaultFilters, action) {

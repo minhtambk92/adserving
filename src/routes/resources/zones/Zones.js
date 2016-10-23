@@ -65,39 +65,42 @@ class Zones extends Component {
     /* eslint-enable no-undef */
   }
 
-  onFilterChange(event, field) {
+  async onFilterChange(event, field) {
     event.persist();
-    this.props.setZonesFilters({
-      [field]: event.target.value,
+
+    await this.props.setZonesFilters({
+      [field]: event.target.value === 'null' ? null : event.target.value,
     });
   }
 
-  clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    document.getElementById('inputZoneName').value = null;
-    document.getElementById('inputZoneDescription').value = null;
-    document.getElementById('inputZoneHTML').value = null;
-    document.getElementById('inputZoneCSS').value = null;
-    document.getElementById('inputZoneSlot').value = null;
+  clearInput() {
+    this.inputZoneName.value = null;
+    this.inputZoneHTML.value = null;
+    this.inputZoneCSS.value = null;
+    this.inputZoneSlot.value = null;
+    this.inputZoneDescription.value = null;
   }
 
   createZone() {
-    const name = document.getElementById('inputZoneName').value;
-    const siteId = document.getElementById('inputZoneSite').value;
-    const type = document.getElementById('inputZoneType').value;
-    const description = document.getElementById('inputZoneDescription').value;
-    const html = document.getElementById('inputZoneHTML').value;
-    const css = document.getElementById('inputZoneCSS').value;
-    const slot = document.getElementById('inputZoneSlot').value;
+    const name = this.inputZoneName.value;
+    const siteId = this.inputZoneSite.value;
+    const type = this.inputZoneType.value;
+    const html = this.inputZoneHTML.value;
+    const css = this.inputZoneCSS.value;
+    const slot = this.inputZoneSlot.value;
+    const status = this.inputZoneStatus.status;
+    const description = this.inputZoneDescription.value;
 
     if (name && siteId && type && description && slot) {
       this.props.createZone({
         name,
         siteId,
         type,
-        description,
         html,
         css,
         slot,
+        status,
+        description,
       });
 
       this.clearInput();
@@ -108,19 +111,19 @@ class Zones extends Component {
     const { siteId, type, status } = this.props.zones.filters;
     let displayable = false;
 
-    if (!siteId || siteId === 'all' || siteId === zone.siteId) {
+    if (!siteId || siteId === zone.siteId) {
       displayable = true;
     } else {
       return false;
     }
 
-    if (!type || type === 'all' || type === zone.type) {
+    if (!type || type === zone.type) {
       displayable = true;
     } else {
       return false;
     }
 
-    if (!status || status === 'all' || status === zone.status) {
+    if (!status || status === zone.status) {
       displayable = true;
     } else {
       return false;
@@ -166,7 +169,7 @@ class Zones extends Component {
                           onChange={event => this.onFilterChange(event, 'siteId')}
                           defaultValue={this.props.zones.filters && this.props.zones.filters.siteId}
                         >
-                          <option value="all">All sites</option>
+                          <option value="null">All sites</option>
                           {this.props.sites.list && this.props.sites.list.map(site => (
                             <option
                               key={site.id} value={site.id}
@@ -190,7 +193,7 @@ class Zones extends Component {
                           onChange={event => this.onFilterChange(event, 'type')}
                           defaultValue={this.props.zones.filters && this.props.zones.filters.type}
                         >
-                          <option value="all">All types</option>
+                          <option value="null">All types</option>
                           <option value="type-1">Type 1</option>
                           <option value="type-2">Type 2</option>
                           <option value="type-3">Type 3</option>
@@ -213,7 +216,7 @@ class Zones extends Component {
                           onChange={event => this.onFilterChange(event, 'status')}
                           defaultValue={this.props.zones.filters && this.props.zones.filters.status}
                         >
-                          <option value="all">All states</option>
+                          <option value="null">All states</option>
                           <option value="active">Active</option>
                           <option value="inactive">Inactive</option>
                         </select>
@@ -252,12 +255,15 @@ class Zones extends Component {
                         <input
                           type="text" className="form-control" id="inputZoneName"
                           placeholder="Dan Tri"
+                          ref={c => {
+                            this.inputZoneName = c;
+                          }}
                         />
                       </div>
                     </div>
                     <div className="form-group">
                       <label
-                        htmlFor="inputZoneType"
+                        htmlFor="inputZoneSite"
                         className="col-sm-2 control-label"
                       >Website</label>
                       <div className="col-sm-10">
@@ -265,6 +271,9 @@ class Zones extends Component {
                           id="inputZoneSite"
                           className="form-control select2"
                           style={{ width: '100%' }}
+                          ref={c => {
+                            this.inputZoneSite = c;
+                          }}
                         >
                           {this.props.sites.list && this.props.sites.list.map(site => (
                             <option
@@ -283,6 +292,9 @@ class Zones extends Component {
                         <select
                           id="inputZoneType"
                           className="form-control"
+                          ref={c => {
+                            this.inputZoneType = c;
+                          }}
                         >
                           <option value="type-1">Type 1</option>
                           <option value="type-2">Type 2</option>
@@ -301,6 +313,9 @@ class Zones extends Component {
                         <textarea
                           className="form-control" id="inputZoneHTML"
                           rows="5" placeholder="More info..."
+                          ref={c => {
+                            this.inputZoneHTML = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -313,6 +328,9 @@ class Zones extends Component {
                         <textarea
                           className="form-control" id="inputZoneCSS"
                           rows="5" placeholder="More info..."
+                          ref={c => {
+                            this.inputZoneCSS = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -325,6 +343,9 @@ class Zones extends Component {
                         <input
                           type="text" className="form-control" id="inputZoneSlot"
                           placeholder="..."
+                          ref={c => {
+                            this.inputZoneSlot = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -336,9 +357,12 @@ class Zones extends Component {
                       <div className="col-sm-10">
                         <select
                           id="inputZoneStatus" className="form-control"
+                          ref={c => {
+                            this.inputZoneStatus = c;
+                          }}
                         >
-                          <option>Active</option>
-                          <option>Inactive</option>
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
                         </select>
                       </div>
                     </div>
@@ -351,6 +375,9 @@ class Zones extends Component {
                         <textarea
                           className="form-control" id="inputZoneDescription"
                           rows="5" placeholder="More info..."
+                          ref={c => {
+                            this.inputZoneDescription = c;
+                          }}
                         />
                       </div>
                     </div>

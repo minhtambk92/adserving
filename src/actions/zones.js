@@ -63,11 +63,15 @@ export function getZone(id) {
   };
 }
 
-export function getZones() {
+export function getZones(args = {
+  where: {},
+  limit: 0,
+  order: '',
+}) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query {
-        zones {
+      query ($where: JSON, $order: String, $limit: Int) {
+        zones(where: $where, order: $order, limit: $limit) {
           id
           siteId
           name
@@ -82,7 +86,16 @@ export function getZones() {
         }
       }`;
 
-    const { data } = await graphqlRequest(query);
+    const variables = Object.assign({}, args);
+    const { siteId, type, status } = await getState().zones.filters;
+
+    if (variables.where === {}) {
+      if (siteId) variables.where.siteId = siteId;
+      if (type) variables.where.type = type;
+      if (status) variables.where.siteId = status;
+    }
+
+    const { data } = await graphqlRequest(query, variables);
 
     dispatch({
       type: GET_ZONES,
