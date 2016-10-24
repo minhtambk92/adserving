@@ -187,15 +187,16 @@ class Banner extends Component {
     }
     return arrPlacement;
   }
-  filterPlacementsNotInBanner(allPlacement, placementOfBanner) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    if (placementOfBanner.length === 0) {
+
+  filterPlacementsNotInBanner(allPlacement, pob) {
+    if (pob.length === 0) {
       return allPlacement;
-    } else if (placementOfBanner.length > 0) {
+    } else if (pob.length > 0) {
       const arrId = [];
       const newArr = [];
       const arrPlacement = [];
-      for (let i = 0; i < placementOfBanner.length; i += 1) {
-        newArr.push(placementOfBanner[i].placements.id);
+      for (let i = 0; i < pob.length; i += 1) {
+        newArr.push(pob[i].placements.id);
       }
       for (let j = 0; j < allPlacement.length; j += 1) {
         arrId.push(allPlacement[j].id);
@@ -221,8 +222,7 @@ class Banner extends Component {
     return false;
   }
 
-  pushPlacementToBanner(placement) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const placementId = placement.id;
+  pushPlacementToBanner(placementId) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const bannerId = this.props.bannerId;
     const zoneId = null;
     if (placementId && bannerId) {
@@ -456,7 +456,7 @@ class Banner extends Component {
                       </thead>
                       <tbody>
                         {this.props.banners.editing &&
-                         this.filterPlacements(this.props.banners.editing.pbzBanner).map(placement => {
+                         this.filterPlacements(this.props.banners.editing.pbzBanner).map(placement => { // eslint max-len
                            if (this.isIndexOf(placement.placements.name,
                                 placement.placements.startTime,
                                 placement.placements.endTime, placement.placements.size,
@@ -539,6 +539,7 @@ class Banner extends Component {
                         </tr>
                       </thead>
                       <tbody>
+                        {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                         {this.props.placements.list && this.props.banners.editing &&
                           this.filterPlacementsNotInBanner(this.props.placements.list,
                             this.props.banners.editing.pbzBanner).map(placement => {
@@ -556,7 +557,9 @@ class Banner extends Component {
                                     <td>{placement.size}</td>
                                     <td>{moment(new Date(placement.startTime)).format('L')}</td>
                                     <td>{moment(new Date(placement.endTime)).format('L')}</td>
-                                    <td onClick={() => this.pushPlacementToBanner(placement)}>
+                                    <td
+                                      onClick={() => this.pushPlacementToBanner(placement.id)}
+                                    >
                                       Add Placement
                                     </td>
                                   </tr>
@@ -564,6 +567,7 @@ class Banner extends Component {
                               }
                               return false;
                             })}
+                        {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                       </tbody>
                       <tfoot>
                         <tr>

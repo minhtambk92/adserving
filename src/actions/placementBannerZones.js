@@ -18,11 +18,17 @@ export function createPlacementBannerZone({ placementId, bannerId, zoneId }) {
     const newArrBanner = [];
     const newArrZone = [];
     if (data.placementBannerZones.length > 0) {
-      for (let i = 0; i < data.placementBannerZones.length; i += 1) {
-        if (data.placementBannerZones[i].bannerId === null) {
-          newArrBanner.push(data.placementBannerZones[i]);
-        } else if (data.placementBannerZones[i].zoneId === null) {
-          newArrZone.push(data.placementBannerZones[i]);
+      if (bannerId !== null && zoneId === null) {
+        for (let i = 0; i < data.placementBannerZones.length; i += 1) {
+          if (data.placementBannerZones[i].bannerId === null) {
+            newArrBanner.push(data.placementBannerZones[i]);
+          }
+        }
+      } else if (bannerId === null && zoneId !== null) {
+        for (let i = 0; i < data.placementBannerZones.length; i += 1) {
+          if (data.placementBannerZones[i].zoneId === null) {
+            newArrZone.push(data.placementBannerZones[i]);
+          }
         }
       }
       if (newArrBanner.length > 0) {

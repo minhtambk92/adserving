@@ -20,6 +20,33 @@ export function getPlacement(id) {
           weight
           description
           campaignId
+          pbzPlacement {
+            banners {
+              id
+              name
+              html
+              width
+              height
+              keyword
+              weight
+              description
+              createdAt
+              updatedAt
+            }
+            zones {
+              id
+              siteId
+              name
+              description
+              type
+              html
+              css
+              slot
+              status
+              createdAt
+              updatedAt
+            }
+          }
           createdAt
           updatedAt
         }
@@ -180,8 +207,35 @@ export function updatePlacement({
           endTime
           weight
           description
-           campaignId
-           createdAt
+          campaignId
+          pbzPlacement {
+            banners {
+              id
+              name
+              html
+              width
+              height
+              keyword
+              weight
+              description
+              createdAt
+              updatedAt
+            }
+            zones {
+              id
+              siteId
+              name
+              description
+              type
+              html
+              css
+              slot
+              status
+              createdAt
+              updatedAt
+            }
+          }
+          createdAt
           updatedAt
         }
       }`;

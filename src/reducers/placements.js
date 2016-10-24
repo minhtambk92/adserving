@@ -12,7 +12,7 @@ export default function placements(state = {}, action) {
       {
         return {
           ...state,
-          current: action.payload.placement,
+          editing: action.payload.placement,
         };
       }
 
@@ -33,7 +33,7 @@ export default function placements(state = {}, action) {
       {
         return {
           ...state,
-          current: action.payload.placement,
+          editing: action.payload.placement,
         };
       }
     case DELETE_PLACEMENT:
