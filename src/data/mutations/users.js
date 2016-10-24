@@ -26,7 +26,7 @@ const users = {
         opts.where = options.where || {};
 
         const salt = genSaltSync();
-        const newUser = args.user;
+        const newUser = Object.assign({}, args.user);
         newUser.password = hashSync(newUser.password, salt);
 
         await User.create(newUser).then(user => {
