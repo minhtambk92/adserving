@@ -188,7 +188,7 @@ class Banner extends Component {
     return arrPlacement;
   }
 
-  filterPlacementsNotInBanner(allPlacement, pob) {
+  filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (pob.length === 0) {
       return allPlacement;
     } else if (pob.length > 0) {
@@ -456,26 +456,27 @@ class Banner extends Component {
                       </thead>
                       <tbody>
                         {this.props.banners.editing &&
-                         this.filterPlacements(this.props.banners.editing.pbzBanner).map(placement => { // eslint max-len
-                           if (this.isIndexOf(placement.placements.name,
-                                placement.placements.startTime,
-                                placement.placements.endTime, placement.placements.size,
-                                placement.placements.description, placement.placements.weight)) {
-                             return (
-                               <tr key={placement.placements.id} >
-                                 <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                 <th><Link to={`/resource/placement/${placement.placements.id}`}>
-                                   {placement.placements.name}
-                                 </Link>
-                                 </th>
-                                 <td>{placement.placements.size}</td>
-                                 <td>{moment(new Date(placement.placements.startTime)).format('L')}</td>
-                                 <td>{moment(new Date(placement.placements.endTime)).format('L')}</td>
-                               </tr>
-                              );
-                           }
-                           return false;
-                         })}
+                         this.filterPlacements(this.props.banners.editing.pbzBanner)
+                           .map(placement => {
+                             if (this.isIndexOf(placement.placements.name,
+                                  placement.placements.startTime,
+                                  placement.placements.endTime, placement.placements.size,
+                                  placement.placements.description, placement.placements.weight)) {
+                               return (
+                                 <tr key={placement.placements.id} >
+                                   <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                   <th><Link to={`/resource/placement/${placement.placements.id}`}>
+                                     {placement.placements.name}
+                                   </Link>
+                                   </th>
+                                   <td>{placement.placements.size}</td>
+                                   <td>{moment(new Date(placement.placements.startTime)).format('L')}</td>
+                                   <td>{moment(new Date(placement.placements.endTime)).format('L')}</td>
+                                 </tr>
+                                );
+                             }
+                             return false;
+                           })}
                       </tbody>
                       <tfoot>
                         <tr>
@@ -541,7 +542,7 @@ class Banner extends Component {
                       <tbody>
                         {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                         {this.props.placements.list && this.props.banners.editing &&
-                          this.filterPlacementsNotInBanner(this.props.placements.list,
+                          this.filterPlmNotIn(this.props.placements.list,
                             this.props.banners.editing.pbzBanner).map(placement => {
                               if (this.isIndexOf(placement.name,
                                   placement.startTime,
