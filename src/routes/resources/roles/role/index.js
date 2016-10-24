@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import Site from './Site';
+import Role from './Role';
 
 export default {
 
@@ -16,8 +16,8 @@ export default {
 
   async action({ params }) {
     return {
-      title: 'Sites Management | Admin Dev Kit',
-      component: <Site siteId={params.id} />,
+      title: 'Roles Management | Admin Dev Kit',
+      component: <Role roleId={params.id} />,
     };
   },
 
