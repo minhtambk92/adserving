@@ -16,6 +16,7 @@ export default {
     require('./campaigns').default,
     require('./placements').default,
     require('./sites').default,
+    require('./roles').default,
     require('./users').default,
     require('./zones').default,
   ],
