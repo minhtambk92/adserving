@@ -18,22 +18,24 @@ function filters(state = {}, action) {
     }
     case SET_USERS_FILTERS: {
       const newState = Object.assign({}, state);
+      const criteriaValue = Object.values(action.payload).pop();
+      const criteriaKey = Object.keys(action.payload).pop();
 
-      switch (Object.values(action.payload).pop()) {
+      switch (criteriaValue) {
         case 'null': {
-          delete newState[Object.keys(action.payload).pop()];
+          delete newState[criteriaKey];
           return { ...newState };
         }
         case 'true': {
           return {
             ...state,
-            ...{ [Object.keys(action.payload).pop()]: true },
+            ...{ [criteriaKey]: true },
           };
         }
         case 'false': {
           return {
             ...state,
-            ...{ [Object.keys(action.payload).pop()]: false },
+            ...{ [criteriaKey]: false },
           };
         }
         default: {
