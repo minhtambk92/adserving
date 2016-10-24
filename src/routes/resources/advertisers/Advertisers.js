@@ -49,6 +49,7 @@ class Advertisers extends Component {
     });
     /* eslint-enable no-undef */
   }
+
   componentDidUpdate() {
     /* eslint-disable no-undef */
     $('input[type="checkbox"].inputChooseAdvertiser').iCheck({
@@ -58,11 +59,11 @@ class Advertisers extends Component {
     /* eslint-enable no-undef */
   }
 
-  clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    document.getElementById('inputAdvertiserContact').value = null;
-    document.getElementById('inputAdvertiserName').value = null;
-    document.getElementById('inputAdvertiserEmail').value = null;
-    document.getElementById('inputAdvertiserDescription').value = null;
+  clearInput() {
+    this.inputAdvertiserName.value = null;
+    this.inputAdvertiserContact.value = null;
+    this.inputAdvertiserEmail.value = null;
+    this.inputAdvertiserDescription.value = null;
   }
 
   searchFor(event) {
@@ -73,11 +74,11 @@ class Advertisers extends Component {
     }));
   }
 
-  createAdvertiser(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const contact = document.getElementById('inputAdvertiserContact').value;
-    const name = document.getElementById('inputAdvertiserName').value;
-    const email = document.getElementById('inputAdvertiserEmail').value;
-    const description = document.getElementById('inputAdvertiserDescription').value;
+  createAdvertiser() {
+    const name = this.inputAdvertiserName.value;
+    const contact = this.inputAdvertiserContact.value;
+    const email = this.inputAdvertiserEmail.value;
+    const description = this.inputAdvertiserDescription.value;
 
     if (contact && name && email && description) {
       this.props.createAdvertiser({ email, name, contact, description }).then(() => {
@@ -124,6 +125,9 @@ class Advertisers extends Component {
                         <input
                           type="text" className="form-control" id="inputAdvertiserName"
                           placeholder="Admicro"
+                          ref={c => {
+                            this.inputAdvertiserName = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -133,6 +137,9 @@ class Advertisers extends Component {
                         <input
                           type="text" className="form-control" id="inputAdvertiserContact"
                           placeholder="0987654321"
+                          ref={c => {
+                            this.inputAdvertiserContact = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -145,6 +152,9 @@ class Advertisers extends Component {
                         <input
                           type="text" className="form-control" id="inputAdvertiserEmail"
                           placeholder="contact@dantri.com.vn"
+                          ref={c => {
+                            this.inputAdvertiserEmail = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -157,6 +167,9 @@ class Advertisers extends Component {
                         <textarea
                           className="form-control" id="inputAdvertiserDescription"
                           rows="5" placeholder="More info..."
+                          ref={c => {
+                            this.inputAdvertiserDescription = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -212,6 +225,8 @@ class Advertisers extends Component {
                         <th>Name</th>
                         <th>Contact</th>
                         <th>Email</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -221,13 +236,24 @@ class Advertisers extends Component {
                             advertiser.name, advertiser.description)) {
                           return (
                             <tr key={advertiser.id}>
-                              <th><input type="checkbox" className="inputChooseAdvertiser" /></th>
-                              <td><Link to={`/resource/advertiser/${advertiser.id}`}>{advertiser.name}</Link>
+                              <td><input type="checkbox" className="inputChooseAdvertiser" /></td>
+                              <td>
+                                <Link
+                                  to={`/resource/advertiser/${advertiser.id}`}
+                                >{advertiser.name}</Link>
                               </td>
                               <td>{advertiser.contact}</td>
                               <td>{advertiser.email}</td>
-                              <td><Link to={`/resource/advertiser/${advertiser.id}`}>Add New Campaign</Link></td>
-                              <td><Link to={`/resource/advertiser/${advertiser.id}`}>Campaigns</Link></td>
+                              <td>
+                                <Link
+                                  to={`/resource/advertiser/${advertiser.id}`}
+                                >Add New Campaign</Link>
+                              </td>
+                              <td>
+                                <Link
+                                  to={`/resource/advertiser/${advertiser.id}`}
+                                >Campaigns</Link>
+                              </td>
                             </tr>
                           );
                         }
@@ -240,6 +266,8 @@ class Advertisers extends Component {
                         <th>Name</th>
                         <th>Contact</th>
                         <th>Email</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
                       </tr>
                     </tfoot>
                   </table>
