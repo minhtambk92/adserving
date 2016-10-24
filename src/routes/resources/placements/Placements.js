@@ -68,6 +68,14 @@ class Placements extends Component {
     });
     /* eslint-enable no-undef */
   }
+  componentDidUpdate() {
+    /* eslint-disable no-undef */
+    $('input[type="checkbox"].inputChoosePlacement').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue',
+    });
+    /* eslint-enable no-undef */
+  }
 
   searchFor(event) {
     event.persist();

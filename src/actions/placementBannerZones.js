@@ -1,3 +1,5 @@
+import { CREATE_PLACEMENT_BANNER_ZONE } from '../constants';
+
 export function createPlacementBannerZone({ placementId, bannerId, zoneId }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
@@ -13,11 +15,19 @@ export function createPlacementBannerZone({ placementId, bannerId, zoneId }) {
       }`;
 
     const { data } = await graphqlRequest(query);
+    const newArrBanner = [];
+    const newArrZone = [];
     if (data.placementBannerZones.length > 0) {
-      for (let i = 0; i < data.placementBannerZones.length; i++) {
-        const id = data.placementBannerZones[i].id;
+      for (let i = 0; i < data.placementBannerZones.length; i += 1) {
         if (data.placementBannerZones[i].bannerId === null) {
-          const mutation = `
+          newArrBanner.push(data.placementBannerZones[i]);
+        } else if (data.placementBannerZones[i].zoneId === null) {
+          newArrZone.push(data.placementBannerZones[i]);
+        }
+      }
+      if (newArrBanner.length > 0) {
+        const id = newArrBanner[0].id;
+        const mutation = `
               mutation ($placementBannerZone: PlacementBannerZoneInputType!) {
                updatedPlacementBannerZone(placementBannerZone: $placementBannerZone) {
                   id
@@ -28,16 +38,72 @@ export function createPlacementBannerZone({ placementId, bannerId, zoneId }) {
                   updatedAt
                 }
               }`;
-
-          const { data1 } = await graphqlRequest(mutation, {
-            placementBannerZone: {
-              id,
-              placementId,
-              bannerId,
-              zoneId,
-            },
-          });
+        const updateBanner = await graphqlRequest(mutation, {
+          placementBannerZone: {
+            id,
+            placementId,
+            bannerId,
+          },
+        });
+        dispatch({
+          type: CREATE_PLACEMENT_BANNER_ZONE,
+          payload: {
+            placementBannerZone: updateBanner.updatedPlacementBannerZone,
+          },
+        });
+      }
+      if (newArrZone.length > 0) {
+        const id = newArrZone[0].id;
+        const mutation = `
+              mutation ($placementBannerZone: PlacementBannerZoneInputType!) {
+               updatedPlacementBannerZone(placementBannerZone: $placementBannerZone) {
+                  id
+                  placementId
+                  bannerId
+                  zoneId
+                  createdAt
+                  updatedAt
+                }
+              }`;
+        const updateZoneId = await graphqlRequest(mutation, {
+          placementBannerZone: {
+            id,
+            placementId,
+            zoneId,
+          },
+        });
+        dispatch({
+          type: CREATE_PLACEMENT_BANNER_ZONE,
+          payload: {
+            placementBannerZone: updateZoneId.updatedPlacementBannerZone,
+          },
+        });
+      }
+      if (newArrBanner.length === 0 && newArrZone.length === 0) {
+        const mutation = `
+      mutation ($placementBannerZone: PlacementBannerZoneInputTypeWithoutId!) {
+        createdPlacementBannerZone(placementBannerZone: $placementBannerZone) {
+          id
+          placementId
+          bannerId
+          zoneId
+          createdAt
+          updatedAt
         }
+      }`;
+        const create = await graphqlRequest(mutation, {
+          placementBannerZone: {
+            placementId,
+            bannerId,
+            zoneId,
+          },
+        });
+        dispatch({
+          type: CREATE_PLACEMENT_BANNER_ZONE,
+          payload: {
+            placementBannerZone: create.createdPlacementBannerZone,
+          },
+        });
       }
     } else {
       const mutation = `
@@ -51,15 +117,19 @@ export function createPlacementBannerZone({ placementId, bannerId, zoneId }) {
           updatedAt
         }
       }`;
-
-      const { data2 } = await graphqlRequest(mutation, {
+      const create = await graphqlRequest(mutation, {
         placementBannerZone: {
           placementId,
           bannerId,
           zoneId,
         },
       });
+      dispatch({
+        type: CREATE_PLACEMENT_BANNER_ZONE,
+        payload: {
+          placementBannerZone: create.createdPlacementBannerZone,
+        },
+      });
     }
   };
 }
-
