@@ -189,15 +189,13 @@ class Roles extends Component {
                     <thead>
                       <tr>
                         <th><input type="checkbox" className="inputChooseRole" /></th>
+                        <th>Alias</th>
                         <th>Name</th>
-                        <th>Domain</th>
-                        <th>Email</th>
-                        <th>Description</th>
                       </tr>
                     </thead>
                     <tbody>
                       {this.props.roles.list && this.props.roles.list.map(role => {
-                        if (this.isIndexOf(role.domain, role.name, role.email, role.description)) {
+                        if (this.isIndexOf(role.uniqueName, role.name)) {
                           return (
                             <tr key={role.id}>
                               <td><input type="checkbox" className="inputChooseRole" /></td>
@@ -215,10 +213,8 @@ class Roles extends Component {
                     <tfoot>
                       <tr>
                         <th><input type="checkbox" className="inputChooseRole" /></th>
+                        <th>Alias</th>
                         <th>Name</th>
-                        <th>Domain</th>
-                        <th>Status</th>
-                        <th>Description</th>
                       </tr>
                     </tfoot>
                   </table>
