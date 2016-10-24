@@ -13,10 +13,10 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSites } from '../../../actions/sites';
 import {
-  getZonesFilters,
-  setZonesFilters,
   getZones,
   createZone,
+  getZonesFilters,
+  setZonesFilters,
 } from '../../../actions/zones';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
@@ -69,7 +69,7 @@ class Zones extends Component {
     event.persist();
 
     await this.props.setZonesFilters({
-      [field]: event.target.value === 'null' ? null : event.target.value,
+      [field]: event.target.value,
     });
   }
 
@@ -108,28 +108,18 @@ class Zones extends Component {
   }
 
   isFiltered(zone) {
-    const { siteId, type, status } = this.props.zones.filters;
-    let displayable = false;
+    const filters = this.props.zones.filters;
 
-    if (!siteId || siteId === zone.siteId) {
-      displayable = true;
-    } else {
-      return false;
+    for (const criteria in filters) { // eslint-disable-line no-restricted-syntax
+      if (
+        !{}.hasOwnProperty.call(zone, criteria) ||
+        filters[criteria] !== zone[criteria]
+      ) {
+        return false;
+      }
     }
 
-    if (!type || type === zone.type) {
-      displayable = true;
-    } else {
-      return false;
-    }
-
-    if (!status || status === zone.status) {
-      displayable = true;
-    } else {
-      return false;
-    }
-
-    return displayable;
+    return true;
   }
 
   render() {

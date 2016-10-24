@@ -53,7 +53,13 @@ export function getUser(id) {
   };
 }
 
-export function getUsers() {
+export function getUsers(args = {
+  where: {},
+  limit: 0,
+  order: '',
+}, options = {
+  globalFilters: false,
+}) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
@@ -67,7 +73,19 @@ export function getUsers() {
         }
       }`;
 
-    const { data } = await graphqlRequest(query);
+    const variables = Object.assign({}, args);
+    const filters = await getState().zones.filters;
+
+    if (
+      options.globalFilters &&
+      variables.where === {} &&
+      Object.keys(filters).length > 0 &&
+      filters.constructor === Object
+    ) {
+      variables.where = Object.assign({}, filters);
+    }
+
+    const { data } = await graphqlRequest(query, variables);
 
     dispatch({
       type: GET_USERS,
