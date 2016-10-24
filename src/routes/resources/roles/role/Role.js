@@ -48,10 +48,8 @@ class Role extends Component {
   }
 
   updateRole() {
-    const {
-      uniqueName,
-      name,
-    } = this.state;
+    const uniqueName = this.inputRoleUniqueName.value;
+    const name = this.inputRoleName.value;
 
     const role = { id: this.props.roleId };
 

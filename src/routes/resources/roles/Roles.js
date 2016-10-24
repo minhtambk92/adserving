@@ -97,7 +97,7 @@ class Roles extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: CREATE NEW */}
+              {/* BOX: CREATE */}
               <div className="box box-primary collapsed-box">
                 <div className="box-header with-border">
                   <h3 className="box-title">Create a new role</h3>
@@ -165,7 +165,7 @@ class Roles extends Component {
               {/* BOX: LIST */}
               <div className="box box-info">
                 <div className="box-header with-border">
-                  <h3 className="box-title">List of webroles</h3>
+                  <h3 className="box-title">List of roles</h3>
 
                   <div className="box-tools">
                     <div className="input-group input-group-sm" style={{ width: 150 }}>
