@@ -21,19 +21,19 @@ export default function placements(state = {}, action) {
       {
         return {
           ...state,
-          latest: action.payload.placements,
+          list: action.payload.placements,
         };
       }
 
     case CREATE_PLACEMENT:
       {
-        state.latest.unshift(action.payload.placement);
+        state.list.unshift(action.payload.placement);
         return { ...state };
       }
     case CREATE_PLACEMENT_INCLUDE_CAMPAIGN: {
       return {
         ...state,
-        new: action.payload.placement,
+        list: action.payload.placement,
       };
     }
     case UPDATE_PLACEMENT:

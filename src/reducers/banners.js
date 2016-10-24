@@ -6,7 +6,7 @@ export default function banners(state = {}, action) {
       {
         return {
           ...state,
-          current: action.payload.banner,
+          editing: action.payload.banner,
         };
       }
 
@@ -14,13 +14,13 @@ export default function banners(state = {}, action) {
       {
         return {
           ...state,
-          latest: action.payload.banners,
+          list: action.payload.banners,
         };
       }
 
     case CREATE_BANNER:
       {
-        state.latest.unshift(action.payload.banner);
+        state.list.unshift(action.payload.banner);
         return { ...state };
       }
 
@@ -28,7 +28,7 @@ export default function banners(state = {}, action) {
       {
         return {
           ...state,
-          current: action.payload.banner,
+          editing: action.payload.banner,
         };
       }
 
@@ -36,7 +36,7 @@ export default function banners(state = {}, action) {
       {
         return {
           ...state,
-          current: null,
+          editing: null,
         };
       }
 

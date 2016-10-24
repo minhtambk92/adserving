@@ -8,6 +8,7 @@ import sites from './sites';
 import advertisers from './advertisers';
 import campaigns from './campaigns';
 import placements from './placements';
+import placementBannerZones from './placementBannerZones';
 import zones from './zones';
 import banners from './banners';
 
@@ -17,6 +18,7 @@ const mutations = new ObjectType({
     // ...users,
     ...sites,
     ...advertisers,
+    ...placementBannerZones,
     ...campaigns,
     ...placements,
     ...banners,

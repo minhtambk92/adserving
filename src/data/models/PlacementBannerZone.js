@@ -6,20 +6,21 @@ import DataType from 'sequelize';
 import Model from '../sequelize';
 
 const PlacementBannerZone = Model.define('PlacementBannerZone', {
-
+  id: {
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+    primaryKey: true,
+  },
   placementId: {
     type: DataType.UUID,
-    primaryKey: true,
     unique: 'pbz',
   },
   bannerId: {
     type: DataType.UUID,
-    primaryKey: true,
     unique: 'pbz',
   },
   zoneId: {
     type: DataType.UUID,
-    primaryKey: true,
     unique: 'pbz',
   },
 

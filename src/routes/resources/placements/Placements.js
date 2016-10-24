@@ -12,6 +12,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getPlacements, createPlacement } from '../../../actions/placements';
+import { getCampaigns } from '../../../actions/campaigns';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
 import s from './Placements.css';
@@ -24,6 +25,8 @@ class Placements extends Component {
     placements: PropTypes.object,
     getPlacements: PropTypes.func,
     createPlacement: PropTypes.func,
+    campaigns: PropTypes.object,
+    getCampaigns: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -36,6 +39,7 @@ class Placements extends Component {
 
   componentWillMount() {
     this.props.getPlacements();
+    this.props.getCampaigns();
   }
 
   componentDidMount() {
@@ -93,22 +97,22 @@ class Placements extends Component {
 
   createPlacement() {
     const name = document.getElementById('inputPlacementName').value;
-    const userId = 'da31ecf7-83ce-4c64-932a-ec165d42e65d';
     const startTime = new Date(moment(new Date(document.getElementById('inputPlacementStartTime').value)).format('YYYY-MM-DD 00:00:00'));
     const endTime = new Date(moment(new Date(document.getElementById('inputPlacementEndTime').value)).format('YYYY-MM-DD 00:00:00'));
     const size = document.getElementById('inputPlacementSize').value;
     const weight = document.getElementById('inputPlacementWeight').value;
     const description = document.getElementById('inputPlacementDescription').value;
-    if (userId && name && startTime && endTime && size && weight && description) {
-      if (endTime > startTime) {
+    const campaignId = document.getElementById('inputCampaign').value;
+    if (name && startTime && endTime && size && weight && description) {
+      if (moment(startTime).format('x') < moment(endTime).format('x')) {
         this.props.createPlacement({
-          userId,
           name,
           startTime,
           endTime,
           size,
           weight,
           description,
+          campaignId,
         }).then(() => {
           this.clearInput();
         });
@@ -148,6 +152,19 @@ class Placements extends Component {
                           type="text" className="form-control" id="inputPlacementName"
                           placeholder="Admicro"
                         />
+                      </div>
+                    </div>
+                    <div className="form-group has-feedback">
+                      <label htmlFor="inputCampaign" className="col-sm-2 control-label">Campaign</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputCampaign" className="form-control"
+                        >
+                          {this.props.campaigns.list
+                          && this.props.campaigns.list.map(campaign => (
+                            <option key={campaign.id} value={campaign.id}>{campaign.name}</option>
+                          ))}
+                        </select>
                       </div>
                     </div>
                     <div className="form-group has-feedback">
@@ -258,8 +275,8 @@ class Placements extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      { this.props.placements.latest &&
-                      this.props.placements.latest.map(placement => {
+                      { this.props.placements.list &&
+                      this.props.placements.list.map(placement => {
                         if (this.isIndexOf(placement.name, placement.startTime,
                             placement.endTime, placement.size,
                             placement.description, placement.weight)) {
@@ -316,11 +333,13 @@ class Placements extends Component {
 }
 const mapState = (state) => ({
   placements: state.placements,
+  campaigns: state.campaigns,
 });
 
 const mapDispatch = {
   getPlacements,
   createPlacement,
+  getCampaigns,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placements));

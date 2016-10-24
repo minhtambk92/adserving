@@ -19,7 +19,6 @@ export function getBanner(id) {
           keyword
           weight
           description
-          advertiserId
           createdAt
           updatedAt
         }
@@ -49,7 +48,6 @@ export function getBanners() {
           keyword
           weight
           description
-          advertiserId
           createdAt
           updatedAt
           }
@@ -74,13 +72,12 @@ export function createBanner({
   keyword,
   weight,
   description,
-  advertiserId,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($banner: BannerInputTypeWithoutId!) {
         createdBanner(banner: $banner) {
-         id
+          id
           name
           html
           width
@@ -88,7 +85,6 @@ export function createBanner({
           keyword
           weight
           description
-          advertiserId
           createdAt
           updatedAt
         }
@@ -103,7 +99,6 @@ export function createBanner({
         keyword,
         weight,
         description,
-        advertiserId,
 
       },
     });
@@ -126,7 +121,6 @@ export function updateBanner({
   keyword,
   weight,
   description,
-  advertiserId,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -140,7 +134,6 @@ export function updateBanner({
           keyword
           weight
           description
-          advertiserId
           createdAt
           updatedAt
         }
@@ -156,7 +149,6 @@ export function updateBanner({
         keyword,
         weight,
         description,
-        advertiserId,
       },
     });
 
@@ -182,7 +174,6 @@ export function deleteBanner(id) {
           keyword
           weight
           description
-          advertiserId
           createdAt
           updatedAt
           deletedAt

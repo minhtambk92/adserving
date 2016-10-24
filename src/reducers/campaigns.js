@@ -22,13 +22,13 @@ export default function campaigns(state = {}, action) {
       {
         return {
           ...state,
-          latest: action.payload.campaigns,
+          list: action.payload.campaigns,
         };
       }
 
     case CREATE_CAMPAIGN:
       {
-        state.latest.unshift(action.payload.campaign);
+        state.list.unshift(action.payload.campaign);
         return {
           ...state,
         };
