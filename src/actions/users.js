@@ -6,7 +6,27 @@ import {
   CREATE_USER,
   UPDATE_USER,
   DELETE_USER,
+  GET_USERS_FILTERS,
+  SET_USERS_FILTERS,
 } from '../constants';
+
+export function getUsersFilters() {
+  return async(dispatch) => {
+    dispatch({
+      type: GET_USERS_FILTERS,
+      payload: {},
+    });
+  };
+}
+
+export function setUsersFilters(filter) {
+  return async(dispatch) => {
+    dispatch({
+      type: SET_USERS_FILTERS,
+      payload: filter,
+    });
+  };
+}
 
 export function getUser(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
@@ -76,7 +96,7 @@ export function createUser({ email, password, emailConfirmed, status }) {
       user: {
         email,
         password,
-        emailConfirmed,
+        emailConfirmed: emailConfirmed === 'true',
         status,
       },
     });
@@ -109,7 +129,7 @@ export function updateUser({ id, email, password, emailConfirmed, status }) {
         id,
         email,
         password,
-        emailConfirmed,
+        emailConfirmed: emailConfirmed === 'true',
         status,
       },
     });

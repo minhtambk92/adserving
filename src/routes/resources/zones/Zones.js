@@ -38,8 +38,8 @@ class Zones extends Component {
   };
 
   componentWillMount() {
-    this.props.getZonesFilters();
     this.props.getSites();
+    this.props.getZonesFilters();
     this.props.getZones();
   }
 
@@ -139,7 +139,7 @@ class Zones extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: FORM OF FILTER */}
+              {/* BOX: FILTER */}
               <div className="box box-default">
                 <div className="box-header with-border">
                   <h3 className="box-title">Filter by:</h3>
