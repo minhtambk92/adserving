@@ -10,15 +10,15 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
-// import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanner, updateBanner, deleteBanner } from '../../../../actions/banners';
 import { getCampaigns } from '../../../../actions/campaigns';
-import { createPlacementIncludeCampaign } from '../../../../actions/placements';
+import { createPlacement, getPlacements } from '../../../../actions/placements';
 import { createPlacementBannerZone } from '../../../../actions/placementBannerZones';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './Banner.css';
+// import { defineMessages, FormattedRelative } from 'react-intl';
 
 const pageTitle = 'Banner';
 
@@ -32,9 +32,10 @@ class Banner extends Component {
     deleteBanner: PropTypes.func,
     campaigns: PropTypes.object,
     getCampaigns: PropTypes.func,
-    createPlacementIncludeCampaign: PropTypes.func,
+    createPlacement: PropTypes.func,
     placements: PropTypes.object,
     createPlacementBannerZone: PropTypes.func,
+    getPlacements: PropTypes.func,
     placementBannerZones: PropTypes.object,
   };
 
@@ -48,12 +49,14 @@ class Banner extends Component {
       keyword: '',
       weight: 0,
       description: '',
+      searchText: '',
     };
   }
 
   componentWillMount() {
     this.props.getBanner(this.props.bannerId);
     this.props.getCampaigns();
+    this.props.getPlacements();
   }
 
   componentDidMount() {
@@ -103,6 +106,15 @@ class Banner extends Component {
     document.getElementById('inputBannerDescription').value = description;
   }
 
+  componentDidUpdate() {
+    /* eslint-disable no-undef */
+    $('input[type="checkbox"].inputChoosePlacement').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue',
+    });
+    /* eslint-enable no-undef */
+  }
+
   onInputChange(event, field) {
     event.persist();
 
@@ -111,6 +123,7 @@ class Banner extends Component {
       [field]: event.target.value,
     }));
   }
+
   createPlacement() {
     const name = document.getElementById('inputPlacementName').value;
     const startTime = new Date(moment(new Date(document.getElementById('inputPlacementStartTime').value)).format('YYYY-MM-DD 00:00:00'));
@@ -121,7 +134,7 @@ class Banner extends Component {
     const campaignId = document.getElementById('inputCampaign').value;
     if (name && startTime && endTime && size && weight && description && campaignId) {
       if (moment(startTime).format('x') < moment(endTime).format('x')) {
-        this.props.createPlacementIncludeCampaign({
+        this.props.createPlacement({
           name,
           startTime,
           endTime,
@@ -130,17 +143,21 @@ class Banner extends Component {
           description,
           campaignId,
         }).then(() => {
-          const placementId = this.props.placements.list.id;
+          const placementId = this.props.placements.list[0].id;
           const bannerId = this.props.bannerId;
           const zoneId = null;
-          this.props.createPlacementBannerZone({ placementId, bannerId, zoneId });
-          this.clearInput();
+          this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+            this.clearInput();
+            this.props.getBanner(this.props.bannerId);
+            this.props.getPlacements();
+          });
         });
       } else {
         document.getElementById('inputPlacementEndTime').value = null;
       }
     }
   }
+
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     document.getElementById('inputPlacementName').value = null;
     document.getElementById('inputPlacementStartTime').value = null;
@@ -149,6 +166,74 @@ class Banner extends Component {
     document.getElementById('inputPlacementWeight').value = null;
     document.getElementById('inputPlacementDescription').value = null;
   }
+
+  isIndexOf(...args) {
+    for (let i = 0; i < args.length; i += 1) {
+      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  filterPlacements(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const arrId = [];
+    const arrPlacement = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      if (arrId.indexOf(arr[i].placements.id) === -1) {
+        arrId.push(arr[i].placements.id);
+        arrPlacement.push(arr[i]);
+      }
+    }
+    return arrPlacement;
+  }
+  filterPlacementsNotInBanner(allPlacement, placementOfBanner) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    if (placementOfBanner.length === 0) {
+      return allPlacement;
+    } else if (placementOfBanner.length > 0) {
+      const arrId = [];
+      const newArr = [];
+      const arrPlacement = [];
+      for (let i = 0; i < placementOfBanner.length; i += 1) {
+        newArr.push(placementOfBanner[i].placements.id);
+      }
+      for (let j = 0; j < allPlacement.length; j += 1) {
+        arrId.push(allPlacement[j].id);
+      }
+      for (let k = 0; k < newArr.length; k += 1) {
+        if (arrId.indexOf(newArr[k]) > -1) {
+          arrId.splice(arrId.indexOf(newArr[k]), 1);
+        }
+      }
+      if (arrId.length > 0) {
+        for (let m = 0; m < allPlacement.length; m += 1) {
+          for (let h = 0; h < arrId.length; h += 1) {
+            if (allPlacement[m].id === arrId[h]) {
+              arrPlacement.push(allPlacement[m]);
+            }
+          }
+        }
+        return arrPlacement;
+      } else if (arrId.length === 0) {
+        return [];
+      }
+    }
+    return false;
+  }
+
+  pushPlacementToBanner(placement) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const placementId = placement.id;
+    const bannerId = this.props.bannerId;
+    const zoneId = null;
+    if (placementId && bannerId) {
+      this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+        this.props.getBanner(this.props.bannerId).then(() => {
+          this.props.getPlacements();
+        });
+      });
+    }
+  }
+
   updateBanner() {
     const {
       name,
@@ -268,7 +353,8 @@ class Banner extends Component {
                         <div className="col-sm-10">
                           <input
                             type="number" className="form-control" id="inputBannerHeight"
-                            placeholder="300" onChange={event => this.onInputChange(event, 'height')}
+                            placeholder="300"
+                            onChange={event => this.onInputChange(event, 'height')}
                           />
                         </div>
                       </div>
@@ -334,6 +420,174 @@ class Banner extends Component {
                   </form>
                 </div>
                 {/* /.col */}
+              </section>
+              <section className="col-lg-6">
+                {/* BOX: LIST OF Placements */}
+                <div className="box box-info">
+                  <div className="box-header with-border">
+                    <h3 className="box-title">List Placement Of Banner</h3>
+
+                    <div className="box-tools">
+                      <div className="input-group input-group-sm" style={{ width: 150 }}>
+                        <input
+                          type="text" name="inputSearchPlacements"
+                          className="form-control pull-right"
+                          placeholder="Search..." onChange={event => this.searchFor(event)}
+                        />
+                        <div className="input-group-btn">
+                          <button
+                            type="submit" className="btn btn-default"
+                          ><i className="fa fa-search" /></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* /.box-header */}
+                  <div className="box-body table-responsive no-padding">
+                    <table id="example1" className="table table-hover">
+                      <thead>
+                        <tr>
+                          <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                          <th>Name</th>
+                          <th>Size</th>
+                          <th>Start Time</th>
+                          <th>End Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.props.banners.editing &&
+                         this.filterPlacements(this.props.banners.editing.pbzBanner).map(placement => {
+                           if (this.isIndexOf(placement.placements.name,
+                                placement.placements.startTime,
+                                placement.placements.endTime, placement.placements.size,
+                                placement.placements.description, placement.placements.weight)) {
+                             return (
+                               <tr key={placement.placements.id} >
+                                 <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                 <th><Link to={`/resource/placement/${placement.placements.id}`}>
+                                   {placement.placements.name}
+                                 </Link>
+                                 </th>
+                                 <td>{placement.placements.size}</td>
+                                 <td>{moment(new Date(placement.placements.startTime)).format('L')}</td>
+                                 <td>{moment(new Date(placement.placements.endTime)).format('L')}</td>
+                               </tr>
+                              );
+                           }
+                           return false;
+                         })}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                          <th>Name</th>
+                          <th>Size</th>
+                          <th>Start Time</th>
+                          <th>End Time</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  {/* /.box-body */}
+                  <div className="box-footer clearfix">
+                    <ul className="pagination pagination-sm no-margin pull-right">
+                      <li><a>&laquo;</a></li>
+                      <li><a>1</a></li>
+                      <li><a>2</a></li>
+                      <li><a>3</a></li>
+                      <li><a>&raquo;</a></li>
+                    </ul>
+                  </div>
+                </div>
+                {/* /.box */}
+              </section>
+            </section>
+          </div>
+          <div className="row">
+            <div className="col-lg-12">
+              <section className="col-lg-6">
+                {/* BOX: LIST OF Placements */}
+                <div className="box box-info">
+                  <div className="box-header with-border">
+                    <h3 className="box-title">List Placement</h3>
+
+                    <div className="box-tools">
+                      <div className="input-group input-group-sm" style={{ width: 150 }}>
+                        <input
+                          type="text" name="inputSearchPlacements"
+                          className="form-control pull-right"
+                          placeholder="Search..." onChange={event => this.searchFor(event)}
+                        />
+                        <div className="input-group-btn">
+                          <button
+                            type="submit" className="btn btn-default"
+                          ><i className="fa fa-search" /></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* /.box-header */}
+                  <div className="box-body table-responsive no-padding">
+                    <table id="example1" className="table table-hover">
+                      <thead>
+                        <tr>
+                          <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                          <th>Name</th>
+                          <th>Size</th>
+                          <th>Start Time</th>
+                          <th>End Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.props.placements.list && this.props.banners.editing &&
+                          this.filterPlacementsNotInBanner(this.props.placements.list,
+                            this.props.banners.editing.pbzBanner).map(placement => {
+                              if (this.isIndexOf(placement.name,
+                                  placement.startTime,
+                                  placement.endTime, placement.size,
+                                  placement.description, placement.weight)) {
+                                return (
+                                  <tr key={placement.id}>
+                                    <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                    <th><Link to={`/resource/placement/${placement.id}`}>
+                                      {placement.name}
+                                    </Link>
+                                    </th>
+                                    <td>{placement.size}</td>
+                                    <td>{moment(new Date(placement.startTime)).format('L')}</td>
+                                    <td>{moment(new Date(placement.endTime)).format('L')}</td>
+                                    <td onClick={() => this.pushPlacementToBanner(placement)}>
+                                      Add Placement
+                                    </td>
+                                  </tr>
+                                );
+                              }
+                              return false;
+                            })}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                          <th>Name</th>
+                          <th>Size</th>
+                          <th>Start Time</th>
+                          <th>End Time</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  {/* /.box-body */}
+                  <div className="box-footer clearfix">
+                    <ul className="pagination pagination-sm no-margin pull-right">
+                      <li><a>&laquo;</a></li>
+                      <li><a>1</a></li>
+                      <li><a>2</a></li>
+                      <li><a>3</a></li>
+                      <li><a>&raquo;</a></li>
+                    </ul>
+                  </div>
+                </div>
+                {/* /.box */}
               </section>
               <section className="col-lg-6">
                 {/* BOX: FORM OF CREATE NEW PlacementS */}
@@ -446,7 +700,8 @@ class Banner extends Component {
                 </div>
                 {/* /.col */}
               </section>
-            </section>
+            </div>
+            {/* /.col */}
           </div>
 
         </div>
@@ -460,7 +715,6 @@ const mapState = (state) => ({
   banners: state.banners,
   campaigns: state.campaigns,
   placements: state.placements,
-  placementBannerZones: state.placementBannerZones,
 });
 
 const mapDispatch = {
@@ -468,8 +722,9 @@ const mapDispatch = {
   updateBanner,
   deleteBanner,
   getCampaigns,
-  createPlacementIncludeCampaign,
+  createPlacement,
   createPlacementBannerZone,
+  getPlacements,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banner));

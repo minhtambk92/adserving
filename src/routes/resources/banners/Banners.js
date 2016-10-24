@@ -277,6 +277,9 @@ class Banners extends Component {
                               <td>{banner.width}px - {banner.height}px</td>
                               <td>{banner.keyword}</td>
                               <td>{banner.description}</td>
+                              <td>
+                                <Link to={`/resource/banner/${banner.id}`}>Add New Placement</Link>
+                              </td>
                             </tr>
                           );
                         }

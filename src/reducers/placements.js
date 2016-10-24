@@ -4,7 +4,6 @@ import {
   CREATE_PLACEMENT,
   UPDATE_PLACEMENT,
   DELETE_PLACEMENT,
-  CREATE_PLACEMENT_INCLUDE_CAMPAIGN,
 } from '../constants';
 
 export default function placements(state = {}, action) {
@@ -30,12 +29,6 @@ export default function placements(state = {}, action) {
         state.list.unshift(action.payload.placement);
         return { ...state };
       }
-    case CREATE_PLACEMENT_INCLUDE_CAMPAIGN: {
-      return {
-        ...state,
-        list: action.payload.placement,
-      };
-    }
     case UPDATE_PLACEMENT:
       {
         return {
@@ -43,7 +36,6 @@ export default function placements(state = {}, action) {
           current: action.payload.placement,
         };
       }
-
     case DELETE_PLACEMENT:
       {
         return {
