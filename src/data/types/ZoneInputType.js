@@ -16,12 +16,12 @@ const ZoneInputType = new InputObjectType({
       'id',
       'siteId',
       'name',
-      'description',
       'type',
       'html',
       'css',
       'slot',
       'status',
+      'description',
     ],
     allowNull: true,
   }), {

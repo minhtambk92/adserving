@@ -9,20 +9,22 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+// import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getAdvertisers, createAdvertiser } from '../../../actions/advertisers';
+import { getRoles, createRole } from '../../../actions/roles';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
-import s from './Advertisers.css';
+import s from './Roles.css';
 
-const pageTitle = 'Home';
+const pageTitle = 'Roles Management';
 const pageSubTitle = 'Control panel';
 
-class Advertisers extends Component {
+class Roles extends Component {
+
   static propTypes = {
-    advertisers: PropTypes.object,
-    getAdvertisers: PropTypes.func,
-    createAdvertiser: PropTypes.func,
+    roles: PropTypes.object,
+    getRoles: PropTypes.func,
+    createRole: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -34,16 +36,12 @@ class Advertisers extends Component {
   }
 
   componentWillMount() {
-    this.props.getAdvertisers();
+    this.props.getRoles();
   }
 
   componentDidMount() {
     /* eslint-disable no-undef */
-    // $('.select2').select2();
-    // $('#example1').DataTable(); // eslint-disable-line new-cap
-
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseAdvertiser').iCheck({
+    $('input[type="checkbox"].inputChooseRole').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
@@ -52,7 +50,8 @@ class Advertisers extends Component {
 
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChooseAdvertiser').iCheck({
+    // iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].inputChooseRole').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
@@ -60,10 +59,18 @@ class Advertisers extends Component {
   }
 
   clearInput() {
-    this.inputAdvertiserName.value = null;
-    this.inputAdvertiserContact.value = null;
-    this.inputAdvertiserEmail.value = null;
-    this.inputAdvertiserDescription.value = null;
+    this.inputRoleUniqueName.value = null;
+    this.inputRoleName.value = null;
+  }
+
+  createRole() {
+    const uniqueName = this.inputRoleName.value;
+    const name = this.inputRoleName.value;
+
+    if (uniqueName && name) {
+      this.props.createRole({ uniqueName, name });
+      this.clearInput();
+    }
   }
 
   searchFor(event) {
@@ -72,19 +79,6 @@ class Advertisers extends Component {
       ...previousState,
       searchText: event.target.value.trim(),
     }));
-  }
-
-  createAdvertiser() {
-    const name = this.inputAdvertiserName.value;
-    const contact = this.inputAdvertiserContact.value;
-    const email = this.inputAdvertiserEmail.value;
-    const description = this.inputAdvertiserDescription.value;
-
-    if (contact && name && email && description) {
-      this.props.createAdvertiser({ email, name, contact, description }).then(() => {
-        this.clearInput();
-      });
-    }
   }
 
   isIndexOf(...args) {
@@ -103,10 +97,10 @@ class Advertisers extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: FORM OF CREATE NEW WEB ADVERTISER */}
+              {/* BOX: CREATE NEW */}
               <div className="box box-primary collapsed-box">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Add new advertiser</h3>
+                  <h3 className="box-title">Create a new role</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn btn-box-tool" data-widget="collapse">
                       <i className="fa fa-plus" />
@@ -119,56 +113,28 @@ class Advertisers extends Component {
                   <div className="box-body">
                     <div className="form-group">
                       <label
-                        htmlFor="inputAdvertiserName" className="col-sm-2 control-label"
-                      >Name</label>
+                        htmlFor="inputRoleUniqueName" className="col-sm-2 control-label"
+                      >Unique name</label>
                       <div className="col-sm-10">
                         <input
-                          type="text" className="form-control" id="inputAdvertiserName"
-                          placeholder="Admicro"
+                          type="text" className="form-control" id="inputRoleUniqueName"
+                          placeholder="user"
                           ref={c => {
-                            this.inputAdvertiserName = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="inputAdvertiserContact" className="col-sm-2 control-label">Contact</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="text" className="form-control" id="inputAdvertiserContact"
-                          placeholder="0987654321"
-                          ref={c => {
-                            this.inputAdvertiserContact = c;
+                            this.inputRoleUniqueName = c;
                           }}
                         />
                       </div>
                     </div>
                     <div className="form-group">
                       <label
-                        htmlFor="inputAdvertiserEmail"
-                        className="col-sm-2 control-label"
-                      >Email</label>
+                        htmlFor="inputRoleName" className="col-sm-2 control-label"
+                      >Display name</label>
                       <div className="col-sm-10">
                         <input
-                          type="text" className="form-control" id="inputAdvertiserEmail"
-                          placeholder="contact@dantri.com.vn"
+                          type="text" className="form-control" id="inputRoleName"
+                          placeholder="User"
                           ref={c => {
-                            this.inputAdvertiserEmail = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputAdvertiserDescription"
-                        className="col-sm-2 control-label"
-                      >Description</label>
-                      <div className="col-sm-10">
-                        <textarea
-                          className="form-control" id="inputAdvertiserDescription"
-                          rows="5" placeholder="More info..."
-                          ref={c => {
-                            this.inputAdvertiserDescription = c;
+                            this.inputRoleName = c;
                           }}
                         />
                       </div>
@@ -183,7 +149,7 @@ class Advertisers extends Component {
                     ><i className="fa fa-eraser" /> Clear</a>
                     <a
                       className="btn btn-app pull-right"
-                      onClick={event => this.createAdvertiser(event)}
+                      onClick={event => this.createRole(event)}
                     ><i className="fa fa-check" /> Confirm</a>
                     {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                   </div>
@@ -196,17 +162,18 @@ class Advertisers extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: LIST OF ADVERTISERS */}
+              {/* BOX: LIST */}
               <div className="box box-info">
                 <div className="box-header with-border">
-                  <h3 className="box-title">List Advertiser</h3>
+                  <h3 className="box-title">List of webroles</h3>
 
                   <div className="box-tools">
                     <div className="input-group input-group-sm" style={{ width: 150 }}>
                       <input
-                        type="text" name="inputSearchAdvertisers"
+                        type="text" name="inputSearchRoles"
                         className="form-control pull-right"
-                        placeholder="Search..." onChange={event => this.searchFor(event)}
+                        placeholder="Search..."
+                        onChange={event => this.searchFor(event)}
                       />
                       <div className="input-group-btn">
                         <button
@@ -221,39 +188,24 @@ class Advertisers extends Component {
                   <table id="example1" className="table table-hover">
                     <thead>
                       <tr>
-                        <th><input type="checkbox" className="inputChooseAdvertiser" /></th>
+                        <th><input type="checkbox" className="inputChooseRole" /></th>
                         <th>Name</th>
-                        <th>Contact</th>
+                        <th>Domain</th>
                         <th>Email</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
+                        <th>Description</th>
                       </tr>
                     </thead>
                     <tbody>
-                      { this.props.advertisers.latest &&
-                      this.props.advertisers.latest.map(advertiser => {
-                        if (this.isIndexOf(advertiser.email, advertiser.contact,
-                            advertiser.name, advertiser.description)) {
+                      {this.props.roles.list && this.props.roles.list.map(role => {
+                        if (this.isIndexOf(role.domain, role.name, role.email, role.description)) {
                           return (
-                            <tr key={advertiser.id}>
-                              <td><input type="checkbox" className="inputChooseAdvertiser" /></td>
-                              <td>
-                                <Link
-                                  to={`/resource/advertiser/${advertiser.id}`}
-                                >{advertiser.name}</Link>
-                              </td>
-                              <td>{advertiser.contact}</td>
-                              <td>{advertiser.email}</td>
-                              <td>
-                                <Link
-                                  to={`/resource/advertiser/${advertiser.id}`}
-                                >Add New Campaign</Link>
-                              </td>
-                              <td>
-                                <Link
-                                  to={`/resource/advertiser/${advertiser.id}`}
-                                >Campaigns</Link>
-                              </td>
+                            <tr key={role.id}>
+                              <td><input type="checkbox" className="inputChooseRole" /></td>
+                              <td><Link to={`/resource/role/${role.id}`}>{role.name}</Link></td>
+                              <td>{role.domain}</td>
+                              <td>{role.email}</td>
+                              <td>{role.description}</td>
+                              <td><Link to={`/resource/role/${role.id}`}>Add New Zone</Link></td>
                             </tr>
                           );
                         }
@@ -262,12 +214,11 @@ class Advertisers extends Component {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th><input type="checkbox" className="inputChooseAdvertiser" /></th>
+                        <th><input type="checkbox" className="inputChooseRole" /></th>
                         <th>Name</th>
-                        <th>Contact</th>
-                        <th>Email</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
+                        <th>Domain</th>
+                        <th>Status</th>
+                        <th>Description</th>
                       </tr>
                     </tfoot>
                   </table>
@@ -296,13 +247,12 @@ class Advertisers extends Component {
 }
 
 const mapState = (state) => ({
-  advertisers: state.advertisers,
+  roles: state.roles,
 });
 
 const mapDispatch = {
-  getAdvertisers,
-  createAdvertiser,
+  getRoles,
+  createRole,
 };
 
-export default withStyles(s)(connect(mapState, mapDispatch)(Advertisers));
-
+export default withStyles(s)(connect(mapState, mapDispatch)(Roles));

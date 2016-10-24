@@ -36,6 +36,14 @@ export const CREATE_USER = 'CREATE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
 
+export const GET_ROLE = 'GET_ROLE';
+export const GET_ROLES = 'GET_ROLES';
+export const CREATE_ROLE = 'CREATE_ROLE';
+export const UPDATE_ROLE = 'UPDATE_ROLE';
+export const DELETE_ROLE = 'DELETE_ROLE';
+export const GET_ROLES_FILTERS = 'GET_ROLES_FILTERS';
+export const SET_ROLES_FILTERS = 'SET_ROLES_FILTERS';
+
 export const GET_ADVERTISER = 'GET_ADVERTISER';
 export const GET_ADVERTISERS = 'GET_ADVERTISERS';
 export const CREATE_ADVERTISER = 'CREATE_ADVERTISER';

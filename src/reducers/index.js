@@ -9,6 +9,7 @@ import placements from './placements';
 import placementBannerZones from './placementBannerZones';
 import banners from './banners';
 import sites from './sites';
+import roles from './roles';
 import users from './users';
 import zones from './zones';
 
@@ -23,6 +24,7 @@ export default combineReducers({
   campaigns,
   banners,
   sites,
+  roles,
   users,
   zones,
 });

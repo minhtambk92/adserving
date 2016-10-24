@@ -63,11 +63,15 @@ export function getZone(id) {
   };
 }
 
-export function getZones() {
+export function getZones(args = {
+  where: {},
+  limit: 0,
+  order: '',
+}) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query {
-        zones {
+      query ($where: JSON, $order: String, $limit: Int) {
+        zones(where: $where, order: $order, limit: $limit) {
           id
           siteId
           name
@@ -82,7 +86,16 @@ export function getZones() {
         }
       }`;
 
-    const { data } = await graphqlRequest(query);
+    const variables = Object.assign({}, args);
+    const { siteId, type, status } = await getState().zones.filters;
+
+    if (variables.where === {}) {
+      if (siteId) variables.where.siteId = siteId;
+      if (type) variables.where.type = type;
+      if (status) variables.where.siteId = status;
+    }
+
+    const { data } = await graphqlRequest(query, variables);
 
     dispatch({
       type: GET_ZONES,
@@ -93,7 +106,7 @@ export function getZones() {
   };
 }
 
-export function createZone({ siteId, name, description, type, html, css, slot }) {
+export function createZone({ siteId, name, type, html, css, slot, status, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($zone: ZoneInputWithoutId!) {
@@ -116,11 +129,12 @@ export function createZone({ siteId, name, description, type, html, css, slot })
       zone: {
         siteId,
         name,
-        description,
         type,
         html,
         css,
         slot,
+        status,
+        description,
       },
     });
 
@@ -174,7 +188,7 @@ export function createZoneIncludeSite({ siteId, name, description, type, html, c
 }
 
 
-export function updateZone({ id, siteId, name, description, type, html, css, slot }) {
+export function updateZone({ id, siteId, name, type, html, css, slot, status, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($zone: ZoneInput!) {
@@ -198,11 +212,12 @@ export function updateZone({ id, siteId, name, description, type, html, css, slo
         id,
         siteId,
         name,
-        description,
         type,
         html,
         css,
         slot,
+        status,
+        description,
       },
     });
 
