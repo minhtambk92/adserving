@@ -64,7 +64,7 @@ class Roles extends Component {
   }
 
   createRole() {
-    const uniqueName = this.inputRoleName.value;
+    const uniqueName = this.inputRoleUniqueName.value;
     const name = this.inputRoleName.value;
 
     if (uniqueName && name) {
@@ -199,11 +199,8 @@ class Roles extends Component {
                           return (
                             <tr key={role.id}>
                               <td><input type="checkbox" className="inputChooseRole" /></td>
-                              <td><Link to={`/resource/role/${role.id}`}>{role.name}</Link></td>
-                              <td>{role.domain}</td>
-                              <td>{role.email}</td>
-                              <td>{role.description}</td>
-                              <td><Link to={`/resource/role/${role.id}`}>Add New Zone</Link></td>
+                              <td><Link to={`/resource/role/${role.id}`}>{role.uniqueName}</Link></td>
+                              <td>{role.name}</td>
                             </tr>
                           );
                         }
