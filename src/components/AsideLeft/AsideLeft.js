@@ -104,10 +104,13 @@ function AsideLeft() {
             </Link>
             <ul className="treeview-menu">
               <li>
+                <Link to="/profile"><i className="fa fa-info-circle" /> Your Profile</Link>
+              </li>
+              <li>
                 <Link to="/resource/user"><i className="fa fa-users" /> All Users</Link>
               </li>
               <li>
-                <Link to="/profile"><i className="fa fa-info-circle" /> Your Profile</Link>
+                <Link to="/resource/role"><i className="fa fa-flag" /> Roles</Link>
               </li>
             </ul>
           </li>

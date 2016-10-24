@@ -18,7 +18,7 @@ const SiteInputType = new InputObjectType({
     domain: { type: StringType },
     name: { type: StringType },
     email: { type: StringType },
-    status: {type: StringType },
+    status: { type: StringType },
   }),
 });
 
