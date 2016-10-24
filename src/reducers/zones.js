@@ -14,13 +14,7 @@ import {
   SET_ZONES_FILTERS,
 } from '../constants';
 
-const defaultFilters = {
-  siteId: null,
-  type: null,
-  status: null,
-};
-
-function filters(state = defaultFilters, action) {
+function filters(state = {}, action) {
   switch (action.type) {
     case GET_ZONES_FILTERS: {
       return {
@@ -28,10 +22,34 @@ function filters(state = defaultFilters, action) {
       };
     }
     case SET_ZONES_FILTERS: {
-      return {
-        ...state,
-        ...action.payload,
-      };
+      const newState = Object.assign({}, state);
+      const criteriaValue = Object.values(action.payload).pop();
+      const criteriaKey = Object.keys(action.payload).pop();
+
+      switch (criteriaValue) {
+        case 'null': {
+          delete newState[criteriaKey];
+          return { ...newState };
+        }
+        case 'true': {
+          return {
+            ...state,
+            ...{ [criteriaKey]: true },
+          };
+        }
+        case 'false': {
+          return {
+            ...state,
+            ...{ [criteriaKey]: false },
+          };
+        }
+        default: {
+          return {
+            ...state,
+            ...action.payload,
+          };
+        }
+      }
     }
     default: {
       return state;

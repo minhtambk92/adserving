@@ -237,15 +237,15 @@ class Site extends Component {
                       {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                       <Link
                         to="/resource/site"
-                        className={'btn btn-app pull-right '.concat(s.btn)}
+                        className="btn btn-app pull-right"
                       ><i className="fa fa-undo" /> Cancel</Link>
                       <Link
                         to="/resource/site"
-                        className={'btn btn-app pull-right '.concat(s.btn)}
+                        className="btn btn-app pull-right"
                         onClick={event => this.deleteSite(event)}
                       ><i className="fa fa-trash-o" /> Delete</Link>
                       <a
-                        className={'btn btn-app pull-right '.concat(s.btn)}
+                        className="btn btn-app pull-right"
                         onClick={event => this.updateSiteIncludeZone(event)}
                       ><i className="fa fa-floppy-o" /> Save</a>
                       {/* eslint-enable jsx-a11y/no-static-element-interactions */}
@@ -364,11 +364,11 @@ class Site extends Component {
                     <div className="box-footer">
                       {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                       <a
-                        className={'btn btn-app pull-right '.concat(s.btn)}
+                        className="btn btn-app pull-right"
                         onClick={event => this.clearInput(event)}
                       ><i className="fa fa-eraser" /> Clear</a>
                       <a
-                        className={'btn btn-app pull-right '.concat(s.btn)}
+                        className="btn btn-app pull-right"
                         onClick={event => this.createZoneIncludeSite(event)}
                       ><i className="fa fa-check" /> Confirm</a>
                       {/* eslint-enable jsx-a11y/no-static-element-interactions */}

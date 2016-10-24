@@ -64,7 +64,7 @@ class Roles extends Component {
   }
 
   createRole() {
-    const uniqueName = this.inputRoleName.value;
+    const uniqueName = this.inputRoleUniqueName.value;
     const name = this.inputRoleName.value;
 
     if (uniqueName && name) {
@@ -97,7 +97,7 @@ class Roles extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: CREATE NEW */}
+              {/* BOX: CREATE */}
               <div className="box box-primary collapsed-box">
                 <div className="box-header with-border">
                   <h3 className="box-title">Create a new role</h3>
@@ -165,7 +165,7 @@ class Roles extends Component {
               {/* BOX: LIST */}
               <div className="box box-info">
                 <div className="box-header with-border">
-                  <h3 className="box-title">List of webroles</h3>
+                  <h3 className="box-title">List of roles</h3>
 
                   <div className="box-tools">
                     <div className="input-group input-group-sm" style={{ width: 150 }}>
@@ -189,23 +189,18 @@ class Roles extends Component {
                     <thead>
                       <tr>
                         <th><input type="checkbox" className="inputChooseRole" /></th>
+                        <th>Alias</th>
                         <th>Name</th>
-                        <th>Domain</th>
-                        <th>Email</th>
-                        <th>Description</th>
                       </tr>
                     </thead>
                     <tbody>
                       {this.props.roles.list && this.props.roles.list.map(role => {
-                        if (this.isIndexOf(role.domain, role.name, role.email, role.description)) {
+                        if (this.isIndexOf(role.uniqueName, role.name)) {
                           return (
                             <tr key={role.id}>
                               <td><input type="checkbox" className="inputChooseRole" /></td>
-                              <td><Link to={`/resource/role/${role.id}`}>{role.name}</Link></td>
-                              <td>{role.domain}</td>
-                              <td>{role.email}</td>
-                              <td>{role.description}</td>
-                              <td><Link to={`/resource/role/${role.id}`}>Add New Zone</Link></td>
+                              <td><Link to={`/resource/role/${role.id}`}>{role.uniqueName}</Link></td>
+                              <td>{role.name}</td>
                             </tr>
                           );
                         }
@@ -215,10 +210,8 @@ class Roles extends Component {
                     <tfoot>
                       <tr>
                         <th><input type="checkbox" className="inputChooseRole" /></th>
+                        <th>Alias</th>
                         <th>Name</th>
-                        <th>Domain</th>
-                        <th>Status</th>
-                        <th>Description</th>
                       </tr>
                     </tfoot>
                   </table>

@@ -25,7 +25,6 @@ function filters(state = {}, action) {
 
       if (!Object.values(action.payload).pop()) {
         delete newState[Object.keys(action.payload).pop()];
-
         return { ...newState };
       }
 

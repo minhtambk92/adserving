@@ -67,6 +67,8 @@ export function getZones(args = {
   where: {},
   limit: 0,
   order: '',
+}, options = {
+  globalFilters: false,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
@@ -87,12 +89,15 @@ export function getZones(args = {
       }`;
 
     const variables = Object.assign({}, args);
-    const { siteId, type, status } = await getState().zones.filters;
+    const filters = await getState().zones.filters;
 
-    if (variables.where === {}) {
-      if (siteId) variables.where.siteId = siteId;
-      if (type) variables.where.type = type;
-      if (status) variables.where.siteId = status;
+    if (
+      options.globalFilters &&
+      variables.where === {} &&
+      Object.keys(filters).length > 0 &&
+      filters.constructor === Object
+    ) {
+      variables.where = Object.assign({}, filters);
     }
 
     const { data } = await graphqlRequest(query, variables);

@@ -49,7 +49,6 @@ const users = {
         opts.where.id = { $eq: args.user.id };
 
         const newUser = Object.assign({}, args.user);
-
         delete newUser.id; // Prevent update id
 
         if (newUser.password) {

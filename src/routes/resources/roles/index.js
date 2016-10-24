@@ -25,7 +25,7 @@ export default {
         };
       },
     },
-    // require('./role').default,
+    require('./role').default,
   ],
 
 };

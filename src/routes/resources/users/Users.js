@@ -11,7 +11,13 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getUsers, createUser } from '../../../actions/users';
+import { getRoles } from '../../../actions/roles';
+import {
+  getUsers,
+  createUser,
+  getUsersFilters,
+  setUsersFilters,
+} from '../../../actions/users';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
 import s from './Users.css';
@@ -22,12 +28,18 @@ const pageSubTitle = 'Control panel';
 class Users extends Component {
 
   static propTypes = {
+    getRoles: PropTypes.func,
+    roles: PropTypes.object,
     users: PropTypes.object,
     getUsers: PropTypes.func,
     createUser: PropTypes.func,
+    getUsersFilters: PropTypes.func,
+    setUsersFilters: PropTypes.func,
   };
 
   componentWillMount() {
+    this.props.getRoles();
+    this.props.getUsersFilters();
     this.props.getUsers();
   }
 
@@ -54,18 +66,26 @@ class Users extends Component {
     /* eslint-enable no-undef */
   }
 
-  clearInput() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    document.getElementById('inputUserEmail').value = null;
-    document.getElementById('inputUserPassword').value = null;
-    document.getElementById('inputUserPasswordConfirmation').value = null;
+  async onFilterChange(event, field) {
+    event.persist();
+
+    await this.props.setUsersFilters({
+      [field]: event.target.value,
+    });
+  }
+
+  clearInput() {
+    this.inputUserEmail.value = null;
+    this.inputUserPassword.value = null;
+    this.inputUserPasswordConfirmation.value = null;
   }
 
   createUser() {
-    const email = document.getElementById('inputUserEmail').value;
-    const password = document.getElementById('inputUserPassword').value;
-    const passwordConfirmation = document.getElementById('inputUserPasswordConfirmation').value;
-    const emailConfirmed = document.getElementById('inputUserEmailConfirmed').value;
-    const status = document.getElementById('inputUserStatus').value;
+    const email = this.inputUserEmail.value;
+    const password = this.inputUserPassword.value;
+    const passwordConfirmation = this.inputUserPasswordConfirmation.value;
+    const emailConfirmed = this.inputUserEmailConfirmed.value;
+    const status = this.inputUserStatus.value;
 
     if (
       email &&
@@ -97,6 +117,21 @@ class Users extends Component {
     return false;
   }
 
+  isFiltered(user) {
+    const filters = this.props.users.filters;
+
+    for (const criteria in filters) { // eslint-disable-line no-restricted-syntax
+      if (
+        !{}.hasOwnProperty.call(user, criteria) ||
+        filters[criteria] !== user[criteria]
+      ) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   render() {
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
@@ -104,8 +139,100 @@ class Users extends Component {
 
           <div className="row">
             <section className="col-lg-12">
+              {/* BOX: FILTER */}
+              <div className="box box-default">
+                <div className="box-header with-border">
+                  <h3 className="box-title">Filter by:</h3>
+                  <div className="box-tools pull-right">
+                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                      <i className="fa fa-minus" />
+                    </button>
+                  </div>
+                </div>
+                {/* /.box-header */}
+                {/* form start */}
+                <form className="form-horizontal">
+                  <div className="box-body">
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputUsersFilterRole"
+                        className="col-sm-2 control-label"
+                      >Role</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputUsersFilterRole"
+                          className="form-control select2"
+                          style={{ width: '100%' }}
+                          ref={c => {
+                            this.inputUsersFilterRole = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'roleId')}
+                          defaultValue={this.props.users.filters && this.props.users.filters.roleId}
+                        >
+                          <option value="null">All roles</option>
+                          {this.props.roles.list && this.props.roles.list.map(role => (
+                            <option
+                              key={role.id} value={role.id}
+                            >{role.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputUsersFilterEmailConfirmed"
+                        className="col-sm-2 control-label"
+                      >Email confirmed</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputUsersFilterEmailConfirmed"
+                          className="form-control"
+                          ref={c => {
+                            this.inputUsersFilterEmailConfirmed = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'emailConfirmed')}
+                          defaultValue={
+                            this.props.users.filters && this.props.users.filters.emailConfirmed
+                          }
+                        >
+                          <option value="null">All types</option>
+                          <option value="true">Yes</option>
+                          <option value="false">No</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputUsersFilterStatus"
+                        className="col-sm-2 control-label"
+                      >Status</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputUsersFilterStatus" className="form-control"
+                          ref={c => {
+                            this.inputUsersFilterStatus = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'status')}
+                          defaultValue={this.props.users.filters && this.props.users.filters.status}
+                        >
+                          <option value="null">All states</option>
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  {/* /.box-body */}
+                </form>
+              </div>
+              {/* /.col */}
+            </section>
+          </div>
+
+          <div className="row">
+            <section className="col-lg-12">
               {/* BOX: FORM OF CREATE A NEW USER */}
-              <div className="box box-primary collapsed-box">
+              <div className="box box-default collapsed-box">
                 <div className="box-header with-border">
                   <h3 className="box-title">Create a new user</h3>
                   <div className="box-tools pull-right">
@@ -127,6 +254,9 @@ class Users extends Component {
                         <input
                           type="text" className="form-control" id="inputUserEmail"
                           placeholder="contact@dantri.com.vn"
+                          ref={c => {
+                            this.inputUserEmail = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -139,6 +269,9 @@ class Users extends Component {
                         <input
                           type="password" className="form-control" id="inputUserPassword"
                           placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                          ref={c => {
+                            this.inputUserPassword = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -152,6 +285,9 @@ class Users extends Component {
                           type="password" className="form-control"
                           id="inputUserPasswordConfirmation"
                           placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                          ref={c => {
+                            this.inputUserPasswordConfirmation = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -164,6 +300,9 @@ class Users extends Component {
                         <select
                           id="inputUserEmailConfirmed"
                           className="form-control"
+                          ref={c => {
+                            this.inputUserEmailConfirmed = c;
+                          }}
                         >
                           <option value="true">Yes</option>
                           <option value="false">No</option>
@@ -179,6 +318,9 @@ class Users extends Component {
                         <select
                           id="inputUserStatus"
                           className="form-control"
+                          ref={c => {
+                            this.inputUserStatus = c;
+                          }}
                         >
                           <option value="active">Active</option>
                           <option value="inactive">Inactive</option>
@@ -241,14 +383,20 @@ class Users extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.users.list && this.props.users.list.map(user => (
-                        <tr key={user.id}>
-                          <td><input type="checkbox" className="inputChooseUser" /></td>
-                          <td><Link to={`/user/${user.id}`}>{user.email}</Link></td>
-                          <td>{user.emailConfirmed ? 'yes' : 'no'}</td>
-                          <td>{user.status}</td>
-                        </tr>
-                      ))}
+                      {this.props.users.list && this.props.users.list.map(user => {
+                        if (this.isFiltered(user)) {
+                          return (
+                            <tr key={user.id}>
+                              <td><input type="checkbox" className="inputChooseUser" /></td>
+                              <td><Link to={`/resource/user/${user.id}`}>{user.email}</Link></td>
+                              <td>{user.emailConfirmed ? 'yes' : 'no'}</td>
+                              <td>{user.status}</td>
+                            </tr>
+                          );
+                        }
+
+                        return false;
+                      })}
                     </tbody>
                     <tfoot>
                       <tr>
@@ -284,12 +432,16 @@ class Users extends Component {
 }
 
 const mapState = (state) => ({
+  roles: state.roles,
   users: state.users,
 });
 
 const mapDispatch = {
+  getRoles,
   getUsers,
   createUser,
+  getUsersFilters,
+  setUsersFilters,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Users));

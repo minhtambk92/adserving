@@ -7,4 +7,18 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-@import '../../../components/variables.css';
+import React from 'react';
+import Role from './Role';
+
+export default {
+
+  path: '/:id',
+
+  async action({ params }) {
+    return {
+      title: 'Roles Management | Admin Dev Kit',
+      component: <Role roleId={params.id} />,
+    };
+  },
+
+};
