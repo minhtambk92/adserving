@@ -58,19 +58,19 @@ class Sites extends Component {
     /* eslint-enable no-undef */
   }
 
-  clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    document.getElementById('inputSiteDomain').value = null;
-    document.getElementById('inputSiteName').value = null;
-    document.getElementById('inputSiteEmail').value = null;
-    document.getElementById('inputSiteDescription').value = null;
+  clearInput() {
+    this.inputSiteDomain.value = null;
+    this.inputSiteName.value = null;
+    this.inputSiteEmail.value = null;
+    this.inputSiteDescription.value = null;
   }
 
-  createSite(event) { // eslint-disable-line no-unused-vars
-    const domain = document.getElementById('inputSiteDomain').value;
-    const name = document.getElementById('inputSiteName').value;
-    const email = document.getElementById('inputSiteEmail').value;
-    const description = document.getElementById('inputSiteDescription').value;
-    const status = document.getElementById('inputSiteStatus').value;
+  createSite() { // eslint-disable-line no-unused-vars
+    const domain = this.inputSiteDomain.value;
+    const name = this.inputSiteName.value;
+    const email = this.inputSiteEmail.value;
+    const description = this.inputSiteDescription.value;
+    const status = this.inputSiteStatus.value;
 
     if (domain && name && email && description && status) {
       this.props.createSite({ domain, name, email, description, status });
@@ -124,6 +124,9 @@ class Sites extends Component {
                         <input
                           type="text" className="form-control" id="inputSiteDomain"
                           placeholder="dantri.com.vn"
+                          ref={c => {
+                            this.inputSiteDomain = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -133,6 +136,9 @@ class Sites extends Component {
                         <input
                           type="text" className="form-control" id="inputSiteName"
                           placeholder="Dan Tri"
+                          ref={c => {
+                            this.inputSiteName = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -145,6 +151,9 @@ class Sites extends Component {
                         <input
                           type="text" className="form-control" id="inputSiteEmail"
                           placeholder="contact@dantri.com.vn"
+                          ref={c => {
+                            this.inputSiteEmail = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -157,6 +166,9 @@ class Sites extends Component {
                         <textarea
                           className="form-control" id="inputSiteDescription"
                           rows="5" placeholder="More info..."
+                          ref={c => {
+                            this.inputSiteDescription = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -168,6 +180,9 @@ class Sites extends Component {
                       <div className="col-sm-10">
                         <select
                           id="inputSiteStatus" className="form-control"
+                          ref={c => {
+                            this.inputSiteStatus = c;
+                          }}
                         >
                           <option value="active">Active</option>
                           <option value="inactive">Inactive</option>

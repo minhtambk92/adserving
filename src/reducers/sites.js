@@ -1,59 +1,49 @@
-/**
- * Created by Manhhailua on 10/11/16.
- */
-
+import { combineReducers } from 'redux';
 import {
   GET_SITE,
   GET_SITES,
   CREATE_SITE,
   UPDATE_SITE,
   DELETE_SITE,
-  UPDATE_SITE_INCLUDE_ZONE,
 } from '../constants';
 
-export default function sites(state = {}, action) {
+function list(state = [], action) {
   switch (action.type) {
-    case GET_SITE: {
-      return {
-        ...state,
-        editing: action.payload.site,
-      };
-    }
-
     case GET_SITES: {
-      return {
-        ...state,
-        list: action.payload.sites,
-      };
+      return action.payload.sites;
     }
-
     case CREATE_SITE: {
-      state.list.unshift(action.payload.site);
-      return { ...state };
-    }
-
-    case UPDATE_SITE: {
-      return {
+      return [
+        action.payload.site,
         ...state,
-        editing: action.payload.site,
-      };
+      ];
     }
-    case UPDATE_SITE_INCLUDE_ZONE: {
-      return {
-        ...state,
-        editing: action.payload.site,
-      };
-    }
-
-    case DELETE_SITE: {
-      return {
-        ...state,
-        editing: null,
-      };
-    }
-
     default: {
       return state;
     }
   }
 }
+
+function editing(state = {}, action) {
+  switch (action.type) {
+    case GET_SITE: {
+      return action.payload.site;
+    }
+    case UPDATE_SITE: {
+      return action.payload.site;
+    }
+    case DELETE_SITE: {
+      return null;
+    }
+    default: {
+      return { ...state };
+    }
+  }
+}
+
+const sites = combineReducers({
+  list,
+  editing,
+});
+
+export default sites;

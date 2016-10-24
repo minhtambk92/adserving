@@ -52,11 +52,17 @@ export function getSite(id) {
   };
 }
 
-export function getSites() {
+export function getSites(args = {
+  where: {},
+  limit: 0,
+  order: '',
+}, options = {
+  globalFilters: false,
+}) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query {
-        sites {
+      query ($where: JSON, $order: String, $limit: Int) {
+        sites(where: $where, order: $order, limit: $limit) {
           id
           domain
           name
@@ -68,7 +74,19 @@ export function getSites() {
         }
       }`;
 
-    const { data } = await graphqlRequest(query);
+    const variables = Object.assign({}, args);
+    const filters = await getState().zones.filters;
+
+    if (
+      options.globalFilters &&
+      variables.where === {} &&
+      Object.keys(filters).length > 0 &&
+      filters.constructor === Object
+    ) {
+      variables.where = Object.assign({}, filters);
+    }
+
+    const { data } = await graphqlRequest(query, variables);
 
     dispatch({
       type: GET_SITES,

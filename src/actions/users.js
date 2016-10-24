@@ -62,8 +62,8 @@ export function getUsers(args = {
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query {
-        users {
+      query ($where: JSON, $order: String, $limit: Int) {
+        users(where: $where, order: $order, limit: $limit) {
           id
           email
           emailConfirmed
