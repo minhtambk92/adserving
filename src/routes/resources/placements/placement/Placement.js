@@ -15,7 +15,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getPlacement, updatePlacement, deletePlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
 import { getBanners } from '../../../../actions/banners';
-import { createPlacementBannerZone } from '../../../../actions/placementBannerZones';
+import { createPlacementBannerZone, removePlacement, removeBannerInPlacementBannerZone, removeZoneInPlacementBannerZone } from '../../../../actions/placementBannerZones';
 import { getZones } from '../../../../actions/zones';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
@@ -39,6 +39,9 @@ class Placement extends Component {
     createPlacementBannerZone: PropTypes.func,
     zones: PropTypes.object,
     getZones: PropTypes.func,
+    removePlacement: PropTypes.func,
+    removeBannerInPlacementBannerZone: PropTypes.func,
+    removeZoneInPlacementBannerZone: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -202,6 +205,7 @@ class Placement extends Component {
 
   deletePlacement() {
     this.props.deletePlacement(this.props.placementId);
+    this.props.removePlacement(this.props.placementId);
   }
   filterBanner(allBanner, bof) { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (bof.length === 0) {
@@ -290,6 +294,26 @@ class Placement extends Component {
     const bannerId = null;
     if (placementId && zoneId) {
       this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+        this.props.getPlacement(this.props.placementId).then(() => {
+          this.props.getZones();
+        });
+      });
+    }
+  }
+  removeBannerToPlacement(bId) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const placementId = this.props.placementId;
+    if (placementId && bId) {
+      this.props.removeBannerInPlacementBannerZone({ placementId, bId }).then(() => {
+        this.props.getPlacement(this.props.placementId).then(() => {
+          this.props.getBanners();
+        });
+      });
+    }
+  }
+  removeZoneToPlacement(zId) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const placementId = this.props.placementId;
+    if (placementId && zId) {
+      this.props.removeZoneInPlacementBannerZone({ placementId, zId }).then(() => {
         this.props.getPlacement(this.props.placementId).then(() => {
           this.props.getZones();
         });
@@ -483,6 +507,7 @@ class Placement extends Component {
                         <tbody>
                           {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                           { this.props.banners.list && this.props.placements.editing &&
+                          this.props.placements.editing.pbzPlacement &&
                             this.filterBanner(this.props.banners.list,
                             this.props.placements.editing.pbzPlacement
                             ).map(banner => {
@@ -566,7 +591,9 @@ class Placement extends Component {
                           </tr>
                         </thead>
                         <tbody>
+                          {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                           {this.props.placements.editing &&
+                          this.props.placements.editing.pbzPlacement &&
                           this.props.placements.editing.pbzPlacement.map(banner => {
                             if (banner.banners) {
                               return (
@@ -578,12 +605,17 @@ class Placement extends Component {
                                   </th>
                                   <td>{banner.banners.width}px - {banner.banners.height}px</td>
                                   <td>{banner.banners.keyword}</td>
-                                  <td>Remove</td>
+                                  <td
+                                    onClick={() => this.removeBannerToPlacement(banner.banners.id)}
+                                  >
+                                    Remove
+                                  </td>
                                 </tr>
                               );
                             }
                             return false;
                           })}
+                          {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                         </tbody>
                         <tfoot>
                           <tr>
@@ -739,6 +771,7 @@ class Placement extends Component {
                           </tr>
                         </thead>
                         <tbody>
+                          {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                           {this.props.placements.editing &&
                           this.props.placements.editing.pbzPlacement.map(zone => {
                             if (zone.zones) {
@@ -753,12 +786,17 @@ class Placement extends Component {
                                   <td>{zone.zones.type}</td>
                                   <td>{zone.zones.description}</td>
                                   <td>{zone.zones.slot}</td>
-                                  <td>Remove</td>
+                                  <td
+                                    onClick={() => this.removeZoneToPlacement(zone.zones.id)}
+                                  >
+                                    Remove
+                                  </td>
                                 </tr>
                               );
                             }
                             return false;
                           })}
+                          {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                         </tbody>
                         <tfoot>
                           <tr>
@@ -810,6 +848,9 @@ const mapDispatch = {
   getBanners,
   createPlacementBannerZone,
   getZones,
+  removePlacement,
+  removeBannerInPlacementBannerZone,
+  removeZoneInPlacementBannerZone,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placement));

@@ -13,15 +13,12 @@ const PlacementBannerZone = Model.define('PlacementBannerZone', {
   },
   placementId: {
     type: DataType.UUID,
-    unique: 'pbz',
   },
   bannerId: {
     type: DataType.UUID,
-    unique: 'pbz',
   },
   zoneId: {
     type: DataType.UUID,
-    unique: 'pbz',
   },
 
 }, {

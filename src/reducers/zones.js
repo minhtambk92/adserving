@@ -9,7 +9,6 @@ import {
   CREATE_ZONE,
   UPDATE_ZONE,
   DELETE_ZONE,
-  CREATE_ZONE_INCLUDE_SITE,
   GET_ZONES_FILTERS,
   SET_ZONES_FILTERS,
 } from '../constants';
@@ -67,11 +66,6 @@ function list(state = [], action) {
         action.payload.zone,
         ...state,
       ];
-    }
-    case CREATE_ZONE_INCLUDE_SITE: {
-      return {
-        ...action.payload.zone,
-      };
     }
     default: {
       return state;
