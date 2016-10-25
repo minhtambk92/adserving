@@ -329,8 +329,7 @@ export function removeZone(zId) {
     if (data.placementBannerZones.length > 0) {
       for (let i = 0; i < data.placementBannerZones.length; i += 1) {
         const id = data.placementBannerZones[i].id;
-        if (data.placementBannerZones[i].bannerId === null) {
-          const mutation = `
+        const mutation = `
             mutation {
               deletedPlacementBannerZone(id: "${id}") {
                 id
@@ -342,38 +341,33 @@ export function removeZone(zId) {
                 deletedAt
               }
             }`;
-
-          const { deletedPlacement } = await graphqlRequest(mutation);
-
-          dispatch({
-            type: DELETE_ZONE,
-            payload: {
-              placementBannerZone: deletedPlacement,
-            },
-          });
-        } else if (data.placementBannerZones[i].bannerId !== null) {
+        await graphqlRequest(mutation);
+        if (data.placementBannerZones[i].bannerId !== null) {
           const zoneId = null;
-          const mutation = `
-          mutation ($placementBannerZone: PlacementBannerZoneInputType!) {
-            updatedPlacementBannerZone(placementBannerZone: $placementBannerZone) {
-              id
-              placementId
-              bannerId
-              zoneId
-              createdAt
-              updatedAt
-            }
-          }`;
-          const { updatePlz } = await graphqlRequest(mutation, {
+          const bannerId = data.placementBannerZones[i].bannerId;
+          const placementId = data.placementBannerZones[i].placementId;
+          const newPbz = `
+            mutation ($placementBannerZone: PlacementBannerZoneInputTypeWithoutId!) {
+              createdPlacementBannerZone(placementBannerZone: $placementBannerZone) {
+                id
+                placementId
+                bannerId
+                zoneId
+                createdAt
+                updatedAt
+              }
+            }`;
+          const create = await graphqlRequest(newPbz, {
             placementBannerZone: {
-              id,
+              placementId,
+              bannerId,
               zoneId,
             },
           });
           dispatch({
             type: DELETE_ZONE,
             payload: {
-              placementBannerZone: updatePlz.updatedPlacementBannerZone,
+              placementBannerZone: create.createdPlacementBannerZone,
             },
           });
         }
@@ -399,8 +393,7 @@ export function removeBanner(bId) {
     if (data.placementBannerZones.length > 0) {
       for (let i = 0; i < data.placementBannerZones.length; i += 1) {
         const id = data.placementBannerZones[i].id;
-        if (data.placementBannerZones[i].zoneId === null) {
-          const mutation = `
+        const mutation = `
             mutation {
               deletedPlacementBannerZone(id: "${id}") {
                 id
@@ -412,38 +405,33 @@ export function removeBanner(bId) {
                 deletedAt
               }
             }`;
-
-          const { deletedPlacement } = await graphqlRequest(mutation);
-
-          dispatch({
-            type: DELETE_BANNER,
-            payload: {
-              placementBannerZone: deletedPlacement,
-            },
-          });
-        } else if (data.placementBannerZones[i].zoneId !== null) {
+        await graphqlRequest(mutation);
+        if (data.placementBannerZones[i].zoneId !== null) {
           const bannerId = null;
-          const mutation = `
-          mutation ($placementBannerZone: PlacementBannerZoneInputType!) {
-            updatedPlacementBannerZone(placementBannerZone: $placementBannerZone) {
-              id
-              placementId
-              bannerId
-              zoneId
-              createdAt
-              updatedAt
-            }
-          }`;
-          const { updatePlz } = await graphqlRequest(mutation, {
+          const zoneId = data.placementBannerZones[i].zoneId;
+          const placementId = data.placementBannerZones[i].placementId;
+          const newPbz = `
+            mutation ($placementBannerZone: PlacementBannerZoneInputTypeWithoutId!) {
+              createdPlacementBannerZone(placementBannerZone: $placementBannerZone) {
+                id
+                placementId
+                bannerId
+                zoneId
+                createdAt
+                updatedAt
+              }
+            }`;
+          const create = await graphqlRequest(newPbz, {
             placementBannerZone: {
-              id,
+              placementId,
               bannerId,
+              zoneId,
             },
           });
           dispatch({
             type: DELETE_BANNER,
             payload: {
-              placementBannerZone: updatePlz.updatedPlacementBannerZone,
+              placementBannerZone: create.createdPlacementBannerZone,
             },
           });
         }
