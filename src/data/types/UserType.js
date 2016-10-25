@@ -7,7 +7,9 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import { GraphQLObjectType as ObjectType } from 'graphql';
+import {
+  GraphQLObjectType as ObjectType,
+} from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { User } from '../models';
 import userBelongsToManyRoles from '../queries/userBelongsToManyRoles';
