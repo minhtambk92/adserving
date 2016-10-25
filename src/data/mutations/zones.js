@@ -38,6 +38,7 @@ const zones = {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.zone.id };
+
         const newZone = Object.assign({}, args.zone);
         delete newZone.id; // Prevent update id
 
