@@ -13,6 +13,7 @@ const ZoneType = new ObjectType({
   fields: () => Object.assign(attributeFields(Zone, {
     // Additional options
   }), {
+    // Additional fields
     site: zoneBelongsToSite(),
     pbzZone: zoneHasManyPlacementBannerZones(),
   }),

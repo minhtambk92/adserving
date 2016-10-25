@@ -13,7 +13,7 @@ import { Filter } from '../models';
 const filters = {
   type: new List(FilterType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Filter, {
     before(options) {

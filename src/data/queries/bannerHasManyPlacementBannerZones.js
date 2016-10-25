@@ -6,7 +6,7 @@ import PlacementBannerZoneType from '../types/PlacementBannerZoneType';
 const bannerHasManyPlacementBannerZones = () => ({
   type: new List(PlacementBannerZoneType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Banner.placementBannerZones, {
     before(options) {

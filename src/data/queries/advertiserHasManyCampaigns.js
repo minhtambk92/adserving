@@ -6,7 +6,7 @@ import CampaignType from '../types/CampaignType';
 const advertiserHasManyCampaigns = () => ({
   type: new List(CampaignType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Advertiser.campaigns, {
     before(options) {

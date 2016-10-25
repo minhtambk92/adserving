@@ -12,7 +12,7 @@ import { Placement } from '../models';
 const placements = {
   type: new List(PlacementType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Placement, {
     before(options) {

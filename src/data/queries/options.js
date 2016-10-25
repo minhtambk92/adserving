@@ -13,7 +13,7 @@ import { Option } from '../models';
 const option = {
   type: new List(OptionType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Option, {
     before(options) {

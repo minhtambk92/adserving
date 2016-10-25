@@ -5,7 +5,7 @@ import ZoneType from '../types/ZoneType';
 const placementBannerZoneBelongsToZone = () => ({
   type: ZoneType,
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(PlacementBannerZone.zone, {
     before(options) {

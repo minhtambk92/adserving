@@ -12,7 +12,7 @@ import { User } from '../models';
 const users = {
   type: new List(UserType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(User, {
     before(options) {

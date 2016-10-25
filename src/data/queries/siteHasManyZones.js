@@ -12,7 +12,7 @@ import ZoneType from '../types/ZoneType';
 const siteHasManyZones = () => ({
   type: new List(ZoneType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Site.zones, {
     before(options) {

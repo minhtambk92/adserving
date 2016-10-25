@@ -6,7 +6,7 @@ import PlacementType from '../types/PlacementType';
 const campaignHasManyPlacements = () => ({
   type: new List(PlacementType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Campaign.placements, {
     before(options) {

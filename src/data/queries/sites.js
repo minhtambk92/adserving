@@ -12,7 +12,7 @@ import { Site } from '../models';
 const sites = {
   type: new List(SiteType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Site, {
     before(options) {

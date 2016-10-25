@@ -5,7 +5,7 @@ import AdvertiserType from '../types/AdvertiserType';
 const campaignBelongsToAdvertiser = () => ({
   type: AdvertiserType,
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Campaign.advertiser, {
     before(options) {

@@ -6,7 +6,7 @@ import { PlacementBannerZone } from '../models';
 const placementBannerZones = {
   type: new List(PlacementBannerZoneType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(PlacementBannerZone, {
     before(options) {

@@ -12,7 +12,7 @@ import { Banner } from '../models';
 const banners = {
   type: new List(BannerType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Banner, {
     before(options) {
