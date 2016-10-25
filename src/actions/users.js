@@ -37,6 +37,7 @@ export function getUser(id) {
           email
           emailConfirmed
           status
+          roles
           createdAt
           updatedAt
         }
@@ -68,6 +69,7 @@ export function getUsers(args = {
           email
           emailConfirmed
           status
+          roles
           createdAt
           updatedAt
         }
@@ -105,6 +107,7 @@ export function createUser({ email, roleIds, password, emailConfirmed, status })
           email
           emailConfirmed
           status
+          roles
           createdAt
           updatedAt
         }
@@ -138,6 +141,7 @@ export function updateUser({ id, email, roleIds, password, emailConfirmed, statu
           email
           emailConfirmed
           status
+          roles
           createdAt
           updatedAt
         }
@@ -172,6 +176,7 @@ export function deleteUser(id) {
           email
           emailConfirmed
           status
+          roles
           createdAt
           updatedAt
           deletedAt
