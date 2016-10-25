@@ -9,7 +9,7 @@ import { resolver, defaultListArgs } from 'graphql-sequelize';
 import SiteType from '../types/SiteType';
 import { Site } from '../models';
 
-const sites = {
+const sites = () => ({
   type: new List(SiteType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
@@ -22,6 +22,6 @@ const sites = {
       return opts;
     },
   }),
-};
+});
 
 export default sites;

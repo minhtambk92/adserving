@@ -3,7 +3,7 @@ import { resolver, defaultListArgs } from 'graphql-sequelize';
 import PlacementBannerZoneType from '../types/PlacementBannerZoneType';
 import { PlacementBannerZone } from '../models';
 
-const placementBannerZones = {
+const placementBannerZones = () => ({
   type: new List(PlacementBannerZoneType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
@@ -16,7 +16,7 @@ const placementBannerZones = {
       return opts;
     },
   }),
-};
+});
 
 export default placementBannerZones;
 

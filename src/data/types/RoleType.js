@@ -10,8 +10,8 @@ import { Role } from '../models';
 import roleBelongsToManyUsers from '../queries/roleBelongsToManyUsers';
 
 const RoleType = new ObjectType({
-  name: 'Role',
-  fields: Object.assign(attributeFields(Role, {
+  name: 'RoleType',
+  fields: () => Object.assign(attributeFields(Role, {
     // Additional options
   }), {
     // Additional fields

@@ -9,7 +9,7 @@ import { resolver, defaultListArgs } from 'graphql-sequelize';
 import UserType from '../types/UserType';
 import { User } from '../models';
 
-const users = {
+const users = () => ({
   type: new List(UserType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
@@ -22,6 +22,6 @@ const users = {
       return opts;
     },
   }),
-};
+});
 
 export default users;
