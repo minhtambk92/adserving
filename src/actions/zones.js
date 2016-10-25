@@ -47,8 +47,22 @@ export function getZone(id) {
           css
           slot
           status
-          createdAt
-          updatedAt
+          pbzZone {
+            placements {
+              id
+              name
+              size
+              startTime
+              endTime
+              weight
+              description
+              campaignId
+              createdAt
+              updatedAt
+              }
+            }
+        createdAt
+        updatedAt
         }
       }`;
 

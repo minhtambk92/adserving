@@ -180,9 +180,11 @@ class Banner extends Component {
     const arrId = [];
     const arrPlacement = [];
     for (let i = 0; i < arr.length; i += 1) {
-      if (arrId.indexOf(arr[i].placements.id) === -1) {
-        arrId.push(arr[i].placements.id);
-        arrPlacement.push(arr[i]);
+      if (arr[i].placements !== null) {
+        if (arrId.indexOf(arr[i].placements.id) === -1) {
+          arrId.push(arr[i].placements.id);
+          arrPlacement.push(arr[i]);
+        }
       }
     }
     return arrPlacement;
@@ -196,7 +198,9 @@ class Banner extends Component {
       const newArr = [];
       const arrPlacement = [];
       for (let i = 0; i < pob.length; i += 1) {
-        newArr.push(pob[i].placements.id);
+        if (pob[i].placements !== null) {
+          newArr.push(pob[i].placements.id);
+        }
       }
       for (let j = 0; j < allPlacement.length; j += 1) {
         arrId.push(allPlacement[j].id);
@@ -455,7 +459,7 @@ class Banner extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        {this.props.banners.editing &&
+                        {this.props.banners.editing && this.props.banners.editing.pbzBanner &&
                          this.filterPlacements(this.props.banners.editing.pbzBanner)
                            .map(placement => {
                              if (this.isIndexOf(placement.placements.name,
@@ -542,6 +546,7 @@ class Banner extends Component {
                       <tbody>
                         {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                         {this.props.placements.list && this.props.banners.editing &&
+                        this.props.banners.editing.pbzBanner &&
                           this.filterPlmNotIn(this.props.placements.list,
                             this.props.banners.editing.pbzBanner).map(placement => {
                               if (this.isIndexOf(placement.name,

@@ -415,7 +415,8 @@ class Site extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.sites.editing && this.props.sites.editing.zones.map(zone => (
+                      {this.props.sites.editing && this.props.sites.editing.zones &&
+                      this.props.sites.editing.zones.map(zone => (
                         <tr key={zone.id}>
                           <td><input type="checkbox" className="inputChooseSite" /></td>
                           <td><Link to={`/zone/${zone.id}`}>{zone.name}</Link></td>
