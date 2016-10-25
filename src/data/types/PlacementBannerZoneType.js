@@ -4,8 +4,9 @@ import { PlacementBannerZone } from '../models';
 import placementBannerZoneBelongsToBanner from '../queries/placementBannerZoneBelongsToBanner';
 import placementBannerZoneBelongsToZone from '../queries/placementBannerZoneBelongsToZone';
 import placementBannerZoneBelongsToPlacement from '../queries/placementBannerZoneBelongsToPlacement';
+
 const PlacementBannerZoneType = new ObjectType({
-  name: 'PlacementBannerZone',
+  name: 'PlacementBannerZoneType',
   fields: () => Object.assign(attributeFields(PlacementBannerZone, {
     // Additional options
   }), {

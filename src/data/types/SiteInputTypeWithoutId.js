@@ -9,7 +9,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { Site } from '../models';
 
 const SiteInputTypeWithoutId = new InputObjectType({
-  name: 'SiteInputWithoutId',
+  name: 'SiteInputTypeWithoutId',
   fields: () => Object.assign(attributeFields(Site, {
     only: ['domain', 'name', 'email', 'description', 'status'],
   }), {

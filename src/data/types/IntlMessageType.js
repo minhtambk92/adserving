@@ -15,7 +15,7 @@ import {
 } from 'graphql';
 
 const IntlMessageType = new ObjectType({
-  name: 'IntlMessage',
+  name: 'IntlMessageType',
   fields: {
     id: { type: new NonNull(StringType) },
     defaultMessage: { type: new NonNull(StringType) },

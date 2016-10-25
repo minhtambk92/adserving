@@ -10,10 +10,11 @@ import { Site } from '../models';
 import siteHasManyZones from '../queries/siteHasManyZones';
 
 const SiteType = new ObjectType({
-  name: 'Site',
+  name: 'SiteType',
   fields: () => Object.assign(attributeFields(Site, {
     // Additional options
   }), {
+    // Additional fields
     zones: siteHasManyZones(),
   }),
 });

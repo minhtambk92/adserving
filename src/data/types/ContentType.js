@@ -14,7 +14,7 @@ import {
 } from 'graphql';
 
 const ContentType = new ObjectType({
-  name: 'Content',
+  name: 'ContentType',
   fields: {
     path: { type: new NonNull(StringType) },
     title: { type: new NonNull(StringType) },

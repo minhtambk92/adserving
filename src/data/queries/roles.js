@@ -9,7 +9,7 @@ import { resolver, defaultListArgs } from 'graphql-sequelize';
 import RoleType from '../types/RoleType';
 import { Role } from '../models';
 
-const roles = () => ({
+const roles = {
   type: new List(RoleType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
@@ -22,6 +22,6 @@ const roles = () => ({
       return opts;
     },
   }),
-});
+};
 
 export default roles;

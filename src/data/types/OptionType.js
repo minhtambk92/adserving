@@ -9,7 +9,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { Option } from '../models';
 
 const OptionType = new ObjectType({
-  name: 'Option',
+  name: 'OptionType',
   fields: Object.assign(attributeFields(Option, {
     // Additional options
   }), {

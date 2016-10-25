@@ -9,7 +9,7 @@ import zoneBelongsToSite from '../queries/zoneBelongsToSite';
 import zoneHasManyPlacementBannerZones from '../queries/zoneHasManyPlacementBannerZones';
 
 const ZoneType = new ObjectType({
-  name: 'Zone',
+  name: 'ZoneType',
   fields: () => Object.assign(attributeFields(Zone, {
     // Additional options
   }), {

@@ -9,7 +9,7 @@ import { resolver, defaultListArgs } from 'graphql-sequelize';
 import ZoneType from '../types/ZoneType';
 import { Zone } from '../models';
 
-const zones = () => ({
+const zones = {
   type: new List(ZoneType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
@@ -22,6 +22,6 @@ const zones = () => ({
       return opts;
     },
   }),
-});
+};
 
 export default zones;

@@ -9,7 +9,7 @@ import { resolver, defaultListArgs } from 'graphql-sequelize';
 import PlacementType from '../types/PlacementType';
 import { Placement } from '../models';
 
-const placements = () => ({
+const placements = {
   type: new List(PlacementType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
@@ -22,7 +22,7 @@ const placements = () => ({
       return opts;
     },
   }),
-});
+};
 
 export default placements;
 

@@ -9,7 +9,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { Role } from '../models';
 
 const RoleInputTypeWithoutId = new InputObjectType({
-  name: 'RoleInputWithoutId',
+  name: 'RoleInputTypeWithoutId',
   fields: () => Object.assign(attributeFields(Role, {
     only: [
       'uniqueName',

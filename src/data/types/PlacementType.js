@@ -9,7 +9,7 @@ import placementHasManyPlacementBannerZones from '../queries/placementHasManyPla
 import placementBelongsToCampaign from '../queries/placementBelongsToCampaign';
 
 const PlacementType = new ObjectType({
-  name: 'Placement',
+  name: 'PlacementType',
   fields: () => Object.assign(attributeFields(Placement, {
     // Additional options
   }), {

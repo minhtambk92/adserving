@@ -11,7 +11,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { Role } from '../models';
 
 const RoleInputType = new InputObjectType({
-  name: 'RoleInput',
+  name: 'RoleInputType',
   fields: () => Object.assign(attributeFields(Role, {
     // Additional options
     only: [

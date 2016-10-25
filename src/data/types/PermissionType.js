@@ -9,7 +9,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { Permission } from '../models';
 
 const PermissionType = new ObjectType({
-  name: 'Permission',
+  name: 'PermissionType',
   fields: Object.assign(attributeFields(Permission, {
     // Additional options
   }), {

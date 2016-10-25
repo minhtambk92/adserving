@@ -8,7 +8,7 @@ import { Banner } from '../models';
 import bannerHasManyPlacementBannerZones from '../queries/bannerHasManyPlacementBannerZones';
 
 const BannerType = new ObjectType({
-  name: 'Banner',
+  name: 'BannerType',
   fields: () => Object.assign(attributeFields(Banner, {
     // Additional options
   }), {

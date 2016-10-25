@@ -9,7 +9,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { Zone } from '../models';
 
 const ZoneInputType = new InputObjectType({
-  name: 'ZoneInput',
+  name: 'ZoneInputType',
   fields: () => Object.assign(attributeFields(Zone, {
     // Additional options
     only: [

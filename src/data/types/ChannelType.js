@@ -9,7 +9,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { Channel } from '../models';
 
 const ChannelType = new ObjectType({
-  name: 'Channel',
+  name: 'ChannelType',
   fields: Object.assign(attributeFields(Channel, {
     // Additional options
   }), {

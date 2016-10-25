@@ -8,7 +8,7 @@ import { Campaign } from '../models';
 import campaignBelongsToAdvertiser from '../queries/campaignBelongsToAdvertiser';
 import campaignHasManyPlacements from '../queries/campaignHasManyPlacements';
 const CampaignType = new ObjectType({
-  name: 'Campaign',
+  name: 'CampaignType',
   fields: () => Object.assign(attributeFields(Campaign, {
     // Additional options
   }), {

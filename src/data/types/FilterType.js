@@ -9,7 +9,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { Filter } from '../models';
 
 const FilterType = new ObjectType({
-  name: 'Filter',
+  name: 'FilterType',
   fields: Object.assign(attributeFields(Filter, {
     // Additional options
   }), {

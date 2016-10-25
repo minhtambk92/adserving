@@ -14,7 +14,7 @@ import {
 } from  'graphql';
 
 const FilterBannerType = new ObjectType({
-  name: 'FilterBanner',
+  name: 'FilterBannerType',
   fields: {
     id: { type: new NonNull(ID) },
     filterId: { type: new NonNull(ID) },
