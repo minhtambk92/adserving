@@ -230,8 +230,8 @@ class Advertisers extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      { this.props.advertisers.latest &&
-                      this.props.advertisers.latest.map(advertiser => {
+                      { this.props.advertisers.list &&
+                      this.props.advertisers.list.map(advertiser => {
                         if (this.isIndexOf(advertiser.email, advertiser.contact,
                             advertiser.name, advertiser.description)) {
                           return (

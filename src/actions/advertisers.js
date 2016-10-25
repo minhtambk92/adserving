@@ -4,7 +4,6 @@ import {
   GET_ADVERTISER,
   UPDATE_ADVERTISER,
   DELETE_ADVERTISER,
-  UPDATE_ADVERTISER_INCLUDE_CAMPAIGN,
 } from '../constants';
 
 export function getAdvertiser(id) {
@@ -133,53 +132,6 @@ export function updateAdvertiser({ id, email, name, contact, description }) {
 
     dispatch({
       type: UPDATE_ADVERTISER,
-      payload: {
-        advertiser: data.updatedAdvertiser,
-      },
-    });
-  };
-}
-
-export function updateAdvertiserIncludeCampaign({ id, email, name, contact, description }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($advertiser: AdvertiserInputType!) {
-        updatedAdvertiser(advertiser: $advertiser) {
-          id
-          email
-          name
-          contact
-          description
-            campaigns {
-              id
-              name
-              startTime
-              endTime
-              views
-              viewPerSession
-              timeResetViewCount
-              weight
-              description
-              createdAt
-              updatedAt
-            }
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
-      advertiser: {
-        id,
-        email,
-        name,
-        contact,
-        description,
-      },
-    });
-
-    dispatch({
-      type: UPDATE_ADVERTISER_INCLUDE_CAMPAIGN,
       payload: {
         advertiser: data.updatedAdvertiser,
       },

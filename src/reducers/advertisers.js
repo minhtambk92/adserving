@@ -4,7 +4,6 @@ import {
   CREATE_ADVERTISER,
   UPDATE_ADVERTISER,
   DELETE_ADVERTISER,
-  UPDATE_ADVERTISER_INCLUDE_CAMPAIGN,
 } from '../constants';
 
 export default function advertisers(state = {}, action) {
@@ -21,13 +20,13 @@ export default function advertisers(state = {}, action) {
       {
         return {
           ...state,
-          latest: action.payload.advertisers,
+          list: action.payload.advertisers,
         };
       }
 
     case CREATE_ADVERTISER:
       {
-        state.latest.unshift(action.payload.advertiser);
+        state.list.unshift(action.payload.advertiser);
         return { ...state };
       }
 
@@ -36,13 +35,6 @@ export default function advertisers(state = {}, action) {
         return {
           ...state,
           editing: action.payload.advertiser,
-        };
-      }
-    case UPDATE_ADVERTISER_INCLUDE_CAMPAIGN:
-      {
-        return {
-          ...state,
-          current: action.payload.advertiser,
         };
       }
     case DELETE_ADVERTISER:

@@ -11,7 +11,7 @@ import {
   UPDATE_ZONE,
   DELETE_ZONE,
   GET_ZONES_FILTERS,
-  SET_ZONES_FILTERS
+  SET_ZONES_FILTERS,
 } from '../constants';
 
 export function getZonesFilters() {
