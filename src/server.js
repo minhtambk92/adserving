@@ -159,6 +159,7 @@ app.get('*', async (req, res, next) => {
     data.script = assets.main.js;
     data.state = context.store.getState();
     data.lang = locale;
+    data.chunk = assets[route.chunk] && assets[route.chunk].js;
     data.classes = 'hold-transition skin-blue sidebar-mini';
     const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
 

@@ -11,7 +11,7 @@ import React, { PropTypes } from 'react';
 import serialize from 'serialize-javascript';
 import { analytics } from '../config';
 
-function Html({ title, description, style, script, state, lang, children, classes }) {
+function Html({ title, description, style, script, chunk, state, lang, children, classes }) {
   return (
     <html className="no-js" lang={lang}>
       <head>
@@ -78,12 +78,14 @@ function Html({ title, description, style, script, state, lang, children, classe
         <script src="/AdminLTE/plugins/fullcalendar/fullcalendar.min.js" />
         <script src="/AdminLTE/plugins/iCheck/icheck.min.js" />
         <script src="/AdminLTE/plugins/ckeditor/ckeditor.js" />
-        {state && <script
-          dangerouslySetInnerHTML={{
-            __html: `window.APP_STATE=${serialize(state, { isJSON: true })}`,
-          }}
-        />}
+        {state && (
+          <script
+            dangerouslySetInnerHTML={{ __html:
+            `window.APP_STATE=${serialize(state, { isJSON: true })}` }}
+          />
+        )}
         {script && <script src={script} />}
+        {chunk && <script src={chunk} />}
         {analytics.google.trackingId && (
           <script
             dangerouslySetInnerHTML={{ __html:
@@ -104,6 +106,7 @@ Html.propTypes = {
   description: PropTypes.string.isRequired,
   style: PropTypes.string,
   script: PropTypes.string,
+  chunk: PropTypes.string,
   state: PropTypes.object,
   lang: PropTypes.string,
   children: PropTypes.string,
