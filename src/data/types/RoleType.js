@@ -7,6 +7,7 @@ import {
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Role } from '../models';
+import roleBelongsToManyUsers from '../queries/roleBelongsToManyUsers';
 
 const RoleType = new ObjectType({
   name: 'Role',
@@ -14,6 +15,7 @@ const RoleType = new ObjectType({
     // Additional options
   }), {
     // Additional fields
+    users: roleBelongsToManyUsers(),
   }),
 });
 

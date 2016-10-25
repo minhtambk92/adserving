@@ -13,7 +13,7 @@ import { Advertiser } from '../models';
 const advertisers = {
   type: new List(AdvertiserType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Advertiser, {
     before(options) {

@@ -12,7 +12,7 @@ import { Zone } from '../models';
 const zones = {
   type: new List(ZoneType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Zone, {
     before(options) {

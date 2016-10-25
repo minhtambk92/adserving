@@ -1,20 +1,20 @@
 /**
- * Created by Manhhailua on 10/8/16.
+ * Created by Manhhailua on 10/25/16.
  */
 
 import {
   GraphQLList as List,
 } from 'graphql';
-import { resolver, defaultListArgs } from 'graphql-sequelize';
-import RoleType from '../types/RoleType';
+import { defaultListArgs, resolver } from 'graphql-sequelize';
 import { Role } from '../models';
+import UserType from '../types/UserType';
 
-const roles = {
-  type: new List(RoleType),
+const roleBelongsToManyUsers = () => ({
+  type: new List(UserType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
   }),
-  resolve: resolver(Role, {
+  resolve: resolver(Role.users, {
     before(options) {
       const opts = options;
       opts.order = options.order || [];
@@ -22,6 +22,6 @@ const roles = {
       return opts;
     },
   }),
-};
+});
 
-export default roles;
+export default roleBelongsToManyUsers;

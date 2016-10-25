@@ -9,7 +9,7 @@ import SiteType from '../types/SiteType';
 const zoneBelongsToSite = () => ({
   type: SiteType,
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Zone.site, {
     before(options) {

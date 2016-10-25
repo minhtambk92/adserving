@@ -5,7 +5,7 @@ import BannerType  from '../types/BannerType';
 const placementBannerZoneBelongsToBanner = () => ({
   type: BannerType,
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(PlacementBannerZone.banner, {
     before(options) {

@@ -13,7 +13,7 @@ import { Permission } from '../models';
 const permissions = {
   type: new List(PermissionType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Permission),
 };

@@ -13,7 +13,7 @@ import { Campaign } from '../models';
 const campaigns = {
   type: new List(CampaignType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Campaign, {
     before(options) {

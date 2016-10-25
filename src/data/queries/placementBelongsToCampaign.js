@@ -5,7 +5,7 @@ import CampaignType from '../types/CampaignType';
 const placementBelongsToCampaign = () => ({
   type: CampaignType,
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Placement.campaign, {
     before(options) {

@@ -13,7 +13,7 @@ import { Channel } from '../models';
 const channels = {
   type: new List(ChannelType),
   args: Object.assign(defaultListArgs(), {
-    // additional params
+    // Additional params
   }),
   resolve: resolver(Channel, {
     before(options) {

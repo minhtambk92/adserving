@@ -7,17 +7,21 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import { GraphQLObjectType as ObjectType } from 'graphql';
+import {
+  GraphQLObjectType as ObjectType,
+} from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { User } from '../models';
+import userBelongsToManyRoles from '../queries/userBelongsToManyRoles';
 
 const UserType = new ObjectType({
   name: 'UserType',
   fields: Object.assign(attributeFields(User, {
     // Additional options
-    // exclude: ['password'],
+    exclude: ['password'],
   }), {
     // Additional fields
+    roles: userBelongsToManyRoles(),
   }),
 });
 
