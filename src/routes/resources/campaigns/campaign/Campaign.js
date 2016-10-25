@@ -14,11 +14,11 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import {
   getCampaign,
-  updateCampaignIncludePlacement,
+  updateCampaign,
   deleteCampaign,
 } from '../../../../actions/campaigns';
 import { getAdvertisers } from '../../../../actions/advertisers';
-import { createPlacementIncludeCampaign } from '../../../../actions/placements';
+import { createPlacement } from '../../../../actions/placements';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './Campaign.css';
@@ -33,10 +33,10 @@ class Campaign extends Component {
     advertisers: PropTypes.object,
     getCampaign: PropTypes.func,
     getAdvertisers: PropTypes.func,
-    updateCampaignIncludePlacement: PropTypes.func,
+    updateCampaign: PropTypes.func,
     deleteCampaign: PropTypes.func,
     placements: PropTypes.object,
-    createPlacementIncludeCampaign: PropTypes.func,
+    createPlacement: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -142,7 +142,7 @@ class Campaign extends Component {
     }));
   }
 
-  createPlacementIncludeCampaign() {
+  createPlacement() {
     const name = document.getElementById('inputPlacementName').value;
     const startTime = new Date(moment(new Date(document.getElementById('inputPlacementStartTime').value)).format('YYYY-MM-DD 00:00:00'));
     const endTime = new Date(moment(new Date(document.getElementById('inputPlacementEndTime').value)).format('YYYY-MM-DD 00:00:00'));
@@ -152,7 +152,7 @@ class Campaign extends Component {
     const campaignId = this.props.campaignId;
     if (name && startTime && endTime && size && weight && description && campaignId) {
       if (endTime > startTime) {
-        this.props.createPlacementIncludeCampaign({
+        this.props.createPlacement({
           name,
           startTime,
           endTime,
@@ -196,7 +196,7 @@ class Campaign extends Component {
     }));
   }
 
-  updateCampaignIncludePlacement() {
+  updateCampaign() {
     const {
       advertiserId,
       name,
@@ -244,7 +244,9 @@ class Campaign extends Component {
       campaign.description = description;
     }
     if (moment(new Date(document.getElementById('inputCampaignStartTime').value)).format('x') < moment(new Date(document.getElementById('inputCampaignEndTime').value))) {
-      this.props.updateCampaignIncludePlacement(campaign);
+      this.props.updateCampaign(campaign).then(() => {
+        this.props.getCampaign(this.props.campaignId);
+      });
     } else {
       document.getElementById('inputCampaignEndTime').value = null;
       document.getElementById('inputCampaignEndTime').focus();
@@ -420,7 +422,7 @@ class Campaign extends Component {
                       ><i className="fa fa-trash-o" /> Delete</Link>
                       <a
                         className="btn btn-app pull-right"
-                        onClick={event => this.updateCampaignIncludePlacement(event)}
+                        onClick={event => this.updateCampaign(event)}
                       ><i className="fa fa-floppy-o" /> Save</a>
                       {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                     </div>
@@ -527,7 +529,7 @@ class Campaign extends Component {
                       ><i className="fa fa-eraser" /> Clear</a>
                       <a
                         className="btn btn-app pull-right"
-                        onClick={event => this.createPlacementIncludeCampaign(event)}
+                        onClick={event => this.createPlacement(event)}
                       ><i className="fa fa-check" /> Confirm</a>
                       {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                     </div>
@@ -644,10 +646,10 @@ const mapState = (state) => ({
 
 const mapDispatch = {
   getCampaign,
-  updateCampaignIncludePlacement,
+  updateCampaign,
   getAdvertisers,
   deleteCampaign,
-  createPlacementIncludeCampaign,
+  createPlacement,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Campaign));

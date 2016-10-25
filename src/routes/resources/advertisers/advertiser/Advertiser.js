@@ -14,10 +14,10 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import {
   getAdvertiser,
-  updateAdvertiserIncludeCampaign,
+  updateAdvertiser,
   deleteAdvertiser,
 } from '../../../../actions/advertisers';
-import { createCampaignIncludeAdvertiser } from '../../../../actions/campaigns';
+import { createCampaign } from '../../../../actions/campaigns';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './Advertiser.css';
@@ -29,10 +29,10 @@ class Advertiser extends Component {
   static propTypes = {
     advertiserId: PropTypes.string.isRequired,
     advertisers: PropTypes.object,
-    updateAdvertiserIncludeCampaign: PropTypes.func,
+    updateAdvertiser: PropTypes.func,
     getAdvertiser: PropTypes.func,
     campaigns: PropTypes.object,
-    createCampaignIncludeAdvertiser: PropTypes.func,
+    createCampaign: PropTypes.func,
     deleteAdvertiser: PropTypes.func,
   };
 
@@ -100,7 +100,7 @@ class Advertiser extends Component {
     }));
   }
 
-  createCampaignIncludeAdvertiser() {
+  createCampaign() {
     const name = document.getElementById('inputCampaignName').value;
     const advertiserId = this.props.advertiserId;
     const startTime = new Date(moment(new Date(document.getElementById('inputCampaignStartTime').value)).format('YYYY-MM-DD 00:00:00'));
@@ -113,7 +113,7 @@ class Advertiser extends Component {
     if (name && advertiserId && startTime && endTime && views && viewPerSession
       && timeResetViewCount && weight && description) {
       if (moment(startTime).format('x') < moment(endTime).format('x')) {
-        this.props.createCampaignIncludeAdvertiser({
+        this.props.createCampaign({
           advertiserId,
           name,
           startTime,
@@ -162,7 +162,7 @@ class Advertiser extends Component {
     return false;
   }
 
-  updateAdvertiserIncludeCampaign() {
+  updateAdvertiser() {
     const { email, name, contact, description } = this.state;
     const advertiser = { id: this.props.advertiserId };
     if (email && email !== this.props.advertisers.current.email) {
@@ -181,7 +181,9 @@ class Advertiser extends Component {
       advertiser.description = description;
     }
 
-    this.props.updateAdvertiserIncludeCampaign(advertiser);
+    this.props.updateAdvertiser(advertiser).then(() => {
+      this.props.getAdvertiser(this.props.advertiserId);
+    });
   }
 
   deleteAdvertiser() {
@@ -282,7 +284,7 @@ class Advertiser extends Component {
                       ><i className="fa fa-trash-o" /> Delete</Link>
                       <a
                         className="btn btn-app pull-right"
-                        onClick={event => this.updateAdvertiserIncludeCampaign(event)}
+                        onClick={event => this.updateAdvertiser(event)}
                       ><i className="fa fa-floppy-o" /> Save</a>
                       {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                     </div>
@@ -411,7 +413,7 @@ class Advertiser extends Component {
                       ><i className="fa fa-eraser" /> Clear</a>
                       <a
                         className="btn btn-app pull-right"
-                        onClick={event => this.createCampaignIncludeAdvertiser(event)}
+                        onClick={event => this.createCampaign(event)}
                       ><i className="fa fa-check" /> Confirm</a>
                       {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                     </div>
@@ -460,7 +462,7 @@ class Advertiser extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.advertisers.current
+                      {this.props.advertisers.current && this.props.advertisers.current.campaigns
                       && this.props.advertisers.current.campaigns.map(campaign => {
                         if (this.isIndexOf(campaign.name, campaign.startTime, campaign.endTime,
                             campaign.views, campaign.viewPerSession, campaign.timeResetViewCount)) {
@@ -516,9 +518,9 @@ const mapState = (state) => ({
 
 const mapDispatch = {
   getAdvertiser,
-  updateAdvertiserIncludeCampaign,
+  updateAdvertiser,
   deleteAdvertiser,
-  createCampaignIncludeAdvertiser,
+  createCampaign,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Advertiser));

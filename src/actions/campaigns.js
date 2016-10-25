@@ -4,8 +4,6 @@ import {
   GET_CAMPAIGN,
   UPDATE_CAMPAIGN,
   DELETE_CAMPAIGN,
-  UPDATE_CAMPAIGN_INCLUDE_PLACEMENT,
-  CREATE_CAMPAIGN_INCLUDE_ADVERTISER,
 } from '../constants/';
 
 export function getCampaign(id) {
@@ -132,59 +130,6 @@ export function createCampaign({
     });
   };
 }
-export function createCampaignIncludeAdvertiser({
-  advertiserId,
-  name,
-  startTime,
-  endTime,
-  views,
-  viewPerSession,
-  timeResetViewCount,
-  weight,
-  description,
-}) {
-  return async(dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($campaign: CampaignInputTypeWithoutId!) {
-        createdCampaign(campaign: $campaign) {
-          id
-          advertiserId
-          name
-          startTime
-          endTime
-          views
-          viewPerSession
-          timeResetViewCount
-          weight
-          description
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
-      campaign: {
-        advertiserId,
-        name,
-        startTime,
-        endTime,
-        views,
-        viewPerSession,
-        timeResetViewCount,
-        weight,
-        description,
-
-      },
-    });
-
-    dispatch({
-      type: CREATE_CAMPAIGN_INCLUDE_ADVERTISER,
-      payload: {
-        campaign: data.createdCampaign,
-      },
-    });
-  };
-}
 
 export function updateCampaign({
   id,
@@ -240,71 +185,6 @@ export function updateCampaign({
     });
   };
 }
-
-export function updateCampaignIncludePlacement({
-  id,
-  advertiserId,
-  name,
-  startTime,
-  endTime,
-  views,
-  viewPerSession,
-  timeResetViewCount,
-  weight,
-  description,
-}) {
-  return async(dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($campaign: CampaignInputType!) {
-        updatedCampaign(campaign: $campaign) {
-          id
-          advertiserId
-          name
-          startTime
-          endTime
-          views
-          viewPerSession
-          timeResetViewCount
-          weight
-          description
-           placements {
-            id
-            name
-            size
-            startTime
-            endTime
-            weight
-            description
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
-      campaign: {
-        id,
-        advertiserId,
-        name,
-        startTime,
-        endTime,
-        views,
-        viewPerSession,
-        timeResetViewCount,
-        weight,
-        description,
-      },
-    });
-
-    dispatch({
-      type: UPDATE_CAMPAIGN_INCLUDE_PLACEMENT,
-      payload: {
-        campaign: data.updatedCampaign,
-      },
-    });
-  };
-}
-
 
 export function deleteCampaign(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
