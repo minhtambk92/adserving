@@ -10,7 +10,6 @@ import {
   CREATE_SITE,
   UPDATE_SITE,
   DELETE_SITE,
-  UPDATE_SITE_INCLUDE_ZONE,
 } from '../constants';
 
 export function getSite(id) {
@@ -161,53 +160,6 @@ export function updateSite({ id, domain, name, email, description, status }) {
 
     dispatch({
       type: UPDATE_SITE,
-      payload: {
-        site: data.updatedSite,
-      },
-    });
-  };
-}
-
-export function updateSiteIncludeZone({ id, domain, name, email, description, status }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($site: SiteInput!) {
-        updatedSite(site: $site) {
-          id
-          domain
-          name
-          email
-          description
-          status
-           zones {
-            id
-            name
-            description
-            type
-            html
-            css
-            slot
-            createdAt
-            updatedAt
-           }
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
-      site: {
-        id,
-        domain,
-        name,
-        email,
-        description,
-        status,
-      },
-    });
-
-    dispatch({
-      type: UPDATE_SITE_INCLUDE_ZONE,
       payload: {
         site: data.updatedSite,
       },

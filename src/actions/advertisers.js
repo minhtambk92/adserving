@@ -199,6 +199,7 @@ export function deleteAdvertiser(id) {
           description
           createdAt
           updatedAt
+          deletedAt
         }
       }`;
 
