@@ -82,6 +82,7 @@ class Users extends Component {
 
   createUser() {
     const email = this.inputUserEmail.value;
+    const roleIds = [this.inputUsersRole.value];
     const password = this.inputUserPassword.value;
     const passwordConfirmation = this.inputUserPasswordConfirmation.value;
     const emailConfirmed = this.inputUserEmailConfirmed.value;
@@ -89,13 +90,14 @@ class Users extends Component {
 
     if (
       email &&
+      roleIds &&
       password &&
       passwordConfirmation &&
       password === passwordConfirmation &&
       emailConfirmed &&
       status
     ) {
-      this.props.createUser({ email, password, emailConfirmed, status });
+      this.props.createUser({ email, roleIds, password, emailConfirmed, status });
       this.clearInput();
     }
   }
@@ -258,6 +260,27 @@ class Users extends Component {
                             this.inputUserEmail = c;
                           }}
                         />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputUsersRole"
+                        className="col-sm-2 control-label"
+                      >Role</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputUsersRole"
+                          className="form-control select2"
+                          style={{ width: '100%' }}
+                          ref={c => {
+                            this.inputUsersRole = c;
+                          }}
+                          defaultValue={this.props.users.filters && this.props.users.filters.roleId}
+                        >
+                          {this.props.roles.list && this.props.roles.list.map(role => (
+                            <option key={role.id} value={role.id}>{role.name}</option>
+                          ))}
+                        </select>
                       </div>
                     </div>
                     <div className="form-group">

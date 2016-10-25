@@ -181,8 +181,9 @@ export default { sync };
 export {
   Option,
   Resource,
-  User,
   Role,
+  User,
+  UserRole,
   Permission,
   Campaign,
   Placement,
