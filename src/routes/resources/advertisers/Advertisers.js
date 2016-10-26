@@ -79,9 +79,10 @@ class Advertisers extends Component {
     const contact = this.inputAdvertiserContact.value;
     const email = this.inputAdvertiserEmail.value;
     const description = this.inputAdvertiserDescription.value;
+    const status = this.inputAdvetiserStatus.value;
 
     if (contact && name && email && description) {
-      this.props.createAdvertiser({ email, name, contact, description }).then(() => {
+      this.props.createAdvertiser({ email, name, contact, description, status }).then(() => {
         this.clearInput();
       });
     }
@@ -156,6 +157,23 @@ class Advertisers extends Component {
                             this.inputAdvertiserEmail = c;
                           }}
                         />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputAdvertiserStatus"
+                        className="col-sm-2 control-label"
+                      >Status</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputAdvertiserStatus" className="form-control"
+                          ref={c => {
+                            this.inputAdvetiserStatus = c;
+                          }}
+                        >
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
                       </div>
                     </div>
                     <div className="form-group">

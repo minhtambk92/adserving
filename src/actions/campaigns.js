@@ -4,7 +4,27 @@ import {
   GET_CAMPAIGN,
   UPDATE_CAMPAIGN,
   DELETE_CAMPAIGN,
+  GET_CAMPAIGNS_FILTERS,
+  SET_CAMPAIGNS_FILTERS,
 } from '../constants/';
+
+export function getCampaignsFilters() {
+  return async(dispatch) => {
+    dispatch({
+      type: GET_CAMPAIGNS_FILTERS,
+      payload: {},
+    });
+  };
+}
+
+export function setCampaignsFilters(filter) {
+  return async(dispatch) => {
+    dispatch({
+      type: SET_CAMPAIGNS_FILTERS,
+      payload: filter,
+    });
+  };
+}
 
 export function getCampaign(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
@@ -21,6 +41,7 @@ export function getCampaign(id) {
           timeResetViewCount
           weight
           description
+          status
           placements {
             id
             name
@@ -29,6 +50,7 @@ export function getCampaign(id) {
             endTime
             weight
             description
+            status
           }
           createdAt
           updatedAt
@@ -46,27 +68,44 @@ export function getCampaign(id) {
   };
 }
 
-export function getCampaigns() {
+export function getCampaigns(args = {
+  where: {},
+  limit: 0,
+  order: '',
+}, options = {
+  globalFilters: false,
+}) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query {
-        campaigns {
+      query($where: JSON, $order: String, $limit: Int) {
+        campaigns(where: $where, order: $order, limit: $limit) {
           id
           advertiserId
-           name
+          name
           startTime
           endTime
           views
           viewPerSession
           timeResetViewCount
           weight
+          status
           description
           createdAt
           updatedAt
           }
       }`;
+    const variables = Object.assign({}, args);
+    const filters = await getState().campaigns.filters;
 
-    const { data } = await graphqlRequest(query);
+    if (
+      options.globalFilters &&
+      variables.where === {} &&
+      Object.keys(filters).length > 0 &&
+      filters.constructor === Object
+    ) {
+      variables.where = Object.assign({}, filters);
+    }
+    const { data } = await graphqlRequest(query, variables);
 
     dispatch({
       type: GET_CAMPAIGNS,
@@ -87,6 +126,7 @@ export function createCampaign({
   timeResetViewCount,
   weight,
   description,
+  status,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -102,6 +142,7 @@ export function createCampaign({
           timeResetViewCount
           weight
           description
+          status
           createdAt
           updatedAt
         }
@@ -118,7 +159,7 @@ export function createCampaign({
         timeResetViewCount,
         weight,
         description,
-
+        status,
       },
     });
 
@@ -142,6 +183,7 @@ export function updateCampaign({
   timeResetViewCount,
   weight,
   description,
+  status,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -157,6 +199,7 @@ export function updateCampaign({
           timeResetViewCount
           weight
           description
+          status
           createdAt
           updatedAt
         }
@@ -174,6 +217,7 @@ export function updateCampaign({
         timeResetViewCount,
         weight,
         description,
+        status,
       },
     });
 
@@ -201,6 +245,7 @@ export function deleteCampaign(id) {
           timeResetViewCount
           weight
           description
+          status
           createdAt
           updatedAt
         }

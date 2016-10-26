@@ -102,6 +102,7 @@ class Campaign extends Component {
       timeResetViewCount,
       weight,
       description,
+      status,
     } = nextProps.campaigns && (nextProps.campaigns.editing || {});
 
     this.inputCampaignName.value = name;
@@ -113,6 +114,7 @@ class Campaign extends Component {
     this.inputCampaignTimeResetViewCount.value = timeResetViewCount;
     this.inputCampaignWeight.value = weight;
     this.inputCampaignDescription.value = description;
+    this.inputCampaignStatus.value = status;
   }
 
   componentDidUpdate() {
@@ -132,6 +134,7 @@ class Campaign extends Component {
     const weight = this.inputPlacementWeight.value;
     const description = this.inputPlacementDescription.value;
     const campaignId = this.props.campaignId;
+    const status = this.inputPlacementStatus.value;
     if (name && startTime && endTime && size && weight && description && campaignId) {
       if (moment(endTime).format('x') > moment(startTime).format('x')) {
         this.props.createPlacement({
@@ -142,6 +145,7 @@ class Campaign extends Component {
           weight,
           description,
           campaignId,
+          status,
         }).then(() => {
           this.props.getCampaign(this.props.campaignId);
           this.clearInput();
@@ -186,6 +190,7 @@ class Campaign extends Component {
     const timeResetViewCount = this.inputCampaignTimeResetViewCount.value;
     const weight = this.inputCampaignWeight.value;
     const description = this.inputCampaignDescription.value;
+    const status = this.inputCampaignStatus.value;
     const campaign = { id: this.props.campaignId };
 
     if (name && name !== this.props.campaigns.editing.name) {
@@ -220,6 +225,9 @@ class Campaign extends Component {
     if (description &&
       description !== this.props.campaigns.editing.description) {
       campaign.description = description;
+    }
+    if (status && status !== this.props.campaigns.editing.status) {
+      campaign.status = status;
     }
     if (moment(new Date(startTime)).format('x') < moment(new Date(endTime)).format('x')) {
       this.props.updateCampaign(campaign).then(() => {
@@ -403,6 +411,23 @@ class Campaign extends Component {
                                   />
                                 </div>
                               </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputCampaignStatus"
+                                  className="col-sm-2 control-label"
+                                >Status</label>
+                                <div className="col-sm-10">
+                                  <select
+                                    id="inputCampaignStatus" className="form-control"
+                                    ref={c => {
+                                      this.inputCampaignStatus = c;
+                                    }}
+                                  >
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                  </select>
+                                </div>
+                              </div>
 
                               <div className="form-group">
                                 <label
@@ -538,6 +563,23 @@ class Campaign extends Component {
                                           this.inputPlacementWeight = c;
                                         }}
                                       />
+                                    </div>
+                                  </div>
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor="inputPlacementStatus"
+                                      className="col-sm-2 control-label"
+                                    >Status</label>
+                                    <div className="col-sm-10">
+                                      <select
+                                        id="inputPlacementStatus" className="form-control"
+                                        ref={c => {
+                                          this.inputPlacementStatus = c;
+                                        }}
+                                      >
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                      </select>
                                     </div>
                                   </div>
 

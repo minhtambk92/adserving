@@ -19,6 +19,7 @@ export function getBanner(id) {
           keyword
           weight
           description
+          status
           pbzBanner {
             placements {
               id
@@ -29,6 +30,7 @@ export function getBanner(id) {
               weight
               description
               campaignId
+              status
               createdAt
               updatedAt
             }
@@ -62,6 +64,7 @@ export function getBanners() {
           keyword
           weight
           description
+          status
           createdAt
           updatedAt
           }
@@ -86,6 +89,7 @@ export function createBanner({
   keyword,
   weight,
   description,
+  status,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -99,6 +103,7 @@ export function createBanner({
           keyword
           weight
           description
+          status
           createdAt
           updatedAt
         }
@@ -113,7 +118,7 @@ export function createBanner({
         keyword,
         weight,
         description,
-
+        status,
       },
     });
 
@@ -135,6 +140,7 @@ export function updateBanner({
   keyword,
   weight,
   description,
+  status,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -148,6 +154,7 @@ export function updateBanner({
           keyword
           weight
           description
+          status
           createdAt
           updatedAt
         }
@@ -163,6 +170,7 @@ export function updateBanner({
         keyword,
         weight,
         description,
+        status,
       },
     });
 
@@ -188,6 +196,7 @@ export function deleteBanner(id) {
           keyword
           weight
           description
+          status
           createdAt
           updatedAt
           deletedAt

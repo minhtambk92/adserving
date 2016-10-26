@@ -75,12 +75,14 @@ class Advertiser extends Component {
       name,
       contact,
       description,
+      status,
     } = nextProps.advertisers && (nextProps.advertisers.editing || {});
 
     this.inputAdvertiserContact.value = contact;
     this.inputAdvertiserName.value = name;
     this.inputAdvertiserEmail.value = email;
     this.inputAdvertiserDescription.value = description;
+    this.inputAdvertiserStatus.value = status;
   }
   componentDidUpdate() {
     /* eslint-disable no-undef */
@@ -100,6 +102,7 @@ class Advertiser extends Component {
     const timeResetViewCount = this.inputCampaignTimeResetViewCount.value;
     const weight = this.inputCampaignWeight.value;
     const description = this.inputCampaignDescription.value;
+    const status = this.inputCampaignStatus.value;
     if (name && advertiserId && startTime && endTime && views && viewPerSession
       && timeResetViewCount && weight && description) {
       if (moment(startTime).format('x') < moment(endTime).format('x')) {
@@ -113,6 +116,7 @@ class Advertiser extends Component {
           timeResetViewCount,
           weight,
           description,
+          status,
         }).then(() => {
           this.props.getAdvertiser(this.props.advertiserId);
           this.clearInput();
@@ -157,6 +161,7 @@ class Advertiser extends Component {
     const contact = this.inputAdvertiserContact.value;
     const email = this.inputAdvertiserEmail.value;
     const description = this.inputAdvertiserDescription.value;
+    const status = this.inputAdvertiserStatus.value;
     const advertiser = { id: this.props.advertiserId };
     if (email && email !== this.props.advertisers.editing.email) {
       advertiser.email = email;
@@ -172,6 +177,10 @@ class Advertiser extends Component {
 
     if (description && description !== this.props.advertisers.editing.description) {
       advertiser.description = description;
+    }
+
+    if (status && status !== this.props.advertisers.editing.status) {
+      advertiser.status = status;
     }
 
     this.props.updateAdvertiser(advertiser).then(() => {
@@ -269,6 +278,23 @@ class Advertiser extends Component {
                                       this.inputAdvertiserEmail = c;
                                     }}
                                   />
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputAdvertiserStatus"
+                                  className="col-sm-2 control-label"
+                                >Status</label>
+                                <div className="col-sm-10">
+                                  <select
+                                    id="inputAdvertiserStatus" className="form-control"
+                                    ref={c => {
+                                      this.inputAdvertiserStatus = c;
+                                    }}
+                                  >
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                  </select>
                                 </div>
                               </div>
                               <div className="form-group">
@@ -435,7 +461,23 @@ class Advertiser extends Component {
                                       />
                                     </div>
                                   </div>
-
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor="inputCampaignStatus"
+                                      className="col-sm-2 control-label"
+                                    >Status</label>
+                                    <div className="col-sm-10">
+                                      <select
+                                        id="inputCampaignStatus" className="form-control"
+                                        ref={c => {
+                                          this.inputCampaignStatus = c;
+                                        }}
+                                      >
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                      </select>
+                                    </div>
+                                  </div>
                                   <div className="form-group">
                                     <label
                                       htmlFor="inputCampaignDescription"

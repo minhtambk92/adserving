@@ -13,6 +13,7 @@ const PlacementInputTypeWithoutId = new InputObjectType({
       'weight',
       'description',
       'campaignId',
+      'status',
     ],
   }), {
     // Additional fields

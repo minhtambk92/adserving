@@ -97,6 +97,7 @@ class Banner extends Component {
       keyword,
       weight,
       description,
+      status,
     } = nextProps.banners && (nextProps.banners.editing || {});
 
     this.inputBannerName.value = name;
@@ -106,6 +107,7 @@ class Banner extends Component {
     this.inputBannerKeyWord.value = keyword;
     this.inputBannerWeight.value = weight;
     this.inputBannerDescription.value = description;
+    this.inputBannerStatus.value = status;
   }
 
   componentDidUpdate() {
@@ -125,6 +127,7 @@ class Banner extends Component {
     const weight = this.inputPlacementWeight.value;
     const description = this.inputPlacementDescription.value;
     const campaignId = this.inputCampaign.value;
+    const status = this.inputPlacementStatus.value;
     if (name && startTime && endTime && size && weight && description && campaignId) {
       if (moment(startTime).format('x') < moment(endTime).format('x')) {
         this.props.createPlacement({
@@ -135,6 +138,7 @@ class Banner extends Component {
           weight,
           description,
           campaignId,
+          status,
         }).then(() => {
           const placementId = this.props.placements.list[0].id;
           const bannerId = this.props.bannerId;
@@ -239,6 +243,7 @@ class Banner extends Component {
     const keyword = this.inputBannerKeyWord.value;
     const weight = this.inputBannerWeight.value;
     const description = this.inputBannerDescription.value;
+    const status = this.inputBannerStatus.value;
     const banner = { id: this.props.bannerId };
 
     if (name && name !== this.props.banners.editing.name) {
@@ -264,6 +269,9 @@ class Banner extends Component {
     }
     if (description && description !== this.props.banners.editing.description) {
       banner.description = description;
+    }
+    if (status && status !== this.props.banners.editing.status) {
+      banner.status = status;
     }
 
     this.props.updateBanner(banner).then(() => {
@@ -418,6 +426,23 @@ class Banner extends Component {
                                       this.inputBannerWeight = c;
                                     }}
                                   />
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputBannerStatus"
+                                  className="col-sm-2 control-label"
+                                >Status</label>
+                                <div className="col-sm-10">
+                                  <select
+                                    id="inputBannerStatus" className="form-control"
+                                    ref={c => {
+                                      this.inputBannerStatus = c;
+                                    }}
+                                  >
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                  </select>
                                 </div>
                               </div>
                               <div className="form-group">
@@ -758,6 +783,23 @@ class Banner extends Component {
                                           this.inputPlacementWeight = c;
                                         }}
                                       />
+                                    </div>
+                                  </div>
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor="inputPlacementStatus"
+                                      className="col-sm-2 control-label"
+                                    >Status</label>
+                                    <div className="col-sm-10">
+                                      <select
+                                        id="inputPlacementStatus" className="form-control"
+                                        ref={c => {
+                                          this.inputPlacementStatus = c;
+                                        }}
+                                      >
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                      </select>
                                     </div>
                                   </div>
 

@@ -83,6 +83,7 @@ class Banners extends Component {
     const keyword = this.inputBannerKeyWord.value;
     const weight = this.inputBannerWeight.value;
     const description = this.inputBannerDescription.value;
+    const status = this.inputBannerStatus.value;
     if (name && html && height && weight && keyword && width && description) {
       this.props.createBanner({
         name,
@@ -92,6 +93,7 @@ class Banners extends Component {
         keyword,
         weight,
         description,
+        status,
       }).then(() => {
         this.clearInput();
       });
@@ -216,6 +218,23 @@ class Banners extends Component {
                             this.inputBannerWeight = c;
                           }}
                         />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputBannerStatus"
+                        className="col-sm-2 control-label"
+                      >Status</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputBannerStatus" className="form-control"
+                          ref={c => {
+                            this.inputBannerStatus = c;
+                          }}
+                        >
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
                       </div>
                     </div>
                     <div className="form-group">

@@ -18,6 +18,7 @@ export function getPlacement(id) {
           endTime
           weight
           description
+          status
           campaignId
           pbzPlacement {
             banners {
@@ -29,6 +30,7 @@ export function getPlacement(id) {
               keyword
               weight
               description
+              status
               createdAt
               updatedAt
             }
@@ -75,6 +77,7 @@ export function getPlacements() {
           weight
           description
           campaignId
+          status
           createdAt
           updatedAt
           }
@@ -99,6 +102,7 @@ export function createPlacement({
   weight,
   description,
   campaignId,
+  status,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -112,6 +116,7 @@ export function createPlacement({
           weight
           description
           campaignId
+          status
           createdAt
           updatedAt
         }
@@ -126,6 +131,7 @@ export function createPlacement({
         weight,
         description,
         campaignId,
+        status,
       },
     });
 
@@ -146,6 +152,7 @@ export function updatePlacement({
   weight,
   description,
   campaignId,
+  status,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -159,6 +166,7 @@ export function updatePlacement({
           weight
           description
           campaignId
+          status
           pbzPlacement {
             banners {
               id
@@ -169,6 +177,7 @@ export function updatePlacement({
               keyword
               weight
               description
+              status
               createdAt
               updatedAt
             }
@@ -201,6 +210,7 @@ export function updatePlacement({
         weight,
         description,
         campaignId,
+        status,
       },
     });
 
@@ -225,7 +235,8 @@ export function deletePlacement(id) {
           endTime
           weight
           description
-           campaignId
+          campaignId
+          status
           createdAt
           updatedAt
         }

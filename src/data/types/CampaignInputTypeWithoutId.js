@@ -15,6 +15,7 @@ const CampaignInputTypeWithoutId = new InputObjectType({
       'timeResetViewCount',
       'weight',
       'description',
+      'status',
     ],
   }), {
     // Additional fields

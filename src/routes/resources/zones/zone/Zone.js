@@ -180,6 +180,7 @@ class Zone extends Component {
     const weight = this.inputPlacementWeight.value;
     const description = this.inputPlacementDescription.value;
     const campaignId = this.inputPlacementCampaign.value;
+    const status = this.inputPlacementStatus.value;
     if (name && startTime && endTime && size && weight && description) {
       if (moment(startTime).format('x') < moment(endTime).format('x')) {
         this.props.createPlacement({
@@ -190,6 +191,7 @@ class Zone extends Component {
           weight,
           description,
           campaignId,
+          status,
         }).then(() => {
           const placementId = this.props.placements.list[0].id;
           const zoneId = this.props.zoneId;
@@ -755,7 +757,23 @@ class Zone extends Component {
                                   />
                                 </div>
                               </div>
-
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputPlacementStatus"
+                                  className="col-sm-2 control-label"
+                                >Status</label>
+                                <div className="col-sm-10">
+                                  <select
+                                    id="inputPlacementStatus" className="form-control"
+                                    ref={c => {
+                                      this.inputPlacementStatus = c;
+                                    }}
+                                  >
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                  </select>
+                                </div>
+                              </div>
                               <div className="form-group">
                                 <label
                                   htmlFor="inputPlacementDescription"

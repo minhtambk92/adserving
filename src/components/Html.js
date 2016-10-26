@@ -79,7 +79,7 @@ function Html({ title, description, style, script, chunk, state, lang, children,
         <script src="/AdminLTE/plugins/bootstrap-slider/bootstrap-slider.js" />
         <script src="/AdminLTE/plugins/fullcalendar/fullcalendar.min.js" />
         <script src="/AdminLTE/plugins/iCheck/icheck.min.js" />
-        <script src="/AdminLTE/plugins/ckeditor/ckeditor.js" />
+        {/* <script src="/AdminLTE/plugins/ckeditor/ckeditor.js" /> */}
         {state && (
           <script
             dangerouslySetInnerHTML={{ __html:

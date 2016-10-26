@@ -16,6 +16,7 @@ export function getAdvertiser(id) {
           name
           contact
           description
+          status
           campaigns {
             id
             name
@@ -26,6 +27,7 @@ export function getAdvertiser(id) {
             timeResetViewCount
             weight
             description
+            status
             createdAt
             updatedAt
           }
@@ -55,6 +57,7 @@ export function getAdvertisers() {
           name
           contact
           description
+          status
           createdAt
           updatedAt
         }
@@ -71,7 +74,7 @@ export function getAdvertisers() {
   };
 }
 
-export function createAdvertiser({ email, name, contact, description }) {
+export function createAdvertiser({ email, name, contact, description, status }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($advertiser: AdvertiserInputTypeWithoutId!) {
@@ -81,6 +84,7 @@ export function createAdvertiser({ email, name, contact, description }) {
           name
           contact
           description
+          status
           createdAt
           updatedAt
         }
@@ -92,7 +96,7 @@ export function createAdvertiser({ email, name, contact, description }) {
         name,
         contact,
         description,
-
+        status,
       },
     });
 
@@ -105,7 +109,7 @@ export function createAdvertiser({ email, name, contact, description }) {
   };
 }
 
-export function updateAdvertiser({ id, email, name, contact, description }) {
+export function updateAdvertiser({ id, email, name, contact, description, status }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($advertiser: AdvertiserInputType!) {
@@ -115,6 +119,7 @@ export function updateAdvertiser({ id, email, name, contact, description }) {
           name
           contact
           description
+          status
           createdAt
           updatedAt
         }
@@ -127,6 +132,7 @@ export function updateAdvertiser({ id, email, name, contact, description }) {
         name,
         contact,
         description,
+        status,
       },
     });
 
@@ -149,6 +155,7 @@ export function deleteAdvertiser(id) {
           name
           contact
           description
+          status
           createdAt
           updatedAt
           deletedAt
