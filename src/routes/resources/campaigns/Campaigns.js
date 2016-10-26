@@ -139,7 +139,6 @@ class Campaigns extends Component {
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
-
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW CAMPAIGNS */}
