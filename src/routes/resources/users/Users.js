@@ -416,7 +416,11 @@ class Users extends Component {
                           return (
                             <tr key={user.id}>
                               <td><input type="checkbox" className="inputChooseUser" /></td>
-                              <td><Link to={`/resource/user/${user.id}`}>{user.email}</Link></td>
+                              <td>
+                                <Link
+                                  to={`/resource/user/${user.id}`}
+                                ><strong>{user.email}</strong></Link>
+                              </td>
                               <td>{user.emailConfirmed ? 'yes' : 'no'}</td>
                               <td>{user.status}</td>
                             </tr>
