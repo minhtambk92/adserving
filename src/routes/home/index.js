@@ -16,13 +16,9 @@ export default {
   path: '/',
 
   action() {
-    const content = {
-      title: 'Home | Admin Dev Kit',
-    };
-
     return {
       title: 'Home | Admin Dev Kit',
-      component: <Home content={content} />,
+      component: <Home />,
     };
   },
 

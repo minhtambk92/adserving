@@ -7,7 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
@@ -17,31 +17,10 @@ const pageTitle = 'Home';
 const pageSubTitle = 'Control panel';
 
 class Home extends Component {
-  static propTypes = {
-    // Wrap all content props to one parent props
-    content: PropTypes.shape({
-      // Document title
-      title: PropTypes.string.isRequired,
-    }).isRequired,
-    // Define page layout
-    isFullWidth: PropTypes.bool,
-  };
-
-  constructor(props, context) {
-    super(props, context);
-
-    if (context.setTitle) {
-      context.setTitle(this.props.content.title);
-    }
-
-    if (context.setBodyClasses) {
-      context.setBodyClasses('hold-transition home-page');
-    }
-  }
 
   componentDidMount() {
+    /* eslint-disable no-undef */
     $(() => {
-      'use strict';
       // Make the dashboard widgets sortable Using jquery UI
       $('.connectedSortable').sortable({
         placeholder: 'sort-highlight',
@@ -255,6 +234,7 @@ class Home extends Component {
         },
       });
     });
+    /* eslint-enable no-undef */
   }
 
   render() {
@@ -352,16 +332,18 @@ class Home extends Component {
                 <div className="tab-content no-padding">
                   {/* Morris chart - Sales */}
                   <div
-                    className="chart tab-pane active" id="revenue-chart" style={{
-                    position: 'relative',
-                    height: 300,
-                  }}
+                    className="chart tab-pane active" id="revenue-chart"
+                    style={{
+                      position: 'relative',
+                      height: 300,
+                    }}
                   />
                   <div
-                    className="chart tab-pane" id="sales-chart" style={{
-                    position: 'relative',
-                    height: 300,
-                  }}
+                    className="chart tab-pane" id="sales-chart"
+                    style={{
+                      position: 'relative',
+                      height: 300,
+                    }}
                   />
                 </div>
               </div>
@@ -491,14 +473,14 @@ class Home extends Component {
                     <li>
                       {/* drag handle */}
                       <span className="handle">
-                      <i className="fa fa-ellipsis-v" />
-                      <i className="fa fa-ellipsis-v" />
-                    </span>
+                        <i className="fa fa-ellipsis-v" />
+                        <i className="fa fa-ellipsis-v" />
+                      </span>
                       {/* checkbox */}
                       <input type="checkbox" defaultValue /> {/* todo text */}
                       <span className="text">
-                      Design a nice theme
-                    </span>
+                        Design a nice theme
+                      </span>
                       {/* Emphasis label */}
                       <small className="label label-danger">
                         <i className="fa fa-clock-o" />
@@ -511,10 +493,10 @@ class Home extends Component {
                       </div>
                     </li>
                     <li>
-                    <span className="handle">
-                      <i className="fa fa-ellipsis-v" />
-                      <i className="fa fa-ellipsis-v" />
-                    </span>
+                      <span className="handle">
+                        <i className="fa fa-ellipsis-v" />
+                        <i className="fa fa-ellipsis-v" />
+                      </span>
                       <input type="checkbox" defaultValue />
                       <span className="text">Make the theme responsive</span>
                       <small className="label label-info">
@@ -526,10 +508,10 @@ class Home extends Component {
                       </div>
                     </li>
                     <li>
-                    <span className="handle">
-                      <i className="fa fa-ellipsis-v" />
-                      <i className="fa fa-ellipsis-v" />
-                    </span>
+                      <span className="handle">
+                        <i className="fa fa-ellipsis-v" />
+                        <i className="fa fa-ellipsis-v" />
+                      </span>
                       <input type="checkbox" defaultValue />
                       <span className="text">Let theme shine like a star</span>
                       <small className="label label-warning">
@@ -541,10 +523,10 @@ class Home extends Component {
                       </div>
                     </li>
                     <li>
-                    <span className="handle">
-                      <i className="fa fa-ellipsis-v" />
-                      <i className="fa fa-ellipsis-v" />
-                    </span>
+                      <span className="handle">
+                        <i className="fa fa-ellipsis-v" />
+                        <i className="fa fa-ellipsis-v" />
+                      </span>
                       <input type="checkbox" defaultValue />
                       <span className="text">Let theme shine like a star</span>
                       <small className="label label-success">
@@ -556,10 +538,10 @@ class Home extends Component {
                       </div>
                     </li>
                     <li>
-                    <span className="handle">
-                      <i className="fa fa-ellipsis-v" />
-                      <i className="fa fa-ellipsis-v" />
-                    </span>
+                      <span className="handle">
+                        <i className="fa fa-ellipsis-v" />
+                        <i className="fa fa-ellipsis-v" />
+                      </span>
                       <input type="checkbox" defaultValue />
                       <span className="text">Check your messages and notifications</span>
                       <small className="label label-primary">
@@ -571,10 +553,10 @@ class Home extends Component {
                       </div>
                     </li>
                     <li>
-                    <span className="handle">
-                      <i className="fa fa-ellipsis-v" />
-                      <i className="fa fa-ellipsis-v" />
-                    </span>
+                      <span className="handle">
+                        <i className="fa fa-ellipsis-v" />
+                        <i className="fa fa-ellipsis-v" />
+                      </span>
                       <input type="checkbox" defaultValue />
                       <span className="text">Let theme shine like a star</span>
                       <small className="label label-default">
@@ -589,9 +571,9 @@ class Home extends Component {
                 </div>
                 {/* /.box-body */}
                 <div className="box-footer clearfix no-border">
-                  <button type="button" className="btn btn-default pull-right">
-                    <i className="fa fa-plus" />Add item
-                  </button>
+                  <button
+                    type="button" className="btn btn-default pull-right"
+                  ><i className="fa fa-plus" />Add item</button>
                 </div>
               </div>
               {/* /.box */}
@@ -605,9 +587,7 @@ class Home extends Component {
                     <button
                       type="button" className="btn btn-info btn-sm"
                       data-widget="remove" data-toggle="tooltip" title="Remove"
-                    >
-                      <i className="fa fa-times" />
-                    </button>
+                    ><i className="fa fa-times" /></button>
                   </div>
                   {/* /. tools */}
                 </div>
@@ -626,24 +606,24 @@ class Home extends Component {
                       />
                     </div>
                     <div>
-                    <textarea
-                      className="textarea" placeholder="Message" style={{
-                      width: '100%',
-                      height: 125,
-                      fontSize: 14,
-                      lineHeight: 18,
-                      border: '1px solid #dddddd',
-                      padding: 10,
-                    }}
-                    />
+                      <textarea
+                        className="textarea" placeholder="Message"
+                        style={{
+                          width: '100%',
+                          height: 125,
+                          fontSize: 14,
+                          lineHeight: 18,
+                          border: '1px solid #dddddd',
+                          padding: 10,
+                        }}
+                      />
                     </div>
                   </form>
                 </div>
                 <div className="box-footer clearfix">
-                  <button type="button" className="pull-right btn btn-default" id="sendEmail">
-                    Send
-                    <i className="fa fa-arrow-circle-right" />
-                  </button>
+                  <button
+                    type="button" className="pull-right btn btn-default" id="sendEmail"
+                  >Send <i className="fa fa-arrow-circle-right" /></button>
                 </div>
               </div>
             </section>
@@ -671,9 +651,7 @@ class Home extends Component {
                   </div>
                   {/* /. tools */}
                   <i className="fa fa-map-marker" />
-                  <h3 className="box-title">
-                    Visitors
-                  </h3>
+                  <h3 className="box-title">Visitors</h3>
                 </div>
                 <div className="box-body">
                   <div id="world-map" style={{ height: 250, width: '100%' }} />
@@ -682,18 +660,16 @@ class Home extends Component {
                 <div className="box-footer no-border">
                   <div className="row">
                     <div
-                      className="col-xs-4 text-center" style={{
-                      borderRight: '1px solid #f4f4f4',
-                    }}
+                      className="col-xs-4 text-center"
+                      style={{ borderRight: '1px solid #f4f4f4' }}
                     >
                       <div id="sparkline-1" />
                       <div className="knob-label">Visitors</div>
                     </div>
                     {/* ./col */}
                     <div
-                      className="col-xs-4 text-center" style={{
-                      borderRight: '1px solid #f4f4f4',
-                    }}
+                      className="col-xs-4 text-center"
+                      style={{ borderRight: '1px solid #f4f4f4' }}
                     >
                       <div id="sparkline-2" />
                       <div className="knob-label">Online</div>
@@ -713,9 +689,7 @@ class Home extends Component {
               <div className="box box-solid bg-teal-gradient">
                 <div className="box-header">
                   <i className="fa fa-th" />
-                  <h3 className="box-title">
-                    Sales Graph
-                  </h3>
+                  <h3 className="box-title">Sales Graph</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn bg-teal btn-sm" data-widget="collapse">
                       <i className="fa fa-minus" />
@@ -732,9 +706,8 @@ class Home extends Component {
                 <div className="box-footer no-border">
                   <div className="row">
                     <div
-                      className="col-xs-4 text-center" style={{
-                      borderRight: '1px solid #f4f4f4',
-                    }}
+                      className="col-xs-4 text-center"
+                      style={{ borderRight: '1px solid #f4f4f4' }}
                     >
                       <input
                         type="text" className="knob" data-readonly="true"
@@ -745,9 +718,8 @@ class Home extends Component {
                     </div>
                     {/* ./col */}
                     <div
-                      className="col-xs-4 text-center" style={{
-                      borderRight: '1px solid #f4f4f4',
-                    }}
+                      className="col-xs-4 text-center"
+                      style={{ borderRight: '1px solid #f4f4f4' }}
                     >
                       <input
                         type="text" className="knob" data-readonly="true"
@@ -789,20 +761,14 @@ class Home extends Component {
                       </button>
                       <ul className="dropdown-menu pull-right" role="menu">
                         <li>
-                          <Link to="#">
-                            Add new event
-                          </Link>
+                          <Link to="#">Add new event</Link>
                         </li>
                         <li>
-                          <Link to="#">
-                            Clear events
-                          </Link>
+                          <Link to="#">Clear events</Link>
                         </li>
                         <li className="divider" />
                         <li>
-                          <Link to="#">
-                            View calendar
-                          </Link>
+                          <Link to="#">View calendar</Link>
                         </li>
                       </ul>
                     </div>
@@ -826,58 +792,46 @@ class Home extends Component {
                     <div className="col-sm-6">
                       {/* Progress bars */}
                       <div className="clearfix">
-                      <span className="pull-left">
-                        Task #1
-                      </span>
+                        <span className="pull-left">Task #1</span>
                         <small className="pull-right">90%</small>
                       </div>
                       <div className="progress xs">
                         <div
-                          className="progress-bar progress-bar-green" style={{
-                          width: '90%',
-                        }}
+                          className="progress-bar progress-bar-green"
+                          style={{ width: '90%' }}
                         />
                       </div>
                       <div className="clearfix">
-                      <span className="pull-left">
-                        Task #2
-                      </span>
+                        <span className="pull-left">Task #2</span>
                         <small className="pull-right">70%</small>
                       </div>
                       <div className="progress xs">
                         <div
-                          className="progress-bar progress-bar-green" style={{
-                          width: '70%',
-                        }}
+                          className="progress-bar progress-bar-green"
+                          style={{ width: '70%' }}
                         />
                       </div>
                     </div>
                     {/* /.col */}
                     <div className="col-sm-6">
                       <div className="clearfix">
-                      <span className="pull-left">
-                        Task #3
-                      </span>
+                        <span className="pull-left">Task #3</span>
                         <small className="pull-right">60%</small>
                       </div>
                       <div className="progress xs">
                         <div
-                          className="progress-bar progress-bar-green" style={{
-                          width: '60%',
-                        }}
+                          className="progress-bar progress-bar-green"
+                          style={{ width: '60%' }}
                         />
                       </div>
                       <div className="clearfix">
-                      <span className="pull-left">
-                        Task #4
-                      </span>
+                        <span className="pull-left">Task #4</span>
                         <small className="pull-right">40%</small>
                       </div>
                       <div className="progress xs">
                         <div
-                          className="progress-bar progress-bar-green" style={{
-                          width: '40%',
-                        }}
+                          className="progress-bar progress-bar-green"
+                          style={{ width: '40%' }}
                         />
                       </div>
                     </div>
