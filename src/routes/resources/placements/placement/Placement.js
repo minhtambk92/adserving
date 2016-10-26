@@ -108,6 +108,7 @@ class Placement extends Component {
       weight,
       description,
       campaignId,
+      status,
     } = nextProps.placements && (nextProps.placements.editing || {});
 
     this.inputPlacementName.value = name;
@@ -117,6 +118,7 @@ class Placement extends Component {
     this.inputPlacementWeight.value = weight;
     this.inputPlacementDescription.value = description;
     this.inputCampaign.value = campaignId;
+    this.inputPlacementStatus.value = status;
   }
   componentDidUpdate() {
     /* eslint-disable no-undef */
@@ -151,6 +153,7 @@ class Placement extends Component {
     const weight = this.inputPlacementWeight.value;
     const description = this.inputPlacementDescription.value;
     const campaignId = this.inputCampaign.value;
+    const status = this.inputPlacementStatus.value;
     const placement = { id: this.props.placementId };
 
     if (name && name !== this.props.placements.editing.name) {
@@ -175,6 +178,9 @@ class Placement extends Component {
     }
     if (campaignId && campaignId !== this.props.placements.editing.campaignId) {
       placement.campaignId = campaignId;
+    }
+    if (status && status !== this.props.placements.editing.status) {
+      placement.status = status;
     }
     if (moment(new Date(startTime)).format('x') < moment(new Date(endTime)).format('x')) {
       this.props.updatePlacement(placement).then(() => {
@@ -455,7 +461,23 @@ class Placement extends Component {
                                   />
                                 </div>
                               </div>
-
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputPlacementStatus"
+                                  className="col-sm-2 control-label"
+                                >Status</label>
+                                <div className="col-sm-10">
+                                  <select
+                                    id="inputPlacementStatus" className="form-control"
+                                    ref={c => {
+                                      this.inputPlacementStatus = c;
+                                    }}
+                                  >
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                  </select>
+                                </div>
+                              </div>
                               <div className="form-group">
                                 <label
                                   htmlFor="inputPlacementDescription"
@@ -710,7 +732,6 @@ class Placement extends Component {
                                       <th><input type="checkbox" className="inputChooseZone" /></th>
                                       <th>Name</th>
                                       <th>Type</th>
-                                      <th>Description</th>
                                       <th>Slot</th>
                                       <th>&nbsp;</th>
                                     </tr>
@@ -733,7 +754,6 @@ class Placement extends Component {
                                               </Link>
                                             </td>
                                             <td>{zone.type}</td>
-                                            <td>{zone.description}</td>
                                             <td>{zone.slot}</td>
                                             <td
                                               onClick={() => this.pushZoneToPlacement(zone.id)}
@@ -752,7 +772,6 @@ class Placement extends Component {
                                       <th><input type="checkbox" className="inputChooseZone" /></th>
                                       <th>Name</th>
                                       <th>Type</th>
-                                      <th>Description</th>
                                       <th>Slot</th>
                                       <th>&nbsp;</th>
                                     </tr>
@@ -803,8 +822,9 @@ class Placement extends Component {
                                     <tr>
                                       <th><input type="checkbox" className="inputChooseZone" /></th>
                                       <th>Name</th>
-                                      <th>Size(px)</th>
-                                      <th>Key Words</th>
+                                      <th>Type</th>
+                                      <th>Slot</th>
+                                      <th>&nbsp;</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -822,7 +842,6 @@ class Placement extends Component {
                                               </Link>
                                             </td>
                                             <td>{zone.zones.type}</td>
-                                            <td>{zone.zones.description}</td>
                                             <td>{zone.zones.slot}</td>
                                             <td
                                               onClick={() =>
@@ -841,8 +860,9 @@ class Placement extends Component {
                                     <tr>
                                       <th><input type="checkbox" className="inputChooseZone" /></th>
                                       <th>Name</th>
-                                      <th>Size(px)</th>
-                                      <th>Key Words</th>
+                                      <th>Type</th>
+                                      <th>Slot</th>
+                                      <th>&nbsp;</th>
                                     </tr>
                                   </tfoot>
                                 </table>

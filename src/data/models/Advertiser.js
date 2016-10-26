@@ -9,10 +9,10 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
-// import {
-//   STATUS_ACTIVE,
-//   STATUS_INACTIVE,
-// } from '../../constants';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const Advertisers = Model.define('Advertisers', {
 
@@ -37,13 +37,14 @@ const Advertisers = Model.define('Advertisers', {
     type: DataType.STRING,
     defaultValue: '',
   },
-  // status: {
-  //   type: DataType.STRING,
-  //   defaultValue: STATUS_INACTIVE,
-  //   validate: {
-  //     isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
-  //   },
-  // },
+  status: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: STATUS_INACTIVE,
+    validate: {
+      isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
+    },
+  },
 
 }, {
 

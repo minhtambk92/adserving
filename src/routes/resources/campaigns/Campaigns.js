@@ -11,7 +11,7 @@ import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getCampaigns, createCampaign } from '../../../actions/campaigns';
+import { getCampaigns, createCampaign, getCampaignsFilters, setCampaignsFilters } from '../../../actions/campaigns';
 import { getAdvertisers } from '../../../actions/advertisers';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
@@ -22,6 +22,8 @@ const pageSubTitle = 'Control panel';
 
 class Campaigns extends Component {
   static propTypes = {
+    getCampaignsFilters: PropTypes.func,
+    setCampaignsFilters: PropTypes.func,
     campaigns: PropTypes.object,
     getCampaigns: PropTypes.func,
     createCampaign: PropTypes.func,
@@ -29,16 +31,9 @@ class Campaigns extends Component {
     advertisers: PropTypes.object,
   };
 
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      searchText: '',
-    };
-  }
-
   componentWillMount() {
     this.props.getCampaigns();
+    this.props.getCampaignsFilters();
     this.props.getAdvertisers();
   }
 
@@ -76,12 +71,26 @@ class Campaigns extends Component {
     /* eslint-enable no-undef */
   }
 
-  searchFor(event) {
+  async onFilterChange(event, field) {
     event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
+
+    await this.props.setCampaignsFilters({
+      [field]: event.target.value,
+    });
+  }
+  isFiltered(campaign) {
+    const filters = this.props.campaigns.filters;
+
+    for (const criteria in filters) { // eslint-disable-line no-restricted-syntax
+      if (
+        !{}.hasOwnProperty.call(campaign, criteria) ||
+        filters[criteria] !== campaign[criteria]
+      ) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -91,15 +100,6 @@ class Campaigns extends Component {
     this.inputCampaignTimeResetViewCount.value = null;
     this.inputCampaignWeight.value = null;
     this.inputCampaignDescription.value = null;
-  }
-
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
-      }
-    }
-    return false;
   }
 
   createCampaign() {
@@ -112,6 +112,7 @@ class Campaigns extends Component {
     const timeResetViewCount = this.inputCampaignTimeResetViewCount.value;
     const weight = this.inputCampaignWeight.value;
     const description = this.inputCampaignDescription.value;
+    const status = this.inputCampaignStatus.value;
     if (name && advertiserId && startTime && endTime && views && viewPerSession
       && timeResetViewCount && weight && description) {
       if (moment(startTime).format('x') < moment(endTime).format('x')) {
@@ -125,6 +126,7 @@ class Campaigns extends Component {
           timeResetViewCount,
           weight,
           description,
+          status,
         }).then(() => {
           this.clearInput();
         });
@@ -139,6 +141,77 @@ class Campaigns extends Component {
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
+          <div className="row">
+            <section className="col-lg-12">
+              {/* BOX: FILTER */}
+              <div className="box box-default">
+                <div className="box-header with-border">
+                  <h3 className="box-title">Filter by:</h3>
+                  <div className="box-tools pull-right">
+                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                      <i className="fa fa-minus" />
+                    </button>
+                  </div>
+                </div>
+                {/* /.box-header */}
+                {/* form start */}
+                <form className="form-horizontal">
+                  <div className="box-body">
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputCampaignsFilterAdvertiser"
+                        className="col-sm-2 control-label"
+                      >Website</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputCampaignsFilterAdvertiser"
+                          className="form-control select2"
+                          style={{ width: '100%' }}
+                          ref={c => {
+                            this.inputCampaignsFilterAdvertiser = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'advertiserId')}
+                          defaultValue={this.props.campaigns.filters &&
+                          this.props.campaigns.filters.advertiserId}
+                        >
+                          <option value="null">All sites</option>
+                          {this.props.advertisers.list &&
+                          this.props.advertisers.list.map(advertiser => (
+                            <option
+                              key={advertiser.id} value={advertiser.id}
+                            >{advertiser.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputCampaignsFilterStatus"
+                        className="col-sm-2 control-label"
+                      >Status</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputCampaignsFilterStatus" className="form-control"
+                          ref={c => {
+                            this.inputCampaignsFilterStatus = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'status')}
+                          defaultValue={this.props.campaigns.filters &&
+                          this.props.campaigns.filters.status}
+                        >
+                          <option value="null">All states</option>
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  {/* /.box-body */}
+                </form>
+              </div>
+              {/* /.col */}
+            </section>
+          </div>
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW CAMPAIGNS */}
@@ -277,6 +350,23 @@ class Campaigns extends Component {
                         />
                       </div>
                     </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputCampaignStatus"
+                        className="col-sm-2 control-label"
+                      >Status</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputCampaignStatus" className="form-control"
+                          ref={c => {
+                            this.inputCampaignStatus = c;
+                          }}
+                        >
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
+                      </div>
+                    </div>
 
                     <div className="form-group">
                       <label
@@ -326,7 +416,7 @@ class Campaigns extends Component {
                       <input
                         type="text" name="inputSearchcampaigns"
                         className="form-control pull-right"
-                        placeholder="Search..." onChange={event => this.searchFor(event)}
+                        placeholder="Search..."
                       />
                       <div className="input-group-btn">
                         <button
@@ -351,24 +441,22 @@ class Campaigns extends Component {
                     </thead>
                     <tbody>
                       { this.props.campaigns.list && this.props.campaigns.list.map(campaign => {
-                        if (this.isIndexOf(campaign.name, campaign.startTime,
-                            campaign.endTime, campaign.views, campaign.viewPerSession,
-                            campaign.timeResetViewCount)) {
-                          return (
-                            <tr key={campaign.id}>
-                              <th><input type="checkbox" className="inputChooseCampaign" /></th>
-                              <th><Link to={`/resource/campaign/${campaign.id}`}>{campaign.name}</Link>
-                              </th>
-                              <td>{moment(new Date(campaign.startTime)).format('L')}</td>
-                              <td>{moment(new Date(campaign.endTime)).format('L')}</td>
-                              <td>{campaign.views}</td>
-                              <td>{campaign.viewPerSession}</td>
-                              <th><Link to={`/resource/campaign/${campaign.id}`}>Add New Placements</Link>
-                              </th>
-                            </tr>
-                          );
+                        if (!this.isFiltered(campaign)) {
+                          return false;
                         }
-                        return false;
+                        return (
+                          <tr key={campaign.id}>
+                            <th><input type="checkbox" className="inputChooseCampaign" /></th>
+                            <th><Link to={`/resource/campaign/${campaign.id}`}>{campaign.name}</Link>
+                            </th>
+                            <td>{moment(new Date(campaign.startTime)).format('L')}</td>
+                            <td>{moment(new Date(campaign.endTime)).format('L')}</td>
+                            <td>{campaign.views}</td>
+                            <td>{campaign.viewPerSession}</td>
+                            <th><Link to={`/resource/campaign/${campaign.id}`}>Add New Placements</Link>
+                            </th>
+                          </tr>
+                          );
                       })}
                     </tbody>
                     <tfoot>
@@ -411,6 +499,8 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = {
+  getCampaignsFilters,
+  setCampaignsFilters,
   getCampaigns,
   createCampaign,
   getAdvertisers,

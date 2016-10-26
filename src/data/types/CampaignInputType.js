@@ -1,4 +1,4 @@
-import { GraphQLInputObjectType as InputObjectType } from 'graphql';
+import { GraphQLInputObjectType as InputObjectType, GraphQLString as StringType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Campaign } from '../models';
 
@@ -20,6 +20,7 @@ const CampaignInputType = new InputObjectType({
     ],
   }), {
     // Additional fields
+    status: { type: StringType },
   }),
 });
 
