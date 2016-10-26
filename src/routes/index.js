@@ -17,6 +17,8 @@ export default {
   // Keep in mind, routes are evaluated in order
   children: [
     require('./home').default,
+    require('./register').default,
+    require('./login').default,
     require('./resources').default,
 
     // place new routes before...
