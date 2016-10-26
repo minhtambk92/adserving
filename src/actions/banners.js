@@ -4,7 +4,27 @@ import {
   GET_BANNER,
   UPDATE_BANNER,
   DELETE_BANNER,
+  GET_BANNERS_FILTERS,
+  SET_BANNERS_FILTERS,
 } from '../constants/';
+
+export function getBannersFilters() {
+  return async(dispatch) => {
+    dispatch({
+      type: GET_BANNERS_FILTERS,
+      payload: {},
+    });
+  };
+}
+
+export function setBannersFilters(filter) {
+  return async(dispatch) => {
+    dispatch({
+      type: SET_BANNERS_FILTERS,
+      payload: filter,
+    });
+  };
+}
 
 export function getBanner(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
@@ -51,11 +71,17 @@ export function getBanner(id) {
   };
 }
 
-export function getBanners() {
+export function getBanners(args = {
+  where: {},
+  limit: 0,
+  order: '',
+}, options = {
+  globalFilters: false,
+}) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query {
-        banners {
+      query($where: JSON, $order: String, $limit: Int) {
+        banners(where: $where, order: $order, limit: $limit) {
           id
           name
           html
@@ -65,12 +91,37 @@ export function getBanners() {
           weight
           description
           status
+          pbzBanner {
+            placements {
+              id
+              name
+              size
+              startTime
+              endTime
+              weight
+              description
+              campaignId
+              status
+              createdAt
+              updatedAt
+            }
+          }
           createdAt
           updatedAt
           }
       }`;
+    const variables = Object.assign({}, args);
+    const filters = await getState().banners.filters;
 
-    const { data } = await graphqlRequest(query);
+    if (
+      options.globalFilters &&
+      variables.where === {} &&
+      Object.keys(filters).length > 0 &&
+      filters.constructor === Object
+    ) {
+      variables.where = Object.assign({}, filters);
+    }
+    const { data } = await graphqlRequest(query, variables);
 
     dispatch({
       type: GET_BANNERS,

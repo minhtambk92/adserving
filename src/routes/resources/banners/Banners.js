@@ -10,7 +10,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getBanners, createBanner } from '../../../actions/banners';
+import { getBanners, createBanner, getBannersFilters, setBannersFilters } from '../../../actions/banners';
+import { getPlacements } from '../../../actions/placements';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
 import s from './Banners.css';
@@ -20,9 +21,13 @@ const pageSubTitle = 'Control panel';
 
 class Banners extends Component {
   static propTypes = {
+    getBannersFilters: PropTypes.func,
+    setBannersFilters: PropTypes.func,
     banners: PropTypes.object,
     getBanners: PropTypes.func,
     createBanner: PropTypes.func,
+    placements: PropTypes.object,
+    getPlacements: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -34,7 +39,9 @@ class Banners extends Component {
   }
 
   componentWillMount() {
+    this.props.getBannersFilters();
     this.props.getBanners();
+    this.props.getPlacements();
   }
 
   componentDidMount() {
@@ -57,6 +64,28 @@ class Banners extends Component {
     });
     /* eslint-enable no-undef */
   }
+  async onFilterChange(event, field) {
+    event.persist();
+
+    await this.props.setBannersFilters({
+      [field]: event.target.value,
+    });
+  }
+  isFiltered(banner) {
+    const { placementId, status } = this.props.banners.filters;
+
+    const notMatchPlacement = (
+      placementId !== undefined &&
+      typeof banner.pbzBanner === 'object' &&
+      JSON.stringify(banner.pbzBanner).indexOf(placementId) === -1
+    );
+
+    const notMatchStatus = (
+      status !== undefined && status !== banner.status
+    );
+
+    return !(notMatchPlacement || notMatchStatus);
+  }
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputBannerName.value = null;
     this.inputBannerHTML.value = null;
@@ -65,14 +94,6 @@ class Banners extends Component {
     this.inputBannerKeyWord.value = null;
     this.inputBannerWeight.value = null;
     this.inputBannerDescription.value = null;
-  }
-
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
   }
 
   createBanner(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -100,19 +121,81 @@ class Banners extends Component {
     }
   }
 
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   render() {
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
+          <div className="row">
+            <section className="col-lg-12">
+              {/* BOX: FILTER */}
+              <div className="box box-default">
+                <div className="box-header with-border">
+                  <h3 className="box-title">Filter by:</h3>
+                  <div className="box-tools pull-right">
+                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                      <i className="fa fa-minus" />
+                    </button>
+                  </div>
+                </div>
+                {/* /.box-header */}
+                {/* form start */}
+                <form className="form-horizontal">
+                  <div className="box-body">
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputBannersFilterPlacement"
+                        className="col-sm-2 control-label"
+                      >Placement</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputBannersFilterPlacement"
+                          className="form-control select2"
+                          style={{ width: '100%' }}
+                          ref={c => {
+                            this.inputBannersFilterPlacement = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'placementId')}
+                          defaultValue={this.props.banners.filters &&
+                          this.props.banners.filters.placementId}
+                        >
+                          <option value="null">All placements</option>
+                          {this.props.placements.list &&
+                          this.props.placements.list.map(placement => (
+                            <option
+                              key={placement.id} value={placement.id}
+                            >{placement.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputBannersFilterStatus"
+                        className="col-sm-2 control-label"
+                      >Status</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputBannersFilterStatus" className="form-control"
+                          ref={c => {
+                            this.inputBannersFilterStatus = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'status')}
+                          defaultValue={this.props.banners.filters &&
+                          this.props.banners.filters.status}
+                        >
+                          <option value="null">All states</option>
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  {/* /.box-body */}
+                </form>
+              </div>
+              {/* /.col */}
+            </section>
+          </div>
 
           <div className="row">
             <section className="col-lg-12">
@@ -285,7 +368,7 @@ class Banners extends Component {
                       <input
                         type="text" name="inputSearchBanners"
                         className="form-control pull-right"
-                        placeholder="Search..." onChange={event => this.searchFor(event)}
+                        placeholder="Search..."
                       />
                       <div className="input-group-btn">
                         <button
@@ -309,24 +392,22 @@ class Banners extends Component {
                     </thead>
                     <tbody>
                       { this.props.banners.list && this.props.banners.list.map(banner => {
-                        if (this.isIndexOf(banner.name, banner.height,
-                            banner.width, banner.keyword, banner.weight,
-                            banner.html, banner.description)) {
-                          return (
-                            <tr key={banner.id}>
-                              <th><input type="checkbox" className="inputChooseBanner" /></th>
-                              <td><Link to={`/resource/banner/${banner.id}`}>{banner.name}</Link>
-                              </td>
-                              <td>{banner.width}px - {banner.height}px</td>
-                              <td>{banner.keyword}</td>
-                              <td>{banner.description}</td>
-                              <td>
-                                <Link to={`/resource/banner/${banner.id}`}>Add Placement</Link>
-                              </td>
-                            </tr>
-                          );
+                        if (!this.isFiltered(banner)) {
+                          return false;
                         }
-                        return false;
+                        return (
+                          <tr key={banner.id}>
+                            <th><input type="checkbox" className="inputChooseBanner" /></th>
+                            <td><Link to={`/resource/banner/${banner.id}`}>{banner.name}</Link>
+                            </td>
+                            <td>{banner.width}px - {banner.height}px</td>
+                            <td>{banner.keyword}</td>
+                            <td>{banner.description}</td>
+                            <td>
+                              <Link to={`/resource/banner/${banner.id}`}>Add Placement</Link>
+                            </td>
+                          </tr>
+                        );
                       })}
                     </tbody>
                     <tfoot>
@@ -365,11 +446,15 @@ class Banners extends Component {
 
 const mapState = (state) => ({
   banners: state.banners,
+  placements: state.placements,
 });
 
 const mapDispatch = {
   getBanners,
   createBanner,
+  getBannersFilters,
+  setBannersFilters,
+  getPlacements,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banners));

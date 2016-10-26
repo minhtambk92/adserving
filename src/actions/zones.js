@@ -96,6 +96,21 @@ export function getZones(args = {
           css
           slot
           status
+          pbzZone {
+            placements {
+              id
+              name
+              size
+              startTime
+              endTime
+              weight
+              description
+              campaignId
+              status
+              createdAt
+              updatedAt
+            }
+          }
           createdAt
           updatedAt
         }
