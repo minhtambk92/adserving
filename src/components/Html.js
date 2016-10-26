@@ -66,7 +66,6 @@ function Html({ title, description, style, script, chunk, state, lang, children,
         <script src="/AdminLTE/plugins/datatables/jquery.dataTables.min.js" />
         <script src="/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js" />
         {/* <script src="/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js" /> */}
-        {/* <script src="/AdminLTE/plugins/fastclick/fastclick.js" /> */}
         <script src="/AdminLTE/plugins/chartjs/Chart.min.js" />
         <script src="/AdminLTE/dist/js/app.min.js" />
         <script src="/AdminLTE/plugins/flot/jquery.flot.min.js" />
