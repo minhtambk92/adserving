@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getRoles, createRole } from '../../../actions/roles';
+import { setUsersFilters } from '../../../actions/users';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
 import s from './Roles.css';
@@ -25,6 +26,7 @@ class Roles extends Component {
     roles: PropTypes.object,
     getRoles: PropTypes.func,
     createRole: PropTypes.func,
+    setUsersFilters: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -88,6 +90,10 @@ class Roles extends Component {
       }
     }
     return false;
+  }
+
+  addUserToThisRole(roleId) {
+    this.props.setUsersFilters({ roleId });
   }
 
   render() {
@@ -191,6 +197,7 @@ class Roles extends Component {
                         <th><input type="checkbox" className="inputChooseRole" /></th>
                         <th>Alias</th>
                         <th>Name</th>
+                        <th>&nbsp;</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -199,8 +206,16 @@ class Roles extends Component {
                           return (
                             <tr key={role.id}>
                               <td><input type="checkbox" className="inputChooseRole" /></td>
-                              <td><Link to={`/resource/role/${role.id}`}>{role.uniqueName}</Link></td>
+                              <td>
+                                <Link to={`/resource/role/${role.id}`}>{role.uniqueName}</Link>
+                              </td>
                               <td>{role.name}</td>
+                              <td>
+                                <Link
+                                  to="/resource/user"
+                                  onClick={event => this.addUserToThisRole(role.id, event)}
+                                >Add New User</Link>
+                              </td>
                             </tr>
                           );
                         }
@@ -212,6 +227,7 @@ class Roles extends Component {
                         <th><input type="checkbox" className="inputChooseRole" /></th>
                         <th>Alias</th>
                         <th>Name</th>
+                        <th>&nbsp;</th>
                       </tr>
                     </tfoot>
                   </table>
@@ -246,6 +262,7 @@ const mapState = (state) => ({
 const mapDispatch = {
   getRoles,
   createRole,
+  setUsersFilters,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Roles));

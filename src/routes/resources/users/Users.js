@@ -120,18 +120,23 @@ class Users extends Component {
   }
 
   isFiltered(user) {
-    const filters = this.props.users.filters;
+    const { roleId, emailConfirmed, status } = this.props.users.filters;
 
-    for (const criteria in filters) { // eslint-disable-line no-restricted-syntax
-      if (
-        !{}.hasOwnProperty.call(user, criteria) ||
-        filters[criteria] !== user[criteria]
-      ) {
-        return false;
-      }
-    }
+    const notMatchRole = (
+      roleId !== undefined &&
+      typeof user.roles === 'object' &&
+      JSON.stringify(user.roles).indexOf(roleId) === -1
+    );
 
-    return true;
+    const notMatchEmailConfirmed = (
+      status !== undefined && status !== user.status
+    );
+
+    const notMatchStatus = (
+      emailConfirmed !== undefined && emailConfirmed !== user.emailConfirmed
+    );
+
+    return !(notMatchRole || notMatchEmailConfirmed || notMatchStatus);
   }
 
   render() {
