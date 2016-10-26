@@ -11,7 +11,7 @@ import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getPlacements, createPlacement } from '../../../actions/placements';
+import { getPlacements, createPlacement, getPlacementsFilters, setPlacementsFilters } from '../../../actions/placements';
 import { getCampaigns } from '../../../actions/campaigns';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
@@ -22,6 +22,8 @@ const pageSubTitle = 'Control panel';
 
 class Placements extends Component {
   static propTypes = {
+    getPlacementsFilters: PropTypes.func,
+    setPlacementsFilters: PropTypes.func,
     placements: PropTypes.object,
     getPlacements: PropTypes.func,
     createPlacement: PropTypes.func,
@@ -39,6 +41,7 @@ class Placements extends Component {
 
   componentWillMount() {
     this.props.getPlacements();
+    this.props.getPlacementsFilters();
     this.props.getCampaigns();
   }
 
@@ -77,28 +80,32 @@ class Placements extends Component {
     /* eslint-enable no-undef */
   }
 
-  searchFor(event) {
+  async onFilterChange(event, field) {
     event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
-  }
 
+    await this.props.setPlacementsFilters({
+      [field]: event.target.value,
+    });
+  }
+  isFiltered(placement) {
+    const filters = this.props.placements.filters;
+
+    for (const criteria in filters) { // eslint-disable-line no-restricted-syntax
+      if (
+        !{}.hasOwnProperty.call(placement, criteria) ||
+        filters[criteria] !== placement[criteria]
+      ) {
+        return false;
+      }
+    }
+
+    return true;
+  }
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputPlacementName.value = null;
     this.inputPlacementSize.value = null;
     this.inputPlacementWeight.value = null;
     this.inputPlacementDescription.value = null;
-  }
-
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
-      }
-    }
-    return false;
   }
 
   createPlacement() {
@@ -134,7 +141,77 @@ class Placements extends Component {
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
-
+          <div className="row">
+            <section className="col-lg-12">
+              {/* BOX: FILTER */}
+              <div className="box box-default">
+                <div className="box-header with-border">
+                  <h3 className="box-title">Filter by:</h3>
+                  <div className="box-tools pull-right">
+                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                      <i className="fa fa-minus" />
+                    </button>
+                  </div>
+                </div>
+                {/* /.box-header */}
+                {/* form start */}
+                <form className="form-horizontal">
+                  <div className="box-body">
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputPlacementsFilterCampaign"
+                        className="col-sm-2 control-label"
+                      >Campaign</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputPlacementsFilterCampaign"
+                          className="form-control select2"
+                          style={{ width: '100%' }}
+                          ref={c => {
+                            this.inputPlacementsFilterCampaign = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'campaignId')}
+                          defaultValue={this.props.placements.filters &&
+                          this.props.placements.filters.campaignId}
+                        >
+                          <option value="null">All campaigns</option>
+                          {this.props.campaigns.list &&
+                          this.props.campaigns.list.map(campaign => (
+                            <option
+                              key={campaign.id} value={campaign.id}
+                            >{campaign.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputPlacementsFilterStatus"
+                        className="col-sm-2 control-label"
+                      >Status</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputPlacementsFilterStatus" className="form-control"
+                          ref={c => {
+                            this.inputPlacementsFilterStatus = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'status')}
+                          defaultValue={this.props.placements.filters &&
+                          this.props.placements.filters.status}
+                        >
+                          <option value="null">All states</option>
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  {/* /.box-body */}
+                </form>
+              </div>
+              {/* /.col */}
+            </section>
+          </div>
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW PlacementS */}
@@ -301,7 +378,7 @@ class Placements extends Component {
                       <input
                         type="text" name="inputSearchPlacements"
                         className="form-control pull-right"
-                        placeholder="Search..." onChange={event => this.searchFor(event)}
+                        placeholder="Search..."
                       />
                       <div className="input-group-btn">
                         <button
@@ -328,25 +405,23 @@ class Placements extends Component {
                     <tbody>
                       { this.props.placements.list &&
                       this.props.placements.list.map(placement => {
-                        if (this.isIndexOf(placement.name, placement.startTime,
-                            placement.endTime, placement.size,
-                            placement.description, placement.weight)) {
-                          return (
-                            <tr key={placement.id}>
-                              <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                              <th><Link to={`/resource/placement/${placement.id}`}>{placement.name}</Link>
-                              </th>
-                              <td>{placement.size}</td>
-                              <td>{moment(new Date(placement.startTime)).format('L')}</td>
-                              <td>{moment(new Date(placement.endTime)).format('L')}</td>
-                              <th><Link to={`/resource/placement/${placement.id}`}>Add banner</Link>
-                              </th>
-                              <th><Link to={`/resource/placement/${placement.id}`}>Add Zone</Link>
-                              </th>
-                            </tr>
-                          );
+                        if (!this.isFiltered(placement)) {
+                          return false;
                         }
-                        return false;
+                        return (
+                          <tr key={placement.id}>
+                            <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                            <th><Link to={`/resource/placement/${placement.id}`}>{placement.name}</Link>
+                            </th>
+                            <td>{placement.size}</td>
+                            <td>{moment(new Date(placement.startTime)).format('L')}</td>
+                            <td>{moment(new Date(placement.endTime)).format('L')}</td>
+                            <th><Link to={`/resource/placement/${placement.id}`}>Add banner</Link>
+                            </th>
+                            <th><Link to={`/resource/placement/${placement.id}`}>Add Zone</Link>
+                            </th>
+                          </tr>
+                        );
                       })}
                     </tbody>
                     <tfoot>
@@ -393,6 +468,8 @@ const mapDispatch = {
   getPlacements,
   createPlacement,
   getCampaigns,
+  getPlacementsFilters,
+  setPlacementsFilters,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placements));

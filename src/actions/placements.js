@@ -4,7 +4,27 @@ import {
   GET_PLACEMENT,
   UPDATE_PLACEMENT,
   DELETE_PLACEMENT,
+  GET_PLACEMENTS_FILTERS,
+  SET_PLACEMENTS_FILTERS,
 } from '../constants/';
+
+export function getPlacementsFilters() {
+  return async(dispatch) => {
+    dispatch({
+      type: GET_PLACEMENTS_FILTERS,
+      payload: {},
+    });
+  };
+}
+
+export function setPlacementsFilters(filter) {
+  return async(dispatch) => {
+    dispatch({
+      type: SET_PLACEMENTS_FILTERS,
+      payload: filter,
+    });
+  };
+}
 
 export function getPlacement(id) {
   return async(dispatch, getState, { graphqlRequest }) => {
@@ -64,11 +84,17 @@ export function getPlacement(id) {
   };
 }
 
-export function getPlacements() {
+export function getPlacements(args = {
+  where: {},
+  limit: 0,
+  order: '',
+}, options = {
+  globalFilters: false,
+}) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query {
-        placements {
+      query($where: JSON, $order: String, $limit: Int) {
+        placements(where: $where, order: $order, limit: $limit) {
           id
           name
           size
@@ -82,8 +108,18 @@ export function getPlacements() {
           updatedAt
           }
       }`;
+    const variables = Object.assign({}, args);
+    const filters = await getState().placements.filters;
 
-    const { data } = await graphqlRequest(query);
+    if (
+      options.globalFilters &&
+      variables.where === {} &&
+      Object.keys(filters).length > 0 &&
+      filters.constructor === Object
+    ) {
+      variables.where = Object.assign({}, filters);
+    }
+    const { data } = await graphqlRequest(query, variables);
 
     dispatch({
       type: GET_PLACEMENTS,
