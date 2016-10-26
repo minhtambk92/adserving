@@ -148,20 +148,6 @@ export function updateBanner({
           keyword
           weight
           description
-           pbzBanner {
-            placements {
-              id
-              name
-              size
-              startTime
-              endTime
-              weight
-              description
-              campaignId
-              createdAt
-              updatedAt
-            }
-          }
           createdAt
           updatedAt
         }

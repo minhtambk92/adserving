@@ -85,15 +85,12 @@ class Campaigns extends Component {
   }
 
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    document.getElementById('inputCampaignName').value = null;
-    document.getElementById('inputAdvertiser').value = null;
-    document.getElementById('inputCampaignStartTime').value = null;
-    document.getElementById('inputCampaignEndTime').value = null;
-    document.getElementById('inputCampaignViews').value = null;
-    document.getElementById('inputCampaignViewPerSession').value = null;
-    document.getElementById('inputCampaignTimeResetViewCount').value = null;
-    document.getElementById('inputCampaignWeight').value = null;
-    document.getElementById('inputCampaignDescription').value = null;
+    this.inputCampaignName.value = null;
+    this.inputCampaignViews.value = null;
+    this.inputCampaignViewPerSession.value = null;
+    this.inputCampaignTimeResetViewCount.value = null;
+    this.inputCampaignWeight.value = null;
+    this.inputCampaignDescription.value = null;
   }
 
   isIndexOf(...args) {
@@ -106,15 +103,15 @@ class Campaigns extends Component {
   }
 
   createCampaign() {
-    const name = document.getElementById('inputCampaignName').value;
-    const advertiserId = document.getElementById('inputAdvertiser').value;
-    const startTime = new Date(moment(new Date(document.getElementById('inputCampaignStartTime').value)).format('YYYY-MM-DD 00:00:00'));
-    const endTime = new Date(moment(new Date(document.getElementById('inputCampaignEndTime').value)).format('YYYY-MM-DD 00:00:00'));
-    const views = document.getElementById('inputCampaignViews').value;
-    const viewPerSession = document.getElementById('inputCampaignViewPerSession').value;
-    const timeResetViewCount = document.getElementById('inputCampaignTimeResetViewCount').value;
-    const weight = document.getElementById('inputCampaignWeight').value;
-    const description = document.getElementById('inputCampaignDescription').value;
+    const name = this.inputCampaignName.value;
+    const advertiserId = this.inputAdvertiser.value;
+    const startTime = new Date(moment(new Date(this.inputCampaignStartTime.value)).format('YYYY-MM-DD 00:00:00'));
+    const endTime = new Date(moment(new Date(this.inputCampaignEndTime.value)).format('YYYY-MM-DD 00:00:00'));
+    const views = this.inputCampaignViews.value;
+    const viewPerSession = this.inputCampaignViewPerSession.value;
+    const timeResetViewCount = this.inputCampaignTimeResetViewCount.value;
+    const weight = this.inputCampaignWeight.value;
+    const description = this.inputCampaignDescription.value;
     if (name && advertiserId && startTime && endTime && views && viewPerSession
       && timeResetViewCount && weight && description) {
       if (moment(startTime).format('x') < moment(endTime).format('x')) {
@@ -132,8 +129,8 @@ class Campaigns extends Component {
           this.clearInput();
         });
       } else {
-        document.getElementById('inputCampaignEndTime').value = null;
-        document.getElementById('inputCampaignEndTime').focus();
+        this.inputCampaignEndTime.value = null;
+        this.inputCampaignEndTime.focus();
       }
     }
   }
@@ -146,9 +143,9 @@ class Campaigns extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW CAMPAIGNS */}
-              <div className="box box-primary collapsed-box">
+              <div className="box box-info collapsed-box">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Create a new campaigns</h3>
+                  <h3 className="box-title">Create New campaigns</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn btn-box-tool" data-widget="collapse">
                       <i className="fa fa-plus" />
@@ -167,32 +164,65 @@ class Campaigns extends Component {
                         <input
                           type="text" className="form-control" id="inputCampaignName"
                           placeholder="Admicro"
+                          ref={c => {
+                            this.inputCampaignName = c;
+                          }}
                         />
                       </div>
                     </div>
                     <div className="form-group">
                       <label htmlFor="inputAdvertiser" className="col-sm-2 control-label">Advertiser</label>
                       <div className="col-sm-10">
-                        <select id="inputAdvertiser" className="form-control">
-                          {this.props.advertisers.latest
-                          && this.props.advertisers.latest.map(advertiser => (
-                            <option key={advertiser.id} value={advertiser.id}>{advertiser.name}</option>
+                        <select
+                          id="inputAdvertiser" className="form-control"
+                          ref={c => {
+                            this.inputAdvertiser = c;
+                          }}
+                        >
+                          {this.props.advertisers.list
+                          && this.props.advertisers.list.map(advertiser => (
+                            <option
+                              key={advertiser.id} value={advertiser.id}
+                            >
+                              {advertiser.name}
+                            </option>
                           ))}
                         </select>
                       </div>
                     </div>
                     <div className="form-group has-feedback">
-                      <label htmlFor="inputCampaignStartTime" className="col-sm-2 control-label">Start Time:</label>
+                      <label
+                        htmlFor="inputCampaignStartTime" className="col-sm-2 control-label"
+                      >
+                        Start Time
+                      </label>
                       <div className=" col-sm-10 date">
                         <span className="fa fa-calendar form-control-feedback" />
-                        <input type="text" className="form-control pull-right" id="inputCampaignStartTime" />
+                        <input
+                          type="text" className="form-control pull-right"
+                          id="inputCampaignStartTime"
+                          ref={c => {
+                            this.inputCampaignStartTime = c;
+                          }}
+                        />
                       </div>
                     </div>
                     <div className="form-group has-feedback">
-                      <label htmlFor="inputCampaignEndTime" className="col-sm-2 control-label">End Time:</label>
+                      <label
+                        htmlFor="inputCampaignEndTime"
+                        className="col-sm-2 control-label"
+                      >
+                        End Time
+                      </label>
                       <div className=" col-sm-10 date">
                         <span className="fa fa-calendar form-control-feedback" />
-                        <input type="text" className="form-control pull-right" id="inputCampaignEndTime" />
+                        <input
+                          type="text" className="form-control pull-right"
+                          id="inputCampaignEndTime"
+                          ref={c => {
+                            this.inputCampaignEndTime = c;
+                          }}
+                        />
                       </div>
                     </div>
 
@@ -202,6 +232,9 @@ class Campaigns extends Component {
                         <input
                           type="number" className="form-control" id="inputCampaignViews"
                           placeholder="1000"
+                          ref={c => {
+                            this.inputCampaignViews = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -211,6 +244,9 @@ class Campaigns extends Component {
                         <input
                           type="number" className="form-control" id="inputCampaignViewPerSession"
                           placeholder="10"
+                          ref={c => {
+                            this.inputCampaignViewPerSession = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -221,6 +257,9 @@ class Campaigns extends Component {
                           type="number" className="form-control"
                           id="inputCampaignTimeResetViewCount"
                           placeholder="24"
+                          ref={c => {
+                            this.inputCampaignTimeResetViewCount = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -233,6 +272,9 @@ class Campaigns extends Component {
                         <input
                           type="number" className="form-control" id="inputCampaignWeight"
                           placeholder="1"
+                          ref={c => {
+                            this.inputCampaignWeight = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -246,6 +288,9 @@ class Campaigns extends Component {
                         <textarea
                           className="form-control" id="inputCampaignDescription"
                           rows="5" placeholder="More info..."
+                          ref={c => {
+                            this.inputCampaignDescription = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -303,7 +348,6 @@ class Campaigns extends Component {
                         <th>End Time</th>
                         <th>Views</th>
                         <th>View/Session</th>
-                        <th>Time Reset View</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -320,7 +364,6 @@ class Campaigns extends Component {
                               <td>{moment(new Date(campaign.endTime)).format('L')}</td>
                               <td>{campaign.views}</td>
                               <td>{campaign.viewPerSession}</td>
-                              <td>{campaign.timeResetViewCount}</td>
                               <th><Link to={`/resource/campaign/${campaign.id}`}>Add New Placements</Link>
                               </th>
                             </tr>
@@ -337,7 +380,6 @@ class Campaigns extends Component {
                         <th>End Time</th>
                         <th>Views</th>
                         <th>View/Session</th>
-                        <th>Time Reset View</th>
                       </tr>
                     </tfoot>
                   </table>

@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import {
   GET_PLACEMENT,
   GET_PLACEMENTS,
@@ -6,47 +7,42 @@ import {
   DELETE_PLACEMENT,
 } from '../constants';
 
-export default function placements(state = {}, action) {
+function list(state = [], action) {
   switch (action.type) {
-    case GET_PLACEMENT:
-      {
-        return {
-          ...state,
-          editing: action.payload.placement,
-        };
-      }
-
-    case GET_PLACEMENTS:
-      {
-        return {
-          ...state,
-          list: action.payload.placements,
-        };
-      }
-
-    case CREATE_PLACEMENT:
-      {
-        state.list.unshift(action.payload.placement);
-        return { ...state };
-      }
-    case UPDATE_PLACEMENT:
-      {
-        return {
-          ...state,
-          editing: action.payload.placement,
-        };
-      }
-    case DELETE_PLACEMENT:
-      {
-        return {
-          ...state,
-          current: null,
-        };
-      }
-
-    default:
-      {
-        return state;
-      }
+    case GET_PLACEMENTS: {
+      return action.payload.placements;
+    }
+    case CREATE_PLACEMENT: {
+      return [
+        action.payload.placement,
+        ...state,
+      ];
+    }
+    default: {
+      return state;
+    }
   }
 }
+
+function editing(state = {}, action) {
+  switch (action.type) {
+    case GET_PLACEMENT: {
+      return action.payload.placement;
+    }
+    case UPDATE_PLACEMENT: {
+      return action.payload.placement;
+    }
+    case DELETE_PLACEMENT: {
+      return null;
+    }
+    default: {
+      return { ...state };
+    }
+  }
+}
+
+const placements = combineReducers({
+  list,
+  editing,
+});
+export default placements;

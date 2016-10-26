@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import {
   GET_CAMPAIGN,
   GET_CAMPAIGNS,
@@ -6,50 +7,44 @@ import {
   DELETE_CAMPAIGN,
 } from '../constants';
 
-export default function campaigns(state = {}, action) {
+function list(state = [], action) {
   switch (action.type) {
-    case GET_CAMPAIGN:
-      {
-        return {
-          ...state,
-          current: action.payload.campaign,
-        };
-      }
-
-    case GET_CAMPAIGNS:
-      {
-        return {
-          ...state,
-          list: action.payload.campaigns,
-        };
-      }
-
-    case CREATE_CAMPAIGN:
-      {
-        state.list.unshift(action.payload.campaign);
-        return {
-          ...state,
-        };
-      }
-    case UPDATE_CAMPAIGN:
-      {
-        return {
-          ...state,
-          current: action.payload.campaign,
-        };
-      }
-
-    case DELETE_CAMPAIGN:
-      {
-        return {
-          ...state,
-          current: null,
-        };
-      }
-
-    default:
-      {
-        return state;
-      }
+    case GET_CAMPAIGNS: {
+      return action.payload.campaigns;
+    }
+    case CREATE_CAMPAIGN: {
+      return [
+        action.payload.campaign,
+        ...state,
+      ];
+    }
+    default: {
+      return state;
+    }
   }
 }
+
+function editing(state = {}, action) {
+  switch (action.type) {
+    case GET_CAMPAIGN: {
+      return action.payload.campaign;
+    }
+    case UPDATE_CAMPAIGN: {
+      return action.payload.campaign;
+    }
+    case DELETE_CAMPAIGN: {
+      return null;
+    }
+    default: {
+      return { ...state };
+    }
+  }
+}
+
+const campaigns = combineReducers({
+  list,
+  editing,
+});
+
+export default campaigns;
+

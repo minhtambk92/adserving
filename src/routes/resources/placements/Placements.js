@@ -86,12 +86,10 @@ class Placements extends Component {
   }
 
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    document.getElementById('inputPlacementName').value = null;
-    document.getElementById('inputPlacementStartTime').value = null;
-    document.getElementById('inputPlacementEndTime').value = null;
-    document.getElementById('inputPlacementSize').value = null;
-    document.getElementById('inputPlacementWeight').value = null;
-    document.getElementById('inputPlacementDescription').value = null;
+    this.inputPlacementName.value = null;
+    this.inputPlacementSize.value = null;
+    this.inputPlacementWeight.value = null;
+    this.inputPlacementDescription.value = null;
   }
 
   isIndexOf(...args) {
@@ -104,13 +102,13 @@ class Placements extends Component {
   }
 
   createPlacement() {
-    const name = document.getElementById('inputPlacementName').value;
-    const startTime = new Date(moment(new Date(document.getElementById('inputPlacementStartTime').value)).format('YYYY-MM-DD 00:00:00'));
-    const endTime = new Date(moment(new Date(document.getElementById('inputPlacementEndTime').value)).format('YYYY-MM-DD 00:00:00'));
-    const size = document.getElementById('inputPlacementSize').value;
-    const weight = document.getElementById('inputPlacementWeight').value;
-    const description = document.getElementById('inputPlacementDescription').value;
-    const campaignId = document.getElementById('inputCampaign').value;
+    const name = this.inputPlacementName.value;
+    const startTime = new Date(moment(new Date(this.inputPlacementStartTime.value)).format('YYYY-MM-DD 00:00:00'));
+    const endTime = new Date(moment(new Date(this.inputPlacementEndTime.value)).format('YYYY-MM-DD 00:00:00'));
+    const size = this.inputPlacementSize.value;
+    const weight = this.inputPlacementWeight.value;
+    const description = this.inputPlacementDescription.value;
+    const campaignId = this.inputCampaign.value;
     if (name && startTime && endTime && size && weight && description) {
       if (moment(startTime).format('x') < moment(endTime).format('x')) {
         this.props.createPlacement({
@@ -125,7 +123,7 @@ class Placements extends Component {
           this.clearInput();
         });
       } else {
-        document.getElementById('inputPlacementEndTime').value = null;
+        this.inputPlacementEndTime.value = null;
       }
     }
   }
@@ -138,9 +136,9 @@ class Placements extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW PlacementS */}
-              <div className="box box-primary collapsed-box">
+              <div className="box box-info collapsed-box">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Create a new Placements</h3>
+                  <h3 className="box-title">Create New Placements</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn btn-box-tool" data-widget="collapse">
                       <i className="fa fa-plus" />
@@ -159,6 +157,9 @@ class Placements extends Component {
                         <input
                           type="text" className="form-control" id="inputPlacementName"
                           placeholder="Admicro"
+                          ref={c => {
+                            this.inputPlacementName = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -167,6 +168,9 @@ class Placements extends Component {
                       <div className="col-sm-10">
                         <select
                           id="inputCampaign" className="form-control"
+                          ref={c => {
+                            this.inputCampaign = c;
+                          }}
                         >
                           {this.props.campaigns.list
                           && this.props.campaigns.list.map(campaign => (
@@ -179,14 +183,26 @@ class Placements extends Component {
                       <label htmlFor="inputPlacementStartTime" className="col-sm-2 control-label">Start Time:</label>
                       <div className=" col-sm-10 date">
                         <span className="fa fa-calendar form-control-feedback" />
-                        <input type="text" className="form-control pull-right" id="inputPlacementStartTime" />
+                        <input
+                          type="text" className="form-control pull-right"
+                          id="inputPlacementStartTime"
+                          ref={c => {
+                            this.inputPlacementStartTime = c;
+                          }}
+                        />
                       </div>
                     </div>
                     <div className="form-group has-feedback">
                       <label htmlFor="inputPlacementEndTime" className="col-sm-2 control-label">End Time:</label>
                       <div className=" col-sm-10 date">
                         <span className="fa fa-calendar form-control-feedback" />
-                        <input type="text" className="form-control pull-right" id="inputPlacementEndTime" />
+                        <input
+                          type="text" className="form-control pull-right"
+                          id="inputPlacementEndTime"
+                          ref={c => {
+                            this.inputPlacementEndTime = c;
+                          }}
+                        />
                       </div>
                     </div>
 
@@ -197,6 +213,9 @@ class Placements extends Component {
                           type="text" className="form-control"
                           id="inputPlacementSize"
                           placeholder="24"
+                          ref={c => {
+                            this.inputPlacementSize = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -209,6 +228,9 @@ class Placements extends Component {
                         <input
                           type="text" className="form-control" id="inputPlacementWeight"
                           placeholder="1"
+                          ref={c => {
+                            this.inputPlacementWeight = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -222,6 +244,9 @@ class Placements extends Component {
                         <textarea
                           className="form-control" id="inputPlacementDescription"
                           rows="5" placeholder="More info..."
+                          ref={c => {
+                            this.inputPlacementDescription = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -278,8 +303,8 @@ class Placements extends Component {
                         <th>Size</th>
                         <th>Start Time</th>
                         <th>End Time</th>
-                        <th>Weight</th>
-                        <th>Description</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -296,8 +321,10 @@ class Placements extends Component {
                               <td>{placement.size}</td>
                               <td>{moment(new Date(placement.startTime)).format('L')}</td>
                               <td>{moment(new Date(placement.endTime)).format('L')}</td>
-                              <td>{placement.weight}</td>
-                              <td>{placement.description}</td>
+                              <th><Link to={`/resource/placement/${placement.id}`}>Add banner</Link>
+                              </th>
+                              <th><Link to={`/resource/placement/${placement.id}`}>Add Zone</Link>
+                              </th>
                             </tr>
                           );
                         }
@@ -311,8 +338,8 @@ class Placements extends Component {
                         <th>Size</th>
                         <th>Start Time</th>
                         <th>End Time</th>
-                        <th>Weight</th>
-                        <th>Description</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
                       </tr>
                     </tfoot>
                   </table>

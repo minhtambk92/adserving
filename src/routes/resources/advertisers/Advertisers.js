@@ -104,7 +104,7 @@ class Advertisers extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW WEB ADVERTISER */}
-              <div className="box box-primary collapsed-box">
+              <div className="box box-info collapsed-box">
                 <div className="box-header with-border">
                   <h3 className="box-title">Add new advertiser</h3>
                   <div className="box-tools pull-right">
@@ -226,7 +226,6 @@ class Advertisers extends Component {
                         <th>Contact</th>
                         <th>Email</th>
                         <th>&nbsp;</th>
-                        <th>&nbsp;</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -249,11 +248,6 @@ class Advertisers extends Component {
                                   to={`/resource/advertiser/${advertiser.id}`}
                                 >Add New Campaign</Link>
                               </td>
-                              <td>
-                                <Link
-                                  to={`/resource/advertiser/${advertiser.id}`}
-                                >Campaigns</Link>
-                              </td>
                             </tr>
                           );
                         }
@@ -266,7 +260,6 @@ class Advertisers extends Component {
                         <th>Name</th>
                         <th>Contact</th>
                         <th>Email</th>
-                        <th>&nbsp;</th>
                         <th>&nbsp;</th>
                       </tr>
                     </tfoot>

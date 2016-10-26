@@ -58,13 +58,13 @@ class Banners extends Component {
     /* eslint-enable no-undef */
   }
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    document.getElementById('inputBannerName').value = null;
-    document.getElementById('inputBannerHTML').value = null;
-    document.getElementById('inputBannerWidth').value = null;
-    document.getElementById('inputBannerHeight').value = null;
-    document.getElementById('inputBannerKeyWord').value = null;
-    document.getElementById('inputBannerWeight').value = null;
-    document.getElementById('inputBannerDescription').value = null;
+    this.inputBannerName.value = null;
+    this.inputBannerHTML.value = null;
+    this.inputBannerWidth.value = null;
+    this.inputBannerHeight.value = null;
+    this.inputBannerKeyWord.value = null;
+    this.inputBannerWeight.value = null;
+    this.inputBannerDescription.value = null;
   }
 
   searchFor(event) {
@@ -76,13 +76,13 @@ class Banners extends Component {
   }
 
   createBanner(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const name = document.getElementById('inputBannerName').value;
-    const html = document.getElementById('inputBannerHTML').value;
-    const width = document.getElementById('inputBannerWidth').value;
-    const height = document.getElementById('inputBannerHeight').value;
-    const keyword = document.getElementById('inputBannerKeyWord').value;
-    const weight = document.getElementById('inputBannerWeight').value;
-    const description = document.getElementById('inputBannerDescription').value;
+    const name = this.inputBannerName.value;
+    const html = this.inputBannerHTML.value;
+    const width = this.inputBannerWidth.value;
+    const height = this.inputBannerHeight.value;
+    const keyword = this.inputBannerKeyWord.value;
+    const weight = this.inputBannerWeight.value;
+    const description = this.inputBannerDescription.value;
     if (name && html && height && weight && keyword && width && description) {
       this.props.createBanner({
         name,
@@ -115,7 +115,7 @@ class Banners extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW WEB BANNER */}
-              <div className="box box-primary collapsed-box">
+              <div className="box box-info collapsed-box">
                 <div className="box-header with-border">
                   <h3 className="box-title">Create a new Banner</h3>
                   <div className="box-tools pull-right">
@@ -137,6 +137,9 @@ class Banners extends Component {
                         <input
                           type="text" className="form-control" id="inputBannerName"
                           placeholder="Dan Tri"
+                          ref={c => {
+                            this.inputBannerName = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -149,6 +152,9 @@ class Banners extends Component {
                         <textarea
                           className="form-control" id="inputBannerHTML"
                           rows="5" placeholder="More info..."
+                          ref={c => {
+                            this.inputBannerHTML = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -161,6 +167,9 @@ class Banners extends Component {
                         <input
                           type="number" className="form-control" id="inputBannerWidth"
                           placeholder="300"
+                          ref={c => {
+                            this.inputBannerWidth = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -173,6 +182,9 @@ class Banners extends Component {
                         <input
                           type="number" className="form-control" id="inputBannerHeight"
                           placeholder="300"
+                          ref={c => {
+                            this.inputBannerHeight = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -185,6 +197,9 @@ class Banners extends Component {
                         <input
                           type="text" className="form-control" id="inputBannerKeyWord"
                           placeholder="dantri"
+                          ref={c => {
+                            this.inputBannerKeyWord = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -194,7 +209,13 @@ class Banners extends Component {
                         className="col-sm-2 control-label"
                       >Weight</label>
                       <div className="col-sm-10">
-                        <input type="number" className="form-control" id="inputBannerWeight" placeholder="1" />
+                        <input
+                          type="number" className="form-control"
+                          id="inputBannerWeight" placeholder="1"
+                          ref={c => {
+                            this.inputBannerWeight = c;
+                          }}
+                        />
                       </div>
                     </div>
                     <div className="form-group">
@@ -206,6 +227,9 @@ class Banners extends Component {
                         <textarea
                           className="form-control" id="inputBannerDescription"
                           rows="5" placeholder="More info..."
+                          ref={c => {
+                            this.inputBannerDescription = c;
+                          }}
                         />
                       </div>
                     </div>
@@ -278,7 +302,7 @@ class Banners extends Component {
                               <td>{banner.keyword}</td>
                               <td>{banner.description}</td>
                               <td>
-                                <Link to={`/resource/banner/${banner.id}`}>Add New Placement</Link>
+                                <Link to={`/resource/banner/${banner.id}`}>Add Placement</Link>
                               </td>
                             </tr>
                           );

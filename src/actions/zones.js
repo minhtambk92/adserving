@@ -127,7 +127,7 @@ export function getZones(args = {
 export function createZone({ siteId, name, type, html, css, slot, status, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($zone: ZoneInputWithoutId!) {
+      mutation ($zone: ZoneInputTypeWithoutId!) {
         createdZone(zone: $zone) {
           id
           siteId
@@ -167,7 +167,7 @@ export function createZone({ siteId, name, type, html, css, slot, status, descri
 export function updateZone({ id, siteId, name, type, html, css, slot, status, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($zone: ZoneInput!) {
+      mutation ($zone: ZoneInputType!) {
         updatedZone(zone: $zone) {
           id
           siteId

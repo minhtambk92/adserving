@@ -151,351 +151,374 @@ class Site extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="row">
-                <section className="col-lg-6">
-                  {/* BOX: FORM OF CREATE NEW WEBSITE */}
-                  <div className="box box-primary">
-                    <div className="box-header with-border">
-                      <h3 className="box-title">Change site information</h3>
-                      <div className="box-tools pull-right">
-                        <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                          <i className="fa fa-minus" />
-                        </button>
+              <div className="nav-tabs-custom">
+                <ul className="nav nav-tabs">
+                  <li className="active">
+                    <a href="#editSite" data-toggle="tab">
+                      Edit Site
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#addZone" data-toggle="tab">
+                      Add Zone
+                    </a>
+                  </li>
+                </ul>
+                <div className="tab-content">
+                  <div className="active tab-pane" id="editSite">
+                    <div className="row">
+                      <section className="col-lg-12">
+                        {/* BOX: FORM OF CREATE NEW WEBSITE */}
+                        <div className="box box-info">
+                          <div className="box-header with-border">
+                            <h3 className="box-title">Change site information</h3>
+                            <div className="box-tools pull-right">
+                              <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                                <i className="fa fa-minus" />
+                              </button>
+                            </div>
+                          </div>
+                          {/* /.box-header */}
+                          {/* form start */}
+                          <form className="form-horizontal">
+                            <div className="box-body">
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputSiteDomain" className="col-sm-3 control-label"
+                                >Website domain</label>
+                                <div className="col-sm-9">
+                                  <input
+                                    type="text" className="form-control" id="inputSiteDomain"
+                                    placeholder="dantri.com.vn"
+                                    ref={c => {
+                                      this.inputSiteDomain = c;
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputSiteName" className="col-sm-3 control-label"
+                                >
+                                  Name
+                                </label>
+                                <div className="col-sm-9">
+                                  <input
+                                    type="text" className="form-control" id="inputSiteName"
+                                    placeholder="Dan Tri"
+                                    ref={c => {
+                                      this.inputSiteName = c;
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputSiteEmail"
+                                  className="col-sm-3 control-label"
+                                >Email</label>
+                                <div className="col-sm-9">
+                                  <input
+                                    type="text" className="form-control" id="inputSiteEmail"
+                                    placeholder="contact@dantri.com.vn"
+                                    ref={c => {
+                                      this.inputSiteEmail = c;
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputSiteDescription"
+                                  className="col-sm-3 control-label"
+                                >Description</label>
+                                <div className="col-sm-9">
+                                  <textarea
+                                    className="form-control" id="inputSiteDescription"
+                                    rows="5" placeholder="More info..."
+                                    ref={c => {
+                                      this.inputSiteDescription = c;
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputSiteStatus"
+                                  className="col-sm-3 control-label"
+                                >Status</label>
+                                <div className="col-sm-9">
+                                  <select
+                                    id="inputSiteStatus" className="form-control"
+                                    ref={c => {
+                                      this.inputSiteStatus = c;
+                                    }}
+                                  >
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            {/* /.box-body */}
+                            <div className="box-footer">
+                              {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+                              <Link
+                                to="/resource/site"
+                                className="btn btn-app pull-right"
+                              ><i className="fa fa-undo" /> Cancel</Link>
+                              <Link
+                                to="/resource/site"
+                                className="btn btn-app pull-right"
+                                onClick={event => this.deleteSite(event)}
+                              ><i className="fa fa-trash-o" /> Delete</Link>
+                              <a
+                                className="btn btn-app pull-right"
+                                onClick={event => this.updateSite(event)}
+                              ><i className="fa fa-floppy-o" /> Save</a>
+                              {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+                            </div>
+                            {/* /.box-footer */}
+                          </form>
+                        </div>
+                        {/* /.col */}
+                      </section>
+                    </div>
+                  </div>
+                  <div className="tab-pane" id="addZone">
+                    <div className="row">
+                      <div className="col-lg-12">
+                        <div className="row">
+                          <section className="col-lg-6">
+                            {/* BOX: FORM OF CREATE A NEW ZONE */}
+                            <div className="box box-info">
+                              <div className="box-header with-border">
+                                <h3 className="box-title">Create New Zone</h3>
+                                <div className="box-tools pull-right">
+                                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                                    <i className="fa fa-minus" />
+                                  </button>
+                                </div>
+                              </div>
+                              {/* /.box-header */}
+                              {/* form start */}
+                              <form className="form-horizontal">
+                                <div className="box-body">
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor="inputZoneName"
+                                      className="col-sm-3 control-label"
+                                    >Name</label>
+                                    <div className="col-sm-9">
+                                      <input
+                                        type="text" className="form-control" id="inputZoneName"
+                                        placeholder="Dan Tri"
+                                        ref={c => {
+                                          this.inputZoneName = c;
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor="inputZoneType"
+                                      className="col-sm-3 control-label"
+                                    >Type</label>
+                                    <div className="col-sm-9">
+                                      <select
+                                        id="inputZoneType"
+                                        className="form-control"
+                                        ref={c => {
+                                          this.inputZoneType = c;
+                                        }}
+                                      >
+                                        <option value="type-1">Type 1</option>
+                                        <option value="type-2">Type 2</option>
+                                        <option value="type-3">Type 3</option>
+                                        <option value="type-4">Type 4</option>
+                                        <option value="type-5">Type 5</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor="inputZoneHTML"
+                                      className="col-sm-3 control-label"
+                                    >HTML</label>
+                                    <div className="col-sm-9">
+                                      <textarea
+                                        className="form-control" id="inputZoneHTML"
+                                        rows="5" placeholder="More info..."
+                                        ref={c => {
+                                          this.inputZoneHTML = c;
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor="inputZoneCSS"
+                                      className="col-sm-3 control-label"
+                                    >CSS</label>
+                                    <div className="col-sm-9">
+                                      <textarea
+                                        className="form-control" id="inputZoneCSS"
+                                        rows="5" placeholder="More info..."
+                                        ref={c => {
+                                          this.inputZoneCSS = c;
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor="inputZoneSlot"
+                                      className="col-sm-3 control-label"
+                                    >Slot</label>
+                                    <div className="col-sm-9">
+                                      <input
+                                        type="text" className="form-control" id="inputZoneSlot"
+                                        placeholder="..."
+                                        ref={c => {
+                                          this.inputZoneSlot = c;
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor="inputZoneStatus"
+                                      className="col-sm-3 control-label"
+                                    >Status</label>
+                                    <div className="col-sm-9">
+                                      <select
+                                        id="inputZoneStatus" className="form-control"
+                                        ref={c => {
+                                          this.inputZoneStatus = c;
+                                        }}
+                                      >
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor="inputZoneDescription"
+                                      className="col-sm-3 control-label"
+                                    >Description</label>
+                                    <div className="col-sm-9">
+                                      <textarea
+                                        className="form-control"
+                                        id="inputZoneDescription" rows="5" placeholder="More info..."
+                                        ref={c => {
+                                          this.inputZoneDescription = c;
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                {/* /.box-body */}
+                                <div className="box-footer">
+                                  {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+                                  <a
+                                    className="btn btn-app pull-right"
+                                    onClick={event => this.clearInput(event)}
+                                  ><i className="fa fa-eraser" /> Clear</a>
+                                  <a
+                                    className="btn btn-app pull-right"
+                                    onClick={event => this.createZone(event)}
+                                  ><i className="fa fa-check" /> Confirm</a>
+                                  {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+                                </div>
+                                {/* /.box-footer */}
+                              </form>
+                            </div>
+                            {/* /.col */}
+                          </section>
+                          <section className="col-lg-6">
+                            {/* BOX: LIST OF ZONES */}
+                            <div className="box box-info">
+                              <div className="box-header with-border">
+                                <h3 className="box-title">
+                                  List of zones: {this.props.sites.editing ?
+                                  this.props.sites.editing.name : '...'}
+                                </h3>
+                                <div className="box-tools">
+                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
+                                    <input
+                                      type="text" name="inputSearchZones"
+                                      className="form-control pull-right"
+                                      placeholder="Search..."
+                                    />
+                                    <div className="input-group-btn">
+                                      <button
+                                        type="submit" className="btn btn-default"
+                                      ><i className="fa fa-search" /></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              {/* /.box-header */}
+                              <div className="box-body table-responsive no-padding">
+                                <table id="example1" className="table table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th><input type="checkbox" className="inputChooseSite" /></th>
+                                      <th>Name</th>
+                                      <th>Type</th>
+                                      <th>Description</th>
+                                      <th>Slot</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {this.props.sites.editing && this.props.sites.editing.zones &&
+                                    this.props.sites.editing.zones.map(zone => {
+                                      return (
+                                        <tr key={zone.id}>
+                                          <td><input type="checkbox" className="inputChooseSite" /></td>
+                                          <td><Link to={`/resource/zone/${zone.id}`}>{zone.name}</Link></td>
+                                          <td>{zone.type}</td>
+                                          <td>{zone.description}</td>
+                                          <td>{zone.slot}</td>
+                                          <td><Link to={`/resource/zone/${zone.id}`}>Add New Placements</Link></td>
+                                        </tr>
+                                      );
+                                    }
+                                    )}
+                                  </tbody>
+                                  <tfoot>
+                                    <tr>
+                                      <th><input type="checkbox" className="inputChooseSite" /></th>
+                                      <th>Name</th>
+                                      <th>Type</th>
+                                      <th>Description</th>
+                                      <th>Slot</th>
+                                    </tr>
+                                  </tfoot>
+                                </table>
+                              </div>
+                              {/* /.box-body */}
+                              <div className="box-footer clearfix">
+                                <ul className="pagination pagination-sm no-margin pull-right">
+                                  <li><a>&laquo;</a></li>
+                                  <li><a>1</a></li>
+                                  <li><a>2</a></li>
+                                  <li><a>3</a></li>
+                                  <li><a>&raquo;</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                            {/* /.box */}
+                          </section>
+                        </div>
                       </div>
                     </div>
-                    {/* /.box-header */}
-                    {/* form start */}
-                    <form className="form-horizontal">
-                      <div className="box-body">
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputSiteDomain" className="col-sm-3 control-label"
-                          >Website domain</label>
-                          <div className="col-sm-9">
-                            <input
-                              type="text" className="form-control" id="inputSiteDomain"
-                              placeholder="dantri.com.vn"
-                              ref={c => {
-                                this.inputSiteDomain = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputSiteName" className="col-sm-3 control-label"
-                          >
-                            Name
-                          </label>
-                          <div className="col-sm-9">
-                            <input
-                              type="text" className="form-control" id="inputSiteName"
-                              placeholder="Dan Tri"
-                              ref={c => {
-                                this.inputSiteName = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputSiteEmail"
-                            className="col-sm-3 control-label"
-                          >Email</label>
-                          <div className="col-sm-9">
-                            <input
-                              type="text" className="form-control" id="inputSiteEmail"
-                              placeholder="contact@dantri.com.vn"
-                              ref={c => {
-                                this.inputSiteEmail = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputSiteDescription"
-                            className="col-sm-3 control-label"
-                          >Description</label>
-                          <div className="col-sm-9">
-                            <textarea
-                              className="form-control" id="inputSiteDescription"
-                              rows="5" placeholder="More info..."
-                              ref={c => {
-                                this.inputSiteDescription = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputSiteStatus"
-                            className="col-sm-3 control-label"
-                          >Status</label>
-                          <div className="col-sm-9">
-                            <select
-                              id="inputSiteStatus" className="form-control"
-                              ref={c => {
-                                this.inputSiteStatus = c;
-                              }}
-                            >
-                              <option value="active">Active</option>
-                              <option value="inactive">Inactive</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      {/* /.box-body */}
-                      <div className="box-footer">
-                        {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                        <Link
-                          to="/resource/site"
-                          className="btn btn-app pull-right"
-                        ><i className="fa fa-undo" /> Cancel</Link>
-                        <Link
-                          to="/resource/site"
-                          className="btn btn-app pull-right"
-                          onClick={event => this.deleteSite(event)}
-                        ><i className="fa fa-trash-o" /> Delete</Link>
-                        <a
-                          className="btn btn-app pull-right"
-                          onClick={event => this.updateSite(event)}
-                        ><i className="fa fa-floppy-o" /> Save</a>
-                        {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                      </div>
-                      {/* /.box-footer */}
-                    </form>
                   </div>
-                  {/* /.col */}
-                </section>
-                <section className="col-lg-6">
-                  {/* BOX: FORM OF CREATE A NEW ZONE */}
-                  <div className="box box-primary">
-                    <div className="box-header with-border">
-                      <h3 className="box-title">Create New Zone</h3>
-                      <div className="box-tools pull-right">
-                        <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                          <i className="fa fa-minus" />
-                        </button>
-                      </div>
-                    </div>
-                    {/* /.box-header */}
-                    {/* form start */}
-                    <form className="form-horizontal">
-                      <div className="box-body">
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneName"
-                            className="col-sm-3 control-label"
-                          >Name</label>
-                          <div className="col-sm-9">
-                            <input
-                              type="text" className="form-control" id="inputZoneName"
-                              placeholder="Dan Tri"
-                              ref={c => {
-                                this.inputZoneName = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneType"
-                            className="col-sm-3 control-label"
-                          >Type</label>
-                          <div className="col-sm-9">
-                            <select
-                              id="inputZoneType"
-                              className="form-control"
-                              ref={c => {
-                                this.inputZoneType = c;
-                              }}
-                            >
-                              <option value="type-1">Type 1</option>
-                              <option value="type-2">Type 2</option>
-                              <option value="type-3">Type 3</option>
-                              <option value="type-4">Type 4</option>
-                              <option value="type-5">Type 5</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneHTML"
-                            className="col-sm-3 control-label"
-                          >HTML</label>
-                          <div className="col-sm-9">
-                            <textarea
-                              className="form-control" id="inputZoneHTML"
-                              rows="5" placeholder="More info..."
-                              ref={c => {
-                                this.inputZoneHTML = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneCSS"
-                            className="col-sm-3 control-label"
-                          >CSS</label>
-                          <div className="col-sm-9">
-                            <textarea
-                              className="form-control" id="inputZoneCSS"
-                              rows="5" placeholder="More info..."
-                              ref={c => {
-                                this.inputZoneCSS = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneSlot"
-                            className="col-sm-3 control-label"
-                          >Slot</label>
-                          <div className="col-sm-9">
-                            <input
-                              type="text" className="form-control" id="inputZoneSlot"
-                              placeholder="..."
-                              ref={c => {
-                                this.inputZoneSlot = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneStatus"
-                            className="col-sm-3 control-label"
-                          >Status</label>
-                          <div className="col-sm-9">
-                            <select
-                              id="inputZoneStatus" className="form-control"
-                              ref={c => {
-                                this.inputZoneStatus = c;
-                              }}
-                            >
-                              <option value="active">Active</option>
-                              <option value="inactive">Inactive</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneDescription"
-                            className="col-sm-3 control-label"
-                          >Description</label>
-                          <div className="col-sm-9">
-                            <textarea
-                              className="form-control"
-                              id="inputZoneDescription" rows="5" placeholder="More info..."
-                              ref={c => {
-                                this.inputZoneDescription = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      {/* /.box-body */}
-                      <div className="box-footer">
-                        {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                        <a
-                          className="btn btn-app pull-right"
-                          onClick={event => this.clearInput(event)}
-                        ><i className="fa fa-eraser" /> Clear</a>
-                        <a
-                          className="btn btn-app pull-right"
-                          onClick={event => this.createZone(event)}
-                        ><i className="fa fa-check" /> Confirm</a>
-                        {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                      </div>
-                      {/* /.box-footer */}
-                    </form>
-                  </div>
-                  {/* /.col */}
-                </section>
+                </div>
               </div>
             </section>
           </div>
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: LIST OF ZONES */}
-              <div className="box box-info">
-                <div className="box-header with-border">
-                  <h3 className="box-title">
-                    List of zones: {this.props.sites.editing ?
-                    this.props.sites.editing.name : '...'}
-                  </h3>
-                  <div className="box-tools">
-                    <div className="input-group input-group-sm" style={{ width: 150 }}>
-                      <input
-                        type="text" name="inputSearchZones"
-                        className="form-control pull-right"
-                        placeholder="Search..."
-                      />
-                      <div className="input-group-btn">
-                        <button
-                          type="submit" className="btn btn-default"
-                        ><i className="fa fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* /.box-header */}
-                <div className="box-body table-responsive no-padding">
-                  <table id="example1" className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseSite" /></th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Slot</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.props.sites.editing && this.props.sites.editing.zones &&
-                      this.props.sites.editing.zones.map(zone => {
-                        return (
-                          <tr key={zone.id}>
-                            <td><input type="checkbox" className="inputChooseSite" /></td>
-                            <td><Link to={`/resource/zone/${zone.id}`}>{zone.name}</Link></td>
-                            <td>{zone.type}</td>
-                            <td>{zone.description}</td>
-                            <td>{zone.slot}</td>
-                            <td><Link to={`/resource/zone/${zone.id}`}>Add New Placements</Link></td>
-                          </tr>
-                        );
-                      }
-                      )}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseSite" /></th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Slot</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-                {/* /.box-body */}
-                <div className="box-footer clearfix">
-                  <ul className="pagination pagination-sm no-margin pull-right">
-                    <li><a>&laquo;</a></li>
-                    <li><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>&raquo;</a></li>
-                  </ul>
-                </div>
-              </div>
-              {/* /.box */}
-            </section>
-          </div>
-
         </div>
       </Layout>
     );

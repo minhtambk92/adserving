@@ -12,7 +12,7 @@ export default function advertisers(state = {}, action) {
       {
         return {
           ...state,
-          current: action.payload.advertiser,
+          editing: action.payload.advertiser,
         };
       }
 

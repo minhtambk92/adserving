@@ -46,13 +46,7 @@ class Zone extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      name: '',
-      siteId: '',
-      description: '',
-      type: '',
       searchText: '',
-      status: '',
-      slot: '',
     };
   }
 
@@ -218,9 +212,11 @@ class Zone extends Component {
     this.inputPlacementWeight.value = null;
   }
   filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    if (pob.length === 0) {
+    if (allPlacement.length === 0) {
+      return [];
+    } else if (pob.length === 0) {
       return allPlacement;
-    } else if (pob.length > 0) {
+    } else if (pob.length > 0 && allPlacement.length > 0) {
       const arrId = [];
       const newArr = [];
       const arrPlacement = [];
@@ -286,490 +282,516 @@ class Zone extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="row">
-                <div className="col-lg-6">
-                  {/* BOX: FORM OF CREATE A NEW ZONE */}
-                  <div className="box box-primary">
-                    <div className="box-header with-border">
-                      <h3 className="box-title">Change Zone Information</h3>
-                      <div className="box-tools pull-right">
-                        <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                          <i className="fa fa-minus" />
-                        </button>
+              <div className="nav-tabs-custom">
+                <ul className="nav nav-tabs">
+                  <li className="active">
+                    <a href="#editZone" data-toggle="tab">
+                      Edit Zone
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#addPlacement" data-toggle="tab">
+                      Add Placement
+                    </a>
+                  </li>
+                </ul>
+                <div className="tab-content">
+                  <div className="active tab-pane" id="editZone">
+                    <div className="row">
+                      <div className="col-lg-12">
+                        {/* BOX: FORM OF CREATE A NEW ZONE */}
+                        <div className="box box-info">
+                          <div className="box-header with-border">
+                            <h3 className="box-title">Change Zone Information</h3>
+                            <div className="box-tools pull-right">
+                              <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                                <i className="fa fa-minus" />
+                              </button>
+                            </div>
+                          </div>
+                          {/* /.box-header */}
+                          {/* form start */}
+                          <form className="form-horizontal">
+                            <div className="box-body">
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputZoneName"
+                                  className="col-sm-2 control-label"
+                                >Name</label>
+                                <div className="col-sm-10">
+                                  <input
+                                    type="text" className="form-control" id="inputZoneName"
+                                    placeholder="Dan Tri"
+                                    ref={c => {
+                                      this.inputZoneName = c;
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputZoneSite"
+                                  className="col-sm-2 control-label"
+                                >Website</label>
+                                <div className="col-sm-10">
+                                  <select
+                                    id="inputZoneSite"
+                                    className="form-control select2"
+                                    style={{ width: '100%' }}
+                                    ref={c => {
+                                      this.inputZoneSite = c;
+                                    }}
+                                  >
+                                    {this.props.sites.list && this.props.sites.list.map(site => (
+                                      <option
+                                        key={site.id} value={site.id}
+                                      >{site.name} | {site.domain}</option>
+                                    ))}
+                                  </select>
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputZoneType"
+                                  className="col-sm-2 control-label"
+                                >Type</label>
+                                <div className="col-sm-10">
+                                  <select
+                                    id="inputZoneType"
+                                    className="form-control"
+                                    ref={c => {
+                                      this.inputZoneType = c;
+                                    }}
+                                  >
+                                    <option value="type-1">Type 1</option>
+                                    <option value="type-2">Type 2</option>
+                                    <option value="type-3">Type 3</option>
+                                    <option value="type-4">Type 4</option>
+                                    <option value="type-5">Type 5</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputZoneHtml"
+                                  className="col-sm-2 control-label"
+                                >HTML</label>
+                                <div className="col-sm-10">
+                                  <textarea
+                                    className="form-control" id="inputZoneHtml"
+                                    rows="5" placeholder="More info..."
+                                    ref={c => {
+                                      this.inputZoneHtml = c;
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputZoneCss"
+                                  className="col-sm-2 control-label"
+                                >CSS</label>
+                                <div className="col-sm-10">
+                                  <textarea
+                                    className="form-control" id="inputZoneCss"
+                                    rows="5" placeholder="More info..."
+                                    ref={c => {
+                                      this.inputZoneCss = c;
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputZoneSlot"
+                                  className="col-sm-2 control-label"
+                                >Slot</label>
+                                <div className="col-sm-10">
+                                  <input
+                                    type="text" className="form-control" id="inputZoneSlot"
+                                    placeholder="..."
+                                    ref={c => {
+                                      this.inputZoneSlot = c;
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputZoneStatus"
+                                  className="col-sm-2 control-label"
+                                >Status</label>
+                                <div className="col-sm-10">
+                                  <select
+                                    id="inputZoneStatus" className="form-control"
+                                    ref={c => {
+                                      this.inputZoneStatus = c;
+                                    }}
+                                  >
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputZoneDescription"
+                                  className="col-sm-2 control-label"
+                                >Description</label>
+                                <div className="col-sm-10">
+                                  <textarea
+                                    className="form-control" id="inputZoneDescription"
+                                    rows="5" placeholder="More info..."
+                                    ref={c => {
+                                      this.inputZoneDescription = c;
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            {/* /.box-body */}
+                            <div className="box-footer">
+                              {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+                              <Link
+                                to="/resource/zone"
+                                className="btn btn-app pull-right"
+                              ><i className="fa fa-undo" /> Cancel</Link>
+                              <Link
+                                to="/resource/zone"
+                                className="btn btn-app pull-right"
+                                onClick={event => this.deleteZone(event)}
+                              ><i className="fa fa-trash-o" /> Delete</Link>
+                              <a
+                                className="btn btn-app pull-right"
+                                onClick={event => this.updateZone(event)}
+                              ><i className="fa fa-floppy-o" /> Save</a>
+                              {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+                            </div>
+                            {/* /.box-footer */}
+                          </form>
+                        </div>
+                        {/* /.col */}
                       </div>
                     </div>
-                    {/* /.box-header */}
-                    {/* form start */}
-                    <form className="form-horizontal">
-                      <div className="box-body">
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneName"
-                            className="col-sm-2 control-label"
-                          >Name</label>
-                          <div className="col-sm-10">
-                            <input
-                              type="text" className="form-control" id="inputZoneName"
-                              placeholder="Dan Tri"
-                              ref={c => {
-                                this.inputZoneName = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneSite"
-                            className="col-sm-2 control-label"
-                          >Website</label>
-                          <div className="col-sm-10">
-                            <select
-                              id="inputZoneSite"
-                              className="form-control select2"
-                              style={{ width: '100%' }}
-                              ref={c => {
-                                this.inputZoneSite = c;
-                              }}
-                            >
-                              {this.props.sites.list && this.props.sites.list.map(site => (
-                                <option
-                                  key={site.id} value={site.id}
-                                >{site.name} | {site.domain}</option>
-                              ))}
-                            </select>
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneType"
-                            className="col-sm-2 control-label"
-                          >Type</label>
-                          <div className="col-sm-10">
-                            <select
-                              id="inputZoneType"
-                              className="form-control"
-                              ref={c => {
-                                this.inputZoneType = c;
-                              }}
-                            >
-                              <option value="type-1">Type 1</option>
-                              <option value="type-2">Type 2</option>
-                              <option value="type-3">Type 3</option>
-                              <option value="type-4">Type 4</option>
-                              <option value="type-5">Type 5</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneHtml"
-                            className="col-sm-2 control-label"
-                          >HTML</label>
-                          <div className="col-sm-10">
-                            <textarea
-                              className="form-control" id="inputZoneHtml"
-                              rows="5" placeholder="More info..."
-                              ref={c => {
-                                this.inputZoneHtml = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneCss"
-                            className="col-sm-2 control-label"
-                          >CSS</label>
-                          <div className="col-sm-10">
-                            <textarea
-                              className="form-control" id="inputZoneCss"
-                              rows="5" placeholder="More info..."
-                              ref={c => {
-                                this.inputZoneCss = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneSlot"
-                            className="col-sm-2 control-label"
-                          >Slot</label>
-                          <div className="col-sm-10">
-                            <input
-                              type="text" className="form-control" id="inputZoneSlot"
-                              placeholder="..."
-                              ref={c => {
-                                this.inputZoneSlot = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneStatus"
-                            className="col-sm-2 control-label"
-                          >Status</label>
-                          <div className="col-sm-10">
-                            <select
-                              id="inputZoneStatus" className="form-control"
-                              ref={c => {
-                                this.inputZoneStatus = c;
-                              }}
-                            >
-                              <option value="active">Active</option>
-                              <option value="inactive">Inactive</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputZoneDescription"
-                            className="col-sm-2 control-label"
-                          >Description</label>
-                          <div className="col-sm-10">
-                            <textarea
-                              className="form-control" id="inputZoneDescription"
-                              rows="5" placeholder="More info..."
-                              ref={c => {
-                                this.inputZoneDescription = c;
-                              }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      {/* /.box-body */}
-                      <div className="box-footer">
-                        {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                        <Link
-                          to="/resource/zone"
-                          className="btn btn-app pull-right"
-                        ><i className="fa fa-undo" /> Cancel</Link>
-                        <Link
-                          to="/resource/zone"
-                          className="btn btn-app pull-right"
-                          onClick={event => this.deleteZone(event)}
-                        ><i className="fa fa-trash-o" /> Delete</Link>
-                        <a
-                          className="btn btn-app pull-right"
-                          onClick={event => this.updateZone(event)}
-                        ><i className="fa fa-floppy-o" /> Save</a>
-                        {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                      </div>
-                      {/* /.box-footer */}
-                    </form>
                   </div>
-                  {/* /.col */}
+                  <div className="tab-pane" id="addPlacement">
+                    <div className="row">
+                      <div className="col-lg-12">
+                        <div className="row">
+                          <section className="col-lg-6">
+                            {/* BOX: LIST OF Placements */}
+                            <div className="box box-info">
+                              <div className="box-header with-border">
+                                <h3 className="box-title">List Placement</h3>
+
+                                <div className="box-tools">
+                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
+                                    <input
+                                      type="text" name="inputSearchPlacements"
+                                      className="form-control pull-right"
+                                      placeholder="Search..."
+                                    />
+                                    <div className="input-group-btn">
+                                      <button
+                                        type="submit" className="btn btn-default"
+                                      ><i className="fa fa-search" /></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              {/* /.box-header */}
+                              <div className="box-body table-responsive no-padding">
+                                <table id="example1" className="table table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                      <th>Name</th>
+                                      <th>Size</th>
+                                      <th>Start Time</th>
+                                      <th>End Time</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+                                    {this.props.placements.list && this.props.zones.editing &&
+                                    this.props.zones.editing.pbzZone &&
+                                    this.filterPlmNotIn(this.props.placements.list,
+                                      this.props.zones.editing.pbzZone).map(placement => {
+                                        if (this.isIndexOf(placement.name,
+                                            placement.startTime,
+                                            placement.endTime, placement.size,
+                                            placement.description, placement.weight)) {
+                                          return (
+                                            <tr key={placement.id}>
+                                              <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                              <th><Link to={`/resource/placement/${placement.id}`}>
+                                                {placement.name}
+                                              </Link>
+                                              </th>
+                                              <td>{placement.size}</td>
+                                              <td>{moment(new Date(placement.startTime)).format('L')}</td>
+                                              <td>{moment(new Date(placement.endTime)).format('L')}</td>
+                                              <td
+                                                onClick={() =>
+                                                this.pushZoneToPlacement(placement.id)}
+                                              >
+                                                Add Placement
+                                              </td>
+                                            </tr>
+                                          );
+                                        }
+                                        return false;
+                                      })}
+                                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+                                  </tbody>
+                                  <tfoot>
+                                    <tr>
+                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                      <th>Name</th>
+                                      <th>Size</th>
+                                      <th>Start Time</th>
+                                      <th>End Time</th>
+                                    </tr>
+                                  </tfoot>
+                                </table>
+                              </div>
+                              {/* /.box-body */}
+                              <div className="box-footer clearfix">
+                                <ul className="pagination pagination-sm no-margin pull-right">
+                                  <li><a>&laquo;</a></li>
+                                  <li><a>1</a></li>
+                                  <li><a>2</a></li>
+                                  <li><a>3</a></li>
+                                  <li><a>&raquo;</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                            {/* /.box */}
+                          </section>
+                          <section className="col-lg-6">
+                            {/* BOX: LIST OF Placements */}
+                            <div className="box box-info">
+                              <div className="box-header with-border">
+                                <h3 className="box-title">
+                                  List placements of {this.props.zones.editing ?
+                                  this.props.zones.editing.name : '...'}
+                                </h3>
+                                <div className="box-tools">
+                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
+                                    <input
+                                      type="text" name="inputSearchPlacements"
+                                      className="form-control pull-right"
+                                      placeholder="Search..."
+                                    />
+                                    <div className="input-group-btn">
+                                      <button
+                                        type="submit" className="btn btn-default"
+                                      ><i className="fa fa-search" /></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              {/* /.box-header */}
+                              <div className="box-body table-responsive no-padding">
+                                <table id="example1" className="table table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                      <th>Name</th>
+                                      <th>Size</th>
+                                      <th>Start Time</th>
+                                      <th>End Time</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+                                    {this.props.zones.editing && this.props.zones.editing.pbzZone &&
+                                    this.props.zones.editing.pbzZone.map(placement => {
+                                      if (this.isIndexOf(placement.placements.name,
+                                          placement.placements.startTime,
+                                          placement.placements.endTime, placement.placements.size,
+                                          placement.placements.description,
+                                          placement.placements.weight)) {
+                                        return (
+                                          <tr key={placement.placements.id}>
+                                            <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                            <th><Link to={`/resource/placement/${placement.placements.id}`}>
+                                              {placement.placements.name}
+                                            </Link>
+                                            </th>
+                                            <td>{placement.placements.size}</td>
+                                            <td>{moment(new Date(placement.placements.startTime)).format('L')}</td>
+                                            <td>{moment(new Date(placement.placements.endTime)).format('L')}</td>
+                                            <td
+                                              onClick={() =>
+                                              this.removePlacement(placement.placements.id)}
+                                            >
+                                              Remove
+                                            </td>
+                                          </tr>
+                                        );
+                                      }
+                                      return false;
+                                    })}
+                                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+                                  </tbody>
+                                  <tfoot>
+                                    <tr>
+                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                      <th>Name</th>
+                                      <th>Size</th>
+                                      <th>Start Time</th>
+                                      <th>End Time</th>
+                                    </tr>
+                                  </tfoot>
+                                </table>
+                              </div>
+                              {/* /.box-body */}
+                              <div className="box-footer clearfix">
+                                <ul className="pagination pagination-sm no-margin pull-right">
+                                  <li><a>&laquo;</a></li>
+                                  <li><a>1</a></li>
+                                  <li><a>2</a></li>
+                                  <li><a>3</a></li>
+                                  <li><a>&raquo;</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                            {/* /.box */}
+                          </section>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <section className="col-lg-6">
+                        {/* BOX: FORM OF CREATE NEW PlacementS */}
+                        <div className="box box-info">
+                          <div className="box-header with-border">
+                            <h3 className="box-title">Create New Placements</h3>
+                            <div className="box-tools pull-right">
+                              <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                                <i className="fa fa-minus" />
+                              </button>
+                            </div>
+                          </div>
+                          {/* /.box-header */}
+                          {/* form start */}
+                          <form className="form-horizontal">
+                            <div className="box-body">
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputPlacementName" className="col-sm-2 control-label"
+                                >Name</label>
+                                <div className="col-sm-10">
+                                  <input
+                                    type="text" className="form-control" id="inputPlacementName"
+                                    placeholder="Admicro"
+                                    ref={c => { this.inputPlacementName = c; }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="form-group has-feedback">
+                                <label htmlFor="inputPlacementCampaign" className="col-sm-2 control-label">Campaign</label>
+                                <div className="col-sm-10">
+                                  <select
+                                    id="inputPlacementCampaign" className="form-control"
+                                    ref={c => {
+                                      this.inputPlacementCampaign = c;
+                                    }}
+                                  >
+                                    {this.props.campaigns.list
+                                    && this.props.campaigns.list.map(campaign => (
+                                      <option
+                                        key={campaign.id} value={campaign.id}
+                                      >
+                                        {campaign.name}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+                              </div>
+                              <div className="form-group has-feedback">
+                                <label htmlFor="inputPlacementStartTime" className="col-sm-2 control-label">Start Time:</label>
+                                <div className=" col-sm-10 date">
+                                  <span className="fa fa-calendar form-control-feedback" />
+                                  <input
+                                    type="text" className="form-control pull-right" id="inputPlacementStartTime"
+                                    ref={c => { this.inputPlacementStartTime = c; }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="form-group has-feedback">
+                                <label htmlFor="inputPlacementEndTime" className="col-sm-2 control-label">End Time:</label>
+                                <div className=" col-sm-10 date">
+                                  <span className="fa fa-calendar form-control-feedback" />
+                                  <input
+                                    type="text" className="form-control pull-right" id="inputPlacementEndTime"
+                                    ref={c => { this.inputPlacementEndTime = c; }}
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="form-group">
+                                <label htmlFor="inputPlacementSize" className="col-sm-2 control-label">Size</label>
+                                <div className="col-sm-10">
+                                  <input
+                                    type="text" className="form-control"
+                                    id="inputPlacementSize"
+                                    placeholder="24"
+                                    ref={c => { this.inputPlacementSize = c; }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputPlacementWeight"
+                                  className="col-sm-2 control-label"
+                                >Weight</label>
+                                <div className="col-sm-10">
+                                  <input
+                                    type="text" className="form-control" id="inputPlacementWeight"
+                                    placeholder="1"
+                                    ref={c => { this.inputPlacementWeight = c; }}
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputPlacementDescription"
+                                  className="col-sm-2 control-label"
+                                >Description</label>
+                                <div className="col-sm-10">
+                                  <textarea
+                                    className="form-control" id="inputPlacementDescription"
+                                    rows="5" placeholder="More info..."
+                                    ref={c => { this.inputPlacementDescription = c; }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            {/* /.box-body */}
+                            <div className="box-footer">
+                              {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+                              <a
+                                className="btn btn-app pull-right"
+                              ><i className="fa fa-eraser" /> Clear</a>
+                              <a
+                                className="btn btn-app pull-right"
+                                onClick={event => this.createPlacement(event)}
+                              ><i className="fa fa-check" /> Confirm</a>
+                              {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+                            </div>
+                            {/* /.box-footer */}
+                          </form>
+                        </div>
+                        {/* /.col */}
+                      </section>
+                    </div>
+                  </div>
                 </div>
-                <section className="col-lg-6">
-                  {/* BOX: FORM OF CREATE NEW PlacementS */}
-                  <div className="box box-primary">
-                    <div className="box-header with-border">
-                      <h3 className="box-title">Create New Placements</h3>
-                      <div className="box-tools pull-right">
-                        <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                          <i className="fa fa-plus" />
-                        </button>
-                      </div>
-                    </div>
-                    {/* /.box-header */}
-                    {/* form start */}
-                    <form className="form-horizontal">
-                      <div className="box-body">
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputPlacementName" className="col-sm-2 control-label"
-                          >Name</label>
-                          <div className="col-sm-10">
-                            <input
-                              type="text" className="form-control" id="inputPlacementName"
-                              placeholder="Admicro"
-                              ref={c => { this.inputPlacementName = c; }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group has-feedback">
-                          <label htmlFor="inputPlacementCampaign" className="col-sm-2 control-label">Campaign</label>
-                          <div className="col-sm-10">
-                            <select
-                              id="inputPlacementCampaign" className="form-control"
-                              ref={c => {
-                                this.inputPlacementCampaign = c;
-                              }}
-                            >
-                              {this.props.campaigns.list
-                              && this.props.campaigns.list.map(campaign => (
-                                <option
-                                  key={campaign.id} value={campaign.id}
-                                >
-                                  {campaign.name}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                        </div>
-                        <div className="form-group has-feedback">
-                          <label htmlFor="inputPlacementStartTime" className="col-sm-2 control-label">Start Time:</label>
-                          <div className=" col-sm-10 date">
-                            <span className="fa fa-calendar form-control-feedback" />
-                            <input
-                              type="text" className="form-control pull-right" id="inputPlacementStartTime"
-                              ref={c => { this.inputPlacementStartTime = c; }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group has-feedback">
-                          <label htmlFor="inputPlacementEndTime" className="col-sm-2 control-label">End Time:</label>
-                          <div className=" col-sm-10 date">
-                            <span className="fa fa-calendar form-control-feedback" />
-                            <input
-                              type="text" className="form-control pull-right" id="inputPlacementEndTime"
-                              ref={c => { this.inputPlacementEndTime = c; }}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="form-group">
-                          <label htmlFor="inputPlacementSize" className="col-sm-2 control-label">Size</label>
-                          <div className="col-sm-10">
-                            <input
-                              type="text" className="form-control"
-                              id="inputPlacementSize"
-                              placeholder="24"
-                              ref={c => { this.inputPlacementSize = c; }}
-                            />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputPlacementWeight"
-                            className="col-sm-2 control-label"
-                          >Weight</label>
-                          <div className="col-sm-10">
-                            <input
-                              type="text" className="form-control" id="inputPlacementWeight"
-                              placeholder="1"
-                              ref={c => { this.inputPlacementWeight = c; }}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputPlacementDescription"
-                            className="col-sm-2 control-label"
-                          >Description</label>
-                          <div className="col-sm-10">
-                            <textarea
-                              className="form-control" id="inputPlacementDescription"
-                              rows="5" placeholder="More info..."
-                              ref={c => { this.inputPlacementDescription = c; }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      {/* /.box-body */}
-                      <div className="box-footer">
-                        {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                        <a
-                          className="btn btn-app pull-right"
-                        ><i className="fa fa-eraser" /> Clear</a>
-                        <a
-                          className="btn btn-app pull-right"
-                          onClick={event => this.createPlacement(event)}
-                        ><i className="fa fa-check" /> Confirm</a>
-                        {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                      </div>
-                      {/* /.box-footer */}
-                    </form>
-                  </div>
-                  {/* /.col */}
-                </section>
               </div>
             </section>
-          </div>
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="row">
-                <section className="col-lg-6">
-                  {/* BOX: LIST OF Placements */}
-                  <div className="box box-info">
-                    <div className="box-header with-border">
-                      <h3 className="box-title">List Placement</h3>
-
-                      <div className="box-tools">
-                        <div className="input-group input-group-sm" style={{ width: 150 }}>
-                          <input
-                            type="text" name="inputSearchPlacements"
-                            className="form-control pull-right"
-                            placeholder="Search..."
-                          />
-                          <div className="input-group-btn">
-                            <button
-                              type="submit" className="btn btn-default"
-                            ><i className="fa fa-search" /></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {/* /.box-header */}
-                    <div className="box-body table-responsive no-padding">
-                      <table id="example1" className="table table-hover">
-                        <thead>
-                          <tr>
-                            <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                            <th>Name</th>
-                            <th>Size</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                          {this.props.placements.list && this.props.zones.editing &&
-                          this.props.zones.editing.pbzZone &&
-                          this.filterPlmNotIn(this.props.placements.list,
-                            this.props.zones.editing.pbzZone).map(placement => {
-                              if (this.isIndexOf(placement.name,
-                                  placement.startTime,
-                                  placement.endTime, placement.size,
-                                  placement.description, placement.weight)) {
-                                return (
-                                  <tr key={placement.id}>
-                                    <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                    <th><Link to={`/resource/placement/${placement.id}`}>
-                                      {placement.name}
-                                    </Link>
-                                    </th>
-                                    <td>{placement.size}</td>
-                                    <td>{moment(new Date(placement.startTime)).format('L')}</td>
-                                    <td>{moment(new Date(placement.endTime)).format('L')}</td>
-                                    <td
-                                      onClick={() => this.pushZoneToPlacement(placement.id)}
-                                    >
-                                      Add Placement
-                                    </td>
-                                  </tr>
-                                );
-                              }
-                              return false;
-                            })}
-                          {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                        </tbody>
-                        <tfoot>
-                          <tr>
-                            <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                            <th>Name</th>
-                            <th>Size</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                          </tr>
-                        </tfoot>
-                      </table>
-                    </div>
-                    {/* /.box-body */}
-                    <div className="box-footer clearfix">
-                      <ul className="pagination pagination-sm no-margin pull-right">
-                        <li><a>&laquo;</a></li>
-                        <li><a>1</a></li>
-                        <li><a>2</a></li>
-                        <li><a>3</a></li>
-                        <li><a>&raquo;</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  {/* /.box */}
-                </section>
-                <section className="col-lg-6">
-                  {/* BOX: LIST OF Placements */}
-                  <div className="box box-info">
-                    <div className="box-header with-border">
-                      <h3 className="box-title">
-                        List placements of {this.props.zones.editing ? this.props.zones.editing.name : '...'}
-                      </h3>
-                      <div className="box-tools">
-                        <div className="input-group input-group-sm" style={{ width: 150 }}>
-                          <input
-                            type="text" name="inputSearchPlacements"
-                            className="form-control pull-right"
-                            placeholder="Search..."
-                          />
-                          <div className="input-group-btn">
-                            <button
-                              type="submit" className="btn btn-default"
-                            ><i className="fa fa-search" /></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {/* /.box-header */}
-                    <div className="box-body table-responsive no-padding">
-                      <table id="example1" className="table table-hover">
-                        <thead>
-                          <tr>
-                            <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                            <th>Name</th>
-                            <th>Size</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                          {this.props.zones.editing && this.props.zones.editing.pbzZone &&
-                            this.props.zones.editing.pbzZone.map(placement => {
-                              if (this.isIndexOf(placement.placements.name,
-                                  placement.placements.startTime,
-                                  placement.placements.endTime, placement.placements.size,
-                                  placement.placements.description, placement.placements.weight)) {
-                                return (
-                                  <tr key={placement.placements.id}>
-                                    <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                    <th><Link to={`/resource/placement/${placement.placements.id}`}>
-                                      {placement.placements.name}
-                                    </Link>
-                                    </th>
-                                    <td>{placement.placements.size}</td>
-                                    <td>{moment(new Date(placement.placements.startTime)).format('L')}</td>
-                                    <td>{moment(new Date(placement.placements.endTime)).format('L')}</td>
-                                    <td
-                                      onClick={() => this.removePlacement(placement.placements.id)}
-                                    >
-                                      Remove
-                                    </td>
-                                  </tr>
-                                );
-                              }
-                              return false;
-                            })}
-                          {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                        </tbody>
-                        <tfoot>
-                          <tr>
-                            <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                            <th>Name</th>
-                            <th>Size</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                          </tr>
-                        </tfoot>
-                      </table>
-                    </div>
-                    {/* /.box-body */}
-                    <div className="box-footer clearfix">
-                      <ul className="pagination pagination-sm no-margin pull-right">
-                        <li><a>&laquo;</a></li>
-                        <li><a>1</a></li>
-                        <li><a>2</a></li>
-                        <li><a>3</a></li>
-                        <li><a>&raquo;</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  {/* /.box */}
-                </section>
-              </div>
-            </div>
           </div>
         </div>
       </Layout>
