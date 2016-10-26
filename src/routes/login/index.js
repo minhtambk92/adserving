@@ -12,7 +12,7 @@ import Login from './Login';
 
 export default {
 
-  path: '/pages/examples/login',
+  path: '/login',
 
   action() {
     return {

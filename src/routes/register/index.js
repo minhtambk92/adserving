@@ -12,7 +12,7 @@ import Register from './Register';
 
 export default {
 
-  path: '/pages/examples/register',
+  path: '/register',
 
   action() {
     return {
