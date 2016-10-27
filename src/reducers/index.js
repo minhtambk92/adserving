@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import user from './user';
+import me from './me';
 import runtime from './runtime';
 import intl from './intl';
 import content from './content';
@@ -15,6 +16,7 @@ import zones from './zones';
 
 export default combineReducers({
   user,
+  me,
   runtime,
   intl,
   content,

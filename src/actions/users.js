@@ -8,6 +8,7 @@ import {
   DELETE_USER,
   GET_USERS_FILTERS,
   SET_USERS_FILTERS,
+  REGISTER_USER,
 } from '../constants';
 
 export function getUsersFilters() {
@@ -219,6 +220,46 @@ export function deleteUser(id) {
       type: DELETE_USER,
       payload: {
         user: data.deletedUser,
+      },
+    });
+  };
+}
+
+export function registerUser({ email, password }) {
+  return async(dispatch, getState, { graphqlRequest }) => {
+    const mutation = `
+      mutation ($user: UserInputTypeWithoutId!) {
+        createdUser(user: $user) {
+          id
+          email
+          emailConfirmed
+          status
+          roles {
+            id
+            uniqueName
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+
+    const { data } = await graphqlRequest(mutation, {
+      user: {
+        email,
+        roleIds: ['9e31f4e4-f562-4244-b769-c5c4b34e263d'],
+        password,
+        emailConfirmed: 'true',
+        status: 'active',
+      },
+    });
+
+    dispatch({
+      type: REGISTER_USER,
+      payload: {
+        user: data.createdUser,
       },
     });
   };

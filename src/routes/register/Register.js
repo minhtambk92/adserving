@@ -1,10 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { registerUser } from '../../actions/users';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './Register.css';
 
 class Register extends Component {
+
+  static propTypes = {
+    user: PropTypes.object,
+    registerUser: PropTypes.func,
+  };
 
   componentDidMount() {
     /* eslint-disable no-undef */
@@ -18,6 +25,22 @@ class Register extends Component {
     /* eslint-enable no-undef */
   }
 
+  registerUser() {
+    const email = this.inputUserEmail.value;
+    const password = this.inputUserPassword.value;
+    const passwordConfirmation = this.inputUserPasswordConfirmation.value;
+    const fullName = this.inputUserFullName.value;
+    // const agreeTerms = this.inputAgreeTerms.value;
+
+    if (password && password === passwordConfirmation) {
+      this.props.registerUser({
+        email,
+        password,
+        fullName,
+      });
+    }
+  }
+
   render() {
     return (
       <Layout bodyClasses="hold-transition register-page" isFullWidth>
@@ -28,21 +51,45 @@ class Register extends Component {
             </div>
             <div className="register-box-body">
               <p className="login-box-msg">Register a new membership</p>
-              <form action="/" method="post">
+              <form>
                 <div className="form-group has-feedback">
-                  <input type="text" className="form-control" placeholder="Full name" />
+                  <input
+                    id="inputUserFullName"
+                    type="text" className="form-control" placeholder="Full name"
+                    ref={c => {
+                      this.inputUserFullName = c;
+                    }}
+                  />
                   <span className="glyphicon glyphicon-user form-control-feedback" />
                 </div>
                 <div className="form-group has-feedback">
-                  <input type="email" className="form-control" placeholder="Email" />
+                  <input
+                    id="inputUserEmail"
+                    type="email" className="form-control" placeholder="Email"
+                    ref={c => {
+                      this.inputUserEmail = c;
+                    }}
+                  />
                   <span className="glyphicon glyphicon-envelope form-control-feedback" />
                 </div>
                 <div className="form-group has-feedback">
-                  <input type="password" className="form-control" placeholder="Password" />
+                  <input
+                    id="inputUserPassword"
+                    type="password" className="form-control" placeholder="Password"
+                    ref={c => {
+                      this.inputUserPassword = c;
+                    }}
+                  />
                   <span className="glyphicon glyphicon-lock form-control-feedback" />
                 </div>
                 <div className="form-group has-feedback">
-                  <input type="password" className="form-control" placeholder="Retype password" />
+                  <input
+                    id="inputUserPasswordConfirmation"
+                    type="password" className="form-control" placeholder="Retype password"
+                    ref={c => {
+                      this.inputUserPasswordConfirmation = c;
+                    }}
+                  />
                   <span className="glyphicon glyphicon-log-in form-control-feedback" />
                 </div>
                 <div className="row">
@@ -61,9 +108,11 @@ class Register extends Component {
                   </div>
                   {/* /.col */}
                   <div className="col-xs-4">
-                    <button
-                      className="btn btn-primary btn-block btn-flat" type="submit"
-                    >Register</button>
+                    <Link
+                      to="/login"
+                      className="btn btn-primary btn-block btn-flat"
+                      onClick={event => this.registerUser(event)}
+                    >Register</Link>
                   </div>
                   {/* /.col */}
                 </div>
@@ -92,4 +141,12 @@ class Register extends Component {
 
 }
 
-export default withStyles(s)(Register);
+const mapState = (state) => ({
+  user: state.user,
+});
+
+const mapDispatch = {
+  registerUser,
+};
+
+export default withStyles(s)(connect(mapState, mapDispatch)(Register));
