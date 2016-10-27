@@ -5,10 +5,11 @@ import { Banner } from '../models';
 const BannerInputType = new InputObjectType({
   name: 'BannerInputType',
   fields: () => Object.assign(attributeFields(Banner, {
-    only: ['id', 'name', 'html', 'width', 'height', 'keyword', 'weight', 'description'],
+    only: ['id', 'name', 'html', 'width', 'height', 'keyword', 'weight', 'description', 'imageUrl', 'target'],
   }), {
     // Additional fields
     status: { type: StringType },
+    type: { type: StringType },
   }),
 });
 

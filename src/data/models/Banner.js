@@ -49,6 +49,22 @@ const Banner = Model.define('Banner', {
     type: DataType.STRING,
     defaultValue: '',
   },
+  type: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: 'html',
+    validate: {
+      isIn: [['html', 'img']],
+    },
+  },
+  imageUrl: {
+    type: DataType.STRING,
+    defaultValue: '',
+  },
+  target: {
+    type: DataType.STRING,
+    defaultValue: '',
+  },
   status: {
     type: DataType.STRING,
     allowNull: false,

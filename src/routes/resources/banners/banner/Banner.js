@@ -97,6 +97,9 @@ class Banner extends Component {
       keyword,
       weight,
       description,
+      target,
+      type,
+      imageUrl,
       status,
     } = nextProps.banners && (nextProps.banners.editing || {});
 
@@ -108,6 +111,9 @@ class Banner extends Component {
     this.inputBannerWeight.value = weight;
     this.inputBannerDescription.value = description;
     this.inputBannerStatus.value = status;
+    if (type === 'html') {
+      this.insertBannerHtml(html, width, height);
+    }
   }
 
   componentDidUpdate() {
@@ -160,6 +166,13 @@ class Banner extends Component {
     this.inputPlacementSize.value = null;
     this.inputPlacementWeight.value = null;
     this.inputPlacementDescription.value = null;
+  }
+  insertBannerHtml(html, w, h) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const idw = document.getElementById('banner');
+    idw.innerHTML = '<iframe src="javacript:void(0);" frameborder="0" scrolling="no" width="' + w + '" height="' + h + '" id="bannerCode"></iframe>';
+    const idb = document.getElementById('bannerCode');
+    const io = idb.contentWindow;
+    io.document.write(html);
   }
 
   isIndexOf(...args) {
@@ -336,6 +349,16 @@ class Banner extends Component {
                           </div>
                           {/* /.box-header */}
                           {/* form start */}
+                          <form className="form-horizontal">
+                            <div className="box-body">
+                              <div
+                                id="banner"
+                                ref={c => {
+                                  this.insertBanner = c;
+                                }}
+                              >Banner</div>
+                            </div>
+                          </form>
                           <form className="form-horizontal">
                             <div className="box-body">
                               <div className="form-group">
