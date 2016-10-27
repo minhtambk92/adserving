@@ -9,6 +9,8 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import 'fine-uploader/fine-uploader/fine-uploader-new.min.css';
+import qq from 'fine-uploader/fine-uploader/fine-uploader.core.min';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanners, createBanner, getBannersFilters, setBannersFilters } from '../../../actions/banners';
 import { getPlacements } from '../../../actions/placements';
@@ -18,7 +20,6 @@ import s from './Banners.css';
 
 const pageTitle = 'Home';
 const pageSubTitle = 'Control panel';
-
 class Banners extends Component {
   static propTypes = {
     getBannersFilters: PropTypes.func,
@@ -46,15 +47,25 @@ class Banners extends Component {
 
   componentDidMount() {
     /* eslint-disable no-undef */
-    // $('.select2').select2();
-    // $('#example1').DataTable(); // eslint-disable-line new-cap
-
     // iCheck for checkbox and radio inputs
     $('input[type="checkbox"].inputChooseBanner').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
     /* eslint-enable no-undef */
+    const options = {
+        element: document.getElementById('fine-uploader'),
+        retry: {
+          enableAuto: true,
+        },
+        callbacks: {
+          onAllComplete: function (succeeded, failed) {
+            console.log(succeeded.length + 'uploads completed!' + failed.length + 'failed');
+          },
+        },
+      },
+      uploader = new qq.FineUploader(options);
+    uploader.addExtraDropZone(document);
   }
   componentDidUpdate() {
     /* eslint-disable no-undef */
@@ -104,8 +115,10 @@ class Banners extends Component {
     const keyword = this.inputBannerKeyWord.value;
     const weight = this.inputBannerWeight.value;
     const description = this.inputBannerDescription.value;
+    const type = this.inputBannerType.value;
+    const target = this.inputBannerTarget.value;
     const status = this.inputBannerStatus.value;
-    if (name && html && height && weight && keyword && width && description) {
+    if (name && html && height && weight && keyword && width && description && type) {
       this.props.createBanner({
         name,
         html,
@@ -114,6 +127,8 @@ class Banners extends Component {
         keyword,
         weight,
         description,
+        type,
+        target,
         status,
       }).then(() => {
         this.clearInput();
@@ -214,6 +229,26 @@ class Banners extends Component {
                 <form className="form-horizontal">
                   <div className="box-body">
                     <div className="form-group">
+                      <div id="fine-uploader">Upload</div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputBannerType"
+                        className="col-sm-2 control-label"
+                      >Type</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputBannerType" className="form-control"
+                          ref={c => {
+                            this.inputBannerType = c;
+                          }}
+                        >
+                          <option value="html">Banner HTML</option>
+                          <option value="img">Banner Upload</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group">
                       <label
                         htmlFor="inputBannerName"
                         className="col-sm-2 control-label"
@@ -228,21 +263,38 @@ class Banners extends Component {
                         />
                       </div>
                     </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputBannerHTML"
-                        className="col-sm-2 control-label"
-                      >HTML</label>
-                      <div className="col-sm-10">
-                        <textarea
-                          className="form-control" id="inputBannerHTML"
-                          rows="5" placeholder="More info..."
-                          ref={c => {
-                            this.inputBannerHTML = c;
-                          }}
-                        />
-                      </div>
-                    </div>
+                    { this.inputBannerType === 'html' ?
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputBannerHTML"
+                          className="col-sm-2 control-label"
+                        >HTML</label>
+                        <div className="col-sm-10">
+                          <textarea
+                            className="form-control" id="inputBannerHTML"
+                            rows="5" placeholder="More info..."
+                            ref={c => {
+                              this.inputBannerHTML = c;
+                            }}
+                          />
+                        </div>
+                      </div> :
+                        <div className="form-group">
+                          <label
+                            htmlFor="inputBannerTarget"
+                            className="col-sm-2 control-label"
+                          >Target</label>
+                          <div className="col-sm-10">
+                            <input
+                              type="text" className="form-control" id="inputBannerTarget"
+                              placeholder="http://kenh14.vn"
+                              ref={c => {
+                                this.inputBannerTarget = c;
+                              }}
+                            />
+                          </div>
+                        </div>
+                    }
                     <div className="form-group">
                       <label
                         htmlFor="inputBannerSlot"
