@@ -25,12 +25,12 @@ class Login extends Component {
 
           <div className="login-box">
             <div className="login-logo">
-              <Link to="/index2"><b>Admin</b>LTE</Link>
+              <Link to="/"><b>Admin</b>LTE</Link>
             </div>
             { /* /.login-logo */ }
             <div className="login-box-body">
               <p className="login-box-msg">Sign in to start your session</p>
-              <form action="/index2" method="post">
+              <form action="/" method="post">
                 <div className="form-group has-feedback">
                   <input type="email" className="form-control" placeholder="Email" />
                   <span className="glyphicon glyphicon-envelope form-control-feedback" />
@@ -75,7 +75,7 @@ class Login extends Component {
               <Link to="#">I forgot my password</Link>
               <br />
               <Link
-                to="/pages/examples/register" className="text-center"
+                to="/register" className="text-center"
               >Register a new membership</Link>
             </div>
             { /* /.login-box-body */ }

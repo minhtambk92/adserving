@@ -24,11 +24,11 @@ class Register extends Component {
         <div>
           <div className="register-box">
             <div className="register-logo">
-              <Link to="/index2"><b>Admin</b>LTE</Link>
+              <Link to="/"><b>Admin</b>LTE</Link>
             </div>
             <div className="register-box-body">
               <p className="login-box-msg">Register a new membership</p>
-              <form action="/index2" method="post">
+              <form action="/" method="post">
                 <div className="form-group has-feedback">
                   <input type="text" className="form-control" placeholder="Full name" />
                   <span className="glyphicon glyphicon-user form-control-feedback" />
@@ -80,7 +80,7 @@ class Register extends Component {
                 ><i className="fa fa-google-plus" /> Sign up using Google+</Link>
               </div>
               <Link
-                to="/pages/examples/login" className="text-center"
+                to="/login" className="text-center"
               >I already have a membership</Link>
             </div>
             {/* /.form-box */}
