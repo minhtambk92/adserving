@@ -39,6 +39,9 @@ export function getBanner(id) {
           keyword
           weight
           description
+          type
+          imageUrl
+          target
           status
           pbzBanner {
             placements {
@@ -90,6 +93,9 @@ export function getBanners(args = {
           keyword
           weight
           description
+          type
+          imageUrl
+          target
           status
           pbzBanner {
             placements {
@@ -154,6 +160,9 @@ export function createBanner({
           keyword
           weight
           description
+          type
+          imageUrl
+          target
           status
           createdAt
           updatedAt
@@ -205,6 +214,9 @@ export function updateBanner({
           keyword
           weight
           description
+          type
+          imageUrl
+          target
           status
           createdAt
           updatedAt
@@ -247,6 +259,9 @@ export function deleteBanner(id) {
           keyword
           weight
           description
+          type
+          imageUrl
+          target
           status
           createdAt
           updatedAt
