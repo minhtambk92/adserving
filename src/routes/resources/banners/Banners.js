@@ -10,7 +10,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import 'fine-uploader/fine-uploader/fine-uploader-new.min.css';
-import qq from 'fine-uploader/fine-uploader/fine-uploader.core.min';
+import qq from 'fine-uploader/lib/traditional';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanners, createBanner, getBannersFilters, setBannersFilters } from '../../../actions/banners';
 import { getPlacements } from '../../../actions/placements';
