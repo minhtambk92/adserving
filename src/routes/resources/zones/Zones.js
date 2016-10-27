@@ -18,6 +18,7 @@ import {
   getZonesFilters,
   setZonesFilters,
 } from '../../../actions/zones';
+import { getPlacements } from '../../../actions/placements';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
 import s from './Zones.css';
@@ -35,11 +36,14 @@ class Zones extends Component {
     zones: PropTypes.object,
     getZones: PropTypes.func,
     createZone: PropTypes.func,
+    placements: PropTypes.object,
+    getPlacements: PropTypes.func,
   };
 
   componentWillMount() {
     this.props.getSites();
     this.props.getZonesFilters();
+    this.props.getPlacements();
     this.props.getZones();
   }
 
@@ -108,18 +112,37 @@ class Zones extends Component {
   }
 
   isFiltered(zone) {
-    const filters = this.props.zones.filters;
+    // const filters = this.props.zones.filters;
+    //
+    // for (const criteria in filters) { // eslint-disable-line no-restricted-syntax
+    //   if (
+    //     !{}.hasOwnProperty.call(zone, criteria) ||
+    //     filters[criteria] !== zone[criteria]
+    //   ) {
+    //     return false;
+    //   }
+    // }
+    //
+    // return true;
+    const { placementId, status, siteId, type } = this.props.zones.filters;
 
-    for (const criteria in filters) { // eslint-disable-line no-restricted-syntax
-      if (
-        !{}.hasOwnProperty.call(zone, criteria) ||
-        filters[criteria] !== zone[criteria]
-      ) {
-        return false;
-      }
-    }
+    const notMatchPlacement = (
+      placementId !== undefined &&
+      typeof zone.pbzZone === 'object' &&
+      JSON.stringify(zone.pbzZone).indexOf(placementId) === -1
+    );
 
-    return true;
+    const notMatchStatus = (
+      status !== undefined && status !== zone.status
+    );
+    const notMatchSite = (
+      siteId !== undefined && siteId !== zone.siteId
+    );
+    const notMatchType = (
+      type !== undefined && type !== zone.type
+    );
+
+    return !(notMatchPlacement || notMatchStatus || notMatchSite || notMatchType);
   }
 
   render() {
@@ -143,6 +166,33 @@ class Zones extends Component {
                 {/* form start */}
                 <form className="form-horizontal">
                   <div className="box-body">
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputZonesFilterPlacement"
+                        className="col-sm-2 control-label"
+                      >Placement</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputZonesFilterPlacement"
+                          className="form-control select2"
+                          style={{ width: '100%' }}
+                          ref={c => {
+                            this.inputZonesFilterPlacement = c;
+                          }}
+                          onChange={event => this.onFilterChange(event, 'placementId')}
+                          defaultValue={this.props.zones.filters &&
+                          this.props.zones.filters.placementId}
+                        >
+                          <option value="null">All placements</option>
+                          {this.props.placements.list &&
+                          this.props.placements.list.map(placement => (
+                            <option
+                              key={placement.id} value={placement.id}
+                            >{placement.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
                     <div className="form-group">
                       <label
                         htmlFor="inputZonesFilterSite"
@@ -488,6 +538,7 @@ class Zones extends Component {
 const mapState = (state) => ({
   sites: state.sites,
   zones: state.zones,
+  placements: state.placements,
 });
 
 const mapDispatch = {
@@ -496,6 +547,7 @@ const mapDispatch = {
   getSites,
   getZones,
   createZone,
+  getPlacements,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zones));
