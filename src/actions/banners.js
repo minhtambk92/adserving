@@ -146,6 +146,8 @@ export function createBanner({
   keyword,
   weight,
   description,
+  type,
+  target,
   status,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
@@ -178,6 +180,8 @@ export function createBanner({
         keyword,
         weight,
         description,
+        type,
+        target,
         status,
       },
     });

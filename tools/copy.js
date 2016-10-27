@@ -37,7 +37,6 @@ async function copy() {
     copyDir('node_modules/raphael', 'build/public/AdminLTE/plugins/raphael'),
     copyDir('node_modules/moment', 'build/public/AdminLTE/plugins/moment'),
     copyDir('node_modules/ckeditor', 'build/public/AdminLTE/plugins/ckeditor'),
-    copyDir('node_modules/fine-uploader', 'build/public/AdminLTE/plugins/fine-uploader'),
   ]);
 
   if (process.argv.includes('--watch')) {
