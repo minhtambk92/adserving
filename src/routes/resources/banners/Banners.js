@@ -9,10 +9,13 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import 'fine-uploader/fine-uploader/fine-uploader-new.min.css';
-import qq from 'fine-uploader/fine-uploader/fine-uploader.core.min';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getBanners, createBanner, getBannersFilters, setBannersFilters } from '../../../actions/banners';
+import {
+  getBanners,
+  createBanner,
+  getBannersFilters,
+  setBannersFilters
+} from '../../../actions/banners';
 import { getPlacements } from '../../../actions/placements';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
@@ -53,20 +56,8 @@ class Banners extends Component {
       radioClass: 'iradio_minimal-blue',
     });
     /* eslint-enable no-undef */
-    const options = {
-        element: document.getElementById('fine-uploader'),
-        retry: {
-          enableAuto: true,
-        },
-        callbacks: {
-          onAllComplete: function (succeeded, failed) {
-            console.log(succeeded.length + 'uploads completed!' + failed.length + 'failed');
-          },
-        },
-      },
-      uploader = new qq.FineUploader(options);
-    uploader.addExtraDropZone(document);
   }
+
   componentDidUpdate() {
     /* eslint-disable no-undef */
     $('input[type="checkbox"].inputChooseBanner').iCheck({
@@ -75,6 +66,7 @@ class Banners extends Component {
     });
     /* eslint-enable no-undef */
   }
+
   async onFilterChange(event, field) {
     event.persist();
 
@@ -82,6 +74,7 @@ class Banners extends Component {
       [field]: event.target.value,
     });
   }
+
   isFiltered(banner) {
     const { placementId, status } = this.props.banners.filters;
 
@@ -97,6 +90,7 @@ class Banners extends Component {
 
     return !(notMatchPlacement || notMatchStatus);
   }
+
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputBannerName.value = null;
     this.inputBannerHTML.value = null;
@@ -279,21 +273,21 @@ class Banners extends Component {
                           />
                         </div>
                       </div> :
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputBannerTarget"
-                            className="col-sm-2 control-label"
-                          >Target</label>
-                          <div className="col-sm-10">
-                            <input
-                              type="text" className="form-control" id="inputBannerTarget"
-                              placeholder="http://kenh14.vn"
-                              ref={c => {
-                                this.inputBannerTarget = c;
-                              }}
-                            />
-                          </div>
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputBannerTarget"
+                          className="col-sm-2 control-label"
+                        >Target</label>
+                        <div className="col-sm-10">
+                          <input
+                            type="text" className="form-control" id="inputBannerTarget"
+                            placeholder="http://kenh14.vn"
+                            ref={c => {
+                              this.inputBannerTarget = c;
+                            }}
+                          />
                         </div>
+                      </div>
                     }
                     <div className="form-group">
                       <label
