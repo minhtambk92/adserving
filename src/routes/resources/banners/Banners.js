@@ -14,7 +14,7 @@ import {
   getBanners,
   createBanner,
   getBannersFilters,
-  setBannersFilters
+  setBannersFilters,
 } from '../../../actions/banners';
 import { getPlacements } from '../../../actions/placements';
 import Layout from '../../../components/Layout';
@@ -257,37 +257,40 @@ class Banners extends Component {
                         />
                       </div>
                     </div>
-                    { this.inputBannerType === 'html' ?
-                      <div className="form-group">
-                        <label
-                          htmlFor="inputBannerHTML"
-                          className="col-sm-2 control-label"
-                        >HTML</label>
-                        <div className="col-sm-10">
-                          <textarea
-                            className="form-control" id="inputBannerHTML"
-                            rows="5" placeholder="More info..."
-                            ref={c => {
-                              this.inputBannerHTML = c;
-                            }}
-                          />
+                    {
+                      this.inputBannerType === 'html' ? (
+                        <div className="form-group">
+                          <label
+                            htmlFor="inputBannerHTML"
+                            className="col-sm-2 control-label"
+                          >HTML</label>
+                          <div className="col-sm-10">
+                            <textarea
+                              className="form-control" id="inputBannerHTML"
+                              rows="5" placeholder="More info..."
+                              ref={c => {
+                                this.inputBannerHTML = c;
+                              }}
+                            />
+                          </div>
                         </div>
-                      </div> :
-                      <div className="form-group">
-                        <label
-                          htmlFor="inputBannerTarget"
-                          className="col-sm-2 control-label"
-                        >Target</label>
-                        <div className="col-sm-10">
-                          <input
-                            type="text" className="form-control" id="inputBannerTarget"
-                            placeholder="http://kenh14.vn"
-                            ref={c => {
-                              this.inputBannerTarget = c;
-                            }}
-                          />
+                      ) : (
+                        <div className="form-group">
+                          <label
+                            htmlFor="inputBannerTarget"
+                            className="col-sm-2 control-label"
+                          >Target</label>
+                          <div className="col-sm-10">
+                            <input
+                              type="text" className="form-control" id="inputBannerTarget"
+                              placeholder="http://kenh14.vn"
+                              ref={c => {
+                                this.inputBannerTarget = c;
+                              }}
+                            />
+                          </div>
                         </div>
-                      </div>
+                      )
                     }
                     <div className="form-group">
                       <label
