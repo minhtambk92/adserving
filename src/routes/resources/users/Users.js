@@ -129,11 +129,11 @@ class Users extends Component {
     );
 
     const notMatchEmailConfirmed = (
-      status !== undefined && status !== user.status
+      emailConfirmed !== undefined && emailConfirmed !== user.emailConfirmed
     );
 
     const notMatchStatus = (
-      emailConfirmed !== undefined && emailConfirmed !== user.emailConfirmed
+      status !== undefined && status !== user.status
     );
 
     return !(notMatchRole || notMatchEmailConfirmed || notMatchStatus);
