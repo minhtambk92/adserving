@@ -44,13 +44,6 @@ class Banner extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      name: '',
-      html: '',
-      width: 0,
-      height: 0,
-      keyword: '',
-      weight: 0,
-      description: '',
       searchText: '',
     };
   }
@@ -104,7 +97,6 @@ class Banner extends Component {
     } = nextProps.banners && (nextProps.banners.editing || {});
 
     this.inputBannerName.value = name;
-    this.inputBannerHTML.value = html;
     this.inputBannerWidth.value = width;
     this.inputBannerHeight.value = height;
     this.inputBannerKeyWord.value = keyword;
@@ -113,6 +105,14 @@ class Banner extends Component {
     this.inputBannerStatus.value = status;
     if (type === 'html') {
       this.insertBannerHtml(html, width, height);
+      if (this.inputBannerHTML !== undefined) {
+        this.inputBannerHTML.value = html;
+      }
+    } else if (type === 'img') {
+      if (this.inputBannerImageUrl !== undefined && this.inputBannerTarget !== undefined) {
+        this.inputBannerTarget.value = target;
+        this.inputBannerImageUrl.value = imageUrl;
+      }
     }
   }
 
@@ -122,6 +122,10 @@ class Banner extends Component {
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
+    $('#inputPlacementStartTime').datepicker('update', new Date());
+    /* eslint-disable no-underscore-dangle */
+    $('#inputPlacementEndTime').datepicker('update', moment().add(1, 'month')._d);
+    /* eslint-enable no-underscore-dangle */
     /* eslint-enable no-undef */
   }
 
@@ -169,10 +173,12 @@ class Banner extends Component {
   }
   insertBannerHtml(html, w, h) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const idw = document.getElementById('banner');
-    idw.innerHTML = '<iframe src="javacript:void(0);" frameborder="0" scrolling="no" width="' + w + '" height="' + h + '" id="bannerCode"></iframe>';
-    const idb = document.getElementById('bannerCode');
-    const io = idb.contentWindow;
-    io.document.write(html);
+    if (idw) {
+      idw.innerHTML = '<iframe src="javacript:void(0);" frameborder="0" scrolling="no" width="' + w + '" height="' + h + '" id="bannerCode"></iframe>';
+      const idb = document.getElementById('bannerCode');
+      const io = idb.contentWindow;
+      io.document.write(html);
+    }
   }
 
   isIndexOf(...args) {
@@ -250,20 +256,25 @@ class Banner extends Component {
 
   updateBanner() {
     const name = this.inputBannerName.value;
-    const html = this.inputBannerHTML.value;
     const width = this.inputBannerWidth.value;
     const height = this.inputBannerHeight.value;
     const keyword = this.inputBannerKeyWord.value;
     const weight = this.inputBannerWeight.value;
     const description = this.inputBannerDescription.value;
+    let html = '';
+    let target = '';
+    let imageUrl = '';
+    const type = this.props.banners.editing.type;
+    if (type === 'html') {
+      html = this.inputBannerHTML.value;
+    } else if (type === 'img') {
+      target = this.inputBannerTarget.value;
+      imageUrl = this.props.banners.editing.imageUrl;
+    }
     const status = this.inputBannerStatus.value;
     const banner = { id: this.props.bannerId };
-
     if (name && name !== this.props.banners.editing.name) {
       banner.name = name;
-    }
-    if (html && html !== this.props.banners.editing.html) {
-      banner.html = html;
     }
 
     if (width && width !== this.props.banners.editing.width) {
@@ -283,10 +294,20 @@ class Banner extends Component {
     if (description && description !== this.props.banners.editing.description) {
       banner.description = description;
     }
+    banner.type = type;
+    if (type === 'html') {
+      if (html && html !== this.props.banners.editing.html) {
+        banner.html = html;
+      }
+    } else if (type === 'img') {
+      if (target && target !== this.props.banners.editing.target) {
+        banner.target = target;
+      }
+      banner.imageUrl = imageUrl;
+    }
     if (status && status !== this.props.banners.editing.status) {
       banner.status = status;
     }
-
     this.props.updateBanner(banner).then(() => {
       this.props.getBanner(this.props.bannerId);
     });
@@ -351,16 +372,65 @@ class Banner extends Component {
                           {/* form start */}
                           <form className="form-horizontal">
                             <div className="box-body">
-                              <div
-                                id="banner"
-                                ref={c => {
-                                  this.insertBanner = c;
-                                }}
-                              >Banner</div>
-                            </div>
-                          </form>
-                          <form className="form-horizontal">
-                            <div className="box-body">
+                              { this.props.banners.editing &&
+                              this.props.banners.editing.type === 'img' ? (
+                                <div className="bannerImage">
+                                  <div className="form-group">
+                                    <div className="col-sm-12">
+                                      <div
+                                        id="inputBannerImageUrl"
+                                        ref={c => {
+                                          this.inputBannerImageUrl = c;
+                                        }}
+                                      >
+                                        <img
+                                          src={this.props.banners.editing ?
+                                          this.props.banners.editing.imageUrl : ''}
+                                          alt="demo"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor="inputBannerTarget"
+                                      className="col-sm-2 control-label"
+                                    >Target</label>
+                                    <div className="col-sm-10">
+                                      <input
+                                        type="text" className="form-control" id="inputBannerTarget"
+                                        placeholder="http://kenh14.vn"
+                                        ref={c => {
+                                          this.inputBannerTarget = c;
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="bannerHTML">
+                                  <div className="form-group">
+                                    <div className="col-lg-12">
+                                      <div id="banner">&nbsp;</div>
+                                    </div>
+                                  </div>
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor="inputBannerHTML"
+                                      className="col-sm-2 control-label"
+                                    >HTML</label>
+                                    <div className="col-sm-10">
+                                      <textarea
+                                        className="form-control" id="inputBannerHTML"
+                                        rows="5" placeholder="More info..."
+                                        ref={c => {
+                                          this.inputBannerHTML = c;
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
                               <div className="form-group">
                                 <label
                                   htmlFor="inputBannerName"
@@ -372,21 +442,6 @@ class Banner extends Component {
                                     placeholder="Banner Top"
                                     ref={c => {
                                       this.inputBannerName = c;
-                                    }}
-                                  />
-                                </div>
-                              </div>
-                              <div className="form-group">
-                                <label
-                                  htmlFor="inputBannerHTML"
-                                  className="col-sm-2 control-label"
-                                >HTML</label>
-                                <div className="col-sm-10">
-                                  <textarea
-                                    className="form-control" id="inputBannerHTML"
-                                    rows="5" placeholder="More info..."
-                                    ref={c => {
-                                      this.inputBannerHTML = c;
                                     }}
                                   />
                                 </div>
@@ -524,7 +579,7 @@ class Banner extends Component {
                                     <input
                                       type="text" name="inputSearchPlacements"
                                       className="form-control pull-right"
-                                      placeholder="Search..." onChange={event => this.searchFor(event)}
+                                      placeholder="Search..."
                                     />
                                     <div className="input-group-btn">
                                       <button

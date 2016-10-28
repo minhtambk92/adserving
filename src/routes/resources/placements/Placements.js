@@ -77,6 +77,10 @@ class Placements extends Component {
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
+    $('#inputPlacementStartTime').datepicker('update', new Date());
+    /* eslint-disable no-underscore-dangle */
+    $('#inputPlacementEndTime').datepicker('update', moment().add(1, 'month')._d);
+    /* eslint-enable no-underscore-dangle */
     /* eslint-enable no-undef */
   }
 

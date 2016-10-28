@@ -68,6 +68,10 @@ class Campaigns extends Component {
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
+    $('#inputCampaignStartTime').datepicker('update', new Date());
+    /* eslint-disable no-underscore-dangle */
+    $('#inputCampaignEndTime').datepicker('update', moment().add(1, 'month')._d);
+    /* eslint-enable no-underscore-dangle */
     /* eslint-enable no-undef */
   }
 

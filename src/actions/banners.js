@@ -148,6 +148,7 @@ export function createBanner({
   description,
   type,
   target,
+  imageUrl,
   status,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
@@ -163,8 +164,8 @@ export function createBanner({
           weight
           description
           type
-          imageUrl
           target
+          imageUrl
           status
           createdAt
           updatedAt
@@ -182,6 +183,7 @@ export function createBanner({
         description,
         type,
         target,
+        imageUrl,
         status,
       },
     });
@@ -204,6 +206,9 @@ export function updateBanner({
   keyword,
   weight,
   description,
+  type,
+  target,
+  imageUrl,
   status,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
@@ -237,6 +242,9 @@ export function updateBanner({
         keyword,
         weight,
         description,
+        type,
+        target,
+        imageUrl,
         status,
       },
     });

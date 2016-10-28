@@ -8,3 +8,12 @@
  */
 
 @import '../../../../components/variables.css';
+#banner iframe{
+  margin: 0 auto;
+  display: block;
+}
+#inputBannerImageUrl img{
+  margin: 0 auto;
+  max-width: 100%;
+  display: block;
+}
