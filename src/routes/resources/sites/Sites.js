@@ -85,7 +85,11 @@ class Sites extends Component {
       searchText: event.target.value.trim(),
     }));
   }
-
+  validateDomain(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const domain = this.inputSiteDomain.value;
+    const urlRegex = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
+    console.log(urlRegex.test(domain));
+  }
   isIndexOf(...args) {
     for (let i = 0; i < args.length; i += 1) {
       if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
@@ -124,6 +128,7 @@ class Sites extends Component {
                         <input
                           type="text" className="form-control" id="inputSiteDomain"
                           placeholder="dantri.com.vn"
+                          onBlur={event => this.validateDomain(event)}
                           ref={c => {
                             this.inputSiteDomain = c;
                           }}
