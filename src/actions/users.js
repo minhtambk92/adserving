@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
+import fetch from '../core/fetch';
 import {
   GET_USER,
   GET_USERS,
@@ -9,6 +10,7 @@ import {
   GET_USERS_FILTERS,
   SET_USERS_FILTERS,
   REGISTER_USER,
+  LOGIN_USER,
 } from '../constants';
 
 export function getUsersFilters() {
@@ -260,6 +262,32 @@ export function registerUser({ email, password }) {
       type: REGISTER_USER,
       payload: {
         user: data.createdUser,
+      },
+    });
+  };
+}
+
+export function loginUser({ email, password, rememberMe }) {
+  return async(dispatch) => {
+    const res = await fetch('/login', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        rememberMe,
+      }),
+    });
+
+    const { data } = await res.json();
+
+    dispatch({
+      type: LOGIN_USER,
+      payload: {
+        user: data.loggedInUser,
       },
     });
   };

@@ -23,11 +23,6 @@ passport.use(new LocalStrategy({
     return done(null, {
       id: user.id,
       email: user.email,
-      emailConfirmed: user.emailConfirmed,
-      status: user.status,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-      deletedAt: user.deletedAt,
     });
   });
 }));
