@@ -90,6 +90,11 @@ app.get('/login/facebook/return',
 );
 
 //
+// Custom middleware
+// -----------------------------------------------------------------------------
+app.use(require('./server/middlewares').default);
+
+//
 // Register API middleware
 // -----------------------------------------------------------------------------
 app.use('/graphql', expressGraphQL(req => ({
@@ -98,6 +103,11 @@ app.use('/graphql', expressGraphQL(req => ({
   rootValue: { request: req },
   pretty: process.env.NODE_ENV !== 'production',
 })));
+
+//
+// Custom routes
+// -----------------------------------------------------------------------------
+app.use(require('./server/routes').default);
 
 //
 // Register server-side rendering middleware
