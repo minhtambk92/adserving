@@ -30,8 +30,8 @@ router.post('/login',
 
 const storage = multer.diskStorage({
   destination: './public/uploads/',
-  filename: function (req, file, cb) {
-    const link = file.originalname.slice(0, 4).toString() + Date.now() + '.jpeg';
+  filename(req, file, cb) {
+    const link = `${file.originalname.slice(0, 4).toString()}-${Date.now()}.jpeg`;
     cb(null, link);
   },
 });
