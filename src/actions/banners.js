@@ -47,7 +47,8 @@ export function getBanner(id) {
             placements {
               id
               name
-              size
+              sizeWidth
+              sizeHeight
               startTime
               endTime
               weight
@@ -101,7 +102,8 @@ export function getBanners(args = {
             placements {
               id
               name
-              size
+              sizeWidth
+              sizeHeight
               startTime
               endTime
               weight

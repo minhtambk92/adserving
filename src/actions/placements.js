@@ -33,7 +33,8 @@ export function getPlacement(id) {
         placements(where: {id: "${id}"}, limit: 1) {
           id
           name
-          size
+          sizeWidth
+          sizeHeight
           startTime
           endTime
           weight
@@ -97,7 +98,8 @@ export function getPlacements(args = {
         placements(where: $where, order: $order, limit: $limit) {
           id
           name
-          size
+          sizeWidth
+          sizeHeight
           startTime
           endTime
           weight
@@ -132,7 +134,8 @@ export function getPlacements(args = {
 
 export function createPlacement({
   name,
-  size,
+  sizeWidth,
+  sizeHeight,
   startTime,
   endTime,
   weight,
@@ -146,7 +149,8 @@ export function createPlacement({
         createdPlacement(placement: $placement) {
           id
           name
-          size
+          sizeWidth
+          sizeHeight
           startTime
           endTime
           weight
@@ -161,7 +165,8 @@ export function createPlacement({
     const { data } = await graphqlRequest(mutation, {
       placement: {
         name,
-        size,
+        sizeWidth,
+        sizeHeight,
         startTime,
         endTime,
         weight,
@@ -182,7 +187,8 @@ export function createPlacement({
 export function updatePlacement({
   id,
   name,
-  size,
+  sizeWidth,
+  sizeHeight,
   startTime,
   endTime,
   weight,
@@ -196,7 +202,8 @@ export function updatePlacement({
         updatedPlacement(placement: $placement) {
           id
           name
-          size
+          sizeWidth
+          sizeHeight
           startTime
           endTime
           weight
@@ -240,7 +247,8 @@ export function updatePlacement({
       placement: {
         id,
         name,
-        size,
+        sizeWidth,
+        sizeHeight,
         startTime,
         endTime,
         weight,
@@ -266,7 +274,8 @@ export function deletePlacement(id) {
         deletedPlacement(id: "${id}") {
           id
           name
-          size
+          sizeWidth
+          sizeHeight
           startTime
           endTime
           weight

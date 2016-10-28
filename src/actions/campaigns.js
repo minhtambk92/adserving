@@ -45,7 +45,8 @@ export function getCampaign(id) {
           placements {
             id
             name
-            size
+            sizeWidth
+            sizeHeight
             startTime
             endTime
             weight

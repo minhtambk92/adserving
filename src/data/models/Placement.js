@@ -29,9 +29,15 @@ const Placement = Model.define('Placement', {
     type: DataType.STRING,
     defaultValue: '',
   },
-  size: {
+  sizeWidth: {
+    type: DataType.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  },
+  sizeHeight: {
     type: DataType.STRING,
     allowNull: false,
+    defaultValue: 0,
   },
   weight: {
     type: DataType.INTEGER,
