@@ -87,7 +87,7 @@ class Login extends Component {
                   <div className="col-xs-4">
                     <Link
                       to="#"
-                      type="submit" className="btn btn-primary btn-block btn-flat"
+                      className="btn btn-primary btn-block btn-flat"
                       onClick={event => this.login(event)}
                     >Sign In</Link>
                   </div>
