@@ -8,7 +8,6 @@ const middleware = express();
 
 middleware.use((req, res, next) => {
   // Your handling goes here
-  console.log('Successfully import middleware!'); // eslint-disable-line no-console
 
   next();
 });
