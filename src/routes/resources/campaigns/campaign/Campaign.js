@@ -134,18 +134,21 @@ class Campaign extends Component {
     const name = this.inputPlacementName.value;
     const startTime = new Date(moment(new Date(this.inputPlacementStartTime.value)).format('YYYY-MM-DD 00:00:00'));
     const endTime = new Date(moment(new Date(this.inputPlacementEndTime.value)).format('YYYY-MM-DD 00:00:00'));
-    const size = this.inputPlacementSize.value;
+    const sizeWidth = this.inputPlacementSizeWidth.value;
+    const sizeHeight = this.inputPlacementSizeHeight.value;
     const weight = this.inputPlacementWeight.value;
     const description = this.inputPlacementDescription.value;
     const campaignId = this.props.campaignId;
     const status = this.inputPlacementStatus.value;
-    if (name && startTime && endTime && size && weight && description && campaignId) {
+    if (name && startTime && endTime && sizeHeight && sizeWidth && weight
+      && description && campaignId) {
       if (moment(endTime).format('x') > moment(startTime).format('x')) {
         this.props.createPlacement({
           name,
           startTime,
           endTime,
-          size,
+          sizeWidth,
+          sizeHeight,
           weight,
           description,
           campaignId,
@@ -162,7 +165,8 @@ class Campaign extends Component {
 
   clearInput() { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputPlacementName.value = null;
-    this.inputPlacementSize.value = null;
+    this.inputPlacementSizeWidth.value = null;
+    this.inputPlacementSizeHeight.value = null;
     this.inputPlacementWeight.value = null;
     this.inputPlacementDescription.value = null;
   }
@@ -537,19 +541,28 @@ class Campaign extends Component {
                                       />
                                     </div>
                                   </div>
-
                                   <div className="form-group">
-                                    <label
-                                      htmlFor="inputPlacementSize"
-                                      className="col-sm-2 control-label"
-                                    >Size</label>
+                                    <label htmlFor="inputPlacementSizeWidth" className="col-sm-2 control-label">Size(Width)</label>
                                     <div className="col-sm-10">
                                       <input
-                                        type="text" className="form-control"
-                                        id="inputPlacementSize"
-                                        placeholder="300x300"
+                                        type="number" className="form-control"
+                                        id="inputPlacementSizeWidth"
+                                        placeholder="300"
                                         ref={c => {
-                                          this.inputPlacementSize = c;
+                                          this.inputPlacementSizeWidth = c;
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="form-group">
+                                    <label htmlFor="inputPlacementSizeHeight" className="col-sm-2 control-label">Size(Height)</label>
+                                    <div className="col-sm-10">
+                                      <input
+                                        type="number" className="form-control"
+                                        id="inputPlacementSizeHeight"
+                                        placeholder="300"
+                                        ref={c => {
+                                          this.inputPlacementSizeHeight = c;
                                         }}
                                       />
                                     </div>
@@ -664,14 +677,17 @@ class Campaign extends Component {
                                     this.props.campaigns.editing.placements &&
                                     this.props.campaigns.editing.placements.map(placement => {
                                       if (this.isIndexOf(placement.name, placement.startTime,
-                                          placement.endTime, placement.size,
+                                          placement.endTime, placement.sizeWidth,
+                                          placement.sizeHeight,
                                           placement.description, placement.weight)) {
                                         return (
                                           <tr key={placement.id}>
                                             <th><input type="checkbox" className="inputChoosePlacement" /></th>
                                             <th><Link to={`/placement/${placement.id}`}>{placement.name}</Link>
                                             </th>
-                                            <td>{placement.size}</td>
+                                            <td>
+                                              {placement.sizeWidth}px - {placement.sizeHeight}px
+                                            </td>
                                             <td>{moment(new Date(placement.startTime)).format('L')}</td>
                                             <td>{moment(new Date(placement.endTime)).format('L')}</td>
                                             <th><Link to={`/placement/${placement.id}`}>Add Banner</Link></th>

@@ -1,4 +1,8 @@
-import { GraphQLInputObjectType as InputObjectType, GraphQLString as StringType } from 'graphql';
+import {
+  GraphQLInputObjectType as InputObjectType,
+  GraphQLString as StringType,
+  GraphQLInt as IntType,
+} from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Placement } from '../models';
 
@@ -17,7 +21,8 @@ const PlacementInputType = new InputObjectType({
   }), {
     // Additional fields
     name: { type: StringType },
-    size: { type: StringType },
+    sizeWidth: { type: IntType },
+    sizeHeight: { type: IntType },
     status: { type: StringType },
   }),
 });

@@ -107,7 +107,8 @@ class Placements extends Component {
   }
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputPlacementName.value = null;
-    this.inputPlacementSize.value = null;
+    this.inputPlacementSizeWidth.value = null;
+    this.inputPlacementSizeHeight.value = null;
     this.inputPlacementWeight.value = null;
     this.inputPlacementDescription.value = null;
   }
@@ -116,18 +117,20 @@ class Placements extends Component {
     const name = this.inputPlacementName.value;
     const startTime = new Date(moment(new Date(this.inputPlacementStartTime.value)).format('YYYY-MM-DD 00:00:00'));
     const endTime = new Date(moment(new Date(this.inputPlacementEndTime.value)).format('YYYY-MM-DD 00:00:00'));
-    const size = this.inputPlacementSize.value;
+    const sizeWidth = this.inputPlacementSizeWidth.value;
+    const sizeHeight = this.inputPlacementSizeHeight.value;
     const weight = this.inputPlacementWeight.value;
     const description = this.inputPlacementDescription.value;
     const campaignId = this.inputCampaign.value;
     const status = this.inputPlacementStatus.value;
-    if (name && startTime && endTime && size && weight && description) {
+    if (name && startTime && endTime && sizeHeight && sizeWidth && weight && description) {
       if (moment(startTime).format('x') < moment(endTime).format('x')) {
         this.props.createPlacement({
           name,
           startTime,
           endTime,
-          size,
+          sizeWidth,
+          sizeHeight,
           weight,
           description,
           campaignId,
@@ -290,14 +293,27 @@ class Placements extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="inputPlacementSize" className="col-sm-2 control-label">Size</label>
+                      <label htmlFor="inputPlacementSizeWidth" className="col-sm-2 control-label">Size(Width)</label>
                       <div className="col-sm-10">
                         <input
-                          type="text" className="form-control"
-                          id="inputPlacementSize"
-                          placeholder="24"
+                          type="number" className="form-control"
+                          id="inputPlacementSizeWidth"
+                          placeholder="300"
                           ref={c => {
-                            this.inputPlacementSize = c;
+                            this.inputPlacementSizeWidth = c;
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="inputPlacementSizeHeight" className="col-sm-2 control-label">Size(Height)</label>
+                      <div className="col-sm-10">
+                        <input
+                          type="number" className="form-control"
+                          id="inputPlacementSizeHeight"
+                          placeholder="300"
+                          ref={c => {
+                            this.inputPlacementSizeHeight = c;
                           }}
                         />
                       </div>
@@ -309,7 +325,7 @@ class Placements extends Component {
                       >Weight</label>
                       <div className="col-sm-10">
                         <input
-                          type="text" className="form-control" id="inputPlacementWeight"
+                          type="number" className="form-control" id="inputPlacementWeight"
                           placeholder="1"
                           ref={c => {
                             this.inputPlacementWeight = c;
@@ -417,7 +433,7 @@ class Placements extends Component {
                             <th><input type="checkbox" className="inputChoosePlacement" /></th>
                             <th><Link to={`/resource/placement/${placement.id}`}>{placement.name}</Link>
                             </th>
-                            <td>{placement.size}</td>
+                            <td>{placement.sizeWidth}px - {placement.sizeHeight}px</td>
                             <td>{moment(new Date(placement.startTime)).format('L')}</td>
                             <td>{moment(new Date(placement.endTime)).format('L')}</td>
                             <th><Link to={`/resource/placement/${placement.id}`}>Add banner</Link>

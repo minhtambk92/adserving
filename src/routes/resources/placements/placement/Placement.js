@@ -104,7 +104,8 @@ class Placement extends Component {
       name,
       startTime,
       endTime,
-      size,
+      sizeWidth,
+      sizeHeight,
       weight,
       description,
       campaignId,
@@ -114,7 +115,8 @@ class Placement extends Component {
     this.inputPlacementName.value = name;
     this.inputPlacementStartTime.value = moment(new Date(startTime)).format('L');
     this.inputPlacementEndTime.value = moment(new Date(endTime)).format('L');
-    this.inputPlacementSize.value = size;
+    this.inputPlacementSizeWidth.value = sizeWidth;
+    this.inputPlacementSizeHeight.value = sizeHeight;
     this.inputPlacementWeight.value = weight;
     this.inputPlacementDescription.value = description;
     this.inputCampaign.value = campaignId;
@@ -147,7 +149,8 @@ class Placement extends Component {
 
   updatePlacement() {
     const name = this.inputPlacementName.value;
-    const size = this.inputPlacementSize.value;
+    const sizeWidth = this.inputPlacementSizeWidth.value;
+    const sizeHeight = this.inputPlacementSizeHeight.value;
     const startTime = this.inputPlacementStartTime.value;
     const endTime = this.inputPlacementEndTime.value;
     const weight = this.inputPlacementWeight.value;
@@ -173,8 +176,11 @@ class Placement extends Component {
     if (description && description !== this.props.placements.editing.description) {
       placement.description = description;
     }
-    if (size && size !== this.props.placements.editing.size) {
-      placement.size = size;
+    if (sizeWidth && sizeWidth !== this.props.placements.editing.sizeWidth) {
+      placement.sizeWidth = sizeWidth;
+    }
+    if (sizeHeight && sizeHeight !== this.props.placements.editing.sizeHeight) {
+      placement.sizeHeight = sizeHeight;
     }
     if (campaignId && campaignId !== this.props.placements.editing.campaignId) {
       placement.campaignId = campaignId;
@@ -433,15 +439,29 @@ class Placement extends Component {
                               </div>
 
                               <div className="form-group">
-                                <label htmlFor="inputPlacementSize" className="col-sm-2 control-label">
-                                  Size
+                                <label htmlFor="inputPlacementSizeWidth" className="col-sm-2 control-label">
+                                  Size (Width)
                                 </label>
                                 <div className="col-sm-10">
                                   <input
-                                    type="text" className="form-control" id="inputPlacementSize"
-                                    placeholder="300x250"
+                                    type="text" className="form-control" id="inputPlacementSizeWidth"
+                                    placeholder="300"
                                     ref={c => {
-                                      this.inputPlacementSize = c;
+                                      this.inputPlacementSizeWidth = c;
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="inputPlacementSizeHeight" className="col-sm-2 control-label">
+                                  Size (Height)
+                                </label>
+                                <div className="col-sm-10">
+                                  <input
+                                    type="text" className="form-control" id="inputPlacementSizeHeight"
+                                    placeholder="300"
+                                    ref={c => {
+                                      this.inputPlacementSizeHeight = c;
                                     }}
                                   />
                                 </div>
