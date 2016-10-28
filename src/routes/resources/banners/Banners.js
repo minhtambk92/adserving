@@ -8,6 +8,9 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import style from 'react-dropzone-component/styles/filepicker.css';
+import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
+import DropzoneComponent from 'react-dropzone-component/lib/react-dropzone';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import {
@@ -39,6 +42,29 @@ class Banners extends Component {
 
     this.state = {
       searchText: '',
+      checkTypeBanner: 'html',
+      imageUrl: '',
+    };
+    this.djsConfig = {
+      acceptedFiles: 'image/jpeg,image/png,image/gif',
+      addRemoveLinks: true,
+      maxFiles: 1,
+    };
+    this.componentConfig = {
+      iconFiletypes: ['.jpg', '.png', '.gif'],
+      showFiletypeIcon: true,
+      postUrl: '/uploadBanner',
+    };
+    this.callbackFail = 'fail';
+    // Simple callbacks work too, of course
+    this.callback = (e) => {
+      if (e.xhr.response) {
+        this.state.imageUrl = e.xhr.response;
+      }
+    };
+    this.eventHandlers = {
+      drop: this.callbackFail,
+      success: this.callback,
     };
   }
 
@@ -55,7 +81,6 @@ class Banners extends Component {
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
     });
-    /* eslint-enable no-undef */
   }
 
   componentDidUpdate() {
@@ -67,6 +92,14 @@ class Banners extends Component {
     /* eslint-enable no-undef */
   }
 
+  onInputChange(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    event.persist();
+    this.setState((previousState) => ({
+      ...previousState,
+      checkTypeBanner: event.target.value.trim(),
+    }));
+  }
+
   async onFilterChange(event, field) {
     event.persist();
 
@@ -74,7 +107,6 @@ class Banners extends Component {
       [field]: event.target.value,
     });
   }
-
   isFiltered(banner) {
     const { placementId, status } = this.props.banners.filters;
 
@@ -93,7 +125,6 @@ class Banners extends Component {
 
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputBannerName.value = null;
-    this.inputBannerHTML.value = null;
     this.inputBannerWidth.value = null;
     this.inputBannerHeight.value = null;
     this.inputBannerKeyWord.value = null;
@@ -103,16 +134,26 @@ class Banners extends Component {
 
   createBanner(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const name = this.inputBannerName.value;
-    const html = this.inputBannerHTML.value;
     const width = this.inputBannerWidth.value;
     const height = this.inputBannerHeight.value;
     const keyword = this.inputBannerKeyWord.value;
     const weight = this.inputBannerWeight.value;
     const description = this.inputBannerDescription.value;
     const type = this.inputBannerType.value;
-    const target = this.inputBannerTarget.value;
+    let target = '';
+    let imageUrl = '';
+    let html = '';
+    if (type === 'html') {
+      html = this.inputBannerHTML.value;
+      target = '';
+      imageUrl = '';
+    } else if (type === 'img') {
+      target = this.inputBannerTarget.value;
+      html = '';
+      imageUrl = this.state.imageUrl;
+    }
     const status = this.inputBannerStatus.value;
-    if (name && html && height && weight && keyword && width && description && type) {
+    if (name && height && weight && keyword && width && description && type) {
       this.props.createBanner({
         name,
         html,
@@ -123,6 +164,7 @@ class Banners extends Component {
         description,
         type,
         target,
+        imageUrl,
         status,
       }).then(() => {
         this.clearInput();
@@ -223,9 +265,6 @@ class Banners extends Component {
                 <form className="form-horizontal">
                   <div className="box-body">
                     <div className="form-group">
-                      <div id="fine-uploader">Upload</div>
-                    </div>
-                    <div className="form-group">
                       <label
                         htmlFor="inputBannerType"
                         className="col-sm-2 control-label"
@@ -236,6 +275,7 @@ class Banners extends Component {
                           ref={c => {
                             this.inputBannerType = c;
                           }}
+                          onChange={event => this.onInputChange(event)}
                         >
                           <option value="html">Banner HTML</option>
                           <option value="img">Banner Upload</option>
@@ -258,7 +298,7 @@ class Banners extends Component {
                       </div>
                     </div>
                     {
-                      this.inputBannerType === 'html' ? (
+                      this.state.checkTypeBanner === 'html' ? (
                         <div className="form-group">
                           <label
                             htmlFor="inputBannerHTML"
@@ -275,19 +315,33 @@ class Banners extends Component {
                           </div>
                         </div>
                       ) : (
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputBannerTarget"
-                            className="col-sm-2 control-label"
-                          >Target</label>
-                          <div className="col-sm-10">
-                            <input
-                              type="text" className="form-control" id="inputBannerTarget"
-                              placeholder="http://kenh14.vn"
-                              ref={c => {
-                                this.inputBannerTarget = c;
-                              }}
-                            />
+                        <div className="bannerImage">
+                          <div className="form-group">
+                            <label htmlFor="inputBannerImage" className="col-sm-2 control-label">
+                              Banner
+                            </label>
+                            <div className="col-sm-10">
+                              <DropzoneComponent
+                                config={this.componentConfig}
+                                eventHandlers={this.eventHandlers}
+                                djsConfig={this.djsConfig}
+                              />
+                            </div>
+                          </div>
+                          <div className="form-group">
+                            <label
+                              htmlFor="inputBannerTarget"
+                              className="col-sm-2 control-label"
+                            >Target</label>
+                            <div className="col-sm-10">
+                              <input
+                                type="text" className="form-control" id="inputBannerTarget"
+                                placeholder="http://kenh14.vn"
+                                ref={c => {
+                                  this.inputBannerTarget = c;
+                                }}
+                              />
+                            </div>
                           </div>
                         </div>
                       )
@@ -506,5 +560,5 @@ const mapDispatch = {
   getPlacements,
 };
 
-export default withStyles(s)(connect(mapState, mapDispatch)(Banners));
+export default withStyles(s, style, dropZoneStyle)(connect(mapState, mapDispatch)(Banners));
 
