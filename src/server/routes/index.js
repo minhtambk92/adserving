@@ -33,7 +33,7 @@ router.post('/login',
 );
 
 const storage = multer.diskStorage({
-  destination: './public/uploads/',
+  destination: '/home/nginx/domains/static.manhhailua.com/public/uploads/',
   filename(req, file, cb) {
     const link = `${file.originalname.slice(0, 4).toString()}-${Date.now()}.jpeg`;
     cb(null, link);
@@ -44,7 +44,8 @@ const upload = multer({ storage });
 router.post('/uploadBanner', upload.single('file'), (req, res) => {
   if (req.file && req.file.originalname) {
     fs.chownSync(req.file.path, 1002, 1002);
-    res.send(req.file.path);
+    const imageUrl = `http://static.manhhailua.com/uploads/${req.file.filename}`;
+    res.send(imageUrl);
   }
 });
 
