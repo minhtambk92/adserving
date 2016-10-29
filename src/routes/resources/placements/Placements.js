@@ -143,6 +143,23 @@ class Placements extends Component {
       }
     }
   }
+  searchFor(event) {
+    event.persist();
+    this.setState((previousState) => ({
+      ...previousState,
+      searchText: event.target.value.trim(),
+    }));
+  }
+  isIndexOf(...args) {
+    for (let i = 0; i < args.length; i += 1) {
+      if (args[i]) {
+        if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   render() {
     return (
@@ -398,7 +415,7 @@ class Placements extends Component {
                       <input
                         type="text" name="inputSearchPlacements"
                         className="form-control pull-right"
-                        placeholder="Search..."
+                        placeholder="Search..." onChange={event => this.searchFor(event)}
                       />
                       <div className="input-group-btn">
                         <button
@@ -428,20 +445,23 @@ class Placements extends Component {
                         if (!this.isFiltered(placement)) {
                           return false;
                         }
-                        return (
-                          <tr key={placement.id}>
-                            <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                            <th><Link to={`/resource/placement/${placement.id}`}>{placement.name}</Link>
-                            </th>
-                            <td>{placement.sizeWidth}px - {placement.sizeHeight}px</td>
-                            <td>{moment(new Date(placement.startTime)).format('L')}</td>
-                            <td>{moment(new Date(placement.endTime)).format('L')}</td>
-                            <th><Link to={`/resource/placement/${placement.id}`}>Add banner</Link>
-                            </th>
-                            <th><Link to={`/resource/placement/${placement.id}`}>Add Zone</Link>
-                            </th>
-                          </tr>
-                        );
+                        if (this.isIndexOf(placement.name)) {
+                          return (
+                            <tr key={placement.id}>
+                              <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                              <th><Link to={`/resource/placement/${placement.id}`}>{placement.name}</Link>
+                              </th>
+                              <td>{placement.sizeWidth}px - {placement.sizeHeight}px</td>
+                              <td>{moment(new Date(placement.startTime)).format('L')}</td>
+                              <td>{moment(new Date(placement.endTime)).format('L')}</td>
+                              <th><Link to={`/resource/placement/${placement.id}`}>Add banner</Link>
+                              </th>
+                              <th><Link to={`/resource/placement/${placement.id}`}>Add Zone</Link>
+                              </th>
+                            </tr>
+                          );
+                        }
+                        return false;
                       })}
                     </tbody>
                     <tfoot>

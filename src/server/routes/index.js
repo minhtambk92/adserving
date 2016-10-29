@@ -41,7 +41,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-router.post('/uploadBanner', upload.single('file'), (req, res) => {
+router.post('/upload-banner', upload.single('file'), (req, res) => {
   if (req.file && req.file.originalname) {
     fs.chownSync(req.file.path, 1002, 1002);
     const imageUrl = `http://static.manhhailua.com/uploads/${req.file.filename}`;

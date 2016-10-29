@@ -138,10 +138,19 @@ class Placement extends Component {
     });
     /* eslint-enable no-undef */
   }
+  searchFor(event) {
+    event.persist();
+    this.setState((previousState) => ({
+      ...previousState,
+      searchText: event.target.value.trim(),
+    }));
+  }
   isIndexOf(...args) {
     for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
+      if (args[i] !== undefined) {
+        if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
+          return true;
+        }
       }
     }
     return false;
@@ -555,6 +564,7 @@ class Placement extends Component {
                                       type="text" name="inputSearchPlacements"
                                       className="form-control pull-right"
                                       placeholder="Search..."
+                                      onChange={event => this.searchFor(event)}
                                     />
                                     <div className="input-group-btn">
                                       <button
@@ -582,9 +592,7 @@ class Placement extends Component {
                                     this.filterBanner(this.props.banners.list,
                                       this.props.placements.editing.pbzPlacement
                                     ).map(banner => {
-                                      if (this.isIndexOf(banner.name, banner.height,
-                                          banner.width, banner.keyword, banner.weight,
-                                          banner.html, banner.description)) {
+                                      if (this.isIndexOf(banner.name)) {
                                         return (
                                           <tr key={banner.id}>
                                             <th><input type="checkbox" className="inputChooseBanner" /></th>
@@ -636,20 +644,6 @@ class Placement extends Component {
                                     this.props.placements.editing.name : '...'
                                 }
                                 </h3>
-                                <div className="box-tools">
-                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
-                                    <input
-                                      type="text" name="inputSearchPlacements"
-                                      className="form-control pull-right"
-                                      placeholder="Search..."
-                                    />
-                                    <div className="input-group-btn">
-                                      <button
-                                        type="submit" className="btn btn-default"
-                                      ><i className="fa fa-search" /></button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                               {/* /.box-header */}
                               <div className="box-body table-responsive no-padding">
@@ -735,6 +729,7 @@ class Placement extends Component {
                                       type="text" name="inputSearchZones"
                                       className="form-control pull-right"
                                       placeholder="Search..."
+                                      onChange={event => this.searchFor(event)}
                                     />
                                     <div className="input-group-btn">
                                       <button
@@ -764,7 +759,7 @@ class Placement extends Component {
                                       this.props.placements.editing.pbzPlacement
                                     ).map(zone => {
                                       if (this.isIndexOf(zone.name, zone.type,
-                                          zone.width, zone.html, zone.description)) {
+                                          zone.width, zone.height, zone.html, zone.description)) {
                                         return (
                                           <tr key={zone.id}>
                                             <td><input type="checkbox" className="inputChooseZone" /></td>
@@ -820,20 +815,6 @@ class Placement extends Component {
                                     this.props.placements.editing.name : '...'
                                 }
                                 </h3>
-                                <div className="box-tools">
-                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
-                                    <input
-                                      type="text" name="inputSearchPlacements"
-                                      className="form-control pull-right"
-                                      placeholder="Search..."
-                                    />
-                                    <div className="input-group-btn">
-                                      <button
-                                        type="submit" className="btn btn-default"
-                                      ><i className="fa fa-search" /></button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                               {/* /.box-header */}
                               <div className="box-body table-responsive no-padding">

@@ -53,7 +53,7 @@ class Banners extends Component {
     this.componentConfig = {
       iconFiletypes: ['.jpg', '.png', '.gif'],
       showFiletypeIcon: true,
-      postUrl: '/uploadBanner',
+      postUrl: '/upload-banner',
     };
     this.callbackFail = 'fail';
     // Simple callbacks work too, of course
@@ -171,7 +171,21 @@ class Banners extends Component {
       });
     }
   }
-
+  searchFor(event) {
+    event.persist();
+    this.setState((previousState) => ({
+      ...previousState,
+      searchText: event.target.value.trim(),
+    }));
+  }
+  isIndexOf(...args) {
+    for (let i = 0; i < args.length; i += 1) {
+      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
+        return true;
+      }
+    }
+    return false;
+  }
   render() {
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
@@ -472,6 +486,7 @@ class Banners extends Component {
                         type="text" name="inputSearchBanners"
                         className="form-control pull-right"
                         placeholder="Search..."
+                        onChange={event => this.searchFor(event)}
                       />
                       <div className="input-group-btn">
                         <button
@@ -498,19 +513,22 @@ class Banners extends Component {
                         if (!this.isFiltered(banner)) {
                           return false;
                         }
-                        return (
-                          <tr key={banner.id}>
-                            <th><input type="checkbox" className="inputChooseBanner" /></th>
-                            <td><Link to={`/resource/banner/${banner.id}`}>{banner.name}</Link>
-                            </td>
-                            <td>{banner.width}px - {banner.height}px</td>
-                            <td>{banner.keyword}</td>
-                            <td>{banner.description}</td>
-                            <td>
-                              <Link to={`/resource/banner/${banner.id}`}>Add Placement</Link>
-                            </td>
-                          </tr>
-                        );
+                        if (this.isIndexOf(banner.name)) {
+                          return (
+                            <tr key={banner.id}>
+                              <th><input type="checkbox" className="inputChooseBanner" /></th>
+                              <td><Link to={`/resource/banner/${banner.id}`}>{banner.name}</Link>
+                              </td>
+                              <td>{banner.width}px - {banner.height}px</td>
+                              <td>{banner.keyword}</td>
+                              <td>{banner.description}</td>
+                              <td>
+                                <Link to={`/resource/banner/${banner.id}`}>Add Placement</Link>
+                              </td>
+                            </tr>
+                          );
+                        }
+                        return false;
                       })}
                     </tbody>
                     <tfoot>

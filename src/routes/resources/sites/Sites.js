@@ -11,7 +11,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getSites, createSite } from '../../../actions/sites';
+import { getSites, createSite, checkSitesByDomain } from '../../../actions/sites';
 import Layout from '../../../components/Layout';
 import Link from '../../../components/Link';
 import s from './Sites.css';
@@ -24,6 +24,7 @@ class Sites extends Component {
   static propTypes = {
     sites: PropTypes.object,
     getSites: PropTypes.func,
+    checkSitesByDomain: PropTypes.func,
     createSite: PropTypes.func,
   };
 
@@ -87,8 +88,36 @@ class Sites extends Component {
   }
   validateDomain(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const domain = this.inputSiteDomain.value;
+    /* eslint-disable max-len */
     const urlRegex = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
-    console.log(urlRegex.test(domain));
+    /* eslint-enable max-len */
+    if (urlRegex.test(domain) === true) {
+      this.props.checkSitesByDomain(domain).then(() => {
+        if (this.props.sites.check && this.props.sites.check.length > 0) {
+          this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-10 has-error');
+          this.inputSiteDomainError.innerHTML = ('Domain has been used');
+          this.inputSiteDomain.value = '';
+          setTimeout(() => {
+            this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-10');
+            this.inputSiteDomainError.innerHTML = ('');
+          }, 2000);
+        } else if (this.props.sites.check && this.props.sites.check.length === 0) {
+          this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-10 has-success');
+          setTimeout(() => {
+            this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-10');
+            this.inputSiteDomainError.innerHTML = ('');
+          }, 2000);
+        }
+      });
+    } else {
+      this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-10 has-error');
+      this.inputSiteDomainError.innerHTML = ('Domain fail');
+      this.inputSiteDomain.value = '';
+      setTimeout(() => {
+        this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-10');
+        this.inputSiteDomainError.innerHTML = ('');
+      }, 2000);
+    }
   }
   isIndexOf(...args) {
     for (let i = 0; i < args.length; i += 1) {
@@ -127,12 +156,20 @@ class Sites extends Component {
                       <div className="col-sm-10">
                         <input
                           type="text" className="form-control" id="inputSiteDomain"
-                          placeholder="dantri.com.vn"
+                          placeholder="http://dantri.com.vn"
                           onBlur={event => this.validateDomain(event)}
                           ref={c => {
                             this.inputSiteDomain = c;
                           }}
                         />
+                        <span // eslint-disable-line react/self-closing-comp
+                          id="inputSiteDomainErr"
+                          className="help-block"
+                          ref={c => {
+                            this.inputSiteDomainError = c;
+                          }}
+                        >
+                        </span>
                       </div>
                     </div>
                     <div className="form-group">
@@ -307,6 +344,7 @@ const mapState = (state) => ({
 
 const mapDispatch = {
   getSites,
+  checkSitesByDomain,
   createSite,
 };
 

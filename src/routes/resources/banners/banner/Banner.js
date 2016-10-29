@@ -177,20 +177,13 @@ class Banner extends Component {
   insertBannerHtml(html, w, h) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const idw = document.getElementById('banner');
     if (idw) {
-      idw.innerHTML = '<iframe src="javacript:void(0);" frameborder="0" scrolling="no" width="' + w + '" height="' + h + '" id="bannerCode"></iframe>';
+      /* eslint-disable prefer-template */
+      idw.innerHTML = '<iframe src="javacript:void(0);" frameborder="0" scrolling="no" width="' + w + '" height="' + h + '" id="bannerCode"></iframe>}';
+      /* eslint-enable prefer-template */
       const idb = document.getElementById('bannerCode');
       const io = idb.contentWindow;
       io.document.write(html);
     }
-  }
-
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
-      }
-    }
-    return false;
   }
 
   filterPlacements(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -329,6 +322,21 @@ class Banner extends Component {
         });
       });
     }
+  }
+  searchFor(event) {
+    event.persist();
+    this.setState((previousState) => ({
+      ...previousState,
+      searchText: event.target.value.trim(),
+    }));
+  }
+  isIndexOf(...args) {
+    for (let i = 0; i < args.length; i += 1) {
+      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
+        return true;
+      }
+    }
+    return false;
   }
 
   render() {
@@ -583,6 +591,7 @@ class Banner extends Component {
                                       type="text" name="inputSearchPlacements"
                                       className="form-control pull-right"
                                       placeholder="Search..."
+                                      onChange={event => this.searchFor(event)}
                                     />
                                     <div className="input-group-btn">
                                       <button
@@ -610,11 +619,7 @@ class Banner extends Component {
                                     this.props.banners.editing.pbzBanner &&
                                     this.filterPlmNotIn(this.props.placements.list,
                                       this.props.banners.editing.pbzBanner).map(placement => {
-                                        if (this.isIndexOf(placement.name,
-                                            placement.startTime,
-                                            placement.endTime, placement.sizeWidth,
-                                            placement.sizeHeight,
-                                            placement.description, placement.weight)) {
+                                        if (this.isIndexOf(placement.name)) {
                                           return (
                                             <tr key={placement.id}>
                                               <th><input type="checkbox" className="inputChoosePlacement" /></th>
@@ -672,21 +677,6 @@ class Banner extends Component {
                                   List Placement Of {this.props.banners.editing ?
                                   this.props.banners.editing.name : '...'}
                                 </h3>
-
-                                <div className="box-tools">
-                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
-                                    <input
-                                      type="text" name="inputSearchPlacements"
-                                      className="form-control pull-right"
-                                      placeholder="Search..."
-                                    />
-                                    <div className="input-group-btn">
-                                      <button
-                                        type="submit" className="btn btn-default"
-                                      ><i className="fa fa-search" /></button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                               {/* /.box-header */}
                               <div className="box-body table-responsive no-padding">
@@ -704,37 +694,27 @@ class Banner extends Component {
                                     {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                                     {this.props.banners.editing &&
                                     this.props.banners.editing.pbzBanner &&
-                                    this.filterPlacements(this.props.banners.editing.pbzBanner)
-                                      .map(placement => {
-                                        if (this.isIndexOf(placement.placements.name,
-                                            placement.placements.startTime,
-                                            placement.placements.endTime,
-                                            placement.placements.sizeHeight,
-                                            placement.placements.description,
-                                            placement.placements.sizeWidth,
-                                            placement.placements.weight)) {
-                                          return (
-                                            <tr key={placement.placements.id} >
-                                              <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                              <th><Link to={`/resource/placement/${placement.placements.id}`}>
-                                                {placement.placements.name}
-                                              </Link>
-                                              </th>
-                                              <td>{placement.placements.sizeWidth}px -
-                                                {placement.placements.sizeHeight}px</td>
-                                              <td>{moment(new Date(placement.placements.startTime)).format('L')}</td>
-                                              <td>{moment(new Date(placement.placements.endTime)).format('L')}</td>
-                                              <td
-                                                onClick={() =>
+                                    this.filterPlacements(this.props.banners.editing.pbzBanner).map(placement => {
+                                      return (
+                                        <tr key={placement.placements.id} >
+                                          <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                          <th><Link to={`/resource/placement/${placement.placements.id}`}>
+                                            {placement.placements.name}
+                                          </Link>
+                                          </th>
+                                          <td>{placement.placements.sizeWidth}px -
+                                            {placement.placements.sizeHeight}px</td>
+                                          <td>{moment(new Date(placement.placements.startTime)).format('L')}</td>
+                                          <td>{moment(new Date(placement.placements.endTime)).format('L')}</td>
+                                          <td
+                                            onClick={() =>
                                                 this.removePlacement(placement.placements.id)}
-                                              >
-                                                Remove
-                                              </td>
-                                            </tr>
-                                          );
-                                        }
-                                        return false;
-                                      })}
+                                          >
+                                            Remove
+                                          </td>
+                                        </tr>
+                                      );
+                                    })}
                                     {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                                   </tbody>
                                   <tfoot>
