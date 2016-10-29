@@ -16,10 +16,18 @@ class Login extends Component {
   componentDidMount() {
     /* eslint-disable no-undef */
     $(() => {
-      $('input').iCheck({
+      $(this.inputRememberMe).iCheck({
         checkboxClass: 'icheckbox_square-blue',
         radioClass: 'iradio_square-blue',
         increaseArea: '20%', // optional
+      });
+
+      $(this.inputRememberMe).on('ifChecked', () => {
+        this.inputRememberMe.value = true;
+      });
+
+      $(this.inputRememberMe).on('ifUnchecked', () => {
+        this.inputRememberMe.value = false;
       });
     });
     /* eslint-enable no-undef */
