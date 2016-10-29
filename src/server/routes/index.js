@@ -24,7 +24,11 @@ router.post('/login',
       return res.sendStatus(401);
     }
 
-    return res.json(req.user);
+    return res.json({
+      data: {
+        loggedInUser: req.user,
+      },
+    });
   }
 );
 

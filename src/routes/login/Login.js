@@ -1,10 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { loginUser } from '../../actions/users';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './Login.css';
 
 class Login extends Component {
+
+  static propTypes = {
+    user: PropTypes.object,
+    loginUser: PropTypes.func,
+  };
 
   componentDidMount() {
     /* eslint-disable no-undef */
@@ -17,6 +24,19 @@ class Login extends Component {
     });
     /* eslint-enable no-undef */
   }
+
+  login() {
+    const email = this.inputUserEmail.value;
+    const password = this.inputUserPassword.value;
+    const rememberMe = this.inputRememberMe.value;
+
+    this.props.loginUser({
+      email,
+      password,
+      rememberMe,
+    });
+  }
+
 
   render() {
     return (
@@ -32,11 +52,23 @@ class Login extends Component {
               <p className="login-box-msg">Sign in to start your session</p>
               <form action="/" method="post">
                 <div className="form-group has-feedback">
-                  <input type="email" className="form-control" placeholder="Email" />
+                  <input
+                    id="inputUserEmail"
+                    type="email" className="form-control" placeholder="Email"
+                    ref={c => {
+                      this.inputUserEmail = c;
+                    }}
+                  />
                   <span className="glyphicon glyphicon-envelope form-control-feedback" />
                 </div>
                 <div className="form-group has-feedback">
-                  <input type="password" className="form-control" placeholder="Password" />
+                  <input
+                    id="inputUserPassword"
+                    type="password" className="form-control" placeholder="Password"
+                    ref={c => {
+                      this.inputUserPassword = c;
+                    }}
+                  />
                   <span className="glyphicon glyphicon-lock form-control-feedback" />
                 </div>
                 <div className="row">
@@ -48,16 +80,16 @@ class Login extends Component {
                           ref={c => {
                             this.inputRememberMe = c;
                           }}
-                        /> Remember Me
-                      </label>
+                        /> Remember Me</label>
                     </div>
                   </div>
                   { /* /.col */ }
                   <div className="col-xs-4">
-                    <button
-                      type="submit" className="btn btn-primary btn-block btn-flat"
-                    >Sign In
-                    </button>
+                    <Link
+                      to="#"
+                      className="btn btn-primary btn-block btn-flat"
+                      onClick={event => this.login(event)}
+                    >Sign In</Link>
                   </div>
                   { /* /.col */ }
                 </div>
@@ -88,4 +120,12 @@ class Login extends Component {
 
 }
 
-export default withStyles(s)(Login);
+const mapState = (state) => ({
+  user: state.user,
+});
+
+const mapDispatch = {
+  loginUser,
+};
+
+export default withStyles(s)(connect(mapState, mapDispatch)(Login));
