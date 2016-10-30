@@ -14,8 +14,6 @@ const router = express.Router(); // eslint-disable-line new-cap
 router.use(passport.initialize());
 
 router.get('/test', (req, res) => {
-  // Your handling goes here
-
   res.send({ title: 'Express' });
 });
 
