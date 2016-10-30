@@ -312,7 +312,7 @@ class Navigation extends Component {
                     src={this.renderUserPicture()}
                     className="user-image" alt="User"
                   />
-                  <span className="hidden-xs">{user.email}</span>
+                  <span className="hidden-xs">{user && user.email}</span>
                 </Link>
                 <ul className="dropdown-menu">
                   {/* User image */}
