@@ -52,7 +52,7 @@ class Navigation extends Component {
   renderUserPicture() {
     const { user } = this.props;
 
-    if (user.profile && user.profile.picture) {
+    if (user && user.profile && user.profile.picture) {
       return user.profile.picture;
     }
 
