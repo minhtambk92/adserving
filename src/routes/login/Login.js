@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { loginUser } from '../../actions/users';
+import { navigate } from '../../actions/route';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './Login.css';
@@ -11,6 +12,7 @@ class Login extends Component {
   static propTypes = {
     user: PropTypes.object,
     loginUser: PropTypes.func,
+    navigate: PropTypes.func,
   };
 
   componentDidMount() {
@@ -31,6 +33,12 @@ class Login extends Component {
       });
     });
     /* eslint-enable no-undef */
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user) {
+      this.props.navigate('/');
+    }
   }
 
   login() {
@@ -134,6 +142,7 @@ const mapState = (state) => ({
 
 const mapDispatch = {
   loginUser,
+  navigate,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Login));

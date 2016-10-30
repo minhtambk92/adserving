@@ -5,6 +5,8 @@
 import express from 'express';
 import multer from 'multer';
 import fs from 'fs';
+import jwt from 'jsonwebtoken';
+import { auth } from '../../config';
 import passport from '../authentications/local';
 
 const router = express.Router(); // eslint-disable-line new-cap
@@ -22,6 +24,13 @@ router.post('/login',
   (req, res) => {
     if (!req.user) {
       return res.sendStatus(401);
+    }
+
+    // Set user cookie
+    if (req.body.rememberMe === 'true') {
+      const expiresIn = 60 * 60 * 24 * 180; // 180 days
+      const token = jwt.sign(req.user, auth.jwt.secret, { expiresIn });
+      res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
     }
 
     return res.json({

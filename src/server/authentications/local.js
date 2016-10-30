@@ -12,6 +12,7 @@ passport.use(new LocalStrategy({
   passReqToCallback: true,
   session: false,
 }, (req, email, password, done) => {
+  // Find user by email
   User.findOne({ where: { email } }).then(user => {
     if (!user) {
       return done(null, false);
@@ -19,10 +20,6 @@ passport.use(new LocalStrategy({
 
     if (!compareSync(password, user.password)) {
       return done(null, false);
-    }
-
-    if (req.body.rememberMe) {
-      console.log('req.body.rememberMe: ', req.body.rememberMe);
     }
 
     return done(null, {
