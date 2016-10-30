@@ -22,6 +22,14 @@ class Register extends Component {
         increaseArea: '20%', // optional
       });
     });
+
+    $(this.inputAgreeTerms).on('ifChecked', () => {
+      this.inputAgreeTerms.value = true;
+    });
+
+    $(this.inputAgreeTerms).on('ifUnchecked', () => {
+      this.inputAgreeTerms.value = false;
+    });
     /* eslint-enable no-undef */
   }
 
@@ -30,9 +38,9 @@ class Register extends Component {
     const password = this.inputUserPassword.value;
     const passwordConfirmation = this.inputUserPasswordConfirmation.value;
     const fullName = this.inputUserFullName.value;
-    // const agreeTerms = this.inputAgreeTerms.value;
+    const agreeTerms = this.inputAgreeTerms.value;
 
-    if (password && password === passwordConfirmation) {
+    if (agreeTerms === true && password && password === passwordConfirmation) {
       this.props.registerUser({
         email,
         password,

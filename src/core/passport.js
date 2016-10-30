@@ -29,7 +29,6 @@ passport.use(new FacebookStrategy({
   passReqToCallback: true,
 }, (req, accessToken, refreshToken, profile, done) => {
   /* eslint-disable no-underscore-dangle */
-  console.log('facebook strategy here!');
   const loginName = 'facebook';
   const claimType = 'urn:facebook:access_token';
   const fooBar = async () => {

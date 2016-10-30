@@ -102,6 +102,7 @@ class Site extends Component {
       this.clearInput();
     }
   }
+
   updateSite() {
     const domain = this.inputSiteDomain.value;
     const name = this.inputSiteName.value;
@@ -173,7 +174,10 @@ class Site extends Component {
                           <div className="box-header with-border">
                             <h3 className="box-title">Change site information</h3>
                             <div className="box-tools pull-right">
-                              <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                              <button
+                                type="button" className="btn btn-box-tool"
+                                data-widget="collapse"
+                              >
                                 <i className="fa fa-minus" />
                               </button>
                             </div>
@@ -295,7 +299,10 @@ class Site extends Component {
                               <div className="box-header with-border">
                                 <h3 className="box-title">Create New Zone</h3>
                                 <div className="box-tools pull-right">
-                                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                                  <button
+                                    type="button" className="btn btn-box-tool"
+                                    data-widget="collapse"
+                                  >
                                     <i className="fa fa-minus" />
                                   </button>
                                 </div>
@@ -410,7 +417,8 @@ class Site extends Component {
                                     <div className="col-sm-9">
                                       <textarea
                                         className="form-control"
-                                        id="inputZoneDescription" rows="5" placeholder="More info..."
+                                        id="inputZoneDescription" rows="5"
+                                        placeholder="More info..."
                                         ref={c => {
                                           this.inputZoneDescription = c;
                                         }}
@@ -445,7 +453,10 @@ class Site extends Component {
                                   this.props.sites.editing.name : '...'}
                                 </h3>
                                 <div className="box-tools">
-                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
+                                  <div
+                                    className="input-group input-group-sm"
+                                    style={{ width: 150 }}
+                                  >
                                     <input
                                       type="text" name="inputSearchZones"
                                       className="form-control pull-right"
@@ -472,20 +483,29 @@ class Site extends Component {
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    {this.props.sites.editing && this.props.sites.editing.zones &&
-                                    this.props.sites.editing.zones.map(zone => {
-                                      return (
+                                    {
+                                      this.props.sites.editing &&
+                                      this.props.sites.editing.zones &&
+                                      this.props.sites.editing.zones.map(zone => (
                                         <tr key={zone.id}>
-                                          <td><input type="checkbox" className="inputChooseSite" /></td>
-                                          <td><Link to={`/resource/zone/${zone.id}`}>{zone.name}</Link></td>
+                                          <td>
+                                            <input type="checkbox" className="inputChooseSite" />
+                                          </td>
+                                          <td>
+                                            <Link
+                                              to={`/resource/zone/${zone.id}`}
+                                            >{zone.name}</Link>
+                                          </td>
                                           <td>{zone.type}</td>
                                           <td>{zone.description}</td>
                                           <td>{zone.slot}</td>
-                                          <td><Link to={`/resource/zone/${zone.id}`}>Add New Placements</Link></td>
-                                        </tr>
-                                      );
-                                    }
-                                    )}
+                                          <td>
+                                            <Link
+                                              to={`/resource/zone/${zone.id}`}
+                                            >Add New Placements</Link>
+                                          </td>
+                                        </tr>)
+                                      )}
                                   </tbody>
                                   <tfoot>
                                     <tr>

@@ -4,7 +4,6 @@
 
 import {
   GraphQLList as List,
-  GraphQLString as StringType,
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import PermissionType from '../types/PermissionType';

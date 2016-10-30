@@ -121,7 +121,7 @@ function AsideRight() {
           <form method="post">
             <h3 className="control-sidebar-heading">General Settings</h3>
             <div className="form-group">
-              <label className="control-sidebar-subheading">
+              <label htmlFor className="control-sidebar-subheading">
                 Report panel usage
                 <input type="checkbox" className="pull-right" defaultChecked />
               </label>
@@ -131,7 +131,7 @@ function AsideRight() {
             </div>
             {/* /.form-group */}
             <div className="form-group">
-              <label className="control-sidebar-subheading">
+              <label htmlFor className="control-sidebar-subheading">
                 Allow mail redirect
                 <input type="checkbox" className="pull-right" defaultChecked />
               </label>
@@ -141,7 +141,7 @@ function AsideRight() {
             </div>
             {/* /.form-group */}
             <div className="form-group">
-              <label className="control-sidebar-subheading">
+              <label htmlFor className="control-sidebar-subheading">
                 Expose author name in posts
                 <input type="checkbox" className="pull-right" defaultChecked />
               </label>
@@ -152,21 +152,21 @@ function AsideRight() {
             {/* /.form-group */}
             <h3 className="control-sidebar-heading">Chat Settings</h3>
             <div className="form-group">
-              <label className="control-sidebar-subheading">
+              <label htmlFor className="control-sidebar-subheading">
                 Show me as online
                 <input type="checkbox" className="pull-right" defaultChecked />
               </label>
             </div>
             {/* /.form-group */}
             <div className="form-group">
-              <label className="control-sidebar-subheading">
+              <label htmlFor className="control-sidebar-subheading">
                 Turn off notifications
                 <input type="checkbox" className="pull-right" />
               </label>
             </div>
             {/* /.form-group */}
             <div className="form-group">
-              <label className="control-sidebar-subheading">
+              <label htmlFor className="control-sidebar-subheading">
                 Delete chat history
                 <a className="text-red pull-right"><i className="fa fa-trash-o" /></a>
               </label>

@@ -14,7 +14,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanner, updateBanner, deleteBanner } from '../../../../actions/banners';
 import { getCampaigns } from '../../../../actions/campaigns';
 import { createPlacement, getPlacements } from '../../../../actions/placements';
-import { createPlacementBannerZone, removeBanner, removeBannerInPlacementBannerZone } from '../../../../actions/placementBannerZones';
+import {
+  createPlacementBannerZone,
+  removeBanner,
+  removeBannerInPlacementBannerZone,
+} from '../../../../actions/placementBannerZones';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './Banner.css';
@@ -174,6 +178,7 @@ class Banner extends Component {
     this.inputPlacementWeight.value = null;
     this.inputPlacementDescription.value = null;
   }
+
   insertBannerHtml(html, w, h) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const idw = document.getElementById('banner');
     if (idw) {
@@ -313,6 +318,7 @@ class Banner extends Component {
     this.props.deleteBanner(this.props.bannerId);
     this.props.removeBanner(this.props.bannerId);
   }
+
   removePlacement(placementId) {
     const bId = this.props.bannerId;
     if (placementId && bId) {
@@ -323,6 +329,7 @@ class Banner extends Component {
       });
     }
   }
+
   searchFor(event) {
     event.persist();
     this.setState((previousState) => ({
@@ -330,6 +337,7 @@ class Banner extends Component {
       searchText: event.target.value.trim(),
     }));
   }
+
   isIndexOf(...args) {
     for (let i = 0; i < args.length; i += 1) {
       if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
@@ -374,7 +382,10 @@ class Banner extends Component {
                           <div className="box-header with-border">
                             <h3 className="box-title">Change Banner information</h3>
                             <div className="box-tools pull-right">
-                              <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                              <button
+                                type="button" className="btn btn-box-tool"
+                                data-widget="collapse"
+                              >
                                 <i className="fa fa-minus" />
                               </button>
                             </div>
@@ -396,7 +407,7 @@ class Banner extends Component {
                                       >
                                         <img
                                           src={this.props.banners.editing ?
-                                          this.props.banners.editing.imageUrl : ''}
+                                            this.props.banners.editing.imageUrl : ''}
                                           alt="demo"
                                         />
                                       </div>
@@ -586,7 +597,10 @@ class Banner extends Component {
                                 <h3 className="box-title">List Placement</h3>
 
                                 <div className="box-tools">
-                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
+                                  <div
+                                    className="input-group input-group-sm"
+                                    style={{ width: 150 }}
+                                  >
                                     <input
                                       type="text" name="inputSearchPlacements"
                                       className="form-control pull-right"
@@ -606,7 +620,8 @@ class Banner extends Component {
                                 <table id="example1" className="table table-hover">
                                   <thead>
                                     <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                      <th><input type="checkbox" className="inputChoosePlacement" />
+                                      </th>
                                       <th>Name</th>
                                       <th>Size</th>
                                       <th>Start Time</th>
@@ -614,40 +629,52 @@ class Banner extends Component {
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                                    {this.props.placements.list && this.props.banners.editing &&
-                                    this.props.banners.editing.pbzBanner &&
-                                    this.filterPlmNotIn(this.props.placements.list,
-                                      this.props.banners.editing.pbzBanner).map(placement => {
+                                    {
+                                      this.props.placements.list &&
+                                      this.props.banners.editing &&
+                                      this.props.banners.editing.pbzBanner &&
+                                      this.filterPlmNotIn(
+                                        this.props.placements.list,
+                                        this.props.banners.editing.pbzBanner
+                                      ).map(placement => {
                                         if (this.isIndexOf(placement.name)) {
                                           return (
                                             <tr key={placement.id}>
-                                              <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                              <th><Link to={`/resource/placement/${placement.id}`}>
-                                                {placement.name}
-                                              </Link>
+                                              <th>
+                                                <input
+                                                  type="checkbox"
+                                                  className="inputChoosePlacement"
+                                                />
+                                              </th>
+                                              <th>
+                                                <Link
+                                                  to={`/resource/placement/${placement.id}`}
+                                                >{placement.name}</Link>
                                               </th>
                                               <td>
                                                 {placement.sizeWidth}px - {placement.sizeHeight}px
                                               </td>
                                               <td>{moment(new Date(placement.startTime)).format('L')}</td>
                                               <td>{moment(new Date(placement.endTime)).format('L')}</td>
-                                              <td
-                                                onClick={() =>
-                                                this.pushPlacementToBanner(placement.id)}
-                                              >
-                                                Add Placement
+                                              <td>
+                                                <Link
+                                                  to="#"
+                                                  onClick={event =>
+                                                    this.pushPlacementToBanner(placement.id, event)
+                                                  }
+                                                >Add Placement</Link>
                                               </td>
                                             </tr>
                                           );
                                         }
+
                                         return false;
                                       })}
-                                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
                                   </tbody>
                                   <tfoot>
                                     <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                      <th><input type="checkbox" className="inputChoosePlacement" />
+                                      </th>
                                       <th>Name</th>
                                       <th>Size</th>
                                       <th>Start Time</th>
@@ -683,7 +710,8 @@ class Banner extends Component {
                                 <table id="example1" className="table table-hover">
                                   <thead>
                                     <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                      <th><input type="checkbox" className="inputChoosePlacement" />
+                                      </th>
                                       <th>Name</th>
                                       <th>Size</th>
                                       <th>Start Time</th>
@@ -691,35 +719,44 @@ class Banner extends Component {
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                                    {this.props.banners.editing &&
-                                    this.props.banners.editing.pbzBanner &&
-                                    this.filterPlacements(this.props.banners.editing.pbzBanner).map(placement => {
-                                      return (
-                                        <tr key={placement.placements.id} >
-                                          <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                          <th><Link to={`/resource/placement/${placement.placements.id}`}>
-                                            {placement.placements.name}
-                                          </Link>
+                                    {
+                                      this.props.banners.editing &&
+                                      this.props.banners.editing.pbzBanner &&
+                                      this.filterPlacements(
+                                        this.props.banners.editing.pbzBanner
+                                      ).map(placement => (
+                                        <tr key={placement.placements.id}>
+                                          <th>
+                                            <input
+                                              type="checkbox"
+                                              className="inputChoosePlacement"
+                                            />
+                                          </th>
+                                          <th>
+                                            <Link
+                                              to={`/resource/placement/${placement.placements.id}`}
+                                            >{placement.placements.name}</Link>
                                           </th>
                                           <td>{placement.placements.sizeWidth}px -
-                                            {placement.placements.sizeHeight}px</td>
+                                            {placement.placements.sizeHeight}px
+                                          </td>
                                           <td>{moment(new Date(placement.placements.startTime)).format('L')}</td>
                                           <td>{moment(new Date(placement.placements.endTime)).format('L')}</td>
-                                          <td
-                                            onClick={() =>
-                                                this.removePlacement(placement.placements.id)}
-                                          >
-                                            Remove
+                                          <td>
+                                            <Link
+                                              to="#"
+                                              onClick={() =>
+                                                this.removePlacement(placement.placements.id)
+                                              }
+                                            >Remove</Link>
                                           </td>
                                         </tr>
-                                      );
-                                    })}
-                                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+                                      ))}
                                   </tbody>
                                   <tfoot>
                                     <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
+                                      <th><input type="checkbox" className="inputChoosePlacement" />
+                                      </th>
                                       <th>Name</th>
                                       <th>Size</th>
                                       <th>Start Time</th>
@@ -744,14 +781,15 @@ class Banner extends Component {
                         </div>
                         <div className="row">
                           <section className="col-lg-6">
-                            {/* BOX: FORM OF CREATE NEW PlacementS */}
+                            {/* BOX: CREATE */}
                             <div className="box box-info">
                               <div className="box-header with-border">
                                 <h3 className="box-title">Create New Placement</h3>
                                 <div className="box-tools pull-right">
-                                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                                    <i className="fa fa-minus" />
-                                  </button>
+                                  <button
+                                    type="button" className="btn btn-box-tool"
+                                    data-widget="collapse"
+                                  ><i className="fa fa-minus" /></button>
                                 </div>
                               </div>
                               {/* /.box-header */}
@@ -760,7 +798,8 @@ class Banner extends Component {
                                 <div className="box-body">
                                   <div className="form-group">
                                     <label
-                                      htmlFor="inputPlacementName" className="col-sm-2 control-label"
+                                      htmlFor="inputPlacementName"
+                                      className="col-sm-2 control-label"
                                     >Name</label>
                                     <div className="col-sm-10">
                                       <input
@@ -773,7 +812,10 @@ class Banner extends Component {
                                     </div>
                                   </div>
                                   <div className="form-group has-feedback">
-                                    <label htmlFor="inputCampaign" className="col-sm-2 control-label">Campaign</label>
+                                    <label
+                                      htmlFor="inputCampaign"
+                                      className="col-sm-2 control-label"
+                                    >Campaign</label>
                                     <div className="col-sm-10">
                                       <select
                                         id="inputCampaign" className="form-control"
@@ -793,7 +835,10 @@ class Banner extends Component {
                                     </div>
                                   </div>
                                   <div className="form-group has-feedback">
-                                    <label htmlFor="inputPlacementStartTime" className="col-sm-2 control-label">Start Time:</label>
+                                    <label
+                                      htmlFor="inputPlacementStartTime"
+                                      className="col-sm-2 control-label"
+                                    >Start Time:</label>
                                     <div className=" col-sm-10 date">
                                       <span className="fa fa-calendar form-control-feedback" />
                                       <input
@@ -824,7 +869,10 @@ class Banner extends Component {
                                     </div>
                                   </div>
                                   <div className="form-group">
-                                    <label htmlFor="inputPlacementSizeWidth" className="col-sm-2 control-label">Size(Width)</label>
+                                    <label
+                                      htmlFor="inputPlacementSizeWidth"
+                                      className="col-sm-2 control-label"
+                                    >Size(Width)</label>
                                     <div className="col-sm-10">
                                       <input
                                         type="number" className="form-control"
@@ -837,7 +885,10 @@ class Banner extends Component {
                                     </div>
                                   </div>
                                   <div className="form-group">
-                                    <label htmlFor="inputPlacementSizeHeight" className="col-sm-2 control-label">Size(Height)</label>
+                                    <label
+                                      htmlFor="inputPlacementSizeHeight"
+                                      className="col-sm-2 control-label"
+                                    >Size(Height)</label>
                                     <div className="col-sm-10">
                                       <input
                                         type="number" className="form-control"
@@ -856,7 +907,8 @@ class Banner extends Component {
                                     >Weight</label>
                                     <div className="col-sm-10">
                                       <input
-                                        type="text" className="form-control" id="inputPlacementWeight"
+                                        type="text" className="form-control"
+                                        id="inputPlacementWeight"
                                         placeholder="1"
                                         ref={c => {
                                           this.inputPlacementWeight = c;

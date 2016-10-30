@@ -11,7 +11,7 @@ import {
   GraphQLObjectType as ObjectType,
   GraphQLID as ID,
   GraphQLNonNull as NonNull,
-} from  'graphql';
+} from 'graphql';
 
 const FilterBannerType = new ObjectType({
   name: 'FilterBannerType',
@@ -19,7 +19,6 @@ const FilterBannerType = new ObjectType({
     id: { type: new NonNull(ID) },
     filterId: { type: new NonNull(ID) },
     placementBannerId: { type: new NonNull(ID) },
-
   },
 });
 
