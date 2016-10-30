@@ -309,7 +309,7 @@ class Navigation extends Component {
               <li className="dropdown user user-menu">
                 <Link to="#" className="dropdown-toggle" data-toggle="dropdown">
                   <img
-                    src="/AdminLTE/dist/img/user2-160x160.jpg"
+                    src={this.renderUserPicture()}
                     className="user-image" alt="User"
                   />
                   <span className="hidden-xs">{user.email}</span>
@@ -345,7 +345,7 @@ class Navigation extends Component {
                   {/* Menu Footer*/}
                   <li className="user-footer">
                     <div className="pull-left">
-                      <Link to="#" className="btn btn-default btn-flat">Profile</Link>
+                      <Link to="/profile" className="btn btn-default btn-flat">Profile</Link>
                     </div>
                     <div className="pull-right">
                       <Link to="#" className="btn btn-default btn-flat">Sign out</Link>
