@@ -280,6 +280,7 @@ export function loginUser({ email, password, rememberMe }) {
         password,
         rememberMe,
       }),
+      credentials: 'include',
     });
 
     const { data } = await res.json();
