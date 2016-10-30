@@ -8,16 +8,6 @@ function AsideLeft() {
     <aside className="main-sidebar">
       {/* sidebar: style can be found in sidebar.less */}
       <section className="sidebar" style={{ height: 'auto' }}>
-        {/* Sidebar user panel */}
-        <div className="user-panel">
-          <div className="pull-left image">
-            <img src="/AdminLTE/dist/img/user2-160x160.jpg" className="img-circle" alt="User" />
-          </div>
-          <div className="pull-left info">
-            <p>Alexander Pierce</p>
-            <Link to="#"><i className="fa fa-circle text-success" /> Online</Link>
-          </div>
-        </div>
         {/* search form */}
         <form action="#" method="get" className="sidebar-form">
           <div className="input-group">
