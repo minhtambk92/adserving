@@ -224,7 +224,7 @@ class Advertisers extends Component {
                       <input
                         type="text" name="inputSearchAdvertisers"
                         className="form-control pull-right"
-                        placeholder="Search..."
+                        placeholder="Search..." onChange={event => this.searchFor(event)}
                       />
                       <div className="input-group-btn">
                         <button

@@ -10,6 +10,7 @@ import {
   CREATE_SITE,
   UPDATE_SITE,
   DELETE_SITE,
+  CHECK_SITE_BY_DOMAIN,
 } from '../constants';
 
 export function getSite(id) {
@@ -89,6 +90,32 @@ export function getSites(args = {
 
     dispatch({
       type: GET_SITES,
+      payload: {
+        sites: data.sites,
+      },
+    });
+  };
+}
+
+export function checkSitesByDomain(domain) {
+  return async(dispatch, getState, { graphqlRequest }) => {
+    const query = `
+      query {
+        sites(where: {domain: "${domain}"}) {
+          id
+          domain
+          name
+          email
+          description
+          status
+          createdAt
+          updatedAt
+        }
+      }`;
+
+    const { data } = await graphqlRequest(query);
+    dispatch({
+      type: CHECK_SITE_BY_DOMAIN,
       payload: {
         sites: data.sites,
       },

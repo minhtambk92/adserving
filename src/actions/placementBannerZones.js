@@ -189,7 +189,7 @@ export function removeZoneInPlacementBannerZone({ placementId, zId }) {
               updatedAt
             }
           }`;
-          const { updatePlz } = await graphqlRequest(newZone, {
+          await graphqlRequest(newZone, {
             placementBannerZone: {
               id,
               zoneId,
@@ -198,7 +198,7 @@ export function removeZoneInPlacementBannerZone({ placementId, zId }) {
           dispatch({
             type: REMOVE_PLACEMENT_BANNER_ZONE,
             payload: {
-              placementBannerZone: updatePlz.updatedPlacementBannerZone,
+              placementBannerZone: REMOVE_PLACEMENT_BANNER_ZONE,
             },
           });
         }

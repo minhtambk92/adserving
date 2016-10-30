@@ -24,6 +24,7 @@ const Site = Model.define('Site', {
   domain: {
     type: DataType.STRING,
     allowNull: false,
+    unique: true,
   },
   name: {
     type: DataType.STRING,

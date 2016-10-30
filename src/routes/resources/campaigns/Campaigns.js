@@ -30,6 +30,13 @@ class Campaigns extends Component {
     getAdvertisers: PropTypes.func,
     advertisers: PropTypes.object,
   };
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      searchText: '',
+    };
+  }
 
   componentWillMount() {
     this.props.getCampaigns();
@@ -140,6 +147,21 @@ class Campaigns extends Component {
       }
     }
   }
+  searchFor(event) {
+    event.persist();
+    this.setState((previousState) => ({
+      ...previousState,
+      searchText: event.target.value.trim(),
+    }));
+  }
+  isIndexOf(...args) {
+    for (let i = 0; i < args.length; i += 1) {
+      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   render() {
     return (
@@ -165,7 +187,7 @@ class Campaigns extends Component {
                       <label
                         htmlFor="inputCampaignsFilterAdvertiser"
                         className="col-sm-2 control-label"
-                      >Website</label>
+                      >Advertiser</label>
                       <div className="col-sm-10">
                         <select
                           id="inputCampaignsFilterAdvertiser"
@@ -421,6 +443,7 @@ class Campaigns extends Component {
                         type="text" name="inputSearchcampaigns"
                         className="form-control pull-right"
                         placeholder="Search..."
+                        onChange={event => this.searchFor(event)}
                       />
                       <div className="input-group-btn">
                         <button
@@ -448,19 +471,22 @@ class Campaigns extends Component {
                         if (!this.isFiltered(campaign)) {
                           return false;
                         }
-                        return (
-                          <tr key={campaign.id}>
-                            <th><input type="checkbox" className="inputChooseCampaign" /></th>
-                            <th><Link to={`/resource/campaign/${campaign.id}`}>{campaign.name}</Link>
-                            </th>
-                            <td>{moment(new Date(campaign.startTime)).format('L')}</td>
-                            <td>{moment(new Date(campaign.endTime)).format('L')}</td>
-                            <td>{campaign.views}</td>
-                            <td>{campaign.viewPerSession}</td>
-                            <th><Link to={`/resource/campaign/${campaign.id}`}>Add New Placements</Link>
-                            </th>
-                          </tr>
+                        if (this.isIndexOf(campaign.name)) {
+                          return (
+                            <tr key={campaign.id}>
+                              <th><input type="checkbox" className="inputChooseCampaign" /></th>
+                              <th><Link to={`/resource/campaign/${campaign.id}`}>{campaign.name}</Link>
+                              </th>
+                              <td>{moment(new Date(campaign.startTime)).format('L')}</td>
+                              <td>{moment(new Date(campaign.endTime)).format('L')}</td>
+                              <td>{campaign.views}</td>
+                              <td>{campaign.viewPerSession}</td>
+                              <th><Link to={`/resource/campaign/${campaign.id}`}>Add New Placements</Link>
+                              </th>
+                            </tr>
                           );
+                        }
+                        return false;
                       })}
                     </tbody>
                     <tfoot>

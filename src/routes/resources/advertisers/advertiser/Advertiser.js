@@ -524,21 +524,6 @@ class Advertiser extends Component {
                                     .concat(this.props.advertisers.editing ?
                                       this.props.advertisers.editing.name : '...')
                                 } </h3>
-
-                                <div className="box-tools">
-                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
-                                    <input
-                                      type="text" name="inputSearchCampaign"
-                                      className="form-control pull-right"
-                                      placeholder="Search..." onChange={event => this.searchFor(event)}
-                                    />
-                                    <div className="input-group-btn">
-                                      <button
-                                        type="submit" className="btn btn-default"
-                                      ><i className="fa fa-search" /></button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                               {/* /.box-header */}
                               <div className="box-body table-responsive no-padding">

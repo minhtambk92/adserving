@@ -40,6 +40,14 @@ class Zones extends Component {
     getPlacements: PropTypes.func,
   };
 
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      searchText: '',
+
+    };
+  }
   componentWillMount() {
     this.props.getSites();
     this.props.getZonesFilters();
@@ -112,18 +120,6 @@ class Zones extends Component {
   }
 
   isFiltered(zone) {
-    // const filters = this.props.zones.filters;
-    //
-    // for (const criteria in filters) { // eslint-disable-line no-restricted-syntax
-    //   if (
-    //     !{}.hasOwnProperty.call(zone, criteria) ||
-    //     filters[criteria] !== zone[criteria]
-    //   ) {
-    //     return false;
-    //   }
-    // }
-    //
-    // return true;
     const { placementId, status, siteId, type } = this.props.zones.filters;
 
     const notMatchPlacement = (
@@ -144,7 +140,23 @@ class Zones extends Component {
 
     return !(notMatchPlacement || notMatchStatus || notMatchSite || notMatchType);
   }
-
+  searchFor(event) {
+    event.persist();
+    this.setState((previousState) => ({
+      ...previousState,
+      searchText: event.target.value.trim(),
+    }));
+  }
+  isIndexOf(...args) {
+    for (let i = 0; i < args.length; i += 1) {
+      if (args[i] !== undefined) {
+        if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
   render() {
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
@@ -455,6 +467,7 @@ class Zones extends Component {
                         type="text" name="inputSearchZones"
                         className="form-control pull-right"
                         placeholder="Search..."
+                        onChange={event => this.searchFor(event)}
                       />
                       <div className="input-group-btn">
                         <button
@@ -482,22 +495,24 @@ class Zones extends Component {
                         if (!this.isFiltered(zone)) {
                           return false;
                         }
-
-                        return (
-                          <tr key={zone.id}>
-                            <td><input type="checkbox" className="inputChooseZone" /></td>
-                            <td>
-                              <Link to={`/resource/zone/${zone.id}`}>
-                                <strong>{zone.name}</strong>
-                              </Link>
-                            </td>
-                            <td>{zone.type}</td>
-                            <td>{zone.description}</td>
-                            <td>{zone.slot}</td>
-                            <td><Link to={`/resource/zone/${zone.id}`}>Add New Placements</Link>
-                            </td>
-                          </tr>
-                        );
+                        if (this.isIndexOf(zone.name)) {
+                          return (
+                            <tr key={zone.id}>
+                              <td><input type="checkbox" className="inputChooseZone" /></td>
+                              <td>
+                                <Link to={`/resource/zone/${zone.id}`}>
+                                  <strong>{zone.name}</strong>
+                                </Link>
+                              </td>
+                              <td>{zone.type}</td>
+                              <td>{zone.description}</td>
+                              <td>{zone.slot}</td>
+                              <td><Link to={`/resource/zone/${zone.id}`}>Add New Placements</Link>
+                              </td>
+                            </tr>
+                          );
+                        }
+                        return false;
                       })}
                     </tbody>
                     <tfoot>
