@@ -40,7 +40,7 @@ class Register extends Component {
     const fullName = this.inputUserFullName.value;
     const agreeTerms = this.inputAgreeTerms.value;
 
-    if (agreeTerms === true && password && password === passwordConfirmation) {
+    if (agreeTerms === 'true' && password && password === passwordConfirmation) {
       this.props.registerUser({
         email,
         password,
@@ -117,7 +117,7 @@ class Register extends Component {
                   {/* /.col */}
                   <div className="col-xs-4">
                     <Link
-                      to="/login"
+                      to="#"
                       className="btn btn-primary btn-block btn-flat"
                       onClick={event => this.registerUser(event)}
                     >Register</Link>
