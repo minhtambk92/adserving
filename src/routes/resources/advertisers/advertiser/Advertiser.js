@@ -243,9 +243,9 @@ class Advertiser extends Component {
                               <div className="form-group">
                                 <label
                                   htmlFor="inputAdvertiserName"
-                                  className="col-sm-2 control-label"
+                                  className="col-sm-3 control-label"
                                 >Name</label>
-                                <div className="col-sm-10">
+                                <div className="col-sm-9">
                                   <input
                                     type="text" className="form-control" id="inputAdvertiserName"
                                     placeholder="Dan Tri"
@@ -257,9 +257,9 @@ class Advertiser extends Component {
                               </div>
                               <div className="form-group">
                                 <label
-                                  htmlFor="inputAdvertiserContact" className="col-sm-2 control-label"
+                                  htmlFor="inputAdvertiserContact" className="col-sm-3 control-label"
                                 >Contact</label>
-                                <div className="col-sm-10">
+                                <div className="col-sm-9">
                                   <input
                                     type="text" className="form-control" id="inputAdvertiserContact"
                                     placeholder="0987666888"
@@ -272,9 +272,9 @@ class Advertiser extends Component {
                               <div className="form-group">
                                 <label
                                   htmlFor="inputAdvertiserEmail"
-                                  className="col-sm-2 control-label"
+                                  className="col-sm-3 control-label"
                                 >Email</label>
-                                <div className="col-sm-10">
+                                <div className="col-sm-9">
                                   <input
                                     type="text" className="form-control" id="inputAdvertiserEmail"
                                     placeholder="contact@dantri.com.vn"
@@ -287,9 +287,9 @@ class Advertiser extends Component {
                               <div className="form-group">
                                 <label
                                   htmlFor="inputAdvertiserStatus"
-                                  className="col-sm-2 control-label"
+                                  className="col-sm-3 control-label"
                                 >Status</label>
-                                <div className="col-sm-10">
+                                <div className="col-sm-9">
                                   <select
                                     id="inputAdvertiserStatus" className="form-control"
                                     ref={c => {
@@ -304,9 +304,9 @@ class Advertiser extends Component {
                               <div className="form-group">
                                 <label
                                   htmlFor="inputAdvertiserDescription"
-                                  className="col-sm-2 control-label"
+                                  className="col-sm-3 control-label"
                                 >Description</label>
-                                <div className="col-sm-10">
+                                <div className="col-sm-9">
                                   <textarea
                                     className="form-control" id="inputAdvertiserDescription"
                                     rows="5" placeholder="More info..."
@@ -362,9 +362,9 @@ class Advertiser extends Component {
                                 <div className="box-body">
                                   <div className="form-group">
                                     <label
-                                      htmlFor="inputCampaignName" className="col-sm-2 control-label"
+                                      htmlFor="inputCampaignName" className="col-sm-3 control-label"
                                     >Name</label>
-                                    <div className="col-sm-10">
+                                    <div className="col-sm-9">
                                       <input
                                         type="text" className="form-control" id="inputCampaignName"
                                         placeholder="Admicro"
@@ -376,9 +376,9 @@ class Advertiser extends Component {
                                   </div>
                                   <div className="form-group has-feedback">
                                     <label
-                                      htmlFor="inputCampaignStartTime" className="col-sm-2 control-label"
+                                      htmlFor="inputCampaignStartTime" className="col-sm-3 control-label"
                                     >Start Time:</label>
-                                    <div className=" col-sm-10 date">
+                                    <div className=" col-sm-9 date">
                                       <span className="fa fa-calendar form-control-feedback" />
                                       <input
                                         type="text" className="form-control pull-right"
@@ -391,9 +391,9 @@ class Advertiser extends Component {
                                   </div>
                                   <div className="form-group has-feedback">
                                     <label
-                                      htmlFor="inputCampaignEndTime" className="col-sm-2 control-label"
+                                      htmlFor="inputCampaignEndTime" className="col-sm-3 control-label"
                                     >End Time:</label>
-                                    <div className=" col-sm-10 date">
+                                    <div className=" col-sm-9 date">
                                       <span className="fa fa-calendar form-control-feedback" />
                                       <input
                                         type="text" className="form-control pull-right"
@@ -407,9 +407,9 @@ class Advertiser extends Component {
 
                                   <div className="form-group">
                                     <label
-                                      htmlFor="inputCampaignViews" className="col-sm-2 control-label"
+                                      htmlFor="inputCampaignViews" className="col-sm-3 control-label"
                                     >Total Views</label>
-                                    <div className="col-sm-10">
+                                    <div className="col-sm-9">
                                       <input
                                         type="number" className="form-control" id="inputCampaignViews"
                                         placeholder="1000"
@@ -422,9 +422,9 @@ class Advertiser extends Component {
                                   <div className="form-group">
                                     <label
                                       htmlFor="inputCampaignViewPerSession"
-                                      className="col-sm-2 control-label"
+                                      className="col-sm-3 control-label"
                                     >Views/Session</label>
-                                    <div className="col-sm-10">
+                                    <div className="col-sm-9">
                                       <input
                                         type="number" className="form-control" id="inputCampaignViewPerSession"
                                         placeholder="10"
@@ -437,9 +437,9 @@ class Advertiser extends Component {
                                   <div className="form-group">
                                     <label
                                       htmlFor="inputCampaignTimeResetViewCount"
-                                      className="col-sm-2 control-label"
+                                      className="col-sm-3 control-label"
                                     >Time reset view(h)</label>
-                                    <div className="col-sm-10">
+                                    <div className="col-sm-9">
                                       <input
                                         type="number" className="form-control"
                                         id="inputCampaignTimeResetViewCount"
@@ -453,9 +453,9 @@ class Advertiser extends Component {
                                   <div className="form-group">
                                     <label
                                       htmlFor="inputCampaignWeight"
-                                      className="col-sm-2 control-label"
+                                      className="col-sm-3 control-label"
                                     >Weight</label>
-                                    <div className="col-sm-10">
+                                    <div className="col-sm-9">
                                       <input
                                         type="number" className="form-control" id="inputCampaignWeight"
                                         placeholder="1"
@@ -468,9 +468,9 @@ class Advertiser extends Component {
                                   <div className="form-group">
                                     <label
                                       htmlFor="inputCampaignStatus"
-                                      className="col-sm-2 control-label"
+                                      className="col-sm-3 control-label"
                                     >Status</label>
-                                    <div className="col-sm-10">
+                                    <div className="col-sm-9">
                                       <select
                                         id="inputCampaignStatus" className="form-control"
                                         ref={c => {
@@ -485,9 +485,9 @@ class Advertiser extends Component {
                                   <div className="form-group">
                                     <label
                                       htmlFor="inputCampaignDescription"
-                                      className="col-sm-2 control-label"
+                                      className="col-sm-3 control-label"
                                     >Description</label>
-                                    <div className="col-sm-10">
+                                    <div className="col-sm-9">
                                       <textarea
                                         className="form-control" id="inputCampaignDescription" rows="5"
                                         placeholder="More info..."
