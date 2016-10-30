@@ -170,8 +170,10 @@ class Zone extends Component {
   }
   isIndexOf(...args) {
     for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
+      if (args[i] !== undefined) {
+        if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
+          return true;
+        }
       }
     }
     return false;

@@ -174,7 +174,8 @@ class Banner extends Component {
 
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputPlacementName.value = null;
-    this.inputPlacementSize.value = null;
+    this.inputPlacementSizeHeight.value = null;
+    this.inputPlacementSizeWidth.value = null;
     this.inputPlacementWeight.value = null;
     this.inputPlacementDescription.value = null;
   }
