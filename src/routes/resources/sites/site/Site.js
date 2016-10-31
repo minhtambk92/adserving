@@ -215,6 +215,7 @@ class Site extends Component {
             this.inputSiteDomainError.innerHTML = ('');
           }, 2000);
         } else if (this.props.sites.check && this.props.sites.check.length === 0) {
+          this.inputSiteDomain.value = domain;
           this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-9 has-success');
           setTimeout(() => {
             this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-9');
