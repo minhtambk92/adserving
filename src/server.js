@@ -105,11 +105,6 @@ app.use('/graphql', expressGraphQL(req => ({
 app.use(require('./server/middlewares').default);
 
 //
-// Custom routes
-// -----------------------------------------------------------------------------
-app.use(require('./server/routes').default);
-
-//
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
 app.get('*', async (req, res, next) => {

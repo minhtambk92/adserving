@@ -3,10 +3,13 @@
  */
 
 import express from 'express';
+import { unauthorizedRoutes, authorizedRoutes } from '../routes';
 
 const middleware = express();
 
-middleware.use(/^\/((?!(login|register)$).)*$/, (req, res, next) => {
+middleware.use(unauthorizedRoutes);
+
+middleware.use((req, res, next) => {
   // Check user token for user login state
   if (!req.cookies.id_token) {
     return res.redirect('/login');
@@ -14,5 +17,7 @@ middleware.use(/^\/((?!(login|register)$).)*$/, (req, res, next) => {
 
   return next();
 });
+
+middleware.use(authorizedRoutes);
 
 export default middleware;

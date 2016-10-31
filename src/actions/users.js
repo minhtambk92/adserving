@@ -297,6 +297,15 @@ export function logUserIn({ email, password, rememberMe }) {
 
 export function logUserOut() {
   return async(dispatch) => {
+    await fetch('/logout', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+
     dispatch({
       type: LOG_USER_OUT,
       payload: {
