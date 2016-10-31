@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { registerUser } from '../../actions/users';
+import { navigate } from '../../actions/route';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './Register.css';
@@ -10,7 +11,9 @@ class Register extends Component {
 
   static propTypes = {
     user: PropTypes.object,
+    me: PropTypes.object,
     registerUser: PropTypes.func,
+    navigate: PropTypes.func,
   };
 
   componentDidMount() {
@@ -24,13 +27,19 @@ class Register extends Component {
     });
 
     $(this.inputAgreeTerms).on('ifChecked', () => {
-      this.inputAgreeTerms.value = true;
+      this.inputAgreeTerms.value = 'yes';
     });
 
     $(this.inputAgreeTerms).on('ifUnchecked', () => {
-      this.inputAgreeTerms.value = false;
+      this.inputAgreeTerms.value = 'no';
     });
     /* eslint-enable no-undef */
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.me.registered) {
+      this.props.navigate('/login');
+    }
   }
 
   registerUser() {
@@ -40,7 +49,7 @@ class Register extends Component {
     const fullName = this.inputUserFullName.value;
     const agreeTerms = this.inputAgreeTerms.value;
 
-    if (agreeTerms === 'true' && password && password === passwordConfirmation) {
+    if (agreeTerms === 'yes' && password && password === passwordConfirmation) {
       this.props.registerUser({
         email,
         password,
@@ -151,10 +160,12 @@ class Register extends Component {
 
 const mapState = (state) => ({
   user: state.user,
+  me: state.me,
 });
 
 const mapDispatch = {
   registerUser,
+  navigate,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Register));

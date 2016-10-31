@@ -36,8 +36,9 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const GET_USERS_FILTERS = 'GET_USERS_FILTERS';
 export const SET_USERS_FILTERS = 'SET_USERS_FILTERS';
-export const REGISTER_USER = 'REGISTER_USER';
-export const LOGIN_USER = 'LOGIN_USER';
+export const SIGN_USER_UP = 'SIGN_USER_UP';
+export const LOG_USER_IN = 'LOG_USER_IN';
+export const LOG_USER_OUT = 'LOG_USER_OUT';
 
 export const GET_ROLE = 'GET_ROLE';
 export const GET_ROLES = 'GET_ROLES';
