@@ -9,8 +9,16 @@ import {
 
 function loggedIn(state = {}, action) {
   switch (action.type) {
-    case REGISTER_USER: {
+    default: {
       return state;
+    }
+  }
+}
+
+function registered(state = {}, action) {
+  switch (action.type) {
+    case REGISTER_USER: {
+      return action.payload.user;
     }
     default: {
       return state;
@@ -20,6 +28,7 @@ function loggedIn(state = {}, action) {
 
 const me = combineReducers({
   loggedIn,
+  registered,
 });
 
 export default me;
