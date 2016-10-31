@@ -45,6 +45,10 @@ export function getZone(id) {
           html
           css
           slot
+          width
+          height
+          sizeText
+          sizeValue
           status
           pbzZone {
             placements {
@@ -96,6 +100,10 @@ export function getZones(args = {
           html
           css
           slot
+          width
+          height
+          sizeText
+          sizeValue
           status
           pbzZone {
             placements {
@@ -141,7 +149,8 @@ export function getZones(args = {
   };
 }
 
-export function createZone({ siteId, name, type, html, css, slot, status, description }) {
+export function createZone({ siteId, name, type, html, css,
+  slot, width, height, sizeText, sizeValue, status, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($zone: ZoneInputTypeWithoutId!) {
@@ -154,6 +163,10 @@ export function createZone({ siteId, name, type, html, css, slot, status, descri
           html
           css
           slot
+          width
+          height
+          sizeText
+          sizeValue
           status
           createdAt
           updatedAt
@@ -167,7 +180,11 @@ export function createZone({ siteId, name, type, html, css, slot, status, descri
         type,
         html,
         css,
+        width,
+        height,
         slot,
+        sizeText,
+        sizeValue,
         status,
         description,
       },
@@ -181,7 +198,8 @@ export function createZone({ siteId, name, type, html, css, slot, status, descri
     });
   };
 }
-export function updateZone({ id, siteId, name, type, html, css, slot, status, description }) {
+export function updateZone({ id, siteId, name, type,
+  html, css, slot, width, height, sizeText, sizeValue, status, description }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($zone: ZoneInputType!) {
@@ -194,6 +212,10 @@ export function updateZone({ id, siteId, name, type, html, css, slot, status, de
           html
           css
           slot
+          width
+          height
+          sizeText
+          sizeValue
           status
           createdAt
           updatedAt
@@ -209,6 +231,10 @@ export function updateZone({ id, siteId, name, type, html, css, slot, status, de
         html,
         css,
         slot,
+        width,
+        height,
+        sizeText,
+        sizeValue,
         status,
         description,
       },
@@ -236,6 +262,10 @@ export function deleteZone(id) {
           html
           css
           slot
+          width
+          height
+          sizeText
+          sizeValue
           status
           createdAt
           updatedAt

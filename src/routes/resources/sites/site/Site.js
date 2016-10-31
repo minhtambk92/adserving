@@ -31,7 +31,14 @@ class Site extends Component {
     createZone: PropTypes.func,
     checkSitesByDomain: PropTypes.func,
   };
+  constructor(props, context) {
+    super(props, context);
 
+    this.state = {
+      searchText: '',
+      checkTypeZone: true,
+    };
+  }
   componentWillMount() {
     this.props.getSite(this.props.siteId);
   }
@@ -69,7 +76,35 @@ class Site extends Component {
     });
     /* eslint-enable no-undef */
   }
-
+  onKeyDown(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    this.inputZoneSize.value = 'custom';
+  }
+  onSelectZoneType(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const zoneType = this.inputZoneType.value;
+    if (zoneType !== 'type-3') {
+      event.persist();
+      this.setState((previousState) => ({
+        ...previousState,
+        checkTypeZone: true,
+      }));
+    } else if (zoneType === 'type-3') {
+      event.persist();
+      this.setState((previousState) => ({
+        ...previousState,
+        checkTypeZone: false,
+      }));
+    }
+  }
+  onSelectSize(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const sizeType = this.inputZoneSize.value;
+    if (sizeType !== 'custom') {
+      this.inputZoneHeight.value = sizeType.split('x')[1];
+      this.inputZoneWidth.value = sizeType.split('x')[0];
+    } else if (sizeType === 'custom') {
+      this.inputZoneHeight.value = 0;
+      this.inputZoneWidth.value = 0;
+    }
+  }
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputZoneName.value = null;
     this.inputZoneHTML.value = null;
@@ -77,7 +112,6 @@ class Site extends Component {
     this.inputZoneSlot.value = null;
     this.inputZoneDescription.value = null;
   }
-
   createZone() {
     const name = this.inputZoneName.value;
     const siteId = this.props.siteId;
@@ -85,16 +119,47 @@ class Site extends Component {
     const html = this.inputZoneHTML.value;
     const css = this.inputZoneCSS.value;
     const slot = this.inputZoneSlot.value;
+    let width = 0;
+    let height = 0;
+    let sizeText = '';
+    let sizeValue = '';
+    if (this.state.checkTypeZone === true && type !== 'type-3') {
+      sizeValue = this.inputZoneSize.value;
+      if (this.inputZoneSize.value === 'custom') {
+        if (this.inputZoneWidth.value.trim() !== '' && this.inputZoneHeight.value.trim() !== '') {
+          width = this.inputZoneWidth.value;
+          height = this.inputZoneHeight.value;
+          sizeText = `Custom (${width} x ${height})`;
+        } else {
+          width = 0;
+          height = 0;
+          sizeText = 'Custom (0 x 0)';
+        }
+      } else if (this.inputZoneSize.value !== 'custom') {
+        width = this.inputZoneWidth.value;
+        height = this.inputZoneHeight.value;
+        sizeText = this.inputZoneSize.options[this.inputZoneSize.selectedIndex].text;
+      }
+    } else if (this.state.checkTypeZone === false && type === 'type-3') {
+      width = 0;
+      height = 0;
+      sizeText = 'Custom (Text ad)';
+      sizeValue = '';
+    }
     const status = this.inputZoneStatus.value;
     const description = this.inputZoneDescription.value;
     if (name && siteId && type && description && slot) {
       this.props.createZone({
-        siteId,
         name,
+        siteId,
         type,
         html,
         css,
         slot,
+        width,
+        height,
+        sizeText,
+        sizeValue,
         status,
         description,
       }).then(() => {
@@ -103,7 +168,6 @@ class Site extends Component {
       this.clearInput();
     }
   }
-
   updateSite() {
     const domain = this.inputSiteDomain.value;
     const name = this.inputSiteName.value;
@@ -143,27 +207,27 @@ class Site extends Component {
     if (urlRegex.test(domain) === true) {
       this.props.checkSitesByDomain(domain).then(() => {
         if (this.props.sites.check && this.props.sites.check.length > 0) {
-          this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-10 has-error');
+          this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-9 has-error');
           this.inputSiteDomainError.innerHTML = ('Domain has been used');
           this.inputSiteDomain.value = '';
           setTimeout(() => {
-            this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-10');
+            this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-9');
             this.inputSiteDomainError.innerHTML = ('');
           }, 2000);
         } else if (this.props.sites.check && this.props.sites.check.length === 0) {
-          this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-10 has-success');
+          this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-9 has-success');
           setTimeout(() => {
-            this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-10');
+            this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-9');
             this.inputSiteDomainError.innerHTML = ('');
           }, 2000);
         }
       });
     } else {
-      this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-10 has-error');
+      this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-9 has-error');
       this.inputSiteDomainError.innerHTML = ('Domain fail');
       this.inputSiteDomain.value = '';
       setTimeout(() => {
-        this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-10');
+        this.inputSiteDomain.parentNode.setAttribute('class', 'col-sm-9');
         this.inputSiteDomainError.innerHTML = ('');
       }, 2000);
     }
@@ -378,18 +442,101 @@ class Site extends Component {
                                       <select
                                         id="inputZoneType"
                                         className="form-control"
+                                        onChange={event => this.onSelectZoneType(event)}
                                         ref={c => {
                                           this.inputZoneType = c;
                                         }}
                                       >
-                                        <option value="type-1">Type 1</option>
-                                        <option value="type-2">Type 2</option>
-                                        <option value="type-3">Type 3</option>
-                                        <option value="type-4">Type 4</option>
-                                        <option value="type-5">Type 5</option>
+                                        <option value="type-1">Banner, Button or Rectangle </option>
+                                        <option value="type-2">Interstitial or Floating DHTML </option>
+                                        <option value="type-3">Text ad </option>
+                                        <option value="type-4">Email/Newsletter zone</option>
                                       </select>
                                     </div>
                                   </div>
+                                  { this.state.checkTypeZone === true ? (
+                                    <div className="size">
+                                      <div className="form-group">
+                                        <label
+                                          htmlFor="inputZoneSize"
+                                          className="col-sm-3 control-label"
+                                        >Size</label>
+                                        <div className="col-sm-9">
+                                          <select
+                                            id="inputZoneSize"
+                                            className="form-control"
+                                            onChange={event => this.onSelectSize(event)}
+                                            ref={c => {
+                                              this.inputZoneSize = c;
+                                            }}
+                                          >
+                                            <option value="468x60">IAB Full Banner (468 x 60)</option>
+                                            <option value="120x600">IAB Skyscraper (120 x 600)</option>
+                                            <option value="728x90">IAB Leaderboard (728 x 90)</option>
+                                            <option value="120x90">IAB Button 1 (120 x 90)</option>
+                                            <option value="120x60">IAB Button 2 (120 x 60)</option>
+                                            <option value="234x60">IAB Half Banner (234 x 60)</option>
+                                            <option value="88x31">IAB Micro Bar (88 x 31)</option>
+                                            <option value="125x125">IAB Square Button (125 x 125)</option>
+                                            <option value="120x240">IAB Vertical Banner (120 x 240)</option>
+                                            <option value="180x150">IAB Rectangle (180 x 150)</option>
+                                            <option value="300x250">IAB Medium Rectangle (300 x 250)</option>
+                                            <option value="336x280">IAB Large Rectangle (336 x 280)</option>
+                                            <option value="240x400">IAB Vertical Rectangle (240 x 400)</option>
+                                            <option value="250x250">IAB Square Pop-up (250 x 250)</option>
+                                            <option value="160x600">IAB Wide Skyscraper (160 x 600)</option>
+                                            <option value="720x300">IAB Pop-Under (720 x 300)</option>
+                                            <option value="300x100">IAB 3:1 Rectangle (300 x 100)</option>
+                                            <option value="custom">Custom</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <div className="form-group">
+                                        <label
+                                          htmlFor="inputZoneSize"
+                                          className="col-sm-3 control-label"
+                                        >&nbsp;</label>
+                                        <div className="col-sm-9">
+                                          <div className="row">
+                                            <div className="col-sm-6">
+                                              <label
+                                                htmlFor="inputZoneWidth"
+                                                className="col-sm-4 control-label"
+                                              >Width</label>
+                                              <div className="col-sm-8">
+                                                <input
+                                                  type="number" className="form-control" id="inputZoneWidth"
+                                                  defaultValue="468"
+                                                  onKeyDown={event => this.onKeyDown(event)}
+                                                  placeholder="300"
+                                                  ref={c => {
+                                                    this.inputZoneWidth = c;
+                                                  }}
+                                                />
+                                              </div>
+                                            </div>
+                                            <div className="col-sm-6">
+                                              <label
+                                                htmlFor="inputZoneHeight"
+                                                className="col-sm-4 control-label"
+                                              >Height</label>
+                                              <div className="col-sm-8">
+                                                <input
+                                                  type="number" className="form-control" id="inputZoneHeight"
+                                                  defaultValue="60"
+                                                  onKeyDown={event => this.onKeyDown(event)}
+                                                  placeholder="300"
+                                                  ref={c => {
+                                                    this.inputZoneHeight = c;
+                                                  }}
+                                                />
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ) : ('') }
                                   <div className="form-group">
                                     <label
                                       htmlFor="inputZoneHTML"
@@ -520,7 +667,7 @@ class Site extends Component {
                                     <tr>
                                       <th><input type="checkbox" className="inputChooseSite" /></th>
                                       <th>Name</th>
-                                      <th>Type</th>
+                                      <th>Size</th>
                                       <th>Description</th>
                                       <th>Slot</th>
                                     </tr>
@@ -539,7 +686,7 @@ class Site extends Component {
                                               to={`/resource/zone/${zone.id}`}
                                             >{zone.name}</Link>
                                           </td>
-                                          <td>{zone.type}</td>
+                                          <td>{zone.sizeText}</td>
                                           <td>{zone.description}</td>
                                           <td>{zone.slot}</td>
                                           <td>
@@ -554,7 +701,7 @@ class Site extends Component {
                                     <tr>
                                       <th><input type="checkbox" className="inputChooseSite" /></th>
                                       <th>Name</th>
-                                      <th>Type</th>
+                                      <th>Size</th>
                                       <th>Description</th>
                                       <th>Slot</th>
                                     </tr>

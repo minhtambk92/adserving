@@ -746,7 +746,7 @@ class Placement extends Component {
                                     <tr>
                                       <th><input type="checkbox" className="inputChooseZone" /></th>
                                       <th>Name</th>
-                                      <th>Type</th>
+                                      <th>Size</th>
                                       <th>Slot</th>
                                       <th>&nbsp;</th>
                                     </tr>
@@ -768,7 +768,7 @@ class Placement extends Component {
                                                 <strong>{zone.name}</strong>
                                               </Link>
                                             </td>
-                                            <td>{zone.type}</td>
+                                            <td>{zone.sizeText}</td>
                                             <td>{zone.slot}</td>
                                             <td
                                               onClick={() => this.pushZoneToPlacement(zone.id)}
@@ -786,7 +786,7 @@ class Placement extends Component {
                                     <tr>
                                       <th><input type="checkbox" className="inputChooseZone" /></th>
                                       <th>Name</th>
-                                      <th>Type</th>
+                                      <th>Size</th>
                                       <th>Slot</th>
                                       <th>&nbsp;</th>
                                     </tr>
@@ -823,7 +823,7 @@ class Placement extends Component {
                                     <tr>
                                       <th><input type="checkbox" className="inputChooseZone" /></th>
                                       <th>Name</th>
-                                      <th>Type</th>
+                                      <th>Size</th>
                                       <th>Slot</th>
                                       <th>&nbsp;</th>
                                     </tr>
@@ -842,7 +842,7 @@ class Placement extends Component {
                                                 <strong>{zone.zones.name}</strong>
                                               </Link>
                                             </td>
-                                            <td>{zone.zones.type}</td>
+                                            <td>{zone.zones.sizeText}</td>
                                             <td>{zone.zones.slot}</td>
                                             <td
                                               onClick={() =>
@@ -861,7 +861,7 @@ class Placement extends Component {
                                     <tr>
                                       <th><input type="checkbox" className="inputChooseZone" /></th>
                                       <th>Name</th>
-                                      <th>Type</th>
+                                      <th>sizeText</th>
                                       <th>Slot</th>
                                       <th>&nbsp;</th>
                                     </tr>

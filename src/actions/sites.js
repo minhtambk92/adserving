@@ -32,6 +32,10 @@ export function getSite(id) {
             html
             css
             slot
+            width
+            height
+            sizeText
+            sizeValue
             createdAt
             updatedAt
             }

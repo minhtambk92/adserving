@@ -45,6 +45,22 @@ const Zone = Model.define('Zone', {
     type: DataType.STRING,
     defaultValue: '',
   },
+  height: {
+    type: DataType.INTEGER,
+    defaultValue: 0,
+  },
+  width: {
+    type: DataType.INTEGER,
+    defaultValue: 0,
+  },
+  sizeText: {
+    type: DataType.STRING,
+    defaultValue: '',
+  },
+  sizeValue: {
+    type: DataType.STRING,
+    defaultValue: '',
+  },
   status: {
     type: DataType.STRING,
     allowNull: false,

@@ -233,6 +233,10 @@ export function updatePlacement({
               html
               css
               slot
+              width
+              height
+              sizeText
+              sizeValue
               status
               createdAt
               updatedAt
