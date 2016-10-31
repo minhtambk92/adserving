@@ -4,7 +4,7 @@
 
 import { combineReducers } from 'redux';
 import {
-  REGISTER_USER,
+  SIGN_USER_UP,
 } from '../constants';
 
 function loggedIn(state = {}, action) {
@@ -17,7 +17,7 @@ function loggedIn(state = {}, action) {
 
 function registered(state = {}, action) {
   switch (action.type) {
-    case REGISTER_USER: {
+    case SIGN_USER_UP: {
       return action.payload.user;
     }
     default: {

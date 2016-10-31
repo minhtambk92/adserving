@@ -9,8 +9,9 @@ import {
   DELETE_USER,
   GET_USERS_FILTERS,
   SET_USERS_FILTERS,
-  REGISTER_USER,
-  LOGIN_USER,
+  SIGN_USER_UP,
+  LOG_USER_IN,
+  LOG_USER_OUT,
 } from '../constants';
 
 export function getUsersFilters() {
@@ -259,7 +260,7 @@ export function registerUser({ email, password }) {
     });
 
     dispatch({
-      type: REGISTER_USER,
+      type: SIGN_USER_UP,
       payload: {
         user: data.createdUser,
       },
@@ -267,7 +268,7 @@ export function registerUser({ email, password }) {
   };
 }
 
-export function loginUser({ email, password, rememberMe }) {
+export function logUserIn({ email, password, rememberMe }) {
   return async(dispatch) => {
     const res = await fetch('/login', {
       method: 'post',
@@ -286,9 +287,20 @@ export function loginUser({ email, password, rememberMe }) {
     const { data } = await res.json();
 
     dispatch({
-      type: LOGIN_USER,
+      type: LOG_USER_IN,
       payload: {
         user: data.loggedInUser,
+      },
+    });
+  };
+}
+
+export function logUserOut() {
+  return async(dispatch) => {
+    dispatch({
+      type: LOG_USER_OUT,
+      payload: {
+        user: null,
       },
     });
   };

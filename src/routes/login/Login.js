@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { loginUser } from '../../actions/users';
+import { logUserIn } from '../../actions/users';
 import { navigate } from '../../actions/route';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
@@ -11,7 +11,7 @@ class Login extends Component {
 
   static propTypes = {
     user: PropTypes.object,
-    loginUser: PropTypes.func,
+    logUserIn: PropTypes.func,
     navigate: PropTypes.func,
   };
 
@@ -46,7 +46,7 @@ class Login extends Component {
     const password = this.inputUserPassword.value;
     const rememberMe = this.inputRememberMe.value;
 
-    this.props.loginUser({
+    this.props.logUserIn({
       email,
       password,
       rememberMe,
@@ -141,7 +141,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = {
-  loginUser,
+  logUserIn,
   navigate,
 };
 

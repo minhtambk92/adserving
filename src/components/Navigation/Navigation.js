@@ -12,6 +12,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { logUserOut } from '../../actions/users';
+import { redirect } from '../../actions/route';
 import s from './Navigation.css';
 import Link from '../Link';
 
@@ -47,7 +49,14 @@ class Navigation extends Component {
 
   static propTypes = {
     user: PropTypes.object,
+    logUserOut: PropTypes.func,
+    redirect: PropTypes.func,
   };
+
+  async logUserOut() {
+    await this.props.logUserOut();
+    this.props.redirect('/login');
+  }
 
   renderUserPicture() {
     const { user } = this.props;
@@ -348,7 +357,10 @@ class Navigation extends Component {
                       <Link to="/profile" className="btn btn-default btn-flat">Profile</Link>
                     </div>
                     <div className="pull-right">
-                      <Link to="#" className="btn btn-default btn-flat">Sign out</Link>
+                      <Link
+                        to="#" className="btn btn-default btn-flat"
+                        onClick={event => this.logUserOut(event)}
+                      >Sign out</Link>
                     </div>
                   </li>
                 </ul>
@@ -369,4 +381,9 @@ const mapState = (state) => ({
   user: state.user,
 });
 
-export default withStyles(s)(connect(mapState)(Navigation));
+const mapDispatch = {
+  logUserOut,
+  redirect,
+};
+
+export default withStyles(s)(connect(mapState, mapDispatch)(Navigation));
