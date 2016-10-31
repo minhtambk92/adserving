@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import {
   LOG_USER_IN,
   LOG_USER_OUT,
@@ -9,9 +10,7 @@ export default function user(state = {}, action) {
       return action.payload.user;
     }
     case LOG_USER_OUT: {
-      if (document) {
-        document.cookie = 'id_token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-      }
+      if (Cookies.get('id_token')) Cookies.remove('id_token');
 
       return action.payload.user;
     }
