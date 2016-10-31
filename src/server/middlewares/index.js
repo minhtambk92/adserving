@@ -9,7 +9,7 @@ const middleware = express();
 
 middleware.use(unauthorizedRoutes);
 
-middleware.use((req, res, next) => {
+middleware.use(/^\/((?!(login|register|logout)$).)*$/, (req, res, next) => {
   // Check user token for user login state
   if (!req.cookies.id_token) {
     return res.redirect('/login');
