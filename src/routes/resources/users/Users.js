@@ -19,7 +19,7 @@ import {
   setUsersFilters,
 } from '../../../actions/users';
 import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+import UserList from './UserList';
 import s from './Users.css';
 
 const pageTitle = 'Users Management';
@@ -46,30 +46,12 @@ class Users extends Component {
   componentDidMount() {
     /* eslint-disable no-undef */
     // $('.select2').select2();
-    // $('#example1').DataTable(); // eslint-disable-line new-cap
-
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseUser').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-    /* eslint-enable no-undef */
   }
 
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseUser').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-    /* eslint-enable no-undef */
-  }
-
-  async onFilterChange(event, field) {
+  onFilterChange(event, field) {
     event.persist();
 
-    await this.props.setUsersFilters({
+    this.props.setUsersFilters({
       [field]: event.target.value,
     });
   }
@@ -100,23 +82,6 @@ class Users extends Component {
       this.props.createUser({ email, roleIds, password, emailConfirmed, status });
       this.clearInput();
     }
-  }
-
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
-  }
-
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
-      }
-    }
-    return false;
   }
 
   isFiltered(user) {
@@ -379,81 +344,8 @@ class Users extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: LIST OF USERS */}
-              <div className="box box-info">
-                <div className="box-header with-border">
-                  <h3 className="box-title">List of users</h3>
-
-                  <div className="box-tools">
-                    <div className="input-group input-group-sm" style={{ width: 150 }}>
-                      <input
-                        type="text" name="inputSearchUsers"
-                        className="form-control pull-right"
-                        placeholder="Search..."
-                        onChange={event => this.searchFor(event)}
-                      />
-                      <div className="input-group-btn">
-                        <button
-                          type="submit" className="btn btn-default"
-                        ><i className="fa fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* /.box-header */}
-                <div className="box-body table-responsive no-padding">
-                  <table id="example1" className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseUser" /></th>
-                        <th>Email</th>
-                        <th>Email confirmed</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.props.users.list && this.props.users.list.map(user => {
-                        if (this.isFiltered(user)) {
-                          return (
-                            <tr key={user.id}>
-                              <td><input type="checkbox" className="inputChooseUser" /></td>
-                              <td>
-                                <Link
-                                  to={`/resource/user/${user.id}`}
-                                ><strong>{user.email}</strong></Link>
-                              </td>
-                              <td>{user.emailConfirmed ? 'yes' : 'no'}</td>
-                              <td>{user.status}</td>
-                            </tr>
-                          );
-                        }
-
-                        return false;
-                      })}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseUser" /></th>
-                        <th>Email</th>
-                        <th>Email confirmed</th>
-                        <th>Status</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-                {/* /.box-body */}
-                <div className="box-footer clearfix">
-                  <ul className="pagination pagination-sm no-margin pull-right">
-                    <li><a>&laquo;</a></li>
-                    <li><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>&raquo;</a></li>
-                  </ul>
-                </div>
-              </div>
-              {/* /.box */}
+              <UserList users={this.props.users} />
             </section>
-            {/* /.col */}
           </div>
 
         </div>
