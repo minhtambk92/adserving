@@ -25,6 +25,7 @@
     "express-request-language": "1.1.8",
     "fastclick": "1.0.6",
     "fbjs": "0.8.5",
+    "fixed-data-table": "^0.6.3",
     "font-awesome": "^4.6.3",
     "front-matter": "2.1.0",
     "graphiql": "0.7.8",
