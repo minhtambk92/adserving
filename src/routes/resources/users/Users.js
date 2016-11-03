@@ -105,6 +105,8 @@ class Users extends Component {
   }
 
   render() {
+    const { users } = this.props;
+
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
@@ -343,9 +345,18 @@ class Users extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: LIST OF USERS */}
-              <UserList users={this.props.users} />
+              <div className="box box-info">
+                <div className="box-header with-border">
+                  <h3 className="box-title">List of users</h3>
+                </div>
+                {/* /.box-header */}
+                <div className="box-body table-responsive">
+                  <UserList list={users && users.list} />
+                </div>
+              </div>
+              {/* /.box */}
             </section>
+            {/* /.col */}
           </div>
 
         </div>
