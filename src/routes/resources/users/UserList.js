@@ -11,9 +11,9 @@ import Link from '../../../components/Link';
 const dataTableOptions = {
   columns: [{
     data: 'email',
-    render: (data, type, full) => (
-      <Link to={`/resource/user/${full.id}`}>${data}</Link>
-    ),
+    createdCell: (cell, cellData, rowData) => {
+      ReactDOM.render(<Link to={`/resource/user/${rowData.id}`}>{cellData}</Link>, cell);
+    },
   }, {
     data: 'emailConfirmed',
     render: data => (data ? 'yes' : 'no'),
