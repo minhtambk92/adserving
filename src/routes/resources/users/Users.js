@@ -350,7 +350,7 @@ class Users extends Component {
                   <h3 className="box-title">List of users</h3>
                 </div>
                 {/* /.box-header */}
-                <div className="box-body table-responsive">
+                <div className="box-body">
                   <UserList list={users && users.list} />
                 </div>
               </div>
