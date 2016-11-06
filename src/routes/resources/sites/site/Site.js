@@ -14,6 +14,7 @@ import { getSite, updateSite, deleteSite, checkSitesByDomain } from '../../../..
 import { createZone } from '../../../../actions/zones';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
+import LisrZoneOfSite from '../ListZoneOfSite';
 import s from './Site.css';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 
@@ -643,71 +644,14 @@ class Site extends Component {
                                   List of zones: {this.props.sites.editing ?
                                   this.props.sites.editing.name : '...'}
                                 </h3>
-                                <div className="box-tools">
-                                  <div
-                                    className="input-group input-group-sm"
-                                    style={{ width: 150 }}
-                                  >
-                                    <input
-                                      type="text" name="inputSearchZones"
-                                      className="form-control pull-right"
-                                      placeholder="Search..."
-                                    />
-                                    <div className="input-group-btn">
-                                      <button
-                                        type="submit" className="btn btn-default"
-                                      ><i className="fa fa-search" /></button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                               {/* /.box-header */}
-                              <div className="box-body table-responsive no-padding">
-                                <table id="example1" className="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChooseSite" /></th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Description</th>
-                                      <th>Slot</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {
-                                      this.props.sites.editing &&
+                              <div className="box-body">
+                                <LisrZoneOfSite
+                                  list={this.props.sites.editing &&
                                       this.props.sites.editing.zones &&
-                                      this.props.sites.editing.zones.map(zone => (
-                                        <tr key={zone.id}>
-                                          <td>
-                                            <input type="checkbox" className="inputChooseSite" />
-                                          </td>
-                                          <td>
-                                            <Link
-                                              to={`/resource/zone/${zone.id}`}
-                                            >{zone.name}</Link>
-                                          </td>
-                                          <td>{zone.sizeText}</td>
-                                          <td>{zone.description}</td>
-                                          <td>{zone.slot}</td>
-                                          <td>
-                                            <Link
-                                              to={`/resource/zone/${zone.id}`}
-                                            >Add New Placements</Link>
-                                          </td>
-                                        </tr>)
-                                      )}
-                                  </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChooseSite" /></th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Description</th>
-                                      <th>Slot</th>
-                                    </tr>
-                                  </tfoot>
-                                </table>
+                                      this.props.sites.editing.zones}
+                                />
                               </div>
                               {/* /.box-body */}
                               <div className="box-footer clearfix">
