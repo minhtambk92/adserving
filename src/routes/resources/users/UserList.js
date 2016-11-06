@@ -4,15 +4,33 @@
 
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
-// import InputICheck from './InputICheck';
+import moment from 'moment';
+import InputICheck from './InputICheck';
 import Link from '../../../components/Link';
 
 const dataTableOptions = {
   columns: [{
+    data: 'id',
+    orderable: false,
+    createdCell: (cell, cellData) => {
+      ReactDOM.render(
+        <InputICheck
+          className="inputChooseUser"
+          name="inputChooseUser[]"
+          value={cellData}
+        />,
+        cell
+      );
+    },
+  }, {
     data: 'email',
     createdCell: (cell, cellData, rowData) => {
-      ReactDOM.render(<Link to={`/resource/user/${rowData.id}`}>{cellData}</Link>, cell);
+      ReactDOM.render(
+        <Link
+          to={`/resource/user/${rowData.id}`}
+        >{cellData}</Link>,
+        cell,
+      );
     },
   }, {
     data: 'emailConfirmed',
@@ -21,9 +39,27 @@ const dataTableOptions = {
     data: 'status',
   }, {
     data: 'createdAt',
+    render(data, type) {
+      const output = moment(new Date(data));
+
+      // If display or filter data is requested, format the date
+      if (type === 'display' || type === 'filter') {
+        return output.format('YYYY-MM-DD h:mm:ss A');
+      }
+
+      // Convert to timestamp for ordering
+      if (type === 'sort') {
+        return output.format('x');
+      }
+
+      // Otherwise the data type requested (`type`) is type detection or
+      // sorting data, for which we want to use the integer, so just return
+      // that, unaltered
+      return data;
+    },
   }],
   destroy: true,
-  order: [[3, 'DESC']],
+  order: [[4, 'DESC']],
 };
 
 class UserList extends Component {
@@ -54,16 +90,6 @@ class UserList extends Component {
     /* eslint-enable no-undef */
   }
 
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-    // $('input[type="checkbox"].inputChooseUser').iCheck({
-    //   checkboxClass: 'icheckbox_minimal-blue',
-    //   radioClass: 'iradio_minimal-blue',
-    // });
-    /* eslint-enable no-undef */
-  }
-
   renderDOMLibs() {
     return (
       <table
@@ -74,6 +100,7 @@ class UserList extends Component {
       >
         <thead>
           <tr>
+            <th><InputICheck className="inputChooseAllUsers" /></th>
             <th>Email</th>
             <th>Email confirmed</th>
             <th>Status</th>
@@ -82,6 +109,7 @@ class UserList extends Component {
         </thead>
         <tfoot>
           <tr>
+            <th><InputICheck className="inputChooseAllUsers" /></th>
             <th>Email</th>
             <th>Email confirmed</th>
             <th>Status</th>

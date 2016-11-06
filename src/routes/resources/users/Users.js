@@ -9,6 +9,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getRoles } from '../../../actions/roles';
@@ -54,6 +55,10 @@ class Users extends Component {
     this.props.setUsersFilters({
       [field]: event.target.value,
     });
+  }
+
+  getFilteredUsers() {
+    return _.filter(this.props.users.list, user => this.isFiltered(user));
   }
 
   clearInput() {
@@ -105,8 +110,6 @@ class Users extends Component {
   }
 
   render() {
-    const { users } = this.props;
-
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
@@ -351,7 +354,7 @@ class Users extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <UserList list={users && users.list} />
+                  <UserList list={this.getFilteredUsers()} />
                 </div>
               </div>
               {/* /.box */}
