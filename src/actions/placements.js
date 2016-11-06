@@ -64,6 +64,10 @@ export function getPlacement(id) {
               html
               css
               slot
+              width
+              height
+              sizeText
+              sizeValue
               status
               createdAt
               updatedAt

@@ -19,6 +19,8 @@ import { getCampaigns } from '../../../../actions/campaigns';
 import { createPlacementBannerZone, removeZone, removeZoneInPlacementBannerZone } from '../../../../actions/placementBannerZones';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
+import ListPlacementNotBelongToZone from '../ListPlacementNotBelongToZone';
+import ListPlacementOfZone from '../ListPlacementOfZone';
 import s from './Zone.css';
 
 const pageTitle = 'Zone';
@@ -338,6 +340,15 @@ class Zone extends Component {
     }
     return false;
   }
+  dataPlacement(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const arrPlacement = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      if (arr[i].placements !== null) {
+        arrPlacement.push(arr[i].placements);
+      }
+    }
+    return arrPlacement;
+  }
   pushZoneToPlacement(placementId) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const zoneId = this.props.zoneId;
     const bannerId = null;
@@ -656,91 +667,21 @@ class Zone extends Component {
                             <div className="box box-info">
                               <div className="box-header with-border">
                                 <h3 className="box-title">List Placement</h3>
-
-                                <div className="box-tools">
-                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
-                                    <input
-                                      type="text" name="inputSearchPlacements"
-                                      className="form-control pull-right"
-                                      placeholder="Search..."
-                                    />
-                                    <div className="input-group-btn">
-                                      <button
-                                        type="submit" className="btn btn-default"
-                                      ><i className="fa fa-search" /></button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                               {/* /.box-header */}
-                              <div className="box-body table-responsive no-padding">
-                                <table id="example1" className="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Start Time</th>
-                                      <th>End Time</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                                    {this.props.placements.list && this.props.zones.editing &&
+                              <div className="box-body">
+                                <ListPlacementNotBelongToZone
+                                  list={this.props.placements.list && this.props.zones.editing &&
                                     this.props.zones.editing.pbzZone &&
                                     this.filterPlmNotIn(this.props.placements.list,
-                                      this.props.zones.editing.pbzZone).map(placement => {
-                                        if (this.isIndexOf(placement.name,
-                                            placement.startTime,
-                                            placement.endTime, placement.sizeWidth,
-                                            placement.sizeHeight,
-                                            placement.description, placement.weight)) {
-                                          return (
-                                            <tr key={placement.id}>
-                                              <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                              <th><Link to={`/resource/placement/${placement.id}`}>
-                                                {placement.name}
-                                              </Link>
-                                              </th>
-                                              <td>
-                                                {placement.sizeWidth}px - {placement.sizeHeight}px
-                                              </td>
-                                              <td>{moment(new Date(placement.startTime)).format('L')}</td>
-                                              <td>{moment(new Date(placement.endTime)).format('L')}</td>
-                                              <td
-                                                onClick={() =>
-                                                this.pushZoneToPlacement(placement.id)}
-                                              >
-                                                Add Placement
-                                              </td>
-                                            </tr>
-                                          );
-                                        }
-                                        return false;
-                                      })}
-                                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                                  </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Start Time</th>
-                                      <th>End Time</th>
-                                    </tr>
-                                  </tfoot>
-                                </table>
+                                      this.props.zones.editing.pbzZone)}
+                                  createPlacementBannerZone={this.props.createPlacementBannerZone}
+                                  getZone={this.props.getZone}
+                                  getPlacements={this.props.getPlacements}
+                                  zoneId={this.props.zoneId}
+                                />
                               </div>
                               {/* /.box-body */}
-                              <div className="box-footer clearfix">
-                                <ul className="pagination pagination-sm no-margin pull-right">
-                                  <li><a>&laquo;</a></li>
-                                  <li><a>1</a></li>
-                                  <li><a>2</a></li>
-                                  <li><a>3</a></li>
-                                  <li><a>&raquo;</a></li>
-                                </ul>
-                              </div>
                             </div>
                             {/* /.box */}
                           </section>
@@ -752,91 +693,22 @@ class Zone extends Component {
                                   List placements of {this.props.zones.editing ?
                                   this.props.zones.editing.name : '...'}
                                 </h3>
-                                <div className="box-tools">
-                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
-                                    <input
-                                      type="text" name="inputSearchPlacements"
-                                      className="form-control pull-right"
-                                      placeholder="Search..."
-                                    />
-                                    <div className="input-group-btn">
-                                      <button
-                                        type="submit" className="btn btn-default"
-                                      ><i className="fa fa-search" /></button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                               {/* /.box-header */}
-                              <div className="box-body table-responsive no-padding">
-                                <table id="example1" className="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Start Time</th>
-                                      <th>End Time</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                                    {this.props.zones.editing && this.props.zones.editing.pbzZone &&
-                                    this.props.zones.editing.pbzZone.map(placement => {
-                                      if (this.isIndexOf(placement.placements.name,
-                                          placement.placements.startTime,
-                                          placement.placements.endTime,
-                                          placement.placements.sizeWidth,
-                                          placement.placements.sizeHeight,
-                                          placement.placements.description,
-                                          placement.placements.weight)) {
-                                        return (
-                                          <tr key={placement.placements.id}>
-                                            <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                            <th><Link to={`/resource/placement/${placement.placements.id}`}>
-                                              {placement.placements.name}
-                                            </Link>
-                                            </th>
-                                            <td>
-                                              {placement.placements.sizeWidth}px -
-                                              {placement.placements.sizeHeight}px
-                                            </td>
-                                            <td>{moment(new Date(placement.placements.startTime)).format('L')}</td>
-                                            <td>{moment(new Date(placement.placements.endTime)).format('L')}</td>
-                                            <td
-                                              onClick={() =>
-                                              this.removePlacement(placement.placements.id)}
-                                            >
-                                              Remove
-                                            </td>
-                                          </tr>
-                                        );
-                                      }
-                                      return false;
-                                    })}
-                                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                                  </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Start Time</th>
-                                      <th>End Time</th>
-                                    </tr>
-                                  </tfoot>
-                                </table>
+                              <div className="box-body">
+                                <ListPlacementOfZone
+                                  list={this.props.zones.editing &&
+                                  this.props.zones.editing.pbzZone &&
+                                    this.dataPlacement(this.props.zones.editing.pbzZone)}
+                                  /* eslint-disable max-len */
+                                  removeZoneInPlacementBannerZone={this.props.removeZoneInPlacementBannerZone}
+                                  /* eslint-enable max-len */
+                                  getPlacements={this.props.getPlacements}
+                                  getZone={this.props.getZone}
+                                  zoneId={this.props.zoneId}
+                                />
                               </div>
                               {/* /.box-body */}
-                              <div className="box-footer clearfix">
-                                <ul className="pagination pagination-sm no-margin pull-right">
-                                  <li><a>&laquo;</a></li>
-                                  <li><a>1</a></li>
-                                  <li><a>2</a></li>
-                                  <li><a>3</a></li>
-                                  <li><a>&raquo;</a></li>
-                                </ul>
-                              </div>
                             </div>
                             {/* /.box */}
                           </section>

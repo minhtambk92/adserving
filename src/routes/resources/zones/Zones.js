@@ -20,7 +20,7 @@ import {
 } from '../../../actions/zones';
 import { getPlacements } from '../../../actions/placements';
 import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+import ZoneList from './ZoneList';
 import s from './Zones.css';
 
 const pageTitle = 'Zone Management';
@@ -57,23 +57,11 @@ class Zones extends Component {
 
   componentDidMount() {
     /* eslint-disable no-undef */
-    // $(this.inputZoneType).select2();
-
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseZones').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     /* eslint-enable no-undef */
   }
 
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseZone').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     /* eslint-enable no-undef */
   }
 
@@ -198,28 +186,11 @@ class Zones extends Component {
 
     return !(notMatchPlacement || notMatchStatus || notMatchSite || notMatchType);
   }
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
-  }
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i] !== undefined) {
-        if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
   render() {
+    const { zones } = this.props;
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
-
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FILTER */}
@@ -338,7 +309,6 @@ class Zones extends Component {
               {/* /.col */}
             </section>
           </div>
-
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE A NEW ZONE */}
@@ -600,83 +570,12 @@ class Zones extends Component {
               <div className="box box-info">
                 <div className="box-header with-border">
                   <h3 className="box-title">List of zones</h3>
-
-                  <div className="box-tools">
-                    <div className="input-group input-group-sm" style={{ width: 150 }}>
-                      <input
-                        type="text" name="inputSearchZones"
-                        className="form-control pull-right"
-                        placeholder="Search..."
-                        onChange={event => this.searchFor(event)}
-                      />
-                      <div className="input-group-btn">
-                        <button
-                          type="submit" className="btn btn-default"
-                        ><i className="fa fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 {/* /.box-header */}
-                <div className="box-body table-responsive no-padding">
-                  <table id="example1" className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseZones" /></th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Slot</th>
-                        <th>&nbsp;</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.props.zones.list && this.props.zones.list.map(zone => {
-                        if (!this.isFiltered(zone)) {
-                          return false;
-                        }
-                        if (this.isIndexOf(zone.name)) {
-                          return (
-                            <tr key={zone.id}>
-                              <td><input type="checkbox" className="inputChooseZone" /></td>
-                              <td>
-                                <Link to={`/resource/zone/${zone.id}`}>
-                                  <strong>{zone.name}</strong>
-                                </Link>
-                              </td>
-                              <td>{zone.sizeText}</td>
-                              <td>{zone.description}</td>
-                              <td>{zone.slot}</td>
-                              <td><Link to={`/resource/zone/${zone.id}`}>Add New Placements</Link>
-                              </td>
-                            </tr>
-                          );
-                        }
-                        return false;
-                      })}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseZones" /></th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Slot</th>
-                        <th>&nbsp;</th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                <div className="box-body">
+                  <ZoneList list={zones && zones.list} />
                 </div>
                 {/* /.box-body */}
-                <div className="box-footer clearfix">
-                  <ul className="pagination pagination-sm no-margin pull-right">
-                    <li><a>&laquo;</a></li>
-                    <li><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>&raquo;</a></li>
-                  </ul>
-                </div>
               </div>
               {/* /.box */}
             </section>

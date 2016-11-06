@@ -21,6 +21,8 @@ import {
 } from '../../../../actions/placementBannerZones';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
+import ListPlacementNotBelongBanner from '../ListPlacementNotBelongBanner';
+import ListPlacementOfBanner from '../ListPlacementOfBanner';
 import s from './Banner.css';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 
@@ -199,7 +201,7 @@ class Banner extends Component {
       if (arr[i].placements !== null) {
         if (arrId.indexOf(arr[i].placements.id) === -1) {
           arrId.push(arr[i].placements.id);
-          arrPlacement.push(arr[i]);
+          arrPlacement.push(arr[i].placements);
         }
       }
     }
@@ -242,18 +244,6 @@ class Banner extends Component {
       }
     }
     return false;
-  }
-
-  pushPlacementToBanner(placementId) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const bannerId = this.props.bannerId;
-    const zoneId = null;
-    if (placementId && bannerId) {
-      this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
-        this.props.getBanner(this.props.bannerId).then(() => {
-          this.props.getPlacements();
-        });
-      });
-    }
   }
 
   updateBanner() {
@@ -329,23 +319,6 @@ class Banner extends Component {
         });
       });
     }
-  }
-
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
-  }
-
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
-      }
-    }
-    return false;
   }
 
   render() {
@@ -596,104 +569,24 @@ class Banner extends Component {
                             <div className="box box-info">
                               <div className="box-header with-border">
                                 <h3 className="box-title">List Placement</h3>
-
-                                <div className="box-tools">
-                                  <div
-                                    className="input-group input-group-sm"
-                                    style={{ width: 150 }}
-                                  >
-                                    <input
-                                      type="text" name="inputSearchPlacements"
-                                      className="form-control pull-right"
-                                      placeholder="Search..."
-                                      onChange={event => this.searchFor(event)}
-                                    />
-                                    <div className="input-group-btn">
-                                      <button
-                                        type="submit" className="btn btn-default"
-                                      ><i className="fa fa-search" /></button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                               {/* /.box-header */}
-                              <div className="box-body table-responsive no-padding">
-                                <table id="example1" className="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" />
-                                      </th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Start Time</th>
-                                      <th>End Time</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {
-                                      this.props.placements.list &&
+                              <div className="box-body">
+                                <ListPlacementNotBelongBanner
+                                  list={this.props.placements.list &&
                                       this.props.banners.editing &&
                                       this.props.banners.editing.pbzBanner &&
                                       this.filterPlmNotIn(
                                         this.props.placements.list,
                                         this.props.banners.editing.pbzBanner
-                                      ).map(placement => {
-                                        if (this.isIndexOf(placement.name)) {
-                                          return (
-                                            <tr key={placement.id}>
-                                              <th>
-                                                <input
-                                                  type="checkbox"
-                                                  className="inputChoosePlacement"
-                                                />
-                                              </th>
-                                              <th>
-                                                <Link
-                                                  to={`/resource/placement/${placement.id}`}
-                                                >{placement.name}</Link>
-                                              </th>
-                                              <td>
-                                                {placement.sizeWidth}px - {placement.sizeHeight}px
-                                              </td>
-                                              <td>{moment(new Date(placement.startTime)).format('L')}</td>
-                                              <td>{moment(new Date(placement.endTime)).format('L')}</td>
-                                              <td>
-                                                <Link
-                                                  to="#"
-                                                  onClick={event =>
-                                                    this.pushPlacementToBanner(placement.id, event)
-                                                  }
-                                                >Add Placement</Link>
-                                              </td>
-                                            </tr>
-                                          );
-                                        }
-
-                                        return false;
-                                      })}
-                                  </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" />
-                                      </th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Start Time</th>
-                                      <th>End Time</th>
-                                    </tr>
-                                  </tfoot>
-                                </table>
+                                      )}
+                                  createPlacementBannerZone={this.props.createPlacementBannerZone}
+                                  getBanner={this.props.getBanner}
+                                  getPlacements={this.props.getPlacements}
+                                  bannerId={this.props.bannerId}
+                                />
                               </div>
                               {/* /.box-body */}
-                              <div className="box-footer clearfix">
-                                <ul className="pagination pagination-sm no-margin pull-right">
-                                  <li><a>&laquo;</a></li>
-                                  <li><a>1</a></li>
-                                  <li><a>2</a></li>
-                                  <li><a>3</a></li>
-                                  <li><a>&raquo;</a></li>
-                                </ul>
-                              </div>
                             </div>
                             {/* /.box */}
                           </section>
@@ -707,75 +600,22 @@ class Banner extends Component {
                                 </h3>
                               </div>
                               {/* /.box-header */}
-                              <div className="box-body table-responsive no-padding">
-                                <table id="example1" className="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" />
-                                      </th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Start Time</th>
-                                      <th>End Time</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {
-                                      this.props.banners.editing &&
+                              <div className="box-body">
+                                <ListPlacementOfBanner
+                                  list={this.props.banners.editing &&
                                       this.props.banners.editing.pbzBanner &&
                                       this.filterPlacements(
                                         this.props.banners.editing.pbzBanner
-                                      ).map(placement => (
-                                        <tr key={placement.placements.id}>
-                                          <th>
-                                            <input
-                                              type="checkbox"
-                                              className="inputChoosePlacement"
-                                            />
-                                          </th>
-                                          <th>
-                                            <Link
-                                              to={`/resource/placement/${placement.placements.id}`}
-                                            >{placement.placements.name}</Link>
-                                          </th>
-                                          <td>{placement.placements.sizeWidth}px -
-                                            {placement.placements.sizeHeight}px
-                                          </td>
-                                          <td>{moment(new Date(placement.placements.startTime)).format('L')}</td>
-                                          <td>{moment(new Date(placement.placements.endTime)).format('L')}</td>
-                                          <td>
-                                            <Link
-                                              to="#"
-                                              onClick={() =>
-                                                this.removePlacement(placement.placements.id)
-                                              }
-                                            >Remove</Link>
-                                          </td>
-                                        </tr>
-                                      ))}
-                                  </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" />
-                                      </th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Start Time</th>
-                                      <th>End Time</th>
-                                    </tr>
-                                  </tfoot>
-                                </table>
+                                      )}
+                                  /* eslint-disable max-len */
+                                  removeBannerInPlacementBannerZone={this.props.removeBannerInPlacementBannerZone}
+                                  /* eslint-enable max-len */
+                                  getPlacements={this.props.getPlacements}
+                                  getBanner={this.props.getBanner}
+                                  bannerId={this.props.bannerId}
+                                />
                               </div>
                               {/* /.box-body */}
-                              <div className="box-footer clearfix">
-                                <ul className="pagination pagination-sm no-margin pull-right">
-                                  <li><a>&laquo;</a></li>
-                                  <li><a>1</a></li>
-                                  <li><a>2</a></li>
-                                  <li><a>3</a></li>
-                                  <li><a>&raquo;</a></li>
-                                </ul>
-                              </div>
                             </div>
                             {/* /.box */}
                           </section>

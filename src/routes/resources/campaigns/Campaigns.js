@@ -14,7 +14,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getCampaigns, createCampaign, getCampaignsFilters, setCampaignsFilters } from '../../../actions/campaigns';
 import { getAdvertisers } from '../../../actions/advertisers';
 import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+import CampaignList from './CampaignList';
 import s from './Campaigns.css';
 
 const pageTitle = 'Campaigns';
@@ -50,18 +50,11 @@ class Campaigns extends Component {
     const dateStart = new Date();
     dateStart.setDate(dateStart.getDate());
     /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseCampaign').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-
     $('#inputCampaignStartTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',
       startDate: dateStart,
     });
-
     $('#inputCampaignEndTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',
@@ -71,10 +64,6 @@ class Campaigns extends Component {
 
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChooseCampaign').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     $('#inputCampaignStartTime').datepicker('update', new Date());
     /* eslint-disable no-underscore-dangle */
     $('#inputCampaignEndTime').datepicker('update', moment().add(1, 'month')._d);
@@ -147,23 +136,9 @@ class Campaigns extends Component {
       }
     }
   }
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
-  }
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   render() {
+    const { campaigns } = this.props;
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
@@ -436,81 +411,12 @@ class Campaigns extends Component {
               <div className="box box-info">
                 <div className="box-header with-border">
                   <h3 className="box-title">List Campaign</h3>
-
-                  <div className="box-tools">
-                    <div className="input-group input-group-sm" style={{ width: 150 }}>
-                      <input
-                        type="text" name="inputSearchcampaigns"
-                        className="form-control pull-right"
-                        placeholder="Search..."
-                        onChange={event => this.searchFor(event)}
-                      />
-                      <div className="input-group-btn">
-                        <button
-                          type="submit" className="btn btn-default"
-                        ><i className="fa fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 {/* /.box-header */}
-                <div className="box-body table-responsive no-padding">
-                  <table id="example1" className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseCampaign" /></th>
-                        <th>Name</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Views</th>
-                        <th>View/Session</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      { this.props.campaigns.list && this.props.campaigns.list.map(campaign => {
-                        if (!this.isFiltered(campaign)) {
-                          return false;
-                        }
-                        if (this.isIndexOf(campaign.name)) {
-                          return (
-                            <tr key={campaign.id}>
-                              <th><input type="checkbox" className="inputChooseCampaign" /></th>
-                              <th><Link to={`/resource/campaign/${campaign.id}`}>{campaign.name}</Link>
-                              </th>
-                              <td>{moment(new Date(campaign.startTime)).format('L')}</td>
-                              <td>{moment(new Date(campaign.endTime)).format('L')}</td>
-                              <td>{campaign.views}</td>
-                              <td>{campaign.viewPerSession}</td>
-                              <th><Link to={`/resource/campaign/${campaign.id}`}>Add New Placements</Link>
-                              </th>
-                            </tr>
-                          );
-                        }
-                        return false;
-                      })}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseCampaign" /></th>
-                        <th>Name</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Views</th>
-                        <th>View/Session</th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                <div className="box-body">
+                  <CampaignList list={campaigns && campaigns.list} />
                 </div>
                 {/* /.box-body */}
-                <div className="box-footer clearfix">
-                  <ul className="pagination pagination-sm no-margin pull-right">
-                    <li><a>&laquo;</a></li>
-                    <li><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>&raquo;</a></li>
-                  </ul>
-                </div>
               </div>
               {/* /.box */}
             </section>

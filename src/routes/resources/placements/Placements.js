@@ -14,7 +14,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getPlacements, createPlacement, getPlacementsFilters, setPlacementsFilters } from '../../../actions/placements';
 import { getCampaigns } from '../../../actions/campaigns';
 import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+import PlacemenList from './PlacementList';
 import s from './Placements.css';
 
 const pageTitle = 'Placements';
@@ -51,11 +51,6 @@ class Placements extends Component {
     const dateEnd = new Date();
     dateEnd.setDate(dateEnd.getDate() + 1);
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChoosePlacement').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-
     $('#inputPlacementStartTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',
@@ -73,10 +68,6 @@ class Placements extends Component {
   }
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChoosePlacement').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     $('#inputPlacementStartTime').datepicker('update', new Date());
     /* eslint-disable no-underscore-dangle */
     $('#inputPlacementEndTime').datepicker('update', moment().add(1, 'month')._d);
@@ -143,25 +134,9 @@ class Placements extends Component {
       }
     }
   }
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
-  }
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i]) {
-        if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
 
   render() {
+    const { placements } = this.props;
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
@@ -409,84 +384,12 @@ class Placements extends Component {
               <div className="box box-info">
                 <div className="box-header with-border">
                   <h3 className="box-title">List Placement</h3>
-
-                  <div className="box-tools">
-                    <div className="input-group input-group-sm" style={{ width: 150 }}>
-                      <input
-                        type="text" name="inputSearchPlacements"
-                        className="form-control pull-right"
-                        placeholder="Search..." onChange={event => this.searchFor(event)}
-                      />
-                      <div className="input-group-btn">
-                        <button
-                          type="submit" className="btn btn-default"
-                        ><i className="fa fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 {/* /.box-header */}
-                <div className="box-body table-responsive no-padding">
-                  <table id="example1" className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                        <th>Name</th>
-                        <th>Size</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      { this.props.placements.list &&
-                      this.props.placements.list.map(placement => {
-                        if (!this.isFiltered(placement)) {
-                          return false;
-                        }
-                        if (this.isIndexOf(placement.name)) {
-                          return (
-                            <tr key={placement.id}>
-                              <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                              <th><Link to={`/resource/placement/${placement.id}`}>{placement.name}</Link>
-                              </th>
-                              <td>{placement.sizeWidth}px - {placement.sizeHeight}px</td>
-                              <td>{moment(new Date(placement.startTime)).format('L')}</td>
-                              <td>{moment(new Date(placement.endTime)).format('L')}</td>
-                              <th><Link to={`/resource/placement/${placement.id}`}>Add banner</Link>
-                              </th>
-                              <th><Link to={`/resource/placement/${placement.id}`}>Add Zone</Link>
-                              </th>
-                            </tr>
-                          );
-                        }
-                        return false;
-                      })}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                        <th>Name</th>
-                        <th>Size</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                <div className="box-body">
+                  <PlacemenList list={placements && placements.list} />
                 </div>
                 {/* /.box-body */}
-                <div className="box-footer clearfix">
-                  <ul className="pagination pagination-sm no-margin pull-right">
-                    <li><a>&laquo;</a></li>
-                    <li><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>&raquo;</a></li>
-                  </ul>
-                </div>
               </div>
               {/* /.box */}
             </section>

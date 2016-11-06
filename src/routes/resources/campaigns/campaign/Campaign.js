@@ -21,6 +21,7 @@ import { getAdvertisers } from '../../../../actions/advertisers';
 import { createPlacement } from '../../../../actions/placements';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
+import PlacementList from '../../placements/PlacementList';
 import s from './Campaign.css';
 
 const pageTitle = 'Campaign';
@@ -70,11 +71,6 @@ class Campaign extends Component {
       startDate: dateEnd,
     });
 
-    $('input[type="checkbox"].inputChoosePlacement').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-
     $('#inputPlacementStartTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',
@@ -119,10 +115,6 @@ class Campaign extends Component {
 
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChoosePlacement').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     $('#inputPlacementStartTime').datepicker('update', new Date());
     /* eslint-disable no-underscore-dangle */
     $('#inputPlacementEndTime').datepicker('update', moment().add(1, 'month')._d);
@@ -484,7 +476,7 @@ class Campaign extends Component {
                     <div className="row">
                       <div className="col-lg-12">
                         <div className="row">
-                          <section className="col-lg-6">
+                          <section className="col-lg-5">
                             {/* BOX: FORM OF CREATE NEW PlacementS */}
                             <div className="box box-info">
                               <div className="box-header with-border">
@@ -636,7 +628,7 @@ class Campaign extends Component {
                             </div>
                             {/* /.col */}
                           </section>
-                          <section className="col-lg-6">
+                          <section className="col-lg-7">
                             {/* BOX: LIST OF Placements */}
                             <div className="box box-info">
                               <div className="box-header with-border">
@@ -644,85 +636,16 @@ class Campaign extends Component {
                                   this.props.campaigns.editing ?
                                     this.props.campaigns.editing.name : '...'
                                 }</h3>
-
-                                <div className="box-tools">
-                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
-                                    <input
-                                      type="text" name="inputSearchPlacements"
-                                      className="form-control pull-right"
-                                      placeholder="Search..." onChange={event => this.searchFor(event)}
-                                    />
-                                    <div className="input-group-btn">
-                                      <button
-                                        type="submit" className="btn btn-default"
-                                      ><i className="fa fa-search" /></button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                               {/* /.box-header */}
-                              <div className="box-body table-responsive no-padding">
-                                <table id="example1" className="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Start Time</th>
-                                      <th>End Time</th>
-                                      <th>&nbsp;</th>
-                                      <th>&nbsp;</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    { this.props.campaigns.editing &&
+                              <div className="box-body">
+                                <PlacementList
+                                  list={this.props.campaigns.editing &&
                                     this.props.campaigns.editing.placements &&
-                                    this.props.campaigns.editing.placements.map(placement => {
-                                      if (this.isIndexOf(placement.name, placement.startTime,
-                                          placement.endTime, placement.sizeWidth,
-                                          placement.sizeHeight,
-                                          placement.description, placement.weight)) {
-                                        return (
-                                          <tr key={placement.id}>
-                                            <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                            <th><Link to={`/placement/${placement.id}`}>{placement.name}</Link>
-                                            </th>
-                                            <td>
-                                              {placement.sizeWidth}px - {placement.sizeHeight}px
-                                            </td>
-                                            <td>{moment(new Date(placement.startTime)).format('L')}</td>
-                                            <td>{moment(new Date(placement.endTime)).format('L')}</td>
-                                            <th><Link to={`/placement/${placement.id}`}>Add Banner</Link></th>
-                                            <th><Link to={`/placement/${placement.id}`}>Add Zone</Link></th>
-                                          </tr>
-                                        );
-                                      }
-                                      return false;
-                                    })}
-                                  </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Start Time</th>
-                                      <th>End Time</th>
-                                      <th>&nbsp;</th>
-                                      <th>&nbsp;</th>
-                                    </tr>
-                                  </tfoot>
-                                </table>
+                                    this.props.campaigns.editing.placements}
+                                />
                               </div>
                               {/* /.box-body */}
-                              <div className="box-footer clearfix">
-                                <ul className="pagination pagination-sm no-margin pull-right">
-                                  <li><a>&laquo;</a></li>
-                                  <li><a>1</a></li>
-                                  <li><a>2</a></li>
-                                  <li><a>3</a></li>
-                                  <li><a>&raquo;</a></li>
-                                </ul>
-                              </div>
                             </div>
                             {/* /.box */}
                           </section>

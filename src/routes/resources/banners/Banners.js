@@ -21,7 +21,7 @@ import {
 } from '../../../actions/banners';
 import { getPlacements } from '../../../actions/placements';
 import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+import BannerList from './BannerList';
 import s from './Banners.css';
 
 const pageTitle = 'Home';
@@ -77,18 +77,10 @@ class Banners extends Component {
   componentDidMount() {
     /* eslint-disable no-undef */
     // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseBanner').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
   }
 
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChooseBanner').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     /* eslint-enable no-undef */
   }
 
@@ -125,6 +117,7 @@ class Banners extends Component {
 
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputBannerName.value = null;
+    this.inputBannerHTML.value = null;
     this.inputBannerWidth.value = null;
     this.inputBannerHeight.value = null;
     this.inputBannerKeyWord.value = null;
@@ -171,24 +164,8 @@ class Banners extends Component {
       });
     }
   }
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
-  }
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i] !== undefined) {
-        if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
   render() {
+    const { banners } = this.props;
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
@@ -481,79 +458,12 @@ class Banners extends Component {
               <div className="box box-info">
                 <div className="box-header with-border">
                   <h3 className="box-title">List Banner</h3>
-
-                  <div className="box-tools">
-                    <div className="input-group input-group-sm" style={{ width: 150 }}>
-                      <input
-                        type="text" name="inputSearchBanners"
-                        className="form-control pull-right"
-                        placeholder="Search..."
-                        onChange={event => this.searchFor(event)}
-                      />
-                      <div className="input-group-btn">
-                        <button
-                          type="submit" className="btn btn-default"
-                        ><i className="fa fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 {/* /.box-header */}
-                <div className="box-body table-responsive no-padding">
-                  <table id="example1" className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseBanner" /></th>
-                        <th>Name</th>
-                        <th>Size</th>
-                        <th>KeyWord</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      { this.props.banners.list && this.props.banners.list.map(banner => {
-                        if (!this.isFiltered(banner)) {
-                          return false;
-                        }
-                        if (this.isIndexOf(banner.name)) {
-                          return (
-                            <tr key={banner.id}>
-                              <th><input type="checkbox" className="inputChooseBanner" /></th>
-                              <td><Link to={`/resource/banner/${banner.id}`}>{banner.name}</Link>
-                              </td>
-                              <td>{banner.width}px - {banner.height}px</td>
-                              <td>{banner.keyword}</td>
-                              <td>{banner.description}</td>
-                              <td>
-                                <Link to={`/resource/banner/${banner.id}`}>Add Placement</Link>
-                              </td>
-                            </tr>
-                          );
-                        }
-                        return false;
-                      })}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseBanner" /></th>
-                        <th>Name</th>
-                        <th>Size</th>
-                        <th>KeyWord</th>
-                        <th>Description</th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                <div className="box-body">
+                  <BannerList list={banners && banners.list} />
                 </div>
                 {/* /.box-body */}
-                <div className="box-footer clearfix">
-                  <ul className="pagination pagination-sm no-margin pull-right">
-                    <li><a>&laquo;</a></li>
-                    <li><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>&raquo;</a></li>
-                  </ul>
-                </div>
               </div>
               {/* /.box */}
             </section>

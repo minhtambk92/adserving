@@ -20,6 +20,7 @@ import {
 import { createCampaign } from '../../../../actions/campaigns';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
+import CampaignList from '../../campaigns/CampaignList';
 import s from './Advertiser.css';
 
 const pageTitle = 'Advertiser';
@@ -143,13 +144,6 @@ class Advertiser extends Component {
     this.inputCampaignDescription.value = null;
   }
 
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
-  }
 
   isIndexOf(...args) {
     for (let i = 0; i < args.length; i += 1) {
@@ -346,7 +340,7 @@ class Advertiser extends Component {
                     <div className="row">
                       <section className="col-lg-12">
                         <div className="row">
-                          <div className="col-lg-6">
+                          <div className="col-lg-5">
                             <div className="box box-info">
                               <div className="box-header with-border">
                                 <h3 className="box-title">Add New Campaign</h3>
@@ -514,7 +508,7 @@ class Advertiser extends Component {
                               </form>
                             </div>
                           </div>
-                          <div className="col-lg-6">
+                          <div className="col-lg-7">
                             {/* BOX: LIST OF campaigns */}
                             <div className="box box-info">
                               <div className="box-header with-border">
@@ -526,58 +520,14 @@ class Advertiser extends Component {
                                 } </h3>
                               </div>
                               {/* /.box-header */}
-                              <div className="box-body table-responsive no-padding">
-                                <table id="example1" className="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChooseCampaign" /></th>
-                                      <th>Name</th>
-                                      <th>Start Time</th>
-                                      <th>End Time</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {this.props.advertisers.editing &&
-                                    this.props.advertisers.editing.campaigns
-                                    && this.props.advertisers.editing.campaigns.map(campaign => {
-                                      if (this.isIndexOf(campaign.name,
-                                          campaign.startTime, campaign.endTime,
-                                          campaign.views, campaign.viewPerSession,
-                                          campaign.timeResetViewCount)) {
-                                        return (
-                                          <tr key={campaign.id}>
-                                            <th><input type="checkbox" className="inputChooseCampaign" /></th>
-                                            <th><Link to={`/resource/campaign/${campaign.id}`}>{campaign.name}</Link>
-                                            </th>
-                                            <td>{moment(new Date(campaign.startTime)).format('L')}</td>
-                                            <td>{moment(new Date(campaign.endTime)).format('L')}</td>
-                                            <td><Link to={`/resource/campaign/${campaign.id}`}>Add New Placement</Link></td>
-                                          </tr>
-                                        );
-                                      }
-                                      return false;
-                                    })}
-                                  </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChooseCampaign" /></th>
-                                      <th>Name</th>
-                                      <th>Start Time</th>
-                                      <th>End Time</th>
-                                    </tr>
-                                  </tfoot>
-                                </table>
+                              <div className="box-body">
+                                <CampaignList
+                                  list={this.props.advertisers.editing &&
+                                  this.props.advertisers.editing.campaigns
+                                  && this.props.advertisers.editing.campaigns}
+                                />
                               </div>
                               {/* /.box-body */}
-                              <div className="box-footer clearfix">
-                                <ul className="pagination pagination-sm no-margin pull-right">
-                                  <li><a>&laquo;</a></li>
-                                  <li><a>1</a></li>
-                                  <li><a>2</a></li>
-                                  <li><a>3</a></li>
-                                  <li><a>&raquo;</a></li>
-                                </ul>
-                              </div>
                             </div>
                             {/* /.box */}
                           </div>

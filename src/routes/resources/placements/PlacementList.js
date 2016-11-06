@@ -1,32 +1,46 @@
-/**
- * Created by Manhhailua on 11/2/16.
- */
-
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 import ReactDOM from 'react-dom';
+import Link from '../../../components/Link';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // import InputICheck from './InputICheck';
-import Link from '../../../components/Link';
 
 const dataTableOptions = {
   columns: [{
-    data: 'email',
+    data: 'name',
     createdCell: (cell, cellData, rowData) => {
-      ReactDOM.render(<Link to={`/resource/user/${rowData.id}`}>{cellData}</Link>, cell);
+      ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>{cellData}</Link>, cell);
     },
   }, {
-    data: 'emailConfirmed',
-    render: data => (data ? 'yes' : 'no'),
+    data: null,
+    render: (data, type, row) => {
+      const size = `${row.sizeWidth} x ${row.sizeHeight}`;
+      return size;
+    },
   }, {
-    data: 'status',
+    data: 'startTime',
+    render: data => (data ? moment(new Date(data)).format('L') : ''),
   }, {
-    data: 'createdAt',
+    data: 'endTime',
+    render: data => (data ? moment(new Date(data)).format('L') : ''),
+  }, {
+    data: 'description',
+  }, {
+    data: null,
+    createdCell: (cell, cellData, rowData) => {
+      ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>New Zone</Link>, cell);
+    },
+  }, {
+    data: null,
+    createdCell: (cell, cellData, rowData) => {
+      ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>New Banner</Link>, cell);
+    },
   }],
   destroy: true,
-  order: [[3, 'DESC']],
+  order: [[1, 'DESC']],
 };
 
-class UserList extends Component {
+class PlacementList extends Component {
 
   static propTypes = {
     containerWidth: PropTypes.number,
@@ -55,13 +69,6 @@ class UserList extends Component {
   }
 
   componentDidUpdate() {
-    /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-    // $('input[type="checkbox"].inputChooseUser').iCheck({
-    //   checkboxClass: 'icheckbox_minimal-blue',
-    //   radioClass: 'iradio_minimal-blue',
-    // });
-    /* eslint-enable no-undef */
   }
 
   renderDOMLibs() {
@@ -74,18 +81,24 @@ class UserList extends Component {
       >
         <thead>
           <tr>
-            <th>Email</th>
-            <th>Email confirmed</th>
-            <th>Status</th>
-            <th>Created date</th>
+            <th>Name</th>
+            <th>Size(px)</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Description</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
-            <th>Email</th>
-            <th>Email confirmed</th>
-            <th>Status</th>
-            <th>Created date</th>
+            <th>Name</th>
+            <th>Size(px)</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Description</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
           </tr>
         </tfoot>
       </table>
@@ -104,4 +117,4 @@ class UserList extends Component {
   }
 }
 
-export default UserList;
+export default PlacementList;

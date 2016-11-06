@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getAdvertisers, createAdvertiser } from '../../../actions/advertisers';
 import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+import AdvertiserList from './AdvertiserList';
 import s from './Advertisers.css';
 
 const pageTitle = 'Home';
@@ -39,23 +39,11 @@ class Advertisers extends Component {
 
   componentDidMount() {
     /* eslint-disable no-undef */
-    // $('.select2').select2();
-    // $('#example1').DataTable(); // eslint-disable-line new-cap
-
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseAdvertiser').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     /* eslint-enable no-undef */
   }
 
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChooseAdvertiser').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     /* eslint-enable no-undef */
   }
 
@@ -64,14 +52,6 @@ class Advertisers extends Component {
     this.inputAdvertiserContact.value = null;
     this.inputAdvertiserEmail.value = null;
     this.inputAdvertiserDescription.value = null;
-  }
-
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
   }
 
   createAdvertiser() {
@@ -88,20 +68,11 @@ class Advertisers extends Component {
     }
   }
 
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   render() {
+    const { advertisers } = this.props;
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
-
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW WEB ADVERTISER */}
@@ -211,88 +182,18 @@ class Advertisers extends Component {
               {/* /.col */}
             </section>
           </div>
-
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: LIST OF ADVERTISERS */}
-              <div className="box box-info">
+              <div className="box">
                 <div className="box-header with-border">
                   <h3 className="box-title">List Advertiser</h3>
-
-                  <div className="box-tools">
-                    <div className="input-group input-group-sm" style={{ width: 150 }}>
-                      <input
-                        type="text" name="inputSearchAdvertisers"
-                        className="form-control pull-right"
-                        placeholder="Search..." onChange={event => this.searchFor(event)}
-                      />
-                      <div className="input-group-btn">
-                        <button
-                          type="submit" className="btn btn-default"
-                        ><i className="fa fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 {/* /.box-header */}
-                <div className="box-body table-responsive no-padding">
-                  <table id="example1" className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseAdvertiser" /></th>
-                        <th>Name</th>
-                        <th>Contact</th>
-                        <th>Email</th>
-                        <th>&nbsp;</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      { this.props.advertisers.list &&
-                      this.props.advertisers.list.map(advertiser => {
-                        if (this.isIndexOf(advertiser.email, advertiser.contact,
-                            advertiser.name, advertiser.description)) {
-                          return (
-                            <tr key={advertiser.id}>
-                              <td><input type="checkbox" className="inputChooseAdvertiser" /></td>
-                              <td>
-                                <Link
-                                  to={`/resource/advertiser/${advertiser.id}`}
-                                >{advertiser.name}</Link>
-                              </td>
-                              <td>{advertiser.contact}</td>
-                              <td>{advertiser.email}</td>
-                              <td>
-                                <Link
-                                  to={`/resource/advertiser/${advertiser.id}`}
-                                >Add New Campaign</Link>
-                              </td>
-                            </tr>
-                          );
-                        }
-                        return false;
-                      })}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseAdvertiser" /></th>
-                        <th>Name</th>
-                        <th>Contact</th>
-                        <th>Email</th>
-                        <th>&nbsp;</th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                <div className="box-body">
+                  <AdvertiserList list={advertisers && advertisers.list} />
                 </div>
                 {/* /.box-body */}
-                <div className="box-footer clearfix">
-                  <ul className="pagination pagination-sm no-margin pull-right">
-                    <li><a>&laquo;</a></li>
-                    <li><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>&raquo;</a></li>
-                  </ul>
-                </div>
               </div>
               {/* /.box */}
             </section>

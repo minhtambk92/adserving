@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSites, createSite, checkSitesByDomain } from '../../../actions/sites';
 import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+import SiteList from './SiteList';
 import s from './Sites.css';
 
 const pageTitle = 'Sites Management';
@@ -42,20 +42,11 @@ class Sites extends Component {
 
   componentDidMount() {
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChooseSite').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     /* eslint-enable no-undef */
   }
 
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseSite').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     /* eslint-enable no-undef */
   }
 
@@ -77,14 +68,6 @@ class Sites extends Component {
       this.props.createSite({ domain, name, email, description, status });
       this.clearInput();
     }
-  }
-
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
   }
   validateDomain(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const domain = this.inputSiteDomain.value;
@@ -119,16 +102,9 @@ class Sites extends Component {
       }, 2000);
     }
   }
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   render() {
+    const { sites } = this.props;
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
@@ -258,73 +234,12 @@ class Sites extends Component {
               <div className="box box-info">
                 <div className="box-header with-border">
                   <h3 className="box-title">List of websites</h3>
-
-                  <div className="box-tools">
-                    <div className="input-group input-group-sm" style={{ width: 150 }}>
-                      <input
-                        type="text" name="inputSearchSites"
-                        className="form-control pull-right"
-                        placeholder="Search..."
-                        onChange={event => this.searchFor(event)}
-                      />
-                      <div className="input-group-btn">
-                        <button
-                          type="submit" className="btn btn-default"
-                        ><i className="fa fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 {/* /.box-header */}
-                <div className="box-body table-responsive no-padding">
-                  <table id="example1" className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseSite" /></th>
-                        <th>Name</th>
-                        <th>Domain</th>
-                        <th>Email</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.props.sites.list && this.props.sites.list.map(site => {
-                        if (this.isIndexOf(site.domain, site.name, site.email, site.description)) {
-                          return (
-                            <tr key={site.id}>
-                              <td><input type="checkbox" className="inputChooseSite" /></td>
-                              <td><Link to={`/resource/site/${site.id}`}>{site.name}</Link></td>
-                              <td>{site.domain}</td>
-                              <td>{site.email}</td>
-                              <td>{site.description}</td>
-                              <td><Link to={`/resource/site/${site.id}`}>Add New Zone</Link></td>
-                            </tr>
-                          );
-                        }
-                        return false;
-                      })}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseSite" /></th>
-                        <th>Name</th>
-                        <th>Domain</th>
-                        <th>Status</th>
-                        <th>Description</th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                <div className="box-body">
+                  <SiteList list={sites && sites.list} />
                 </div>
                 {/* /.box-body */}
-                <div className="box-footer clearfix">
-                  <ul className="pagination pagination-sm no-margin pull-right">
-                    <li><a>&laquo;</a></li>
-                    <li><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>&raquo;</a></li>
-                  </ul>
-                </div>
               </div>
               {/* /.box */}
             </section>

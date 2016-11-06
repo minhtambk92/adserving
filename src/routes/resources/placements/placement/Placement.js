@@ -19,6 +19,10 @@ import { createPlacementBannerZone, removePlacement, removeBannerInPlacementBann
 import { getZones } from '../../../../actions/zones';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
+import ListBannerNotBelongPlacement from '../ListBannerNotBelongPlacement';
+import ListBannerOfPlacement from '../ListBannerOfPlacement';
+import ListZoneNotBelongPlacement from '../ListZoneNotBelongPlacement';
+import ListZoneOfPlacement from '../ListZoneOfPlacement';
 import s from './Placement.css';
 
 const pageTitle = 'Placement';
@@ -137,13 +141,6 @@ class Placement extends Component {
       radioClass: 'iradio_minimal-blue',
     });
     /* eslint-enable no-undef */
-  }
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
   }
   isIndexOf(...args) {
     for (let i = 0; i < args.length; i += 1) {
@@ -285,48 +282,23 @@ class Placement extends Component {
     }
     return false;
   }
-
-  pushBannerToPlacement(bannerId) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const placementId = this.props.placementId;
-    const zoneId = null;
-    if (placementId && bannerId) {
-      this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
-        this.props.getPlacement(this.props.placementId).then(() => {
-          this.props.getBanners();
-        });
-      });
+  dataBanner(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const arrBanner = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      if (arr[i].banners !== null) {
+        arrBanner.push(arr[i].banners);
+      }
     }
+    return arrBanner;
   }
-  pushZoneToPlacement(zoneId) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const placementId = this.props.placementId;
-    const bannerId = null;
-    if (placementId && zoneId) {
-      this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
-        this.props.getPlacement(this.props.placementId).then(() => {
-          this.props.getZones();
-        });
-      });
+  dataZone(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const arrZone = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      if (arr[i].zones !== null) {
+        arrZone.push(arr[i].zones);
+      }
     }
-  }
-  removeBannerToPlacement(bId) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const placementId = this.props.placementId;
-    if (placementId && bId) {
-      this.props.removeBannerInPlacementBannerZone({ placementId, bId }).then(() => {
-        this.props.getPlacement(this.props.placementId).then(() => {
-          this.props.getBanners();
-        });
-      });
-    }
-  }
-  removeZoneToPlacement(zId) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const placementId = this.props.placementId;
-    if (placementId && zId) {
-      this.props.removeZoneInPlacementBannerZone({ placementId, zId }).then(() => {
-        this.props.getPlacement(this.props.placementId).then(() => {
-          this.props.getZones();
-        });
-      });
-    }
+    return arrZone;
   }
 
   render() {
@@ -557,81 +529,23 @@ class Placement extends Component {
                             <div className="box box-info">
                               <div className="box-header with-border">
                                 <h3 className="box-title">List All Banner</h3>
-
-                                <div className="box-tools">
-                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
-                                    <input
-                                      type="text" name="inputSearchPlacements"
-                                      className="form-control pull-right"
-                                      placeholder="Search..."
-                                      onChange={event => this.searchFor(event)}
-                                    />
-                                    <div className="input-group-btn">
-                                      <button
-                                        type="submit" className="btn btn-default"
-                                      ><i className="fa fa-search" /></button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                               {/* /.box-header */}
-                              <div className="box-body table-responsive no-padding">
-                                <table id="example1" className="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                      <th>Name</th>
-                                      <th>Size(px)</th>
-                                      <th>KeyWords</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                                    { this.props.banners.list && this.props.placements.editing &&
+                              <div className="box-body">
+                                <ListBannerNotBelongPlacement
+                                  list={this.props.banners && this.props.banners.list
+                                   && this.props.placements && this.props.placements.editing &&
                                     this.props.placements.editing.pbzPlacement &&
                                     this.filterBanner(this.props.banners.list,
                                       this.props.placements.editing.pbzPlacement
-                                    ).map(banner => {
-                                      if (this.isIndexOf(banner.name)) {
-                                        return (
-                                          <tr key={banner.id}>
-                                            <th><input type="checkbox" className="inputChooseBanner" /></th>
-                                            <td><Link to={`/resource/banner/${banner.id}`}>{banner.name}</Link>
-                                            </td>
-                                            <td>{banner.width}px - {banner.height}px</td>
-                                            <td>{banner.keyword}</td>
-                                            <td
-                                              onClick={() => this.pushBannerToPlacement(banner.id)}
-                                            >
-                                              Add To Placement
-                                            </td>
-                                          </tr>
-                                        );
-                                      }
-                                      return false;
-                                    })}
-                                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                                  </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                      <th>Name</th>
-                                      <th>Size(px)</th>
-                                      <th>KeyWords</th>
-                                    </tr>
-                                  </tfoot>
-                                </table>
+                                    )}
+                                  createPlacementBannerZone={this.props.createPlacementBannerZone}
+                                  getPlacement={this.props.getPlacement}
+                                  getBanners={this.props.getBanners}
+                                  placementId={this.props.placementId}
+                                />
                               </div>
                               {/* /.box-body */}
-                              <div className="box-footer clearfix">
-                                <ul className="pagination pagination-sm no-margin pull-right">
-                                  <li><a>&laquo;</a></li>
-                                  <li><a>1</a></li>
-                                  <li><a>2</a></li>
-                                  <li><a>3</a></li>
-                                  <li><a>&raquo;</a></li>
-                                </ul>
-                              </div>
                             </div>
                             {/* /.box */}
                           </section>
@@ -646,66 +560,20 @@ class Placement extends Component {
                                 </h3>
                               </div>
                               {/* /.box-header */}
-                              <div className="box-body table-responsive no-padding">
-                                <table id="example1" className="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChooseBanner" /></th>
-                                      <th>Name</th>
-                                      <th>Size(px)</th>
-                                      <th>Key Words</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                                    {this.props.placements.editing &&
+                              <div className="box-body">
+                                <ListBannerOfPlacement
+                                  list={this.props.placements && this.props.placements.editing &&
                                     this.props.placements.editing.pbzPlacement &&
-                                    this.props.placements.editing.pbzPlacement.map(banner => {
-                                      if (banner.banners) {
-                                        return (
-                                          <tr key={banner.banners.id}>
-                                            <th><input type="checkbox" className="inputChooseBanner" /></th>
-                                            <th><Link to={`/resource/banner/${banner.banners.id}`}>
-                                              {banner.banners.name}
-                                            </Link>
-                                            </th>
-                                            <td>
-                                              {banner.banners.width}px - {banner.banners.height}px
-                                            </td>
-                                            <td>{banner.banners.keyword}</td>
-                                            <td
-                                              onClick={() =>
-                                              this.removeBannerToPlacement(banner.banners.id)}
-                                            >
-                                              Remove
-                                            </td>
-                                          </tr>
-                                        );
-                                      }
-                                      return false;
-                                    })}
-                                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                                  </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChoosePlacement" /></th>
-                                      <th>Name</th>
-                                      <th>Size(px)</th>
-                                      <th>Key Words</th>
-                                    </tr>
-                                  </tfoot>
-                                </table>
+                                    this.dataBanner(this.props.placements.editing.pbzPlacement)}
+                                  /* eslint-disable max-len */
+                                  removeBannerInPlacementBannerZone={this.props.removeBannerInPlacementBannerZone}
+                                  /* eslint-enable max-len */
+                                  getPlacement={this.props.getPlacement}
+                                  getBanners={this.props.getBanners}
+                                  placementId={this.props.placementId}
+                                />
                               </div>
                               {/* /.box-body */}
-                              <div className="box-footer clearfix">
-                                <ul className="pagination pagination-sm no-margin pull-right">
-                                  <li><a>&laquo;</a></li>
-                                  <li><a>1</a></li>
-                                  <li><a>2</a></li>
-                                  <li><a>3</a></li>
-                                  <li><a>&raquo;</a></li>
-                                </ul>
-                              </div>
                             </div>
                             {/* /.box */}
                           </section>
@@ -722,87 +590,23 @@ class Placement extends Component {
                             <div className="box box-info">
                               <div className="box-header with-border">
                                 <h3 className="box-title">List All Zones</h3>
-
-                                <div className="box-tools">
-                                  <div className="input-group input-group-sm" style={{ width: 150 }}>
-                                    <input
-                                      type="text" name="inputSearchZones"
-                                      className="form-control pull-right"
-                                      placeholder="Search..."
-                                      onChange={event => this.searchFor(event)}
-                                    />
-                                    <div className="input-group-btn">
-                                      <button
-                                        type="submit" className="btn btn-default"
-                                      ><i className="fa fa-search" /></button>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                               {/* /.box-header */}
-                              <div className="box-body table-responsive no-padding">
-                                <table id="example1" className="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChooseZone" /></th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Slot</th>
-                                      <th>&nbsp;</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                                    { this.props.zones.list && this.props.placements.editing &&
+                              <div className="box-body">
+                                <ListZoneNotBelongPlacement
+                                  list={this.props.zones && this.props.zones.list &&
+                                  this.props.placements &&
+                                  this.props.placements.editing &&
                                     this.props.placements.editing.pbzPlacement &&
                                     this.filterZones(this.props.zones.list,
-                                      this.props.placements.editing.pbzPlacement
-                                    ).map(zone => {
-                                      if (this.isIndexOf(zone.name, zone.type,
-                                          zone.width, zone.height, zone.html, zone.description)) {
-                                        return (
-                                          <tr key={zone.id}>
-                                            <td><input type="checkbox" className="inputChooseZone" /></td>
-                                            <td>
-                                              <Link to={`/resource/zone/${zone.id}`}>
-                                                <strong>{zone.name}</strong>
-                                              </Link>
-                                            </td>
-                                            <td>{zone.sizeText}</td>
-                                            <td>{zone.slot}</td>
-                                            <td
-                                              onClick={() => this.pushZoneToPlacement(zone.id)}
-                                            >
-                                              Add To Placement
-                                            </td>
-                                          </tr>
-                                        );
-                                      }
-                                      return false;
-                                    })}
-                                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                                  </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChooseZone" /></th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Slot</th>
-                                      <th>&nbsp;</th>
-                                    </tr>
-                                  </tfoot>
-                                </table>
+                                      this.props.placements.editing.pbzPlacement)}
+                                  createPlacementBannerZone={this.props.createPlacementBannerZone}
+                                  getPlacement={this.props.getPlacement}
+                                  getZones={this.props.getZones}
+                                  placementId={this.props.placementId}
+                                />
                               </div>
                               {/* /.box-body */}
-                              <div className="box-footer clearfix">
-                                <ul className="pagination pagination-sm no-margin pull-right">
-                                  <li><a>&laquo;</a></li>
-                                  <li><a>1</a></li>
-                                  <li><a>2</a></li>
-                                  <li><a>3</a></li>
-                                  <li><a>&raquo;</a></li>
-                                </ul>
-                              </div>
                             </div>
                             {/* /.box */}
                           </section>
@@ -817,67 +621,20 @@ class Placement extends Component {
                                 </h3>
                               </div>
                               {/* /.box-header */}
-                              <div className="box-body table-responsive no-padding">
-                                <table id="example1" className="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChooseZone" /></th>
-                                      <th>Name</th>
-                                      <th>Size</th>
-                                      <th>Slot</th>
-                                      <th>&nbsp;</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                                    {this.props.placements.editing &&
+                              <div className="box-body">
+                                <ListZoneOfPlacement
+                                  list={this.props.placements && this.props.placements.editing &&
                                     this.props.placements.editing.pbzPlacement &&
-                                    this.props.placements.editing.pbzPlacement.map(zone => {
-                                      if (zone.zones) {
-                                        return (
-                                          <tr key={zone.zones.id}>
-                                            <td><input type="checkbox" className="inputChooseZone" /></td>
-                                            <td>
-                                              <Link to={`/resource/zone/${zone.zones.id}`}>
-                                                <strong>{zone.zones.name}</strong>
-                                              </Link>
-                                            </td>
-                                            <td>{zone.zones.sizeText}</td>
-                                            <td>{zone.zones.slot}</td>
-                                            <td
-                                              onClick={() =>
-                                              this.removeZoneToPlacement(zone.zones.id)}
-                                            >
-                                              Remove
-                                            </td>
-                                          </tr>
-                                        );
-                                      }
-                                      return false;
-                                    })}
-                                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                                  </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <th><input type="checkbox" className="inputChooseZone" /></th>
-                                      <th>Name</th>
-                                      <th>sizeText</th>
-                                      <th>Slot</th>
-                                      <th>&nbsp;</th>
-                                    </tr>
-                                  </tfoot>
-                                </table>
+                                    this.dataZone(this.props.placements.editing.pbzPlacement)}
+                                  /* eslint-disable max-len */
+                                  removeZoneInPlacementBannerZone={this.props.removeZoneInPlacementBannerZone}
+                                  /* eslint-enable max-len */
+                                  getPlacement={this.props.getPlacement}
+                                  getZones={this.props.getZones}
+                                  placementId={this.props.placementId}
+                                />
                               </div>
                               {/* /.box-body */}
-                              <div className="box-footer clearfix">
-                                <ul className="pagination pagination-sm no-margin pull-right">
-                                  <li><a>&laquo;</a></li>
-                                  <li><a>1</a></li>
-                                  <li><a>2</a></li>
-                                  <li><a>3</a></li>
-                                  <li><a>&raquo;</a></li>
-                                </ul>
-                              </div>
                             </div>
                             {/* /.box */}
                           </section>
