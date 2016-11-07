@@ -46,7 +46,7 @@ async function userFiction() {
       console.log('No user found! Do a fiction...');
 
       // Get role:admin
-      const admin = await Role.findOne({ uniqueName: 'admin' });
+      const admin = await Role.findOne({ where: { uniqueName: 'admin' } });
 
       // Create an admin account
       const user = await User.create({
