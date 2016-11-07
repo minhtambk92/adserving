@@ -39,8 +39,9 @@ class UserList extends Component {
     });
     /* eslint-enable no-undef */
   }
+
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const columns = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -63,6 +64,8 @@ class UserList extends Component {
           cell,
         );
       },
+    }, {
+      data: 'profile.displayName',
     }, {
       data: 'emailConfirmed',
       render: data => (data ? 'yes' : 'no'),
@@ -89,7 +92,6 @@ class UserList extends Component {
         return data;
       },
     }];
-    return columns;
   }
 
   renderDOMLibs() {
@@ -104,6 +106,7 @@ class UserList extends Component {
           <tr>
             <th><InputICheck className="inputChooseAllUsers" /></th>
             <th>Email</th>
+            <th>Name</th>
             <th>Email confirmed</th>
             <th>Status</th>
             <th>Created date</th>
@@ -113,6 +116,7 @@ class UserList extends Component {
           <tr>
             <th><InputICheck className="inputChooseAllUsers" /></th>
             <th>Email</th>
+            <th>Name</th>
             <th>Email confirmed</th>
             <th>Status</th>
             <th>Created date</th>

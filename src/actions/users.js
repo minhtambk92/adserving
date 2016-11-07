@@ -120,7 +120,7 @@ export function getUsers(args = {
   };
 }
 
-export function createUser({ email, roleIds, password, emailConfirmed, status }) {
+export function createUser({ email, profile, roles, password, emailConfirmed, status }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($user: UserInputTypeWithoutId!) {
@@ -147,7 +147,8 @@ export function createUser({ email, roleIds, password, emailConfirmed, status })
     const { data } = await graphqlRequest(mutation, {
       user: {
         email,
-        roleIds,
+        profile,
+        roles,
         password,
         emailConfirmed: emailConfirmed === 'true',
         status,
@@ -163,7 +164,7 @@ export function createUser({ email, roleIds, password, emailConfirmed, status })
   };
 }
 
-export function updateUser({ id, email, roleIds, password, emailConfirmed, status }) {
+export function updateUser({ id, email, profile, roles, password, emailConfirmed, status }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($user: UserInputType!) {
@@ -191,7 +192,8 @@ export function updateUser({ id, email, roleIds, password, emailConfirmed, statu
       user: {
         id,
         email,
-        roleIds,
+        profile,
+        roles,
         password,
         emailConfirmed: emailConfirmed === 'true',
         status,

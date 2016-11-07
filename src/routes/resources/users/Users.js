@@ -69,7 +69,8 @@ class Users extends Component {
 
   createUser() {
     const email = this.inputUserEmail.value;
-    const roleIds = [this.inputUsersRole.value];
+    const displayName = this.inputUserDisplayName.value;
+    const roles = [this.inputUserRoles.value];
     const password = this.inputUserPassword.value;
     const passwordConfirmation = this.inputUserPasswordConfirmation.value;
     const emailConfirmed = this.inputUserEmailConfirmed.value;
@@ -77,14 +78,25 @@ class Users extends Component {
 
     if (
       email &&
-      roleIds &&
+      displayName &&
+      roles &&
       password &&
       passwordConfirmation &&
       password === passwordConfirmation &&
       emailConfirmed &&
       status
     ) {
-      this.props.createUser({ email, roleIds, password, emailConfirmed, status });
+      this.props.createUser({
+        email,
+        profile: {
+          displayName,
+        },
+        roles,
+        password,
+        emailConfirmed,
+        status,
+      });
+
       this.clearInput();
     }
   }
@@ -208,7 +220,7 @@ class Users extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: FORM OF CREATE A NEW USER */}
+              {/* BOX: CREATE */}
               <div className="box box-default collapsed-box">
                 <div className="box-header with-border">
                   <h3 className="box-title">Create a new user</h3>
@@ -239,21 +251,36 @@ class Users extends Component {
                     </div>
                     <div className="form-group">
                       <label
-                        htmlFor="inputUsersRole"
+                        htmlFor="inputUserDisplayName"
+                        className="col-sm-2 control-label"
+                      >Name</label>
+                      <div className="col-sm-10">
+                        <input
+                          type="text" className="form-control" id="inputUserDisplayName"
+                          placeholder="John Doe"
+                          ref={c => {
+                            this.inputUserDisplayName = c;
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputUserRoles"
                         className="col-sm-2 control-label"
                       >Role</label>
                       <div className="col-sm-10">
                         <select
-                          id="inputUsersRole"
+                          id="inputUserRoles"
                           className="form-control select2"
                           style={{ width: '100%' }}
                           ref={c => {
-                            this.inputUsersRole = c;
+                            this.inputUserRoles = c;
                           }}
                           defaultValue={this.props.users.filters && this.props.users.filters.roleId}
                         >
                           {this.props.roles.list && this.props.roles.list.map(role => (
-                            <option key={role.id} value={role.id}>{role.name}</option>
+                            <option key={role.id} value={role.uniqueName}>{role.name}</option>
                           ))}
                         </select>
                       </div>
