@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
-// import InputICheck from './InputICheck';
-
+import InputICheck from './../../../components/UI/InputICheck';
 class PlacementList extends Component {
 
   static propTypes = {
@@ -43,9 +41,22 @@ class PlacementList extends Component {
   }
   dataTableOptions() {
     const colums = [{
+      data: 'id',
+      orderable: false,
+      createdCell: (cell, cellData) => {
+        ReactDOM.render(
+          <InputICheck
+            className="inputChooseBanner"
+            name="inputChooseBanner[]"
+            value={cellData}
+          />,
+          cell
+        );
+      },
+    }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>{cellData}</Link>, cell);
+        ReactDOM.render(<Link to={`/resource/banner/${rowData.id}`}>{cellData}</Link>, cell);
       },
     }, {
       data: null,
@@ -90,6 +101,7 @@ class PlacementList extends Component {
       >
         <thead>
           <tr>
+            <th><InputICheck className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>
@@ -97,6 +109,7 @@ class PlacementList extends Component {
         </thead>
         <tfoot>
           <tr>
+            <th><InputICheck className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>

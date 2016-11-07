@@ -53,10 +53,6 @@ class Advertiser extends Component {
     const dateEnd = new Date();
     dateEnd.setDate(dateEnd.getDate() + 1);
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChooseCampaign').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     $('#inputCampaignStartTime').datepicker({
       autoclose: true,
       todayHighlight: 'TRUE',
@@ -87,10 +83,6 @@ class Advertiser extends Component {
   }
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChooseCampaign').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     $('#inputCampaignStartTime').datepicker('update', new Date());
     /* eslint-disable no-underscore-dangle */
     $('#inputCampaignEndTime').datepicker('update', moment().add(1, 'month')._d);
@@ -142,16 +134,6 @@ class Advertiser extends Component {
     this.inputCampaignTimeResetViewCount.value = null;
     this.inputCampaignWeight.value = null;
     this.inputCampaignDescription.value = null;
-  }
-
-
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
-      }
-    }
-    return false;
   }
 
   updateAdvertiser() {

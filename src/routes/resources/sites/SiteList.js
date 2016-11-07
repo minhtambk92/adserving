@@ -1,30 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
-// import InputICheck from './InputICheck';
-
-const dataTableOptions = {
-  columns: [{
-    data: 'name',
-    createdCell: (cell, cellData, rowData) => {
-      ReactDOM.render(<Link to={`/resource/site/${rowData.id}`}>{cellData}</Link>, cell);
-    },
-  }, {
-    data: 'domain',
-  }, {
-    data: 'email',
-  }, {
-    data: 'description',
-  }, {
-    data: null,
-    createdCell: (cell, cellData, rowData) => {
-      ReactDOM.render(<Link to={`/resource/site/${rowData.id}`}>New Zone</Link>, cell);
-    },
-  }],
-  destroy: true,
-  order: [[1, 'DESC']],
-};
+import InputICheck from './../../../components/UI/InputICheck';
 
 class SiteList extends Component {
 
@@ -37,7 +14,9 @@ class SiteList extends Component {
     /* eslint-disable no-undef */
     $(this.dataTable).dataTable({
       data: this.props.list,
-      ...dataTableOptions,
+      columns: this.dataTableOptions(),
+      destroy: true,
+      order: [[1, 'DESC']],
     });
     /* eslint-enable no-undef */
 
@@ -49,14 +28,45 @@ class SiteList extends Component {
     /* eslint-disable no-undef */
     $(this.dataTable).dataTable({
       data: nextProps.list,
-      ...dataTableOptions,
+      columns: this.dataTableOptions(),
+      destroy: true,
+      order: [[1, 'DESC']],
     });
     /* eslint-enable no-undef */
   }
-
-  componentDidUpdate() {
+  dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const columns = [{
+      data: 'id',
+      orderable: false,
+      createdCell: (cell, cellData) => {
+        ReactDOM.render(
+          <InputICheck
+            className="inputChooseSite"
+            name="inputChooseSite[]"
+            value={cellData}
+          />,
+          cell
+        );
+      },
+    }, {
+      data: 'name',
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link to={`/resource/site/${rowData.id}`}>{cellData}</Link>, cell);
+      },
+    }, {
+      data: 'domain',
+    }, {
+      data: 'email',
+    }, {
+      data: 'description',
+    }, {
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link to={`/resource/site/${rowData.id}`}>New Zone</Link>, cell);
+      },
+    }];
+    return columns;
   }
-
   renderDOMLibs() {
     return (
       <table
@@ -67,6 +77,7 @@ class SiteList extends Component {
       >
         <thead>
           <tr>
+            <th><InputICheck className="inputChooseAllSites" /></th>
             <th>Name</th>
             <th>Domain</th>
             <th>Email</th>
@@ -76,6 +87,7 @@ class SiteList extends Component {
         </thead>
         <tfoot>
           <tr>
+            <th><InputICheck className="inputChooseAllSites" /></th>
             <th>Name</th>
             <th>Domain</th>
             <th>Email</th>

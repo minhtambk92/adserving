@@ -121,7 +121,9 @@ class Banners extends Component {
 
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputBannerName.value = null;
-    this.inputBannerHTML.value = null;
+    if (this.state.checkTypeBanner === 'html') {
+      this.inputBannerHTML.value = null;
+    };
     this.inputBannerWidth.value = null;
     this.inputBannerHeight.value = null;
     this.inputBannerKeyWord.value = null;

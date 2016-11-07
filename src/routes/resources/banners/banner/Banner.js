@@ -66,10 +66,6 @@ class Banner extends Component {
     const dateEnd = new Date();
     dateEnd.setDate(dateEnd.getDate() + 1);
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChoosePlacement').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
 
     $('#inputPlacementStartTime').datepicker({
       autoclose: true,
@@ -124,10 +120,6 @@ class Banner extends Component {
 
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChoosePlacement').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     $('#inputPlacementStartTime').datepicker('update', new Date());
     /* eslint-disable no-underscore-dangle */
     $('#inputPlacementEndTime').datepicker('update', moment().add(1, 'month')._d);
@@ -308,17 +300,6 @@ class Banner extends Component {
   deleteBanner() {
     this.props.deleteBanner(this.props.bannerId);
     this.props.removeBanner(this.props.bannerId);
-  }
-
-  removePlacement(placementId) {
-    const bId = this.props.bannerId;
-    if (placementId && bId) {
-      this.props.removeBannerInPlacementBannerZone({ placementId, bId }).then(() => {
-        this.props.getBanner(this.props.bannerId).then(() => {
-          this.props.getPlacements();
-        });
-      });
-    }
   }
 
   render() {

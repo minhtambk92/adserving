@@ -66,22 +66,7 @@ class Placement extends Component {
 
   componentDidMount() {
     /* eslint-disable no-undef */
-    // $('.select2').select2();
-    // $('#example1').DataTable(); // eslint-disable-line new-cap
-
     // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChoosePlacement').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-    $('input[type="checkbox"].inputChooseBanner').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-    $('input[type="checkbox"].inputChooseZone').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     const dateStart = new Date();
     dateStart.setDate(dateStart.getDate());
 
@@ -128,29 +113,7 @@ class Placement extends Component {
   }
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChoosePlacement').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-    $('input[type="checkbox"].inputChooseBanner').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-    $('input[type="checkbox"].inputChooseZone').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     /* eslint-enable no-undef */
-  }
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i] !== undefined) {
-        if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   updatePlacement() {

@@ -5,62 +5,8 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
-import InputICheck from './InputICheck';
+import InputICheck from './../../../components/UI/InputICheck';
 import Link from '../../../components/Link';
-
-const dataTableOptions = {
-  columns: [{
-    data: 'id',
-    orderable: false,
-    createdCell: (cell, cellData) => {
-      ReactDOM.render(
-        <InputICheck
-          className="inputChooseUser"
-          name="inputChooseUser[]"
-          value={cellData}
-        />,
-        cell
-      );
-    },
-  }, {
-    data: 'email',
-    createdCell: (cell, cellData, rowData) => {
-      ReactDOM.render(
-        <Link
-          to={`/resource/user/${rowData.id}`}
-        >{cellData}</Link>,
-        cell,
-      );
-    },
-  }, {
-    data: 'emailConfirmed',
-    render: data => (data ? 'yes' : 'no'),
-  }, {
-    data: 'status',
-  }, {
-    data: 'createdAt',
-    render(data, type) {
-      const output = moment(new Date(data));
-
-      // If display or filter data is requested, format the date
-      if (type === 'display' || type === 'filter') {
-        return output.format('YYYY-MM-DD h:mm:ss A');
-      }
-
-      // Convert to timestamp for ordering
-      if (type === 'sort') {
-        return output.format('x');
-      }
-
-      // Otherwise the data type requested (`type`) is type detection or
-      // sorting data, for which we want to use the integer, so just return
-      // that, unaltered
-      return data;
-    },
-  }],
-  destroy: true,
-  order: [[4, 'DESC']],
-};
 
 class UserList extends Component {
 
@@ -73,7 +19,9 @@ class UserList extends Component {
     /* eslint-disable no-undef */
     $(this.dataTable).dataTable({
       data: this.props.list,
-      ...dataTableOptions,
+      columns: this.dataTableOptions(),
+      destroy: true,
+      order: [[4, 'DESC']],
     });
     /* eslint-enable no-undef */
 
@@ -85,9 +33,63 @@ class UserList extends Component {
     /* eslint-disable no-undef */
     $(this.dataTable).dataTable({
       data: nextProps.list,
-      ...dataTableOptions,
+      columns: this.dataTableOptions(),
+      destroy: true,
+      order: [[4, 'DESC']],
     });
     /* eslint-enable no-undef */
+  }
+  dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const columns = [{
+      data: 'id',
+      orderable: false,
+      createdCell: (cell, cellData) => {
+        ReactDOM.render(
+          <InputICheck
+            className="inputChooseUser"
+            name="inputChooseUser[]"
+            value={cellData}
+          />,
+          cell
+        );
+      },
+    }, {
+      data: 'email',
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(
+          <Link
+            to={`/resource/user/${rowData.id}`}
+          >{cellData}</Link>,
+          cell,
+        );
+      },
+    }, {
+      data: 'emailConfirmed',
+      render: data => (data ? 'yes' : 'no'),
+    }, {
+      data: 'status',
+    }, {
+      data: 'createdAt',
+      render(data, type) {
+        const output = moment(new Date(data));
+
+        // If display or filter data is requested, format the date
+        if (type === 'display' || type === 'filter') {
+          return output.format('YYYY-MM-DD h:mm:ss A');
+        }
+
+        // Convert to timestamp for ordering
+        if (type === 'sort') {
+          return output.format('x');
+        }
+
+        // Otherwise the data type requested (`type`) is type detection or
+        // sorting data, for which we want to use the integer, so just return
+        // that, unaltered
+        return data;
+      },
+    }];
+    return columns;
   }
 
   renderDOMLibs() {

@@ -2,32 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
+import InputICheck from './../../../components/UI/InputICheck';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
-// import InputICheck from './InputICheck';
-
-const dataTableOptions = {
-  columns: [{
-    data: 'name',
-    createdCell: (cell, cellData, rowData) => {
-      ReactDOM.render(<Link to={`/resource/campaign/${rowData.id}`}>{cellData}</Link>, cell);
-    },
-  }, {
-    data: 'startTime',
-    render: data => (data ? moment(new Date(data)).format('L') : ''),
-  }, {
-    data: 'endTime',
-    render: data => (data ? moment(new Date(data)).format('L') : ''),
-  }, {
-    data: 'description',
-  }, {
-    data: null,
-    createdCell: (cell, cellData, rowData) => {
-      ReactDOM.render(<Link to={`/resource/campaign/${rowData.id}`}>New Placement</Link>, cell);
-    },
-  }],
-  destroy: true,
-  order: [[1, 'DESC']],
-};
 
 class CampaignList extends Component {
 
@@ -40,7 +16,9 @@ class CampaignList extends Component {
     /* eslint-disable no-undef */
     $(this.dataTable).dataTable({
       data: this.props.list,
-      ...dataTableOptions,
+      columns: this.dataTableOptions(),
+      destroy: true,
+      order: [[1, 'DESC']],
     });
     /* eslint-enable no-undef */
 
@@ -52,12 +30,45 @@ class CampaignList extends Component {
     /* eslint-disable no-undef */
     $(this.dataTable).dataTable({
       data: nextProps.list,
-      ...dataTableOptions,
+      columns: this.dataTableOptions(),
+      destroy: true,
+      order: [[1, 'DESC']],
     });
     /* eslint-enable no-undef */
   }
 
-  componentDidUpdate() {
+  dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const columns = [{
+      data: 'id',
+      orderable: false,
+      createdCell: (cell, cellData) => {
+        ReactDOM.render(
+          <InputICheck
+            className="inputChooseCampaign"
+            name="inputChooseCampaign[]"
+            value={cellData}
+          />,
+          cell
+        );
+      },
+    }, {
+      data: 'name',
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link to={`/resource/campaign/${rowData.id}`}>{cellData}</Link>, cell);
+      },
+    }, {
+      data: 'startTime',
+      render: data => (data ? moment(new Date(data)).format('L') : ''),
+    }, {
+      data: 'endTime',
+      render: data => (data ? moment(new Date(data)).format('L') : ''),
+    }, {
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link to={`/resource/campaign/${rowData.id}`}>New Placement</Link>, cell);
+      },
+    }];
+    return columns;
   }
 
   renderDOMLibs() {
@@ -70,19 +81,19 @@ class CampaignList extends Component {
       >
         <thead>
           <tr>
+            <th><InputICheck className="inputChooseAllCampaigns" /></th>
             <th>Name</th>
             <th>Start Time</th>
             <th>End Time</th>
-            <th>Description</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
+            <th><InputICheck className="inputChooseAllCampaigns" /></th>
             <th>Name</th>
             <th>Start Time</th>
             <th>End Time</th>
-            <th>Description</th>
             <th>&nbsp;</th>
           </tr>
         </tfoot>

@@ -65,10 +65,6 @@ class Zone extends Component {
     const dateEnd = new Date();
     dateEnd.setDate(dateEnd.getDate() + 1);
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChoosePlacement').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
 
     $('#inputPlacementStartTime').datepicker({
       autoclose: true,
@@ -119,10 +115,6 @@ class Zone extends Component {
   }
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChoosePlacement').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     $('#inputPlacementStartTime').datepicker('update', new Date());
     /* eslint-disable no-underscore-dangle */
     $('#inputPlacementEndTime').datepicker('update', moment().add(1, 'month')._d);
@@ -249,16 +241,6 @@ class Zone extends Component {
     this.props.deleteZone(this.props.zoneId);
     this.props.removeZone(this.props.zoneId);
   }
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i] !== undefined) {
-        if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
   createPlacement() {
     const name = this.inputPlacementName.value;
     const startTime = new Date(moment(new Date(this.inputPlacementStartTime.value)).format('YYYY-MM-DD 00:00:00'));
@@ -348,27 +330,6 @@ class Zone extends Component {
       }
     }
     return arrPlacement;
-  }
-  pushZoneToPlacement(placementId) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const zoneId = this.props.zoneId;
-    const bannerId = null;
-    if (placementId && zoneId) {
-      this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
-        this.props.getZone(this.props.zoneId).then(() => {
-          this.props.getPlacements();
-        });
-      });
-    }
-  }
-  removePlacement(placementId) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const zId = this.props.zoneId;
-    if (placementId && zId) {
-      this.props.removeZoneInPlacementBannerZone({ placementId, zId }).then(() => {
-        this.props.getZone(this.props.zoneId).then(() => {
-          this.props.getPlacements();
-        });
-      });
-    }
   }
   render() {
     return (
