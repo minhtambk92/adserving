@@ -14,11 +14,10 @@ import {
 } from '../../data/models';
 import { host } from '../../config';
 
-async function fiction() {
-  /* eslint-disable no-console */
-  console.log('Start data fictions!');
+/* eslint-disable no-console */
 
-  // Roles
+// Roles fiction
+async function rolesFiction() {
   console.log('Check current number of roles...');
   await Role.count().then(async(quantity) => {
     if (quantity === 0) {
@@ -36,8 +35,11 @@ async function fiction() {
       console.log(`${quantity} role(s) found. Passed!`);
     }
   });
+}
 
-  // User
+// Users fiction
+// Mainly for creating super admin
+async function userFiction() {
   console.log('Check current number of users...');
   await User.count().then(async(quantity) => {
     if (quantity === 0) {
@@ -72,9 +74,15 @@ async function fiction() {
       console.log(`${quantity} user(s) found. Passed!`);
     }
   });
-
-  console.log(`Your application is now ready at http://${host}/`);
-  /* eslint-enable no-console */
 }
+
+async function fiction() {
+  console.log('Start data fictions!');
+  await rolesFiction();
+  await userFiction();
+  console.log(`Your application is now ready at http://${host}/`);
+}
+
+/* eslint-enable no-console */
 
 export default fiction;
