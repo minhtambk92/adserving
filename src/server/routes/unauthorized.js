@@ -28,7 +28,7 @@ router.post('/login',
     }
 
     return res.json({
-      data: {
+      auth: {
         loggedInUser: req.user,
       },
     });

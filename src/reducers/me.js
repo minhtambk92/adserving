@@ -7,14 +7,6 @@ import {
   SIGN_USER_UP,
 } from '../constants';
 
-function loggedIn(state = {}, action) {
-  switch (action.type) {
-    default: {
-      return state;
-    }
-  }
-}
-
 function registered(state = {}, action) {
   switch (action.type) {
     case SIGN_USER_UP: {
@@ -27,7 +19,6 @@ function registered(state = {}, action) {
 }
 
 const me = combineReducers({
-  loggedIn,
   registered,
 });
 

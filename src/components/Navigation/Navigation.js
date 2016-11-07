@@ -10,6 +10,7 @@
 import React, { Component, PropTypes } from 'react';
 // import { defineMessages, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import moment from 'moment';
 // import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { logUserOut } from '../../actions/users';
@@ -321,7 +322,9 @@ class Navigation extends Component {
                     src={this.renderUserPicture()}
                     className="user-image" alt="User"
                   />
-                  <span className="hidden-xs">{user && user.email}</span>
+                  <span
+                    className="hidden-xs"
+                  >{(user && user.profile) ? user.profile.displayName : ''}</span>
                 </Link>
                 <ul className="dropdown-menu">
                   {/* User image */}
@@ -331,10 +334,7 @@ class Navigation extends Component {
                       className="img-circle"
                       alt="User"
                     />
-                    <p>
-                      Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
-                    </p>
+                    <p>{user && user.email}</p>
                   </li>
                   {/* Menu Body */}
                   <li className="user-body">

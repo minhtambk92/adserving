@@ -41,6 +41,9 @@ export function getUser(id) {
           email
           emailConfirmed
           status
+          profile {
+            displayName
+          }
           roles {
             id
             uniqueName
@@ -79,6 +82,9 @@ export function getUsers(args = {
           email
           emailConfirmed
           status
+          profile {
+            displayName
+          }
           roles {
             id
             uniqueName
@@ -123,6 +129,9 @@ export function createUser({ email, roleIds, password, emailConfirmed, status })
           email
           emailConfirmed
           status
+          profile {
+            displayName
+          }
           roles {
             id
             uniqueName
@@ -163,6 +172,9 @@ export function updateUser({ id, email, roleIds, password, emailConfirmed, statu
           email
           emailConfirmed
           status
+          profile {
+            displayName
+          }
           roles {
             id
             uniqueName
@@ -204,6 +216,9 @@ export function deleteUser(id) {
           email
           emailConfirmed
           status
+          profile {
+            displayName
+          }
           roles {
             id
             uniqueName
@@ -237,6 +252,9 @@ export function registerUser({ email, password, fullName }) {
           email
           emailConfirmed
           status
+          profile {
+            displayName
+          }
           roles {
             id
             uniqueName
@@ -272,7 +290,7 @@ export function registerUser({ email, password, fullName }) {
 }
 
 export function logUserIn({ email, password, rememberMe }) {
-  return async(dispatch) => {
+  return async(dispatch, getState, { graphqlRequest }) => {
     const res = await fetch('/login', {
       method: 'post',
       headers: {
@@ -287,12 +305,36 @@ export function logUserIn({ email, password, rememberMe }) {
       credentials: 'include',
     });
 
-    const { data } = await res.json();
+    const { auth } = await res.json();
+
+    const query = `
+      query {
+        users(where: {id: "${auth.loggedInUser.id}"}, limit: 1) {
+          id
+          email
+          emailConfirmed
+          status
+          profile {
+            displayName
+          }
+          roles {
+            id
+            uniqueName
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+
+    const { data } = await graphqlRequest(query);
 
     dispatch({
       type: LOG_USER_IN,
       payload: {
-        user: data.loggedInUser,
+        user: data.users.shift(),
       },
     });
   };
