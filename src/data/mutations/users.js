@@ -12,7 +12,12 @@ import { genSaltSync, hashSync } from 'bcrypt';
 import UserType from '../types/UserType';
 import UserInputType from '../types/UserInputType';
 import UserInputTypeWithoutId from '../types/UserInputTypeWithoutId';
-import { User, UserRole } from '../models';
+import {
+  Role,
+  User,
+  UserProfile,
+  UserRole,
+} from '../models';
 
 const users = {
   createdUser: {
@@ -32,22 +37,28 @@ const users = {
 
         const userRoles = [];
 
-        await User.create(newUser).then(user => {
-          // Return recently added user
-          opts.where.id = { $eq: user.id };
-
-          // Prepare mediate objects
-          for (let i = 0; i < newUser.roleIds.length; i += 1) {
-            userRoles.push({
-              status: 'active',
-              userId: user.id,
-              roleId: newUser.roleIds[i],
-            });
-          }
+        const createdUser = await User.create(newUser, {
+          include: [
+            { model: UserProfile, as: 'profile' },
+          ],
         });
+
+        // Prepare mediate objects
+        for (let i = 0; i < newUser.roles.length; i += 1) {
+          const role = await Role.findOne({ where: { uniqueName: newUser.roles[i] } });
+
+          userRoles.push({
+            status: 'active',
+            userId: createdUser.id,
+            roleId: role.id,
+          });
+        }
 
         // Set roles to user
         await UserRole.bulkCreate(userRoles);
+
+        // Return recently added user
+        opts.where.id = { $eq: createdUser.id };
 
         return opts;
       },

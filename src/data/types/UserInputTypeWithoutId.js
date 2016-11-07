@@ -2,10 +2,11 @@ import {
   GraphQLInputObjectType as InputObjectType,
   GraphQLNonNull as NonNull,
   GraphQLList as List,
-  GraphQLID as ID,
+  GraphQLString as StringType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { User } from '../models';
+import UserProfileInputType from './UserProfileInputType';
 
 const UserInputTypeWithoutId = new InputObjectType({
   name: 'UserInputTypeWithoutId',
@@ -14,7 +15,8 @@ const UserInputTypeWithoutId = new InputObjectType({
     only: ['email', 'password', 'emailConfirmed', 'status'],
   }), {
     // Additional fields
-    roleIds: { type: new NonNull(new List(ID)) },
+    roles: { type: new NonNull(new List(StringType)) },
+    profile: { type: new NonNull(UserProfileInputType) },
   }),
 });
 

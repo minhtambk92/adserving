@@ -228,7 +228,7 @@ export function deleteUser(id) {
   };
 }
 
-export function registerUser({ email, password }) {
+export function registerUser({ email, password, fullName }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($user: UserInputTypeWithoutId!) {
@@ -252,10 +252,13 @@ export function registerUser({ email, password }) {
     const { data } = await graphqlRequest(mutation, {
       user: {
         email,
-        roleIds: ['9e31f4e4-f562-4244-b769-c5c4b34e263d'],
+        roles: ['user'],
         password,
         emailConfirmed: 'true',
         status: 'active',
+        profile: {
+          displayName: fullName,
+        },
       },
     });
 

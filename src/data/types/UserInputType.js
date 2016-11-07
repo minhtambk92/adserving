@@ -3,9 +3,11 @@ import {
   GraphQLNonNull as NonNull,
   GraphQLList as List,
   GraphQLID as ID,
+  GraphQLString as StringType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { User } from '../models';
+import UserProfileInputType from './UserProfileInputType';
 
 const UserInputType = new InputObjectType({
   name: 'UserInputType',
@@ -16,7 +18,8 @@ const UserInputType = new InputObjectType({
   }), {
     // Additional fields
     id: { type: new NonNull(ID) },
-    roleIds: { type: new List(ID) },
+    roles: { type: new List(StringType) },
+    profile: { type: UserProfileInputType },
   }),
 });
 
