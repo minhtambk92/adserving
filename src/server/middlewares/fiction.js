@@ -12,6 +12,7 @@ import {
   UserProfile,
   UserRole,
 } from '../../data/models';
+import { host } from '../../config';
 
 async function fiction() {
   /* eslint-disable no-console */
@@ -72,7 +73,7 @@ async function fiction() {
     }
   });
 
-  console.log('Your application is now ready!');
+  console.log(`Your application is now ready at http://${host}/`);
   /* eslint-enable no-console */
 }
 
