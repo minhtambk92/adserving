@@ -8,6 +8,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -78,6 +79,9 @@ class Campaigns extends Component {
       [field]: event.target.value,
     });
   }
+  getFilteredCampaigns() {
+    return _.filter(this.props.campaigns.list, campaign => this.isFiltered(campaign));
+  }
   isFiltered(campaign) {
     const filters = this.props.campaigns.filters;
 
@@ -138,7 +142,6 @@ class Campaigns extends Component {
   }
 
   render() {
-    const { campaigns } = this.props;
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
@@ -414,7 +417,7 @@ class Campaigns extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <CampaignList list={campaigns && campaigns.list} />
+                  <CampaignList list={this.getFilteredCampaigns()} />
                 </div>
                 {/* /.box-body */}
               </div>

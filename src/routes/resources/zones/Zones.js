@@ -8,6 +8,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 // import { FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -101,6 +102,9 @@ class Zones extends Component {
       [field]: event.target.value,
     });
   }
+  getFilteredZones() {
+    return _.filter(this.props.zones.list, zone => this.isFiltered(zone));
+  }
 
   clearInput() {
     this.inputZoneName.value = null;
@@ -187,7 +191,6 @@ class Zones extends Component {
     return !(notMatchPlacement || notMatchStatus || notMatchSite || notMatchType);
   }
   render() {
-    const { zones } = this.props;
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
@@ -573,7 +576,7 @@ class Zones extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <ZoneList list={zones && zones.list} />
+                  <ZoneList list={this.getFilteredZones()} />
                 </div>
                 {/* /.box-body */}
               </div>

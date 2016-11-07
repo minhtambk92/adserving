@@ -8,6 +8,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -82,6 +83,9 @@ class Placements extends Component {
       [field]: event.target.value,
     });
   }
+  getFilteredPlacements() {
+    return _.filter(this.props.placements.list, placement => this.isFiltered(placement));
+  }
   isFiltered(placement) {
     const filters = this.props.placements.filters;
 
@@ -136,7 +140,6 @@ class Placements extends Component {
   }
 
   render() {
-    const { placements } = this.props;
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
@@ -387,7 +390,7 @@ class Placements extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <PlacemenList list={placements && placements.list} />
+                  <PlacemenList list={this.getFilteredPlacements()} />
                 </div>
                 {/* /.box-body */}
               </div>

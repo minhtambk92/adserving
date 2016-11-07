@@ -8,6 +8,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import style from 'react-dropzone-component/styles/filepicker.css';
 import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
 import DropzoneComponent from 'react-dropzone-component/lib/react-dropzone';
@@ -99,6 +100,9 @@ class Banners extends Component {
       [field]: event.target.value,
     });
   }
+  getFilteredBanners() {
+    return _.filter(this.props.banners.list, banner => this.isFiltered(banner));
+  }
   isFiltered(banner) {
     const { placementId, status } = this.props.banners.filters;
 
@@ -165,7 +169,6 @@ class Banners extends Component {
     }
   }
   render() {
-    const { banners } = this.props;
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
@@ -461,7 +464,7 @@ class Banners extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <BannerList list={banners && banners.list} />
+                  <BannerList list={this.getFilteredBanners()} />
                 </div>
                 {/* /.box-body */}
               </div>
