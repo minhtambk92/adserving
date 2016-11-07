@@ -46,10 +46,6 @@ class Site extends Component {
 
   componentDidMount() {
     /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChooseSite').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     /* eslint-enable no-undef */
   }
 
@@ -71,10 +67,6 @@ class Site extends Component {
   componentDidUpdate() {
     /* eslint-disable no-undef */
     // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseSite').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
     /* eslint-enable no-undef */
   }
   onKeyDown(event) { // eslint-disable-line no-unused-vars, class-methods-use-this

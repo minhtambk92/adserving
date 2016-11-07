@@ -34,7 +34,7 @@ const Advertisers = Model.define('Advertisers', {
     defaultValue: '',
   },
   description: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
     defaultValue: '',
   },
   status: {

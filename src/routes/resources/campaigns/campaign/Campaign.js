@@ -163,25 +163,6 @@ class Campaign extends Component {
     this.inputPlacementDescription.value = null;
   }
 
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i] !== undefined) {
-        if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
-  }
-
   updateCampaign() {
     const advertiserId = this.inputAdvertiser.value;
     const name = this.inputCampaignName.value;

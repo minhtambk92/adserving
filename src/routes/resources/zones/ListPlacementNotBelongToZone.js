@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
-// import InputICheck from './InputICheck';
+import InputICheck from './../../../components/UI/InputICheck';
 class ListPlacementNotBelongToZone extends Component {
   static propTypes = {
     zoneId: PropTypes.string.isRequired,
@@ -41,6 +40,19 @@ class ListPlacementNotBelongToZone extends Component {
   }
   dataTableOptions() {
     const colums = [{
+      data: 'id',
+      orderable: false,
+      createdCell: (cell, cellData) => {
+        ReactDOM.render(
+          <InputICheck
+            className="inputChoosePlacement"
+            name="inputChoosePlacement[]"
+            value={cellData}
+          />,
+          cell
+        );
+      },
+    }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link to={`/resource/zone/${rowData.id}`}>{cellData}</Link>, cell);
@@ -89,6 +101,7 @@ class ListPlacementNotBelongToZone extends Component {
       >
         <thead>
           <tr>
+            <th><InputICheck className="inputChooseAllPlacements" /></th>
             <th>Name</th>
             <th>Size</th>
             <th>&nbsp;</th>
@@ -96,6 +109,7 @@ class ListPlacementNotBelongToZone extends Component {
         </thead>
         <tfoot>
           <tr>
+            <th><InputICheck className="inputChooseAllPlacements" /></th>
             <th>Name</th>
             <th>Size</th>
             <th>&nbsp;</th>

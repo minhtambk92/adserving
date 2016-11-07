@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
-// import InputICheck from './InputICheck';
+import InputICheck from './../../../components/UI/InputICheck';
 
 class ListBannerOfPlacement extends Component {
 
@@ -52,9 +51,22 @@ class ListBannerOfPlacement extends Component {
   }
   dataTableOptions() {
     const columns = [{
+      data: 'id',
+      orderable: false,
+      createdCell: (cell, cellData) => {
+        ReactDOM.render(
+          <InputICheck
+            className="inputChooseBanner"
+            name="inputChooseBanner[]"
+            value={cellData}
+          />,
+          cell
+        );
+      },
+    }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>{rowData.name}</Link>, cell);
+        ReactDOM.render(<Link to={`/resource/banner/${rowData.id}`}>{rowData.name}</Link>, cell);
       },
     }, {
       data: null,
@@ -97,6 +109,7 @@ class ListBannerOfPlacement extends Component {
       >
         <thead>
           <tr>
+            <th><InputICheck className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>
@@ -104,6 +117,7 @@ class ListBannerOfPlacement extends Component {
         </thead>
         <tfoot>
           <tr>
+            <th><InputICheck className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>

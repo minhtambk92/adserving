@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
-// import InputICheck from './InputICheck';
+import InputICheck from './../../../components/UI/InputICheck';
 
 class ListPlacementOfBanner extends Component {
 
@@ -31,14 +30,14 @@ class ListPlacementOfBanner extends Component {
   }
   componentWillReceiveProps(nextProps) {
     /* eslint-disable no-undef */
-    if (nextProps.list.length > 0) {
+    if (nextProps.list && nextProps.list.length > 0) {
       $(this.dataTable).dataTable({
         data: nextProps.list,
         columns: this.dataTableOptions(),
         destroy: true,
         order: [[1, 'DESC']],
       });
-    } else if (nextProps.list.length === 0) {
+    } else if (nextProps.list && nextProps.list.length === 0) {
       $(this.dataTable).dataTable({
         data: [],
         destroy: true,
@@ -51,6 +50,19 @@ class ListPlacementOfBanner extends Component {
   }
   dataTableOptions() {
     const columns = [{
+      data: 'id',
+      orderable: false,
+      createdCell: (cell, cellData) => {
+        ReactDOM.render(
+          <InputICheck
+            className="inputChooseBanner"
+            name="inputChooseBanner[]"
+            value={cellData}
+          />,
+          cell
+        );
+      },
+    }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>{rowData.name}</Link>, cell);
@@ -96,6 +108,7 @@ class ListPlacementOfBanner extends Component {
       >
         <thead>
           <tr>
+            <th><InputICheck className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>
@@ -103,6 +116,7 @@ class ListPlacementOfBanner extends Component {
         </thead>
         <tfoot>
           <tr>
+            <th><InputICheck className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>

@@ -26,7 +26,7 @@ const Zone = Model.define('Zone', {
     defaultValue: '',
   },
   description: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
     defaultValue: '',
   },
   type: {
@@ -34,11 +34,11 @@ const Zone = Model.define('Zone', {
     allowNull: false,
   },
   html: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
     defaultValue: '',
   },
   css: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
     defaultValue: '',
   },
   slot: {
@@ -54,7 +54,7 @@ const Zone = Model.define('Zone', {
     defaultValue: 0,
   },
   sizeText: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
     defaultValue: '',
   },
   sizeValue: {

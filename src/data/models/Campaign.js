@@ -50,7 +50,7 @@ const Campaign = Model.define('Campaign', {
     defaultValue: 0,
   },
   description: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
     defaultValue: '',
   },
   status: {

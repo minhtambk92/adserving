@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
-// import InputICheck from './InputICheck';
+import InputICheck from './../../../components/UI/InputICheck';
 
 class ListZoneOfSite extends Component {
 
@@ -47,6 +46,19 @@ class ListZoneOfSite extends Component {
   }
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     const columns = [{
+      data: 'id',
+      orderable: false,
+      createdCell: (cell, cellData) => {
+        ReactDOM.render(
+          <InputICheck
+            className="inputChooseSite"
+            name="inputChooseSite[]"
+            value={cellData}
+          />,
+          cell
+        );
+      },
+    }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link to={`/resource/zone/${rowData.id}`}>{rowData.name}</Link>, cell);
@@ -73,6 +85,7 @@ class ListZoneOfSite extends Component {
       >
         <thead>
           <tr>
+            <th><InputICheck className="inputChooseAllSites" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>
@@ -80,6 +93,7 @@ class ListZoneOfSite extends Component {
         </thead>
         <tfoot>
           <tr>
+            <th><InputICheck className="inputChooseAllSites" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>
