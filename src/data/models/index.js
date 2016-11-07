@@ -111,6 +111,7 @@ User.roles = User.belongsToMany(Role, {
     model: UserRole,
   },
   foreignKey: 'userId',
+  as: 'roles',
 });
 
 Role.users = Role.belongsToMany(User, {
@@ -118,6 +119,7 @@ Role.users = Role.belongsToMany(User, {
     model: UserRole,
   },
   foreignKey: 'roleId',
+  as: 'users',
 });
 
 PlacementBannerZone.placement = PlacementBannerZone.belongsTo(Placement, {
@@ -183,6 +185,9 @@ export {
   Resource,
   Role,
   User,
+  UserLogin,
+  UserClaim,
+  UserProfile,
   UserRole,
   Permission,
   Campaign,

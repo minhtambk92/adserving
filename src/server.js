@@ -36,6 +36,7 @@ import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './actions/runtime';
 import { setLocale } from './actions/intl';
 import { port, auth, locales } from './config';
+import fiction from './server/middlewares/fiction';
 
 const app = express();
 
@@ -107,7 +108,7 @@ app.use(require('./server/middlewares').default);
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
-app.get('*', async (req, res, next) => {
+app.get('*', async(req, res, next) => {
   try {
     const store = configureStore({
       user: req.user || null,
@@ -212,6 +213,7 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 models.sync().catch(err => console.error(err.stack)).then(() => {
   app.listen(port, () => {
     console.log(`The server is running at http://localhost:${port}/`);
+    fiction();
   });
 });
 /* eslint-enable no-console */
