@@ -29,14 +29,14 @@ class ListPlacementOfZone extends Component {
   }
   componentWillReceiveProps(nextProps) {
     /* eslint-disable no-undef */
-    if (nextProps.list.length > 0) {
+    if (nextProps.list && nextProps.list.length > 0) {
       $(this.dataTable).dataTable({
         data: nextProps.list,
         columns: this.dataTableOptions(),
         destroy: true,
         order: [[1, 'DESC']],
       });
-    } else if (nextProps.list.length === 0) {
+    } else if (nextProps.list && nextProps.list.length === 0) {
       $(this.dataTable).dataTable({
         data: [],
         destroy: true,
@@ -45,8 +45,6 @@ class ListPlacementOfZone extends Component {
     /* eslint-enable no-undef */
   }
 
-  componentDidUpdate() {
-  }
   dataTableOptions() {
     const columns = [{
       data: 'id',

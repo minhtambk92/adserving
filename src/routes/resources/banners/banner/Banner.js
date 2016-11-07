@@ -178,7 +178,7 @@ class Banner extends Component {
     const idw = document.getElementById('banner');
     if (idw) {
       /* eslint-disable prefer-template */
-      idw.innerHTML = '<iframe src="javacript:void(0);" frameborder="0" scrolling="no" width="' + w + '" height="' + h + '" id="bannerCode"></iframe>}';
+      idw.innerHTML = '<iframe src="javacript:void(0);" frameborder="0" scrolling="no" width="' + w + '" height="' + h + '" id="bannerCode"></iframe>';
       /* eslint-enable prefer-template */
       const idb = document.getElementById('bannerCode');
       const io = idb.contentWindow;

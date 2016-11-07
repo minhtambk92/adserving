@@ -26,7 +26,7 @@ const Banner = Model.define('Banner', {
     defaultValue: '',
   },
   html: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
     defaultValue: '',
   },
   width: {
@@ -46,7 +46,7 @@ const Banner = Model.define('Banner', {
     defaultValue: 0,
   },
   description: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
     defaultValue: '',
   },
   type: {
@@ -58,7 +58,7 @@ const Banner = Model.define('Banner', {
     },
   },
   imageUrl: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
     defaultValue: '',
   },
   target: {
