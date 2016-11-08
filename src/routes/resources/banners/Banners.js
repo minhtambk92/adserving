@@ -43,7 +43,7 @@ class Banners extends Component {
 
     this.state = {
       searchText: '',
-      checkTypeBanner: 'html',
+      checkTypeBanner: 'img',
       imageUrl: '',
     };
     this.djsConfig = {
