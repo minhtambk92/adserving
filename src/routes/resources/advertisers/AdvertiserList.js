@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import InputICheck from './../../../components/UI/InputICheck';
+import { InputICheck } from '../../../components/UI/';
 import Link from '../../../components/Link';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
