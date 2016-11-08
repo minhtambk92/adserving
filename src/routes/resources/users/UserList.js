@@ -5,37 +5,16 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
-import { iCheck } from '../../../components/UI/';
+import { DataTables, iCheck } from '../../../components/UI/';
 import Link from '../../../components/Link';
 
 class UserList extends Component {
 
   static propTypes = {
-    containerWidth: PropTypes.number,
     list: PropTypes.array,
   };
 
-  async componentDidMount() {
-    // Wrapping DOM Libs
-    await ReactDOM.render(this.renderDOMLibs(), this.portal);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    /* eslint-disable no-undef */
-    $(this.dataTable).dataTable({
-      data: nextProps.list,
-      columns: this.dataTableOptions(),
-      destroy: true,
-      order: [[4, 'DESC']],
-    });
-    /* eslint-enable no-undef */
-  }
-
-  componentWillUnmount() {
-    ReactDOM.unmountComponentAtNode(this.portal);
-  }
-
-  dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
+  dataTableOptions() { // eslint-disable-line class-methods-use-this
     return [{
       data: 'id',
       orderable: false,
@@ -89,17 +68,19 @@ class UserList extends Component {
     }];
   }
 
-  renderDOMLibs() {
+  render() {
+    // Open the portal
     return (
-      <table
+      <DataTables
         className="table table-bordered table-striped"
-        ref={c => {
-          this.dataTable = c;
-        }}
+        list={this.props.list}
+        options={this.dataTableOptions()}
       >
         <thead>
           <tr>
-            <th><iCheck className="inputChooseAllUsers" /></th>
+            <th>
+              <iCheck className="inputChooseAllUsers" />
+            </th>
             <th>Email</th>
             <th>Name</th>
             <th>Email confirmed</th>
@@ -109,7 +90,9 @@ class UserList extends Component {
         </thead>
         <tfoot>
           <tr>
-            <th><iCheck className="inputChooseAllUsers" /></th>
+            <th>
+              <iCheck className="inputChooseAllUsers" />
+            </th>
             <th>Email</th>
             <th>Name</th>
             <th>Email confirmed</th>
@@ -117,18 +100,7 @@ class UserList extends Component {
             <th>Created date</th>
           </tr>
         </tfoot>
-      </table>
-    );
-  }
-
-  render() {
-    // Open the portal
-    return (
-      <div
-        ref={c => {
-          this.portal = c;
-        }}
-      />
+      </DataTables>
     );
   }
 }
