@@ -43,7 +43,7 @@ class Banners extends Component {
 
     this.state = {
       searchText: '',
-      checkTypeBanner: 'img',
+      checkTypeBanner: 'html',
       imageUrl: '',
     };
     this.djsConfig = {
@@ -77,6 +77,9 @@ class Banners extends Component {
 
   componentDidMount() {
     /* eslint-disable no-undef */
+    $('#inputBannerKeyWord').tagsinput({
+      allowDuplicates: true,
+    });
     // iCheck for checkbox and radio inputs
   }
 
@@ -123,7 +126,7 @@ class Banners extends Component {
     this.inputBannerName.value = null;
     if (this.state.checkTypeBanner === 'html') {
       this.inputBannerHTML.value = null;
-    };
+    }
     this.inputBannerWidth.value = null;
     this.inputBannerHeight.value = null;
     this.inputBannerKeyWord.value = null;
@@ -383,6 +386,7 @@ class Banners extends Component {
                         <input
                           type="text" className="form-control" id="inputBannerKeyWord"
                           placeholder="dantri"
+                          data-role="tagsinput"
                           ref={c => {
                             this.inputBannerKeyWord = c;
                           }}

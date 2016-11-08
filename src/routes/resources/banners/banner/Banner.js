@@ -56,6 +56,7 @@ class Banner extends Component {
       searchText: '',
       checkTypeBanner: 'img',
       imageUrl: '',
+      keyWord: '',
     };
   }
 
@@ -85,6 +86,9 @@ class Banner extends Component {
       startDate: dateEnd,
       defaultDate: new Date(),
     });
+    $('#inputBannerKeyWord').tagsinput({
+      allowDuplicates: true,
+    });
     /* eslint-enable no-undef */
   }
 
@@ -102,6 +106,7 @@ class Banner extends Component {
       imageUrl,
       status,
     } = nextProps.banners && (nextProps.banners.editing || {});
+    this.state.keyWord = keyword;
     this.inputBannerName.value = name;
     this.inputBannerWidth.value = width;
     this.inputBannerHeight.value = height;
@@ -132,6 +137,7 @@ class Banner extends Component {
     /* eslint-disable no-underscore-dangle */
     $('#inputPlacementEndTime').datepicker('update', moment().add(1, 'month')._d);
     /* eslint-enable no-underscore-dangle */
+    $('#inputBannerKeyWord').tagsinput('add', this.state.keyWord);
     /* eslint-enable no-undef */
   }
 
@@ -319,7 +325,7 @@ class Banner extends Component {
         addRemoveLinks: true,
         maxFiles: 1,
         init: function () {
-          const mockFile = { name: 'image', size: 125 };
+          const mockFile = { name: 'image', size: 125, type: 'image/jpeg' };
           this.options.addedfile.call(this, mockFile);
           this.options.thumbnail.call(this, mockFile, img);
           mockFile.previewElement.classList.add('dz-success');
@@ -512,6 +518,7 @@ class Banner extends Component {
                                   <input
                                     type="text" className="form-control" id="inputBannerKeyWord"
                                     placeholder="dantri"
+                                    data-role="tagsinput"
                                     ref={c => {
                                       this.inputBannerKeyWord = c;
                                     }}
