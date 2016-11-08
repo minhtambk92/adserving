@@ -31,7 +31,6 @@ function Html({ title, description, style, script, chunk, state, lang, children,
         <link rel="stylesheet" href="/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.min.css" />
         <link rel="stylesheet" href="/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css" />
         <link rel="stylesheet" href="/AdminLTE/plugins/select2/select2.min.css" />
-        <link rel="stylesheet" href="/AdminLTE/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" />
         <link rel="stylesheet" href="/AdminLTE/plugins/datatables/dataTables.bootstrap.css" />
         <link rel="stylesheet" href="/AdminLTE/dist/css/AdminLTE.min.css" />
         <link rel="stylesheet" href="/AdminLTE/dist/css/skins/skin-blue.min.css" />
