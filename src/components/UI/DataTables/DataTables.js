@@ -8,9 +8,10 @@ import ReactDOM from 'react-dom';
 class DataTables extends Component {
 
   static propTypes = {
-    children: PropTypes.element,
+    thead: PropTypes.element,
+    tfoot: PropTypes.element,
     options: PropTypes.object,
-    list: PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired,
   };
 
   async componentDidMount() {
@@ -21,7 +22,7 @@ class DataTables extends Component {
   componentWillReceiveProps(nextProps) {
     /* eslint-disable no-undef */
     $(this.dataTable).dataTable({
-      data: nextProps.list,
+      data: nextProps.data,
       ...this.props.options,
     });
     /* eslint-enable no-undef */
@@ -38,7 +39,10 @@ class DataTables extends Component {
           this.dataTable = c;
         }}
         {...this.props}
-      >{this.props.children}</table>
+      >
+        <thead>{this.props.thead}</thead>
+        <tfoot>{this.props.tfoot}</tfoot>
+      </table>
     );
   }
 
