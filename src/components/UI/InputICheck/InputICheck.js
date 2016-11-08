@@ -11,29 +11,20 @@ class InputICheck extends Component {
     className: PropTypes.string.isRequired,
   };
 
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-    $('.table').on('draw.dt', () => {
-      $(`.${this.props.className}`).iCheck({
-        checkboxClass: 'icheckbox_minimal-blue',
-        radioClass: 'iradio_minimal-blue',
-      });
-    });
-    /* eslint-enable no-undef */
+  async componentDidMount() {
+    await ReactDOM.render(this.renderDOMLibs(), this.portal);
 
-    ReactDOM.render(this.renderDOMLibs(), this.portal);
-  }
-  componentDidUpdate() {
     /* eslint-disable no-undef */
     // iCheck for checkbox and radio inputs
-    $('.table').on('draw.dt', () => {
-      $(`.${this.props.className}`).iCheck({
-        checkboxClass: 'icheckbox_minimal-blue',
-        radioClass: 'iradio_minimal-blue',
-      });
+    $(this.input).iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue',
     });
     /* eslint-enable no-undef */
+  }
+
+  componentWillUnmount() {
+    ReactDOM.unmountComponentAtNode(this.portal);
   }
 
   renderDOMLibs() {

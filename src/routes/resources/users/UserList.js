@@ -15,18 +15,9 @@ class UserList extends Component {
     list: PropTypes.array,
   };
 
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    $(this.dataTable).dataTable({
-      data: this.props.list,
-      columns: this.dataTableOptions(),
-      destroy: true,
-      order: [[4, 'DESC']],
-    });
-    /* eslint-enable no-undef */
-
+  async componentDidMount() {
     // Wrapping DOM Libs
-    ReactDOM.render(this.renderDOMLibs(), this.portal);
+    await ReactDOM.render(this.renderDOMLibs(), this.portal);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -38,6 +29,10 @@ class UserList extends Component {
       order: [[4, 'DESC']],
     });
     /* eslint-enable no-undef */
+  }
+
+  componentWillUnmount() {
+    ReactDOM.unmountComponentAtNode(this.portal);
   }
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
