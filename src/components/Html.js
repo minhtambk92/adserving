@@ -31,6 +31,7 @@ function Html({ title, description, style, script, chunk, state, lang, children,
         <link rel="stylesheet" href="/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.min.css" />
         <link rel="stylesheet" href="/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css" />
         <link rel="stylesheet" href="/AdminLTE/plugins/select2/select2.min.css" />
+        <link rel="stylesheet" href="/AdminLTE/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" />
         <link rel="stylesheet" href="/AdminLTE/plugins/datatables/dataTables.bootstrap.css" />
         <link rel="stylesheet" href="/AdminLTE/dist/css/AdminLTE.min.css" />
         <link rel="stylesheet" href="/AdminLTE/dist/css/skins/skin-blue.min.css" />
@@ -51,6 +52,7 @@ function Html({ title, description, style, script, chunk, state, lang, children,
         <script src="/AdminLTE/plugins/jQueryUI/jquery-ui.min.js" />
         <script src="/AdminLTE/bootstrap/js/bootstrap.min.js" />
         <script src="/AdminLTE/plugins/select2/select2.full.min.js" />
+        <script src="/AdminLTE/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js" />
         <script src="/AdminLTE/plugins/input-mask/jquery.inputmask.js" />
         <script src="/AdminLTE/plugins/input-mask/jquery.inputmask.date.extensions.js" />
         <script src="/AdminLTE/plugins/input-mask/jquery.inputmask.extensions.js" />
