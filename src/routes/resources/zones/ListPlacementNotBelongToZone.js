@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-import InputICheck from './../../../components/UI/InputICheck';
+import { InputICheck } from '../../../components/UI/';
 class ListPlacementNotBelongToZone extends Component {
   static propTypes = {
     zoneId: PropTypes.string.isRequired,

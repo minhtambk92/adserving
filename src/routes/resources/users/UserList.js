@@ -5,7 +5,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
-import InputICheck from './../../../components/UI/InputICheck';
+import { InputICheck } from '../../../components/UI/';
 import Link from '../../../components/Link';
 
 class UserList extends Component {

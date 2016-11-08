@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-import InputICheck from './../../../components/UI/InputICheck';
+import { InputICheck } from '../../../components/UI/';
 class ListZoneNotBelongPlacement extends Component {
   static propTypes = {
     placementId: PropTypes.string.isRequired,
