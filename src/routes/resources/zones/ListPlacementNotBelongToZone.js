@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-import { InputICheck } from '../../../components/UI/';
+import { iCheck } from '../../../components/UI/';
 class ListPlacementNotBelongToZone extends Component {
   static propTypes = {
     zoneId: PropTypes.string.isRequired,
@@ -44,7 +44,7 @@ class ListPlacementNotBelongToZone extends Component {
       orderable: false,
       createdCell: (cell, cellData) => {
         ReactDOM.render(
-          <InputICheck
+          <iCheck
             className="inputChoosePlacement"
             name="inputChoosePlacement[]"
             value={cellData}
@@ -101,7 +101,7 @@ class ListPlacementNotBelongToZone extends Component {
       >
         <thead>
           <tr>
-            <th><InputICheck className="inputChooseAllPlacements" /></th>
+            <th><iCheck className="inputChooseAllPlacements" /></th>
             <th>Name</th>
             <th>Size</th>
             <th>&nbsp;</th>
@@ -109,7 +109,7 @@ class ListPlacementNotBelongToZone extends Component {
         </thead>
         <tfoot>
           <tr>
-            <th><InputICheck className="inputChooseAllPlacements" /></th>
+            <th><iCheck className="inputChooseAllPlacements" /></th>
             <th>Name</th>
             <th>Size</th>
             <th>&nbsp;</th>

@@ -5,7 +5,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
-import { InputICheck } from '../../../components/UI/';
+import { iCheck } from '../../../components/UI/';
 import Link from '../../../components/Link';
 
 class UserList extends Component {
@@ -41,7 +41,7 @@ class UserList extends Component {
       orderable: false,
       createdCell: (cell, cellData) => {
         ReactDOM.render(
-          <InputICheck
+          <iCheck
             className="inputChooseUser"
             name="inputChooseUser[]"
             value={cellData}
@@ -99,7 +99,7 @@ class UserList extends Component {
       >
         <thead>
           <tr>
-            <th><InputICheck className="inputChooseAllUsers" /></th>
+            <th><iCheck className="inputChooseAllUsers" /></th>
             <th>Email</th>
             <th>Name</th>
             <th>Email confirmed</th>
@@ -109,7 +109,7 @@ class UserList extends Component {
         </thead>
         <tfoot>
           <tr>
-            <th><InputICheck className="inputChooseAllUsers" /></th>
+            <th><iCheck className="inputChooseAllUsers" /></th>
             <th>Email</th>
             <th>Name</th>
             <th>Email confirmed</th>

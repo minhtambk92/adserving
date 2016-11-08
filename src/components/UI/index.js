@@ -4,10 +4,12 @@
 
 /* eslint-disable import/prefer-default-export */
 
-import InputICheck from './InputICheck/InputICheck';
+import DataTables from './DataTables';
+import iCheck from './iCheck';
 
 export {
-  InputICheck,
+  DataTables,
+  iCheck,
 };
 
 /* eslint-enable import/prefer-default-export */

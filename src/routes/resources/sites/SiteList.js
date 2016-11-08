@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-import { InputICheck } from '../../../components/UI/';
+import { iCheck } from '../../../components/UI/';
 
 class SiteList extends Component {
 
@@ -40,7 +40,7 @@ class SiteList extends Component {
       orderable: false,
       createdCell: (cell, cellData) => {
         ReactDOM.render(
-          <InputICheck
+          <iCheck
             className="inputChooseSite"
             name="inputChooseSite[]"
             value={cellData}
@@ -77,7 +77,7 @@ class SiteList extends Component {
       >
         <thead>
           <tr>
-            <th><InputICheck className="inputChooseAllSites" /></th>
+            <th><iCheck className="inputChooseAllSites" /></th>
             <th>Name</th>
             <th>Domain</th>
             <th>Email</th>
@@ -87,7 +87,7 @@ class SiteList extends Component {
         </thead>
         <tfoot>
           <tr>
-            <th><InputICheck className="inputChooseAllSites" /></th>
+            <th><iCheck className="inputChooseAllSites" /></th>
             <th>Name</th>
             <th>Domain</th>
             <th>Email</th>
