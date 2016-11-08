@@ -34,6 +34,7 @@ async function copy() {
     copyDir('node_modules/admin-lte', 'build/public/AdminLTE'),
     copyDir('node_modules/font-awesome', 'build/public/AdminLTE/plugins/font-awesome'),
     copyDir('node_modules/ionicons', 'build/public/AdminLTE/plugins/ionicons'),
+    copyDir('node_modules/bootstrap-tagsinput', 'build/public/AdminLTE/plugins/bootstrap-tagsinput'),
     copyDir('node_modules/raphael', 'build/public/AdminLTE/plugins/raphael'),
     copyDir('node_modules/moment', 'build/public/AdminLTE/plugins/moment'),
     copyDir('node_modules/ckeditor', 'build/public/AdminLTE/plugins/ckeditor'),
