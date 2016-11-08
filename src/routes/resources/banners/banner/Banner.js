@@ -9,6 +9,9 @@
 
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
+import style from 'react-dropzone-component/styles/filepicker.css';
+import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
+import DropzoneComponent from 'react-dropzone-component/lib/react-dropzone';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanner, updateBanner, deleteBanner } from '../../../../actions/banners';
@@ -51,6 +54,8 @@ class Banner extends Component {
     super(props, context);
     this.state = {
       searchText: '',
+      checkTypeBanner: 'img',
+      imageUrl: '',
     };
   }
 
@@ -97,7 +102,6 @@ class Banner extends Component {
       imageUrl,
       status,
     } = nextProps.banners && (nextProps.banners.editing || {});
-
     this.inputBannerName.value = name;
     this.inputBannerWidth.value = width;
     this.inputBannerHeight.value = height;
@@ -109,8 +113,12 @@ class Banner extends Component {
       this.insertBannerHtml(html, width, height);
       if (this.inputBannerHTML !== undefined) {
         this.inputBannerHTML.value = html;
+        this.state.checkTypeBanner = 'html';
+        this.state.imageUrl = '';
       }
     } else if (type === 'img') {
+      this.state.imageUrl = imageUrl;
+      this.state.checkTypeBanner = 'img';
       if (this.inputBannerImageUrl !== undefined && this.inputBannerTarget !== undefined) {
         this.inputBannerTarget.value = target;
         this.inputBannerImageUrl.value = imageUrl;
@@ -253,7 +261,7 @@ class Banner extends Component {
       html = this.inputBannerHTML.value;
     } else if (type === 'img') {
       target = this.inputBannerTarget.value;
-      imageUrl = this.props.banners.editing.imageUrl;
+      imageUrl = this.state.imageUrl;
     }
     const status = this.inputBannerStatus.value;
     const banner = { id: this.props.bannerId };
@@ -303,6 +311,37 @@ class Banner extends Component {
   }
 
   render() {
+    if (this.state.checkTypeBanner === 'img') {
+      const img = this.state.imageUrl;
+      /* eslint-disable */
+      this.djsConfig = {
+        acceptedFiles: 'image/jpeg,image/png,image/gif',
+        addRemoveLinks: true,
+        maxFiles: 1,
+        init: function () {
+          const mockFile = { name: 'image', size: 125 };
+          this.options.addedfile.call(this, mockFile);
+          this.options.thumbnail.call(this, mockFile, img);
+          mockFile.previewElement.classList.add('dz-success');
+          mockFile.previewElement.classList.add('dz-complete');
+        },
+      };
+      /* eslint-enable */
+      this.componentConfig = {
+        postUrl: '/upload-banner',
+      };
+      this.callbackFail = 'fail';
+      // Simple callbacks work too, of course
+      this.callback = (e) => {
+        if (e.xhr.response) {
+          this.state.imageUrl = e.xhr.response;
+        }
+      };
+      this.eventHandlers = {
+        drop: this.callbackFail,
+        success: this.callback,
+      };
+    }
     return (
       <Layout
         pageTitle={
@@ -350,21 +389,32 @@ class Banner extends Component {
                           <form className="form-horizontal">
                             <div className="box-body">
                               { this.props.banners.editing &&
-                              this.props.banners.editing.type === 'img' ? (
+                              (this.props.banners.editing.type === 'img' && this.state.checkTypeBanner === 'img') ? (
                                 <div className="bannerImage">
                                   <div className="form-group">
                                     <div className="col-sm-12">
-                                      <div
-                                        id="inputBannerImageUrl"
-                                        ref={c => {
-                                          this.inputBannerImageUrl = c;
-                                        }}
-                                      >
-                                        <img
-                                          src={this.props.banners.editing ?
+                                      <div className="row">
+                                        <div className="col-sm-8">
+                                          <div
+                                            id="inputBannerImageUrl"
+                                            ref={c => {
+                                              this.inputBannerImageUrl = c;
+                                            }}
+                                          >
+                                            <img
+                                              src={this.props.banners.editing ?
                                             this.props.banners.editing.imageUrl : ''}
-                                          alt="demo"
-                                        />
+                                              alt="demo"
+                                            />
+                                          </div>
+                                        </div>
+                                        <div className="col-sm-4">
+                                          <DropzoneComponent
+                                            config={this.componentConfig}
+                                            eventHandlers={this.eventHandlers}
+                                            djsConfig={this.djsConfig}
+                                          />
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -823,4 +873,4 @@ const mapDispatch = {
   removeBannerInPlacementBannerZone,
 };
 
-export default withStyles(s)(connect(mapState, mapDispatch)(Banner));
+export default withStyles(s, style, dropZoneStyle)(connect(mapState, mapDispatch)(Banner));
