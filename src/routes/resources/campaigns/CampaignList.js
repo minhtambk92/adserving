@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-import { iCheck } from '../../../components/UI/';
+import { ICheck } from '../../../components/UI/';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 class CampaignList extends Component {
@@ -43,7 +43,7 @@ class CampaignList extends Component {
       orderable: false,
       createdCell: (cell, cellData) => {
         ReactDOM.render(
-          <iCheck
+          <ICheck
             className="inputChooseCampaign"
             name="inputChooseCampaign[]"
             value={cellData}
@@ -81,7 +81,7 @@ class CampaignList extends Component {
       >
         <thead>
           <tr>
-            <th><iCheck className="inputChooseAllCampaigns" /></th>
+            <th><ICheck className="inputChooseAllCampaigns" /></th>
             <th>Name</th>
             <th>Start Time</th>
             <th>End Time</th>
@@ -90,7 +90,7 @@ class CampaignList extends Component {
         </thead>
         <tfoot>
           <tr>
-            <th><iCheck className="inputChooseAllCampaigns" /></th>
+            <th><ICheck className="inputChooseAllCampaigns" /></th>
             <th>Name</th>
             <th>Start Time</th>
             <th>End Time</th>

@@ -5,11 +5,11 @@
 /* eslint-disable import/prefer-default-export */
 
 import DataTables from './DataTables';
-import iCheck from './iCheck';
+import ICheck from './ICheck';
 
 export {
   DataTables,
-  iCheck,
+  ICheck,
 };
 
 /* eslint-enable import/prefer-default-export */

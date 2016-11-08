@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { iCheck } from '../../../components/UI/';
+import { ICheck } from '../../../components/UI/';
 import Link from '../../../components/Link';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -41,7 +41,7 @@ class AdvertiserList extends Component {
       orderable: false,
       createdCell: (cell, cellData) => {
         ReactDOM.render(
-          <iCheck
+          <ICheck
             className="inputChooseAdvertiser"
             name="inputChooseAdvertiser[]"
             value={cellData}
@@ -76,7 +76,7 @@ class AdvertiserList extends Component {
       >
         <thead>
           <tr>
-            <th><iCheck className="inputChooseAllAdvertisers" /></th>
+            <th><ICheck className="inputChooseAllAdvertisers" /></th>
             <th>Name</th>
             <th>Email</th>
             <th>Contact</th>
@@ -85,7 +85,7 @@ class AdvertiserList extends Component {
         </thead>
         <tfoot>
           <tr>
-            <th><iCheck className="inputChooseAllAdvertisers" /></th>
+            <th><ICheck className="inputChooseAllAdvertisers" /></th>
             <th>Name</th>
             <th>Email</th>
             <th>Contact</th>

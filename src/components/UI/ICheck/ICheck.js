@@ -5,7 +5,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-class iCheck extends Component {
+class ICheck extends Component {
 
   static propTypes = {
     className: PropTypes.string.isRequired,
@@ -52,4 +52,4 @@ class iCheck extends Component {
   }
 }
 
-export default iCheck;
+export default ICheck;

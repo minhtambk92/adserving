@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-import { iCheck } from '../../../components/UI/';
+import { ICheck } from '../../../components/UI/';
 
 class ListZoneOfPlacement extends Component {
 
@@ -53,7 +53,7 @@ class ListZoneOfPlacement extends Component {
       orderable: false,
       createdCell: (cell, cellData) => {
         ReactDOM.render(
-          <iCheck
+          <ICheck
             className="inputChooseZone"
             name="inputChooseZone[]"
             value={cellData}
@@ -103,7 +103,7 @@ class ListZoneOfPlacement extends Component {
       >
         <thead>
           <tr>
-            <th><iCheck className="inputChooseAllZones" /></th>
+            <th><ICheck className="inputChooseAllZones" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>
@@ -111,7 +111,7 @@ class ListZoneOfPlacement extends Component {
         </thead>
         <tfoot>
           <tr>
-            <th><iCheck className="inputChooseAllZones" /></th>
+            <th><ICheck className="inputChooseAllZones" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-import { iCheck } from '../../../components/UI/';
+import { ICheck } from '../../../components/UI/';
 
 class ListPlacementOfBanner extends Component {
 
@@ -54,7 +54,7 @@ class ListPlacementOfBanner extends Component {
       orderable: false,
       createdCell: (cell, cellData) => {
         ReactDOM.render(
-          <iCheck
+          <ICheck
             className="inputChooseBanner"
             name="inputChooseBanner[]"
             value={cellData}
@@ -108,7 +108,7 @@ class ListPlacementOfBanner extends Component {
       >
         <thead>
           <tr>
-            <th><iCheck className="inputChooseAllBanners" /></th>
+            <th><ICheck className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>
@@ -116,7 +116,7 @@ class ListPlacementOfBanner extends Component {
         </thead>
         <tfoot>
           <tr>
-            <th><iCheck className="inputChooseAllBanners" /></th>
+            <th><ICheck className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>

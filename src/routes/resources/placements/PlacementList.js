@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-import { iCheck } from '../../../components/UI/';
+import { ICheck } from '../../../components/UI/';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 class PlacementList extends Component {
@@ -42,7 +42,7 @@ class PlacementList extends Component {
       orderable: false,
       createdCell: (cell, cellData) => {
         ReactDOM.render(
-          <iCheck
+          <ICheck
             className="inputChoosePlacement"
             name="inputChoosePlacement[]"
             value={cellData}
@@ -91,7 +91,7 @@ class PlacementList extends Component {
       >
         <thead>
           <tr>
-            <th><iCheck className="inputChooseAllPlacements" /></th>
+            <th><ICheck className="inputChooseAllPlacements" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>Start Time</th>
@@ -102,7 +102,7 @@ class PlacementList extends Component {
         </thead>
         <tfoot>
           <tr>
-            <th><iCheck className="inputChooseAllPlacements" /></th>
+            <th><ICheck className="inputChooseAllPlacements" /></th>
             <th>Name</th>
             <th>Size(px)</th>
             <th>Start Time</th>

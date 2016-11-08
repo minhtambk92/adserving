@@ -1,6 +1,6 @@
 {
-  "name": "iCheck",
+  "name": "ICheck",
   "version": "0.1.0",
   "private": true,
-  "main": "./iCheck.js"
+  "main": "./ICheck.js"
 }

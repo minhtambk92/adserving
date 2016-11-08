@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
-import { iCheck } from '../../../components/UI/';
+import { ICheck } from '../../../components/UI/';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 class ZoneList extends Component {
@@ -42,7 +42,7 @@ class ZoneList extends Component {
       orderable: false,
       createdCell: (cell, cellData) => {
         ReactDOM.render(
-          <iCheck
+          <ICheck
             className="inputChooseZone"
             name="inputChooseZone[]"
             value={cellData}
@@ -78,7 +78,7 @@ class ZoneList extends Component {
       >
         <thead>
           <tr>
-            <th><iCheck className="inputChooseAllZones" /></th>
+            <th><ICheck className="inputChooseAllZones" /></th>
             <th>Name</th>
             <th>Type</th>
             <th>Description</th>
@@ -87,7 +87,7 @@ class ZoneList extends Component {
         </thead>
         <tfoot>
           <tr>
-            <th><iCheck className="inputChooseAllZones" /></th>
+            <th><ICheck className="inputChooseAllZones" /></th>
             <th>Name</th>
             <th>Type</th>
             <th>Description</th>
