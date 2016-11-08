@@ -319,7 +319,7 @@ class Banner extends Component {
         addRemoveLinks: true,
         maxFiles: 1,
         init: function () {
-          const mockFile = { name: 'image', size: 125 };
+          const mockFile = { name: 'image', size: 125, type: 'image/jpeg' };
           this.options.addedfile.call(this, mockFile);
           this.options.thumbnail.call(this, mockFile, img);
           mockFile.previewElement.classList.add('dz-success');
