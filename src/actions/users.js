@@ -292,7 +292,7 @@ export function registerUser({ email, password, fullName }) {
 }
 
 export function logUserIn({ email, password, rememberMe }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async(dispatch) => {
     const res = await fetch('/login', {
       method: 'post',
       headers: {
@@ -307,36 +307,12 @@ export function logUserIn({ email, password, rememberMe }) {
       credentials: 'include',
     });
 
-    const { auth } = await res.json();
-
-    const query = `
-      query {
-        users(where: {id: "${auth.loggedInUser.id}"}, limit: 1) {
-          id
-          email
-          emailConfirmed
-          status
-          profile {
-            displayName
-          }
-          roles {
-            id
-            uniqueName
-            name
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(query);
+    const { data } = await res.json();
 
     dispatch({
       type: LOG_USER_IN,
       payload: {
-        user: data.users.shift(),
+        user: data.loggedInUser,
       },
     });
   };
