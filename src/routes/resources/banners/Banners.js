@@ -126,7 +126,7 @@ class Banners extends Component {
     this.inputBannerName.value = null;
     if (this.state.checkTypeBanner === 'html') {
       this.inputBannerHTML.value = null;
-    };
+    }
     this.inputBannerWidth.value = null;
     this.inputBannerHeight.value = null;
     this.inputBannerKeyWord.value = null;
