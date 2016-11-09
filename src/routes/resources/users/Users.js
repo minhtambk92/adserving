@@ -137,7 +137,7 @@ class Users extends Component {
                 </div>
                 {/* /.box-header */}
                 <FilterUsersForm
-                  roles={this.props.roles}
+                  roles={this.props.roles.list}
                   filters={this.props.users.filters}
                   setUsersFilters={this.props.setUsersFilters}
                 />
