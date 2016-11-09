@@ -9,6 +9,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getRoles, createRole, getRolesFilters, setRolesFilters } from '../../../actions/roles';
