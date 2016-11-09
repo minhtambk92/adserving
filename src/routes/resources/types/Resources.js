@@ -61,7 +61,7 @@ class Resources extends Component {
                 </div>
                 {/* /.box-header */}
                 {/* form start */}
-                <CreateResourceForm createResource={this.createResource} />
+                <CreateResourceForm createResource={this.props.createResource} />
               </div>
               {/* /.col */}
             </section>
