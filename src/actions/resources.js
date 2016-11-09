@@ -103,10 +103,10 @@ export function getResources(args = {
   };
 }
 
-export function createResource({ uniqueName, name }) {
+export function createResource({ uniqueName, modelName, name, hasMeta, description, status }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($resource: ResourceInputWithoutId!) {
+      mutation ($resource: ResourceInputTypeWithoutId!) {
         createdResource(resource: $resource) {
           id
           uniqueName
@@ -121,7 +121,16 @@ export function createResource({ uniqueName, name }) {
         }
       }`;
 
-    const { data } = await graphqlRequest(mutation, { resource: { uniqueName, name } });
+    const { data } = await graphqlRequest(mutation, {
+      resource: {
+        uniqueName,
+        modelName,
+        name,
+        hasMeta: hasMeta === true,
+        description,
+        status,
+      },
+    });
 
     dispatch({
       type: CREATE_RESOURCE,
@@ -132,10 +141,10 @@ export function createResource({ uniqueName, name }) {
   };
 }
 
-export function updateResource({ id, uniqueName, name }) {
+export function updateResource({ id, uniqueName, modelName, name, hasMeta, description, status }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($resource: ResourceInput!) {
+      mutation ($resource: ResourceInputType!) {
         updatedResource(resource: $resource) {
           id
           uniqueName
@@ -150,7 +159,17 @@ export function updateResource({ id, uniqueName, name }) {
         }
       }`;
 
-    const { data } = await graphqlRequest(mutation, { resource: { id, uniqueName, name } });
+    const { data } = await graphqlRequest(mutation, {
+      resource: {
+        id,
+        uniqueName,
+        modelName,
+        name,
+        hasMeta: hasMeta === true,
+        description,
+        status,
+      },
+    });
 
     dispatch({
       type: UPDATE_RESOURCE,

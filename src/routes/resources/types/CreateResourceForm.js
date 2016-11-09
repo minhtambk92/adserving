@@ -12,15 +12,29 @@ class CreateResourceForm extends Component {
 
   clearInput() {
     this.inputResourceUniqueName.value = null;
+    this.inputResourceModelName.value = null;
     this.inputResourceName.value = null;
+    this.inputResourceDescription.value = null;
   }
 
   createResource() {
     const uniqueName = this.inputResourceUniqueName.value;
+    const modelName = this.inputResourceModelName.value;
     const name = this.inputResourceName.value;
+    const hasMeta = this.inputResourceHasMeta.value;
+    const description = this.inputResourceDescription.value;
+    const status = this.inputResourceStatus.value;
 
-    if (uniqueName && name) {
-      this.props.createResource({ uniqueName, name });
+    if (uniqueName && modelName && name && hasMeta && description && status) {
+      this.props.createResource({
+        uniqueName,
+        modelName,
+        name,
+        hasMeta,
+        description,
+        status,
+      });
+
       this.clearInput();
     }
   }
@@ -45,16 +59,80 @@ class CreateResourceForm extends Component {
           </div>
           <div className="form-group">
             <label
+              htmlFor="inputResourceModelName" className="col-sm-2 control-label"
+            >Model name</label>
+            <div className="col-sm-10">
+              <input
+                type="text" className="form-control" id="inputResourceModelName"
+                placeholder="User"
+                ref={c => {
+                  this.inputResourceModelName = c;
+                }}
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <label
               htmlFor="inputResourceName" className="col-sm-2 control-label"
             >Display name</label>
             <div className="col-sm-10">
               <input
                 type="text" className="form-control" id="inputResourceName"
-                placeholder="User"
+                placeholder="Resource"
                 ref={c => {
                   this.inputResourceName = c;
                 }}
               />
+            </div>
+          </div>
+          <div className="form-group">
+            <label
+              htmlFor="inputResourceHasMeta"
+              className="col-sm-2 control-label"
+            >Has meta value</label>
+            <div className="col-sm-10">
+              <select
+                id="inputResourceHasMeta"
+                className="form-control"
+                ref={c => {
+                  this.inputResourceHasMeta = c;
+                }}
+              >
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          </div>
+          <div className="form-group">
+            <label
+              htmlFor="inputResourceDescription" className="col-sm-2 control-label"
+            >Description</label>
+            <div className="col-sm-10">
+              <textarea
+                className="form-control" id="inputResourceDescription"
+                placeholder="Resource description..."
+                ref={c => {
+                  this.inputResourceDescription = c;
+                }}
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <label
+              htmlFor="inputResourceStatus"
+              className="col-sm-2 control-label"
+            >Status</label>
+            <div className="col-sm-10">
+              <select
+                id="inputResourceStatus"
+                className="form-control"
+                ref={c => {
+                  this.inputResourceStatus = c;
+                }}
+              >
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
             </div>
           </div>
         </div>
