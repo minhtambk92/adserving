@@ -274,7 +274,7 @@ class Users extends Component {
                           ref={c => {
                             this.inputUserRoles = c;
                           }}
-                          defaultValue={this.props.users.filters && this.props.users.filters.roleId}
+                          defaultValue={this.props.users.filters.uniqueName}
                         >
                           {this.props.roles.list && this.props.roles.list.map(role => (
                             <option key={role.id} value={role.uniqueName}>{role.name}</option>
