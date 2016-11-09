@@ -22,23 +22,12 @@ class User extends Component {
 
   static propTypes = {
     userId: PropTypes.string.isRequired,
+    roles: PropTypes.object,
     users: PropTypes.object,
     getUser: PropTypes.func,
     updateUser: PropTypes.func,
     deleteUser: PropTypes.func,
   };
-
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      email: '',
-      password: '',
-      passwordConfirmation: '',
-      emailConfirmed: '',
-      status: '',
-    };
-  }
 
   componentWillMount() {
     this.props.getUser(this.props.userId);
@@ -47,32 +36,23 @@ class User extends Component {
   componentWillReceiveProps(nextProps) {
     const {
       email,
+      profile,
       emailConfirmed,
       status,
-    } = nextProps.users && (nextProps.users.editing || {});
+    } = nextProps.users.editing;
 
-    document.getElementById('inputUserEmail').value = email;
-    document.getElementById('inputUserEmailConfirmed').value = emailConfirmed;
-    document.getElementById('inputUserStatus').value = status;
-  }
-
-  onInputChange(event, field) {
-    event.persist();
-
-    this.setState(previousState => ({
-      ...previousState,
-      [field]: event.target.value,
-    }));
+    this.inputUserEmail.value = email;
+    this.inputUserDisplayName.value = profile.displayName;
+    this.inputUserEmailConfirmed.value = emailConfirmed;
+    this.inputUserStatus.value = status;
   }
 
   updateUser() {
-    const {
-      email,
-      password,
-      passwordConfirmation,
-      emailConfirmed,
-      status,
-    } = this.state;
+    const email = this.inputUserEmail.value;
+    const password = this.inputUserPassword.value;
+    const passwordConfirmation = this.inputUserPasswordConfirmation.value;
+    const emailConfirmed = this.inputUserEmailConfirmed.value;
+    const status = this.inputUserStatus.value;
 
     const user = { id: this.props.userId };
 
@@ -113,7 +93,7 @@ class User extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: FORM OF USER INFORMATION */}
+              {/* BOX: UPDATE */}
               <div className="box box-primary">
                 <div className="box-header with-border">
                   <h3 className="box-title">Change user information</h3>
@@ -124,9 +104,9 @@ class User extends Component {
                   </div>
                 </div>
                 {/* /.box-header */}
-                {/* form start */}
                 <form className="form-horizontal">
                   <div className="box-body">
+                    {/* email */}
                     <div className="form-group">
                       <label
                         htmlFor="inputUserEmail"
@@ -136,10 +116,35 @@ class User extends Component {
                         <input
                           type="text" className="form-control" id="inputUserEmail"
                           placeholder="contact@dantri.com.vn"
-                          onChange={event => this.onInputChange(event, 'email')}
+                          ref={c => {
+                            this.inputUserEmail = c;
+                          }}
                         />
                       </div>
                     </div>
+                    {/* role */}
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputUserRoles"
+                        className="col-sm-2 control-label"
+                      >Role</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputUserRoles"
+                          className="form-control select2"
+                          style={{ width: '100%' }}
+                          ref={c => {
+                            this.inputUserRoles = c;
+                          }}
+                          defaultValue={this.props.users.filters.roleUniqueName}
+                        >
+                          {this.props.roles && this.props.roles.map(role => (
+                            <option key={role.id} value={role.uniqueName}>{role.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    {/* password */}
                     <div className="form-group">
                       <label
                         htmlFor="inputUserPassword"
@@ -149,10 +154,13 @@ class User extends Component {
                         <input
                           type="password" className="form-control" id="inputUserPassword"
                           placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                          onChange={event => this.onInputChange(event, 'password')}
+                          ref={c => {
+                            this.inputUserPassword = c;
+                          }}
                         />
                       </div>
                     </div>
+                    {/* passwordConfirmation */}
                     <div className="form-group">
                       <label
                         htmlFor="inputUserPasswordConfirmation"
@@ -163,10 +171,13 @@ class User extends Component {
                           type="password" className="form-control"
                           id="inputUserPasswordConfirmation"
                           placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                          onChange={event => this.onInputChange(event, 'passwordConfirmation')}
+                          ref={c => {
+                            this.inputUserPasswordConfirmation = c;
+                          }}
                         />
                       </div>
                     </div>
+                    {/* emailConfirmed */}
                     <div className="form-group">
                       <label
                         htmlFor="inputUserEmailConfirmed"
@@ -176,13 +187,16 @@ class User extends Component {
                         <select
                           id="inputUserEmailConfirmed"
                           className="form-control"
-                          onChange={event => this.onInputChange(event, 'emailConfirmed')}
+                          ref={c => {
+                            this.inputUserEmailConfirmed = c;
+                          }}
                         >
                           <option value="true">Yes</option>
                           <option value="false">No</option>
                         </select>
                       </div>
                     </div>
+                    {/* status */}
                     <div className="form-group">
                       <label
                         htmlFor="inputUserStatus"
@@ -192,7 +206,9 @@ class User extends Component {
                         <select
                           id="inputUserStatus"
                           className="form-control"
-                          onChange={event => this.onInputChange(event, 'status')}
+                          ref={c => {
+                            this.inputUserStatus = c;
+                          }}
                         >
                           <option value="active">Active</option>
                           <option value="inactive">Inactive</option>
@@ -232,6 +248,7 @@ class User extends Component {
 
 const mapState = (state) => ({
   users: state.users,
+  roles: state.roles,
 });
 
 const mapDispatch = {
