@@ -59,12 +59,12 @@ class Users extends Component {
   }
 
   isFiltered(user) {
-    const { roleId, emailConfirmed, status } = this.props.users.filters;
+    const { roleUniqueName, emailConfirmed, status } = this.props.users.filters;
 
     const notMatchRole = (
-      roleId !== undefined &&
+      roleUniqueName !== undefined &&
       typeof user.roles === 'object' &&
-      JSON.stringify(user.roles).indexOf(roleId) === -1
+      JSON.stringify(user.roles).indexOf(roleUniqueName) === -1
     );
 
     const notMatchEmailConfirmed = (

@@ -38,7 +38,7 @@ class FilterUsersForm extends Component {
                 ref={c => {
                   this.inputUsersFilterRole = c;
                 }}
-                onChange={event => this.onFilterChange(event, 'roleId')}
+                onChange={event => this.onFilterChange(event, 'roleUniqueName')}
                 defaultValue={this.props.filters.roleUniqueName}
               >
                 <option value="null">All roles</option>
