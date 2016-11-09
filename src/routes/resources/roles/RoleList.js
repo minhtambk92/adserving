@@ -1,5 +1,5 @@
 /**
- * Created by Manhhailua on 11/2/16.
+ * Created by Manhhailua on 11/9/16.
  */
 
 import React, { Component, PropTypes } from 'react';
@@ -8,11 +8,16 @@ import moment from 'moment';
 import { DataTables, ICheck } from '../../../components/UI/';
 import Link from '../../../components/Link';
 
-class UserList extends Component {
+class RoleList extends Component {
 
   static propTypes = {
     list: PropTypes.array.isRequired,
+    setUsersFilters: PropTypes.func.isRequired,
   };
+
+  addUserToThisRole(roleId) {
+    this.props.setUsersFilters({ roleId });
+  }
 
   dataTableOptions() { // eslint-disable-line class-methods-use-this
     return [{
@@ -21,30 +26,25 @@ class UserList extends Component {
       createdCell: (cell, cellData) => {
         ReactDOM.render(
           <ICheck
-            className="inputChooseUser"
-            name="inputChooseUser[]"
+            className="inputChooseRole"
+            name="inputChooseRole[]"
             value={cellData}
           />,
           cell
         );
       },
     }, {
-      data: 'email',
+      data: 'uniqueName',
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(
           <Link
-            to={`/resource/user/${rowData.id}`}
+            to={`/resource/role/${rowData.id}`}
           >{cellData}</Link>,
           cell,
         );
       },
     }, {
-      data: 'profile.displayName',
-    }, {
-      data: 'emailConfirmed',
-      render: data => (data ? 'yes' : 'no'),
-    }, {
-      data: 'status',
+      data: 'name',
     }, {
       data: 'createdAt',
       render(data, type) {
@@ -65,6 +65,16 @@ class UserList extends Component {
         // that, unaltered
         return data;
       },
+    }, {
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(
+          <Link
+            to="/resource/user"
+            onClick={event => this.addUserToThisRole(rowData.id, event)}
+          >Add New User</Link>,
+          cell,
+        );
+      },
     }];
   }
 
@@ -77,30 +87,28 @@ class UserList extends Component {
         options={{
           columns: this.dataTableOptions(),
           destroy: true,
-          order: [[4, 'DESC']],
+          order: [[3, 'DESC']],
         }}
         thead={(
           <tr>
             <th>
-              <ICheck className="inputChooseAllUsers" />
+              <ICheck className="inputChooseAllRoles" />
             </th>
-            <th>Email</th>
+            <th>Unique name</th>
             <th>Name</th>
-            <th>Email confirmed</th>
-            <th>Status</th>
             <th>Created date</th>
+            <th>&nbsp;</th>
           </tr>
         )}
         tfoot={(
           <tr>
             <th>
-              <ICheck className="inputChooseAllUsers" />
+              <ICheck className="inputChooseAllRoles" />
             </th>
-            <th>Email</th>
+            <th>Unique name</th>
             <th>Name</th>
-            <th>Email confirmed</th>
-            <th>Status</th>
             <th>Created date</th>
+            <th>&nbsp;</th>
           </tr>
         )}
       />
@@ -108,4 +116,4 @@ class UserList extends Component {
   }
 }
 
-export default UserList;
+export default RoleList;

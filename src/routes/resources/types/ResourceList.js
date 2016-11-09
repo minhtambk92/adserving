@@ -11,7 +11,7 @@ import Link from '../../../components/Link';
 class ResourceList extends Component {
 
   static propTypes = {
-    list: PropTypes.array,
+    list: PropTypes.array.isRequired,
   };
 
   dataTableOptions() { // eslint-disable-line class-methods-use-this
