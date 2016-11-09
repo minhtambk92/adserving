@@ -14,7 +14,7 @@ import Resources from './Resources';
 
 export default {
 
-  path: '/',
+  path: '/type',
 
   children: [
     {

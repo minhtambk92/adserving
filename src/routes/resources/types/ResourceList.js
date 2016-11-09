@@ -33,7 +33,7 @@ class ResourceList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(
           <Link
-            to={`/resource/${rowData.id}`}
+            to={`/resource/type/${rowData.id}`}
           >{cellData}</Link>,
           cell,
         );
