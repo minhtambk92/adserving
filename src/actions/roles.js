@@ -12,7 +12,7 @@ import {
   SET_ROLES_FILTERS,
 } from '../constants';
 
-export function getZonesFilters() {
+export function getRolesFilters() {
   return async(dispatch) => {
     dispatch({
       type: GET_ROLES_FILTERS,
@@ -21,7 +21,7 @@ export function getZonesFilters() {
   };
 }
 
-export function setZonesFilters(filter) {
+export function setRolesFilters(filter) {
   return async(dispatch) => {
     dispatch({
       type: SET_ROLES_FILTERS,

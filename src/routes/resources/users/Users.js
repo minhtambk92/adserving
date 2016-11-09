@@ -20,6 +20,8 @@ import {
   setUsersFilters,
 } from '../../../actions/users';
 import Layout from '../../../components/Layout';
+import FilterUsersForm from './FilterUsersForm';
+import CreateUserForm from './CreateUserForm';
 import UserList from './UserList';
 import s from './Users.css';
 
@@ -134,80 +136,11 @@ class Users extends Component {
                   </div>
                 </div>
                 {/* /.box-header */}
-                {/* form start */}
-                <form className="form-horizontal">
-                  <div className="box-body">
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputUsersFilterRole"
-                        className="col-sm-2 control-label"
-                      >Role</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputUsersFilterRole"
-                          className="form-control select2"
-                          style={{ width: '100%' }}
-                          ref={c => {
-                            this.inputUsersFilterRole = c;
-                          }}
-                          onChange={event => this.onFilterChange(event, 'roleId')}
-                          defaultValue={this.props.users.filters && this.props.users.filters.roleId}
-                        >
-                          <option value="null">All roles</option>
-                          {this.props.roles.list && this.props.roles.list.map(role => (
-                            <option
-                              key={role.id} value={role.id}
-                            >{role.name}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputUsersFilterEmailConfirmed"
-                        className="col-sm-2 control-label"
-                      >Email confirmed</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputUsersFilterEmailConfirmed"
-                          className="form-control"
-                          ref={c => {
-                            this.inputUsersFilterEmailConfirmed = c;
-                          }}
-                          onChange={event => this.onFilterChange(event, 'emailConfirmed')}
-                          defaultValue={
-                            this.props.users.filters && this.props.users.filters.emailConfirmed
-                          }
-                        >
-                          <option value="null">All types</option>
-                          <option value="true">Yes</option>
-                          <option value="false">No</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputUsersFilterStatus"
-                        className="col-sm-2 control-label"
-                      >Status</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputUsersFilterStatus" className="form-control"
-                          ref={c => {
-                            this.inputUsersFilterStatus = c;
-                          }}
-                          onChange={event => this.onFilterChange(event, 'status')}
-                          defaultValue={this.props.users.filters && this.props.users.filters.status}
-                        >
-                          <option value="null">All states</option>
-                          <option value="active">Active</option>
-                          <option value="inactive">Inactive</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  {/* /.box-body */}
-                </form>
+                <FilterUsersForm
+                  roles={this.props.roles.list}
+                  filters={this.props.users.filters}
+                  setUsersFilters={this.props.setUsersFilters}
+                />
               </div>
               {/* /.col */}
             </section>
@@ -216,9 +149,9 @@ class Users extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: CREATE */}
-              <div className="box box-default collapsed-box">
+              <div className="box box-primary collapsed-box">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Create a new user</h3>
+                  <h3 className="box-title">Create a new resource</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn btn-box-tool" data-widget="collapse">
                       <i className="fa fa-plus" />
@@ -226,143 +159,11 @@ class Users extends Component {
                   </div>
                 </div>
                 {/* /.box-header */}
-                {/* form start */}
-                <form className="form-horizontal">
-                  <div className="box-body">
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputUserEmail"
-                        className="col-sm-2 control-label"
-                      >Email</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="text" className="form-control" id="inputUserEmail"
-                          placeholder="contact@dantri.com.vn"
-                          ref={c => {
-                            this.inputUserEmail = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputUserDisplayName"
-                        className="col-sm-2 control-label"
-                      >Name</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="text" className="form-control" id="inputUserDisplayName"
-                          placeholder="John Doe"
-                          ref={c => {
-                            this.inputUserDisplayName = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputUserRoles"
-                        className="col-sm-2 control-label"
-                      >Role</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputUserRoles"
-                          className="form-control select2"
-                          style={{ width: '100%' }}
-                          ref={c => {
-                            this.inputUserRoles = c;
-                          }}
-                          defaultValue={this.props.users.filters && this.props.users.filters.roleId}
-                        >
-                          {this.props.roles.list && this.props.roles.list.map(role => (
-                            <option key={role.id} value={role.uniqueName}>{role.name}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputUserPassword"
-                        className="col-sm-2 control-label"
-                      >Password</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="password" className="form-control" id="inputUserPassword"
-                          placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                          ref={c => {
-                            this.inputUserPassword = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputUserPasswordConfirmation"
-                        className="col-sm-2 control-label"
-                      >Password again</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="password" className="form-control"
-                          id="inputUserPasswordConfirmation"
-                          placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                          ref={c => {
-                            this.inputUserPasswordConfirmation = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputUserEmailConfirmed"
-                        className="col-sm-2 control-label"
-                      >Email confirmed</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputUserEmailConfirmed"
-                          className="form-control"
-                          ref={c => {
-                            this.inputUserEmailConfirmed = c;
-                          }}
-                        >
-                          <option value="true">Yes</option>
-                          <option value="false">No</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputUserStatus"
-                        className="col-sm-2 control-label"
-                      >Status</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputUserStatus"
-                          className="form-control"
-                          ref={c => {
-                            this.inputUserStatus = c;
-                          }}
-                        >
-                          <option value="active">Active</option>
-                          <option value="inactive">Inactive</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  {/* /.box-body */}
-                  <div className="box-footer">
-                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                    <a
-                      className="btn btn-app pull-right"
-                      onClick={event => this.clearInput(event)}
-                    ><i className="fa fa-eraser" /> Clear</a>
-                    <a
-                      className="btn btn-app pull-right"
-                      onClick={event => this.createUser(event)}
-                    ><i className="fa fa-check" /> Confirm</a>
-                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                  </div>
-                  {/* /.box-footer */}
-                </form>
+                <CreateUserForm
+                  filters={this.props.users.filters}
+                  roles={this.props.roles.list}
+                  createUser={this.props.createUser}
+                />
               </div>
               {/* /.col */}
             </section>
