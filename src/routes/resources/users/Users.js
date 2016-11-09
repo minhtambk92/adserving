@@ -44,11 +44,6 @@ class Users extends Component {
     this.props.getUsers();
   }
 
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    // $('.select2').select2();
-  }
-
   onFilterChange(event, field) {
     event.persist();
 
@@ -59,6 +54,26 @@ class Users extends Component {
 
   getFilteredUsers() {
     return _.filter(this.props.users.list, user => this.isFiltered(user));
+  }
+
+  isFiltered(user) {
+    const { roleId, emailConfirmed, status } = this.props.users.filters;
+
+    const notMatchRole = (
+      roleId !== undefined &&
+      typeof user.roles === 'object' &&
+      JSON.stringify(user.roles).indexOf(roleId) === -1
+    );
+
+    const notMatchEmailConfirmed = (
+      emailConfirmed !== undefined && emailConfirmed !== user.emailConfirmed
+    );
+
+    const notMatchStatus = (
+      status !== undefined && status !== user.status
+    );
+
+    return !(notMatchRole || notMatchEmailConfirmed || notMatchStatus);
   }
 
   clearInput() {
@@ -99,26 +114,6 @@ class Users extends Component {
 
       this.clearInput();
     }
-  }
-
-  isFiltered(user) {
-    const { roleId, emailConfirmed, status } = this.props.users.filters;
-
-    const notMatchRole = (
-      roleId !== undefined &&
-      typeof user.roles === 'object' &&
-      JSON.stringify(user.roles).indexOf(roleId) === -1
-    );
-
-    const notMatchEmailConfirmed = (
-      emailConfirmed !== undefined && emailConfirmed !== user.emailConfirmed
-    );
-
-    const notMatchStatus = (
-      status !== undefined && status !== user.status
-    );
-
-    return !(notMatchRole || notMatchEmailConfirmed || notMatchStatus);
   }
 
   render() {
