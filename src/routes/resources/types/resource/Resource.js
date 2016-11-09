@@ -230,11 +230,11 @@ class Resource extends Component {
                   <div className="box-footer">
                     {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                     <Link
-                      to="/resource"
+                      to="/resource/type"
                       className="btn btn-app pull-right"
                     ><i className="fa fa-undo" /> Cancel</Link>
                     <Link
-                      to="/resource"
+                      to="/resource/type"
                       className="btn btn-app pull-right"
                       onClick={event => this.deleteResource(event)}
                     ><i className="fa fa-trash-o" /> Delete</Link>
