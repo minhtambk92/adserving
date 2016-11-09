@@ -15,8 +15,8 @@ class RoleList extends Component {
     setUsersFilters: PropTypes.func.isRequired,
   };
 
-  addUserToThisRole(roleId) {
-    this.props.setUsersFilters({ roleId });
+  addUserToThisRole(roleUniqueName) {
+    this.props.setUsersFilters({ roleUniqueName });
   }
 
   dataTableOptions() { // eslint-disable-line class-methods-use-this
@@ -72,7 +72,7 @@ class RoleList extends Component {
         ReactDOM.render(
           <Link
             to="/resource/user"
-            onClick={event => this.addUserToThisRole(rowData.id, event)}
+            onClick={event => this.addUserToThisRole(rowData.uniqueName, event)}
           >Add New User</Link>,
           cell,
         );

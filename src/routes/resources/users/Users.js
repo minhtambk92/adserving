@@ -134,9 +134,9 @@ class Users extends Component {
                   </div>
                 </div>
                 {/* /.box-header */}
-                {/* form start */}
                 <form className="form-horizontal">
                   <div className="box-body">
+                    {/* role */}
                     <div className="form-group">
                       <label
                         htmlFor="inputUsersFilterRole"
@@ -151,17 +151,18 @@ class Users extends Component {
                             this.inputUsersFilterRole = c;
                           }}
                           onChange={event => this.onFilterChange(event, 'roleId')}
-                          defaultValue={this.props.users.filters && this.props.users.filters.roleId}
+                          defaultValue={this.props.users.filters.roleUniqueName}
                         >
                           <option value="null">All roles</option>
                           {this.props.roles.list && this.props.roles.list.map(role => (
                             <option
-                              key={role.id} value={role.id}
+                              key={role.id} value={role.uniqueName}
                             >{role.name}</option>
                           ))}
                         </select>
                       </div>
                     </div>
+                    {/* emailConfirmed */}
                     <div className="form-group">
                       <label
                         htmlFor="inputUsersFilterEmailConfirmed"
@@ -185,6 +186,7 @@ class Users extends Component {
                         </select>
                       </div>
                     </div>
+                    {/* status */}
                     <div className="form-group">
                       <label
                         htmlFor="inputUsersFilterStatus"
