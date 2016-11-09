@@ -21,6 +21,7 @@ import {
   setBannersFilters,
 } from '../../../actions/banners';
 import { getPlacements } from '../../../actions/placements';
+import { InputTags } from '../../../components/UI';
 import Layout from '../../../components/Layout';
 import BannerList from './BannerList';
 import s from './Banners.css';
@@ -45,6 +46,7 @@ class Banners extends Component {
       searchText: '',
       checkTypeBanner: 'html',
       imageUrl: '',
+      tags: '',
     };
     this.djsConfig = {
       acceptedFiles: 'image/jpeg,image/png,image/gif',
@@ -77,9 +79,6 @@ class Banners extends Component {
 
   componentDidMount() {
     /* eslint-disable no-undef */
-    $('#inputBannerKeyWord').tagsinput({
-      allowDuplicates: true,
-    });
     // iCheck for checkbox and radio inputs
   }
 
@@ -138,7 +137,6 @@ class Banners extends Component {
     const name = this.inputBannerName.value;
     const width = this.inputBannerWidth.value;
     const height = this.inputBannerHeight.value;
-    const keyword = this.inputBannerKeyWord.value;
     const weight = this.inputBannerWeight.value;
     const description = this.inputBannerDescription.value;
     const type = this.inputBannerType.value;
@@ -155,6 +153,7 @@ class Banners extends Component {
       imageUrl = this.state.imageUrl;
     }
     const status = this.inputBannerStatus.value;
+    const keyword = document.getElementById('inputBannerKeyWord').value;
     if (name && height && weight && keyword && width && description && type) {
       this.props.createBanner({
         name,
@@ -252,7 +251,7 @@ class Banners extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW WEB BANNER */}
-              <div className="box box-info collapsed-box">
+              <div className="box box-info">
                 <div className="box-header with-border">
                   <h3 className="box-title">Create a new Banner</h3>
                   <div className="box-tools pull-right">
@@ -379,17 +378,13 @@ class Banners extends Component {
                     </div>
                     <div className="form-group">
                       <label
-                        htmlFor="inputBannerSlot"
+                        htmlFor="inputBannerKeyWord"
                         className="col-sm-2 control-label"
                       >KeyWord</label>
                       <div className="col-sm-10">
-                        <input
-                          type="text" className="form-control" id="inputBannerKeyWord"
-                          placeholder="dantri"
-                          data-role="tagsinput"
-                          ref={c => {
-                            this.inputBannerKeyWord = c;
-                          }}
+                        <InputTags
+                          id="inputBannerKeyWord"
+                          data={this.state.tags}
                         />
                       </div>
                     </div>

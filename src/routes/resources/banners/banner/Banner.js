@@ -86,9 +86,6 @@ class Banner extends Component {
       startDate: dateEnd,
       defaultDate: new Date(),
     });
-    $('#inputBannerKeyWord').tagsinput({
-      allowDuplicates: true,
-    });
     /* eslint-enable no-undef */
   }
 
@@ -137,6 +134,9 @@ class Banner extends Component {
     /* eslint-disable no-underscore-dangle */
     $('#inputPlacementEndTime').datepicker('update', moment().add(1, 'month')._d);
     /* eslint-enable no-underscore-dangle */
+    $('#inputBannerKeyWord').tagsinput({
+      allowDuplicates: true,
+    });
     $('#inputBannerKeyWord').tagsinput('add', this.state.keyWord);
     /* eslint-enable no-undef */
   }
