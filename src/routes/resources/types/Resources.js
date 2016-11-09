@@ -14,7 +14,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getResources, createResource } from '../../../actions/resources';
 import { setUsersFilters } from '../../../actions/users';
 import Layout from '../../../components/Layout';
-import Link from '../../../components/Link';
+import ResourceList from './ResourceList';
 import s from './Resources.css';
 
 const pageTitle = 'Resources Management';
@@ -41,25 +41,6 @@ class Resources extends Component {
     this.props.getResources();
   }
 
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    $('input[type="checkbox"].inputChooseResource').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-    /* eslint-enable no-undef */
-  }
-
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].inputChooseResource').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue',
-    });
-    /* eslint-enable no-undef */
-  }
-
   clearInput() {
     this.inputResourceUniqueName.value = null;
     this.inputResourceName.value = null;
@@ -73,27 +54,6 @@ class Resources extends Component {
       this.props.createResource({ uniqueName, name });
       this.clearInput();
     }
-  }
-
-  searchFor(event) {
-    event.persist();
-    this.setState((previousState) => ({
-      ...previousState,
-      searchText: event.target.value.trim(),
-    }));
-  }
-
-  isIndexOf(...args) {
-    for (let i = 0; i < args.length; i += 1) {
-      if (args[i].toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  addUserToThisResource(resourceId) {
-    this.props.setUsersFilters({ resourceId });
   }
 
   render() {
@@ -168,79 +128,13 @@ class Resources extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: LIST */}
               <div className="box box-info">
                 <div className="box-header with-border">
                   <h3 className="box-title">List of resources</h3>
-
-                  <div className="box-tools">
-                    <div className="input-group input-group-sm" style={{ width: 150 }}>
-                      <input
-                        type="text" name="inputSearchResources"
-                        className="form-control pull-right"
-                        placeholder="Search..."
-                        onChange={event => this.searchFor(event)}
-                      />
-                      <div className="input-group-btn">
-                        <button
-                          type="submit" className="btn btn-default"
-                        ><i className="fa fa-search" /></button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 {/* /.box-header */}
-                <div className="box-body table-responsive no-padding">
-                  <table id="example1" className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseResource" /></th>
-                        <th>Alias</th>
-                        <th>Name</th>
-                        <th>&nbsp;</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.props.resources.list && this.props.resources.list.map(resource => {
-                        if (this.isIndexOf(resource.uniqueName, resource.name)) {
-                          return (
-                            <tr key={resource.id}>
-                              <td><input type="checkbox" className="inputChooseResource" /></td>
-                              <td>
-                                <Link to={`/resource/resource/${resource.id}`}>{resource.uniqueName}</Link>
-                              </td>
-                              <td>{resource.name}</td>
-                              <td>
-                                <Link
-                                  to="/resource/user"
-                                  onClick={event => this.addUserToThisResource(resource.id, event)}
-                                >Add New User</Link>
-                              </td>
-                            </tr>
-                          );
-                        }
-                        return false;
-                      })}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th><input type="checkbox" className="inputChooseResource" /></th>
-                        <th>Alias</th>
-                        <th>Name</th>
-                        <th>&nbsp;</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-                {/* /.box-body */}
-                <div className="box-footer clearfix">
-                  <ul className="pagination pagination-sm no-margin pull-right">
-                    <li><a>&laquo;</a></li>
-                    <li><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>&raquo;</a></li>
-                  </ul>
+                <div className="box-body">
+                  <ResourceList list={this.props.resources.list} />
                 </div>
               </div>
               {/* /.box */}
