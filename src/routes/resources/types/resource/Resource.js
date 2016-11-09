@@ -11,7 +11,11 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getResource, updateResource, deleteResource } from '../../../../actions/resources';
+import {
+  getResource,
+  updateResource,
+  deleteResource,
+} from '../../../../actions/resources';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './Resource.css';
@@ -35,11 +39,19 @@ class Resource extends Component {
   componentWillReceiveProps(nextProps) {
     const {
       uniqueName,
+      modelName,
       name,
-    } = nextProps.resources && (nextProps.resources.editing || {});
+      hasMeta,
+      description,
+      status,
+    } = nextProps.resources.editing;
 
     this.inputResourceUniqueName.value = uniqueName;
+    this.inputResourceModelName.value = modelName;
     this.inputResourceName.value = name;
+    this.inputResourceHasMeta.value = hasMeta;
+    this.inputResourceDescription.value = description;
+    this.inputResourceStatus.value = status;
   }
 
   clearInput() {
@@ -49,9 +61,17 @@ class Resource extends Component {
 
   updateResource() {
     const uniqueName = this.inputResourceUniqueName.value;
+    const modelName = this.inputResourceModelName.value;
     const name = this.inputResourceName.value;
+    const hasMeta = this.inputResourceHasMeta.value;
+    const description = this.inputResourceDescription.value;
+    const status = this.inputResourceStatus.value;
 
     const resource = { id: this.props.resourceId };
+
+    if (modelName && modelName !== this.props.resources.editing.modelName) {
+      resource.modelName = modelName;
+    }
 
     if (uniqueName && uniqueName !== this.props.resources.editing.uniqueName) {
       resource.uniqueName = uniqueName;
@@ -59,6 +79,18 @@ class Resource extends Component {
 
     if (name && name !== this.props.resources.editing.name) {
       resource.name = name;
+    }
+
+    if (hasMeta && hasMeta !== this.props.resources.editing.hasMeta) {
+      resource.hasMeta = hasMeta;
+    }
+
+    if (description && description !== this.props.resources.editing.description) {
+      resource.description = description;
+    }
+
+    if (status && status !== this.props.resources.editing.status) {
+      resource.status = status;
     }
 
     this.props.updateResource(resource);
@@ -93,14 +125,14 @@ class Resource extends Component {
                   </div>
                 </div>
                 {/* /.box-header */}
-                {/* form start */}
                 <form className="form-horizontal">
                   <div className="box-body">
+                    {/* uniqueName */}
                     <div className="form-group">
                       <label
-                        htmlFor="inputResourceUniqueName" className="col-sm-3 control-label"
-                      >Webresource domain</label>
-                      <div className="col-sm-9">
+                        htmlFor="inputResourceUniqueName" className="col-sm-2 control-label"
+                      >Unique name</label>
+                      <div className="col-sm-10">
                         <input
                           type="text" className="form-control" id="inputResourceUniqueName"
                           placeholder="admin"
@@ -110,9 +142,27 @@ class Resource extends Component {
                         />
                       </div>
                     </div>
+                    {/* modelName */}
                     <div className="form-group">
-                      <label htmlFor="inputResourceName" className="col-sm-3 control-label">Name</label>
-                      <div className="col-sm-9">
+                      <label
+                        htmlFor="inputResourceModelName" className="col-sm-2 control-label"
+                      >Model name</label>
+                      <div className="col-sm-10">
+                        <input
+                          type="text" className="form-control" id="inputResourceModelName"
+                          placeholder="admin"
+                          ref={c => {
+                            this.inputResourceModelName = c;
+                          }}
+                        />
+                      </div>
+                    </div>
+                    {/* name */}
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputResourceName" className="col-sm-2 control-label"
+                      >Name</label>
+                      <div className="col-sm-10">
                         <input
                           type="text" className="form-control" id="inputResourceName"
                           placeholder="Administrator"
@@ -122,16 +172,69 @@ class Resource extends Component {
                         />
                       </div>
                     </div>
+                    {/* hasMeta */}
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputResourceHasMeta"
+                        className="col-sm-2 control-label"
+                      >Has meta value</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputResourceHasMeta"
+                          className="form-control"
+                          ref={c => {
+                            this.inputResourceHasMeta = c;
+                          }}
+                        >
+                          <option value="true">Yes</option>
+                          <option value="false">No</option>
+                        </select>
+                      </div>
+                    </div>
+                    {/* description */}
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputResourceDescription" className="col-sm-2 control-label"
+                      >Description</label>
+                      <div className="col-sm-10">
+                        <textarea
+                          className="form-control" id="inputResourceDescription"
+                          placeholder="Resource description..."
+                          ref={c => {
+                            this.inputResourceDescription = c;
+                          }}
+                        />
+                      </div>
+                    </div>
+                    {/* status */}
+                    <div className="form-group">
+                      <label
+                        htmlFor="inputResourceStatus"
+                        className="col-sm-2 control-label"
+                      >Status</label>
+                      <div className="col-sm-10">
+                        <select
+                          id="inputResourceStatus"
+                          className="form-control"
+                          ref={c => {
+                            this.inputResourceStatus = c;
+                          }}
+                        >
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
                   {/* /.box-body */}
                   <div className="box-footer">
                     {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                     <Link
-                      to="/resource/resource"
+                      to="/resource"
                       className="btn btn-app pull-right"
                     ><i className="fa fa-undo" /> Cancel</Link>
                     <Link
-                      to="/resource/resource"
+                      to="/resource"
                       className="btn btn-app pull-right"
                       onClick={event => this.deleteResource(event)}
                     ><i className="fa fa-trash-o" /> Delete</Link>

@@ -43,6 +43,7 @@ class CreateResourceForm extends Component {
     return (
       <form className="form-horizontal">
         <div className="box-body">
+          {/* uniqueName */}
           <div className="form-group">
             <label
               htmlFor="inputResourceUniqueName" className="col-sm-2 control-label"
@@ -57,6 +58,7 @@ class CreateResourceForm extends Component {
               />
             </div>
           </div>
+          {/* modelName */}
           <div className="form-group">
             <label
               htmlFor="inputResourceModelName" className="col-sm-2 control-label"
@@ -71,6 +73,7 @@ class CreateResourceForm extends Component {
               />
             </div>
           </div>
+          {/* name */}
           <div className="form-group">
             <label
               htmlFor="inputResourceName" className="col-sm-2 control-label"
@@ -85,6 +88,7 @@ class CreateResourceForm extends Component {
               />
             </div>
           </div>
+          {/* hasMeta */}
           <div className="form-group">
             <label
               htmlFor="inputResourceHasMeta"
@@ -103,6 +107,7 @@ class CreateResourceForm extends Component {
               </select>
             </div>
           </div>
+          {/* description */}
           <div className="form-group">
             <label
               htmlFor="inputResourceDescription" className="col-sm-2 control-label"
@@ -117,6 +122,7 @@ class CreateResourceForm extends Component {
               />
             </div>
           </div>
+          {/* status */}
           <div className="form-group">
             <label
               htmlFor="inputResourceStatus"
