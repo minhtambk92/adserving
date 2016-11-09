@@ -66,6 +66,8 @@ class RoleList extends Component {
         return data;
       },
     }, {
+      defaultContent: '',
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(
           <Link
