@@ -39,7 +39,7 @@ class UserList extends Component {
         );
       },
     }, {
-      data: 'profile.displayName',
+      data: 'profile.name',
     }, {
       data: 'emailConfirmed',
       render: data => (data ? 'yes' : 'no'),

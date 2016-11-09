@@ -23,7 +23,7 @@ class InputTags extends Component {
     $(`#${this.props.id}`).tagsinput({
       allowDuplicates: true,
     });
-    $(`#${this.props.id}`).tagsinput('add', 'quy,deptrai');
+    $(`#${this.props.id}`).tagsinput('add', this.props.data);
 
     /* eslint-enable no-undef */
   }
