@@ -2,12 +2,12 @@
  * Created by Manhhailua on 11/9/16.
  */
 
-import React, { Component, Proptypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 class CreateResourceForm extends Component {
 
   static propTypes = {
-    createResource: Proptypes.func.isRequired,
+    createResource: PropTypes.func.isRequired,
   };
 
   clearInput() {
