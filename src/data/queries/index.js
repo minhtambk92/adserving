@@ -3,6 +3,8 @@
  */
 
 import { GraphQLObjectType as ObjectType } from 'graphql';
+import resources from './resources';
+import options from './options';
 import me from './me';
 import content from './content';
 import news from './news';
@@ -10,7 +12,6 @@ import intl from './intl';
 import campaigns from './campaigns';
 import placements from './placements';
 import banners from './banners';
-import options from './options';
 import permissions from './permissions';
 import roles from './roles';
 import users from './users';
@@ -24,6 +25,7 @@ import placementBannerZones from './placementBannerZones';
 const queries = new ObjectType({
   name: 'Query',
   fields: {
+    resources,
     options,
     me,
     roles,

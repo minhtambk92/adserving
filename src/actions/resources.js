@@ -37,9 +37,14 @@ export function getResource(id) {
         resources(where: {id: "${id}"}, limit: 1) {
           id
           uniqueName
+          modelName
           name
+          hasMeta
+          description
+          status
           createdAt
           updatedAt
+          deletedAt
         }
       }`;
 
@@ -65,9 +70,14 @@ export function getResources(args = {
         resources(where: $where, order: $order, limit: $limit) {
           id
           uniqueName
+          modelName
           name
+          hasMeta
+          description
+          status
           createdAt
           updatedAt
+          deletedAt
         }
       }`;
 
@@ -100,9 +110,14 @@ export function createResource({ uniqueName, name }) {
         createdResource(resource: $resource) {
           id
           uniqueName
+          modelName
           name
+          hasMeta
+          description
+          status
           createdAt
           updatedAt
+          deletedAt
         }
       }`;
 
@@ -124,9 +139,14 @@ export function updateResource({ id, uniqueName, name }) {
         updatedResource(resource: $resource) {
           id
           uniqueName
+          modelName
           name
+          hasMeta
+          description
+          status
           createdAt
           updatedAt
+          deletedAt
         }
       }`;
 
@@ -148,7 +168,11 @@ export function deleteResource(id) {
         deletedResource(id: "${id}") {
           id
           uniqueName
+          modelName
           name
+          hasMeta
+          description
+          status
           createdAt
           updatedAt
           deletedAt

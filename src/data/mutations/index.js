@@ -3,6 +3,7 @@
  */
 
 import { GraphQLObjectType as ObjectType } from 'graphql';
+import resources from './resources';
 import roles from './roles';
 import users from './users';
 import sites from './sites';
@@ -16,6 +17,7 @@ import banners from './banners';
 const mutations = new ObjectType({
   name: 'Mutation',
   fields: {
+    ...resources,
     ...roles,
     ...users,
     ...sites,

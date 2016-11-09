@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import {
   GET_ADVERTISER,
   GET_ADVERTISERS,
@@ -6,48 +7,40 @@ import {
   DELETE_ADVERTISER,
 } from '../constants';
 
-export default function advertisers(state = {}, action) {
+function list(state = [], action) {
   switch (action.type) {
-    case GET_ADVERTISER:
-      {
-        return {
-          ...state,
-          editing: action.payload.advertiser,
-        };
-      }
-
-    case GET_ADVERTISERS:
-      {
-        return {
-          ...state,
-          list: action.payload.advertisers,
-        };
-      }
-
-    case CREATE_ADVERTISER:
-      {
-        state.list.unshift(action.payload.advertiser);
-        return { ...state };
-      }
-
-    case UPDATE_ADVERTISER:
-      {
-        return {
-          ...state,
-          editing: action.payload.advertiser,
-        };
-      }
-    case DELETE_ADVERTISER:
-      {
-        return {
-          ...state,
-          current: null,
-        };
-      }
-
-    default:
-      {
-        return state;
-      }
+    case GET_ADVERTISERS: {
+      return action.payload.advertisers;
+    }
+    case CREATE_ADVERTISER: {
+      return [action.payload.advertiser, ...state];
+    }
+    default: {
+      return state;
+    }
   }
 }
+
+function editing(state = {}, action) {
+  switch (action.type) {
+    case GET_ADVERTISER: {
+      return action.payload.advertiser;
+    }
+    case UPDATE_ADVERTISER: {
+      return action.payload.advertiser;
+    }
+    case DELETE_ADVERTISER: {
+      return null;
+    }
+    default: {
+      return { ...state };
+    }
+  }
+}
+
+const advertisers = combineReducers({
+  list,
+  editing,
+});
+
+export default advertisers;
