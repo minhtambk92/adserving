@@ -10,13 +10,13 @@ class DataTables extends Component {
   static propTypes = {
     thead: PropTypes.element,
     tfoot: PropTypes.element,
-    options: PropTypes.object,
     data: PropTypes.array.isRequired,
+    options: PropTypes.object,
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     // Wrapping DOM Libs
-    await ReactDOM.render(this.renderDOMLibs(), this.portal);
+    ReactDOM.render(this.renderDOMLibs(), this.portal);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,15 +33,23 @@ class DataTables extends Component {
   }
 
   renderDOMLibs() {
+    const {
+      thead,
+      tfoot,
+      data, // eslint-disable-line no-unused-vars
+      options, // eslint-disable-line no-unused-vars
+      ...rest
+    } = this.props;
+
     return (
       <table
         ref={c => {
           this.dataTable = c;
         }}
-        {...this.props}
+        {...rest}
       >
-        <thead>{this.props.thead}</thead>
-        <tfoot>{this.props.tfoot}</tfoot>
+        <thead>{thead}</thead>
+        <tfoot>{tfoot}</tfoot>
       </table>
     );
   }

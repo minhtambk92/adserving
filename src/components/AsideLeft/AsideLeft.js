@@ -113,7 +113,7 @@ function AsideLeft() {
             </Link>
             <ul className="treeview-menu">
               <li>
-                <Link to="/resources"><i className="fa fa-circle-o" /> Types</Link>
+                <Link to="/resource"><i className="fa fa-circle-o" /> Types</Link>
               </li>
             </ul>
           </li>

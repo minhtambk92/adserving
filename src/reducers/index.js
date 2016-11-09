@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import resources from './resources';
 import user from './user';
 import me from './me';
 import runtime from './runtime';
@@ -15,6 +16,7 @@ import users from './users';
 import zones from './zones';
 
 export default combineReducers({
+  resources,
   user,
   me,
   runtime,

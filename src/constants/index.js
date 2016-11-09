@@ -14,6 +14,14 @@ export const STATUS_ACTIVE = 'active';
 export const STATUS_INACTIVE = 'inactive';
 
 // Redux actions
+export const GET_RESOURCE = 'GET_RESOURCE';
+export const GET_RESOURCES = 'GET_RESOURCES';
+export const CREATE_RESOURCE = 'CREATE_RESOURCE';
+export const UPDATE_RESOURCE = 'UPDATE_RESOURCE';
+export const DELETE_RESOURCE = 'DELETE_RESOURCE';
+export const GET_RESOURCES_FILTERS = 'GET_RESOURCES_FILTERS';
+export const SET_RESOURCES_FILTERS = 'SET_RESOURCES_FILTERS';
+
 export const GET_SITE = 'GET_SITE';
 export const GET_SITES = 'GET_SITES';
 export const CREATE_SITE = 'CREATE_SITE';

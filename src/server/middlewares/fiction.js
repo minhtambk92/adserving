@@ -7,6 +7,7 @@ import {
   STATUS_ACTIVE,
 } from '../../constants';
 import {
+  Resource,
   Role,
   User,
   UserProfile,
@@ -15,6 +16,79 @@ import {
 import { host } from '../../config';
 
 /* eslint-disable no-console */
+
+// Resources fiction
+async function resourcesFiction() {
+  console.log('Check current number of resources...');
+  await Resource.count().then(async(quantity) => {
+    if (quantity === 0) {
+      console.log('No resource found! Do a fiction...');
+
+      // Create basic roles
+      const results = await Resource.bulkCreate([{
+        uniqueName: 'option',
+        modelName: 'Option',
+        name: 'Options',
+        hasMeta: false,
+        description: 'Global application\'s options',
+        status: 'active',
+      }, {
+        uniqueName: 'resource',
+        modelName: 'Resource',
+        name: 'Resource types',
+        hasMeta: false,
+        description: 'Application\'s resources types',
+        status: 'active',
+      }, {
+        uniqueName: 'role',
+        modelName: 'Role',
+        name: 'User roles',
+        hasMeta: false,
+        description: 'Name for group of user privileges',
+        status: 'active',
+      }, {
+        uniqueName: 'user',
+        modelName: 'User',
+        name: 'User',
+        hasMeta: true,
+        description: 'User account',
+        status: 'active',
+      }, {
+        uniqueName: 'claims',
+        modelName: 'UserClaim',
+        name: 'User\'s claims',
+        hasMeta: true,
+        description: 'User\'s claims list',
+        status: 'active',
+      }, {
+        uniqueName: 'logins',
+        modelName: 'UserLogin',
+        name: 'User\'s login information',
+        hasMeta: true,
+        description: 'User\'s login information',
+        status: 'active',
+      }, {
+        uniqueName: 'profile',
+        modelName: 'UserProfile',
+        name: 'User\'s profile',
+        hasMeta: true,
+        description: 'User\'s profile information',
+        status: 'active',
+      }, {
+        uniqueName: 'permission',
+        modelName: 'Permission',
+        name: 'Resources permissions',
+        hasMeta: false,
+        description: 'User privileges',
+        status: 'active',
+      }]);
+
+      console.log(`${results.length} resources created. Passed!`);
+    } else {
+      console.log(`${quantity} resources(s) found. Passed!`);
+    }
+  });
+}
 
 // Roles fiction
 async function rolesFiction() {
@@ -78,6 +152,7 @@ async function userFiction() {
 
 async function fiction() {
   console.log('Start data fictions!');
+  await resourcesFiction();
   await rolesFiction();
   await userFiction();
   console.log(`Your application is now ready at http://${host}/`);
