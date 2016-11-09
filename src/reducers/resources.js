@@ -21,17 +21,34 @@ function filters(state = {}, action) {
       };
     }
     case SET_RESOURCES_FILTERS: {
-      const newState = state;
+      const newState = Object.assign({}, state);
+      const criteriaValue = Object.values(action.payload).pop();
+      const criteriaKey = Object.keys(action.payload).pop();
 
-      if (!Object.values(action.payload).pop()) {
-        delete newState[Object.keys(action.payload).pop()];
-        return { ...newState };
+      switch (criteriaValue) {
+        case 'null': {
+          delete newState[criteriaKey];
+          return { ...newState };
+        }
+        case 'true': {
+          return {
+            ...state,
+            ...{ [criteriaKey]: true },
+          };
+        }
+        case 'false': {
+          return {
+            ...state,
+            ...{ [criteriaKey]: false },
+          };
+        }
+        default: {
+          return {
+            ...state,
+            ...action.payload,
+          };
+        }
       }
-
-      return {
-        ...newState,
-        ...action.payload,
-      };
     }
     default: {
       return state;
