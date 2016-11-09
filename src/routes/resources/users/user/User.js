@@ -36,13 +36,11 @@ class User extends Component {
   componentWillReceiveProps(nextProps) {
     const {
       email,
-      profile,
       emailConfirmed,
       status,
     } = nextProps.users.editing;
 
     this.inputUserEmail.value = email;
-    this.inputUserDisplayName.value = profile.displayName;
     this.inputUserEmailConfirmed.value = emailConfirmed;
     this.inputUserStatus.value = status;
   }
@@ -80,14 +78,14 @@ class User extends Component {
   }
 
   render() {
+    const { roles, users } = this.props;
+
     return (
       <Layout
-        pageTitle={
-          pageTitle
-            .concat(': ')
-            .concat(this.props.users.editing ? this.props.users.editing.email : '...')
-        }
-        pageSubTitle={this.props.users.editing ? this.props.users.editing.email : ''}
+        pageTitle={`${pageTitle}: ${users.editing.profile && (
+          users.editing.profile.displayName || '...'
+        )}`}
+        pageSubTitle={users.editing.email || ''}
       >
         <div>
 
@@ -136,9 +134,8 @@ class User extends Component {
                           ref={c => {
                             this.inputUserRoles = c;
                           }}
-                          defaultValue={this.props.users.filters.roleUniqueName}
                         >
-                          {this.props.roles && this.props.roles.map(role => (
+                          {roles.list.map(role => (
                             <option key={role.id} value={role.uniqueName}>{role.name}</option>
                           ))}
                         </select>
