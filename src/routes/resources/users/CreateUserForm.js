@@ -55,8 +55,8 @@ class CreateUserForm extends Component {
   render() {
     return (
       <form className="form-horizontal">
-        {/* email */}
         <div className="box-body">
+          {/* email */}
           <div className="form-group">
             <label
               htmlFor="inputUserEmail"
@@ -102,7 +102,7 @@ class CreateUserForm extends Component {
                 ref={c => {
                   this.inputUserRoles = c;
                 }}
-                defaultValue={this.props.filters.uniqueName}
+                defaultValue={this.props.filters.roleUniqueName}
               >
                 {this.props.roles && this.props.roles.map(role => (
                   <option key={role.id} value={role.uniqueName}>{role.name}</option>

@@ -77,7 +77,7 @@ class UserList extends Component {
         options={{
           columns: this.dataTableOptions(),
           destroy: true,
-          order: [[4, 'DESC']],
+          order: [[5, 'DESC']],
         }}
         thead={(
           <tr>
