@@ -35,13 +35,13 @@ const users = {
         const newUser = Object.assign({}, args.user);
         newUser.password = hashSync(newUser.password, salt);
 
-        const userRoles = [];
-
         const createdUser = await User.create(newUser, {
           include: [
             { model: UserProfile, as: 'profile' },
           ],
         });
+
+        const userRoles = [];
 
         // Prepare mediate objects
         for (let i = 0; i < newUser.roles.length; i += 1) {
@@ -82,6 +82,8 @@ const users = {
           const salt = genSaltSync();
           newUser.password = hashSync(newUser.password, salt);
         }
+
+        console.log(newUser.roles);
 
         await User.update(newUser, {
           where: {

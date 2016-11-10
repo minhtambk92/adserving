@@ -46,14 +46,6 @@ class Users extends Component {
     this.props.getUsers();
   }
 
-  onFilterChange(event, field) {
-    event.persist();
-
-    this.props.setUsersFilters({
-      [field]: event.target.value,
-    });
-  }
-
   getFilteredUsers() {
     return _.filter(this.props.users.list, user => this.isFiltered(user));
   }
@@ -76,46 +68,6 @@ class Users extends Component {
     );
 
     return !(notMatchRole || notMatchEmailConfirmed || notMatchStatus);
-  }
-
-  clearInput() {
-    this.inputUserEmail.value = null;
-    this.inputUserPassword.value = null;
-    this.inputUserPasswordConfirmation.value = null;
-  }
-
-  createUser() {
-    const email = this.inputUserEmail.value;
-    const displayName = this.inputUserDisplayName.value;
-    const roles = [this.inputUserRoles.value];
-    const password = this.inputUserPassword.value;
-    const passwordConfirmation = this.inputUserPasswordConfirmation.value;
-    const emailConfirmed = this.inputUserEmailConfirmed.value;
-    const status = this.inputUserStatus.value;
-
-    if (
-      email &&
-      displayName &&
-      roles &&
-      password &&
-      passwordConfirmation &&
-      password === passwordConfirmation &&
-      emailConfirmed &&
-      status
-    ) {
-      this.props.createUser({
-        email,
-        profile: {
-          displayName,
-        },
-        roles,
-        password,
-        emailConfirmed,
-        status,
-      });
-
-      this.clearInput();
-    }
   }
 
   render() {

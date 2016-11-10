@@ -9,11 +9,14 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getUser, updateUser, deleteUser } from '../../../../actions/users';
+import { getRoles } from '../../../../actions/roles';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
+import { Select2 } from '../../../../components/UI';
 import s from './User.css';
 
 const pageTitle = 'User';
@@ -24,29 +27,42 @@ class User extends Component {
     userId: PropTypes.string.isRequired,
     roles: PropTypes.object,
     users: PropTypes.object,
+    getRoles: PropTypes.func,
     getUser: PropTypes.func,
     updateUser: PropTypes.func,
     deleteUser: PropTypes.func,
   };
 
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      currentRoles: [],
+    };
+  }
+
   componentWillMount() {
+    this.props.getRoles();
     this.props.getUser(this.props.userId);
   }
 
   componentWillReceiveProps(nextProps) {
     const {
       email,
+      roles,
       emailConfirmed,
       status,
     } = nextProps.users.editing;
 
     this.inputUserEmail.value = email;
+    this.setState({ currentRoles: roles.map(role => role.uniqueName).sort() });
     this.inputUserEmailConfirmed.value = emailConfirmed;
     this.inputUserStatus.value = status;
   }
 
   updateUser() {
     const email = this.inputUserEmail.value;
+    const roles = $('#inputUserRoles').val(); // eslint-disable-line no-undef
     const password = this.inputUserPassword.value;
     const passwordConfirmation = this.inputUserPasswordConfirmation.value;
     const emailConfirmed = this.inputUserEmailConfirmed.value;
@@ -58,12 +74,19 @@ class User extends Component {
       user.email = email;
     }
 
+    if (roles && !_.isEqual(roles.sort(), this.state.currentRoles)) {
+      user.roles = this.props.roles.map(role => ({
+        id: role.id,
+        isGranted: roles.indexOf(role.uniqueName) !== -1,
+      }));
+    }
+
     if (password && passwordConfirmation && password === passwordConfirmation) {
       user.password = password;
     }
 
-    if (emailConfirmed && emailConfirmed !== this.props.users.editing.emailConfirmed) {
-      user.emailConfirmed = emailConfirmed;
+    if (emailConfirmed && emailConfirmed !== this.props.users.editing.emailConfirmed.toString()) {
+      user.emailConfirmed = emailConfirmed === 'true'; // Convert to boolean
     }
 
     if (status && status !== this.props.users.editing.status) {
@@ -127,18 +150,25 @@ class User extends Component {
                         className="col-sm-2 control-label"
                       >Role</label>
                       <div className="col-sm-10">
-                        <select
+                        <Select2
                           id="inputUserRoles"
-                          className="form-control select2"
+                          className="form-control"
                           style={{ width: '100%' }}
+                          data-placeholder="Select roles"
+                          defaultValue={this.state.currentRoles}
+                          multiple
                           ref={c => {
                             this.inputUserRoles = c;
                           }}
                         >
-                          {roles && roles.list.map(role => (
-                            <option key={role.id} value={role.uniqueName}>{role.name}</option>
-                          ))}
-                        </select>
+                          <optgroup>
+                            {roles.list.map(role => (
+                              <option
+                                key={role.id} value={role.uniqueName}
+                              >{role.name}</option>
+                            ))}
+                          </optgroup>
+                        </Select2>
                       </div>
                     </div>
                     {/* password */}
@@ -249,6 +279,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = {
+  getRoles,
   getUser,
   updateUser,
   deleteUser,

@@ -7,11 +7,13 @@
 import DataTables from './DataTables';
 import ICheck from './ICheck';
 import InputTags from './InputTags';
+import Select2 from './Select2';
 
 export {
   DataTables,
   ICheck,
   InputTags,
+  Select2,
 };
 
 /* eslint-enable import/prefer-default-export */

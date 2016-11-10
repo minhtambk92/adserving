@@ -150,7 +150,7 @@ export function createUser({ email, profile, roles, password, emailConfirmed, st
         profile,
         roles,
         password,
-        emailConfirmed: emailConfirmed === 'true',
+        emailConfirmed,
         status,
       },
     });
@@ -195,7 +195,7 @@ export function updateUser({ id, email, profile, roles, password, emailConfirmed
         profile,
         roles,
         password,
-        emailConfirmed: emailConfirmed === 'true',
+        emailConfirmed,
         status,
       },
     });
