@@ -40,36 +40,6 @@ class Placements extends Component {
     this.props.getCampaigns();
   }
 
-  componentDidMount() {
-    const dateStart = new Date();
-    dateStart.setDate(dateStart.getDate());
-    const dateEnd = new Date();
-    dateEnd.setDate(dateEnd.getDate() + 1);
-    /* eslint-disable no-undef */
-    $('#inputPlacementStartTime').datepicker({
-      autoclose: true,
-      todayHighlight: 'TRUE',
-      startDate: dateStart,
-      defaultDate: new Date(),
-    });
-
-    $('#inputPlacementEndTime').datepicker({
-      autoclose: true,
-      todayHighlight: 'TRUE',
-      startDate: dateEnd,
-      defaultDate: new Date(),
-    });
-    /* eslint-enable no-undef */
-  }
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    $('#inputPlacementStartTime').datepicker('update', new Date());
-    /* eslint-disable no-underscore-dangle */
-    $('#inputPlacementEndTime').datepicker('update', moment().add(1, 'month')._d);
-    /* eslint-enable no-underscore-dangle */
-    /* eslint-enable no-undef */
-  }
-
   getFilteredPlacements() {
     return _.filter(this.props.placements.list, placement => this.isFiltered(placement));
   }
