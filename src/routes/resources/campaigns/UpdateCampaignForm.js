@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
+import { DatePicker } from '../../../components/UI';
 import Link from '../../../components/Link';
 
 class UpdateCampaignForm extends Component {
@@ -29,8 +30,8 @@ class UpdateCampaignForm extends Component {
 
     this.inputCampaignName.value = name;
     this.inputAdvertiser.value = advertiserId;
-    this.inputCampaignStartTime.value = moment(new Date(startTime)).format('L');
-    this.inputCampaignEndTime.value = moment(new Date(endTime)).format('L');
+    document.getElementById('inputCampaignStartTime').value = moment(new Date(startTime)).format('L');
+    document.getElementById('inputCampaignEndTime').value = moment(new Date(endTime)).format('L');
     this.inputCampaignViews.value = views;
     this.inputCampaignViewPerSession.value = viewPerSession;
     this.inputCampaignTimeResetViewCount.value = timeResetViewCount;
@@ -41,8 +42,8 @@ class UpdateCampaignForm extends Component {
   updateCampaign() {
     const advertiserId = this.inputAdvertiser.value;
     const name = this.inputCampaignName.value;
-    const startTime = this.inputCampaignStartTime.value;
-    const endTime = this.inputCampaignEndTime.value;
+    const startTime = document.getElementById('inputCampaignStartTime').value;
+    const endTime = document.getElementById('inputCampaignEndTime').value;
     const views = this.inputCampaignViews.value;
     const viewPerSession = this.inputCampaignViewPerSession.value;
     const timeResetViewCount = this.inputCampaignTimeResetViewCount.value;
@@ -92,8 +93,8 @@ class UpdateCampaignForm extends Component {
         this.props.getCampaign(this.props.campaignId);
       });
     } else {
-      this.inputCampaignEndTime.value = null;
-      this.inputCampaignEndTime.focus();
+      document.getElementById('inputCampaignEndTime').value = null;
+      document.getElementById('inputCampaignEndTime').focus();
     }
   }
 
@@ -144,12 +145,9 @@ class UpdateCampaignForm extends Component {
             >Start Time:</label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
-              <input
-                type="text" className="form-control pull-right"
+              <DatePicker
                 id="inputCampaignStartTime"
-                ref={c => {
-                  this.inputCampaignStartTime = c;
-                }}
+                timeValue="start"
               />
             </div>
           </div>
@@ -159,12 +157,9 @@ class UpdateCampaignForm extends Component {
             >End Time:</label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
-              <input
-                type="text" className="form-control pull-right"
+              <DatePicker
                 id="inputCampaignEndTime"
-                ref={c => {
-                  this.inputCampaignEndTime = c;
-                }}
+                timeValue="end"
               />
             </div>
           </div>

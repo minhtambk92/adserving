@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
+import { DatePicker } from '../../../components/UI';
 
 class CreatePlacementForm extends Component {
 
@@ -27,8 +28,8 @@ class CreatePlacementForm extends Component {
 
   createPlacement() {
     const name = this.inputPlacementName.value;
-    const startTime = new Date(moment(new Date(this.inputPlacementStartTime.value)).format('YYYY-MM-DD 00:00:00'));
-    const endTime = new Date(moment(new Date(this.inputPlacementEndTime.value)).format('YYYY-MM-DD 00:00:00'));
+    const startTime = new Date(moment(new Date(document.getElementById('inputPlacementStartTime').value)).format('YYYY-MM-DD 00:00:00'));
+    const endTime = new Date(moment(new Date(document.getElementById('inputPlacementEndTime').value)).format('YYYY-MM-DD 00:00:00'));
     const sizeWidth = this.inputPlacementSizeWidth.value;
     const sizeHeight = this.inputPlacementSizeHeight.value;
     const weight = this.inputPlacementWeight.value;
@@ -75,7 +76,7 @@ class CreatePlacementForm extends Component {
           }
         });
       } else {
-        this.inputPlacementEndTime.value = null;
+        document.getElementById('inputPlacementEndTime').value = null;
       }
     }
   }
@@ -119,12 +120,9 @@ class CreatePlacementForm extends Component {
             <label htmlFor="inputPlacementStartTime" className="col-sm-2 control-label">Start Time:</label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
-              <input
-                type="text" className="form-control pull-right"
+              <DatePicker
                 id="inputPlacementStartTime"
-                ref={c => {
-                  this.inputPlacementStartTime = c;
-                }}
+                timeValue="start"
               />
             </div>
           </div>
@@ -132,12 +130,9 @@ class CreatePlacementForm extends Component {
             <label htmlFor="inputPlacementEndTime" className="col-sm-2 control-label">End Time:</label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
-              <input
-                type="text" className="form-control pull-right"
+              <DatePicker
                 id="inputPlacementEndTime"
-                ref={c => {
-                  this.inputPlacementEndTime = c;
-                }}
+                timeValue="end"
               />
             </div>
           </div>

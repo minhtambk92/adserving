@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
+import { DatePicker } from '../../../components/UI';
 import Link from '../../../components/Link';
 
 class UpdatePlacementForm extends Component {
@@ -28,8 +29,8 @@ class UpdatePlacementForm extends Component {
     } = nextProps.placement && (nextProps.placement || {});
 
     this.inputPlacementName.value = name;
-    this.inputPlacementStartTime.value = moment(new Date(startTime)).format('L');
-    this.inputPlacementEndTime.value = moment(new Date(endTime)).format('L');
+    document.getElementById('inputPlacementStartTime').value = moment(new Date(startTime)).format('L');
+    document.getElementById('inputPlacementEndTime').value = moment(new Date(endTime)).format('L');
     this.inputPlacementSizeWidth.value = sizeWidth;
     this.inputPlacementSizeHeight.value = sizeHeight;
     this.inputPlacementWeight.value = weight;
@@ -41,8 +42,8 @@ class UpdatePlacementForm extends Component {
     const name = this.inputPlacementName.value;
     const sizeWidth = this.inputPlacementSizeWidth.value;
     const sizeHeight = this.inputPlacementSizeHeight.value;
-    const startTime = this.inputPlacementStartTime.value;
-    const endTime = this.inputPlacementEndTime.value;
+    const startTime = document.getElementById('inputPlacementStartTime').value;
+    const endTime = document.getElementById('inputPlacementEndTime').value;
     const weight = this.inputPlacementWeight.value;
     const description = this.inputPlacementDescription.value;
     const campaignId = this.inputCampaign.value;
@@ -83,8 +84,8 @@ class UpdatePlacementForm extends Component {
         this.props.getPlacement(this.props.placementId);
       });
     } else {
-      this.inputPlacementEndTime.value = null;
-      this.inputPlacementEndTime.focus();
+      document.getElementById('inputPlacementEndTime').value = null;
+      document.getElementById('inputPlacementEndTime').focus();
     }
   }
 
@@ -139,12 +140,9 @@ class UpdatePlacementForm extends Component {
             </label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
-              <input
-                type="text" className="form-control pull-right"
+              <DatePicker
                 id="inputPlacementStartTime"
-                ref={c => {
-                  this.inputPlacementStartTime = c;
-                }}
+                timeValue="start"
               />
             </div>
           </div>
@@ -156,12 +154,9 @@ class UpdatePlacementForm extends Component {
             </label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
-              <input
-                type="text" className="form-control pull-right"
+              <DatePicker
                 id="inputPlacementEndTime"
-                ref={c => {
-                  this.inputPlacementEndTime = c;
-                }}
+                timeValue="end"
               />
             </div>
           </div>

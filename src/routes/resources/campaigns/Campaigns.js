@@ -9,7 +9,6 @@
 
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getCampaigns, createCampaign, getCampaignsFilters, setCampaignsFilters } from '../../../actions/campaigns';
@@ -39,40 +38,6 @@ class Campaigns extends Component {
     this.props.getAdvertisers();
   }
 
-  componentDidMount() {
-    const dateEnd = new Date();
-    dateEnd.setDate(dateEnd.getDate() + 1);
-    const dateStart = new Date();
-    dateStart.setDate(dateStart.getDate());
-    /* eslint-disable no-undef */
-    $('#inputCampaignStartTime').datepicker({
-      autoclose: true,
-      todayHighlight: 'TRUE',
-      startDate: dateStart,
-    });
-    $('#inputCampaignEndTime').datepicker({
-      autoclose: true,
-      todayHighlight: 'TRUE',
-      startDate: dateEnd,
-    });
-  }
-
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    $('#inputCampaignStartTime').datepicker('update', new Date());
-    /* eslint-disable no-underscore-dangle */
-    $('#inputCampaignEndTime').datepicker('update', moment().add(1, 'month')._d);
-    /* eslint-enable no-underscore-dangle */
-    /* eslint-enable no-undef */
-  }
-
-  async onFilterChange(event, field) {
-    event.persist();
-
-    await this.props.setCampaignsFilters({
-      [field]: event.target.value,
-    });
-  }
   getFilteredCampaigns() {
     return _.filter(this.props.campaigns.list, campaign => this.isFiltered(campaign));
   }

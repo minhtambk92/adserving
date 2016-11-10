@@ -54,29 +54,6 @@ class Placement extends Component {
     this.props.getZones();
   }
 
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-    const dateStart = new Date();
-    dateStart.setDate(dateStart.getDate());
-
-    $('#inputPlacementStartTime').datepicker({
-      autoclose: true,
-      todayHighlight: 'TRUE',
-      startDate: dateStart,
-      defaultDate: new Date(),
-    });
-
-    const dateEnd = new Date();
-    dateEnd.setDate(dateEnd.getDate());
-    $('#inputPlacementEndTime').datepicker({
-      autoclose: true,
-      todayHighlight: 'TRUE',
-      startDate: dateEnd,
-      defaultDate: new Date(),
-    });
-    /* eslint-enable no-undef */
-  }
   filterBanner(allBanner, bof) { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (allBanner.length === 0) {
       return [];
