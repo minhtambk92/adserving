@@ -40,33 +40,6 @@ class Advertiser extends Component {
   componentWillMount() {
     this.props.getAdvertiser(this.props.advertiserId);
   }
-
-  componentDidMount() {
-    const dateStart = new Date();
-    dateStart.setDate(dateStart.getDate());
-    const dateEnd = new Date();
-    dateEnd.setDate(dateEnd.getDate() + 1);
-    /* eslint-disable no-undef */
-    $('#inputCampaignStartTime').datepicker({
-      autoclose: true,
-      todayHighlight: 'TRUE',
-      startDate: dateStart,
-    });
-    $('#inputCampaignEndTime').datepicker({
-      autoclose: true,
-      todayHighlight: 'TRUE',
-      startDate: dateEnd,
-    });
-    /* eslint-enable no-undef */
-  }
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    $('#inputCampaignStartTime').datepicker('update', new Date());
-    /* eslint-disable no-underscore-dangle */
-    $('#inputCampaignEndTime').datepicker('update', moment().add(1, 'month')._d);
-    /* eslint-enable no-underscore-dangle */
-    /* eslint-enable no-undef */
-  }
   createCampaign() {
     const name = this.inputCampaignName.value;
     const advertiserId = this.props.advertiserId;

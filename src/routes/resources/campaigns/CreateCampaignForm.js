@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
+import { DatePicker } from '../../../components/UI';
 
 class CreateCampaignForm extends Component {
 
@@ -28,8 +29,8 @@ class CreateCampaignForm extends Component {
     } else {
       advertiserId = this.inputAdvertiser.value;
     }
-    const startTime = new Date(moment(new Date(this.inputCampaignStartTime.value)).format('YYYY-MM-DD 00:00:00'));
-    const endTime = new Date(moment(new Date(this.inputCampaignEndTime.value)).format('YYYY-MM-DD 00:00:00'));
+    const startTime = new Date(moment(new Date(document.getElementById('inputCampaignStartTime').value)).format('YYYY-MM-DD 00:00:00'));
+    const endTime = new Date(moment(new Date(document.getElementById('inputCampaignEndTime').value)).format('YYYY-MM-DD 00:00:00'));
     const views = this.inputCampaignViews.value;
     const viewPerSession = this.inputCampaignViewPerSession.value;
     const timeResetViewCount = this.inputCampaignTimeResetViewCount.value;
@@ -57,8 +58,8 @@ class CreateCampaignForm extends Component {
           }
         });
       } else {
-        this.inputCampaignEndTime.value = null;
-        this.inputCampaignEndTime.focus();
+        document.getElementById('inputCampaignEndTime').value = null;
+        document.getElementById('inputCampaignEndTime').focus();
       }
     }
   }
@@ -111,12 +112,9 @@ class CreateCampaignForm extends Component {
             </label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
-              <input
-                type="text" className="form-control pull-right"
+              <DatePicker
                 id="inputCampaignStartTime"
-                ref={c => {
-                  this.inputCampaignStartTime = c;
-                }}
+                timeValue="start"
               />
             </div>
           </div>
@@ -129,12 +127,9 @@ class CreateCampaignForm extends Component {
             </label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
-              <input
-                type="text" className="form-control pull-right"
+              <DatePicker
                 id="inputCampaignEndTime"
-                ref={c => {
-                  this.inputCampaignEndTime = c;
-                }}
+                timeValue="end"
               />
             </div>
           </div>

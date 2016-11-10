@@ -7,11 +7,13 @@
 import DataTables from './DataTables';
 import ICheck from './ICheck';
 import InputTags from './InputTags';
+import DatePicker from './DatePicker'
 
 export {
   DataTables,
   ICheck,
   InputTags,
+  DatePicker,
 };
 
 /* eslint-enable import/prefer-default-export */
