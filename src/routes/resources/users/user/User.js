@@ -135,7 +135,7 @@ class User extends Component {
                             this.inputUserRoles = c;
                           }}
                         >
-                          {roles.list.map(role => (
+                          {roles && roles.list.map(role => (
                             <option key={role.id} value={role.uniqueName}>{role.name}</option>
                           ))}
                         </select>
