@@ -3,12 +3,13 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import { Select2 } from '../../../components/UI';
 
 class CreateUserForm extends Component {
 
   static propTypes = {
-    filters: PropTypes.object,
-    roles: PropTypes.array.isRequired,
+    userFilters: PropTypes.object,
+    roleList: PropTypes.array.isRequired,
     createUser: PropTypes.func.isRequired,
   };
 
@@ -21,7 +22,7 @@ class CreateUserForm extends Component {
   createUser() {
     const email = this.inputUserEmail.value;
     const displayName = this.inputUserDisplayName.value;
-    const roles = [this.inputUserRoles.value];
+    const roles = $('#inputUserRoles').val(); // eslint-disable-line no-undef
     const password = this.inputUserPassword.value;
     const passwordConfirmation = this.inputUserPasswordConfirmation.value;
     const emailConfirmed = this.inputUserEmailConfirmed.value;
@@ -95,19 +96,25 @@ class CreateUserForm extends Component {
               className="col-sm-2 control-label"
             >Role</label>
             <div className="col-sm-10">
-              <select
+              <Select2
                 id="inputUserRoles"
-                className="form-control select2"
+                className="form-control"
                 style={{ width: '100%' }}
+                data-placeholder="Select roles"
+                defaultValue={[this.props.userFilters.roleUniqueName || 'user']}
+                multiple
                 ref={c => {
                   this.inputUserRoles = c;
                 }}
-                defaultValue={this.props.filters.roleUniqueName}
               >
-                {this.props.roles && this.props.roles.map(role => (
-                  <option key={role.id} value={role.uniqueName}>{role.name}</option>
-                ))}
-              </select>
+                <optgroup>
+                  {this.props.roleList.map(role => (
+                    <option
+                      key={role.id} value={role.uniqueName}
+                    >{role.name}</option>
+                  ))}
+                </optgroup>
+              </Select2>
             </div>
           </div>
           {/* password */}

@@ -102,9 +102,7 @@ const users = {
                 status: 'active',
               });
             } else if (
-              userRole &&
-              userRole.getDataValue('deletedAt') !== null &&
-              role.isGranted === true
+              userRole && userRole.getDataValue('deletedAt') !== null && role.isGranted === true
             ) {
               await userRole.restore();
             } else if (userRole && role.isGranted === false) {
