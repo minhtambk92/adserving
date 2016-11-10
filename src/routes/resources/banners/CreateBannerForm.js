@@ -20,30 +20,35 @@ class CreateBannerForm extends Component {
       imageUrl: '',
       tags: '',
     };
+
     this.djsConfig = {
       acceptedFiles: 'image/jpeg,image/png,image/gif',
       addRemoveLinks: true,
       maxFiles: 1,
     };
+
     this.componentConfig = {
       iconFiletypes: ['.jpg', '.png', '.gif'],
       showFiletypeIcon: true,
       postUrl: '/upload-banner',
     };
+
     this.callbackFail = 'fail';
+
     // Simple callbacks work too, of course
     this.callback = (e) => {
       if (e.xhr.response) {
         this.state.imageUrl = e.xhr.response;
       }
     };
+
     this.eventHandlers = {
       drop: this.callbackFail,
       success: this.callback,
     };
   }
 
-  onInputChange(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+  onInputChange(event) {
     event.persist();
     this.setState((previousState) => ({
       ...previousState,
@@ -51,7 +56,7 @@ class CreateBannerForm extends Component {
     }));
   }
 
-  clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+  clearInput() {
     this.inputBannerName.value = null;
     if (this.state.checkTypeBanner === 'html') {
       this.inputBannerHTML.value = null;
@@ -63,7 +68,7 @@ class CreateBannerForm extends Component {
     this.inputBannerDescription.value = null;
   }
 
-  createBanner(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+  createBanner() {
     const name = this.inputBannerName.value;
     const width = this.inputBannerWidth.value;
     const height = this.inputBannerHeight.value;
@@ -107,6 +112,7 @@ class CreateBannerForm extends Component {
     return (
       <form className="form-horizontal">
         <div className="box-body">
+          {/* type */}
           <div className="form-group">
             <label
               htmlFor="inputBannerType"
@@ -125,6 +131,7 @@ class CreateBannerForm extends Component {
               </select>
             </div>
           </div>
+          {/* name */}
           <div className="form-group">
             <label
               htmlFor="inputBannerName"
@@ -141,23 +148,24 @@ class CreateBannerForm extends Component {
             </div>
           </div>
           {
-            this.state.checkTypeBanner === 'html' ? (
-              <div className="form-group">
-                <label
-                  htmlFor="inputBannerHTML"
-                  className="col-sm-2 control-label"
-                >HTML</label>
-                <div className="col-sm-10">
-                  <textarea
-                    className="form-control" id="inputBannerHTML"
-                    rows="5" placeholder="More info..."
-                    ref={c => {
-                      this.inputBannerHTML = c;
-                    }}
-                  />
+            this.state.checkTypeBanner === 'html' ?
+              (
+                <div className="form-group">
+                  <label
+                    htmlFor="inputBannerHTML"
+                    className="col-sm-2 control-label"
+                  >HTML</label>
+                  <div className="col-sm-10">
+                    <textarea
+                      className="form-control" id="inputBannerHTML"
+                      rows="5" placeholder="More info..."
+                      ref={c => {
+                        this.inputBannerHTML = c;
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
-            ) : (
+              ) : (
               <div className="bannerImage">
                 <div className="form-group">
                   <label htmlFor="inputBannerImage" className="col-sm-2 control-label">

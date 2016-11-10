@@ -27,6 +27,7 @@ import s from './Banners.css';
 const pageTitle = 'Home';
 const pageSubTitle = 'Control panel';
 class Banners extends Component {
+
   static propTypes = {
     getBannersFilters: PropTypes.func,
     setBannersFilters: PropTypes.func,
@@ -37,33 +38,16 @@ class Banners extends Component {
     getPlacements: PropTypes.func,
   };
 
-
   componentWillMount() {
     this.props.getBannersFilters();
     this.props.getBanners();
     this.props.getPlacements();
   }
 
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-  }
-
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    /* eslint-enable no-undef */
-  }
-
-  async onFilterChange(event, field) {
-    event.persist();
-
-    await this.props.setBannersFilters({
-      [field]: event.target.value,
-    });
-  }
   getFilteredBanners() {
     return _.filter(this.props.banners.list, banner => this.isFiltered(banner));
   }
+
   isFiltered(banner) {
     const { placementId, status } = this.props.banners.filters;
 
@@ -79,10 +63,12 @@ class Banners extends Component {
 
     return !(notMatchPlacement || notMatchStatus);
   }
+
   render() {
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
+
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FILTER */}
@@ -96,7 +82,6 @@ class Banners extends Component {
                   </div>
                 </div>
                 {/* /.box-header */}
-                {/* form start */}
                 <FilterBannersForm
                   placements={this.props.placements.list}
                   filters={this.props.banners.filters}

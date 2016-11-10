@@ -30,21 +30,12 @@ class Advertisers extends Component {
     this.props.getAdvertisers();
   }
 
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    /* eslint-enable no-undef */
-  }
-
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    /* eslint-enable no-undef */
-  }
-
   render() {
     const { advertisers } = this.props;
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
+
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW WEB ADVERTISER */}
@@ -66,6 +57,7 @@ class Advertisers extends Component {
               {/* /.col */}
             </section>
           </div>
+
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: LIST OF ADVERTISERS */}

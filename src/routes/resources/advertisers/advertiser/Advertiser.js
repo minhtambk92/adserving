@@ -37,9 +37,11 @@ class Advertiser extends Component {
     createCampaign: PropTypes.func,
     deleteAdvertiser: PropTypes.func,
   };
+
   componentWillMount() {
     this.props.getAdvertiser(this.props.advertiserId);
   }
+
   createCampaign() {
     const name = this.inputCampaignName.value;
     const advertiserId = this.props.advertiserId;
@@ -51,8 +53,11 @@ class Advertiser extends Component {
     const weight = this.inputCampaignWeight.value;
     const description = this.inputCampaignDescription.value;
     const status = this.inputCampaignStatus.value;
-    if (name && advertiserId && startTime && endTime && views && viewPerSession
-      && timeResetViewCount && weight && description) {
+
+    if (
+      name && advertiserId && startTime && endTime && views && viewPerSession &&
+      timeResetViewCount && weight && description
+    ) {
       if (moment(startTime).format('x') < moment(endTime).format('x')) {
         this.props.createCampaign({
           advertiserId,
@@ -122,9 +127,10 @@ class Advertiser extends Component {
                           <div className="box-header with-border">
                             <h3 className="box-title">Change Advertiser information</h3>
                             <div className="box-tools pull-right">
-                              <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                                <i className="fa fa-minus" />
-                              </button>
+                              <button
+                                type="button" className="btn btn-box-tool"
+                                data-widget="collapse"
+                              ><i className="fa fa-minus" /></button>
                             </div>
                           </div>
                           {/* /.box-header */}
@@ -150,9 +156,10 @@ class Advertiser extends Component {
                               <div className="box-header with-border">
                                 <h3 className="box-title">Add New Campaign</h3>
                                 <div className="box-tools pull-right">
-                                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                                    <i className="fa fa-minus" />
-                                  </button>
+                                  <button
+                                    type="button" className="btn btn-box-tool"
+                                    data-widget="collapse"
+                                  ><i className="fa fa-minus" /></button>
                                 </div>
                               </div>
                               {/* /.box-header */}

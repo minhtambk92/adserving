@@ -34,6 +34,7 @@ class DatePicker extends Component {
     }
     /* eslint-enable no-undef */
   }
+
   componentDidUpdate() {
     /* eslint-disable no-undef */
     if (this.props.timeValue === 'start') {
@@ -45,6 +46,7 @@ class DatePicker extends Component {
     }
     /* eslint-enable no-undef */
   }
+
   componentWillUnmount() {
     ReactDOM.unmountComponentAtNode(this.portal);
   }

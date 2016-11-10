@@ -20,6 +20,7 @@ class FilterCampaignsForm extends Component {
     return (
       <form className="form-horizontal">
         <div className="box-body">
+          {/* placement */}
           <div className="form-group">
             <label
               htmlFor="inputBannersFilterPlacement"
@@ -47,6 +48,7 @@ class FilterCampaignsForm extends Component {
               </select>
             </div>
           </div>
+          {/* status */}
           <div className="form-group">
             <label
               htmlFor="inputBannersFilterStatus"

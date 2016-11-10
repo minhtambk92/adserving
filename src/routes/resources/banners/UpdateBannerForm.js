@@ -44,6 +44,7 @@ class UpdateBannerForm extends Component {
     this.inputBannerWeight.value = weight;
     this.inputBannerDescription.value = description;
     this.inputBannerStatus.value = status;
+
     if (type === 'html') {
       this.insertBannerHtml(html, width, height);
       if (this.inputBannerHTML !== undefined) {
@@ -60,11 +61,10 @@ class UpdateBannerForm extends Component {
       }
     }
   }
+
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    $('#inputBannerKeyWord').tagsinput({
-      allowDuplicates: true,
-    });
+    $('#inputBannerKeyWord').tagsinput({ allowDuplicates: true });
     $('#inputBannerKeyWord').tagsinput('add', this.state.keyWord);
     /* eslint-enable no-undef */
   }
@@ -180,77 +180,79 @@ class UpdateBannerForm extends Component {
     return (
       <form className="form-horizontal">
         <div className="box-body">
-          { this.props.banner &&
-          (this.props.banner.type === 'img' && this.state.checkTypeBanner === 'img') ? (
-            <div className="bannerImage">
-              <div className="form-group">
-                <div className="col-sm-12">
-                  <div className="row">
-                    <div className="col-sm-8">
-                      <div
-                        id="inputBannerImageUrl"
-                        ref={c => {
-                          this.inputBannerImageUrl = c;
-                        }}
-                      >
-                        <img
-                          src={this.props.banner ?
-                            this.props.banner.imageUrl : ''
-                          }
-                          alt="demo"
-                        />
+          {
+            this.props.banner &&
+            (this.props.banner.type === 'img' && this.state.checkTypeBanner === 'img') ?
+              (
+                <div className="bannerImage">
+                  <div className="form-group">
+                    <div className="col-sm-12">
+                      <div className="row">
+                        <div className="col-sm-8">
+                          <div
+                            id="inputBannerImageUrl"
+                            ref={c => {
+                              this.inputBannerImageUrl = c;
+                            }}
+                          >
+                            <img
+                              src={this.props.banner ?
+                                this.props.banner.imageUrl : ''
+                              }
+                              alt="demo"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-sm-4">
+                          <DropzoneComponent
+                            config={this.componentConfig}
+                            eventHandlers={this.eventHandlers}
+                            djsConfig={this.djsConfig}
+                          />
+                        </div>
                       </div>
                     </div>
-                    <div className="col-sm-4">
-                      <DropzoneComponent
-                        config={this.componentConfig}
-                        eventHandlers={this.eventHandlers}
-                        djsConfig={this.djsConfig}
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="inputBannerTarget"
+                      className="col-sm-2 control-label"
+                    >Target</label>
+                    <div className="col-sm-10">
+                      <input
+                        type="text" className="form-control" id="inputBannerTarget"
+                        placeholder="http://kenh14.vn"
+                        ref={c => {
+                          this.inputBannerTarget = c;
+                        }}
                       />
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="form-group">
-                <label
-                  htmlFor="inputBannerTarget"
-                  className="col-sm-2 control-label"
-                >Target</label>
-                <div className="col-sm-10">
-                  <input
-                    type="text" className="form-control" id="inputBannerTarget"
-                    placeholder="http://kenh14.vn"
-                    ref={c => {
-                      this.inputBannerTarget = c;
-                    }}
-                  />
+              ) : (
+              <div className="bannerHTML">
+                <div className="form-group">
+                  <div className="col-lg-12">
+                    <div id="banner">&nbsp;</div>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label
+                    htmlFor="inputBannerHTML"
+                    className="col-sm-2 control-label"
+                  >HTML</label>
+                  <div className="col-sm-10">
+                    <textarea
+                      className="form-control" id="inputBannerHTML"
+                      rows="5" placeholder="More info..."
+                      ref={c => {
+                        this.inputBannerHTML = c;
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            <div className="bannerHTML">
-              <div className="form-group">
-                <div className="col-lg-12">
-                  <div id="banner">&nbsp;</div>
-                </div>
-              </div>
-              <div className="form-group">
-                <label
-                  htmlFor="inputBannerHTML"
-                  className="col-sm-2 control-label"
-                >HTML</label>
-                <div className="col-sm-10">
-                  <textarea
-                    className="form-control" id="inputBannerHTML"
-                    rows="5" placeholder="More info..."
-                    ref={c => {
-                      this.inputBannerHTML = c;
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          )}
+            )}
           <div className="form-group">
             <label
               htmlFor="inputBannerName"

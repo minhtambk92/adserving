@@ -10,6 +10,7 @@ class InputTags extends Component {
     setTags: PropTypes.func,
     data: PropTypes.string,
   };
+
   constructor(props, context) {
     super(props, context);
 
@@ -17,6 +18,7 @@ class InputTags extends Component {
       tags: '',
     };
   }
+
   async componentDidMount() {
     await ReactDOM.render(this.renderDOMLibs(), this.portal);
     /* eslint-disable no-undef */
@@ -30,9 +32,6 @@ class InputTags extends Component {
 
   componentWillUnmount() {
     ReactDOM.unmountComponentAtNode(this.portal);
-  }
-  componentDidUpdate() {
-
   }
 
   renderDOMLibs() {

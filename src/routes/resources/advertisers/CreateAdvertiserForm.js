@@ -32,6 +32,7 @@ class CreateAdvertiserForm extends Component {
     return (
       <form className="form-horizontal">
         <div className="box-body">
+          {/* name */}
           <div className="form-group">
             <label
               htmlFor="inputAdvertiserName" className="col-sm-2 control-label"
@@ -46,6 +47,7 @@ class CreateAdvertiserForm extends Component {
               />
             </div>
           </div>
+          {/* contact */}
           <div className="form-group">
             <label htmlFor="inputAdvertiserContact" className="col-sm-2 control-label">Contact</label>
             <div className="col-sm-10">
@@ -58,6 +60,7 @@ class CreateAdvertiserForm extends Component {
               />
             </div>
           </div>
+          {/* email */}
           <div className="form-group">
             <label
               htmlFor="inputAdvertiserEmail"
@@ -73,6 +76,7 @@ class CreateAdvertiserForm extends Component {
               />
             </div>
           </div>
+          {/* status */}
           <div className="form-group">
             <label
               htmlFor="inputAdvertiserStatus"
@@ -90,6 +94,7 @@ class CreateAdvertiserForm extends Component {
               </select>
             </div>
           </div>
+          {/* description */}
           <div className="form-group">
             <label
               htmlFor="inputAdvertiserDescription"

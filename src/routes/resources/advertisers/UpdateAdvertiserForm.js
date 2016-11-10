@@ -33,7 +33,9 @@ class UpdateAdvertiserForm extends Component {
     const email = this.inputAdvertiserEmail.value;
     const description = this.inputAdvertiserDescription.value;
     const status = this.inputAdvertiserStatus.value;
+
     const advertiser = { id: this.props.advertiserId };
+
     if (email && email !== this.props.advertiser.email) {
       advertiser.email = email;
     }

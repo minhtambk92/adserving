@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
 import { DataTables, ICheck } from '../../../components/UI/';
+
 class ListPlacementNotBelongToZone extends Component {
   static propTypes = {
     bannerId: PropTypes.string.isRequired,
@@ -12,8 +13,9 @@ class ListPlacementNotBelongToZone extends Component {
     createPlacementBannerZone: PropTypes.func,
     getPlacements: PropTypes.func,
   };
+
   dataTableOptions() {
-    const colums = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -33,26 +35,22 @@ class ListPlacementNotBelongToZone extends Component {
       },
     }, {
       data: null,
-      render: (data, type, row) => {
-        const size = `${row.sizeWidth}px x ${row.sizeHeight}px`;
-        return size;
-      },
+      render: (data, type, row) => `${row.sizeWidth}px x ${row.sizeHeight}px`,
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
-        ReactDOM.render(<a
-          onClick={() => this.pushBannerToPlacement(rowData.id)}
-        >
-          Add To Banner
-        </a>, cell);
+        ReactDOM.render(
+          <Link
+            to="#"
+            onClick={() => this.pushBannerToPlacement(rowData.id)}
+          >Add To Banner</Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];
-    return colums;
   }
-  /* eslint-disable max-len */
-  pushBannerToPlacement(id) { // eslint-disable-line no-unused-vars, class-methods-use-this
+
+  pushBannerToPlacement(id) {
     const bannerId = this.props.bannerId;
     const zoneId = null;
     const placementId = id;
@@ -64,9 +62,10 @@ class ListPlacementNotBelongToZone extends Component {
       });
     }
   }
-  /* eslint-enable max-len */
+
   render() {
     let data = [];
+
     if (this.props.list) {
       if (this.props.list.length === 0) {
         data = [];
@@ -74,7 +73,7 @@ class ListPlacementNotBelongToZone extends Component {
         data = this.props.list;
       }
     }
-    // Open the portal
+
     return (
       <DataTables
         className="table table-bordered table-striped"

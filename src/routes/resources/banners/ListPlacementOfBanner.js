@@ -15,7 +15,7 @@ class ListPlacementOfBanner extends Component {
   };
 
   dataTableOptions() {
-    const columns = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -35,25 +35,20 @@ class ListPlacementOfBanner extends Component {
       },
     }, {
       data: null,
-      render: (data, type, row) => {
-        const size = `${row.sizeWidth}px x ${row.sizeHeight}px`;
-        return size;
-      },
+      render: (data, type, row) => `${row.sizeWidth}px x ${row.sizeHeight}px`,
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        /* eslint-disable jsx-a11y/no-static-element-interactions */
-        ReactDOM.render(<a
-          onClick={() => this.removePlacement(rowData.id)}
-        >
-          Remove
-        </a>, cell);
-        /* eslint-enable jsx-a11y/no-static-element-interactions */
+        ReactDOM.render(
+          <Link
+            to="#"
+            onClick={() => this.removePlacement(rowData.id)}
+          >Remove</Link>, cell);
       },
     }];
-    return columns;
   }
-  removePlacement(id) { // eslint-disable-line no-unused-vars, class-methods-use-this
+
+  removePlacement(id) {
     const bId = this.props.bannerId;
     const placementId = id;
     if (placementId && bId) {
@@ -64,8 +59,10 @@ class ListPlacementOfBanner extends Component {
       });
     }
   }
+
   render() {
     let data = [];
+
     if (this.props.list) {
       if (this.props.list.length === 0) {
         data = [];
@@ -73,7 +70,7 @@ class ListPlacementOfBanner extends Component {
         data = this.props.list;
       }
     }
-    // Open the portal
+
     return (
       <DataTables
         className="table table-bordered table-striped"
