@@ -44,7 +44,7 @@ class CreateUserForm extends Component {
         },
         roles,
         password,
-        emailConfirmed,
+        emailConfirmed: emailConfirmed === 'true', // Convert to boolean
         status,
       });
 

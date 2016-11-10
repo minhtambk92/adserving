@@ -1,0 +1,6 @@
+{
+  "name": "Select2",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./Select2.js"
+}

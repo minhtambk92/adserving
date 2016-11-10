@@ -8,12 +8,13 @@ import DataTables from './DataTables';
 import ICheck from './ICheck';
 import InputTags from './InputTags';
 import DatePicker from './DatePicker'
-
+import Select2 from './Select2';
 export {
   DataTables,
   ICheck,
   InputTags,
   DatePicker,
+  Select2,
 };
 
 /* eslint-enable import/prefer-default-export */
