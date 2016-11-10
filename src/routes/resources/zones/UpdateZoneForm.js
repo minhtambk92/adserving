@@ -1,25 +1,57 @@
 import React, { Component, PropTypes } from 'react';
+import Link from '../../../components/Link';
 
-class CreateZoneForm extends Component {
+class UpdateZoneForm extends Component {
 
   static propTypes = {
-    filters: PropTypes.object,
-    createZone: PropTypes.func,
+    zoneId: PropTypes.string.isRequired,
+    updateZone: PropTypes.func,
+    zone: PropTypes.object,
+    deleteZone: PropTypes.func,
     sites: PropTypes.array,
-    getSite: PropTypes.func,
-    siteId: PropTypes.string,
+    getZone: PropTypes.func,
   };
   constructor(props, context) {
     super(props, context);
-
     this.state = {
       checkTypeZone: true,
     };
   }
+  componentWillReceiveProps(nextProps) {
+    const {
+      siteId,
+      name,
+      description,
+      type,
+      html,
+      css,
+      slot,
+      width,
+      height,
+      sizeValue,
+      status,
+    } = nextProps.zone && (nextProps.zone || {});
+
+    this.inputZoneSite.value = siteId;
+    this.inputZoneName.value = name;
+    this.inputZoneType.value = type;
+    this.inputZoneHtml.value = html;
+    this.inputZoneCss.value = css;
+    this.inputZoneSlot.value = slot;
+    this.inputZoneStatus.value = status;
+    this.inputZoneDescription.value = description;
+    if (type !== 'type-3') {
+      this.state.checkTypeZone = true;
+      this.inputZoneWidth.value = width;
+      this.inputZoneHeight.value = height;
+      this.inputZoneSize.value = sizeValue;
+    } else if (type === 'type-3') {
+      this.state.checkTypeZone = false;
+    }
+  }
   onKeyDown(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputZoneSize.value = 'custom';
   }
-
   onSelectZoneType(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const zoneType = this.inputZoneType.value;
     if (zoneType !== 'type-3') {
@@ -36,7 +68,6 @@ class CreateZoneForm extends Component {
       }));
     }
   }
-
   onSelectSize(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const sizeType = this.inputZoneSize.value;
     if (sizeType !== 'custom') {
@@ -47,31 +78,45 @@ class CreateZoneForm extends Component {
       this.inputZoneWidth.value = 0;
     }
   }
-
-  clearInput() {
-    this.inputZoneName.value = null;
-    this.inputZoneHTML.value = null;
-    this.inputZoneCSS.value = null;
-    this.inputZoneSlot.value = null;
-    this.inputZoneDescription.value = null;
-  }
-
-  createZone() {
+  updateZone() {
+    const siteId = this.inputZoneSite.value;
     const name = this.inputZoneName.value;
-    let siteId = '';
-    if (this.props.siteId) {
-      siteId = this.props.siteId;
-    } else {
-      siteId = this.inputZoneSite.value;
-    }
     const type = this.inputZoneType.value;
-    const html = this.inputZoneHTML.value;
-    const css = this.inputZoneCSS.value;
+    const html = this.inputZoneHtml.value;
+    const css = this.inputZoneCss.value;
     const slot = this.inputZoneSlot.value;
-    let width = 0;
-    let height = 0;
+    const status = this.inputZoneStatus.value;
+    const description = this.inputZoneDescription.value;
     let sizeText = '';
     let sizeValue = '';
+    let height = 0;
+    let width = 0;
+
+    const zone = { id: this.props.zoneId };
+
+    if (siteId && siteId !== this.props.zone.siteId) {
+      zone.siteId = siteId;
+    }
+
+    if (name && name !== this.props.zone.name) {
+      zone.name = name;
+    }
+
+    if (type && type !== this.props.zone.type) {
+      zone.type = type;
+    }
+
+    if (html && html !== this.props.zone.html) {
+      zone.html = html;
+    }
+
+    if (css && css !== this.props.zone.css) {
+      zone.css = css;
+    }
+
+    if (slot && slot !== this.props.zone.slot) {
+      zone.slot = slot;
+    }
     if (this.state.checkTypeZone === true && type !== 'type-3') {
       sizeValue = this.inputZoneSize.value;
       if (this.inputZoneSize.value === 'custom') {
@@ -95,28 +140,34 @@ class CreateZoneForm extends Component {
       sizeText = 'Custom (Text ad)';
       sizeValue = '';
     }
-    const status = this.inputZoneStatus.value;
-    const description = this.inputZoneDescription.value;
-    if (name && siteId && type && description && slot) {
-      this.props.createZone({
-        name,
-        siteId,
-        type,
-        html,
-        css,
-        slot,
-        width,
-        height,
-        sizeText,
-        sizeValue,
-        status,
-        description,
-      });
-      this.clearInput();
-      if (this.props.siteId) {
-        this.props.getSite(this.props.siteId);
-      }
+    if (width && width !== this.props.zone.width) {
+      zone.width = width;
     }
+    if (height && height !== this.props.zone.height) {
+      zone.height = height;
+    }
+    if (sizeText && sizeText !== this.props.zone.sizeText) {
+      zone.sizeText = sizeText;
+    }
+    if (sizeValue && sizeValue !== this.props.zone.sizeValue) {
+      zone.sizeValue = sizeValue;
+    }
+
+    if (status && status !== this.props.zone.status) {
+      zone.status = status;
+    }
+
+    if (description && description !== this.props.zone.description) {
+      zone.description = description;
+    }
+
+    this.props.updateZone(zone).then(() => {
+      this.props.getZone(this.props.zoneId);
+    });
+  }
+  deleteZone() {
+    this.props.deleteZone(this.props.zoneId);
+    this.props.removeZone(this.props.zoneId);
   }
 
   render() {
@@ -138,30 +189,28 @@ class CreateZoneForm extends Component {
               />
             </div>
           </div>
-          { this.props.siteId ? ('') : (
-            <div className="form-group">
-              <label
-                htmlFor="inputZoneSite"
-                className="col-sm-2 control-label"
-              >Website</label>
-              <div className="col-sm-10">
-                <select
-                  id="inputZoneSite"
-                  className="form-control select2"
-                  style={{ width: '100%' }}
-                  ref={c => {
-                    this.inputZoneSite = c;
-                  }}
-                >
-                  {this.props.sites && this.props.sites.map(site => (
-                    <option
-                      key={site.id} value={site.id}
-                    >{site.name} | {site.domain}</option>
-                  ))}
-                </select>
-              </div>
+          <div className="form-group">
+            <label
+              htmlFor="inputZoneSite"
+              className="col-sm-2 control-label"
+            >Website</label>
+            <div className="col-sm-10">
+              <select
+                id="inputZoneSite"
+                className="form-control select2"
+                style={{ width: '100%' }}
+                ref={c => {
+                  this.inputZoneSite = c;
+                }}
+              >
+                {this.props.sites && this.props.sites.map(site => (
+                  <option
+                    key={site.id} value={site.id}
+                  >{site.name} | {site.domain}</option>
+                ))}
+              </select>
             </div>
-          ) }
+          </div>
           <div className="form-group">
             <label
               htmlFor="inputZoneType"
@@ -176,9 +225,9 @@ class CreateZoneForm extends Component {
                   this.inputZoneType = c;
                 }}
               >
-                <option value="type-1">Banner, Button or Rectangle</option>
-                <option value="type-2">Interstitial or Floating DHTML</option>
-                <option value="type-3">Text ad</option>
+                <option value="type-1">Banner, Button or Rectangle </option>
+                <option value="type-2">Interstitial or Floating DHTML </option>
+                <option value="type-3">Text ad </option>
                 <option value="type-4">Email/Newsletter zone</option>
               </select>
             </div>
@@ -268,30 +317,30 @@ class CreateZoneForm extends Component {
           ) : ('') }
           <div className="form-group">
             <label
-              htmlFor="inputZoneHTML"
+              htmlFor="inputZoneHtml"
               className="col-sm-2 control-label"
             >HTML</label>
             <div className="col-sm-10">
               <textarea
-                className="form-control" id="inputZoneHTML"
+                className="form-control" id="inputZoneHtml"
                 rows="5" placeholder="More info..."
                 ref={c => {
-                  this.inputZoneHTML = c;
+                  this.inputZoneHtml = c;
                 }}
               />
             </div>
           </div>
           <div className="form-group">
             <label
-              htmlFor="inputZoneCSS"
+              htmlFor="inputZoneCss"
               className="col-sm-2 control-label"
             >CSS</label>
             <div className="col-sm-10">
               <textarea
-                className="form-control" id="inputZoneCSS"
+                className="form-control" id="inputZoneCss"
                 rows="5" placeholder="More info..."
                 ref={c => {
-                  this.inputZoneCSS = c;
+                  this.inputZoneCss = c;
                 }}
               />
             </div>
@@ -347,14 +396,25 @@ class CreateZoneForm extends Component {
         {/* /.box-body */}
         <div className="box-footer">
           {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+          <Link
+            to="/resource/zone"
+            className="btn btn-app pull-right"
+          >
+            <i className="fa fa-undo" />
+            Cancel
+          </Link>
+          <Link
+            to="/resource/zone"
+            className="btn btn-app pull-right"
+            onClick={event => this.deleteZone(event)}
+          >
+            <i className="fa fa-trash-o" />
+            Delete
+          </Link>
           <a
             className="btn btn-app pull-right"
-            onClick={event => this.clearInput(event)}
-          ><i className="fa fa-eraser" /> Clear</a>
-          <a
-            className="btn btn-app pull-right"
-            onClick={event => this.createZone(event)}
-          ><i className="fa fa-check" /> Confirm</a>
+            onClick={event => this.updateZone(event)}
+          ><i className="fa fa-floppy-o" /> Save</a>
           {/* eslint-enable jsx-a11y/no-static-element-interactions */}
         </div>
         {/* /.box-footer */}
@@ -363,4 +423,4 @@ class CreateZoneForm extends Component {
   }
 }
 
-export default CreateZoneForm;
+export default UpdateZoneForm;

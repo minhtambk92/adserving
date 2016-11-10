@@ -9,6 +9,13 @@ class CreatePlacementForm extends Component {
     campaigns: PropTypes.array,
     campaignId: PropTypes.string,
     getCampaign: PropTypes.func,
+    zoneId: PropTypes.string,
+    getZone: PropTypes.func,
+    bannerId: PropTypes.string,
+    getBanner: PropTypes.func,
+    placements: PropTypes.array,
+    createPlacementBannerZone: PropTypes.func,
+    getPlacements: PropTypes.func,
   };
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputPlacementName.value = null;
@@ -49,6 +56,22 @@ class CreatePlacementForm extends Component {
           this.clearInput();
           if (this.props.campaignId) {
             this.props.getCampaign(this.props.campaignId);
+          } else if (this.props.zoneId) {
+            const placementId = this.props.placements[0].id;
+            const zoneId = this.props.zoneId;
+            const bannerId = null;
+            this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+              this.props.getZone(this.props.zoneId);
+              this.props.getPlacements();
+            });
+          } else if (this.props.bannerId) {
+            const placementId = this.props.placements[0].id;
+            const bannerId = this.props.bannerId;
+            const zoneId = null;
+            this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+              this.props.getBanner(this.props.bannerId);
+              this.props.getPlacements();
+            });
           }
         });
       } else {
