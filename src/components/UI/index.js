@@ -6,10 +6,12 @@
 
 import DataTables from './DataTables';
 import ICheck from './ICheck';
+import InputTags from './InputTags';
 
 export {
   DataTables,
   ICheck,
+  InputTags,
 };
 
 /* eslint-enable import/prefer-default-export */
