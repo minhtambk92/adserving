@@ -48,7 +48,6 @@ class Zone extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      searchText: '',
       checkTypeZone: true,
     };
   }
@@ -600,12 +599,18 @@ class Zone extends Component {
                               <Link
                                 to="/resource/zone"
                                 className="btn btn-app pull-right"
-                              ><i className="fa fa-undo" /> Cancel</Link>
+                              >
+                                <i className="fa fa-undo" />
+                                Cancel
+                              </Link>
                               <Link
                                 to="/resource/zone"
                                 className="btn btn-app pull-right"
                                 onClick={event => this.deleteZone(event)}
-                              ><i className="fa fa-trash-o" /> Delete</Link>
+                              >
+                                <i className="fa fa-trash-o" />
+                                Delete
+                              </Link>
                               <a
                                 className="btn btn-app pull-right"
                                 onClick={event => this.updateZone(event)}
@@ -658,7 +663,7 @@ class Zone extends Component {
                               {/* /.box-header */}
                               <div className="box-body">
                                 <ListPlacementOfZone
-                                  list={this.props.zones.editing &&
+                                  list={this.props.zones && this.props.zones.editing &&
                                   this.props.zones.editing.pbzZone &&
                                     this.dataPlacement(this.props.zones.editing.pbzZone)}
                                   /* eslint-disable max-len */
