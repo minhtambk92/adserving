@@ -83,7 +83,35 @@ const users = {
           newUser.password = hashSync(newUser.password, salt);
         }
 
-        console.log(newUser.roles);
+        if (newUser.roles) {
+          const userRoles = JSON.parse(newUser.roles);
+
+          userRoles.forEach(async(role) => {
+            const userRole = await UserRole.findOne({
+              where: {
+                userId: args.user.id,
+                roleId: role.id,
+              },
+              paranoid: false,
+            });
+
+            if (!userRole && role.isGranted === true) {
+              await UserRole.create({
+                userId: args.user.id,
+                roleId: role.id,
+                status: 'active',
+              });
+            } else if (
+              userRole &&
+              userRole.getDataValue('deletedAt') !== null &&
+              role.isGranted === true
+            ) {
+              await userRole.restore();
+            } else if (userRole && role.isGranted === false) {
+              await userRole.destroy();
+            }
+          });
+        }
 
         await User.update(newUser, {
           where: {

@@ -75,10 +75,10 @@ class User extends Component {
     }
 
     if (roles && !_.isEqual(roles.sort(), this.state.currentRoles)) {
-      user.roles = this.props.roles.map(role => ({
+      user.roles = JSON.stringify(this.props.roles.list.map(role => ({
         id: role.id,
         isGranted: roles.indexOf(role.uniqueName) !== -1,
-      }));
+      })));
     }
 
     if (password && passwordConfirmation && password === passwordConfirmation) {
