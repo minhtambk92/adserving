@@ -15,6 +15,8 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getCampaigns, createCampaign, getCampaignsFilters, setCampaignsFilters } from '../../../actions/campaigns';
 import { getAdvertisers } from '../../../actions/advertisers';
 import Layout from '../../../components/Layout';
+import CreateCampaignForm from './CreateCampaignForm';
+import FilterCampaignsForm from './FilterCampaignsForm';
 import CampaignList from './CampaignList';
 import s from './Campaigns.css';
 
@@ -31,14 +33,6 @@ class Campaigns extends Component {
     getAdvertisers: PropTypes.func,
     advertisers: PropTypes.object,
   };
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      searchText: '',
-    };
-  }
-
   componentWillMount() {
     this.props.getCampaigns();
     this.props.getCampaignsFilters();
@@ -97,50 +91,6 @@ class Campaigns extends Component {
     return true;
   }
 
-  clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    this.inputCampaignName.value = null;
-    this.inputCampaignViews.value = null;
-    this.inputCampaignViewPerSession.value = null;
-    this.inputCampaignTimeResetViewCount.value = null;
-    this.inputCampaignWeight.value = null;
-    this.inputCampaignDescription.value = null;
-  }
-
-  createCampaign() {
-    const name = this.inputCampaignName.value;
-    const advertiserId = this.inputAdvertiser.value;
-    const startTime = new Date(moment(new Date(this.inputCampaignStartTime.value)).format('YYYY-MM-DD 00:00:00'));
-    const endTime = new Date(moment(new Date(this.inputCampaignEndTime.value)).format('YYYY-MM-DD 00:00:00'));
-    const views = this.inputCampaignViews.value;
-    const viewPerSession = this.inputCampaignViewPerSession.value;
-    const timeResetViewCount = this.inputCampaignTimeResetViewCount.value;
-    const weight = this.inputCampaignWeight.value;
-    const description = this.inputCampaignDescription.value;
-    const status = this.inputCampaignStatus.value;
-    if (name && advertiserId && startTime && endTime && views && viewPerSession
-      && timeResetViewCount && weight && description) {
-      if (moment(startTime).format('x') < moment(endTime).format('x')) {
-        this.props.createCampaign({
-          advertiserId,
-          name,
-          startTime,
-          endTime,
-          views,
-          viewPerSession,
-          timeResetViewCount,
-          weight,
-          description,
-          status,
-        }).then(() => {
-          this.clearInput();
-        });
-      } else {
-        this.inputCampaignEndTime.value = null;
-        this.inputCampaignEndTime.focus();
-      }
-    }
-  }
-
   render() {
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
@@ -159,59 +109,11 @@ class Campaigns extends Component {
                 </div>
                 {/* /.box-header */}
                 {/* form start */}
-                <form className="form-horizontal">
-                  <div className="box-body">
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputCampaignsFilterAdvertiser"
-                        className="col-sm-2 control-label"
-                      >Advertiser</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputCampaignsFilterAdvertiser"
-                          className="form-control select2"
-                          style={{ width: '100%' }}
-                          ref={c => {
-                            this.inputCampaignsFilterAdvertiser = c;
-                          }}
-                          onChange={event => this.onFilterChange(event, 'advertiserId')}
-                          defaultValue={this.props.campaigns.filters &&
-                          this.props.campaigns.filters.advertiserId}
-                        >
-                          <option value="null">All sites</option>
-                          {this.props.advertisers.list &&
-                          this.props.advertisers.list.map(advertiser => (
-                            <option
-                              key={advertiser.id} value={advertiser.id}
-                            >{advertiser.name}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputCampaignsFilterStatus"
-                        className="col-sm-2 control-label"
-                      >Status</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputCampaignsFilterStatus" className="form-control"
-                          ref={c => {
-                            this.inputCampaignsFilterStatus = c;
-                          }}
-                          onChange={event => this.onFilterChange(event, 'status')}
-                          defaultValue={this.props.campaigns.filters &&
-                          this.props.campaigns.filters.status}
-                        >
-                          <option value="null">All states</option>
-                          <option value="active">Active</option>
-                          <option value="inactive">Inactive</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  {/* /.box-body */}
-                </form>
+                <FilterCampaignsForm
+                  advertisers={this.props.advertisers.list}
+                  filters={this.props.campaigns.filters}
+                  setCampaignsFilters={this.props.setCampaignsFilters}
+                />
               </div>
               {/* /.col */}
             </section>
@@ -230,178 +132,11 @@ class Campaigns extends Component {
                 </div>
                 {/* /.box-header */}
                 {/* form start */}
-                <form className="form-horizontal">
-                  <div className="box-body">
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputCampaignName" className="col-sm-2 control-label"
-                      >Name</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="text" className="form-control" id="inputCampaignName"
-                          placeholder="Admicro"
-                          ref={c => {
-                            this.inputCampaignName = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="inputAdvertiser" className="col-sm-2 control-label">Advertiser</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputAdvertiser" className="form-control"
-                          ref={c => {
-                            this.inputAdvertiser = c;
-                          }}
-                        >
-                          {this.props.advertisers.list
-                          && this.props.advertisers.list.map(advertiser => (
-                            <option
-                              key={advertiser.id} value={advertiser.id}
-                            >
-                              {advertiser.name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="form-group has-feedback">
-                      <label
-                        htmlFor="inputCampaignStartTime" className="col-sm-2 control-label"
-                      >
-                        Start Time
-                      </label>
-                      <div className=" col-sm-10 date">
-                        <span className="fa fa-calendar form-control-feedback" />
-                        <input
-                          type="text" className="form-control pull-right"
-                          id="inputCampaignStartTime"
-                          ref={c => {
-                            this.inputCampaignStartTime = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group has-feedback">
-                      <label
-                        htmlFor="inputCampaignEndTime"
-                        className="col-sm-2 control-label"
-                      >
-                        End Time
-                      </label>
-                      <div className=" col-sm-10 date">
-                        <span className="fa fa-calendar form-control-feedback" />
-                        <input
-                          type="text" className="form-control pull-right"
-                          id="inputCampaignEndTime"
-                          ref={c => {
-                            this.inputCampaignEndTime = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="inputCampaignViews" className="col-sm-2 control-label">Total Views</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="number" className="form-control" id="inputCampaignViews"
-                          placeholder="1000"
-                          ref={c => {
-                            this.inputCampaignViews = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="inputCampaignViewPerSession" className="col-sm-2 control-label">Views/Session</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="number" className="form-control" id="inputCampaignViewPerSession"
-                          placeholder="10"
-                          ref={c => {
-                            this.inputCampaignViewPerSession = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="inputCampaignTimeResetViewCount" className="col-sm-2 control-label">Time reset view(h)</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="number" className="form-control"
-                          id="inputCampaignTimeResetViewCount"
-                          placeholder="24"
-                          ref={c => {
-                            this.inputCampaignTimeResetViewCount = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputCampaignWeight"
-                        className="col-sm-2 control-label"
-                      >Weight</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="number" className="form-control" id="inputCampaignWeight"
-                          placeholder="1"
-                          ref={c => {
-                            this.inputCampaignWeight = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputCampaignStatus"
-                        className="col-sm-2 control-label"
-                      >Status</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputCampaignStatus" className="form-control"
-                          ref={c => {
-                            this.inputCampaignStatus = c;
-                          }}
-                        >
-                          <option value="active">Active</option>
-                          <option value="inactive">Inactive</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputCampaignDescription"
-                        className="col-sm-2 control-label"
-                      >Description</label>
-                      <div className="col-sm-10">
-                        <textarea
-                          className="form-control" id="inputCampaignDescription"
-                          rows="5" placeholder="More info..."
-                          ref={c => {
-                            this.inputCampaignDescription = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  {/* /.box-body */}
-                  <div className="box-footer">
-                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                    <a
-                      className="btn btn-app pull-right"
-                    ><i className="fa fa-eraser" /> Clear</a>
-                    <a
-                      className="btn btn-app pull-right"
-                      onClick={event => this.createCampaign(event)}
-                    ><i className="fa fa-check" /> Confirm</a>
-                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                  </div>
-                  {/* /.box-footer */}
-                </form>
+                <CreateCampaignForm
+                  filters={this.props.campaigns.filters}
+                  advertisers={this.props.advertisers.list}
+                  createCampaign={this.props.createCampaign}
+                />
               </div>
               {/* /.col */}
             </section>

@@ -11,7 +11,6 @@ import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import style from 'react-dropzone-component/styles/filepicker.css';
 import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
-import DropzoneComponent from 'react-dropzone-component/lib/react-dropzone';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanner, updateBanner, deleteBanner } from '../../../../actions/banners';
@@ -23,9 +22,10 @@ import {
   removeBannerInPlacementBannerZone,
 } from '../../../../actions/placementBannerZones';
 import Layout from '../../../../components/Layout';
-import Link from '../../../../components/Link';
 import ListPlacementNotBelongBanner from '../ListPlacementNotBelongBanner';
 import ListPlacementOfBanner from '../ListPlacementOfBanner';
+import UpdateBannerForm from '../UpdateBannerForm';
+import CreatePlacementInBanner from '../../placements/CreatePlacementForm';
 import s from './Banner.css';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 
@@ -49,16 +49,6 @@ class Banner extends Component {
     removeBanner: PropTypes.func,
     removeBannerInPlacementBannerZone: PropTypes.func,
   };
-
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      searchText: '',
-      checkTypeBanner: 'img',
-      imageUrl: '',
-      keyWord: '',
-    };
-  }
 
   componentWillMount() {
     this.props.getBanner(this.props.bannerId);
@@ -89,115 +79,13 @@ class Banner extends Component {
     /* eslint-enable no-undef */
   }
 
-  componentWillReceiveProps(nextProps) {
-    const {
-      name,
-      html,
-      width,
-      height,
-      keyword,
-      weight,
-      description,
-      target,
-      type,
-      imageUrl,
-      status,
-    } = nextProps.banners && (nextProps.banners.editing || {});
-    this.state.keyWord = keyword;
-    this.inputBannerName.value = name;
-    this.inputBannerWidth.value = width;
-    this.inputBannerHeight.value = height;
-    this.inputBannerKeyWord.value = keyword;
-    this.inputBannerWeight.value = weight;
-    this.inputBannerDescription.value = description;
-    this.inputBannerStatus.value = status;
-    if (type === 'html') {
-      this.insertBannerHtml(html, width, height);
-      if (this.inputBannerHTML !== undefined) {
-        this.inputBannerHTML.value = html;
-        this.state.checkTypeBanner = 'html';
-        this.state.imageUrl = '';
-      }
-    } else if (type === 'img') {
-      this.state.imageUrl = imageUrl;
-      this.state.checkTypeBanner = 'img';
-      if (this.inputBannerImageUrl !== undefined && this.inputBannerTarget !== undefined) {
-        this.inputBannerTarget.value = target;
-        this.inputBannerImageUrl.value = imageUrl;
-      }
-    }
-  }
-
   componentDidUpdate() {
     /* eslint-disable no-undef */
     $('#inputPlacementStartTime').datepicker('update', new Date());
     /* eslint-disable no-underscore-dangle */
     $('#inputPlacementEndTime').datepicker('update', moment().add(1, 'month')._d);
     /* eslint-enable no-underscore-dangle */
-    $('#inputBannerKeyWord').tagsinput({
-      allowDuplicates: true,
-    });
-    $('#inputBannerKeyWord').tagsinput('add', this.state.keyWord);
     /* eslint-enable no-undef */
-  }
-
-  createPlacement() {
-    const name = this.inputPlacementName.value;
-    const startTime = new Date(moment(new Date(this.inputPlacementStartTime.value)).format('YYYY-MM-DD 00:00:00'));
-    const endTime = new Date(moment(new Date(this.inputPlacementEndTime.value)).format('YYYY-MM-DD 00:00:00'));
-    const sizeWidth = this.inputPlacementSizeWidth.value;
-    const sizeHeight = this.inputPlacementSizeHeight.value;
-    const weight = this.inputPlacementWeight.value;
-    const description = this.inputPlacementDescription.value;
-    const campaignId = this.inputCampaign.value;
-    const status = this.inputPlacementStatus.value;
-    if (name && startTime && endTime && sizeHeight && sizeWidth
-      && weight && description && campaignId) {
-      if (moment(startTime).format('x') < moment(endTime).format('x')) {
-        this.props.createPlacement({
-          name,
-          startTime,
-          endTime,
-          sizeWidth,
-          sizeHeight,
-          weight,
-          description,
-          campaignId,
-          status,
-        }).then(() => {
-          const placementId = this.props.placements.list[0].id;
-          const bannerId = this.props.bannerId;
-          const zoneId = null;
-          this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
-            this.clearInput();
-            this.props.getBanner(this.props.bannerId);
-            this.props.getPlacements();
-          });
-        });
-      } else {
-        this.inputPlacementEndTime.value = null;
-      }
-    }
-  }
-
-  clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    this.inputPlacementName.value = null;
-    this.inputPlacementSizeHeight.value = null;
-    this.inputPlacementSizeWidth.value = null;
-    this.inputPlacementWeight.value = null;
-    this.inputPlacementDescription.value = null;
-  }
-
-  insertBannerHtml(html, w, h) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const idw = document.getElementById('banner');
-    if (idw) {
-      /* eslint-disable prefer-template */
-      idw.innerHTML = '<iframe src="javacript:void(0);" frameborder="0" scrolling="no" width="' + w + '" height="' + h + '" id="bannerCode"></iframe>';
-      /* eslint-enable prefer-template */
-      const idb = document.getElementById('bannerCode');
-      const io = idb.contentWindow;
-      io.document.write(html);
-    }
   }
 
   filterPlacements(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -252,102 +140,7 @@ class Banner extends Component {
     return false;
   }
 
-  updateBanner() {
-    const name = this.inputBannerName.value;
-    const width = this.inputBannerWidth.value;
-    const height = this.inputBannerHeight.value;
-    const keyword = this.inputBannerKeyWord.value;
-    const weight = this.inputBannerWeight.value;
-    const description = this.inputBannerDescription.value;
-    let html = '';
-    let target = '';
-    let imageUrl = '';
-    const type = this.props.banners.editing.type;
-    if (type === 'html') {
-      html = this.inputBannerHTML.value;
-    } else if (type === 'img') {
-      target = this.inputBannerTarget.value;
-      imageUrl = this.state.imageUrl;
-    }
-    const status = this.inputBannerStatus.value;
-    const banner = { id: this.props.bannerId };
-    if (name && name !== this.props.banners.editing.name) {
-      banner.name = name;
-    }
-
-    if (width && width !== this.props.banners.editing.width) {
-      banner.width = width;
-    }
-
-    if (height && height !== this.props.banners.editing.height) {
-      banner.height = height;
-    }
-
-    if (keyword && keyword !== this.props.banners.editing.keyword) {
-      banner.keyword = keyword;
-    }
-    if (weight && weight !== this.props.banners.editing.weight) {
-      banner.weight = weight;
-    }
-    if (description && description !== this.props.banners.editing.description) {
-      banner.description = description;
-    }
-    banner.type = type;
-    if (type === 'html') {
-      if (html && html !== this.props.banners.editing.html) {
-        banner.html = html;
-      }
-    } else if (type === 'img') {
-      if (target && target !== this.props.banners.editing.target) {
-        banner.target = target;
-      }
-      banner.imageUrl = imageUrl;
-    }
-    if (status && status !== this.props.banners.editing.status) {
-      banner.status = status;
-    }
-    this.props.updateBanner(banner).then(() => {
-      this.props.getBanner(this.props.bannerId);
-    });
-  }
-
-  deleteBanner() {
-    this.props.deleteBanner(this.props.bannerId);
-    this.props.removeBanner(this.props.bannerId);
-  }
-
   render() {
-    if (this.state.checkTypeBanner === 'img') {
-      const img = this.state.imageUrl;
-      /* eslint-disable */
-      this.djsConfig = {
-        acceptedFiles: 'image/jpeg,image/png,image/gif',
-        addRemoveLinks: true,
-        maxFiles: 1,
-        init: function () {
-          const mockFile = { name: 'image', size: 125, type: 'image/jpeg' };
-          this.options.addedfile.call(this, mockFile);
-          this.options.thumbnail.call(this, mockFile, img);
-          mockFile.previewElement.classList.add('dz-success');
-          mockFile.previewElement.classList.add('dz-complete');
-        },
-      };
-      /* eslint-enable */
-      this.componentConfig = {
-        postUrl: '/upload-banner',
-      };
-      this.callbackFail = 'fail';
-      // Simple callbacks work too, of course
-      this.callback = (e) => {
-        if (e.xhr.response) {
-          this.state.imageUrl = e.xhr.response;
-        }
-      };
-      this.eventHandlers = {
-        drop: this.callbackFail,
-        success: this.callback,
-      };
-    }
     return (
       <Layout
         pageTitle={
@@ -391,208 +184,14 @@ class Banner extends Component {
                             </div>
                           </div>
                           {/* /.box-header */}
-                          {/* form start */}
-                          <form className="form-horizontal">
-                            <div className="box-body">
-                              { this.props.banners.editing &&
-                              (this.props.banners.editing.type === 'img' && this.state.checkTypeBanner === 'img') ? (
-                                <div className="bannerImage">
-                                  <div className="form-group">
-                                    <div className="col-sm-12">
-                                      <div className="row">
-                                        <div className="col-sm-8">
-                                          <div
-                                            id="inputBannerImageUrl"
-                                            ref={c => {
-                                              this.inputBannerImageUrl = c;
-                                            }}
-                                          >
-                                            <img
-                                              src={this.props.banners.editing ?
-                                            this.props.banners.editing.imageUrl : ''}
-                                              alt="demo"
-                                            />
-                                          </div>
-                                        </div>
-                                        <div className="col-sm-4">
-                                          <DropzoneComponent
-                                            config={this.componentConfig}
-                                            eventHandlers={this.eventHandlers}
-                                            djsConfig={this.djsConfig}
-                                          />
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="form-group">
-                                    <label
-                                      htmlFor="inputBannerTarget"
-                                      className="col-sm-2 control-label"
-                                    >Target</label>
-                                    <div className="col-sm-10">
-                                      <input
-                                        type="text" className="form-control" id="inputBannerTarget"
-                                        placeholder="http://kenh14.vn"
-                                        ref={c => {
-                                          this.inputBannerTarget = c;
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                <div className="bannerHTML">
-                                  <div className="form-group">
-                                    <div className="col-lg-12">
-                                      <div id="banner">&nbsp;</div>
-                                    </div>
-                                  </div>
-                                  <div className="form-group">
-                                    <label
-                                      htmlFor="inputBannerHTML"
-                                      className="col-sm-2 control-label"
-                                    >HTML</label>
-                                    <div className="col-sm-10">
-                                      <textarea
-                                        className="form-control" id="inputBannerHTML"
-                                        rows="5" placeholder="More info..."
-                                        ref={c => {
-                                          this.inputBannerHTML = c;
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                              <div className="form-group">
-                                <label
-                                  htmlFor="inputBannerName"
-                                  className="col-sm-2 control-label"
-                                >Name</label>
-                                <div className="col-sm-10">
-                                  <input
-                                    type="text" className="form-control" id="inputBannerName"
-                                    placeholder="Banner Top"
-                                    ref={c => {
-                                      this.inputBannerName = c;
-                                    }}
-                                  />
-                                </div>
-                              </div>
-                              <div className="form-group">
-                                <label
-                                  htmlFor="inputBannerWidth"
-                                  className="col-sm-2 control-label"
-                                >Width(px)</label>
-                                <div className="col-sm-10">
-                                  <input
-                                    type="number" className="form-control" id="inputBannerWidth"
-                                    placeholder="300"
-                                    ref={c => {
-                                      this.inputBannerWidth = c;
-                                    }}
-                                  />
-                                </div>
-                              </div>
-                              <div className="form-group">
-                                <label
-                                  htmlFor="inputBannerHeight"
-                                  className="col-sm-2 control-label"
-                                >Height(px)</label>
-                                <div className="col-sm-10">
-                                  <input
-                                    type="number" className="form-control" id="inputBannerHeight"
-                                    placeholder="300"
-                                    ref={c => {
-                                      this.inputBannerHeight = c;
-                                    }}
-                                  />
-                                </div>
-                              </div>
-                              <div className="form-group">
-                                <label
-                                  htmlFor="inputBannerKeyWord"
-                                  className="col-sm-2 control-label"
-                                >KeyWord</label>
-                                <div className="col-sm-10">
-                                  <input
-                                    type="text" className="form-control" id="inputBannerKeyWord"
-                                    placeholder="dantri"
-                                    data-role="tagsinput"
-                                    ref={c => {
-                                      this.inputBannerKeyWord = c;
-                                    }}
-                                  />
-                                </div>
-                              </div>
-                              <div className="form-group">
-                                <label
-                                  htmlFor="inputBannerWeight"
-                                  className="col-sm-2 control-label"
-                                >Weight</label>
-                                <div className="col-sm-10">
-                                  <input
-                                    type="number"
-                                    className="form-control" id="inputBannerWeight" placeholder="1"
-                                    ref={c => {
-                                      this.inputBannerWeight = c;
-                                    }}
-                                  />
-                                </div>
-                              </div>
-                              <div className="form-group">
-                                <label
-                                  htmlFor="inputBannerStatus"
-                                  className="col-sm-2 control-label"
-                                >Status</label>
-                                <div className="col-sm-10">
-                                  <select
-                                    id="inputBannerStatus" className="form-control"
-                                    ref={c => {
-                                      this.inputBannerStatus = c;
-                                    }}
-                                  >
-                                    <option value="active">Active</option>
-                                    <option value="inactive">Inactive</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div className="form-group">
-                                <label
-                                  htmlFor="inputBannerDescription"
-                                  className="col-sm-2 control-label"
-                                >Description</label>
-                                <div className="col-sm-10">
-                                  <textarea
-                                    className="form-control" id="inputBannerDescription"
-                                    rows="5" placeholder="More info..."
-                                    ref={c => {
-                                      this.inputBannerDescription = c;
-                                    }}
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                            {/* /.box-body */}
-                            <div className="box-footer">
-                              {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                              <Link
-                                to="/resource/banner"
-                                className="btn btn-app pull-right"
-                              ><i className="fa fa-undo" /> Cancel</Link>
-                              <Link
-                                to="/resource/banner"
-                                className="btn btn-app pull-right"
-                                onClick={event => this.deleteBanner(event)}
-                              ><i className="fa fa-trash-o" /> Delete</Link>
-                              <a
-                                className="btn btn-app pull-right"
-                                onClick={event => this.updateBanner(event)}
-                              ><i className="fa fa-floppy-o" /> Save</a>
-                              {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                            </div>
-                            {/* /.box-footer */}
-                          </form>
+                          <UpdateBannerForm
+                            banner={this.props.banners && this.props.banners.editing}
+                            updateBanner={this.props.updateBanner}
+                            deleteBanner={this.props.deleteBanner}
+                            bannerId={this.props.bannerId}
+                            getBanner={this.props.getBanner}
+                            removeBanner={this.props.removeBanner}
+                          />
                         </div>
                         {/* /.col */}
                       </section>
@@ -673,176 +272,15 @@ class Banner extends Component {
                               </div>
                               {/* /.box-header */}
                               {/* form start */}
-                              <form className="form-horizontal">
-                                <div className="box-body">
-                                  <div className="form-group">
-                                    <label
-                                      htmlFor="inputPlacementName"
-                                      className="col-sm-2 control-label"
-                                    >Name</label>
-                                    <div className="col-sm-10">
-                                      <input
-                                        type="text" className="form-control" id="inputPlacementName"
-                                        placeholder="Admicro"
-                                        ref={c => {
-                                          this.inputPlacementName = c;
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="form-group has-feedback">
-                                    <label
-                                      htmlFor="inputCampaign"
-                                      className="col-sm-2 control-label"
-                                    >Campaign</label>
-                                    <div className="col-sm-10">
-                                      <select
-                                        id="inputCampaign" className="form-control"
-                                        ref={c => {
-                                          this.inputCampaign = c;
-                                        }}
-                                      >
-                                        {this.props.campaigns.list
-                                        && this.props.campaigns.list.map(campaign => (
-                                          <option
-                                            key={campaign.id} value={campaign.id}
-                                          >
-                                            {campaign.name}
-                                          </option>
-                                        ))}
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div className="form-group has-feedback">
-                                    <label
-                                      htmlFor="inputPlacementStartTime"
-                                      className="col-sm-2 control-label"
-                                    >Start Time:</label>
-                                    <div className=" col-sm-10 date">
-                                      <span className="fa fa-calendar form-control-feedback" />
-                                      <input
-                                        type="text" className="form-control pull-right"
-                                        id="inputPlacementStartTime"
-                                        ref={c => {
-                                          this.inputPlacementStartTime = c;
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="form-group has-feedback">
-                                    <label
-                                      htmlFor="inputPlacementEndTime"
-                                      className="col-sm-2 control-label"
-                                    >
-                                      End Time:
-                                    </label>
-                                    <div className=" col-sm-10 date">
-                                      <span className="fa fa-calendar form-control-feedback" />
-                                      <input
-                                        type="text" className="form-control pull-right"
-                                        id="inputPlacementEndTime"
-                                        ref={c => {
-                                          this.inputPlacementEndTime = c;
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="form-group">
-                                    <label
-                                      htmlFor="inputPlacementSizeWidth"
-                                      className="col-sm-2 control-label"
-                                    >Size(Width)</label>
-                                    <div className="col-sm-10">
-                                      <input
-                                        type="number" className="form-control"
-                                        id="inputPlacementSizeWidth"
-                                        placeholder="300"
-                                        ref={c => {
-                                          this.inputPlacementSizeWidth = c;
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="form-group">
-                                    <label
-                                      htmlFor="inputPlacementSizeHeight"
-                                      className="col-sm-2 control-label"
-                                    >Size(Height)</label>
-                                    <div className="col-sm-10">
-                                      <input
-                                        type="number" className="form-control"
-                                        id="inputPlacementSizeHeight"
-                                        placeholder="300"
-                                        ref={c => {
-                                          this.inputPlacementSizeHeight = c;
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="form-group">
-                                    <label
-                                      htmlFor="inputPlacementWeight"
-                                      className="col-sm-2 control-label"
-                                    >Weight</label>
-                                    <div className="col-sm-10">
-                                      <input
-                                        type="text" className="form-control"
-                                        id="inputPlacementWeight"
-                                        placeholder="1"
-                                        ref={c => {
-                                          this.inputPlacementWeight = c;
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="form-group">
-                                    <label
-                                      htmlFor="inputPlacementStatus"
-                                      className="col-sm-2 control-label"
-                                    >Status</label>
-                                    <div className="col-sm-10">
-                                      <select
-                                        id="inputPlacementStatus" className="form-control"
-                                        ref={c => {
-                                          this.inputPlacementStatus = c;
-                                        }}
-                                      >
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
-                                      </select>
-                                    </div>
-                                  </div>
-
-                                  <div className="form-group">
-                                    <label
-                                      htmlFor="inputPlacementDescription"
-                                      className="col-sm-2 control-label"
-                                    >Description</label>
-                                    <div className="col-sm-10">
-                                      <textarea
-                                        className="form-control" id="inputPlacementDescription"
-                                        rows="5" placeholder="More info..."
-                                        ref={c => {
-                                          this.inputPlacementDescription = c;
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                {/* /.box-body */}
-                                <div className="box-footer">
-                                  {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-                                  <a
-                                    className="btn btn-app pull-right"
-                                  ><i className="fa fa-eraser" /> Clear</a>
-                                  <a
-                                    className="btn btn-app pull-right"
-                                    onClick={event => this.createPlacement(event)}
-                                  ><i className="fa fa-check" /> Confirm</a>
-                                  {/* eslint-enable jsx-a11y/no-static-element-interactions */}
-                                </div>
-                                {/* /.box-footer */}
-                              </form>
+                              <CreatePlacementInBanner
+                                createPlacement={this.props.createPlacement}
+                                bannerId={this.props.bannerId}
+                                campaigns={this.props.campaigns && this.props.campaigns.list}
+                                getPlacements={this.props.getPlacements}
+                                placements={this.props.placements && this.props.placements.list}
+                                getBanner={this.props.getBanner}
+                                createPlacementBannerZone={this.props.createPlacementBannerZone}
+                              />
                             </div>
                             {/* /.col */}
                           </section>
