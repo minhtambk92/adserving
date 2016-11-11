@@ -15,8 +15,6 @@ class ListBannerOfPlacement extends Component {
     getBanners: PropTypes.func,
   };
 
-  componentDidUpdate() {
-  }
   dataTableOptions() {
     return [{
       data: 'id',
@@ -44,15 +42,17 @@ class ListBannerOfPlacement extends Component {
       data: null,
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
-        ReactDOM.render(<a
+        ReactDOM.render(<Link
+          to="#"
           onClick={() => this.removeBannerToPlacement(rowData.id)}
         >
           Remove
-        </a>, cell);
+        </Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];
   }
+
   removeBannerToPlacement(bannerId) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const placementId = this.props.placementId;
     const bId = bannerId;
@@ -64,6 +64,7 @@ class ListBannerOfPlacement extends Component {
       });
     }
   }
+
   render() {
     let data = [];
     if (this.props.list) {

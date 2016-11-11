@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Link from '../../../components/Link';
 
 class CreateAdvertiserForm extends Component {
 
@@ -113,16 +114,16 @@ class CreateAdvertiserForm extends Component {
         </div>
         {/* /.box-body */}
         <div className="box-footer">
-          {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-          <a
+          <Link
+            to="#"
             className="btn btn-app pull-right"
             onClick={event => this.clearInput(event)}
-          ><i className="fa fa-eraser" /> Clear</a>
-          <a
+          ><i className="fa fa-eraser" /> Clear</Link>
+          <Link
+            to="#"
             className="btn btn-app pull-right"
             onClick={event => this.createAdvertiser(event)}
-          ><i className="fa fa-check" /> Confirm</a>
-          {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+          ><i className="fa fa-check" /> Confirm</Link>
         </div>
         {/* /.box-footer */}
       </form>

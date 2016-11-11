@@ -10,6 +10,7 @@ class UpdateZoneForm extends Component {
     deleteZone: PropTypes.func,
     sites: PropTypes.array,
     getZone: PropTypes.func,
+    removeZone: PropTypes.func,
   };
   constructor(props, context) {
     super(props, context);
@@ -169,7 +170,6 @@ class UpdateZoneForm extends Component {
     this.props.deleteZone(this.props.zoneId);
     this.props.removeZone(this.props.zoneId);
   }
-
   render() {
     return (
       <form className="form-horizontal">
@@ -395,7 +395,6 @@ class UpdateZoneForm extends Component {
         </div>
         {/* /.box-body */}
         <div className="box-footer">
-          {/* eslint-disable jsx-a11y/no-static-element-interactions */}
           <Link
             to="/resource/zone"
             className="btn btn-app pull-right"
@@ -411,11 +410,11 @@ class UpdateZoneForm extends Component {
             <i className="fa fa-trash-o" />
             Delete
           </Link>
-          <a
+          <Link
+            to="#"
             className="btn btn-app pull-right"
             onClick={event => this.updateZone(event)}
-          ><i className="fa fa-floppy-o" /> Save</a>
-          {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+          ><i className="fa fa-floppy-o" /> Save</Link>
         </div>
         {/* /.box-footer */}
       </form>

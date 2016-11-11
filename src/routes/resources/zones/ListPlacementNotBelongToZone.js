@@ -42,6 +42,7 @@ class ListPlacementNotBelongToZone extends Component {
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link
+          to="#"
           onClick={() => this.pushZoneToPlacement(rowData.id)}
         >
           Add To Zone
@@ -50,6 +51,7 @@ class ListPlacementNotBelongToZone extends Component {
       },
     }];
   }
+
   /* eslint-disable max-len */
   pushZoneToPlacement(id) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const zoneId = this.props.zoneId;
@@ -64,6 +66,7 @@ class ListPlacementNotBelongToZone extends Component {
     }
   }
   /* eslint-enable max-len */
+
   render() {
     // Open the portal
     let data = [];

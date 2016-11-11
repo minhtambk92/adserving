@@ -149,15 +149,6 @@ class Site extends Component {
                                 />
                               </div>
                               {/* /.box-body */}
-                              <div className="box-footer clearfix">
-                                <ul className="pagination pagination-sm no-margin pull-right">
-                                  <li><a>&laquo;</a></li>
-                                  <li><a>1</a></li>
-                                  <li><a>2</a></li>
-                                  <li><a>3</a></li>
-                                  <li><a>&raquo;</a></li>
-                                </ul>
-                              </div>
                             </div>
                             {/* /.box */}
                           </section>

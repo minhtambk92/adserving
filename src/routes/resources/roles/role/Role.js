@@ -125,7 +125,6 @@ class Role extends Component {
                   </div>
                   {/* /.box-body */}
                   <div className="box-footer">
-                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                     <Link
                       to="/resource/role"
                       className="btn btn-app pull-right"
@@ -135,11 +134,11 @@ class Role extends Component {
                       className="btn btn-app pull-right"
                       onClick={event => this.deleteRole(event)}
                     ><i className="fa fa-trash-o" /> Delete</Link>
-                    <a
+                    <Link
+                      to="#"
                       className="btn btn-app pull-right"
                       onClick={event => this.updateRole(event)}
-                    ><i className="fa fa-floppy-o" /> Save</a>
-                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+                    ><i className="fa fa-floppy-o" /> Save</Link>
                   </div>
                   {/* /.box-footer */}
                 </form>

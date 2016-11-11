@@ -41,11 +41,12 @@ class PlacementList extends Component {
       data: null,
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
-        ReactDOM.render(<a
+        ReactDOM.render(<Link
+          to="#"
           onClick={() => this.pushBannerToPlacement(rowData.id)}
         >
           Add To Placement
-        </a>, cell);
+        </Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];
@@ -91,7 +92,7 @@ class PlacementList extends Component {
           </tr>
         )}
         tfoot={(
-           <tr>
+          <tr>
             <th><ICheck type="checkbox" className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size(px)</th>

@@ -42,6 +42,7 @@ class ListZoneOfPlacement extends Component {
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link
+          to="#"
           onClick={() => this.removeZoneToPlacement(rowData.id)}
         >
           Remove
@@ -49,7 +50,6 @@ class ListZoneOfPlacement extends Component {
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];
-    return columns;
   }
   removeZoneToPlacement(ZoneId) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const placementId = this.props.placementId;

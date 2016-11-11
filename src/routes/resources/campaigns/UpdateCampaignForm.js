@@ -270,10 +270,11 @@ class UpdateCampaignForm extends Component {
             className="btn btn-app pull-right"
             onClick={event => this.deleteCampaign(event)}
           ><i className="fa fa-trash-o" /> Delete</Link>
-          <a
+          <Link
+            to="#"
             className="btn btn-app pull-right"
             onClick={event => this.updateCampaign(event)}
-          ><i className="fa fa-floppy-o" /> Save</a>
+          ><i className="fa fa-floppy-o" /> Save</Link>
           {/* eslint-enable jsx-a11y/no-static-element-interactions */}
         </div>
         {/* /.box-footer */}
