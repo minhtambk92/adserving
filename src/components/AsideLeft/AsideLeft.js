@@ -76,15 +76,22 @@ function AsideLeft() {
             </Link>
             <ul className="treeview-menu">
               <li>
-                <Link to="/settings/global"><i className="fa fa-globe" /> Global</Link>
-              </li>
-              <li>
-                <Link to="/settings/update"><i className="fa fa-cloud-download" /> Update</Link>
+                <Link to="/settings/appearance">
+                  <i className="fa fa-desktop" /> <span>Appearance</span>
+                  <span className="pull-right-container">
+                    <i className="fa fa-angle-left pull-right" />
+                  </span>
+                </Link>
+                <ul className="treeview-menu">
+                  <li>
+                    <Link to="/settings/appearance/menus">
+                      <i className="fa fa-bars" /> <span>Menus</span>
+                    </Link>
+                  </li>
+                </ul>
               </li>
             </ul>
           </li>
-
-          <li className="header">SYSTEM</li>
           <li className="treeview">
             <Link to="/resource/user">
               <i className="fa fa-user" /> <span>Users</span>
