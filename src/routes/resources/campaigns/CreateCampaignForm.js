@@ -113,9 +113,12 @@ class CreateCampaignForm extends Component {
             </label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
+              {/* /DatePicker */}
               <DatePicker
                 id="inputCampaignStartTime"
-                timeValue="start"
+                type="text"
+                className="form-control pull-right"
+                name="start"
               />
             </div>
           </div>
@@ -128,9 +131,12 @@ class CreateCampaignForm extends Component {
             </label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
+              {/* /DatePicker */}
               <DatePicker
                 id="inputCampaignEndTime"
-                timeValue="end"
+                type="text"
+                className="form-control pull-right"
+                name="end"
               />
             </div>
           </div>

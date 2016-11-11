@@ -140,9 +140,12 @@ class UpdatePlacementForm extends Component {
             </label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
+              {/* /DatePicker */}
               <DatePicker
                 id="inputPlacementStartTime"
-                timeValue="start"
+                type="text"
+                className="form-control pull-right"
+                name="start"
               />
             </div>
           </div>
@@ -154,9 +157,12 @@ class UpdatePlacementForm extends Component {
             </label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
+              {/* /DatePicker */}
               <DatePicker
                 id="inputPlacementEndTime"
-                timeValue="end"
+                type="text"
+                className="form-control pull-right"
+                name="end"
               />
             </div>
           </div>
