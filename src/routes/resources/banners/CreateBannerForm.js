@@ -234,8 +234,12 @@ class CreateBannerForm extends Component {
               className="col-sm-2 control-label"
             >KeyWord</label>
             <div className="col-sm-10">
+              {/* /.InputTas */}
               <InputTags
+                type="text"
                 id="inputBannerKeyWord"
+                className="form-control"
+                placeholder="dantri"
                 data={this.state.tags}
               />
             </div>
