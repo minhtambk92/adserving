@@ -18,6 +18,7 @@ class InputTags extends Component {
     });
     /* eslint-enable no-undef */
   }
+
   componentWillReceiveProps(nextProps) {
     /* eslint-disable no-undef */
     $(`#${this.props.id}`).tagsinput('removeAll');

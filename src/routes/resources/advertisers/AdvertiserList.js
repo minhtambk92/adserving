@@ -10,7 +10,7 @@ class AdvertiserList extends Component {
     list: PropTypes.array,
   };
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const columns = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -39,7 +39,6 @@ class AdvertiserList extends Component {
         ReactDOM.render(<Link to={`/resource/advertiser/${rowData.id}`}>New Campaign</Link>, cell);
       },
     }];
-    return columns;
   }
 
   render() {
