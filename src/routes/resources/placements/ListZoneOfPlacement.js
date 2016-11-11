@@ -16,7 +16,7 @@ class ListZoneOfPlacement extends Component {
   };
 
   dataTableOptions() {
-    const columns = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -40,11 +40,11 @@ class ListZoneOfPlacement extends Component {
       data: null,
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
-        ReactDOM.render(<a
+        ReactDOM.render(<Link
           onClick={() => this.removeZoneToPlacement(rowData.id)}
         >
           Remove
-        </a>, cell);
+        </Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];

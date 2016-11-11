@@ -18,7 +18,7 @@ class ListBannerOfPlacement extends Component {
   componentDidUpdate() {
   }
   dataTableOptions() {
-    const columns = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -38,10 +38,7 @@ class ListBannerOfPlacement extends Component {
       },
     }, {
       data: null,
-      render: (data, type, rowData) => {
-        const size = `${rowData.width}px x ${rowData.height}px`;
-        return size;
-      },
+      render: (data, type, rowData) => `${rowData.width}px x ${rowData.height}px`,
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
@@ -54,7 +51,6 @@ class ListBannerOfPlacement extends Component {
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];
-    return columns;
   }
   removeBannerToPlacement(bannerId) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const placementId = this.props.placementId;

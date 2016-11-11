@@ -12,7 +12,7 @@ class CampaignList extends Component {
   };
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const columns = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -42,7 +42,6 @@ class CampaignList extends Component {
         ReactDOM.render(<Link to={`/resource/campaign/${rowData.id}`}>New Placement</Link>, cell);
       },
     }];
-    return columns;
   }
   render() {
     let data = [];

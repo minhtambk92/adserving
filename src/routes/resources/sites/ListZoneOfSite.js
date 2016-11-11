@@ -10,7 +10,7 @@ class ListZoneOfSite extends Component {
     list: PropTypes.array,
   };
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const columns = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -38,7 +38,6 @@ class ListZoneOfSite extends Component {
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];
-    return columns;
   }
   render() {
     let data = [];

@@ -10,7 +10,7 @@ class SiteList extends Component {
   };
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const columns = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -40,7 +40,6 @@ class SiteList extends Component {
         ReactDOM.render(<Link to={`/resource/site/${rowData.id}`}>New Zone</Link>, cell);
       },
     }];
-    return columns;
   }
   render() {
     // Open the portal

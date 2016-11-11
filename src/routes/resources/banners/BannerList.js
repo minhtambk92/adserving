@@ -10,7 +10,7 @@ class BannerList extends Component {
     list: PropTypes.array,
   };
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const columns = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -30,10 +30,7 @@ class BannerList extends Component {
       },
     }, {
       data: null,
-      render: (data, type, row) => {
-        const size = `${row.width}px x ${row.height}px`;
-        return size;
-      },
+      render: (data, type, row) => `${row.width}px x ${row.height}px`,
     }, {
       data: 'keyword',
     }, {
@@ -42,7 +39,6 @@ class BannerList extends Component {
         ReactDOM.render(<Link to={`/resource/banner/${rowData.id}`}>New Placement</Link>, cell);
       },
     }];
-    return columns;
   }
   render() {
     // Open the portal

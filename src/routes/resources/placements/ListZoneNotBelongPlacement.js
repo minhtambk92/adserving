@@ -14,7 +14,7 @@ class ListZoneNotBelongPlacement extends Component {
     getZones: PropTypes.func,
   };
   dataTableOptions() {
-    const colums = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -38,15 +38,14 @@ class ListZoneNotBelongPlacement extends Component {
       data: null,
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
-        ReactDOM.render(<a
+        ReactDOM.render(<Link
           onClick={() => this.pushZoneToPlacement(rowData.id)}
         >
           Add To Placement
-        </a>, cell);
+        </Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];
-    return colums;
   }
   /* eslint-disable max-len */
   pushZoneToPlacement(id) { // eslint-disable-line no-unused-vars, class-methods-use-this

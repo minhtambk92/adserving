@@ -14,7 +14,7 @@ class ListPlacementOfZone extends Component {
   };
 
   dataTableOptions() {
-    const columns = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -34,23 +34,19 @@ class ListPlacementOfZone extends Component {
       },
     }, {
       data: null,
-      render: (data, type, row) => {
-        const size = `${row.sizeWidth}px x ${row.sizeHeight}px`;
-        return size;
-      },
+      render: (data, type, row) => `${row.sizeWidth}px x ${row.sizeHeight}px`,
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
-        ReactDOM.render(<a
+        ReactDOM.render(<Link
           onClick={() => this.removePlacement(rowData.id)}
         >
           Remove
-        </a>, cell);
+        </Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];
-    return columns;
   }
 
   removePlacement(id) { // eslint-disable-line no-unused-vars, class-methods-use-this

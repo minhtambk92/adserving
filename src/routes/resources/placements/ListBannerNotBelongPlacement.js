@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import Link from '../../../components/Link';
 import { DataTables, ICheck } from '../../../components/UI/';
+import Link from '../../../components/Link';
+
 class PlacementList extends Component {
 
   static propTypes = {
@@ -14,7 +15,7 @@ class PlacementList extends Component {
     getBanners: PropTypes.func,
   };
   dataTableOptions() {
-    const colums = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -34,10 +35,7 @@ class PlacementList extends Component {
       },
     }, {
       data: null,
-      render: (data, type, row) => {
-        const size = `${row.width}px x ${row.height}px`;
-        return size;
-      },
+      render: (data, type, row) => `${row.width}px x ${row.height}px`,
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
@@ -50,7 +48,6 @@ class PlacementList extends Component {
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];
-    return colums;
   }
   /* eslint-disable max-len */
   pushBannerToPlacement(bannerId) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -93,7 +90,7 @@ class PlacementList extends Component {
           </tr>
         )}
         tfoot={(
-           <tr>
+          <tr>
             <th><ICheck className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size(px)</th>
