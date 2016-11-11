@@ -61,9 +61,15 @@ const Banner = Model.define('Banner', {
     type: DataType.TEXT,
     defaultValue: '',
   },
-  target: {
+  url: {
     type: DataType.STRING,
     defaultValue: '',
+  },
+  target: {
+    type: DataType.STRING,
+    validate: {
+      isIn: [['_blank', '_self', '_parent', '_top', '']],
+    },
   },
   status: {
     type: DataType.STRING,

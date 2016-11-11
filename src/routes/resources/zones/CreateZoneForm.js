@@ -21,6 +21,16 @@ class CreateZoneForm extends Component {
     this.inputZoneSize.value = 'custom';
   }
 
+  onBlur(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const w = this.inputZoneWidth.value.trim();
+    const h = this.inputZoneHeight.value.trim();
+    if (w === '') {
+      this.inputZoneWidth.value = 0;
+    } else if (h === '') {
+      this.inputZoneHeight.value = 0;
+    }
+  }
+
   onSelectZoneType(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const zoneType = this.inputZoneType.value;
     if (zoneType !== 'type-3') {
@@ -238,6 +248,7 @@ class CreateZoneForm extends Component {
                           type="number" className="form-control" id="inputZoneWidth"
                           defaultValue="468"
                           onKeyDown={event => this.onKeyDown(event)}
+                          onBlur={event => this.onBlur(event)}
                           placeholder="300"
                           ref={c => {
                             this.inputZoneWidth = c;
@@ -255,6 +266,7 @@ class CreateZoneForm extends Component {
                           type="number" className="form-control" id="inputZoneHeight"
                           defaultValue="60"
                           onKeyDown={event => this.onKeyDown(event)}
+                          onBlur={event => this.onBlur(event)}
                           placeholder="300"
                           ref={c => {
                             this.inputZoneHeight = c;

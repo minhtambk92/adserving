@@ -32,6 +32,7 @@ class UpdateBannerForm extends Component {
       keyword,
       weight,
       description,
+      url,
       target,
       type,
       imageUrl,
@@ -55,8 +56,10 @@ class UpdateBannerForm extends Component {
     } else if (type === 'img') {
       this.state.imageUrl = imageUrl;
       this.state.checkTypeBanner = 'img';
-      if (this.inputBannerImageUrl !== undefined && this.inputBannerTarget !== undefined) {
+      if (this.inputBannerImageUrl !== undefined && this.inputBannerTarget !== undefined
+      && this.inputBannerUrl !== undefined) {
         this.inputBannerTarget.value = target;
+        this.inputBannerUrl.value = url;
         this.inputBannerImageUrl.value = imageUrl;
       }
     }
@@ -72,11 +75,13 @@ class UpdateBannerForm extends Component {
     let html = '';
     let target = '';
     let imageUrl = '';
+    let url = '';
     const type = this.props.banner.type;
     if (type === 'html') {
       html = this.inputBannerHTML.value;
     } else if (type === 'img') {
       target = this.inputBannerTarget.value;
+      url = this.inputBannerUrl.value;
       imageUrl = this.state.imageUrl;
     }
     const status = this.inputBannerStatus.value;
@@ -110,6 +115,9 @@ class UpdateBannerForm extends Component {
     } else if (type === 'img') {
       if (target && target !== this.props.banner.target) {
         banner.target = target;
+      }
+      if (url && url !== this.props.banner.url) {
+        banner.url = url;
       }
       banner.imageUrl = imageUrl;
     }
@@ -208,17 +216,36 @@ class UpdateBannerForm extends Component {
                   </div>
                   <div className="form-group">
                     <label
+                      htmlFor="inputBannerUrl"
+                      className="col-sm-2 control-label"
+                    >Url</label>
+                    <div className="col-sm-10">
+                      <input
+                        type="text" className="form-control" id="inputBannerUrl"
+                        placeholder="http://kenh14.vn"
+                        ref={c => {
+                          this.inputBannerUrl = c;
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label
                       htmlFor="inputBannerTarget"
                       className="col-sm-2 control-label"
                     >Target</label>
                     <div className="col-sm-10">
-                      <input
-                        type="text" className="form-control" id="inputBannerTarget"
-                        placeholder="http://kenh14.vn"
+                      <select
+                        id="inputBannerTarget" className="form-control"
                         ref={c => {
                           this.inputBannerTarget = c;
                         }}
-                      />
+                      >
+                        <option value="_blank">_BLANK</option>
+                        <option value="_self">_SELF</option>
+                        <option value="_parent">_PARENT</option>
+                        <option value="_top">_TOP</option>
+                      </select>
                     </div>
                   </div>
                 </div>
