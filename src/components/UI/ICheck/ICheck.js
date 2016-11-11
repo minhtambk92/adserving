@@ -14,15 +14,13 @@ class ICheck extends Component {
   async componentDidMount() {
     // Wrapping DOM Libs
     await ReactDOM.render(this.renderDOMLibs(), this.portal);
-  }
 
-  componentWillReceiveProps(nextProps) {
     /* eslint-disable no-undef */
     // iCheck for checkbox and radio inputs
     $(this.input).iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
-      ...nextProps.options,
+      ...this.props.options,
     });
     /* eslint-enable no-undef */
   }
