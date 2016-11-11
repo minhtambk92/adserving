@@ -140,9 +140,12 @@ class UpdatePlacementForm extends Component {
             </label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
+              {/* /DatePicker */}
               <DatePicker
                 id="inputPlacementStartTime"
-                timeValue="start"
+                type="text"
+                className="form-control pull-right"
+                name="start"
               />
             </div>
           </div>
@@ -154,9 +157,12 @@ class UpdatePlacementForm extends Component {
             </label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
+              {/* /DatePicker */}
               <DatePicker
                 id="inputPlacementEndTime"
-                timeValue="end"
+                type="text"
+                className="form-control pull-right"
+                name="end"
               />
             </div>
           </div>
@@ -239,7 +245,6 @@ class UpdatePlacementForm extends Component {
         </div>
         {/* /.box-body */}
         <div className="box-footer">
-          {/* eslint-disable jsx-a11y/no-static-element-interactions */}
           <Link
             to="/resource/placement"
             className="btn btn-app pull-right"
@@ -249,11 +254,11 @@ class UpdatePlacementForm extends Component {
             className="btn btn-app pull-right"
             onClick={event => this.deletePlacement(event)}
           ><i className="fa fa-trash-o" /> Delete</Link>
-          <a
+          <Link
+            to="#"
             className="btn btn-app pull-right"
             onClick={event => this.updatePlacement(event)}
-          ><i className="fa fa-floppy-o" /> Save</a>
-          {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+          ><i className="fa fa-floppy-o" /> Save</Link>
         </div>
         {/* /.box-footer */}
       </form>

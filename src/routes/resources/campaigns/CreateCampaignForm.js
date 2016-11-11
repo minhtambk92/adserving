@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import { DatePicker } from '../../../components/UI';
+import Link from '../../../components/Link';
 
 class CreateCampaignForm extends Component {
 
@@ -112,9 +113,12 @@ class CreateCampaignForm extends Component {
             </label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
+              {/* /DatePicker */}
               <DatePicker
                 id="inputCampaignStartTime"
-                timeValue="start"
+                type="text"
+                className="form-control pull-right"
+                name="start"
               />
             </div>
           </div>
@@ -127,9 +131,12 @@ class CreateCampaignForm extends Component {
             </label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
+              {/* /DatePicker */}
               <DatePicker
                 id="inputCampaignEndTime"
-                timeValue="end"
+                type="text"
+                className="form-control pull-right"
+                name="end"
               />
             </div>
           </div>
@@ -222,15 +229,15 @@ class CreateCampaignForm extends Component {
         </div>
         {/* /.box-body */}
         <div className="box-footer">
-          {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-          <a
+          <Link
+            to="#"
             className="btn btn-app pull-right"
-          ><i className="fa fa-eraser" /> Clear</a>
-          <a
+          ><i className="fa fa-eraser" /> Clear</Link>
+          <Link
+            to="#"
             className="btn btn-app pull-right"
             onClick={event => this.createCampaign(event)}
-          ><i className="fa fa-check" /> Confirm</a>
-          {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+          ><i className="fa fa-check" /> Confirm</Link>
         </div>
         {/* /.box-footer */}
       </form>

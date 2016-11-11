@@ -8,7 +8,6 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import moment from 'moment';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -147,6 +146,7 @@ class Zone extends Component {
                             sites={this.props.sites && this.props.sites.list}
                             zoneId={this.props.zoneId}
                             getZone={this.props.getZone}
+                            removeZone={this.props.removeZone}
                           />
                         </div>
                         {/* /.col */}

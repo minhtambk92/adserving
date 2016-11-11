@@ -228,7 +228,6 @@ class Resource extends Component {
                   </div>
                   {/* /.box-body */}
                   <div className="box-footer">
-                    {/* eslint-disable jsx-a11y/no-static-element-interactions */}
                     <Link
                       to="/resource/type"
                       className="btn btn-app pull-right"
@@ -238,11 +237,11 @@ class Resource extends Component {
                       className="btn btn-app pull-right"
                       onClick={event => this.deleteResource(event)}
                     ><i className="fa fa-trash-o" /> Delete</Link>
-                    <a
+                    <Link
+                      to="#"
                       className="btn btn-app pull-right"
                       onClick={event => this.updateResource(event)}
-                    ><i className="fa fa-floppy-o" /> Save</a>
-                    {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+                    ><i className="fa fa-floppy-o" /> Save</Link>
                   </div>
                   {/* /.box-footer */}
                 </form>

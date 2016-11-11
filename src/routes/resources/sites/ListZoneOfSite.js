@@ -6,7 +6,6 @@ import { DataTables, ICheck } from '../../../components/UI/';
 class ListZoneOfSite extends Component {
 
   static propTypes = {
-    containerWidth: PropTypes.number,
     list: PropTypes.array,
   };
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this

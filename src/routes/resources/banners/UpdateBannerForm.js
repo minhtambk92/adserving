@@ -297,8 +297,12 @@ class UpdateBannerForm extends Component {
               className="col-sm-2 control-label"
             >KeyWord</label>
             <div className="col-sm-10">
+              {/* /.InputTas */}
               <InputTags
+                type="text"
                 id="inputBannerKeyWord"
+                className="form-control"
+                placeholder="dantri"
                 data={this.state.keyWord}
               />
             </div>
@@ -353,7 +357,6 @@ class UpdateBannerForm extends Component {
         </div>
         {/* /.box-body */}
         <div className="box-footer">
-          {/* eslint-disable jsx-a11y/no-static-element-interactions */}
           <Link
             to="/resource/banner"
             className="btn btn-app pull-right"
@@ -363,11 +366,11 @@ class UpdateBannerForm extends Component {
             className="btn btn-app pull-right"
             onClick={event => this.deleteBanner(event)}
           ><i className="fa fa-trash-o" /> Delete</Link>
-          <a
+          <Link
+            to="#"
             className="btn btn-app pull-right"
             onClick={event => this.updateBanner(event)}
-          ><i className="fa fa-floppy-o" /> Save</a>
-          {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+          ><i className="fa fa-floppy-o" /> Save</Link>
         </div>
         {/* /.box-footer */}
       </form>

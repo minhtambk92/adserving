@@ -6,23 +6,23 @@ import s from './InputTags.css';
 class InputTags extends Component {
 
   static propTypes = {
-    id: PropTypes.string.isRequired,
-    data: PropTypes.string,
+    options: PropTypes.object,
   };
 
   async componentDidMount() {
     await ReactDOM.render(this.renderDOMLibs(), this.portal);
     /* eslint-disable no-undef */
-    $(`#${this.props.id}`).tagsinput({
+    $(this.input).tagsinput({
       allowDuplicates: true,
+      ...this.props.options,
     });
     /* eslint-enable no-undef */
   }
 
   componentWillReceiveProps(nextProps) {
     /* eslint-disable no-undef */
-    $(`#${this.props.id}`).tagsinput('removeAll');
-    $(`#${this.props.id}`).tagsinput('add', nextProps.data);
+    $(this.input).tagsinput('removeAll');
+    $(this.input).tagsinput('add', nextProps.data);
     /* eslint-enable no-undef */
   }
 
@@ -31,11 +31,14 @@ class InputTags extends Component {
   }
 
   renderDOMLibs() {
+    const { ...rest } = this.props;
     return (
       <input
-        type="text" className="form-control" id={this.props.id}
-        placeholder="dantri"
+        ref={c => {
+          this.input = c;
+        }}
         data-role="tagsinput"
+        {...rest}
       />
     );
   }

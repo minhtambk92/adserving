@@ -212,12 +212,11 @@ class UpdateUserForm extends Component {
             to="/resource/user" className="btn btn-app pull-right"
             onClick={event => this.deleteUser(event)}
           ><i className="fa fa-trash-o" /> Delete</Link>
-          {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-          <a
+          <Link
+            to="#"
             className="btn btn-app pull-right"
             onClick={event => this.updateUser(event)}
-          ><i className="fa fa-floppy-o" /> Save</a>
-          {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+          ><i className="fa fa-floppy-o" /> Save</Link>
         </div>
         {/* /.box-footer */}
       </form>

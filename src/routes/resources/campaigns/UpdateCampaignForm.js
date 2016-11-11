@@ -145,9 +145,12 @@ class UpdateCampaignForm extends Component {
             >Start Time:</label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
+              {/* /.box-body */}
               <DatePicker
                 id="inputCampaignStartTime"
-                timeValue="start"
+                type="text"
+                className="form-control pull-right"
+                name="start"
               />
             </div>
           </div>
@@ -157,9 +160,12 @@ class UpdateCampaignForm extends Component {
             >End Time:</label>
             <div className=" col-sm-10 date">
               <span className="fa fa-calendar form-control-feedback" />
+              {/* /.box-body */}
               <DatePicker
                 id="inputCampaignEndTime"
-                timeValue="end"
+                type="text"
+                className="form-control pull-right"
+                name="end"
               />
             </div>
           </div>
@@ -270,10 +276,11 @@ class UpdateCampaignForm extends Component {
             className="btn btn-app pull-right"
             onClick={event => this.deleteCampaign(event)}
           ><i className="fa fa-trash-o" /> Delete</Link>
-          <a
+          <Link
+            to="#"
             className="btn btn-app pull-right"
             onClick={event => this.updateCampaign(event)}
-          ><i className="fa fa-floppy-o" /> Save</a>
+          ><i className="fa fa-floppy-o" /> Save</Link>
           {/* eslint-enable jsx-a11y/no-static-element-interactions */}
         </div>
         {/* /.box-footer */}

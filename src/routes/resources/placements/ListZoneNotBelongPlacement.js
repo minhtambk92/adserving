@@ -4,6 +4,7 @@ import { DataTables, ICheck } from '../../../components/UI/';
 import Link from '../../../components/Link';
 
 class ListZoneNotBelongPlacement extends Component {
+
   static propTypes = {
     placementId: PropTypes.string.isRequired,
     containerWidth: PropTypes.number,
@@ -13,6 +14,7 @@ class ListZoneNotBelongPlacement extends Component {
     createPlacementBannerZone: PropTypes.func,
     getZones: PropTypes.func,
   };
+
   dataTableOptions() {
     return [{
       data: 'id',
@@ -40,6 +42,7 @@ class ListZoneNotBelongPlacement extends Component {
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link
+          to="#"
           onClick={() => this.pushZoneToPlacement(rowData.id)}
         >
           Add To Placement
@@ -48,6 +51,7 @@ class ListZoneNotBelongPlacement extends Component {
       },
     }];
   }
+
   /* eslint-disable max-len */
   pushZoneToPlacement(id) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const placementId = this.props.placementId;
@@ -62,6 +66,7 @@ class ListZoneNotBelongPlacement extends Component {
     }
   }
   /* eslint-enable max-len */
+
   render() {
     let data = [];
     if (this.props.list) {

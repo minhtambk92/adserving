@@ -8,7 +8,6 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import moment from 'moment';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -41,57 +40,6 @@ class Advertiser extends Component {
   componentWillMount() {
     this.props.getAdvertiser(this.props.advertiserId);
   }
-
-  createCampaign() {
-    const name = this.inputCampaignName.value;
-    const advertiserId = this.props.advertiserId;
-    const startTime = new Date(moment(new Date(this.inputCampaignStartTime.value)).format('YYYY-MM-DD 00:00:00'));
-    const endTime = new Date(moment(new Date(this.inputCampaignEndTime.value)).format('YYYY-MM-DD 00:00:00'));
-    const views = this.inputCampaignViews.value;
-    const viewPerSession = this.inputCampaignViewPerSession.value;
-    const timeResetViewCount = this.inputCampaignTimeResetViewCount.value;
-    const weight = this.inputCampaignWeight.value;
-    const description = this.inputCampaignDescription.value;
-    const status = this.inputCampaignStatus.value;
-
-    if (
-      name && advertiserId && startTime && endTime && views && viewPerSession &&
-      timeResetViewCount && weight && description
-    ) {
-      if (moment(startTime).format('x') < moment(endTime).format('x')) {
-        this.props.createCampaign({
-          advertiserId,
-          name,
-          startTime,
-          endTime,
-          views,
-          viewPerSession,
-          timeResetViewCount,
-          weight,
-          description,
-          status,
-        }).then(() => {
-          this.props.getAdvertiser(this.props.advertiserId);
-          this.clearInput();
-        });
-      } else {
-        this.inputCampaignEndTime.value = null;
-        this.inputCampaignEndTime.focus();
-      }
-    }
-  }
-
-  clearInput() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    this.inputCampaignName.value = null;
-    this.inputCampaignStartTime.value = null;
-    this.inputCampaignEndTime.value = null;
-    this.inputCampaignViews.value = null;
-    this.inputCampaignViewPerSession.value = null;
-    this.inputCampaignTimeResetViewCount.value = null;
-    this.inputCampaignWeight.value = null;
-    this.inputCampaignDescription.value = null;
-  }
-
   render() {
     return (
       <Layout

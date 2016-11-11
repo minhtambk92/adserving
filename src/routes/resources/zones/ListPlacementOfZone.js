@@ -41,6 +41,7 @@ class ListPlacementOfZone extends Component {
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link
+          to="#"
           onClick={() => this.removePlacement(rowData.id)}
         >
           Remove

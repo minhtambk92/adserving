@@ -20,7 +20,8 @@ class ListPlacementNotBelongToZone extends Component {
       orderable: false,
       createdCell: (cell, cellData) => {
         ReactDOM.render(
-          <ICheck type="checkbox"
+          <ICheck
+            type="checkbox"
             className="inputChooseBanner"
             name="inputChooseBanner[]"
             value={cellData}

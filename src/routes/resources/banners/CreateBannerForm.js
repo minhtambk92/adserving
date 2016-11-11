@@ -4,6 +4,7 @@ import style from 'react-dropzone-component/styles/filepicker.css';
 import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
 import DropzoneComponent from 'react-dropzone-component/lib/react-dropzone';
 import { InputTags } from '../../../components/UI';
+import Link from '../../../components/Link';
 
 class CreateBannerForm extends Component {
 
@@ -63,7 +64,7 @@ class CreateBannerForm extends Component {
     }
     this.inputBannerWidth.value = null;
     this.inputBannerHeight.value = null;
-    this.inputBannerKeyWord.value = null;
+    document.getElementById('inputBannerKeyWord').value = null;
     this.inputBannerWeight.value = null;
     this.inputBannerDescription.value = null;
   }
@@ -233,8 +234,12 @@ class CreateBannerForm extends Component {
               className="col-sm-2 control-label"
             >KeyWord</label>
             <div className="col-sm-10">
+              {/* /.InputTas */}
               <InputTags
+                type="text"
                 id="inputBannerKeyWord"
+                className="form-control"
+                placeholder="dantri"
                 data={this.state.tags}
               />
             </div>
@@ -289,16 +294,16 @@ class CreateBannerForm extends Component {
         </div>
         {/* /.box-body */}
         <div className="box-footer">
-          {/* eslint-disable jsx-a11y/no-static-element-interactions */}
-          <a
+          <Link
+            to="#"
             className="btn btn-app pull-right"
             onClick={event => this.clearInput(event)}
-          ><i className="fa fa-eraser" /> Clear</a>
-          <a
+          ><i className="fa fa-eraser" /> Clear</Link>
+          <Link
+            to="#"
             className="btn btn-app pull-right"
             onClick={event => this.createBanner(event)}
-          ><i className="fa fa-check" /> Confirm</a>
-          {/* eslint-enable jsx-a11y/no-static-element-interactions */}
+          ><i className="fa fa-check" /> Confirm</Link>
         </div>
         {/* /.box-footer */}
       </form>
