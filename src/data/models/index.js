@@ -11,6 +11,7 @@ import sequelize from '../sequelize';
 import Option from './Option';
 import Resource from './Resource';
 import ResourcePermission from './ResourcePermission';
+import MenuModel from './Menu';
 import User from './User';
 import UserLogin from './UserLogin';
 import UserClaim from './UserClaim';
@@ -29,6 +30,10 @@ import Channel from './Channel';
 import Filter from './Filter';
 import PlacementBannerZone from './PlacementBannerZone';
 
+const MenuHeader = MenuModel.scope('headers');
+const Menu = MenuModel.scope('menus');
+const MenuItem = MenuModel.scope('items');
+
 // Associations
 Resource.permissions = Resource.hasMany(ResourcePermission, {
   foreignKey: {
@@ -40,6 +45,14 @@ Resource.permissions = Resource.hasMany(ResourcePermission, {
     resource: 'Resource',
   },
   constraints: false,
+});
+
+Menu.items = Menu.hasMany(MenuItem, {
+  foreignKey: {
+    name: 'parentId',
+    allowNull: false,
+  },
+  as: 'items',
 });
 
 Role.permissions = Role.hasMany(ResourcePermission, {
@@ -183,6 +196,9 @@ export default { sync };
 export {
   Option,
   Resource,
+  MenuHeader,
+  Menu,
+  MenuItem,
   Role,
   User,
   UserLogin,

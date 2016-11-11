@@ -13,6 +13,11 @@ export const FETCH_CONTENT_ERROR = 'FETCH_CONTENT_ERROR';
 export const STATUS_ACTIVE = 'active';
 export const STATUS_INACTIVE = 'inactive';
 
+// Menu types
+export const TYPE_MENU = 'menu';
+export const TYPE_MENU_HEADER = 'header';
+export const TYPE_MENU_ITEM = 'item';
+
 // Redux actions
 export const GET_RESOURCE = 'GET_RESOURCE';
 export const GET_RESOURCES = 'GET_RESOURCES';
