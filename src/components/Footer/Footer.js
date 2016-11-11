@@ -16,9 +16,12 @@ function Footer() {
   return (
     <footer className="main-footer">
       {/* To the right */}
-      <div className="pull-right hidden-xs">Anything you want</div>
+      <div className="pull-right hidden-xs">CoreJS Team - AdTech</div>
       {/* Default to the left */}
-      <strong>Copyright © 2016 <Link to="#">Company</Link>.</strong> All rights reserved.
+      <strong>
+        <span>Copyright © 2016</span>&nbsp;<Link to="http://admicro.vn/">Admicro</Link>.
+      </strong>
+      <span>&nbsp;All rights reserved.</span>
     </footer>
   );
 }
