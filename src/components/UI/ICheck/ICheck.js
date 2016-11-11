@@ -8,17 +8,21 @@ import ReactDOM from 'react-dom';
 class ICheck extends Component {
 
   static propTypes = {
-    className: PropTypes.string.isRequired,
+    options: PropTypes.object,
   };
 
   async componentDidMount() {
+    // Wrapping DOM Libs
     await ReactDOM.render(this.renderDOMLibs(), this.portal);
+  }
 
+  componentWillReceiveProps(nextProps) {
     /* eslint-disable no-undef */
     // iCheck for checkbox and radio inputs
     $(this.input).iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
+      ...nextProps.options,
     });
     /* eslint-enable no-undef */
   }

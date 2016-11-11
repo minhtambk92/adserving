@@ -23,7 +23,7 @@ class DataTables extends Component {
     /* eslint-disable no-undef */
     $(this.dataTable).dataTable({
       data: nextProps.data,
-      ...this.props.options,
+      ...nextProps.options,
     });
     /* eslint-enable no-undef */
   }

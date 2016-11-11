@@ -9,13 +9,15 @@ class Select2 extends Component {
 
   static propTypes = {
     children: PropTypes.element.isRequired,
+    options: PropTypes.object,
   };
 
   async componentWillReceiveProps(nextProps) {
+    // Wrapping DOM Libs
     await ReactDOM.render(this.renderDOMLibs(nextProps), this.portal);
 
     /* eslint-disable no-undef */
-    $(this.select).select2();
+    $(this.select).select2(nextProps.options);
     /* eslint-enable no-undef */
   }
 
