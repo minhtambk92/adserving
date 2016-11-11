@@ -16,6 +16,7 @@ class SiteList extends Component {
       createdCell: (cell, cellData) => {
         ReactDOM.render(
           <ICheck
+            type="checkbox"
             className="inputChooseSite"
             name="inputChooseSite[]"
             value={cellData}
@@ -55,7 +56,7 @@ class SiteList extends Component {
         }}
         thead={(
           <tr>
-            <th><ICheck className="inputChooseAllSites" /></th>
+            <th><ICheck type="checkbox" className="inputChooseAllSites" /></th>
             <th>Name</th>
             <th>Domain</th>
             <th>Email</th>
@@ -65,7 +66,7 @@ class SiteList extends Component {
         )}
         tfoot={(
           <tr>
-            <th><ICheck className="inputChooseAllSites" /></th>
+            <th><ICheck type="checkbox" className="inputChooseAllSites" /></th>
             <th>Name</th>
             <th>Domain</th>
             <th>Email</th>

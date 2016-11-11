@@ -28,14 +28,14 @@ class ICheck extends Component {
   }
 
   renderDOMLibs() {
+    const { ...rest } = this.props;
+
     return (
       <input
-        type="checkbox"
-        className={this.props.className}
         ref={c => {
           this.input = c;
         }}
-        {...this.props}
+        {...rest}
       />
     );
   }

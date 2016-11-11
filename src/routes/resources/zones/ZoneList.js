@@ -17,6 +17,7 @@ class ZoneList extends Component {
       createdCell: (cell, cellData) => {
         ReactDOM.render(
           <ICheck
+            type="checkbox"
             className="inputChooseZone"
             name="inputChooseZone[]"
             value={cellData}
@@ -54,7 +55,7 @@ class ZoneList extends Component {
         }}
         thead={(
           <tr>
-            <th><ICheck className="inputChooseAllZones" /></th>
+            <th><ICheck type="checkbox" className="inputChooseAllZones" /></th>
             <th>Name</th>
             <th>Type</th>
             <th>Description</th>
@@ -63,7 +64,7 @@ class ZoneList extends Component {
         )}
         tfoot={(
           <tr>
-            <th><ICheck className="inputChooseAllZones" /></th>
+            <th><ICheck type="checkbox" className="inputChooseAllZones" /></th>
             <th>Name</th>
             <th>Type</th>
             <th>Description</th>

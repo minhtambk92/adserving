@@ -26,6 +26,7 @@ class RoleList extends Component {
       createdCell: (cell, cellData) => {
         ReactDOM.render(
           <ICheck
+            type="checkbox"
             className="inputChooseRole"
             name="inputChooseRole[]"
             value={cellData}
@@ -94,7 +95,7 @@ class RoleList extends Component {
         thead={(
           <tr>
             <th>
-              <ICheck className="inputChooseAllRoles" />
+              <ICheck type="checkbox" className="inputChooseAllRoles" />
             </th>
             <th>Unique name</th>
             <th>Name</th>
@@ -105,7 +106,7 @@ class RoleList extends Component {
         tfoot={(
           <tr>
             <th>
-              <ICheck className="inputChooseAllRoles" />
+              <ICheck type="checkbox" className="inputChooseAllRoles" />
             </th>
             <th>Unique name</th>
             <th>Name</th>

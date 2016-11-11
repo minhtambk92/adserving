@@ -16,6 +16,7 @@ class AdvertiserList extends Component {
       createdCell: (cell, cellData) => {
         ReactDOM.render(
           <ICheck
+            type="checkbox"
             className="inputChooseAdvertiser"
             name="inputChooseAdvertiser[]"
             value={cellData}
@@ -54,7 +55,7 @@ class AdvertiserList extends Component {
         }}
         thead={(
           <tr>
-            <th><ICheck className="inputChooseAllAdvertisers" /></th>
+            <th><ICheck type="checkbox" className="inputChooseAllAdvertisers" /></th>
             <th>Name</th>
             <th>Email</th>
             <th>Contact</th>
@@ -63,7 +64,7 @@ class AdvertiserList extends Component {
         )}
         tfoot={(
           <tr>
-            <th><ICheck className="inputChooseAllAdvertisers" /></th>
+            <th><ICheck type="checkbox" className="inputChooseAllAdvertisers" /></th>
             <th>Name</th>
             <th>Email</th>
             <th>Contact</th>

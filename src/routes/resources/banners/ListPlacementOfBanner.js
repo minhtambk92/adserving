@@ -20,7 +20,7 @@ class ListPlacementOfBanner extends Component {
       orderable: false,
       createdCell: (cell, cellData) => {
         ReactDOM.render(
-          <ICheck
+          <ICheck type="checkbox"
             className="inputChooseBanner"
             name="inputChooseBanner[]"
             value={cellData}
@@ -82,7 +82,7 @@ class ListPlacementOfBanner extends Component {
         }}
         thead={(
           <tr>
-            <th><ICheck className="inputChooseAllBanners" /></th>
+            <th><ICheck type="checkbox" className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size</th>
             <th>&nbsp;</th>
@@ -90,7 +90,7 @@ class ListPlacementOfBanner extends Component {
         )}
         tfoot={(
           <tr>
-            <th><ICheck className="inputChooseAllBanners" /></th>
+            <th><ICheck type="checkbox" className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size</th>
             <th>&nbsp;</th>

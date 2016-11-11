@@ -21,6 +21,7 @@ class ResourceList extends Component {
       createdCell: (cell, cellData) => {
         ReactDOM.render(
           <ICheck
+            type="checkbox"
             className="inputChooseResource"
             name="inputChooseResource[]"
             value={cellData}
@@ -86,7 +87,7 @@ class ResourceList extends Component {
         thead={(
           <tr>
             <th>
-              <ICheck className="inputChooseAllResources" />
+              <ICheck type="checkbox" className="inputChooseAllResources" />
             </th>
             <th>Unique name</th>
             <th>Model</th>
@@ -100,7 +101,7 @@ class ResourceList extends Component {
         tfoot={(
           <tr>
             <th>
-              <ICheck className="inputChooseAllResources" />
+              <ICheck type="checkbox" className="inputChooseAllResources" />
             </th>
             <th>Unique name</th>
             <th>Model</th>
