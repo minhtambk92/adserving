@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import DropzoneComponent from 'react-dropzone-component/lib/react-dropzone';
+import { InputTags } from '../../../components/UI';
 import Link from '../../../components/Link';
 
 class UpdateBannerForm extends Component {
@@ -40,7 +41,6 @@ class UpdateBannerForm extends Component {
     this.inputBannerName.value = name;
     this.inputBannerWidth.value = width;
     this.inputBannerHeight.value = height;
-    this.inputBannerKeyWord.value = keyword;
     this.inputBannerWeight.value = weight;
     this.inputBannerDescription.value = description;
     this.inputBannerStatus.value = status;
@@ -62,18 +62,11 @@ class UpdateBannerForm extends Component {
     }
   }
 
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    $('#inputBannerKeyWord').tagsinput({ allowDuplicates: true });
-    $('#inputBannerKeyWord').tagsinput('add', this.state.keyWord);
-    /* eslint-enable no-undef */
-  }
-
   updateBanner() {
     const name = this.inputBannerName.value;
     const width = this.inputBannerWidth.value;
     const height = this.inputBannerHeight.value;
-    const keyword = this.inputBannerKeyWord.value;
+    const keyword = document.getElementById('inputBannerKeyWord').value;
     const weight = this.inputBannerWeight.value;
     const description = this.inputBannerDescription.value;
     let html = '';
@@ -230,28 +223,28 @@ class UpdateBannerForm extends Component {
                   </div>
                 </div>
               ) : (
-              <div className="bannerHTML">
-                <div className="form-group">
-                  <div className="col-lg-12">
-                    <div id="banner">&nbsp;</div>
+                <div className="bannerHTML">
+                  <div className="form-group">
+                    <div className="col-lg-12">
+                      <div id="banner">&nbsp;</div>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="inputBannerHTML"
+                      className="col-sm-2 control-label"
+                    >HTML</label>
+                    <div className="col-sm-10">
+                      <textarea
+                        className="form-control" id="inputBannerHTML"
+                        rows="5" placeholder="More info..."
+                        ref={c => {
+                          this.inputBannerHTML = c;
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className="form-group">
-                  <label
-                    htmlFor="inputBannerHTML"
-                    className="col-sm-2 control-label"
-                  >HTML</label>
-                  <div className="col-sm-10">
-                    <textarea
-                      className="form-control" id="inputBannerHTML"
-                      rows="5" placeholder="More info..."
-                      ref={c => {
-                        this.inputBannerHTML = c;
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
             )}
           <div className="form-group">
             <label
@@ -304,13 +297,9 @@ class UpdateBannerForm extends Component {
               className="col-sm-2 control-label"
             >KeyWord</label>
             <div className="col-sm-10">
-              <input
-                type="text" className="form-control" id="inputBannerKeyWord"
-                placeholder="dantri"
-                data-role="tagsinput"
-                ref={c => {
-                  this.inputBannerKeyWord = c;
-                }}
+              <InputTags
+                id="inputBannerKeyWord"
+                data={this.state.keyWord}
               />
             </div>
           </div>

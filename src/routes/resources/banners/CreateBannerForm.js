@@ -166,35 +166,35 @@ class CreateBannerForm extends Component {
                   </div>
                 </div>
               ) : (
-              <div className="bannerImage">
-                <div className="form-group">
-                  <label htmlFor="inputBannerImage" className="col-sm-2 control-label">
-                    Banner
-                  </label>
-                  <div className="col-sm-10">
-                    <DropzoneComponent
-                      config={this.componentConfig}
-                      eventHandlers={this.eventHandlers}
-                      djsConfig={this.djsConfig}
-                    />
+                <div className="bannerImage">
+                  <div className="form-group">
+                    <label htmlFor="inputBannerImage" className="col-sm-2 control-label">
+                      Banner
+                    </label>
+                    <div className="col-sm-10">
+                      <DropzoneComponent
+                        config={this.componentConfig}
+                        eventHandlers={this.eventHandlers}
+                        djsConfig={this.djsConfig}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="inputBannerTarget"
+                      className="col-sm-2 control-label"
+                    >Target</label>
+                    <div className="col-sm-10">
+                      <input
+                        type="text" className="form-control" id="inputBannerTarget"
+                        placeholder="http://kenh14.vn"
+                        ref={c => {
+                          this.inputBannerTarget = c;
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className="form-group">
-                  <label
-                    htmlFor="inputBannerTarget"
-                    className="col-sm-2 control-label"
-                  >Target</label>
-                  <div className="col-sm-10">
-                    <input
-                      type="text" className="form-control" id="inputBannerTarget"
-                      placeholder="http://kenh14.vn"
-                      ref={c => {
-                        this.inputBannerTarget = c;
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
             )
           }
           <div className="form-group">

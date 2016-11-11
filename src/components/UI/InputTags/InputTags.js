@@ -7,17 +7,8 @@ class InputTags extends Component {
 
   static propTypes = {
     id: PropTypes.string.isRequired,
-    setTags: PropTypes.func,
     data: PropTypes.string,
   };
-
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      tags: '',
-    };
-  }
 
   async componentDidMount() {
     await ReactDOM.render(this.renderDOMLibs(), this.portal);
@@ -25,8 +16,12 @@ class InputTags extends Component {
     $(`#${this.props.id}`).tagsinput({
       allowDuplicates: true,
     });
-    $(`#${this.props.id}`).tagsinput('add', this.props.data);
-
+    /* eslint-enable no-undef */
+  }
+  componentWillReceiveProps(nextProps) {
+    /* eslint-disable no-undef */
+    $(`#${this.props.id}`).tagsinput('removeAll');
+    $(`#${this.props.id}`).tagsinput('add', nextProps.data);
     /* eslint-enable no-undef */
   }
 
