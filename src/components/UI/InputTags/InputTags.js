@@ -21,7 +21,8 @@ class InputTags extends Component {
 
   componentWillReceiveProps(nextProps) {
     /* eslint-disable no-undef */
-    $(`#${this.props.id}`).tagsinput('removeAll').tagsinput('add', nextProps.data);
+    $(`#${this.props.id}`).tagsinput('removeAll');
+    $(`#${this.props.id}`).tagsinput('add', nextProps.data);
     /* eslint-enable no-undef */
   }
 
