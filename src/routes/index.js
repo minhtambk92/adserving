@@ -38,3 +38,5 @@ export default {
   },
 
 };
+
+/* eslint-enable global-require */

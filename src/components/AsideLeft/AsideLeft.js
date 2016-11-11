@@ -76,7 +76,7 @@ function AsideLeft() {
             </Link>
             <ul className="treeview-menu">
               <li>
-                <Link to="/settings/appearance">
+                <Link to="/setting/appearance">
                   <i className="fa fa-desktop" /> <span>Appearance</span>
                   <span className="pull-right-container">
                     <i className="fa fa-angle-left pull-right" />
@@ -84,7 +84,7 @@ function AsideLeft() {
                 </Link>
                 <ul className="treeview-menu">
                   <li>
-                    <Link to="/settings/appearance/menus">
+                    <Link to="/setting/appearance/menus">
                       <i className="fa fa-bars" /> <span>Menus</span>
                     </Link>
                   </li>

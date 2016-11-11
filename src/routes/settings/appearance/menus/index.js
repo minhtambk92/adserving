@@ -9,7 +9,7 @@ import Menus from './Menus';
 
 export default {
 
-  path: '/role',
+  path: '/menus',
 
   children: [{
     path: '/',
