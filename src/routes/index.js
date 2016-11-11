@@ -19,7 +19,7 @@ export default {
     require('./home').default,
     require('./register').default,
     require('./login').default,
-    require('./appearance').default,
+    require('./settings').default,
     require('./resources').default,
 
     // place new routes before...
