@@ -47,7 +47,7 @@ Resource.permissions = Resource.hasMany(ResourcePermission, {
   constraints: false,
 });
 
-Menu.items = Menu.hasMany(MenuHeader, {
+Menu.headers = Menu.hasMany(MenuHeader, {
   foreignKey: {
     name: 'parentId',
     allowNull: false,
