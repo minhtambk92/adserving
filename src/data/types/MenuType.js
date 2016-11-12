@@ -7,6 +7,8 @@ import {
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Menu } from '../models';
+import menuHasManyHeaders from '../queries/menuHasManyHeaders';
+import menuHasManyItems from '../queries/menuHasManyItems';
 
 const MenuType = new ObjectType({
   name: 'MenuType',
@@ -14,6 +16,8 @@ const MenuType = new ObjectType({
     // Additional options
   }), {
     // Additional fields
+    headers: menuHasManyHeaders(),
+    items: menuHasManyItems(),
   }),
 });
 

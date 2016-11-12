@@ -47,12 +47,22 @@ Resource.permissions = Resource.hasMany(ResourcePermission, {
   constraints: false,
 });
 
+Menu.items = Menu.hasMany(MenuHeader, {
+  foreignKey: {
+    name: 'parentId',
+    allowNull: false,
+  },
+  as: 'headers',
+  constraints: false,
+});
+
 Menu.items = Menu.hasMany(MenuItem, {
   foreignKey: {
     name: 'parentId',
     allowNull: false,
   },
   as: 'items',
+  constraints: false,
 });
 
 Role.permissions = Role.hasMany(ResourcePermission, {
