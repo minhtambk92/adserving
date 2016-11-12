@@ -6,15 +6,15 @@ import {
   GraphQLList as List,
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import MenuItemType from '../types/MenuItemType';
-import { MenuItem } from '../models';
+import MenuHeaderType from '../types/MenuHeaderType';
+import { MenuHeader } from '../models';
 
 const menuItems = {
-  type: new List(MenuItemType),
+  type: new List(MenuHeaderType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
   }),
-  resolve: resolver(MenuItem, {
+  resolve: resolver(MenuHeader, {
     before(options) {
       const opts = options;
       opts.order = options.order || [];
