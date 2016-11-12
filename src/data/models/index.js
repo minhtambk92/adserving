@@ -34,7 +34,7 @@ const MenuHeader = MenuModel.scope('headers');
 const Menu = MenuModel.scope('menus');
 const MenuItem = MenuModel.scope('items');
 
-// Associations
+// Permissions for each resource type
 Resource.permissions = Resource.hasMany(ResourcePermission, {
   foreignKey: {
     name: 'resourceEntityId',
@@ -47,6 +47,7 @@ Resource.permissions = Resource.hasMany(ResourcePermission, {
   constraints: false,
 });
 
+// A menu has many headers
 Menu.headers = Menu.hasMany(MenuHeader, {
   foreignKey: {
     name: 'parentId',
@@ -56,6 +57,7 @@ Menu.headers = Menu.hasMany(MenuHeader, {
   constraints: false,
 });
 
+// A menu has many items
 Menu.items = Menu.hasMany(MenuItem, {
   foreignKey: {
     name: 'parentId',
@@ -65,6 +67,17 @@ Menu.items = Menu.hasMany(MenuItem, {
   constraints: false,
 });
 
+// A menu item can contains many child items
+MenuItem.childItems = Menu.hasMany(MenuItem, {
+  foreignKey: {
+    name: 'parentId',
+    allowNull: false,
+  },
+  as: 'childItems',
+  constraints: false,
+});
+
+// Role is a set of permission granted to a user
 Role.permissions = Role.hasMany(ResourcePermission, {
   foreignKey: {
     name: 'authorizedId',
@@ -77,6 +90,7 @@ Role.permissions = Role.hasMany(ResourcePermission, {
   constraints: false,
 });
 
+// Each user can have specific permission which not depend on role or resource types permissions
 User.permissions = User.hasMany(ResourcePermission, {
   foreignKey: {
     name: 'authorizedId',
@@ -89,6 +103,7 @@ User.permissions = User.hasMany(ResourcePermission, {
   constraints: false,
 });
 
+// Each user can have many login type
 User.login = User.hasMany(UserLogin, {
   foreignKey: {
     name: 'userId',
@@ -99,6 +114,7 @@ User.login = User.hasMany(UserLogin, {
   onDelete: 'cascade',
 });
 
+// Each user can link his account to many other third party account (social networks)
 User.claim = User.hasMany(UserClaim, {
   foreignKey: {
     name: 'userId',

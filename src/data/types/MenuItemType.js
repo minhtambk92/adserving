@@ -7,6 +7,7 @@ import {
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { MenuItem } from '../models';
+import menuItemHasManyChildItems from '../queries/menuItemHasManyChildItems';
 
 const MenuItemType = new ObjectType({
   name: 'MenuItemType',
@@ -14,6 +15,7 @@ const MenuItemType = new ObjectType({
     // Additional options
   }), {
     // Additional fields
+    childItems: menuItemHasManyChildItems(),
   }),
 });
 
