@@ -34,6 +34,11 @@ const Menu = Model.define('Menu', {
   parentId: {
     type: DataType.UUID,
   },
+  order: {
+    type: DataType.INTEGER,
+    defaultValue: 0,
+    allowNull: false,
+  },
   type: {
     type: DataType.STRING,
     allowNull: false,
