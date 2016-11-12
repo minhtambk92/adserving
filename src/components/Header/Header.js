@@ -7,8 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
+import React, { Component } from 'react';
+import { defineMessages, FormattedMessage } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Header.css';
 import Link from '../Link';
@@ -34,9 +34,11 @@ const messages = defineMessages({
   },
 });
 
-function Header() {
-  return <Navigation />;
+class Header extends Component {
+  render() {
+    return <Navigation />;
+  }
 }
 
-export default injectIntl(withStyles(s)(Header));
+export default withStyles(s)(Header);
 /* eslint-enable no-unused-vars */

@@ -22,7 +22,7 @@ export default {
     require('./settings').default,
     require('./resources').default,
 
-    // place new routes before...
+    // Wildcard routes, e.g. { path: '*', ... } (must go last)
     require('./notFound').default,
   ],
 
@@ -38,5 +38,3 @@ export default {
   },
 
 };
-
-/* eslint-enable global-require */
