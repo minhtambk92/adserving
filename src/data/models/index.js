@@ -7,6 +7,10 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+import {
+  TYPE_MENU_HEADER,
+  TYPE_MENU_ITEM,
+} from '../../constants';
 import sequelize from '../sequelize';
 import Option from './Option';
 import Resource from './Resource';
@@ -30,8 +34,8 @@ import Channel from './Channel';
 import Filter from './Filter';
 import PlacementBannerZone from './PlacementBannerZone';
 
-const MenuHeader = MenuModel.scope('headers');
 const Menu = MenuModel.scope('menus');
+const MenuHeader = MenuModel.scope('headers');
 const MenuItem = MenuModel.scope('items');
 
 // Permissions for each resource type
@@ -48,27 +52,35 @@ Resource.permissions = Resource.hasMany(ResourcePermission, {
 });
 
 // A menu has many headers
-Menu.headers = Menu.hasMany(MenuHeader, {
+Menu.headers = Menu.hasMany(MenuModel, {
   foreignKey: {
     name: 'parentId',
     allowNull: false,
+  },
+  scope: {
+    type: TYPE_MENU_HEADER,
   },
   as: 'headers',
   constraints: false,
 });
 
 // A menu has many items
-Menu.items = Menu.hasMany(MenuItem, {
+Menu.items = Menu.hasMany(MenuModel, {
   foreignKey: {
     name: 'parentId',
     allowNull: false,
+  },
+  scope: {
+    type: {
+      $in: [TYPE_MENU_HEADER, TYPE_MENU_ITEM],
+    },
   },
   as: 'items',
   constraints: false,
 });
 
 // A menu item can contains many child items
-MenuItem.childItems = Menu.hasMany(MenuItem, {
+MenuItem.childItems = MenuItem.hasMany(MenuItem, {
   foreignKey: {
     name: 'parentId',
     allowNull: false,
@@ -125,6 +137,7 @@ User.claim = User.hasMany(UserClaim, {
   onDelete: 'cascade',
 });
 
+// Each user can only have one profile information
 User.profile = User.hasOne(UserProfile, {
   foreignKey: {
     name: 'userId',
@@ -135,6 +148,7 @@ User.profile = User.hasOne(UserProfile, {
   onDelete: 'cascade',
 });
 
+// Each user can have many meta data
 User.meta = User.hasMany(UserMeta, {
   foreignKey: {
     name: 'userId',
@@ -145,6 +159,7 @@ User.meta = User.hasMany(UserMeta, {
   onDelete: 'cascade',
 });
 
+// Each user can use many role
 User.roles = User.belongsToMany(Role, {
   through: {
     model: UserRole,
@@ -153,6 +168,7 @@ User.roles = User.belongsToMany(Role, {
   as: 'roles',
 });
 
+// Each role can be set to many users
 Role.users = Role.belongsToMany(User, {
   through: {
     model: UserRole,
@@ -185,6 +201,7 @@ Zone.placementBannerZones = Zone.hasMany(PlacementBannerZone, {
   foreignKey: 'zoneId',
 });
 
+// Each site has many zones
 Site.zones = Site.hasMany(Zone, {
   foreignKey: {
     name: 'siteId',
@@ -192,23 +209,28 @@ Site.zones = Site.hasMany(Zone, {
   },
 });
 
+// Each zone can only belong to one site
 Zone.site = Zone.belongsTo(Site, {
   foreignKey: 'siteId',
 });
 
+// Each advertiser can make many campaigns
 Advertiser.campaigns = Advertiser.hasMany(Campaign, {
   foreignKey: 'advertiserId',
 });
 
+// Each campaign only belong to one advertiser
 Campaign.advertiser = Campaign.belongsTo(Advertiser, {
   foreignKey: 'advertiserId',
 });
 
+// Each campaign can use many placements of ads
 Campaign.placements = Campaign.hasMany(Placement, {
   foreignKey: 'campaignId',
   as: 'placements',
 });
 
+// Each placement can only belong to one campaign
 Placement.campaign = Placement.belongsTo(Campaign, {
   foreignKey: 'campaignId',
   as: 'campaign',

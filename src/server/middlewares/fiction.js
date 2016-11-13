@@ -5,6 +5,9 @@
 import { genSaltSync, hashSync } from 'bcrypt';
 import {
   STATUS_ACTIVE,
+  TYPE_MENU,
+  TYPE_MENU_HEADER,
+  TYPE_MENU_ITEM,
 } from '../../constants';
 import {
   Resource,
@@ -97,7 +100,200 @@ async function resourcesFiction() {
 async function menusFiction() {
   console.log('Check current number of menus...');
   const menusQuantity = await Menu.count();
-  console.log(`${menusQuantity} menu(s) found. Passed!`);
+
+  if (menusQuantity === 0) {
+    console.log('No menu found! Do a fiction...');
+
+    // Create main menu
+    const menu = await Menu.create({
+      url: '#',
+      name: 'Main menu',
+      type: TYPE_MENU,
+    });
+
+    if (menu) {
+      await Menu.create({
+        url: '#',
+        name: 'Main Navigation',
+        parentId: menu.id,
+        order: 0,
+        type: TYPE_MENU_HEADER,
+      });
+
+      const reports = await Menu.create({
+        url: '#',
+        name: 'Report',
+        icon: '<i class="fa fa-line-chart"></i>',
+        parentId: menu.id,
+        order: 1,
+        type: TYPE_MENU_ITEM,
+      });
+
+      if (reports) {
+        await Menu.create({
+          url: `${host}/report/system`,
+          name: 'System',
+          icon: '<i class="fa fa-cirle-o"></i>',
+          parentId: reports.id,
+          order: 0,
+          type: TYPE_MENU_ITEM,
+        });
+      }
+
+      const inventory = await Menu.create({
+        url: '#',
+        name: 'Inventory',
+        icon: '<i class="fa fa-briefcase"></i>',
+        parentId: menu.id,
+        order: 2,
+        type: TYPE_MENU_ITEM,
+      });
+
+      if (inventory) {
+        await Menu.bulkCreate([{
+          url: `${host}/resource/advertiser`,
+          name: 'Advertisers',
+          icon: '<i class="fa fa-cirle-o"></i>',
+          parentId: inventory.id,
+          order: 0,
+          type: TYPE_MENU_ITEM,
+        }, {
+          url: `${host}/resource/campaign`,
+          name: 'Campaigns',
+          icon: '<i class="fa fa-cirle-o"></i>',
+          parentId: inventory.id,
+          order: 1,
+          type: TYPE_MENU_ITEM,
+        }, {
+          url: `${host}/resource/banner`,
+          name: 'Banners',
+          icon: '<i class="fa fa-cirle-o"></i>',
+          parentId: inventory.id,
+          order: 2,
+          type: TYPE_MENU_ITEM,
+        }, {
+          url: `${host}/resource/placement`,
+          name: 'Placements',
+          icon: '<i class="fa fa-cirle-o"></i>',
+          parentId: inventory.id,
+          order: 3,
+          type: TYPE_MENU_ITEM,
+        }, {
+          url: `${host}/resource/site`,
+          name: 'Sites',
+          icon: '<i class="fa fa-cirle-o"></i>',
+          parentId: inventory.id,
+          order: 4,
+          type: TYPE_MENU_ITEM,
+        }, {
+          url: `${host}/resource/zone`,
+          name: 'Zones',
+          icon: '<i class="fa fa-cirle-o"></i>',
+          parentId: inventory.id,
+          order: 5,
+          type: TYPE_MENU_ITEM,
+        }]);
+      }
+
+      await Menu.create({
+        url: '#',
+        name: 'Configuration',
+        parentId: menu.id,
+        order: 3,
+        type: TYPE_MENU_HEADER,
+      });
+
+      const settings = await Menu.create({
+        url: '#',
+        name: 'Settings',
+        icon: '<i class="fa fa-gears"></i>',
+        parentId: menu.id,
+        order: 4,
+        type: TYPE_MENU_ITEM,
+      });
+
+      if (settings) {
+        const appearance = await Menu.create({
+          url: `${host}/resource/appearance`,
+          name: 'Appearance',
+          icon: '<i class="fa fa-cirle-o"></i>',
+          parentId: settings.id,
+          order: 0,
+          type: TYPE_MENU_ITEM,
+        });
+
+        if (appearance) {
+          await Menu.create({
+            url: `${host}/resource/appearance/menu`,
+            name: 'Menus',
+            icon: '<i class="fa fa-bars"></i>',
+            parentId: appearance.id,
+            order: 0,
+            type: TYPE_MENU_ITEM,
+          });
+        }
+      }
+
+      const users = await Menu.create({
+        url: '#',
+        name: 'Users',
+        icon: '<i class="fa fa-user"></i>',
+        parentId: menu.id,
+        order: 5,
+        type: TYPE_MENU_ITEM,
+      });
+
+      if (users) {
+        await Menu.bulkCreate([{
+          url: `${host}/profile`,
+          name: 'Profile',
+          icon: '<i class="fa fa-info-circle"></i>',
+          parentId: users.id,
+          order: 0,
+          type: TYPE_MENU_ITEM,
+        }, {
+          url: `${host}/resource/user`,
+          name: 'Users',
+          icon: '<i class="fa fa-users"></i>',
+          parentId: users.id,
+          order: 1,
+          type: TYPE_MENU_ITEM,
+        }], {
+          url: `${host}/resource/role`,
+          name: 'Roles',
+          icon: '<i class="fa fa-flag"></i>',
+          parentId: users.id,
+          order: 2,
+          type: TYPE_MENU_ITEM,
+        });
+      }
+
+      const resources = await Menu.create({
+        url: '#',
+        name: 'Resources',
+        icon: '<i class="fa fa-industry"></i>',
+        parentId: menu.id,
+        order: 6,
+        type: TYPE_MENU_ITEM,
+      });
+
+      if (resources) {
+        await Menu.create({
+          url: `${host}/resouce/type`,
+          name: 'Types',
+          icon: '<i class="fa fa-circle-o"></i>',
+          parentId: resources.id,
+          order: 0,
+          type: TYPE_MENU_ITEM,
+        });
+      }
+    }
+
+    console.log('Main menu is created! Passed!');
+  } else {
+    console.log(`${menusQuantity} menu(s) found. Passed!`);
+  }
+
   const menuHeadersQuantity = await MenuHeader.count();
   console.log(`${menuHeadersQuantity} menu header(s) found. Passed!`);
   const menuItemsQuantity = await MenuItem.count();

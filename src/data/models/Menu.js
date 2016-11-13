@@ -25,7 +25,16 @@ const Menu = Model.define('Menu', {
   },
   icon: {
     type: DataType.TEXT,
-    allowNull: false,
+  },
+  uniqueName: {
+    type: DataType.STRING,
+    validate: {
+      isEven: value => {
+        if (this.type === TYPE_MENU && typeof value !== 'string') {
+          throw new Error('uniqueName must be defined as a string if type is menu.');
+        }
+      },
+    },
   },
   name: {
     type: DataType.TEXT,
@@ -33,6 +42,7 @@ const Menu = Model.define('Menu', {
   },
   parentId: {
     type: DataType.UUID,
+    allowNull: true,
   },
   order: {
     type: DataType.INTEGER,
@@ -50,7 +60,7 @@ const Menu = Model.define('Menu', {
   status: {
     type: DataType.STRING,
     allowNull: false,
-    defaultValue: STATUS_INACTIVE,
+    defaultValue: STATUS_ACTIVE,
     validate: {
       isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
     },
@@ -68,16 +78,19 @@ const Menu = Model.define('Menu', {
     menus: {
       where: {
         type: TYPE_MENU,
+        status: STATUS_ACTIVE,
       },
     },
     headers: {
       where: {
         type: TYPE_MENU_HEADER,
+        status: STATUS_ACTIVE,
       },
     },
     items: {
       where: {
         type: TYPE_MENU_ITEM,
+        status: STATUS_ACTIVE,
       },
     },
   },
