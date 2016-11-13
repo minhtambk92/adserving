@@ -30,13 +30,6 @@ const Menu = Model.define('Menu', {
     type: DataType.STRING,
     unique: true,
     allowNull: true,
-    validate: {
-      isEven: value => {
-        if (this.type === TYPE_MENU && typeof value !== 'string') {
-          throw new Error('uniqueName must be defined as a string if type is menu.');
-        }
-      },
-    },
   },
   name: {
     type: DataType.TEXT,
@@ -94,6 +87,15 @@ const Menu = Model.define('Menu', {
         type: TYPE_MENU_ITEM,
         status: STATUS_ACTIVE,
       },
+    },
+  },
+
+  // Model validations
+  validate: {
+    menuUniqueName() {
+      if ((this.type === TYPE_MENU) && (typeof this.uniqueName !== 'string')) {
+        throw new Error('uniqueName must be defined as a string if type is "menu".');
+      }
     },
   },
 
