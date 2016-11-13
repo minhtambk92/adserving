@@ -107,6 +107,7 @@ async function menusFiction() {
     // Create main menu
     const menu = await Menu.create({
       url: '#',
+      uniqueName: 'main-menu',
       name: 'Main menu',
       type: TYPE_MENU,
     });

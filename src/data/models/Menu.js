@@ -28,6 +28,8 @@ const Menu = Model.define('Menu', {
   },
   uniqueName: {
     type: DataType.STRING,
+    unique: true,
+    allowNull: true,
     validate: {
       isEven: value => {
         if (this.type === TYPE_MENU && typeof value !== 'string') {
