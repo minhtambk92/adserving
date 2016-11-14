@@ -27,6 +27,13 @@ export const DELETE_RESOURCE = 'DELETE_RESOURCE';
 export const GET_RESOURCES_FILTERS = 'GET_RESOURCES_FILTERS';
 export const SET_RESOURCES_FILTERS = 'SET_RESOURCES_FILTERS';
 
+export const GET_MENU = 'GET_MENU';
+export const GET_MENUS = 'GET_MENUS';
+export const CREATE_MENU = 'CREATE_MENU';
+export const UPDATE_MENU = 'UPDATE_MENU';
+export const DELETE_MENU = 'DELETE_MENU';
+export const GET_ASIDE_LEFT_MENU = 'GET_ASIDE_LEFT_MENU';
+
 export const GET_SITE = 'GET_SITE';
 export const GET_SITES = 'GET_SITES';
 export const CREATE_SITE = 'CREATE_SITE';
