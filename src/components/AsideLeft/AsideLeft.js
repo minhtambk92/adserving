@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getAsideLeftMenu } from '../../actions/menus';
+// import { getAsideLeftMenu } from '../../actions/menus';
 import Link from '../Link';
 import s from './AsideLeft.css';
 
@@ -13,7 +13,7 @@ class AsideLeft extends Component {
   };
 
   componentDidMount() {
-    this.props.getAsideLeftMenu('main-menu');
+    // this.props.getAsideLeftMenu('main-menu');
   }
 
   render() {
@@ -146,12 +146,12 @@ class AsideLeft extends Component {
   }
 }
 
-const mapState = (state) => ({
-  menus: state.menus,
-});
+// const mapState = (state) => ({
+//   menus: state.menus,
+// });
 
-const mapDispatch = {
-  getAsideLeftMenu,
-};
+// const mapDispatch = {
+//   getAsideLeftMenu,
+// };
 
-export default withStyles(s)(connect(mapState, mapDispatch)(AsideLeft));
+export default withStyles(s)(AsideLeft);

@@ -12,7 +12,9 @@ import {
 } from '../constants';
 
 export function getMenu(uniqueName, actionType) {
+  console.log(uniqueName, actionType);
   return async(dispatch, getState, { graphqlRequest }) => {
+    console.log(dispatch, getState, { graphqlRequest });
     const query = `
       query {
         menus(where: {uniqueName: "${uniqueName}"}) {
@@ -39,6 +41,8 @@ export function getMenu(uniqueName, actionType) {
       }`;
 
     const { data } = await graphqlRequest(query);
+
+    console.log(data);
 
     dispatch({
       type: actionType,
