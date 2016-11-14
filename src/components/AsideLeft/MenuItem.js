@@ -44,14 +44,14 @@ class MenuItem extends Component {
               <li key={childItem.id}>
                 <Link to={childItem.url}>
                   {renderChildItemIcon(childItem)}&nbsp;<span>{childItem.name}</span>
-                  {childItem.childItems && (
+                  {childItem.childItems.length > 0 && (
                     <span className="pull-right-container">
                       <i className="fa fa-angle-left pull-right" />
                     </span>
                   )}
                 </Link>
 
-                {childItem.childItems && (
+                {childItem.childItems.length > 0 && (
                   <ul className="treeview-menu">
                     {childItem.childItems.map(smallItem => (
                       <li key={smallItem.id}>
