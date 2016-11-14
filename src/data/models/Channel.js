@@ -29,18 +29,6 @@ const Channel = Model.define('Channel', {
     type: DataType.STRING,
     defaultValue: '',
   },
-  compiledLimitation: {
-    type: DataType.STRING,
-    defaultValue: '',
-  },
-  updated: {
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  },
-  aclsUpdated: {
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  },
   status: {
     type: DataType.STRING,
     allowNull: false,

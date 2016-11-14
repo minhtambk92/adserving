@@ -61,6 +61,8 @@ class CreateBannerForm extends Component {
     this.inputBannerName.value = null;
     if (this.state.checkTypeBanner === 'html') {
       this.inputBannerHTML.value = null;
+    } else if (this.state.checkTypeBanner === 'img') {
+      this.inputBannerUrl.value = null;
     }
     this.inputBannerWidth.value = null;
     this.inputBannerHeight.value = null;
@@ -77,15 +79,18 @@ class CreateBannerForm extends Component {
     const description = this.inputBannerDescription.value;
     const type = this.inputBannerType.value;
     let target = '';
+    let url = '';
     let imageUrl = '';
     let html = '';
     if (type === 'html') {
       html = this.inputBannerHTML.value;
       target = '';
+      url = '';
       imageUrl = '';
     } else if (type === 'img') {
       target = this.inputBannerTarget.value;
       html = '';
+      url = this.inputBannerUrl.value;
       imageUrl = this.state.imageUrl;
     }
     const status = this.inputBannerStatus.value;
@@ -100,6 +105,7 @@ class CreateBannerForm extends Component {
         weight,
         description,
         type,
+        url,
         target,
         imageUrl,
         status,
@@ -182,17 +188,36 @@ class CreateBannerForm extends Component {
                   </div>
                   <div className="form-group">
                     <label
+                      htmlFor="inputBannerUrl"
+                      className="col-sm-2 control-label"
+                    >Url</label>
+                    <div className="col-sm-10">
+                      <input
+                        type="text" className="form-control" id="inputBannerUrl"
+                        placeholder="http://kenh14.vn"
+                        ref={c => {
+                          this.inputBannerUrl = c;
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label
                       htmlFor="inputBannerTarget"
                       className="col-sm-2 control-label"
                     >Target</label>
                     <div className="col-sm-10">
-                      <input
-                        type="text" className="form-control" id="inputBannerTarget"
-                        placeholder="http://kenh14.vn"
+                      <select
+                        id="inputBannerTarget" className="form-control"
                         ref={c => {
                           this.inputBannerTarget = c;
                         }}
-                      />
+                      >
+                        <option value="_blank">_BLANK</option>
+                        <option value="_self">_SELF</option>
+                        <option value="_parent">_PARENT</option>
+                        <option value="_top">_TOP</option>
+                      </select>
                     </div>
                   </div>
                 </div>

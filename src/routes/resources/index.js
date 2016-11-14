@@ -20,6 +20,7 @@ export default {
     require('./roles').default,
     require('./users').default,
     require('./zones').default,
+    require('./channels').default,
   ],
 
   async action({ next }) {

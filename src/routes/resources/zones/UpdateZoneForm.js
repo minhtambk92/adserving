@@ -53,6 +53,17 @@ class UpdateZoneForm extends Component {
   onKeyDown(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputZoneSize.value = 'custom';
   }
+
+  onBlur(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const w = this.inputZoneWidth.value.trim();
+    const h = this.inputZoneHeight.value.trim();
+    if (w === '') {
+      this.inputZoneWidth.value = 0;
+    } else if (h === '') {
+      this.inputZoneHeight.value = 0;
+    }
+  }
+
   onSelectZoneType(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const zoneType = this.inputZoneType.value;
     if (zoneType !== 'type-3') {
@@ -69,6 +80,7 @@ class UpdateZoneForm extends Component {
       }));
     }
   }
+
   onSelectSize(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const sizeType = this.inputZoneSize.value;
     if (sizeType !== 'custom') {
@@ -286,6 +298,7 @@ class UpdateZoneForm extends Component {
                           type="number" className="form-control" id="inputZoneWidth"
                           defaultValue="468"
                           onKeyDown={event => this.onKeyDown(event)}
+                          onBlur={event => this.onBlur(event)}
                           placeholder="300"
                           ref={c => {
                             this.inputZoneWidth = c;
@@ -303,6 +316,7 @@ class UpdateZoneForm extends Component {
                           type="number" className="form-control" id="inputZoneHeight"
                           defaultValue="60"
                           onKeyDown={event => this.onKeyDown(event)}
+                          onBlur={event => this.onBlur(event)}
                           placeholder="300"
                           ref={c => {
                             this.inputZoneHeight = c;

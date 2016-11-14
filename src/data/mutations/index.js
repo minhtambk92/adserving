@@ -13,6 +13,7 @@ import placements from './placements';
 import placementBannerZones from './placementBannerZones';
 import zones from './zones';
 import banners from './banners';
+import channels from './channels';
 
 const mutations = new ObjectType({
   name: 'Mutation',
@@ -27,6 +28,7 @@ const mutations = new ObjectType({
     ...placements,
     ...banners,
     ...zones,
+    ...channels,
   },
 });
 
