@@ -12,67 +12,37 @@ class MenuItem extends Component {
     item: PropTypes.object.isRequired,
   };
 
-  componentDidMount() {
-    console.log(history);
-  }
-
-  render() {
-    const { item } = this.props;
-
-    function renderChildItemIcon(childItem) {
-      let content = null;
-
-      if (typeof childItem.icon === 'string') {
-        content = <span className="fa" dangerouslySetInnerHTML={{ __html: childItem.icon }} />;
-      } else {
-        content = <i className="fa fa-circle-o" />;
-      }
-
-      return content;
+  renderChildItemIcon(childItem) { // eslint-disable-line class-methods-use-this
+    if (typeof childItem.icon === 'string') {
+      return <span className="fa" dangerouslySetInnerHTML={{ __html: childItem.icon }} />;
     }
 
+    return <i className="fa fa-circle-o" />;
+  }
+
+  renderChildItem(childItem, className = 'treeview') {
     return (
-      <li className="treeview">
-        <Link to="/">
-          <span
-            className="fa"
-            dangerouslySetInnerHTML={{ __html: item.icon }}
-          />&nbsp;<span>{item.name}</span>
-          <span className="pull-right-container">
-            <i className="fa fa-angle-left pull-right" />
-          </span>
+      <li className={className} key={childItem.id}>
+        <Link to={childItem.url}>
+          {this.renderChildItemIcon(childItem)}&nbsp;<span>{childItem.name}</span>
+          {childItem.childItems && childItem.childItems.length > 0 && (
+            <span className="pull-right-container">
+              <i className="fa fa-angle-left pull-right" />
+            </span>
+          )}
         </Link>
 
-        {item.childItems && (
+        {childItem.childItems && childItem.childItems.length > 0 && (
           <ul className="treeview-menu">
-            {item.childItems.map(childItem => (
-              <li key={childItem.id}>
-                <Link to={childItem.url}>
-                  {renderChildItemIcon(childItem)}&nbsp;<span>{childItem.name}</span>
-                  {childItem.childItems.length > 0 && (
-                    <span className="pull-right-container">
-                      <i className="fa fa-angle-left pull-right" />
-                    </span>
-                  )}
-                </Link>
-
-                {childItem.childItems.length > 0 && (
-                  <ul className="treeview-menu">
-                    {childItem.childItems.map(smallItem => (
-                      <li key={smallItem.id}>
-                        <Link to={smallItem.url}>
-                          {renderChildItemIcon(smallItem)}&nbsp;<span>{smallItem.name}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
+            {childItem.childItems.map(smallItem => this.renderChildItem(smallItem, null))}
           </ul>
         )}
       </li>
     );
+  }
+
+  render() {
+    return this.renderChildItem(this.props.item);
   }
 }
 

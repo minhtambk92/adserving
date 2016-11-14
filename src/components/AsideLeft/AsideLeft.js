@@ -43,7 +43,6 @@ class AsideLeft extends Component {
                   <li key={item.id} className="header">{item.name}</li>
                 );
               }
-
               return <MenuItem key={item.id} item={item} />;
             })}
           </ul>
