@@ -12,12 +12,10 @@ import {
 } from '../constants';
 
 export function getMenu(uniqueName, actionType) {
-  console.log(uniqueName, actionType);
   return async(dispatch, getState, { graphqlRequest }) => {
-    console.log(dispatch, getState, { graphqlRequest });
     const query = `
       query {
-        menus(where: {uniqueName: "${uniqueName}"}) {
+        menus(where: {uniqueName: "${uniqueName}"}, limit: 1) {
           id
           url
           uniqueName
@@ -42,8 +40,6 @@ export function getMenu(uniqueName, actionType) {
 
     const { data } = await graphqlRequest(query);
 
-    console.log(data);
-
     dispatch({
       type: actionType,
       payload: {
@@ -54,11 +50,11 @@ export function getMenu(uniqueName, actionType) {
 }
 
 export function getEditingMenu(uniqueName) {
-  getMenu(uniqueName, GET_MENU);
+  return getMenu(uniqueName, GET_MENU);
 }
 
 export function getAsideLeftMenu(uniqueName) {
-  getMenu(uniqueName, GET_ASIDE_LEFT_MENU);
+  return getMenu(uniqueName, GET_ASIDE_LEFT_MENU);
 }
 
 export function getMenus(args = {
@@ -71,10 +67,24 @@ export function getMenus(args = {
       query ($where: JSON, $order: String, $limit: Int) {
         menus(where: $where, order: $order, limit: $limit) {
           id
+          url
           uniqueName
           name
-          createdAt
-          updatedAt
+          items {
+            id
+            url
+            icon
+            name
+            type
+            childItems {
+              id
+              url
+              icon
+              name
+              order
+            }
+            order
+          }
         }
       }`;
 
@@ -106,10 +116,24 @@ export function createMenu({ uniqueName, name }) {
       mutation ($menu: MenuInputWithoutId!) {
         createdMenu(menu: $menu) {
           id
+          url
           uniqueName
           name
-          createdAt
-          updatedAt
+          items {
+            id
+            url
+            icon
+            name
+            type
+            childItems {
+              id
+              url
+              icon
+              name
+              order
+            }
+            order
+          }
         }
       }`;
 
@@ -130,10 +154,24 @@ export function updateMenu({ id, uniqueName, name }) {
       mutation ($menu: MenuInput!) {
         updatedMenu(menu: $menu) {
           id
+          url
           uniqueName
           name
-          createdAt
-          updatedAt
+          items {
+            id
+            url
+            icon
+            name
+            type
+            childItems {
+              id
+              url
+              icon
+              name
+              order
+            }
+            order
+          }
         }
       }`;
 
@@ -154,11 +192,24 @@ export function deleteMenu(id) {
       mutation {
         deletedMenu(id: "${id}") {
           id
+          url
           uniqueName
           name
-          createdAt
-          updatedAt
-          deletedAt
+          items {
+            id
+            url
+            icon
+            name
+            type
+            childItems {
+              id
+              url
+              icon
+              name
+              order
+            }
+            order
+          }
         }
       }`;
 
