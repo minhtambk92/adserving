@@ -217,7 +217,7 @@ async function menusFiction() {
         const appearance = await Menu.create({
           url: '/setting/appearance',
           name: 'Appearance',
-          icon: '<i class="fa fa-circle-o"></i>',
+          icon: '<i class="fa fa-desktop"></i>',
           parentId: settings.id,
           order: 0,
           type: TYPE_MENU_ITEM,

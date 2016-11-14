@@ -3,6 +3,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import history from '../../core/history';
 import Link from '../Link';
 
 class MenuItem extends Component {
@@ -10,6 +11,10 @@ class MenuItem extends Component {
   static propTypes = {
     item: PropTypes.object.isRequired,
   };
+
+  componentDidMount() {
+    console.log(history);
+  }
 
   render() {
     const { item } = this.props;
@@ -56,7 +61,7 @@ class MenuItem extends Component {
                     {childItem.childItems.map(smallItem => (
                       <li key={smallItem.id}>
                         <Link to={smallItem.url}>
-                          <i className="fa fa-circle-o" />&nbsp;<span>{smallItem.name}</span>
+                          {renderChildItemIcon(smallItem)}&nbsp;<span>{smallItem.name}</span>
                         </Link>
                       </li>
                     ))}
