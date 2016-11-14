@@ -13,6 +13,7 @@ import s from './Footer.css';
 import Link from '../Link';
 
 class Footer extends Component {
+
   render() {
     return (
       <footer className="main-footer">
