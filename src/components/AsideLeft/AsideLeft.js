@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getAsideLeftMenu } from '../../actions/menus';
-import Link from '../Link';
+import MenuItem from './MenuItem';
 import s from './AsideLeft.css';
 
 class AsideLeft extends Component {
@@ -17,6 +17,8 @@ class AsideLeft extends Component {
   }
 
   render() {
+    const { menus } = this.props;
+
     return (
       <aside className="main-sidebar">
         {/* sidebar: style can be found in sidebar.less */}
@@ -35,109 +37,15 @@ class AsideLeft extends Component {
           {/* /.search form */}
           {/* sidebar menu: : style can be found in sidebar.less */}
           <ul className="sidebar-menu">
+            {menus.asideLeft.items && menus.asideLeft.items.map(item => {
+              if (item.type === 'header') {
+                return (
+                  <li key={item.id} className="header">{item.name}</li>
+                );
+              }
 
-            <li className="header">MAIN NAVIGATION</li>
-            <li className="treeview">
-              <Link to="/">
-                <i className="fa fa-line-chart" /> <span>Report</span>
-                <span className="pull-right-container">
-                  <i className="fa fa-angle-left pull-right" />
-                </span>
-              </Link>
-              <ul className="treeview-menu">
-                <li>
-                  <Link to="/campaigns"><i className="fa fa-circle-o" /> System</Link>
-                </li>
-              </ul>
-            </li>
-            <li className="treeview active">
-              <Link to="/">
-                <i className="fa fa-briefcase" /> <span>Inventory</span>
-                <span className="pull-right-container">
-                  <i className="fa fa-angle-left pull-right" />
-                </span>
-              </Link>
-              <ul className="treeview-menu">
-                <li className="active">
-                  <Link to="/resource/advertiser"><i className="fa fa-circle-o" />
-                    Advertisers</Link>
-                </li>
-                <li>
-                  <Link to="/resource/campaign"><i className="fa fa-circle-o" /> Campaigns</Link>
-                </li>
-                <li>
-                  <Link to="/resource/banner"><i className="fa fa-circle-o" /> Banners</Link>
-                </li>
-                <li>
-                  <Link to="/resource/placement"><i className="fa fa-circle-o" /> Placements</Link>
-                </li>
-                <li>
-                  <Link to="/resource/site"><i className="fa fa-circle-o" /> Sites</Link>
-                </li>
-                <li>
-                  <Link to="/resource/zone"><i className="fa fa-circle-o" /> Zones</Link>
-                </li>
-              </ul>
-            </li>
-
-            <li className="header">CONFIGURATION</li>
-            <li className="treeview">
-              <Link to="/">
-                <i className="fa fa-gears" /> <span>Settings</span>
-                <span className="pull-right-container">
-                  <i className="fa fa-angle-left pull-right" />
-                </span>
-              </Link>
-              <ul className="treeview-menu">
-                <li>
-                  <Link to="/setting/appearance">
-                    <i className="fa fa-desktop" /> <span>Appearance</span>
-                    <span className="pull-right-container">
-                      <i className="fa fa-angle-left pull-right" />
-                    </span>
-                  </Link>
-                  <ul className="treeview-menu">
-                    <li>
-                      <Link to="/setting/appearance/menus">
-                        <i className="fa fa-bars" /> <span>Menus</span>
-                      </Link>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li className="treeview">
-              <Link to="/resource/user">
-                <i className="fa fa-user" /> <span>Users</span>
-                <span className="pull-right-container">
-                  <i className="fa fa-angle-left pull-right" />
-                </span>
-              </Link>
-              <ul className="treeview-menu">
-                <li>
-                  <Link to="/profile"><i className="fa fa-info-circle" /> Your Profile</Link>
-                </li>
-                <li>
-                  <Link to="/resource/user"><i className="fa fa-users" /> All Users</Link>
-                </li>
-                <li>
-                  <Link to="/resource/role"><i className="fa fa-flag" /> Roles</Link>
-                </li>
-              </ul>
-            </li>
-            <li className="treeview">
-              <Link to="/users">
-                <i className="fa fa-industry" /> <span>Resources</span>
-                <span className="pull-right-container">
-                  <i className="fa fa-angle-left pull-right" />
-                </span>
-              </Link>
-              <ul className="treeview-menu">
-                <li>
-                  <Link to="/resource/type"><i className="fa fa-circle-o" /> Types</Link>
-                </li>
-              </ul>
-            </li>
+              return <MenuItem key={item.id} item={item} />;
+            })}
           </ul>
         </section>
         {/* /.sidebar */}

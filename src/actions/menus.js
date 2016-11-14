@@ -31,6 +31,13 @@ export function getMenu(uniqueName, actionType) {
               url
               icon
               name
+              childItems {
+                id
+                url
+                icon
+                name
+                order
+              }
               order
             }
             order

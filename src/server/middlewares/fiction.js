@@ -132,9 +132,9 @@ async function menusFiction() {
 
       if (reports) {
         await Menu.create({
-          url: `${host}/report/system`,
+          url: '/report/system',
           name: 'System',
-          icon: '<i class="fa fa-cirle-o"></i>',
+          icon: '<i class="fa fa-circle-o"></i>',
           parentId: reports.id,
           order: 0,
           type: TYPE_MENU_ITEM,
@@ -152,44 +152,44 @@ async function menusFiction() {
 
       if (inventory) {
         await Menu.bulkCreate([{
-          url: `${host}/resource/advertiser`,
+          url: '/resource/advertiser',
           name: 'Advertisers',
-          icon: '<i class="fa fa-cirle-o"></i>',
+          icon: '<i class="fa fa-circle-o"></i>',
           parentId: inventory.id,
           order: 0,
           type: TYPE_MENU_ITEM,
         }, {
-          url: `${host}/resource/campaign`,
+          url: '/resource/campaign',
           name: 'Campaigns',
-          icon: '<i class="fa fa-cirle-o"></i>',
+          icon: '<i class="fa fa-circle-o"></i>',
           parentId: inventory.id,
           order: 1,
           type: TYPE_MENU_ITEM,
         }, {
-          url: `${host}/resource/banner`,
+          url: '/resource/banner',
           name: 'Banners',
-          icon: '<i class="fa fa-cirle-o"></i>',
+          icon: '<i class="fa fa-circle-o"></i>',
           parentId: inventory.id,
           order: 2,
           type: TYPE_MENU_ITEM,
         }, {
-          url: `${host}/resource/placement`,
+          url: '/resource/placement',
           name: 'Placements',
-          icon: '<i class="fa fa-cirle-o"></i>',
+          icon: '<i class="fa fa-circle-o"></i>',
           parentId: inventory.id,
           order: 3,
           type: TYPE_MENU_ITEM,
         }, {
-          url: `${host}/resource/site`,
+          url: '/resource/site',
           name: 'Sites',
-          icon: '<i class="fa fa-cirle-o"></i>',
+          icon: '<i class="fa fa-circle-o"></i>',
           parentId: inventory.id,
           order: 4,
           type: TYPE_MENU_ITEM,
         }, {
-          url: `${host}/resource/zone`,
+          url: '/resource/zone',
           name: 'Zones',
-          icon: '<i class="fa fa-cirle-o"></i>',
+          icon: '<i class="fa fa-circle-o"></i>',
           parentId: inventory.id,
           order: 5,
           type: TYPE_MENU_ITEM,
@@ -215,9 +215,9 @@ async function menusFiction() {
 
       if (settings) {
         const appearance = await Menu.create({
-          url: `${host}/resource/appearance`,
+          url: '/setting/appearance',
           name: 'Appearance',
-          icon: '<i class="fa fa-cirle-o"></i>',
+          icon: '<i class="fa fa-circle-o"></i>',
           parentId: settings.id,
           order: 0,
           type: TYPE_MENU_ITEM,
@@ -225,7 +225,7 @@ async function menusFiction() {
 
         if (appearance) {
           await Menu.create({
-            url: `${host}/resource/appearance/menu`,
+            url: '/setting/appearance/menus',
             name: 'Menus',
             icon: '<i class="fa fa-bars"></i>',
             parentId: appearance.id,
@@ -246,27 +246,20 @@ async function menusFiction() {
 
       if (users) {
         await Menu.bulkCreate([{
-          url: `${host}/profile`,
-          name: 'Profile',
-          icon: '<i class="fa fa-info-circle"></i>',
-          parentId: users.id,
-          order: 0,
-          type: TYPE_MENU_ITEM,
-        }, {
-          url: `${host}/resource/user`,
+          url: '/resource/user',
           name: 'Users',
           icon: '<i class="fa fa-users"></i>',
           parentId: users.id,
           order: 1,
           type: TYPE_MENU_ITEM,
-        }], {
-          url: `${host}/resource/role`,
+        }, {
+          url: '/resource/role',
           name: 'Roles',
           icon: '<i class="fa fa-flag"></i>',
           parentId: users.id,
           order: 2,
           type: TYPE_MENU_ITEM,
-        });
+        }]);
       }
 
       const resources = await Menu.create({
@@ -280,7 +273,7 @@ async function menusFiction() {
 
       if (resources) {
         await Menu.create({
-          url: `${host}/resouce/type`,
+          url: '/resouce/type',
           name: 'Types',
           icon: '<i class="fa fa-circle-o"></i>',
           parentId: resources.id,
