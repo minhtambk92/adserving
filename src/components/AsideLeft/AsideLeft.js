@@ -1,7 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getAsideLeftMenu } from '../../actions/menus';
+import history from '../../core/history';
+import {
+  getAsideLeftMenu,
+  setActiveItems,
+} from '../../actions/menus';
 import MenuItem from './MenuItem';
 import s from './AsideLeft.css';
 
@@ -10,10 +14,46 @@ class AsideLeft extends Component {
   static propTypes = {
     menus: PropTypes.object,
     getAsideLeftMenu: PropTypes.func,
+    setActiveItems: PropTypes.func,
   };
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      activeItems: [],
+    };
+  }
 
   componentDidMount() {
     this.props.getAsideLeftMenu('main-menu');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.menus.asideLeft.items) {
+      nextProps.menus.asideLeft.items.map(item => this.checkActiveItem(item));
+    }
+  }
+
+  checkActiveItem(item, activeItems = []) {
+    if (item) {
+      const array = activeItems;
+      array.unshift(item);
+
+      if (item.url === history.location.pathname) {
+        this.setState({ activeItems: Object.assign([], array) });
+      }
+
+      if (item.childItems && item.childItems.length > 0) {
+        item.childItems.map(childItem => {
+          if (childItem.parentId !== array[0].id) {
+            array.shift();
+          }
+
+          return this.checkActiveItem(childItem, array);
+        });
+      }
+    }
   }
 
   render() {
@@ -39,11 +79,14 @@ class AsideLeft extends Component {
           <ul className="sidebar-menu">
             {menus.asideLeft.items && menus.asideLeft.items.map(item => {
               if (item.type === 'header') {
-                return (
-                  <li key={item.id} className="header">{item.name}</li>
-                );
+                return <li key={item.id} className="header">{item.name}</li>;
               }
-              return <MenuItem key={item.id} item={item} />;
+              return (
+                <MenuItem
+                  key={item.id} item={item}
+                  activeIds={this.state.activeItems.map(activeItem => activeItem.id)}
+                />
+              );
             })}
           </ul>
         </section>
@@ -59,6 +102,7 @@ const mapState = (state) => ({
 
 const mapDispatch = {
   getAsideLeftMenu,
+  setActiveItems,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(AsideLeft));

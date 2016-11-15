@@ -33,6 +33,7 @@ export const CREATE_MENU = 'CREATE_MENU';
 export const UPDATE_MENU = 'UPDATE_MENU';
 export const DELETE_MENU = 'DELETE_MENU';
 export const GET_ASIDE_LEFT_MENU = 'GET_ASIDE_LEFT_MENU';
+export const SET_ACTIVE_ITEMS = 'SET_ACTIVE_ITEMS';
 
 export const GET_SITE = 'GET_SITE';
 export const GET_SITES = 'GET_SITES';

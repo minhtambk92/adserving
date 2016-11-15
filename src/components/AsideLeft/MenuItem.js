@@ -3,14 +3,19 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import history from '../../core/history';
+import cx from 'classnames';
 import Link from '../Link';
 
 class MenuItem extends Component {
 
   static propTypes = {
     item: PropTypes.object.isRequired,
+    activeIds: PropTypes.array.isRequired,
   };
+
+  isActive(id) {
+    return this.props.activeIds.indexOf(id) > -1;
+  }
 
   renderChildItemIcon(childItem) { // eslint-disable-line class-methods-use-this
     if (typeof childItem.icon === 'string') {
@@ -22,7 +27,7 @@ class MenuItem extends Component {
 
   renderChildItem(childItem, className = 'treeview') {
     return (
-      <li className={className} key={childItem.id}>
+      <li className={cx(className, this.isActive(childItem.id) && 'active')} key={childItem.id}>
         <Link to={childItem.url}>
           {this.renderChildItemIcon(childItem)}&nbsp;<span>{childItem.name}</span>
           {childItem.childItems && childItem.childItems.length > 0 && (
@@ -33,7 +38,7 @@ class MenuItem extends Component {
         </Link>
 
         {childItem.childItems && childItem.childItems.length > 0 && (
-          <ul className="treeview-menu">
+          <ul className={cx('treeview-menu', this.isActive(childItem.id) && 'menu-open')}>
             {childItem.childItems.map(smallItem => this.renderChildItem(smallItem, null))}
           </ul>
         )}

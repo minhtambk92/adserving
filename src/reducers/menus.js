@@ -12,6 +12,7 @@ import {
   DELETE_MENU,
   // Using
   GET_ASIDE_LEFT_MENU,
+  SET_ACTIVE_ITEMS,
 } from '../constants';
 
 function asideLeft(state = {}, action) {
@@ -21,6 +22,17 @@ function asideLeft(state = {}, action) {
     }
     default: {
       return { ...state };
+    }
+  }
+}
+
+function activeItems(state = [], action) {
+  switch (action.type) {
+    case SET_ACTIVE_ITEMS: {
+      return action.payload.items;
+    }
+    default: {
+      return state;
     }
   }
 }
@@ -60,6 +72,7 @@ const menus = combineReducers({
   list,
   editing,
   asideLeft,
+  activeItems,
 });
 
 export default menus;

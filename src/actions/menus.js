@@ -9,6 +9,7 @@ import {
   UPDATE_MENU,
   DELETE_MENU,
   GET_ASIDE_LEFT_MENU,
+  SET_ACTIVE_ITEMS,
 } from '../constants';
 
 export function getMenu(uniqueName, actionType) {
@@ -26,16 +27,19 @@ export function getMenu(uniqueName, actionType) {
             icon
             name
             type
+            parentId
             childItems {
               id
               url
               icon
               name
+              parentId
               childItems {
                 id
                 url
                 icon
                 name
+                parentId
                 order
               }
               order
@@ -62,6 +66,17 @@ export function getEditingMenu(uniqueName) {
 
 export function getAsideLeftMenu(uniqueName) {
   return getMenu(uniqueName, GET_ASIDE_LEFT_MENU);
+}
+
+export function setActiveItems(activeItems) {
+  return async(dispatch) => {
+    dispatch({
+      type: SET_ACTIVE_ITEMS,
+      payload: {
+        items: activeItems,
+      },
+    });
+  };
 }
 
 export function getMenus(args = {
