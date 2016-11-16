@@ -56,7 +56,7 @@ class Breadcrumb extends Component {
         <li><Link to="/"><i className="fa fa-dashboard" /></Link></li>
         {this.state.activeItems.reverse().map((item, index) => {
           if (index !== this.state.activeItems.length - 1) {
-            return <li key={item.id}><Link to={item.url}>{item.name}</Link></li>;
+            return <li key={item.id}><Link to={item.url}>{item.name}&nbsp;</Link></li>;
           }
           return <li key={item.id} className="active">{item.name}</li>;
         })}
