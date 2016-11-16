@@ -31,7 +31,7 @@ class Layout extends Component {
   };
 
   componentDidMount() {
-    const BODY_CLASSES = 'hold-transition skin-blue sidebar-mini';
+    const BODY_CLASSES = 'skin-blue sidebar-mini';
     let classes = BODY_CLASSES;
     const {
       isBoxed,

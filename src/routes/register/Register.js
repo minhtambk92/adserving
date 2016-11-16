@@ -60,7 +60,7 @@ class Register extends Component {
 
   render() {
     return (
-      <Layout bodyClasses="hold-transition register-page" isFullWidth>
+      <Layout bodyClasses="register-page" isFullWidth>
         <div>
           <div className="register-box">
             <div className="register-logo">
