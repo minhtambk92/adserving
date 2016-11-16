@@ -8,3 +8,10 @@
  */
 
 @import '../../../../components/variables.css';
+.col-sm-3 label div:nth-child(1){
+  display: inline-block !important;
+  margin-right: 5px;
+}
+.box-title{
+  text-transform: uppercase;
+}

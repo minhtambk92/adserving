@@ -11,7 +11,7 @@ import { Site } from '../models';
 const SiteInputTypeWithoutId = new InputObjectType({
   name: 'SiteInputTypeWithoutId',
   fields: () => Object.assign(attributeFields(Site, {
-    only: ['domain', 'name', 'email', 'description', 'status'],
+    only: ['domain', 'name', 'email', 'description', 'status', 'channelId'],
   }), {
     // Additional fields
   }),

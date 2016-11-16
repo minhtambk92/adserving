@@ -15,6 +15,7 @@ import roles from './roles';
 import users from './users';
 import zones from './zones';
 import channels from './channels';
+import optionChannels from './optionChannels';
 
 export default combineReducers({
   resources,
@@ -33,4 +34,5 @@ export default combineReducers({
   users,
   zones,
   channels,
+  optionChannels,
 });

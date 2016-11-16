@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSite, updateSite, deleteSite, checkSitesByDomain } from '../../../../actions/sites';
 import { createZone } from '../../../../actions/zones';
+import { getChannels } from '../../../../actions/channels';
 import Layout from '../../../../components/Layout';
 import ListZoneOfSite from '../ListZoneOfSite';
 import UpdateSiteForm from '../UpdateSiteForm';
@@ -32,20 +33,26 @@ class Site extends Component {
     zones: PropTypes.object,
     createZone: PropTypes.func,
     checkSitesByDomain: PropTypes.func,
+    getChannels: PropTypes.func,
+    channels: PropTypes.object,
   };
+
   componentWillMount() {
     this.props.getSite(this.props.siteId);
+    this.props.getChannels();
   }
 
   componentDidMount() {
     /* eslint-disable no-undef */
     /* eslint-enable no-undef */
   }
+
   componentDidUpdate() {
     /* eslint-disable no-undef */
     // iCheck for checkbox and radio inputs
     /* eslint-enable no-undef */
   }
+
   render() {
     return (
       <Layout
@@ -98,6 +105,7 @@ class Site extends Component {
                             getSite={this.props.getSite}
                             sites={this.props.sites}
                             checkSitesByDomain={this.props.checkSitesByDomain}
+                            channels={this.props.channels && this.props.channels.list}
                           />
                         </div>
                         {/* /.col */}
@@ -169,6 +177,7 @@ class Site extends Component {
 const mapState = (state) => ({
   sites: state.sites,
   zones: state.zones,
+  channels: state.channels,
 });
 
 const mapDispatch = {
@@ -177,6 +186,7 @@ const mapDispatch = {
   deleteSite,
   createZone,
   checkSitesByDomain,
+  getChannels,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Site));

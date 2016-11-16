@@ -8,6 +8,7 @@ class CreateSiteForm extends Component {
     createSite: PropTypes.func,
     checkSitesByDomain: PropTypes.func,
     sites: PropTypes.object,
+    channels: PropTypes.array,
   };
 
   clearInput() {
@@ -23,12 +24,14 @@ class CreateSiteForm extends Component {
     const email = this.inputSiteEmail.value;
     const description = this.inputSiteDescription.value;
     const status = this.inputSiteStatus.value;
+    const channelId = this.inputChannelId.value;
 
     if (domain && name && email && description && status) {
-      this.props.createSite({ domain, name, email, description, status });
+      this.props.createSite({ domain, name, email, description, status, channelId });
       this.clearInput();
     }
   }
+
   validateDomain(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const domain = this.inputSiteDomain.value;
     /* eslint-disable max-len */
@@ -87,7 +90,7 @@ class CreateSiteForm extends Component {
                   this.inputSiteDomainError = c;
                 }}
               >
-                        </span>
+              </span>
             </div>
           </div>
           <div className="form-group">
@@ -115,6 +118,26 @@ class CreateSiteForm extends Component {
                   this.inputSiteEmail = c;
                 }}
               />
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="inputChannelId" className="col-sm-2 control-label">Channel</label>
+            <div className="col-sm-10">
+              <select
+                id="inputChannelId" className="form-control"
+                ref={c => {
+                  this.inputChannelId = c;
+                }}
+              >
+                {this.props.channels
+                && this.props.channels.map(channel => (
+                  <option
+                    key={channel.id} value={channel.id}
+                  >
+                    {channel.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="form-group">

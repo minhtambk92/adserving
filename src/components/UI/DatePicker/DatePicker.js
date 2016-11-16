@@ -9,13 +9,14 @@ class DatePicker extends Component {
 
   async componentDidMount() {
     await ReactDOM.render(this.renderDOMLibs(), this.portal);
-
+    /* eslint-disable no-undef */
     $(this.input).datepicker({
       ...this.props.options,
       autoclose: true,
       todayHighlight: 'TRUE',
       minDate: 0,
     });
+    /* eslint-enable no-undef */
   }
   componentWillReceiveProps(nextProps) {
     const dateEnd = new Date();

@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSites, createSite, checkSitesByDomain } from '../../../actions/sites';
+import { getChannels } from '../../../actions/channels';
 import Layout from '../../../components/Layout';
 import SiteList from './SiteList';
 import CreateSiteForm from './CreateSiteForm';
@@ -27,10 +28,13 @@ class Sites extends Component {
     getSites: PropTypes.func,
     checkSitesByDomain: PropTypes.func,
     createSite: PropTypes.func,
+    getChannels: PropTypes.func,
+    channels: PropTypes.object,
   };
 
   componentWillMount() {
     this.props.getSites();
+    this.props.getChannels();
   }
 
   componentDidMount() {
@@ -68,6 +72,7 @@ class Sites extends Component {
                   sites={this.props.sites}
                   createSite={this.props.createSite}
                   checkSitesByDomain={this.props.checkSitesByDomain}
+                  channels={this.props.channels.list}
                 />
               </div>
               {/* /.col */}
@@ -101,12 +106,14 @@ class Sites extends Component {
 
 const mapState = (state) => ({
   sites: state.sites,
+  channels: state.channels,
 });
 
 const mapDispatch = {
   getSites,
   checkSitesByDomain,
   createSite,
+  getChannels,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Sites));

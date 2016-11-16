@@ -37,6 +37,13 @@ export function getChannel(id) {
           name
           description
           status
+          options {
+            id
+            type
+            logical
+            comparison
+            value
+          }
           createdAt
           updatedAt
         }

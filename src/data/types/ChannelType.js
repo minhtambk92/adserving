@@ -7,6 +7,8 @@ import {
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Channel } from '../models';
+import channelHasManyOptionChannels from '../queries/channelHasManyOptionChannels';
+import channelHasManySites from '../queries/channelHasManySites';
 
 const ChannelType = new ObjectType({
   name: 'ChannelType',
@@ -14,6 +16,8 @@ const ChannelType = new ObjectType({
     // Additional options
   }), {
     // Additional fields
+    options: channelHasManyOptionChannels(),
+    sites: channelHasManySites(),
   }),
 });
 

@@ -28,6 +28,7 @@ import Zone from './Zone';
 import Channel from './Channel';
 import Filter from './Filter';
 import PlacementBannerZone from './PlacementBannerZone';
+import OptionChannel from './OptionChannel';
 
 // Associations
 Resource.permissions = Resource.hasMany(ResourcePermission, {
@@ -157,6 +158,26 @@ Zone.site = Zone.belongsTo(Site, {
   foreignKey: 'siteId',
 });
 
+Channel.sites = Channel.hasMany(Site, {
+  foreignKey: {
+    name: 'channelId',
+    allowNull: false,
+  },
+});
+Site.channel = Site.belongsTo(Channel, {
+  foreignKey: 'channelId',
+});
+
+Channel.optionChannels = Channel.hasMany(OptionChannel, {
+  foreignKey: {
+    name: 'channelId',
+    allowNull: false,
+  },
+});
+OptionChannel.channel = OptionChannel.belongsTo(Channel, {
+  foreignKey: 'channelId',
+});
+
 Advertiser.campaigns = Advertiser.hasMany(Campaign, {
   foreignKey: 'advertiserId',
 });
@@ -199,4 +220,5 @@ export {
   Channel,
   Filter,
   PlacementBannerZone,
+  OptionChannel,
 };
