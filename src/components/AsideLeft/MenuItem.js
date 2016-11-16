@@ -19,7 +19,7 @@ class MenuItem extends Component {
 
   renderChildItemIcon(childItem) { // eslint-disable-line class-methods-use-this
     if (typeof childItem.icon === 'string') {
-      return <span className="fa" dangerouslySetInnerHTML={{ __html: childItem.icon }} />;
+      return <i className="fa" dangerouslySetInnerHTML={{ __html: childItem.icon }} />;
     }
 
     return <i className="fa fa-circle-o" />;
