@@ -273,7 +273,7 @@ async function menusFiction() {
 
       if (resources) {
         await Menu.create({
-          url: '/resouce/type',
+          url: '/resource/type',
           name: 'Types',
           icon: '<i class="fa fa-circle-o"></i>',
           parentId: resources.id,
