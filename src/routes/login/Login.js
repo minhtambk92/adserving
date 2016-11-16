@@ -56,7 +56,7 @@ class Login extends Component {
 
   render() {
     return (
-      <Layout bodyClasses="hold-transition login-page" isFullWidth>
+      <Layout bodyClasses="login-page" isFullWidth>
         <div>
 
           <div className="login-box">
