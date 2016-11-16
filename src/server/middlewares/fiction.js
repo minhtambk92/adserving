@@ -2,6 +2,7 @@
  * Created by Manhhailua on 11/7/16.
  */
 
+import chalk from 'chalk';
 import { genSaltSync, hashSync } from 'bcrypt';
 import {
   STATUS_ACTIVE,
@@ -25,11 +26,11 @@ import { host } from '../../config';
 
 // Resources fiction
 async function resourcesFiction() {
-  console.log('Check current number of resources...');
+  console.log(chalk.gray('Check current number of resources...'));
   const resourcesQuantity = await Resource.count();
 
   if (resourcesQuantity === 0) {
-    console.log('No resource found! Do a fiction...');
+    console.log(chalk.red('No resource found! Do a fiction...'));
 
     // Create basic roles
     const results = await Resource.bulkCreate([{
@@ -90,19 +91,19 @@ async function resourcesFiction() {
       status: 'active',
     }]);
 
-    console.log(`${results.length} resources created. Passed!`);
+    console.log(chalk.green(`${results.length} resources created. Passed!`));
   } else {
-    console.log(`${resourcesQuantity} resources(s) found. Passed!`);
+    console.log(chalk.green(`${resourcesQuantity} resources(s) found. Passed!`));
   }
 }
 
 // Menus fiction
 async function menusFiction() {
-  console.log('Check current number of menus...');
+  console.log(chalk.grey('Check current number of menus...'));
   const menusQuantity = await Menu.count();
 
   if (menusQuantity === 0) {
-    console.log('No menu found! Do a fiction...');
+    console.log(chalk.red('No menu found! Do a fiction...'));
 
     // Create main menu
     const menu = await Menu.create({
@@ -283,24 +284,24 @@ async function menusFiction() {
       }
     }
 
-    console.log('Main menu is created! Passed!');
+    console.log(chalk.green('Main menu is created! Passed!'));
   } else {
-    console.log(`${menusQuantity} menu(s) found. Passed!`);
+    console.log(chalk.green(`${menusQuantity} menu(s) found. Passed!`));
   }
 
   const menuHeadersQuantity = await MenuHeader.count();
-  console.log(`${menuHeadersQuantity} menu header(s) found. Passed!`);
+  console.log(chalk.green(`${menuHeadersQuantity} menu header(s) found. Passed!`));
   const menuItemsQuantity = await MenuItem.count();
-  console.log(`${menuItemsQuantity} menu items(s) found. Passed!`);
+  console.log(chalk.green(`${menuItemsQuantity} menu items(s) found. Passed!`));
 }
 
 // Roles fiction
 async function rolesFiction() {
-  console.log('Check current number of roles...');
+  console.log(chalk.grey('Check current number of roles...'));
   const rolesQuantity = await Role.count();
 
   if (rolesQuantity === 0) {
-    console.log('No role found! Do a fiction...');
+    console.log(chalk.red('No role found! Do a fiction...'));
 
     // Create basic roles
     const results = await Role.bulkCreate([
@@ -309,20 +310,20 @@ async function rolesFiction() {
       { uniqueName: 'publisher', name: 'Publisher' },
     ]);
 
-    console.log(`${results.length} roles created. Passed!`);
+    console.log(chalk.green(`${results.length} roles created. Passed!`));
   } else {
-    console.log(`${rolesQuantity} role(s) found. Passed!`);
+    console.log(chalk.green(`${rolesQuantity} role(s) found. Passed!`));
   }
 }
 
 // Users fiction
 // Mainly for creating super admin
 async function userFiction() {
-  console.log('Check current number of users...');
+  console.log(chalk.grey('Check current number of users...'));
   const usersQuantity = await User.count();
 
   if (usersQuantity === 0) {
-    console.log('No user found! Do a fiction...');
+    console.log(chalk.red('No user found! Do a fiction...'));
 
     // Get role:admin
     const admin = await Role.findOne({ where: { uniqueName: 'admin' } });
@@ -348,21 +349,19 @@ async function userFiction() {
       status: STATUS_ACTIVE,
     });
 
-    console.log(`Super ${user.profile.displayName} is created. Passed!`);
+    console.log(chalk.green(`Super ${user.profile.displayName} is created. Passed!`));
   } else {
-    console.log(`${usersQuantity} user(s) found. Passed!`);
+    console.log(chalk.green(`${usersQuantity} user(s) found. Passed!`));
   }
 }
 
 async function fiction() {
-  console.log('Start data fictions!');
+  console.log(chalk.grey.dim('Start data fictions!'));
   await resourcesFiction();
   await menusFiction();
   await rolesFiction();
   await userFiction();
-  console.log(`Your application is now ready at http://${host}/`);
+  console.log(chalk.magenta(`Your application is now ready at http://${host}/`));
 }
-
-/* eslint-enable no-console */
 
 export default fiction;
