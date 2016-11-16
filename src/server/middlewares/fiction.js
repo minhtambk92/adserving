@@ -289,8 +289,11 @@ async function menusFiction() {
     console.log(chalk.green(`${menusQuantity} menu(s) found. Passed!`));
   }
 
+  console.log(chalk.grey('Check current number of menu headers...'));
   const menuHeadersQuantity = await MenuHeader.count();
   console.log(chalk.green(`${menuHeadersQuantity} menu header(s) found. Passed!`));
+
+  console.log(chalk.grey('Check current number of menu items...'));
   const menuItemsQuantity = await MenuItem.count();
   console.log(chalk.green(`${menuItemsQuantity} menu items(s) found. Passed!`));
 }
