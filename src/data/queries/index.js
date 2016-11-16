@@ -4,6 +4,9 @@
 
 import { GraphQLObjectType as ObjectType } from 'graphql';
 import resources from './resources';
+import menus from './menus';
+import menuHeaders from './menuHeaders';
+import menuItems from './menuItems';
 import options from './options';
 import me from './me';
 import content from './content';
@@ -27,6 +30,9 @@ const queries = new ObjectType({
   name: 'Query',
   fields: {
     resources,
+    menus,
+    menuHeaders,
+    menuItems,
     options,
     me,
     roles,

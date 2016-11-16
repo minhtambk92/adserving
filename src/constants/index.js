@@ -13,6 +13,11 @@ export const FETCH_CONTENT_ERROR = 'FETCH_CONTENT_ERROR';
 export const STATUS_ACTIVE = 'active';
 export const STATUS_INACTIVE = 'inactive';
 
+// Menu types
+export const TYPE_MENU = 'menu';
+export const TYPE_MENU_HEADER = 'header';
+export const TYPE_MENU_ITEM = 'item';
+
 // Redux actions
 export const GET_RESOURCE = 'GET_RESOURCE';
 export const GET_RESOURCES = 'GET_RESOURCES';
@@ -21,6 +26,14 @@ export const UPDATE_RESOURCE = 'UPDATE_RESOURCE';
 export const DELETE_RESOURCE = 'DELETE_RESOURCE';
 export const GET_RESOURCES_FILTERS = 'GET_RESOURCES_FILTERS';
 export const SET_RESOURCES_FILTERS = 'SET_RESOURCES_FILTERS';
+
+export const GET_MENU = 'GET_MENU';
+export const GET_MENUS = 'GET_MENUS';
+export const CREATE_MENU = 'CREATE_MENU';
+export const UPDATE_MENU = 'UPDATE_MENU';
+export const DELETE_MENU = 'DELETE_MENU';
+export const GET_ASIDE_LEFT_MENU = 'GET_ASIDE_LEFT_MENU';
+export const SET_ACTIVE_ITEMS = 'SET_ACTIVE_ITEMS';
 
 export const GET_SITE = 'GET_SITE';
 export const GET_SITES = 'GET_SITES';

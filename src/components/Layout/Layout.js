@@ -58,6 +58,7 @@ class Layout extends Component {
     }
   }
 
+  // Render page with Asides and default navigation
   renderInnerPage() {
     return (
       <div className="wrapper">

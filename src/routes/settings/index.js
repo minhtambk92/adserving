@@ -7,20 +7,11 @@
 // The top-level (parent) route
 export default {
 
-  path: '/resource',
+  path: '/setting',
 
   // Keep in mind, routes are evaluated in order
   children: [
-    require('./types').default,
-    require('./advertisers').default,
-    require('./banners').default,
-    require('./campaigns').default,
-    require('./placements').default,
-    require('./sites').default,
-    require('./roles').default,
-    require('./users').default,
-    require('./zones').default,
-    require('./channels').default,
+    require('./appearance').default,
   ],
 
   async action({ next }) {

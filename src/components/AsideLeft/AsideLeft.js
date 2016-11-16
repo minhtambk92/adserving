@@ -1,130 +1,112 @@
-import React from 'react';
+/**
+ * Created by Manhhailua on 11/16/16.
+ */
+
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import Link from '../Link';
+import history from '../../core/history';
+import {
+  getAsideLeftMenu,
+  setActiveItems,
+} from '../../actions/menus';
+import MenuItem from './MenuItem';
 import s from './AsideLeft.css';
 
-function AsideLeft() {
-  return (
-    <aside className="main-sidebar">
-      {/* sidebar: style can be found in sidebar.less */}
-      <section className="sidebar" style={{ height: 'auto' }}>
-        {/* search form */}
-        <form action="#" method="get" className="sidebar-form">
-          <div className="input-group">
-            <input type="text" name="q" className="form-control" placeholder="Search..." />
-            <div className="input-group-btn">
-              <button type="submit" name="search" id="search-btn" className="btn btn-flat">
-                <i className="fa fa-search" />
-              </button>
+class AsideLeft extends Component {
+
+  static propTypes = {
+    menus: PropTypes.object,
+    getAsideLeftMenu: PropTypes.func,
+    setActiveItems: PropTypes.func,
+  };
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      activeItems: [],
+    };
+  }
+
+  componentDidMount() {
+    this.props.getAsideLeftMenu('main-menu');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.menus.asideLeft.items) {
+      nextProps.menus.asideLeft.items.map(item => this.checkActiveItem(item));
+    }
+  }
+
+  checkActiveItem(item, activeItems = []) {
+    if (item) {
+      const array = activeItems;
+      array.unshift(item);
+
+      if (item.url === history.location.pathname) {
+        this.setState({ activeItems: Object.assign([], array) });
+      }
+
+      if (item.childItems && item.childItems.length > 0) {
+        item.childItems.map(childItem => {
+          if (childItem.parentId !== array[0].id) {
+            array.shift();
+          }
+
+          return this.checkActiveItem(childItem, array);
+        });
+      }
+    }
+  }
+
+  render() {
+    const { menus } = this.props;
+
+    return (
+      <aside className="main-sidebar">
+        {/* sidebar: style can be found in sidebar.less */}
+        <section className="sidebar" style={{ height: 'auto' }}>
+          {/* search form */}
+          <form action="#" method="get" className="sidebar-form">
+            <div className="input-group">
+              <input type="text" name="q" className="form-control" placeholder="Search..." />
+              <div className="input-group-btn">
+                <button type="submit" name="search" id="search-btn" className="btn btn-flat">
+                  <i className="fa fa-search" />
+                </button>
+              </div>
             </div>
-          </div>
-        </form>
-        {/* /.search form */}
-        {/* sidebar menu: : style can be found in sidebar.less */}
-        <ul className="sidebar-menu">
-
-          <li className="header">MAIN NAVIGATION</li>
-          <li className="treeview">
-            <Link to="/">
-              <i className="fa fa-line-chart" /> <span>Report</span>
-              <span className="pull-right-container">
-                <i className="fa fa-angle-left pull-right" />
-              </span>
-            </Link>
-            <ul className="treeview-menu">
-              <li>
-                <Link to="/campaigns"><i className="fa fa-circle-o" /> System</Link>
-              </li>
-            </ul>
-          </li>
-          <li className="treeview active">
-            <Link to="/">
-              <i className="fa fa-briefcase" /> <span>Inventory</span>
-              <span className="pull-right-container">
-                <i className="fa fa-angle-left pull-right" />
-              </span>
-            </Link>
-            <ul className="treeview-menu">
-              <li className="active">
-                <Link to="/resource/advertiser"><i className="fa fa-circle-o" /> Advertisers</Link>
-              </li>
-              <li>
-                <Link to="/resource/campaign"><i className="fa fa-circle-o" /> Campaigns</Link>
-              </li>
-              <li>
-                <Link to="/resource/banner"><i className="fa fa-circle-o" /> Banners</Link>
-              </li>
-              <li>
-                <Link to="/resource/placement"><i className="fa fa-circle-o" /> Placements</Link>
-              </li>
-              <li>
-                <Link to="/resource/site"><i className="fa fa-circle-o" /> Sites</Link>
-              </li>
-              <li>
-                <Link to="/resource/zone"><i className="fa fa-circle-o" /> Zones</Link>
-              </li>
-              <li>
-                <Link to="/resource/channel"><i className="fa fa-circle-o" />Target Channel</Link>
-              </li>
-            </ul>
-          </li>
-
-          <li className="header">CONFIGURATION</li>
-          <li className="treeview">
-            <Link to="/">
-              <i className="fa fa-gears" /> <span>Settings</span>
-              <span className="pull-right-container">
-                <i className="fa fa-angle-left pull-right" />
-              </span>
-            </Link>
-            <ul className="treeview-menu">
-              <li>
-                <Link to="/settings/global"><i className="fa fa-globe" /> Global</Link>
-              </li>
-              <li>
-                <Link to="/settings/update"><i className="fa fa-cloud-download" /> Update</Link>
-              </li>
-            </ul>
-          </li>
-
-          <li className="header">SYSTEM</li>
-          <li className="treeview">
-            <Link to="/resource/user">
-              <i className="fa fa-user" /> <span>Users</span>
-              <span className="pull-right-container">
-                <i className="fa fa-angle-left pull-right" />
-              </span>
-            </Link>
-            <ul className="treeview-menu">
-              <li>
-                <Link to="/profile"><i className="fa fa-info-circle" /> Your Profile</Link>
-              </li>
-              <li>
-                <Link to="/resource/user"><i className="fa fa-users" /> All Users</Link>
-              </li>
-              <li>
-                <Link to="/resource/role"><i className="fa fa-flag" /> Roles</Link>
-              </li>
-            </ul>
-          </li>
-          <li className="treeview">
-            <Link to="/users">
-              <i className="fa fa-industry" /> <span>Resources</span>
-              <span className="pull-right-container">
-                <i className="fa fa-angle-left pull-right" />
-              </span>
-            </Link>
-            <ul className="treeview-menu">
-              <li>
-                <Link to="/resource/type"><i className="fa fa-circle-o" /> Types</Link>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-      {/* /.sidebar */}
-    </aside>
-  );
+          </form>
+          {/* /.search form */}
+          {/* sidebar menu: : style can be found in sidebar.less */}
+          <ul className="sidebar-menu">
+            {menus.asideLeft.items && menus.asideLeft.items.map(item => {
+              if (item.type === 'header') {
+                return <li key={item.id} className="header">{item.name}</li>;
+              }
+              return (
+                <MenuItem
+                  key={item.id} item={item}
+                  activeIds={this.state.activeItems.map(activeItem => activeItem.id)}
+                />
+              );
+            })}
+          </ul>
+        </section>
+        {/* /.sidebar */}
+      </aside>
+    );
+  }
 }
 
-export default withStyles(s)(AsideLeft);
+const mapState = (state) => ({
+  menus: state.menus,
+});
+
+const mapDispatch = {
+  getAsideLeftMenu,
+  setActiveItems,
+};
+
+export default withStyles(s)(connect(mapState, mapDispatch)(AsideLeft));

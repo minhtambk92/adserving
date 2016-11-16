@@ -7,20 +7,26 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Footer.css';
 import Link from '../Link';
 
-function Footer() {
-  return (
-    <footer className="main-footer">
-      {/* To the right */}
-      <div className="pull-right hidden-xs">Anything you want</div>
-      {/* Default to the left */}
-      <strong>Copyright © 2016 <Link to="#">Company</Link>.</strong> All rights reserved.
-    </footer>
-  );
+class Footer extends Component {
+
+  render() {
+    return (
+      <footer className="main-footer">
+        {/* To the right */}
+        <div className="pull-right hidden-xs">CoreJS Team - AdTech</div>
+        {/* Default to the left */}
+        <strong>
+          <span>Copyright © 2016</span>&nbsp;<Link to="http://admicro.vn/">Admicro</Link>.
+        </strong>
+        <span>&nbsp;All rights reserved.</span>
+      </footer>
+    );
+  }
 }
 
 export default withStyles(s)(Footer);

@@ -7,46 +7,49 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './NotFound.css';
 
-const pageTitle = '404';
+class NotFound extends Component {
 
-function NotFound({ title }) {
-  return (
-    <Layout pageTitle={pageTitle} pageSubTitle={title}>
-      <div>
-        <div className="error-page">
-          <h2 className="headline text-yellow"> 404</h2>
-          <div className="error-content">
-            <h3><i className="fa fa-warning text-yellow" /> Oops! Page not found.</h3>
-            <p>We could not find the page you were looking for. Meanwhile,
-              you may <Link to="/">return to dashboard</Link> or try using the search form.</p>
-            <form className="search-form">
-              <div className="input-group">
-                <input type="text" name="search" className="form-control" placeholder="Search" />
-                <div className="input-group-btn">
-                  <button
-                    type="submit" name="submit" className="btn btn-warning btn-flat"
-                  ><i className="fa fa-search" /></button>
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+  };
+
+  render() {
+    return (
+      <Layout pageTitle={this.props.title}>
+        <div>
+
+          <div className="error-page">
+            <h2 className="headline text-yellow"> 404</h2>
+            <div className="error-content">
+              <h3><i className="fa fa-warning text-yellow" /> Oops! Page not found.</h3>
+              <p>We could not find the page you were looking for. Meanwhile,
+                you may <Link to="/">return to dashboard</Link> or try using the search form.</p>
+              <form className="search-form">
+                <div className="input-group">
+                  <input type="text" name="search" className="form-control" placeholder="Search" />
+                  <div className="input-group-btn">
+                    <button
+                      type="submit" name="submit" className="btn btn-warning btn-flat"
+                    ><i className="fa fa-search" /></button>
+                  </div>
                 </div>
-              </div>
-              {/* /.input-group */}
-            </form>
+                {/* /.input-group */}
+              </form>
+            </div>
+            {/* /.error-content */}
           </div>
-          {/* /.error-content */}
-        </div>
-        {/* /.error-page */}
-      </div>
-    </Layout>
-  );
-}
+          {/* /.error-page */}
 
-NotFound.propTypes = {
-  title: PropTypes.string.isRequired,
-};
+        </div>
+      </Layout>
+    );
+  }
+}
 
 export default withStyles(s)(NotFound);

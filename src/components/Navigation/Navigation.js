@@ -10,8 +10,6 @@
 import React, { Component, PropTypes } from 'react';
 // import { defineMessages, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import moment from 'moment';
-// import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { logUserOut } from '../../actions/users';
 import { redirect } from '../../actions/route';
@@ -77,9 +75,9 @@ class Navigation extends Component {
         {/* Logo */}
         <Link to="/" className="logo">
           {/* mini logo for sidebar mini 50x50 pixels */}
-          <span className="logo-mini"><b>A</b>LT</span>
+          <span className="logo-mini"><b>AD</b>S</span>
           {/* logo for regular state and mobile devices */}
-          <span className="logo-lg"><b>Admin</b>LTE</span>
+          <span className="logo-lg"><b>Ad</b>serving</span>
         </Link>
         {/* Header Navbar: style can be found in header.less */}
         <nav className="navbar navbar-static-top">
