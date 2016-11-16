@@ -13,8 +13,6 @@ import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import s from './NotFound.css';
 
-const pageTitle = '404';
-
 class NotFound extends Component {
 
   static propTypes = {
@@ -23,7 +21,7 @@ class NotFound extends Component {
 
   render() {
     return (
-      <Layout pageTitle={pageTitle} pageSubTitle={title}>
+      <Layout pageTitle={this.props.title}>
         <div>
 
           <div className="error-page">
