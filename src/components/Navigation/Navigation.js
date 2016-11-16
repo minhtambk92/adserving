@@ -10,8 +10,6 @@
 import React, { Component, PropTypes } from 'react';
 // import { defineMessages, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import moment from 'moment';
-// import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { logUserOut } from '../../actions/users';
 import { redirect } from '../../actions/route';

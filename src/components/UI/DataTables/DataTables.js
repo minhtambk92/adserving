@@ -38,7 +38,7 @@ class DataTables extends Component {
       tfoot,
       data, // eslint-disable-line no-unused-vars
       options, // eslint-disable-line no-unused-vars
-      ...rest,
+      ...rest
     } = this.props;
 
     return (

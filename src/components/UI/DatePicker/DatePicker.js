@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
+/* global $ */
+
 class DatePicker extends Component {
 
   static propTypes = {
