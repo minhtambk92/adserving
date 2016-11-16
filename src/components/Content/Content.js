@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Breadcrumb from '../Breadcrumb';
 import Link from '../Link';
 import s from './Content.css';
 
@@ -22,10 +23,7 @@ class Content extends Component {
             <small>{pageSubTitle || ''}</small>
           </h1>
 
-          <ol className="breadcrumb">
-            <li><Link to="#"><i className="fa fa-dashboard" /> Level</Link></li>
-            <li className="active">Here</li>
-          </ol>
+          <Breadcrumb />
         </section>
         {/* End of .content-header */}
 

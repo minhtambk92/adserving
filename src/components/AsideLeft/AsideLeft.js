@@ -1,3 +1,7 @@
+/**
+ * Created by Manhhailua on 11/16/16.
+ */
+
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
