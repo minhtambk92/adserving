@@ -247,7 +247,7 @@ async function menusFiction() {
       if (users) {
         await Menu.bulkCreate([{
           url: '/resource/user',
-          name: 'Users',
+          name: 'All Users',
           icon: '<i class="fa fa-users"></i>',
           parentId: users.id,
           order: 1,
