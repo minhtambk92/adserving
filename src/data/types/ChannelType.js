@@ -9,6 +9,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { Channel } from '../models';
 import channelHasManyOptionChannels from '../queries/channelHasManyOptionChannels';
 import channelHasManySites from '../queries/channelHasManySites';
+import channelHasManyBanners from '../queries/channelHasManyBanners';
 
 const ChannelType = new ObjectType({
   name: 'ChannelType',
@@ -18,6 +19,7 @@ const ChannelType = new ObjectType({
     // Additional fields
     options: channelHasManyOptionChannels(),
     sites: channelHasManySites(),
+    banners: channelHasManyBanners(),
   }),
 });
 

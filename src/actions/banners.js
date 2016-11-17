@@ -43,6 +43,7 @@ export function getBanner(id) {
           imageUrl
           target
           status
+          channelId
           pbzBanner {
             placements {
               id
@@ -98,6 +99,7 @@ export function getBanners(args = {
           imageUrl
           target
           status
+          channelId
           pbzBanner {
             placements {
               id
@@ -152,6 +154,7 @@ export function createBanner({
   target,
   imageUrl,
   status,
+  channelId,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -169,6 +172,7 @@ export function createBanner({
           target
           imageUrl
           status
+          channelId
           createdAt
           updatedAt
         }
@@ -187,6 +191,7 @@ export function createBanner({
         target,
         imageUrl,
         status,
+        channelId,
       },
     });
 
@@ -212,6 +217,7 @@ export function updateBanner({
   target,
   imageUrl,
   status,
+  channelId,
 }) {
   return async(dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -229,6 +235,7 @@ export function updateBanner({
           imageUrl
           target
           status
+          channelId
           createdAt
           updatedAt
         }
@@ -248,6 +255,7 @@ export function updateBanner({
         target,
         imageUrl,
         status,
+        channelId,
       },
     });
 
@@ -277,6 +285,7 @@ export function deleteBanner(id) {
           imageUrl
           target
           status
+          channelId
           createdAt
           updatedAt
           deletedAt

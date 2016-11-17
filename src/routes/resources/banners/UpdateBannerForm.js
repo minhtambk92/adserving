@@ -12,6 +12,7 @@ class UpdateBannerForm extends Component {
     deleteBanner: PropTypes.func,
     getBanner: PropTypes.func,
     removeBanner: PropTypes.func,
+    channels: PropTypes.array,
   };
 
   constructor(props, context) {
@@ -37,6 +38,7 @@ class UpdateBannerForm extends Component {
       type,
       imageUrl,
       status,
+      channelId,
     } = nextProps.banner && (nextProps.banner || {});
     this.state.keyWord = keyword;
     this.inputBannerName.value = name;
@@ -45,6 +47,7 @@ class UpdateBannerForm extends Component {
     this.inputBannerWeight.value = weight;
     this.inputBannerDescription.value = description;
     this.inputBannerStatus.value = status;
+    this.inputChannelId.value = channelId;
 
     if (type === 'html') {
       this.insertBannerHtml(html, width, height);
@@ -72,6 +75,7 @@ class UpdateBannerForm extends Component {
     const keyword = document.getElementById('inputBannerKeyWord').value;
     const weight = this.inputBannerWeight.value;
     const description = this.inputBannerDescription.value;
+    const channelId = this.inputChannelId.value;
     let html = '';
     let target = '';
     let imageUrl = '';
@@ -123,6 +127,9 @@ class UpdateBannerForm extends Component {
     }
     if (status && status !== this.props.banner.status) {
       banner.status = status;
+    }
+    if (channelId && channelId !== this.props.banner.channelId) {
+      banner.channelId = channelId;
     }
     this.props.updateBanner(banner).then(() => {
       this.props.getBanner(this.props.bannerId);
@@ -347,6 +354,26 @@ class UpdateBannerForm extends Component {
                   this.inputBannerWeight = c;
                 }}
               />
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="inputChannelId" className="col-sm-2 control-label">Channel</label>
+            <div className="col-sm-10">
+              <select
+                id="inputChannelId" className="form-control"
+                ref={c => {
+                  this.inputChannelId = c;
+                }}
+              >
+                {this.props.channels
+                && this.props.channels.map(channel => (
+                  <option
+                    key={channel.id} value={channel.id}
+                  >
+                    {channel.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="form-group">

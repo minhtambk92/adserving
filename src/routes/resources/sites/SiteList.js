@@ -34,7 +34,10 @@ class SiteList extends Component {
     }, {
       data: 'email',
     }, {
-      data: 'description',
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link to={`/resource/channel/${rowData.channelId}`}>Channel Option</Link>, cell);
+      },
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
@@ -59,7 +62,7 @@ class SiteList extends Component {
             <th>Name</th>
             <th>Domain</th>
             <th>Email</th>
-            <th>Description</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}
@@ -69,7 +72,7 @@ class SiteList extends Component {
             <th>Name</th>
             <th>Domain</th>
             <th>Email</th>
-            <th>Description</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}

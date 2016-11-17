@@ -33,7 +33,10 @@ class BannerList extends Component {
       data: null,
       render: (data, type, row) => `${row.width}px x ${row.height}px`,
     }, {
-      data: 'keyword',
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link to={`/resource/channel/${rowData.channelId}`}>Target Channel</Link>, cell);
+      },
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
@@ -57,7 +60,7 @@ class BannerList extends Component {
             <th><ICheck type="checkbox" className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size</th>
-            <th>KeyWord</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}
@@ -66,7 +69,7 @@ class BannerList extends Component {
             <th><ICheck type="checkbox" className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size</th>
-            <th>KeyWord</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}

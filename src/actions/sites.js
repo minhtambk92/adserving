@@ -216,6 +216,7 @@ export function deleteSite(id) {
           email
           description
           status
+          channelId
           createdAt
           updatedAt
           deletedAt

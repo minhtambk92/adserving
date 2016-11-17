@@ -18,6 +18,7 @@ import {
   setBannersFilters,
 } from '../../../actions/banners';
 import { getPlacements } from '../../../actions/placements';
+import { getChannels } from '../../../actions/channels';
 import Layout from '../../../components/Layout';
 import BannerList from './BannerList';
 import CreateBannerForm from './CreateBannerForm';
@@ -36,12 +37,15 @@ class Banners extends Component {
     createBanner: PropTypes.func,
     placements: PropTypes.object,
     getPlacements: PropTypes.func,
+    getChannels: PropTypes.func,
+    channels: PropTypes.object,
   };
 
   componentWillMount() {
     this.props.getBannersFilters();
     this.props.getBanners();
     this.props.getPlacements();
+    this.props.getChannels();
   }
 
   getFilteredBanners() {
@@ -109,6 +113,7 @@ class Banners extends Component {
                 <CreateBannerForm
                   filters={this.props.banners.filters}
                   createBanner={this.props.createBanner}
+                  channels={this.props.channels && this.props.channels.list}
                 />
               </div>
               {/* /.col */}
@@ -143,6 +148,7 @@ class Banners extends Component {
 const mapState = (state) => ({
   banners: state.banners,
   placements: state.placements,
+  channels: state.channels,
 });
 
 const mapDispatch = {
@@ -151,6 +157,7 @@ const mapDispatch = {
   getBannersFilters,
   setBannersFilters,
   getPlacements,
+  getChannels,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banners));

@@ -16,6 +16,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanner, updateBanner, deleteBanner } from '../../../../actions/banners';
 import { getCampaigns } from '../../../../actions/campaigns';
 import { createPlacement, getPlacements } from '../../../../actions/placements';
+import { getChannels } from '../../../../actions/channels';
 import {
   createPlacementBannerZone,
   removeBanner,
@@ -47,6 +48,8 @@ class Banner extends Component {
     getPlacements: PropTypes.func,
     placementBannerZones: PropTypes.object,
     removeBanner: PropTypes.func,
+    getChannels: PropTypes.func,
+    channels: PropTypes.object,
     removeBannerInPlacementBannerZone: PropTypes.func,
   };
 
@@ -54,6 +57,7 @@ class Banner extends Component {
     this.props.getBanner(this.props.bannerId);
     this.props.getCampaigns();
     this.props.getPlacements();
+    this.props.getChannels();
   }
 
   filterPlacements(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -159,6 +163,7 @@ class Banner extends Component {
                             bannerId={this.props.bannerId}
                             getBanner={this.props.getBanner}
                             removeBanner={this.props.removeBanner}
+                            channels={this.props.channels && this.props.channels.list}
                           />
                         </div>
                         {/* /.col */}
@@ -271,6 +276,7 @@ const mapState = (state) => ({
   banners: state.banners,
   campaigns: state.campaigns,
   placements: state.placements,
+  channels: state.channels,
   placementBannerZones: state.placementBannerZones,
 });
 
@@ -284,6 +290,7 @@ const mapDispatch = {
   getPlacements,
   removeBanner,
   removeBannerInPlacementBannerZone,
+  getChannels,
 };
 
 export default withStyles(s, style, dropZoneStyle)(connect(mapState, mapDispatch)(Banner));

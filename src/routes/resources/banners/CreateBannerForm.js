@@ -11,6 +11,7 @@ class CreateBannerForm extends Component {
   static propTypes = {
     filters: PropTypes.object,
     createBanner: PropTypes.func,
+    channels: PropTypes.array,
   };
 
   constructor(props, context) {
@@ -77,6 +78,7 @@ class CreateBannerForm extends Component {
     const height = this.inputBannerHeight.value;
     const weight = this.inputBannerWeight.value;
     const description = this.inputBannerDescription.value;
+    const channelId = this.inputChannelId.value;
     const type = this.inputBannerType.value;
     let target = '';
     let url = '';
@@ -95,7 +97,7 @@ class CreateBannerForm extends Component {
     }
     const status = this.inputBannerStatus.value;
     const keyword = document.getElementById('inputBannerKeyWord').value;
-    if (name && height && weight && keyword && width && description && type) {
+    if (name && height && weight && keyword && width && description && type && channelId) {
       this.props.createBanner({
         name,
         html,
@@ -109,6 +111,7 @@ class CreateBannerForm extends Component {
         target,
         imageUrl,
         status,
+        channelId,
       }).then(() => {
         this.clearInput();
       });
@@ -282,6 +285,26 @@ class CreateBannerForm extends Component {
                   this.inputBannerWeight = c;
                 }}
               />
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="inputChannelId" className="col-sm-2 control-label">Channel</label>
+            <div className="col-sm-10">
+              <select
+                id="inputChannelId" className="form-control"
+                ref={c => {
+                  this.inputChannelId = c;
+                }}
+              >
+                {this.props.channels
+                && this.props.channels.map(channel => (
+                  <option
+                    key={channel.id} value={channel.id}
+                  >
+                    {channel.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="form-group">

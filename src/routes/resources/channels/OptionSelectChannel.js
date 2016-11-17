@@ -13,8 +13,6 @@ class OptionSelectChannel extends Component {
     value: PropTypes.string,
     optionChannelId: PropTypes.string,
     deleteOptionChannel: PropTypes.func,
-    getChannel: PropTypes.func,
-    channelId: PropTypes.string,
   };
 
   async componentDidMount() {

@@ -126,24 +126,36 @@ class Channel extends Component {
       const logical = 'and';
       const channelId = this.props.channelId;
       if (type && comparison && value) {
-        if (type === 'category') {
-          this.setState({
-            showCategory: false,
-          });
-        } else if (type === 'browser') {
-          this.setState({
-            showBrowser: false,
-          });
-        }
+        this.enabledOption(type);
         this.props.createOptionChannel({ logical, type, comparison, value, channelId }).then(() => {
           this.props.getChannel(this.props.channelId);
         });
       }
     }
-
     /* eslint-enable no-undef */
   }
-
+  disabledOption(type) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    if (type === 'category') {
+      this.setState({
+        showCategory: true,
+      });
+    } else if (type === 'browser') {
+      this.setState({
+        showBrowser: true,
+      });
+    }
+  }
+  enabledOption(type) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    if (type === 'category') {
+      this.setState({
+        showCategory: false,
+      });
+    } else if (type === 'browser') {
+      this.setState({
+        showBrowser: false,
+      });
+    }
+  }
   saveOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     /* eslint-disable no-undef */
     const currentOption = ['category', 'browser'];
@@ -165,15 +177,7 @@ class Channel extends Component {
       const logical = 'and';
       const channelId = this.props.channelId;
       if (type && comparison && value) {
-        if (type === 'category') {
-          this.setState({
-            showCategory: false,
-          });
-        } else if (type === 'browser') {
-          this.setState({
-            showBrowser: false,
-          });
-        }
+        this.enabledOption(type);
         this.props.createOptionChannel({ logical, type, comparison, value, channelId }).then(() => {
           this.props.getChannel(this.props.channelId);
         });
@@ -194,27 +198,11 @@ class Channel extends Component {
       const options = this.props.channels.editing.options;
       for (let i = 0; i < options.length; i += 1) {
         if (value !== options[i].type) {
-          if (value === 'category') {
-            this.setState({
-              showCategory: true,
-            });
-          } else if (value === 'browser') {
-            this.setState({
-              showBrowser: true,
-            });
-          }
+          this.disabledOption(value);
         }
       }
     } else if (this.props.channels.editing.options.length === 0) {
-      if (value === 'category') {
-        this.setState({
-          showCategory: true,
-        });
-      } else if (value === 'browser') {
-        this.setState({
-          showBrowser: true,
-        });
-      }
+      this.disabledOption(value);
     }
   }
 
@@ -359,8 +347,6 @@ class Channel extends Component {
                                       data={this.state.category}
                                       deleteOptionChannel={this.props.deleteOptionChannel}
                                       optionChannelId={option.id}
-                                      getChannel={this.props.getChannel}
-                                      channeId={this.props.channelId}
                                     />);
                                   } else if (option.type === 'browser') {
                                     return (<SelectOptionChannel
@@ -372,8 +358,6 @@ class Channel extends Component {
                                       data={this.state.browser}
                                       optionChannelId={option.id}
                                       deleteOptionChannel={this.props.deleteOptionChannel}
-                                      getChannel={this.props.getChannel}
-                                      channeId={this.props.channelId}
                                     />);
                                   }
                                   return false;

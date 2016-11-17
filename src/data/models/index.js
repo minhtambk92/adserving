@@ -215,6 +215,17 @@ Zone.site = Zone.belongsTo(Site, {
   foreignKey: 'siteId',
 });
 
+// Each Channel can make many banners
+Channel.banners = Channel.hasMany(Banner, {
+  foreignKey: {
+    name: 'channelId',
+    allowNull: false,
+  },
+});
+Banner.channel = Banner.belongsTo(Channel, {
+  foreignKey: 'channelId',
+});
+
 // Each advertiser can make many campaigns
 Channel.sites = Channel.hasMany(Site, {
   foreignKey: {
