@@ -65,6 +65,14 @@ const Banner = Model.define('Banner', {
     type: DataType.STRING,
     defaultValue: '',
   },
+  adServer: {
+    type: DataType.STRING,
+    defaultValue: '',
+  },
+  bannerHTMLType: {
+    type: DataType.STRING,
+    defaultValue: '',
+  },
   status: {
     type: DataType.STRING,
     allowNull: false,

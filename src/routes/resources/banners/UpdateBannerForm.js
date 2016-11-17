@@ -38,6 +38,8 @@ class UpdateBannerForm extends Component {
       type,
       imageUrl,
       status,
+      adServer,
+      bannerHTMLType,
       channelId,
     } = nextProps.banner && (nextProps.banner || {});
     this.state.keyWord = keyword;
@@ -51,10 +53,13 @@ class UpdateBannerForm extends Component {
 
     if (type === 'html') {
       this.insertBannerHtml(html, width, height);
-      if (this.inputBannerHTML !== undefined) {
-        this.inputBannerHTML.value = html;
+      if (this.inputBannerHTML !== undefined && this.inputBannerHTMLType.value !== undefined &&
+        this.inputBannerHTMLType.value !== undefined) {
         this.state.checkTypeBanner = 'html';
         this.state.imageUrl = '';
+        this.inputBannerHTML.value = html;
+        this.inputBannerAdServer.value = adServer;
+        this.inputBannerHTMLType.value = bannerHTMLType;
       }
     } else if (type === 'img') {
       this.state.imageUrl = imageUrl;
@@ -80,9 +85,13 @@ class UpdateBannerForm extends Component {
     let target = '';
     let imageUrl = '';
     let url = '';
+    let bannerHTMLType = '';
+    let adServer = '';
     const type = this.props.banner.type;
     if (type === 'html') {
       html = this.inputBannerHTML.value;
+      adServer = this.inputBannerAdServer.value;
+      bannerHTMLType = this.inputBannerHTMLType.value;
     } else if (type === 'img') {
       target = this.inputBannerTarget.value;
       url = this.inputBannerUrl.value;
@@ -115,6 +124,12 @@ class UpdateBannerForm extends Component {
     if (type === 'html') {
       if (html && html !== this.props.banner.html) {
         banner.html = html;
+      }
+      if (adServer && adServer !== this.props.banner.adServer) {
+        banner.adServer = adServer;
+      }
+      if (bannerHTMLType && bannerHTMLType !== this.props.banner.bannerHTMLType) {
+        banner.bannerHTMLType = bannerHTMLType;
       }
     } else if (type === 'img') {
       if (target && target !== this.props.banner.target) {
@@ -276,6 +291,72 @@ class UpdateBannerForm extends Component {
                           this.inputBannerHTML = c;
                         }}
                       />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="inputBannerAdServer"
+                      className="col-sm-2 control-label"
+                    >Alter HTML to enable click tracking for</label>
+                    <div className="col-sm-10">
+                      <select
+                        id="inputBannerAdServer" className="form-control"
+                        ref={c => {
+                          this.inputBannerAdServer = c;
+                        }}
+                      >
+                        <option value="">Generic HTML Banner</option>
+                        <option value="adtech">Rich Media - adtech</option>
+                        <option value="atlas">Rich Media - Atlas</option>
+                        <option value="bluestreak">Rich Media - Bluestreak</option>
+                        <option value="cpx">Rich Media - CPX</option>
+                        <option value="doubleclick">Rich Media - Doubleclick</option>
+                        <option value="eyeblaster">Rich Media - Eyeblaster</option>
+                        <option value="falk">Rich Media - Falk</option>
+                        <option value="google">Rich Media - Google AdSense</option>
+                        <option value="kontera">Rich Media - Kontera</option>
+                        <option value="max">Rich Media - OpenX</option>
+                        <option value="mediaplex">Rich Media - Mediaplex</option>
+                        <option value="tangozebra">Rich Media - Tango Zebra</option>
+                        <option value="tradedoubler">Rich Media - Trade Doubler</option>
+                        <option value="ypn">Rich Media - Yahoo! Publisher Network</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="inputBannerHTMLType"
+                      className="col-sm-2 control-label"
+                    >Type Banner HTML</label>
+                    <div className="col-sm-10">
+                      <select
+                        id="inputBannerHTMLType" className="form-control"
+                        ref={c => {
+                          this.inputBannerHTMLType = c;
+                        }}
+                      >
+                        <option value="0">Generic HTML</option>
+                        <option value="18">ADN Code</option>
+                        <option value="13">Balloon Classic Code</option>
+                        <option value="9">Balloon Plus Code</option>
+                        <option value="7">Box-App CPD Code</option>
+                        <option value="4">Box-App CPM Booking 300x600</option>
+                        <option value="12">Box-App CPM 300x250 Code</option>
+                        <option value="6">Box-App CPM 300x385 Code</option>
+                        <option value="5">CPC Admarket Code</option>
+                        <option value="10">CPC PLUS Code</option>
+                        <option value="11">CPM Admarket Code</option>
+                        <option value="8">CPM 7K Code hoặc Banner CPM Bám biên phải</option>
+                        <option value="14">Google Adsense Code</option>
+                        <option value="15">Sponsor Code</option>
+                        <option value="16">Retargeting Banner</option>
+                        <option value="17">Banner TVC Sticky</option>
+                        <option value="30">Banner CPM Kingsize</option>
+                        <option value="33">Banner popup CPC</option>
+                        <option value="35">Banner King size chạy merge</option>
+                        <option value="36">Banner chạy kèm kingsize 300x600 vị trí dưới</option>
+                        <option value="99">PR Tracking</option>
+                      </select>
                     </div>
                   </div>
                 </div>

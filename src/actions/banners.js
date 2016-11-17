@@ -43,6 +43,8 @@ export function getBanner(id) {
           imageUrl
           target
           status
+          adServer
+          bannerHTMLType
           channelId
           pbzBanner {
             placements {
@@ -99,6 +101,8 @@ export function getBanners(args = {
           imageUrl
           target
           status
+          adServer
+          bannerHTMLType
           channelId
           pbzBanner {
             placements {
@@ -154,6 +158,8 @@ export function createBanner({
   target,
   imageUrl,
   status,
+  adServer,
+  bannerHTMLType,
   channelId,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -172,6 +178,8 @@ export function createBanner({
           target
           imageUrl
           status
+          adServer
+          bannerHTMLType
           channelId
           createdAt
           updatedAt
@@ -191,6 +199,8 @@ export function createBanner({
         target,
         imageUrl,
         status,
+        adServer,
+        bannerHTMLType,
         channelId,
       },
     });
@@ -217,6 +227,8 @@ export function updateBanner({
   target,
   imageUrl,
   status,
+  adServer,
+  bannerHTMLType,
   channelId,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -235,6 +247,8 @@ export function updateBanner({
           imageUrl
           target
           status
+          adServer
+          bannerHTMLType
           channelId
           createdAt
           updatedAt
@@ -255,6 +269,8 @@ export function updateBanner({
         target,
         imageUrl,
         status,
+        adServer,
+        bannerHTMLType,
         channelId,
       },
     });
@@ -285,6 +301,8 @@ export function deleteBanner(id) {
           imageUrl
           target
           status
+          adServer
+          bannerHTMLType
           channelId
           createdAt
           updatedAt

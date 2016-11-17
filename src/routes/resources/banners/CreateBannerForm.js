@@ -84,20 +84,26 @@ class CreateBannerForm extends Component {
     let url = '';
     let imageUrl = '';
     let html = '';
+    let bannerHTMLType = '';
+    let adServer = '';
     if (type === 'html') {
       html = this.inputBannerHTML.value;
       target = '';
       url = '';
       imageUrl = '';
+      bannerHTMLType = this.inputBannerHTMLType.value;
+      adServer = this.inputBannerAdServer.value;
     } else if (type === 'img') {
       target = this.inputBannerTarget.value;
       html = '';
       url = this.inputBannerUrl.value;
       imageUrl = this.state.imageUrl;
+      bannerHTMLType = '';
+      adServer = '';
     }
     const status = this.inputBannerStatus.value;
     const keyword = document.getElementById('inputBannerKeyWord').value;
-    if (name && height && weight && keyword && width && description && type && channelId) {
+    if (name && keyword && width && description && type && channelId) {
       this.props.createBanner({
         name,
         html,
@@ -111,6 +117,8 @@ class CreateBannerForm extends Component {
         target,
         imageUrl,
         status,
+        adServer,
+        bannerHTMLType,
         channelId,
       }).then(() => {
         this.clearInput();
@@ -160,27 +168,95 @@ class CreateBannerForm extends Component {
           {
             this.state.checkTypeBanner === 'html' ?
               (
-                <div className="form-group">
-                  <label
-                    htmlFor="inputBannerHTML"
-                    className="col-sm-2 control-label"
-                  >HTML</label>
-                  <div className="col-sm-10">
-                    <textarea
-                      className="form-control" id="inputBannerHTML"
-                      rows="5" placeholder="More info..."
-                      ref={c => {
-                        this.inputBannerHTML = c;
-                      }}
-                    />
+                <div className="banneHtml">
+                  <div className="form-group">
+                    <label
+                      htmlFor="inputBannerHTML"
+                      className="col-sm-2 control-label"
+                    >HTML</label>
+                    <div className="col-sm-10">
+                      <textarea
+                        className="form-control" id="inputBannerHTML"
+                        rows="5" placeholder="More info..."
+                        ref={c => {
+                          this.inputBannerHTML = c;
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="inputBannerAdServer"
+                      className="col-sm-2 control-label"
+                    >Alter HTML to enable click tracking for</label>
+                    <div className="col-sm-10">
+                      <select
+                        id="inputBannerAdServer" className="form-control"
+                        ref={c => {
+                          this.inputBannerAdServer = c;
+                        }}
+                      >
+                        <option value="">Generic HTML Banner</option>
+                        <option value="adtech">Rich Media - adtech</option>
+                        <option value="atlas">Rich Media - Atlas</option>
+                        <option value="bluestreak">Rich Media - Bluestreak</option>
+                        <option value="cpx">Rich Media - CPX</option>
+                        <option value="doubleclick">Rich Media - Doubleclick</option>
+                        <option value="eyeblaster">Rich Media - Eyeblaster</option>
+                        <option value="falk">Rich Media - Falk</option>
+                        <option value="google">Rich Media - Google AdSense</option>
+                        <option value="kontera">Rich Media - Kontera</option>
+                        <option value="max">Rich Media - OpenX</option>
+                        <option value="mediaplex">Rich Media - Mediaplex</option>
+                        <option value="tangozebra">Rich Media - Tango Zebra</option>
+                        <option value="tradedoubler">Rich Media - Trade Doubler</option>
+                        <option value="ypn">Rich Media - Yahoo! Publisher Network</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="inputBannerHTMLType"
+                      className="col-sm-2 control-label"
+                    >Type Banner HTML</label>
+                    <div className="col-sm-10">
+                      <select
+                        id="inputBannerHTMLType" className="form-control"
+                        ref={c => {
+                          this.inputBannerHTMLType = c;
+                        }}
+                      >
+                        <option value="0">Generic HTML</option>
+                        <option value="18">ADN Code</option>
+                        <option value="13">Balloon Classic Code</option>
+                        <option value="9">Balloon Plus Code</option>
+                        <option value="7">Box-App CPD Code</option>
+                        <option value="4">Box-App CPM Booking 300x600</option>
+                        <option value="12">Box-App CPM 300x250 Code</option>
+                        <option value="6">Box-App CPM 300x385 Code</option>
+                        <option value="5">CPC Admarket Code</option>
+                        <option value="10">CPC PLUS Code</option>
+                        <option value="11">CPM Admarket Code</option>
+                        <option value="8">CPM 7K Code hoặc Banner CPM Bám biên phải</option>
+                        <option value="14">Google Adsense Code</option>
+                        <option value="15">Sponsor Code</option>
+                        <option value="16">Retargeting Banner</option>
+                        <option value="17">Banner TVC Sticky</option>
+                        <option value="30">Banner CPM Kingsize</option>
+                        <option value="33">Banner popup CPC</option>
+                        <option value="35">Banner King size chạy merge</option>
+                        <option value="36">Banner chạy kèm kingsize 300x600 vị trí dưới</option>
+                        <option value="99">PR Tracking</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               ) : (
                 <div className="bannerImage">
                   <div className="form-group">
                     <label htmlFor="inputBannerImage" className="col-sm-2 control-label">
-                      Banner
-                    </label>
+                    Banner
+                  </label>
                     <div className="col-sm-10">
                       <DropzoneComponent
                         config={this.componentConfig}
