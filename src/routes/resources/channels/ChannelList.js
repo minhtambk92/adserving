@@ -21,7 +21,7 @@ class ChannelList extends Component {
             name="inputChooseChannel[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

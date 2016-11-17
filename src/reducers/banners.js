@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import { GET_BANNER, GET_BANNERS, CREATE_BANNER, UPDATE_BANNER,
-  DELETE_BANNER, GET_BANNERS_FILTERS, SET_BANNERS_FILTERS } from '../constants';
+import {
+  GET_BANNER, GET_BANNERS, CREATE_BANNER, UPDATE_BANNER,
+  DELETE_BANNER, GET_BANNERS_FILTERS, SET_BANNERS_FILTERS,
+} from '../constants';
 
 function filters(state = {}, action) {
   switch (action.type) {

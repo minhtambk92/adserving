@@ -297,7 +297,7 @@ class Channel extends Component {
                                                     value={option.value}
                                                   >
                                                     {option.name}
-                                                  </option>
+                                                  </option>,
                                                 )}
                                               </select>
                                             </div>
@@ -361,7 +361,7 @@ class Channel extends Component {
                                     />);
                                   }
                                   return false;
-                                }
+                                },
                                 )}
                               </div>
                               <div className="box-footer">

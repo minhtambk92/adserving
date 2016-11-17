@@ -65,7 +65,7 @@ class FilterCampaignsForm extends Component {
                 defaultValue={this.props.filters && this.props.filters.siteId}
               >
                 <option value="null">All sites</option>
-                {this.props.list && this.props.sites.map(site => (
+                {this.props.sites && this.props.sites.map(site => (
                   <option
                     key={site.id} value={site.id}
                   >{site.name} | {site.domain}</option>

@@ -1,5 +1,5 @@
 import {
- CREATE_PLACEMENT_BANNER_ZONE, REMOVE_PLACEMENT_BANNER_ZONE, DELETE_BANNER, DELETE_ZONE,
+  CREATE_PLACEMENT_BANNER_ZONE, REMOVE_PLACEMENT_BANNER_ZONE, DELETE_BANNER, DELETE_ZONE,
 } from '../constants';
 
 export default function placementBannerZones(state = {}, action) {

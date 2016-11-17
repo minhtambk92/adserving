@@ -27,7 +27,7 @@ class ListBannerOfPlacement extends Component {
             name="inputChooseBanner[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {
