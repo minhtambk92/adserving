@@ -21,7 +21,7 @@ class SiteList extends Component {
             name="inputChooseSite[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

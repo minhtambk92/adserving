@@ -9,7 +9,7 @@ import {
 } from '../constants/';
 
 export function getBannersFilters() {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: GET_BANNERS_FILTERS,
       payload: {},
@@ -18,7 +18,7 @@ export function getBannersFilters() {
 }
 
 export function setBannersFilters(filter) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: SET_BANNERS_FILTERS,
       payload: filter,
@@ -27,7 +27,7 @@ export function setBannersFilters(filter) {
 }
 
 export function getBanner(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         banners(where: {id: "${id}"}, limit: 1) {
@@ -83,7 +83,7 @@ export function getBanners(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query($where: JSON, $order: String, $limit: Int) {
         banners(where: $where, order: $order, limit: $limit) {
@@ -156,7 +156,7 @@ export function createBanner({
   status,
   channelId,
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($banner: BannerInputTypeWithoutId!) {
         createdBanner(banner: $banner) {
@@ -219,7 +219,7 @@ export function updateBanner({
   status,
   channelId,
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($banner: BannerInputType!) {
        updatedBanner(banner: $banner) {
@@ -269,7 +269,7 @@ export function updateBanner({
 }
 
 export function deleteBanner(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
         deletedBanner(id: "${id}") {

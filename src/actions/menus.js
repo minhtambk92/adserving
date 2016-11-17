@@ -13,7 +13,7 @@ import {
 } from '../constants';
 
 export function getMenu(uniqueName, actionType) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         menus(where: {uniqueName: "${uniqueName}"}, limit: 1) {
@@ -69,7 +69,7 @@ export function getAsideLeftMenu(uniqueName) {
 }
 
 export function setActiveItems(activeItems) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: SET_ACTIVE_ITEMS,
       payload: {
@@ -84,7 +84,7 @@ export function getMenus(args = {
   limit: 0,
   order: '',
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query ($where: JSON, $order: String, $limit: Int) {
         menus(where: $where, order: $order, limit: $limit) {
@@ -133,7 +133,7 @@ export function getMenus(args = {
 }
 
 export function createMenu({ uniqueName, name }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($menu: MenuInputWithoutId!) {
         createdMenu(menu: $menu) {
@@ -171,7 +171,7 @@ export function createMenu({ uniqueName, name }) {
 }
 
 export function updateMenu({ id, uniqueName, name }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($menu: MenuInput!) {
         updatedMenu(menu: $menu) {
@@ -209,7 +209,7 @@ export function updateMenu({ id, uniqueName, name }) {
 }
 
 export function deleteMenu(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
         deletedMenu(id: "${id}") {

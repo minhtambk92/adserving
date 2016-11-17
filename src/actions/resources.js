@@ -13,7 +13,7 @@ import {
 } from '../constants';
 
 export function getResourcesFilters() {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: GET_RESOURCES_FILTERS,
       payload: {},
@@ -22,7 +22,7 @@ export function getResourcesFilters() {
 }
 
 export function setResourcesFilters(filter) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: SET_RESOURCES_FILTERS,
       payload: filter,
@@ -31,7 +31,7 @@ export function setResourcesFilters(filter) {
 }
 
 export function getResource(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         resources(where: {id: "${id}"}, limit: 1) {
@@ -64,7 +64,7 @@ export function getResources(args = {
   limit: 0,
   order: '',
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query ($where: JSON, $order: String, $limit: Int) {
         resources(where: $where, order: $order, limit: $limit) {
@@ -104,7 +104,7 @@ export function getResources(args = {
 }
 
 export function createResource({ uniqueName, modelName, name, hasMeta, description, status }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($resource: ResourceInputTypeWithoutId!) {
         createdResource(resource: $resource) {
@@ -142,7 +142,7 @@ export function createResource({ uniqueName, modelName, name, hasMeta, descripti
 }
 
 export function updateResource({ id, uniqueName, modelName, name, hasMeta, description, status }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($resource: ResourceInputType!) {
         updatedResource(resource: $resource) {
@@ -181,7 +181,7 @@ export function updateResource({ id, uniqueName, modelName, name, hasMeta, descr
 }
 
 export function deleteResource(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
         deletedResource(id: "${id}") {

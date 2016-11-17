@@ -6,7 +6,7 @@ import {
 } from '../constants';
 
 export function createPlacementBannerZone({ placementId, bannerId, zoneId }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         placementBannerZones(where: {placementId: "${placementId}"}) {
@@ -146,7 +146,7 @@ export function createPlacementBannerZone({ placementId, bannerId, zoneId }) {
   };
 }
 export function removeZoneInPlacementBannerZone({ placementId, zId }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     // REMOVE ZONE IN PLACEMENT OR REMOVE PLACEMENT IN ZONE
     if (zId !== null) {
       const query = `
@@ -207,7 +207,7 @@ export function removeZoneInPlacementBannerZone({ placementId, zId }) {
   };
 }
 export function removeBannerInPlacementBannerZone({ placementId, bId }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     // REMOVE BANNER IN PLACEMENT OR REMOVE PLACEMENT IN BANNER
     if (bId !== null) {
       const query = `
@@ -270,7 +270,7 @@ export function removeBannerInPlacementBannerZone({ placementId, bId }) {
   };
 }
 export function removePlacement(placementId) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         placementBannerZones(where: {placementId: "${placementId}"}) {
@@ -313,7 +313,7 @@ export function removePlacement(placementId) {
 }
 export function removeZone(zId) {
   // DELETE ZONE
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         placementBannerZones(where: {zoneId: "${zId}"}) {
@@ -377,7 +377,7 @@ export function removeZone(zId) {
 }
 export function removeBanner(bId) {
   // DELETE BANNER
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         placementBannerZones(where: {bannerId: "${bId}"}) {

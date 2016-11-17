@@ -13,7 +13,7 @@ import {
 } from '../constants';
 
 export function getRolesFilters() {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: GET_ROLES_FILTERS,
       payload: {},
@@ -22,7 +22,7 @@ export function getRolesFilters() {
 }
 
 export function setRolesFilters(filter) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: SET_ROLES_FILTERS,
       payload: filter,
@@ -31,7 +31,7 @@ export function setRolesFilters(filter) {
 }
 
 export function getRole(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         roles(where: {id: "${id}"}, limit: 1) {
@@ -59,7 +59,7 @@ export function getRoles(args = {
   limit: 0,
   order: '',
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query ($where: JSON, $order: String, $limit: Int) {
         roles(where: $where, order: $order, limit: $limit) {
@@ -94,7 +94,7 @@ export function getRoles(args = {
 }
 
 export function createRole({ uniqueName, name }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($role: RoleInputWithoutId!) {
         createdRole(role: $role) {
@@ -118,7 +118,7 @@ export function createRole({ uniqueName, name }) {
 }
 
 export function updateRole({ id, uniqueName, name }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($role: RoleInput!) {
         updatedRole(role: $role) {
@@ -142,7 +142,7 @@ export function updateRole({ id, uniqueName, name }) {
 }
 
 export function deleteRole(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
         deletedRole(id: "${id}") {

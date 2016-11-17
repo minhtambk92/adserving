@@ -21,7 +21,7 @@ class AdvertiserList extends Component {
             name="inputChooseAdvertiser[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

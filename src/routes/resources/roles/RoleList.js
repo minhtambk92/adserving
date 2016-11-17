@@ -31,7 +31,7 @@ class RoleList extends Component {
             name="inputChooseRole[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

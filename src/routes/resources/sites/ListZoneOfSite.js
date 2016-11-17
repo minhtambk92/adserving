@@ -20,7 +20,7 @@ class ListZoneOfSite extends Component {
             name="inputChooseSite[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

@@ -7,7 +7,7 @@ import {
 } from '../constants';
 
 export function getAdvertiser(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         advertisers(where: {id: "${id}"}, limit: 1) {
@@ -48,7 +48,7 @@ export function getAdvertiser(id) {
 }
 
 export function getAdvertisers() {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         advertisers {
@@ -75,7 +75,7 @@ export function getAdvertisers() {
 }
 
 export function createAdvertiser({ email, name, contact, description, status }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($advertiser: AdvertiserInputTypeWithoutId!) {
         createdAdvertiser(advertiser: $advertiser) {
@@ -110,7 +110,7 @@ export function createAdvertiser({ email, name, contact, description, status }) 
 }
 
 export function updateAdvertiser({ id, email, name, contact, description, status }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($advertiser: AdvertiserInputType!) {
         updatedAdvertiser(advertiser: $advertiser) {
@@ -146,7 +146,7 @@ export function updateAdvertiser({ id, email, name, contact, description, status
 }
 
 export function deleteAdvertiser(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
         deletedAdvertiser(id: "${id}") {

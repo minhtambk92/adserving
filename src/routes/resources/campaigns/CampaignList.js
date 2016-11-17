@@ -23,7 +23,7 @@ class CampaignList extends Component {
             name="inputChooseCampaign[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

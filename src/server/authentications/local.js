@@ -11,7 +11,7 @@ passport.use(new LocalStrategy({
   usernameField: 'email',
   passReqToCallback: true,
   session: false,
-}, async(req, email, password, done) => {
+}, async (req, email, password, done) => {
   // Find user by email
   const user = await User.findOne({ where: { email } });
 

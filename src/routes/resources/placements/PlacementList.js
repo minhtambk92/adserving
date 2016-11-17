@@ -24,7 +24,7 @@ class PlacementList extends Component {
             name="inputChoosePlacement[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

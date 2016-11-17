@@ -26,7 +26,7 @@ class ListPlacementNotBelongToZone extends Component {
             name="inputChoosePlacement[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

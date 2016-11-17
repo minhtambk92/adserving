@@ -22,7 +22,7 @@ class ZoneList extends Component {
             name="inputChooseZone[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

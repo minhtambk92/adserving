@@ -21,7 +21,7 @@ class BannerList extends Component {
             name="inputChooseBanner[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

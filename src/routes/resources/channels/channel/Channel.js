@@ -88,7 +88,7 @@ class Channel extends Component {
   componentDidUpdate() {
     /* eslint-disable no-undef */
     const self = this;
-    $('.remove-option').click(function () {
+    $('.remove-option').click(() => {
       const type = $(this).parents('.row').attr('id');
       if (type === 'category') {
         self.setState({
@@ -113,7 +113,7 @@ class Channel extends Component {
       const arrCategory = [];
       const id = currentOption[i];
       /* eslint-disable no-loop-func */
-      $(`#${id} input[type=checkbox]`).each(function () {
+      $(`#${id} input[type=checkbox]`).each(() => {
         /* eslint-enable no-loop-func */
         const val = (this.checked ? $(this).val() : '');
         if (val !== 'on' && val.trim() !== '') {
@@ -164,7 +164,7 @@ class Channel extends Component {
       const arrCategory = [];
       const id = currentOption[i];
       /* eslint-disable no-loop-func */
-      $(`#${id} input[type=checkbox]`).each(function () {
+      $(`#${id} input[type=checkbox]`).each(() => {
         /* eslint-enable no-loop-func */
         const val = (this.checked ? $(this).val() : '');
         if (val !== 'on' && val.trim() !== '') {
@@ -297,7 +297,7 @@ class Channel extends Component {
                                                     value={option.value}
                                                   >
                                                     {option.name}
-                                                  </option>
+                                                  </option>,
                                                 )}
                                               </select>
                                             </div>
@@ -361,7 +361,7 @@ class Channel extends Component {
                                     />);
                                   }
                                   return false;
-                                }
+                                },
                                 )}
                               </div>
                               <div className="box-footer">

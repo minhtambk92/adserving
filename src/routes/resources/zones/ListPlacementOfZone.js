@@ -25,7 +25,7 @@ class ListPlacementOfZone extends Component {
             name="inputChoosePlacement[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

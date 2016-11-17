@@ -7,7 +7,7 @@ import {
 } from '../constants';
 
 export function getOptionChannel(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         optionChannels(where: {id: "${id}"}, limit: 1) {
@@ -33,7 +33,7 @@ export function getOptionChannel(id) {
 }
 
 export function getOptionChannels() {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         optionChannels {
@@ -59,7 +59,7 @@ export function getOptionChannels() {
 }
 
 export function createOptionChannel({ logical, type, comparison, value, channelId }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($optionChannel: OptionChannelInputTypeWithoutId!) {
         createdOptionChannel(optionChannel: $optionChannel) {
@@ -80,7 +80,7 @@ export function createOptionChannel({ logical, type, comparison, value, channelI
         type,
         comparison,
         value,
-        channelId
+        channelId,
       },
     });
 
@@ -94,7 +94,7 @@ export function createOptionChannel({ logical, type, comparison, value, channelI
 }
 
 export function updateOptionChannel({ id, logical, type, comparison, value }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($optionChannel: OptionChannelInputType!) {
         updatedAdvertiser(optionChannel: $optionChannel) {
@@ -128,7 +128,7 @@ export function updateOptionChannel({ id, logical, type, comparison, value }) {
 }
 
 export function deleteOptionChannel(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
         deletedOptionChannel(id: "${id}") {

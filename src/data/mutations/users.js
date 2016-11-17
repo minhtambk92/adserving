@@ -86,7 +86,7 @@ const users = {
         if (newUser.roles) {
           const userRoles = JSON.parse(newUser.roles);
 
-          userRoles.forEach(async(role) => {
+          userRoles.forEach(async (role) => {
             const userRole = await UserRole.findOne({
               where: {
                 userId: args.user.id,

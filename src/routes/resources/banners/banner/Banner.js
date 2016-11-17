@@ -8,7 +8,6 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import moment from 'moment';
 import style from 'react-dropzone-component/styles/filepicker.css';
 import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
 import { connect } from 'react-redux';
@@ -188,7 +187,7 @@ class Banner extends Component {
                                       this.props.banners.editing.pbzBanner &&
                                       this.filterPlmNotIn(
                                         this.props.placements.list,
-                                        this.props.banners.editing.pbzBanner
+                                        this.props.banners.editing.pbzBanner,
                                       )}
                                   createPlacementBannerZone={this.props.createPlacementBannerZone}
                                   getBanner={this.props.getBanner}
@@ -215,7 +214,7 @@ class Banner extends Component {
                                   list={this.props.banners.editing &&
                                       this.props.banners.editing.pbzBanner &&
                                       this.filterPlacements(
-                                        this.props.banners.editing.pbzBanner
+                                        this.props.banners.editing.pbzBanner,
                                       )}
                                   /* eslint-disable max-len */
                                   removeBannerInPlacementBannerZone={this.props.removeBannerInPlacementBannerZone}
