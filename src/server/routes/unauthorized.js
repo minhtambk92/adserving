@@ -32,7 +32,7 @@ router.post('/login',
         loggedInUser: req.user,
       },
     });
-  }
+  },
 );
 
 router.post('/logout', (req, res) => {

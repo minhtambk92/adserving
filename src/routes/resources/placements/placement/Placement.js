@@ -224,7 +224,7 @@ class Placement extends Component {
                                    && this.props.placements && this.props.placements.editing &&
                                     this.props.placements.editing.pbzPlacement &&
                                     this.filterBanner(this.props.banners.list,
-                                      this.props.placements.editing.pbzPlacement
+                                      this.props.placements.editing.pbzPlacement,
                                     )}
                                   createPlacementBannerZone={this.props.createPlacementBannerZone}
                                   getPlacement={this.props.getPlacement}

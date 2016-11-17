@@ -96,7 +96,7 @@ class OptionSelectChannel extends Component {
                         />
                         {data.name}
                       </label>
-                    </div>
+                    </div>,
                   )
                   }
                 </div>

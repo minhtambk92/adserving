@@ -26,7 +26,7 @@ class UserList extends Component {
             name="inputChooseUser[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

@@ -26,7 +26,7 @@ class ResourceList extends Component {
             name="inputChooseResource[]"
             value={cellData}
           />,
-          cell
+          cell,
         );
       },
     }, {

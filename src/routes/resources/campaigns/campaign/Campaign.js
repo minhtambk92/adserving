@@ -8,7 +8,6 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import moment from 'moment';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';

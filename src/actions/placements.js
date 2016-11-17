@@ -9,7 +9,7 @@ import {
 } from '../constants/';
 
 export function getPlacementsFilters() {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: GET_PLACEMENTS_FILTERS,
       payload: {},
@@ -18,7 +18,7 @@ export function getPlacementsFilters() {
 }
 
 export function setPlacementsFilters(filter) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: SET_PLACEMENTS_FILTERS,
       payload: filter,
@@ -27,7 +27,7 @@ export function setPlacementsFilters(filter) {
 }
 
 export function getPlacement(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         placements(where: {id: "${id}"}, limit: 1) {
@@ -96,7 +96,7 @@ export function getPlacements(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query($where: JSON, $order: String, $limit: Int) {
         placements(where: $where, order: $order, limit: $limit) {
@@ -147,7 +147,7 @@ export function createPlacement({
   campaignId,
   status,
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($placement: PlacementInputTypeWithoutId!) {
         createdPlacement(placement: $placement) {
@@ -200,7 +200,7 @@ export function updatePlacement({
   campaignId,
   status,
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($placement: PlacementInputType!) {
         updatedPlacement(placement: $placement) {
@@ -276,7 +276,7 @@ export function updatePlacement({
 }
 
 export function deletePlacement(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
         deletedPlacement(id: "${id}") {

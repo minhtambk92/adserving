@@ -6,12 +6,13 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-
 @import '../../../../components/variables.css';
-.col-sm-3 label div:nth-child(1){
+
+.col-sm-3 label div:nth-child(1) {
   display: inline-block !important;
   margin-right: 5px;
 }
-.box-title{
+
+.box-title {
   text-transform: uppercase;
 }

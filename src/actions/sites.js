@@ -14,7 +14,7 @@ import {
 } from '../constants';
 
 export function getSite(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         sites(where: {id: "${id}"}, limit: 1) {
@@ -64,7 +64,7 @@ export function getSites(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query ($where: JSON, $order: String, $limit: Int) {
         sites(where: $where, order: $order, limit: $limit) {
@@ -104,7 +104,7 @@ export function getSites(args = {
 }
 
 export function checkSitesByDomain(domain) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         sites(where: {domain: "${domain}"}) {
@@ -131,7 +131,7 @@ export function checkSitesByDomain(domain) {
 }
 
 export function createSite({ domain, name, email, description, status, channelId }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($site: SiteInputTypeWithoutId!) {
         createdSite(site: $site) {
@@ -168,7 +168,7 @@ export function createSite({ domain, name, email, description, status, channelId
 }
 
 export function updateSite({ id, domain, name, email, description, status, channelId }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($site: SiteInputType!) {
         updatedSite(site: $site) {
@@ -206,7 +206,7 @@ export function updateSite({ id, domain, name, email, description, status, chann
 }
 
 export function deleteSite(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
         deletedSite(id: "${id}") {

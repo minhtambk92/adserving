@@ -9,7 +9,6 @@
 
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getPlacements, createPlacement, getPlacementsFilters, setPlacementsFilters } from '../../../actions/placements';

@@ -7,8 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { Component, PropTypes } from 'react';
-import { FormattedRelative } from 'react-intl';
+import React, { Component } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
@@ -61,7 +60,7 @@ class Home extends Component {
           'You chose: '
             .concat(start.format('MMMM D, YYYY'))
             .concat(' - ')
-            .concat(end.format('MMMM D, YYYY'))
+            .concat(end.format('MMMM D, YYYY')),
         );
       });
 
@@ -109,7 +108,7 @@ class Home extends Component {
               el.html()
                 .concat(': ')
                 .concat(visitorsData[code])
-                .concat(' new visitors')
+                .concat(' new visitors'),
             );
           }
         },

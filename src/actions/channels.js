@@ -11,7 +11,7 @@ import {
 } from '../constants';
 
 export function getChannelsFilters() {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: GET_CHANNELS_FILTERS,
       payload: {},
@@ -20,7 +20,7 @@ export function getChannelsFilters() {
 }
 
 export function setChannelsFilters(filter) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: SET_CHANNELS_FILTERS,
       payload: filter,
@@ -29,7 +29,7 @@ export function setChannelsFilters(filter) {
 }
 
 export function getChannel(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         channels(where: {id: "${id}"}, limit: 1) {
@@ -67,7 +67,7 @@ export function getChannels(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query ($where: JSON, $order: String, $limit: Int) {
         channels(where: $where, order: $order, limit: $limit) {
@@ -104,7 +104,7 @@ export function getChannels(args = {
 }
 
 export function createChannel({ name, description, status }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($channel: ChannelInputTypeWithoutId!) {
         createdChannel(channel: $channel) {
@@ -135,7 +135,7 @@ export function createChannel({ name, description, status }) {
 }
 
 export function updateChannel({ id, name, description, status }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($channel: ChannelInputType!) {
         updatedChannel(channel: $channel) {
@@ -167,7 +167,7 @@ export function updateChannel({ id, name, description, status }) {
 }
 
 export function deleteChannel(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
         deletedChannel(id: "${id}") {

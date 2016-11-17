@@ -15,7 +15,7 @@ import {
 } from '../constants';
 
 export function getUsersFilters() {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: GET_USERS_FILTERS,
       payload: {},
@@ -24,7 +24,7 @@ export function getUsersFilters() {
 }
 
 export function setUsersFilters(filter) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: SET_USERS_FILTERS,
       payload: filter,
@@ -33,7 +33,7 @@ export function setUsersFilters(filter) {
 }
 
 export function getUser(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         users(where: {id: "${id}"}, limit: 1) {
@@ -74,7 +74,7 @@ export function getUsers(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query ($where: JSON, $order: String, $limit: Int) {
         users(where: $where, order: $order, limit: $limit) {
@@ -121,7 +121,7 @@ export function getUsers(args = {
 }
 
 export function createUser({ email, profile, roles, password, emailConfirmed, status }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($user: UserInputTypeWithoutId!) {
         createdUser(user: $user) {
@@ -165,7 +165,7 @@ export function createUser({ email, profile, roles, password, emailConfirmed, st
 }
 
 export function updateUser({ id, email, profile, roles, password, emailConfirmed, status }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($user: UserInputType!) {
         updatedUser(user: $user) {
@@ -210,7 +210,7 @@ export function updateUser({ id, email, profile, roles, password, emailConfirmed
 }
 
 export function deleteUser(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
         deletedUser(id: "${id}") {
@@ -246,7 +246,7 @@ export function deleteUser(id) {
 }
 
 export function registerUser({ email, password, fullName }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($user: UserInputTypeWithoutId!) {
         createdUser(user: $user) {
@@ -292,7 +292,7 @@ export function registerUser({ email, password, fullName }) {
 }
 
 export function logUserIn({ email, password, rememberMe }) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     const res = await fetch('/login', {
       method: 'post',
       headers: {
@@ -319,7 +319,7 @@ export function logUserIn({ email, password, rememberMe }) {
 }
 
 export function logUserOut() {
-  return async(dispatch) => {
+  return async (dispatch) => {
     await fetch('/logout', {
       method: 'post',
       headers: {

@@ -9,7 +9,7 @@ import {
 } from '../constants/';
 
 export function getCampaignsFilters() {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: GET_CAMPAIGNS_FILTERS,
       payload: {},
@@ -18,7 +18,7 @@ export function getCampaignsFilters() {
 }
 
 export function setCampaignsFilters(filter) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: SET_CAMPAIGNS_FILTERS,
       payload: filter,
@@ -27,7 +27,7 @@ export function setCampaignsFilters(filter) {
 }
 
 export function getCampaign(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
         campaigns(where: {id: "${id}"}) {
@@ -76,7 +76,7 @@ export function getCampaigns(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query($where: JSON, $order: String, $limit: Int) {
         campaigns(where: $where, order: $order, limit: $limit) {
@@ -129,7 +129,7 @@ export function createCampaign({
   description,
   status,
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($campaign: CampaignInputTypeWithoutId!) {
         createdCampaign(campaign: $campaign) {
@@ -186,7 +186,7 @@ export function updateCampaign({
   description,
   status,
 }) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($campaign: CampaignInputType!) {
         updatedCampaign(campaign: $campaign) {
@@ -232,7 +232,7 @@ export function updateCampaign({
 }
 
 export function deleteCampaign(id) {
-  return async(dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
         deletedCampaign(id: "${id}") {
