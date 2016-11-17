@@ -108,7 +108,7 @@ app.use(require('./server/middlewares').default);
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
-app.get('*', async(req, res, next) => {
+app.get('*', async (req, res, next) => {
   try {
     const store = configureStore({
       user: req.user || null,
@@ -166,7 +166,6 @@ app.get('*', async(req, res, next) => {
     data.state = context.store.getState();
     data.lang = locale;
     data.chunk = assets[route.chunk] && assets[route.chunk].js;
-    data.classes = 'skin-blue sidebar-mini';
     const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
 
     res.status(route.status || 200);

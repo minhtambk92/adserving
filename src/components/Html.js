@@ -21,11 +21,10 @@ class Html extends React.Component {
     state: PropTypes.object,
     lang: PropTypes.string,
     children: PropTypes.string,
-    classes: PropTypes.string,
   };
 
   render() {
-    const { title, description, style, script, chunk, state, lang, children, classes } = this.props;
+    const { title, description, style, script, chunk, state, lang, children } = this.props;
     return (
       <html className="no-js" lang={lang}>
         <head>
@@ -58,7 +57,7 @@ class Html extends React.Component {
           />
           {style && <style id="css" dangerouslySetInnerHTML={{ __html: style }} />}
         </head>
-        <body className={classes}>
+        <body className="skin-blue sidebar-mini">
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
           <script src="/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js" />
           <script src="/AdminLTE/plugins/jQueryUI/jquery-ui.min.js" />
