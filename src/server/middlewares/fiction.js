@@ -3,6 +3,7 @@
  */
 
 import chalk from 'chalk';
+import moment from 'moment';
 import { genSaltSync, hashSync } from 'bcrypt';
 import {
   STATUS_ACTIVE,
@@ -19,6 +20,15 @@ import {
   User,
   UserProfile,
   UserRole,
+  Advertiser,
+  Campaign,
+  Channel,
+  OptionChannel,
+  Site,
+  Placement,
+  Zone,
+  Banner,
+  PlacementBannerZone,
 } from '../../data/models';
 import { host } from '../../config';
 
@@ -194,6 +204,13 @@ async function menusFiction() {
           parentId: inventory.id,
           order: 5,
           type: TYPE_MENU_ITEM,
+        }, {
+          url: '/resource/channel',
+          name: 'Target Channels',
+          icon: '<i class="fa fa-circle-o"></i>',
+          parentId: inventory.id,
+          order: 6,
+          type: TYPE_MENU_ITEM,
         }]);
       }
 
@@ -358,12 +375,263 @@ async function userFiction() {
   }
 }
 
+// Advertisers fiction
+async function advertiserFiction() {
+  console.log(chalk.grey('Check current number of advertisers...'));
+  const advertisersQuantity = await Advertiser.count();
+
+  if (advertisersQuantity === 0) {
+    console.log(chalk.red('No advertiser found! Do a fiction...'));
+
+    // Create an admin account
+    const advertiser = await Advertiser.create({
+      email: 'contact@admicro.vn',
+      name: 'Admicro',
+      status: STATUS_ACTIVE,
+      contact: '0988333777',
+      description: 'Đơn vị quảng cáo admicro',
+    });
+
+    console.log(chalk.green(`${advertiser.name} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${advertisersQuantity} advertiser(s) found. Passed!`));
+  }
+}
+
+// Campaigns fiction
+async function campaignFiction() {
+  console.log(chalk.grey('Check current number of advertisers...'));
+  const campaignsQuantity = await Campaign.count();
+
+  if (campaignsQuantity === 0) {
+    console.log(chalk.red('No advertiser found! Do a fiction...'));
+    // Get id of Advertiser
+    const advertiser = await Advertiser.findOne({ where: { email: 'contact@admicro.vn' } });
+    // Create an admin account
+    const campaign = await Campaign.create({
+      name: 'Campaign',
+      startTime: new Date(moment().format('YYYY-MM-DD 00:00:00')),
+      endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 00:00:00')),
+      views: 200000,
+      viewPerSession: 20,
+      timeResetViewCount: 24,
+      weight: 1,
+      status: STATUS_ACTIVE,
+      description: 'Campaign của Admicro',
+      advertiserId: advertiser.id,
+    });
+
+    console.log(chalk.green(`Super ${campaign.name} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${campaignsQuantity} campaign(s) found. Passed!`));
+  }
+}
+
+// Channels fiction
+async function channelFiction() {
+  console.log(chalk.grey('Check current number of channels...'));
+  const channelsQuantity = await Channel.count();
+
+  if (channelsQuantity === 0) {
+    console.log(chalk.red('No channel found! Do a fiction...'));
+    // Create an Channel
+    const channel = await Channel.create({
+      name: 'Channel',
+      status: STATUS_ACTIVE,
+      description: 'Channel của Admicro',
+    });
+
+    console.log(chalk.green(`Super ${channel.name} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${channelsQuantity} channel(s) found. Passed!`));
+  }
+}
+
+// OptionChannels fiction
+async function optionChannelFiction() {
+  console.log(chalk.grey('Check current number of optionChannels...'));
+  const optionChannelsQuantity = await OptionChannel.count();
+
+  if (optionChannelsQuantity === 0) {
+    console.log(chalk.red('No optionChannel found! Do a fiction...'));
+    // Get id of Channel
+    const channel = await Channel.findOne({ where: { name: 'Channel' } });
+    // Create an OptionChannel
+    const optionChannel = await OptionChannel.create({
+      logical: 'and',
+      type: 'category',
+      comparison: '==',
+      value: 'kinh-te,van-hoa',
+      status: STATUS_ACTIVE,
+      channelId: channel.id,
+    });
+
+    console.log(chalk.green(`${optionChannel.name} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${optionChannelsQuantity} optionChannel(s) found. Passed!`));
+  }
+}
+
+// Sites fiction
+async function siteFiction() {
+  console.log(chalk.grey('Check current number of sites...'));
+  const sitesQuantity = await Site.count();
+
+  if (sitesQuantity === 0) {
+    console.log(chalk.red('No site found! Do a fiction...'));
+    // Get id of Channel
+    const channel = await Channel.findOne({ where: { name: 'Channel' } });
+    // Create an OptionChannel
+    const site = await Site.create({
+      domain: 'http://bongdaso.com',
+      name: 'Bong Da So',
+      email: 'contact@bongdaso.com',
+      status: STATUS_ACTIVE,
+      description: 'Đơn vị đối tác của admicro',
+      channelId: channel.id,
+    });
+
+    console.log(chalk.green(`${site.name} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${sitesQuantity} site(s) found. Passed!`));
+  }
+}
+
+// Placements fiction
+async function placementFiction() {
+  console.log(chalk.grey('Check current number of placements...'));
+  const placementsQuantity = await Placement.count();
+
+  if (placementsQuantity === 0) {
+    console.log(chalk.red('No placement found! Do a fiction...'));
+    // Get id of Campaign
+    const campaign = await Campaign.findOne({ where: { name: 'Campaign' } });
+    // Create an OptionChannel
+    const placement = await Placement.create({
+      name: 'Placement',
+      startTime: new Date(moment().format('YYYY-MM-DD 00:00:00')),
+      endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 00:00:00')),
+      sizeWidth: 300,
+      sizeHeight: 300,
+      status: STATUS_ACTIVE,
+      weight: 1,
+      description: 'placement of Bong Da So',
+      campaignId: campaign.id,
+    });
+
+    console.log(chalk.green(`${placement.name} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${placementsQuantity} placement(s) found. Passed!`));
+  }
+}
+
+// Zones fiction
+async function zoneFiction() {
+  console.log(chalk.grey('Check current number of zones...'));
+  const zonesQuantity = await Zone.count();
+
+  if (zonesQuantity === 0) {
+    console.log(chalk.red('No zone found! Do a fiction...'));
+    // Get id of Site
+    const site = await Site.findOne({ where: { domain: 'http://bongdaso.com' } });
+    // Create an Zone
+    const zone = await Zone.create({
+      name: 'Zone Top',
+      width: 468,
+      height: 60,
+      sizeText: 'IAB Full Banner (468 x 60)',
+      sizeValue: '468x60',
+      slot: '1',
+      type: 'type-1',
+      html: 'html',
+      css: 'css',
+      status: STATUS_ACTIVE,
+      weight: 1,
+      description: 'Zone Top of Bong Da So',
+      siteId: site.id,
+    });
+
+    console.log(chalk.green(`${zone.name} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${zonesQuantity} zone(s) found. Passed!`));
+  }
+}
+
+// Banners fiction
+async function bannerFiction() {
+  console.log(chalk.grey('Check current number of banners...'));
+  const bannersQuantity = await Banner.count();
+
+  if (bannersQuantity === 0) {
+    console.log(chalk.red('No banner found! Do a fiction...'));
+    // Get id of Channel
+    const channel = await Channel.findOne({ where: { name: 'Channel' } });
+    // Create an Zone
+    const banner = await Banner.create({
+      name: 'Banner Top',
+      html: '<script src="https://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=rsb&c=28&pli=18292301&PluID=0&w=980&h=250&ord=[timestamp]&ucm=true&ncu=$$%%TTD_CLK_ESC%%$$"></script> <noscript> <a href="%%TTD_CLK_ESC%%https%3A//bs.serving-sys.com/BurstingPipe/adServer.bs%3Fcn%3Dbrd%26FlightID%3D18292301%26Page%3D%26PluID%3D0%26Pos%3D1596347057" target="_blank"><img src="https://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=bsr&FlightID=18292301&Page=&PluID=0&Pos=1596347057" border=0 width=980 height=250></a> </noscript>',
+      status: STATUS_ACTIVE,
+      width: 980,
+      height: 250,
+      keyword: 'dantri',
+      imageUrl: '',
+      target: '',
+      adServer: 'adtech',
+      bannerHTMLType: '9',
+      userIFrame: '1',
+      type: 'html',
+      weight: 1,
+      description: 'Banner Top of Bong Da So',
+      channelId: channel.id,
+    });
+
+    console.log(chalk.green(`${banner.name} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${bannersQuantity} zone(s) found. Passed!`));
+  }
+}
+
+// PlacementBannerZones Fiction
+async function placementBannerZoneFiction() {
+  console.log(chalk.grey('Check current number of placementBannerZones...'));
+  const placementBannerZonesQuantity = await PlacementBannerZone.count();
+
+  if (placementBannerZonesQuantity === 0) {
+    console.log(chalk.red('No placementBannerZone found! Do a fiction...'));
+    // Get id of Site
+    const zone = await Zone.findOne({ where: { name: 'Zone Top' } });
+    // Get id of Placement
+    const placement = await Placement.findOne({ where: { name: 'Placement' } });
+    // Get Id of Banner
+    const banner = await Banner.findOne({ where: { name: 'Banner Top' } });
+    // Create an Zone
+    const placementBannerZone = await PlacementBannerZone.create({
+      placementId: placement.id,
+      bannerId: banner.id,
+      zoneId: zone.id,
+    });
+
+    console.log(chalk.green(`${placementBannerZone} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${placementBannerZonesQuantity} placementBannerZone(s) found. Passed!`));
+  }
+}
+
 async function fiction() {
   console.log(chalk.grey.dim('Start data fictions!'));
   await resourcesFiction();
   await menusFiction();
   await rolesFiction();
   await userFiction();
+  await advertiserFiction();
+  await campaignFiction();
+  await channelFiction();
+  await optionChannelFiction();
+  await siteFiction();
+  await placementFiction();
+  await zoneFiction();
+  await bannerFiction();
+  await placementBannerZoneFiction();
   console.log(chalk.magenta(`Your application is now ready at http://${host}/`));
 }
 

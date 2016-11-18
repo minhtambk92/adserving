@@ -10,6 +10,7 @@ const BannerInputType = new InputObjectType({
     // Additional fields
     status: { type: StringType },
     type: { type: StringType },
+    userIFrame: { type: StringType },
   }),
 });
 

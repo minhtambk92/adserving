@@ -37,6 +37,7 @@ class UpdateBannerForm extends Component {
       target,
       type,
       imageUrl,
+      userIFrame,
       status,
       adServer,
       bannerHTMLType,
@@ -50,6 +51,7 @@ class UpdateBannerForm extends Component {
     this.inputBannerDescription.value = description;
     this.inputBannerStatus.value = status;
     this.inputChannelId.value = channelId;
+    this.inputBannerUserIFrame.value = userIFrame;
 
     if (type === 'html') {
       this.insertBannerHtml(html, width, height);
@@ -81,6 +83,7 @@ class UpdateBannerForm extends Component {
     const weight = this.inputBannerWeight.value;
     const description = this.inputBannerDescription.value;
     const channelId = this.inputChannelId.value;
+    const userIFrame = this.inputBannerUserIFrame.value;
     let html = '';
     let target = '';
     let imageUrl = '';
@@ -139,6 +142,9 @@ class UpdateBannerForm extends Component {
         banner.url = url;
       }
       banner.imageUrl = imageUrl;
+    }
+    if (userIFrame && userIFrame !== this.props.banner.userIFrame) {
+      banner.userIFrame = userIFrame;
     }
     if (status && status !== this.props.banner.status) {
       banner.status = status;
@@ -454,6 +460,23 @@ class UpdateBannerForm extends Component {
                     {channel.name}
                   </option>
                 ))}
+              </select>
+            </div>
+          </div>
+          <div className="form-group">
+            <label
+              htmlFor="inputBannerUserIFrame"
+              className="col-sm-2 control-label"
+            >User IFrame</label>
+            <div className="col-sm-10">
+              <select
+                id="inputBannerTarget" className="form-control"
+                ref={c => {
+                  this.inputBannerUserIFrame = c;
+                }}
+              >
+                <option value="1">YES</option>
+                <option value="0">NO</option>
               </select>
             </div>
           </div>

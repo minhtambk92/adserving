@@ -405,7 +405,6 @@ class Channel extends Component {
 
 const mapState = (state) => ({
   channels: state.channels,
-  sites: state.sites,
   optionChannels: state.optionChannels,
 });
 

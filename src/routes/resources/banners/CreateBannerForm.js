@@ -80,6 +80,7 @@ class CreateBannerForm extends Component {
     const description = this.inputBannerDescription.value;
     const channelId = this.inputChannelId.value;
     const type = this.inputBannerType.value;
+    const userIFrame = this.inputBannerUserIFrame.value;
     let target = '';
     let url = '';
     let imageUrl = '';
@@ -116,6 +117,7 @@ class CreateBannerForm extends Component {
         url,
         target,
         imageUrl,
+        userIFrame,
         status,
         adServer,
         bannerHTMLType,
@@ -380,6 +382,23 @@ class CreateBannerForm extends Component {
                     {channel.name}
                   </option>
                 ))}
+              </select>
+            </div>
+          </div>
+          <div className="form-group">
+            <label
+              htmlFor="inputBannerUserIFrame"
+              className="col-sm-2 control-label"
+            >User IFrame</label>
+            <div className="col-sm-10">
+              <select
+                id="inputBannerTarget" className="form-control"
+                ref={c => {
+                  this.inputBannerUserIFrame = c;
+                }}
+              >
+                <option value="1">YES</option>
+                <option value="0">NO</option>
               </select>
             </div>
           </div>
