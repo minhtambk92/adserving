@@ -427,7 +427,7 @@ class Banner extends Component {
                                         />
                                       </div>
                                     </div>
-                                  ) :('')}
+                                  ) : ('')}
                                 </form>
                               </div>
                             </div>
@@ -462,7 +462,7 @@ class Banner extends Component {
                                         onChange={event => this.chooseActivationDate(event)}
                                       >
                                         <option value="0">Active Immediately</option>
-                                        <option value="1">Choose Data</option>
+                                        <option value="1">Choose Date</option>
                                       </select>
                                     </div>
                                   </div>
@@ -499,7 +499,7 @@ class Banner extends Component {
                                         }}
                                       >
                                         <option value="0">Dont Expire</option>
-                                        <option value="1">Choose Data</option>
+                                        <option value="1">Choose Date</option>
                                       </select>
                                     </div>
                                   </div>

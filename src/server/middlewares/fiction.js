@@ -605,13 +605,13 @@ async function placementBannerZoneFiction() {
     // Get Id of Banner
     const banner = await Banner.findOne({ where: { name: 'Banner Top' } });
     // Create an Zone
-    const placementBannerZone = await PlacementBannerZone.create({
+    await PlacementBannerZone.create({
       placementId: placement.id,
       bannerId: banner.id,
       zoneId: zone.id,
     });
 
-    console.log(chalk.green(`${placementBannerZone} is created. Passed!`));
+    console.log(chalk.green('placementBannerZone is created. Passed!'));
   } else {
     console.log(chalk.green(`${placementBannerZonesQuantity} placementBannerZone(s) found. Passed!`));
   }
