@@ -41,11 +41,25 @@ export function getBanner(id) {
           description
           type
           imageUrl
+          url
           target
           userIFrame
           status
           adServer
           bannerHTMLType
+          countView
+          fixIE
+          isDefault 
+          isRelative
+          impressionsBooked
+          clicksBooked
+          activationDate
+          expirationDate
+          adStore
+          impressionsBookedValue
+          clicksBookedValue
+          activationDateValue
+          expirationDateValue
           channelId
           pbzBanner {
             placements {
@@ -100,11 +114,25 @@ export function getBanners(args = {
           description
           type
           imageUrl
+          url
           target
           userIFrame
           status
           adServer
           bannerHTMLType
+          countView
+          fixIE
+          isDefault 
+          isRelative
+          impressionsBooked
+          clicksBooked
+          activationDate
+          expirationDate
+          adStore
+          impressionsBookedValue
+          clicksBookedValue
+          activationDateValue
+          expirationDateValue
           channelId
           pbzBanner {
             placements {
@@ -157,12 +185,26 @@ export function createBanner({
   weight,
   description,
   type,
+  url,
   target,
   imageUrl,
   userIFrame,
   status,
   adServer,
   bannerHTMLType,
+  countView,
+  fixIE,
+  isDefault,
+  isRelative,
+  impressionsBooked,
+  clicksBooked,
+  activationDate,
+  expirationDate,
+  adStore,
+  impressionsBookedValue,
+  clicksBookedValue,
+  activationDateValue,
+  expirationDateValue,
   channelId,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -178,12 +220,26 @@ export function createBanner({
           weight
           description
           type
+          url
           target
           imageUrl
           userIFrame
           status
           adServer
           bannerHTMLType
+          countView
+          fixIE
+          isDefault 
+          isRelative
+          impressionsBooked
+          clicksBooked
+          activationDate
+          expirationDate
+          adStore
+          impressionsBookedValue
+          clicksBookedValue
+          activationDateValue
+          expirationDateValue
           channelId
           createdAt
           updatedAt
@@ -200,12 +256,26 @@ export function createBanner({
         weight,
         description,
         type,
+        url,
         target,
         imageUrl,
         userIFrame,
         status,
         adServer,
         bannerHTMLType,
+        countView,
+        fixIE,
+        isDefault,
+        isRelative,
+        impressionsBooked,
+        clicksBooked,
+        activationDate,
+        expirationDate,
+        adStore,
+        impressionsBookedValue,
+        clicksBookedValue,
+        activationDateValue,
+        expirationDateValue,
         channelId,
       },
     });
@@ -229,12 +299,26 @@ export function updateBanner({
   weight,
   description,
   type,
+  url,
   target,
   imageUrl,
   userIFrame,
   status,
   adServer,
   bannerHTMLType,
+  countView,
+  fixIE,
+  isDefault,
+  isRelative,
+  impressionsBooked,
+  clicksBooked,
+  activationDate,
+  expirationDate,
+  adStore,
+  impressionsBookedValue,
+  clicksBookedValue,
+  activationDateValue,
+  expirationDateValue,
   channelId,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -251,11 +335,25 @@ export function updateBanner({
           description
           type
           imageUrl
+          url
           target
           userIFrame
           status
           adServer
           bannerHTMLType
+          countView
+          fixIE
+          isDefault 
+          isRelative
+          impressionsBooked
+          clicksBooked
+          activationDate
+          expirationDate
+          adStore
+          impressionsBookedValue
+          clicksBookedValue
+          activationDateValue
+          expirationDateValue
           channelId
           createdAt
           updatedAt
@@ -273,12 +371,26 @@ export function updateBanner({
         weight,
         description,
         type,
+        url,
         target,
         imageUrl,
         userIFrame,
         status,
         adServer,
         bannerHTMLType,
+        countView,
+        fixIE,
+        isDefault,
+        isRelative,
+        impressionsBooked,
+        clicksBooked,
+        activationDate,
+        expirationDate,
+        adStore,
+        impressionsBookedValue,
+        clicksBookedValue,
+        activationDateValue,
+        expirationDateValue,
         channelId,
       },
     });
@@ -307,11 +419,25 @@ export function deleteBanner(id) {
           description
           type
           imageUrl
+          url
           target
           userIFrame
           status
           adServer
           bannerHTMLType
+          countView
+          fixIE
+          isDefault 
+          isRelative
+          impressionsBooked
+          clicksBooked
+          activationDate
+          expirationDate
+          adStore
+          impressionsBookedValue
+          clicksBookedValue
+          activationDateValue
+          expirationDateValue
           channelId
           createdAt
           updatedAt

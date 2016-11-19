@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import style from 'react-dropzone-component/styles/filepicker.css';
 import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
@@ -104,6 +105,19 @@ class CreateBannerForm extends Component {
     }
     const status = this.inputBannerStatus.value;
     const keyword = document.getElementById('inputBannerKeyWord').value;
+    const countView = '0';
+    const fixIE = '0';
+    const isDefault = '0';
+    const isRelative = '0';
+    const impressionsBooked = '0';
+    const clicksBooked = '0';
+    const activationDate = '0';
+    const expirationDate = '0';
+    const adStore = '';
+    const impressionsBookedValue = 'unlimited';
+    const clicksBookedValue = 'unlimited';
+    const activationDateValue = new Date(moment().format('YYYY-MM-DD 00:00:00'));
+    const expirationDateValue = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00'));
     if (name && keyword && width && description && type && channelId) {
       this.props.createBanner({
         name,
@@ -121,6 +135,19 @@ class CreateBannerForm extends Component {
         status,
         adServer,
         bannerHTMLType,
+        countView,
+        fixIE,
+        isDefault,
+        isRelative,
+        impressionsBooked,
+        clicksBooked,
+        activationDate,
+        expirationDate,
+        adStore,
+        impressionsBookedValue,
+        clicksBookedValue,
+        activationDateValue,
+        expirationDateValue,
         channelId,
       }).then(() => {
         this.clearInput();

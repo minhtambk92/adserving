@@ -29,14 +29,17 @@ class DatePicker extends Component {
     if (nextProps.name === 'start') {
       $(this.input).datepicker({
         startDate: dateStart,
+        autoclose: true,
+        setDate: dateStart,
       });
-      $(this.input).datepicker('update', new Date());
     } else if (nextProps.name === 'end') {
       $(this.input).datepicker({
         startDate: dateEnd,
+        autoclose: true,
+        setDate: dateEnd,
       });
       /* eslint-disable no-underscore-dangle */
-      $(this.input).datepicker('update', moment().add(1, 'month')._d);
+      // $(this.input).datepicker('update', moment().add(1, 'month')._d);
       /* eslint-enable no-underscore-dangle */
     }
     /* eslint-enable no-undef */

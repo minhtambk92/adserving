@@ -61,9 +61,15 @@ const Banner = Model.define('Banner', {
     type: DataType.TEXT,
     defaultValue: '',
   },
-  target: {
+  url: {
     type: DataType.STRING,
     defaultValue: '',
+  },
+  target: {
+    type: DataType.STRING,
+    validate: {
+      isIn: [['_blank', '_self', '_parent', '_top', '']],
+    },
   },
   adServer: {
     type: DataType.STRING,
@@ -81,58 +87,88 @@ const Banner = Model.define('Banner', {
       isIn: [['1', '0']],
     },
   },
-  // countView: {
-  //   type: DataType.STRING,
-  //   allowNull: false,
-  //   defaultValue: '0',
-  //   validate: {
-  //     isIn: [['1', '0']],
-  //   },
-  // },
-  // fixIE: {
-  //   type: DataType.STRING,
-  //   allowNull: false,
-  //   defaultValue: '0',
-  //   validate: {
-  //     isIn: [['1', '0']],
-  //   },
-  // },
-  // isDefault: {
-  //   type: DataType.STRING,
-  //   allowNull: false,
-  //   defaultValue: '0',
-  //   validate: {
-  //     isIn: [['1', '0']],
-  //   },
-  // },
-  // isRelative: {
-  //   type: DataType.STRING,
-  //   allowNull: false,
-  //   defaultValue: '0',
-  //   validate: {
-  //     isIn: [['1', '0']],
-  //   },
-  // },
-  // adStore: {
-  //   type: DataType.STRING,
-  //   defaultValue: '',
-  // },
-  // impressionsBooked: {
-  //   type: DataType.STRING,
-  //   defaultValue: 'unlimited',
-  // },
-  // clicksBooked: {
-  //   type: DataType.STRING,
-  //   defaultValue: 'unlimited',
-  // },
-  // activationDate: {
-  //   type: DataType.STRING,
-  //   defaultValue: 'immediately',
-  // },
-  // expirationData: {
-  //   type: DataType.STRING,
-  //   defaultValue: 'never',
-  // },
+  countView: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: '0',
+    validate: {
+      isIn: [['1', '0']],
+    },
+  },
+  fixIE: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: '0',
+    validate: {
+      isIn: [['1', '0']],
+    },
+  },
+  isDefault: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: '0',
+    validate: {
+      isIn: [['1', '0']],
+    },
+  },
+  isRelative: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: '0',
+    validate: {
+      isIn: [['1', '0']],
+    },
+  },
+  adStore: {
+    type: DataType.STRING,
+    defaultValue: '',
+  },
+  impressionsBooked: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: '0',
+    validate: {
+      isIn: [['1', '0']],
+    },
+  },
+  impressionsBookedValue: {
+    type: DataType.STRING,
+    defaultValue: 'unlimited',
+  },
+  clicksBooked: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: '0',
+    validate: {
+      isIn: [['1', '0']],
+    },
+  },
+  clicksBookedValue: {
+    type: DataType.STRING,
+    defaultValue: 'unlimited',
+  },
+  activationDate: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: '0',
+    validate: {
+      isIn: [['1', '0']],
+    },
+  },
+  activationDateValue: {
+    type: DataType.DATE,
+  },
+  expirationDate: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: '0',
+    validate: {
+      isIn: [['1', '0']],
+    },
+  },
+  expirationDateValue: {
+    type: DataType.DATE,
+  },
   status: {
     type: DataType.STRING,
     allowNull: false,
