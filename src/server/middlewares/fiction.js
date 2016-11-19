@@ -596,6 +596,10 @@ async function bannerFiction() {
       clicksBookedValue: 'unlimited',
       activationDateValue: new Date(moment().format('YYYY-MM-DD 00:00:00')),
       expirationDateValue: new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00')),
+      clickImpressionsUrl: [{
+        clickUrl: 'http://kenh14.vn/',
+        impressionsUrl: 'http://docs.sequelizejs.com/en/v3/docs/instances/',
+      }],
       channelId: channel.id,
     });
 

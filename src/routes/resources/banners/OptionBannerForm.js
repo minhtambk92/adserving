@@ -198,7 +198,9 @@ class UpdateBannerForm extends Component {
       this.props.getBanner(this.props.bannerId);
     });
   }
+  addLinkClickAndImpression() { // eslint-disable-line no-unused-vars, class-methods-use-this
 
+  }
   render() {
     return (
       <div>
@@ -494,6 +496,44 @@ class UpdateBannerForm extends Component {
                     </div>
                   </div>
               ) : ('')}
+                <div className="form-group">
+                  <div
+                    className="col-sm-6"
+                    onClick={event => this.addLinkClickAndImpression(event)}
+                  > Add Link Click and Impressions</div>
+                </div>
+                <div className="col-sm-12 link-click-impression">
+                  <div className="form-group">
+                    <label
+                      htmlFor="inputLinkClick"
+                      className="col-sm-2 control-label"
+                    >Link Click</label>
+                    <div className="col-sm-8">
+                      <input
+                        type="text" className="form-control"
+                        id="inputLinkImpression" placeholder="1000"
+                        ref={c => {
+                          this.inputLinkClick = c;
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="inputLinkImpression"
+                      className="col-sm-2 control-label"
+                    >Link Impression</label>
+                    <div className="col-sm-8">
+                      <input
+                        type="text" className="form-control"
+                        id="inputLinkImpression" placeholder="1000"
+                        ref={c => {
+                          this.inputLinkImpression = c;
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
               </form>
             </div>
           </div>

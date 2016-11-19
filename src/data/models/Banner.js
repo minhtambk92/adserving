@@ -169,6 +169,10 @@ const Banner = Model.define('Banner', {
   expirationDateValue: {
     type: DataType.DATE,
   },
+  // clickImpressionsUrl: {
+  //   type: DataType.ARRAY(DataType.STRING),
+  //   defaultValue: [],
+  // },
   status: {
     type: DataType.STRING,
     allowNull: false,
