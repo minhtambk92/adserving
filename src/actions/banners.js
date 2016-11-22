@@ -77,6 +77,11 @@ export function getBanner(id) {
               updatedAt
             }
           }
+         clickImpression {
+            id
+            clickUrl
+            impressionUrl
+         }
           createdAt
           updatedAt
          }

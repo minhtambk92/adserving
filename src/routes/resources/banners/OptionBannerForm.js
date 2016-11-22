@@ -11,7 +11,11 @@ class UpdateBannerForm extends Component {
     banner: PropTypes.object,
     getBanner: PropTypes.func,
     channels: PropTypes.array,
+    createClickImpression: PropTypes.func,
+    deleteClickImpression: PropTypes.func,
+    updateClickImpression: PropTypes.func,
   };
+
   constructor(props, context) {
     super(props, context);
 
@@ -20,7 +24,48 @@ class UpdateBannerForm extends Component {
       showExpirationDate: false,
       showImpressionsBooked: false,
       showClicksBooked: false,
+      countLinkClickImpression: 0,
+      string: '',
     };
+  }
+
+  componentDidMount() {
+    /* eslint-disable no-undef */
+    const self = this;
+    // Add New
+    $('#addNewLink').click(() => {
+      const length = this.state.countLinkClickImpression;
+      const count = length + 1;
+      self.setState({ countLinkClickImpression: count });
+      let html = '';
+      html += `<div class="clickImpression-${count}">`;
+      html += '<button type="button" class="close closeClickImpression" aria-hidden="true">×</button>';
+      html += '<div class="form-group">';
+      html += '<label class="col-sm-2 control-label" >Link Click</label>';
+      html += '<div class="col-sm-8">';
+      html += `<input type="text" class="form-control" id="inputLinkClick-${count}" placeholder="1000" /></div></div>`;
+      html += '<div class="form-group">';
+      html += '<label class="col-sm-2 control-label" >Link Impression</label>';
+      html += '<div class="col-sm-8">';
+      html += `<input type="text" class="form-control" id="inputLinkImpression-${count}" placeholder="1000"/></div></div>`;
+      html += '</div>';
+      $('#link-click-impression').append(html);
+    });
+
+    // Delete
+    $('#optionBanner').on('click', '.closeClickImpression', function () {
+      const id = $(this).parent().attr('id');
+      if (id) {
+        self.props.deleteClickImpression(id).then(() => {
+          self.props.getBanner(self.props.bannerId);
+          $(this).parent().css('display', 'none');
+        });
+      } else {
+        $(this).parent().css('display', 'none');
+      }
+      // self.props.getBanner(self.props.bannerId);
+    });
+    /* eslint-enable no-undef */
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,6 +90,10 @@ class UpdateBannerForm extends Component {
     this.inputBannerIsRelative.value = isRelative;
     this.inputBannerAdStore.value = adStore;
     this.inputImpressionsBooked.value = impressionsBooked;
+    if (nextProps.banner.clickImpression) {
+      const length = nextProps.banner.clickImpression.length;
+      this.setState({ countLinkClickImpression: length });
+    }
     if (impressionsBooked === '1') {
       this.setState({ showImpressionsBooked: true });
       if (this.inputBannerImpressionsBooked !== undefined) {
@@ -82,6 +131,7 @@ class UpdateBannerForm extends Component {
       this.setState({ showExpirationDate: false });
     }
   }
+
   chooseExpirationDate() { // eslint-disable-line no-unused-vars, class-methods-use-this
     const expirationDate = this.inputExpirationDate.value;
     if (expirationDate === '1') {
@@ -117,6 +167,7 @@ class UpdateBannerForm extends Component {
       this.setState({ showClicksBooked: false });
     }
   }
+
   updateBanner() {
     const countView = this.inputBannerCountView.value;
     const fixIE = this.inputBannerFixIE.value;
@@ -195,12 +246,39 @@ class UpdateBannerForm extends Component {
       banner.expirationDateValue = expirationDateValue;
     }
     this.props.updateBanner(banner).then(() => {
-      this.props.getBanner(this.props.bannerId);
     });
+    this.addLinkClickAndImpression();
   }
-  addLinkClickAndImpression() { // eslint-disable-line no-unused-vars, class-methods-use-this
 
+  addLinkClickAndImpression() { // eslint-disable-line no-unused-vars, class-methods-use-this
+    /* eslint-disable no-undef */
+    /* eslint-disable no-loop-func */
+    const length = this.state.countLinkClickImpression;
+    for (let i = 1; i <= length; i += 1) {
+      const id = $('#link-click-impression').find(`.clickImpression-${i}`).attr('id');
+      if (id) {
+        const impressionUrl = $(`#${id} #inputLinkImpression-${i}`).val();
+        const clickUrl = $(`#${id} #inputLinkClick-${i}`).val();
+        if (impressionUrl && clickUrl) {
+          this.props.updateClickImpression({ id, clickUrl, impressionUrl }).then(() => {
+            this.props.getBanner(this.props.bannerId);
+          });
+        }
+      } else {
+        const impressionUrl = $(`#link-click-impression .clickImpression-${i} #inputLinkImpression-${i}`).val();
+        const clickUrl = $(`#link-click-impression .clickImpression-${i} #inputLinkClick-${i}`).val();
+        if (impressionUrl && clickUrl) {
+          const bannerId = this.props.bannerId;
+          this.props.createClickImpression({ clickUrl, impressionUrl, bannerId }).then(() => {
+            this.props.getBanner(this.props.bannerId);
+          });
+          $(`#link-click-impression .clickImpression-${i}`).remove();
+        }
+      }
+    }
+    /* eslint-enable no-undef */
   }
+
   render() {
     return (
       <div>
@@ -358,7 +436,7 @@ class UpdateBannerForm extends Component {
                       />
                     </div>
                   </div>
-              ) : ('') }
+                ) : ('') }
                 {/* /Click Booked */}
                 <div className="form-group">
                   <label
@@ -394,7 +472,7 @@ class UpdateBannerForm extends Component {
                       />
                     </div>
                   </div>
-              ) : ('')}
+                ) : ('')}
               </form>
             </div>
           </div>
@@ -439,7 +517,7 @@ class UpdateBannerForm extends Component {
                       htmlFor="inputBannerActivationDate"
                       className="col-sm-2 control-label"
                     >
-                    &nbsp;
+                      &nbsp;
                     </label>
                     <div className=" col-sm-8 date">
                       <span className="fa fa-calendar form-control-feedback" />
@@ -479,7 +557,7 @@ class UpdateBannerForm extends Component {
                       htmlFor="inputBannerExpirationDate"
                       className="col-sm-2 control-label"
                     >
-                    &nbsp;
+                      &nbsp;
                     </label>
                     <div className=" col-sm-8 date">
                       <span className="fa fa-calendar form-control-feedback" />
@@ -495,44 +573,52 @@ class UpdateBannerForm extends Component {
                       />
                     </div>
                   </div>
-              ) : ('')}
+                ) : ('')}
                 <div className="form-group">
                   <div
+                    id="addNewLink"
                     className="col-sm-6"
-                    onClick={event => this.addLinkClickAndImpression(event)}
-                  > Add Link Click and Impressions</div>
+                  > Add Link Click and Impressions
+                  </div>
                 </div>
-                <div className="col-sm-12 link-click-impression">
-                  <div className="form-group">
-                    <label
-                      htmlFor="inputLinkClick"
-                      className="col-sm-2 control-label"
-                    >Link Click</label>
-                    <div className="col-sm-8">
-                      <input
-                        type="text" className="form-control"
-                        id="inputLinkImpression" placeholder="1000"
-                        ref={c => {
-                          this.inputLinkClick = c;
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label
-                      htmlFor="inputLinkImpression"
-                      className="col-sm-2 control-label"
-                    >Link Impression</label>
-                    <div className="col-sm-8">
-                      <input
-                        type="text" className="form-control"
-                        id="inputLinkImpression" placeholder="1000"
-                        ref={c => {
-                          this.inputLinkImpression = c;
-                        }}
-                      />
-                    </div>
-                  </div>
+                <div className="col-sm-12" id="link-click-impression">
+                  { this.props.banner && this.props.banner.clickImpression
+                  && this.props.banner.clickImpression.map((clickImpression, index) => (
+                    <div
+                      key={clickImpression.id} id={clickImpression.id}
+                      className={`clickImpression-${index + 1}`}
+                    >
+                      <button
+                        type="button" className="close closeClickImpression" aria-hidden="true"
+                      >×</button>
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputLinkClick"
+                          className="col-sm-2 control-label"
+                        >Link Click</label>
+                        <div className="col-sm-8">
+                          <input
+                            type="text" className="form-control"
+                            id={`inputLinkClick-${index + 1}`} placeholder="1000"
+                            defaultValue={clickImpression.clickUrl}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputLinkImpression"
+                          className="col-sm-2 control-label"
+                        >Link Impression</label>
+                        <div className="col-sm-8">
+                          <input
+                            type="text" className="form-control"
+                            id={`inputLinkImpression-${index + 1}`} placeholder="1000"
+                            defaultValue={clickImpression.impressionUrl}
+                          />
+                        </div>
+                      </div>
+                    </div>))}
+                  {this.state.string}
                 </div>
               </form>
             </div>

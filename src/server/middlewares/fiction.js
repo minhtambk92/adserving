@@ -29,6 +29,7 @@ import {
   Zone,
   Banner,
   PlacementBannerZone,
+  ClickImpression,
 } from '../../data/models';
 import { host } from '../../config';
 
@@ -631,6 +632,28 @@ async function placementBannerZoneFiction() {
   }
 }
 
+// ClickImpression Fiction
+async function clickImpressionFiction() {
+  console.log(chalk.grey('Check current number of clickImpressions...'));
+  const clickImpressionsQuantity = await ClickImpression.count();
+
+  if (clickImpressionsQuantity === 0) {
+    console.log(chalk.red('No ClickImpression found! Do a fiction...'));
+    // Get id of Banner
+    const banner = await Banner.findOne({ where: { name: 'Banner Top' } });
+    // Create an ClickImpression
+    await ClickImpression.create({
+      clickUrl: 'https://github.com/sequelize/sequelize/issues/4423',
+      impressionUrl: 'http://rsk.quynd.com/resource/banner/40e285a8-2b38-491e-a032-011e117b4d22',
+      bannerId: banner.id,
+    });
+
+    console.log(chalk.green('ClickImpression is created. Passed!'));
+  } else {
+    console.log(chalk.green(`${clickImpressionsQuantity} clickImpression(s) found. Passed!`));
+  }
+}
+
 async function fiction() {
   console.log(chalk.grey.dim('Start data fictions!'));
   await resourcesFiction();
@@ -646,6 +669,7 @@ async function fiction() {
   await zoneFiction();
   await bannerFiction();
   await placementBannerZoneFiction();
+  await clickImpressionFiction();
   console.log(chalk.magenta(`Your application is now ready at http://${host}/`));
 }
 

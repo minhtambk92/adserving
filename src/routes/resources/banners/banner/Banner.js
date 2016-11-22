@@ -21,6 +21,11 @@ import {
   removeBanner,
   removeBannerInPlacementBannerZone,
 } from '../../../../actions/placementBannerZones';
+import {
+  createClickImpression,
+  deleteClickImpression,
+  updateClickImpression,
+} from '../../../../actions/clickImpressions';
 import Layout from '../../../../components/Layout';
 import ListPlacementNotBelongBanner from '../ListPlacementNotBelongBanner';
 import ListPlacementOfBanner from '../ListPlacementOfBanner';
@@ -51,6 +56,10 @@ class Banner extends Component {
     getChannels: PropTypes.func,
     channels: PropTypes.object,
     removeBannerInPlacementBannerZone: PropTypes.func,
+    createClickImpression: PropTypes.func,
+    deleteClickImpression: PropTypes.func,
+    updateClickImpression: PropTypes.func,
+
   };
 
   componentWillMount() {
@@ -197,6 +206,9 @@ class Banner extends Component {
                             bannerId={this.props.bannerId}
                             getBanner={this.props.getBanner}
                             channels={this.props.channels && this.props.channels.list}
+                            createClickImpression={this.props.createClickImpression}
+                            deleteClickImpression={this.props.deleteClickImpression}
+                            updateClickImpression={this.props.updateClickImpression}
                           />
                         </div>
                       </section>
@@ -310,6 +322,7 @@ const mapState = (state) => ({
   campaigns: state.campaigns,
   placements: state.placements,
   channels: state.channels,
+  clickImpressions: state.clickImpressions,
   placementBannerZones: state.placementBannerZones,
 });
 
@@ -324,6 +337,9 @@ const mapDispatch = {
   removeBanner,
   removeBannerInPlacementBannerZone,
   getChannels,
+  createClickImpression,
+  deleteClickImpression,
+  updateClickImpression,
 };
 
 export default withStyles(s, style, dropZoneStyle)(connect(mapState, mapDispatch)(Banner));

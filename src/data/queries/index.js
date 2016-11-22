@@ -25,6 +25,7 @@ import channels from './channels';
 import filters from './filters';
 import placementBannerZones from './placementBannerZones';
 import optionChannels from './optionChannels';
+import clickImpressions from './clickImpressions';
 
 const queries = new ObjectType({
   name: 'Query',
@@ -51,6 +52,7 @@ const queries = new ObjectType({
     filters,
     placementBannerZones,
     optionChannels,
+    clickImpressions,
   },
 });
 

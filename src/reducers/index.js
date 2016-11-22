@@ -17,6 +17,7 @@ import users from './users';
 import zones from './zones';
 import channels from './channels';
 import optionChannels from './optionChannels';
+import clickImpressions from './clickImpressions';
 
 export default combineReducers({
   resources,
@@ -37,4 +38,5 @@ export default combineReducers({
   zones,
   channels,
   optionChannels,
+  clickImpressions,
 });

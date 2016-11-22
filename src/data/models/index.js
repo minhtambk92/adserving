@@ -34,6 +34,7 @@ import Channel from './Channel';
 import Filter from './Filter';
 import PlacementBannerZone from './PlacementBannerZone';
 import OptionChannel from './OptionChannel';
+import ClickImpression from './ClickImpression';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -215,6 +216,19 @@ Zone.site = Zone.belongsTo(Site, {
   foreignKey: 'siteId',
 });
 
+// Each banner has many clickImpression
+Banner.clickImpressions = Banner.hasMany(ClickImpression, {
+  foreignKey: {
+    name: 'bannerId',
+    allowNull: false,
+  },
+});
+
+// Each clickImpression can only belong to one Banner
+ClickImpression.banner = ClickImpression.belongsTo(Banner, {
+  foreignKey: 'bannerId',
+});
+
 // Each Channel can make many banners
 Channel.banners = Channel.hasMany(Banner, {
   foreignKey: {
@@ -296,4 +310,5 @@ export {
   Filter,
   PlacementBannerZone,
   OptionChannel,
+  ClickImpression,
 };

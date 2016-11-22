@@ -15,6 +15,7 @@ import zones from './zones';
 import banners from './banners';
 import channels from './channels';
 import optionChannels from './optionChannels';
+import clickImpressions from './clickImpressions';
 
 const mutations = new ObjectType({
   name: 'Mutation',
@@ -31,6 +32,7 @@ const mutations = new ObjectType({
     ...zones,
     ...channels,
     ...optionChannels,
+    ...clickImpressions,
   },
 });
 
