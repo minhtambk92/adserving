@@ -7,6 +7,8 @@ class CreateChannelForm extends Component {
     filters: PropTypes.object,
     createChannel: PropTypes.func,
     sites: PropTypes.array,
+    siteId: PropTypes.string,
+    getSite: PropTypes.func,
   };
 
   clearInput() {
@@ -18,11 +20,18 @@ class CreateChannelForm extends Component {
     const name = this.inputChannelName.value;
     const description = this.inputChannelDescription.value;
     const status = this.inputChannelStatus.value;
-    const siteId = this.inputSiteId.value;
-
+    let siteId = '';
+    if (this.props.siteId) {
+      siteId = this.props.siteId;
+    } else {
+      siteId = this.inputSiteId.value;
+    }
     if (name && description && siteId) {
       this.props.createChannel({ name, description, status, siteId }).then(() => {
         this.clearInput();
+        if (this.props.siteId) {
+          this.props.getSite(this.props.siteId);
+        }
       });
     }
   }
@@ -47,26 +56,28 @@ class CreateChannelForm extends Component {
             </div>
           </div>
           {/* Site */}
-          <div className="form-group">
-            <label htmlFor="inputSiteId" className="col-sm-2 control-label">Site</label>
-            <div className="col-sm-10">
-              <select
-                id="inputSiteId" className="form-control"
-                ref={c => {
-                  this.inputSiteId = c;
-                }}
-              >
-                {this.props.sites
-                && this.props.sites.map(site => (
-                  <option
-                    key={site.id} value={site.id}
-                  >
-                    {site.name}
-                  </option>
-                ))}
-              </select>
+          {this.props.siteId ? ('') : (
+            <div className="form-group">
+              <label htmlFor="inputSiteId" className="col-sm-2 control-label">Site</label>
+              <div className="col-sm-10">
+                <select
+                  id="inputSiteId" className="form-control"
+                  ref={c => {
+                    this.inputSiteId = c;
+                  }}
+                >
+                  {this.props.sites
+                  && this.props.sites.map(site => (
+                    <option
+                      key={site.id} value={site.id}
+                    >
+                      {site.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-          </div>
+          )}
           {/* description */}
           <div className="form-group">
             <label
@@ -107,12 +118,12 @@ class CreateChannelForm extends Component {
             to="#"
             className="btn btn-app pull-right"
             onClick={event => this.clearInput(event)}
-          ><i className="fa fa-eraser" /> Clear</Link>
+          ><i className="fa fa-eraser"/> Clear</Link>
           <Link
             to="#"
             className="btn btn-app pull-right"
             onClick={event => this.createChannel(event)}
-          ><i className="fa fa-check" /> Confirm</Link>
+          ><i className="fa fa-check"/> Confirm</Link>
         </div>
         {/* /.box-footer */}
       </form>

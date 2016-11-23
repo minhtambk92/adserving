@@ -24,7 +24,7 @@ export function getSite(id) {
           email
           description
           status
-            zones {
+          zones {
             id
             name
             description
@@ -38,7 +38,16 @@ export function getSite(id) {
             sizeValue
             createdAt
             updatedAt
-            }  
+          }
+          channels {
+            id
+            name
+            description
+            status
+            siteId
+            createdAt
+            updatedAt
+          }
           status
           createdAt
           updatedAt

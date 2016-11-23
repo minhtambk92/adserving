@@ -12,11 +12,13 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSite, updateSite, deleteSite, checkSitesByDomain } from '../../../../actions/sites';
 import { createZone } from '../../../../actions/zones';
-import { getChannels } from '../../../../actions/channels';
+import { getChannels, createChannel } from '../../../../actions/channels';
 import Layout from '../../../../components/Layout';
 import ListZoneOfSite from '../ListZoneOfSite';
+import ListChannelOfSite from '../ListChannelOfSite';
 import UpdateSiteForm from '../UpdateSiteForm';
 import CreateZoneInSite from '../../zones/CreateZoneForm';
+import CreateChannelForm from '../../channels/CreateChannelForm';
 import s from './Site.css';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 
@@ -34,23 +36,13 @@ class Site extends Component {
     createZone: PropTypes.func,
     checkSitesByDomain: PropTypes.func,
     getChannels: PropTypes.func,
+    createChannel: PropTypes.func,
     channels: PropTypes.object,
   };
 
   componentWillMount() {
     this.props.getSite(this.props.siteId);
     this.props.getChannels();
-  }
-
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    /* eslint-enable no-undef */
-  }
-
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    // iCheck for checkbox and radio inputs
-    /* eslint-enable no-undef */
   }
 
   render() {
@@ -68,7 +60,7 @@ class Site extends Component {
             <section className="col-lg-12">
               <div className="nav-tabs-custom">
                 <ul className="nav nav-tabs">
-                  <li className="active">
+                  <li>
                     <a href="#editSite" data-toggle="tab">
                       Edit Site
                     </a>
@@ -78,9 +70,14 @@ class Site extends Component {
                       Add Zone
                     </a>
                   </li>
+                  <li className="active">
+                    <a href="#addChannel" data-toggle="tab">
+                      Add Channel
+                    </a>
+                  </li>
                 </ul>
                 <div className="tab-content">
-                  <div className="active tab-pane" id="editSite">
+                  <div className="tab-pane" id="editSite">
                     <div className="row">
                       <section className="col-lg-12">
                         {/* BOX: FORM OF CREATE NEW WEBSITE */}
@@ -163,6 +160,58 @@ class Site extends Component {
                       </div>
                     </div>
                   </div>
+                  <div className="active tab-pane" id="addChannel">
+                    <div className="row">
+                      <div className="col-lg-12">
+                        <div className="row">
+                          <section className="col-lg-6">
+                            {/* BOX: FORM OF CREATE A NEW CHANNEL */}
+                            <div className="box box-info">
+                              <div className="box-header with-border">
+                                <h3 className="box-title">Create New Channel</h3>
+                                <div className="box-tools pull-right">
+                                  <button
+                                    type="button" className="btn btn-box-tool"
+                                    data-widget="collapse"
+                                  >
+                                    <i className="fa fa-minus" />
+                                  </button>
+                                </div>
+                              </div>
+                              {/* /.box-header */}
+                              <CreateChannelForm
+                                createChannel={this.props.createChannel}
+                                siteId={this.props.siteId}
+                                getSite={this.props.getSite}
+                              />
+                            </div>
+                            {/* /.col */}
+                          </section>
+                          <section className="col-lg-6">
+                            {/* BOX: LIST OF ZONES */}
+                            <div className="box box-info">
+                              <div className="box-header with-border">
+                                <h3 className="box-title">
+                                  List of channels: {this.props.sites.editing ?
+                                  this.props.sites.editing.name : '...'}
+                                </h3>
+                              </div>
+                              {/* /.box-header */}
+                              <div className="box-body">
+                                <ListChannelOfSite
+                                  list={this.props.sites.editing &&
+                                  this.props.sites.editing.channels &&
+                                  this.props.sites.editing.channels}
+                                />
+                              </div>
+                              {/* /.box-body */}
+                            </div>
+                            {/* /.box */}
+                          </section>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -185,6 +234,7 @@ const mapDispatch = {
   deleteSite,
   createZone,
   checkSitesByDomain,
+  createChannel,
   getChannels,
 };
 
