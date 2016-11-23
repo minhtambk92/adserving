@@ -30,7 +30,7 @@ class ChannelList extends Component {
         ReactDOM.render(<Link to={`/resource/channel/${rowData.id}`}>{cellData}</Link>, cell);
       },
     }, {
-      data: 'site.name',
+      data: null,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link to={`/resource/site/${rowData.site.id}`}>{rowData.site.name}</Link>, cell);
       },

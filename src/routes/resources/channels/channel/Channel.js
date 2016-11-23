@@ -17,6 +17,7 @@ import {
   deleteChannel,
 } from '../../../../actions/channels';
 import { createOptionChannel, deleteOptionChannel } from '../../../../actions/optionChannels';
+import { getSites } from '../../../../actions/sites';
 import Layout from '../../../../components/Layout';
 import UpdateChannelForm from '../UpdateChannelForm';
 import SelectOptionChannel from '../OptionSelectChannel';
@@ -37,6 +38,8 @@ class Channel extends Component {
     deleteChannel: PropTypes.func,
     createOptionChannel: PropTypes.func,
     deleteOptionChannel: PropTypes.func,
+    sites: PropTypes.object,
+    getSites: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -83,6 +86,7 @@ class Channel extends Component {
 
   componentWillMount() {
     this.props.getChannel(this.props.channelId);
+    this.props.getSites();
   }
 
   componentDidUpdate() {
@@ -255,6 +259,7 @@ class Channel extends Component {
                             deleteChannel={this.props.deleteChannel}
                             channelId={this.props.channelId}
                             getChannel={this.props.getChannel}
+                            sites={this.props.sites && this.props.sites.list}
                           />
                         </div>
                         {/* /.col */}
@@ -406,6 +411,7 @@ class Channel extends Component {
 const mapState = (state) => ({
   channels: state.channels,
   optionChannels: state.optionChannels,
+  sites: state.sites,
 });
 
 const mapDispatch = {
@@ -414,6 +420,7 @@ const mapDispatch = {
   deleteChannel,
   createOptionChannel,
   deleteOptionChannel,
+  getSites,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Channel));

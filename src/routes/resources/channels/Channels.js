@@ -11,6 +11,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getChannels, createChannel } from '../../../actions/channels';
+import { getSites } from '../../../actions/sites';
 import Layout from '../../../components/Layout';
 import CreateChannelForm from './CreateChannelForm';
 import ChannelList from './ChannelList';
@@ -24,10 +25,13 @@ class Channels extends Component {
     channels: PropTypes.object,
     getChannels: PropTypes.func,
     createChannel: PropTypes.func,
+    sites: PropTypes.object,
+    getSites: PropTypes.func,
   };
 
   componentWillMount() {
     this.props.getChannels();
+    this.props.getSites();
   }
 
   render() {
@@ -52,6 +56,7 @@ class Channels extends Component {
                 <CreateChannelForm
                   filters={this.props.channels.filters}
                   createChannel={this.props.createChannel}
+                  sites={this.props.sites && this.props.sites.list}
                 />
               </div>
               {/* /.col */}
@@ -85,11 +90,13 @@ class Channels extends Component {
 
 const mapState = (state) => ({
   channels: state.channels,
+  sites: state.sites,
 });
 
 const mapDispatch = {
   getChannels,
   createChannel,
+  getSites,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Channels));

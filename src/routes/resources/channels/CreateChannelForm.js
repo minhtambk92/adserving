@@ -6,6 +6,7 @@ class CreateChannelForm extends Component {
   static propTypes = {
     filters: PropTypes.object,
     createChannel: PropTypes.func,
+    sites: PropTypes.array,
   };
 
   clearInput() {
@@ -17,9 +18,10 @@ class CreateChannelForm extends Component {
     const name = this.inputChannelName.value;
     const description = this.inputChannelDescription.value;
     const status = this.inputChannelStatus.value;
+    const siteId = this.inputSiteId.value;
 
-    if (name && description) {
-      this.props.createChannel({ name, description, status }).then(() => {
+    if (name && description && siteId) {
+      this.props.createChannel({ name, description, status, siteId }).then(() => {
         this.clearInput();
       });
     }
@@ -42,6 +44,27 @@ class CreateChannelForm extends Component {
                   this.inputChannelName = c;
                 }}
               />
+            </div>
+          </div>
+          {/* Site */}
+          <div className="form-group">
+            <label htmlFor="inputSiteId" className="col-sm-2 control-label">Site</label>
+            <div className="col-sm-10">
+              <select
+                id="inputSiteId" className="form-control"
+                ref={c => {
+                  this.inputSiteId = c;
+                }}
+              >
+                {this.props.sites
+                && this.props.sites.map(site => (
+                  <option
+                    key={site.id} value={site.id}
+                  >
+                    {site.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           {/* description */}

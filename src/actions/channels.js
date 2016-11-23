@@ -37,12 +37,7 @@ export function getChannel(id) {
           name
           description
           status
-          site {
-            id
-            name
-            domain
-            description
-          }
+          siteId
           options {
             id
             type
