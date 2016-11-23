@@ -1,48 +1,27 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { ICheck } from '../../../components/UI/';
 
-class OptionSelectChannel extends Component {
+class FilterSiteChannel extends Component {
 
   static propTypes = {
-    options: PropTypes.object,
-    data: PropTypes.array,
     id: PropTypes.string,
     name: PropTypes.string,
     comparison: PropTypes.string,
     value: PropTypes.string,
-    optionChannelId: PropTypes.string,
-    deleteOptionChannel: PropTypes.func,
+    logical: PropTypes.string,
     index: PropTypes.number,
   };
 
   async componentDidMount() {
     await ReactDOM.render(this.renderDOMLibs(), this.portal);
-    if (this.props.value && this.props.name && this.props.comparison) {
-      this.inputTypeFilter.value = this.props.comparison;
-      const value = this.props.value;
-      const arr = value.split(',');
-      /* eslint-disable no-undef */
-      for (let i = 0; i < arr.length; i += 1) {
-        const id = `${this.props.name}${arr[i]}`;
-        $(`#${id}`).iCheck('check');
-      }
-      /* eslint-enable no-undef */
-    }
   }
-
+  componentWillReceiveProps(nextProps) {
+    this.inputTypeFilter.value = nextProps.logical;
+    this.inputSiteFilter.value = nextProps.comparison;
+  }
   componentWillUnmount() {
     ReactDOM.unmountComponentAtNode(this.portal);
   }
-
-  deleteOption() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    if (this.props.value && this.props.name && this.props.comparison) {
-      this.props.deleteOptionChannel(this.props.optionChannelId).then(() => {
-        // this.props.getChannel(this.props.channelId);
-      });
-    }
-  }
-
   renderDOMLibs() {
     return (
       <div className="col-lg-12">
@@ -53,7 +32,6 @@ class OptionSelectChannel extends Component {
               <button
                 className="btn btn-box-tool remove-option"
                 data-widget="remove"
-                onClick={event => this.deleteOption(event)}
               >
                 <i
                   className="fa fa-times"
@@ -63,7 +41,7 @@ class OptionSelectChannel extends Component {
           </div>
           {/* /.box-header */}
           <div className="box-body">
-            <div className="col-lg-4">
+            <div className="col-lg-2">
               <div className="box-body">
                 <div className="form-group">
                   <div className="col-sm-12">
@@ -73,33 +51,49 @@ class OptionSelectChannel extends Component {
                         this.inputTypeFilter = c;
                       }}
                     >
-                      <option value="==">Is any of</option>
-                      <option value="!=">Is not any of</option>
+                      <option value="and">AND</option>
+                      <option value="or">OR</option>
                     </select>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-6">
+            <div className="col-lg-8">
               <div className="box-body">
                 <div className="row">
-                  {this.props.data.map((data) =>
-                    <div className="col-sm-3" key={data.id}>
+                  <form className="form-horizontal">
+                    <div className="form-group">
+                      <label htmlFor="inputChannelOption" className="col-sm-3 control-label">Site
+                        - Page URL</label>
+                      <div className="col-sm-9">
+                        <select
+                          className="form-control inputSiteFilter"
+                          ref={c => {
+                            this.inputSiteFilter = c;
+                          }}
+                        >
+                          <option value="==">is equal to</option>
+                          <option value="!=">is different from</option>
+                          <option value="=~">Contains</option>
+                          <option value="!~">Does not contain</option>
+                          <option value="=x">Regex match</option>
+                          <option value="!x">Regex does not match</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group">
                       <label
-                        htmlFor="inputChannelOptions"
-                        className="control-label"
-                      >
-                        <ICheck
-                          type="checkbox"
-                          id={this.props.name + data.value}
-                          className="inputOption"
-                          value={data.value}
+                        htmlFor="inputChannelOptionURL" className="col-sm-3 control-label"
+                      >&nbsp;</label>
+                      <div className="col-sm-9">
+                        <input
+                          type="text" className="form-control inputChannelOptionURL"
+                          placeholder="http://www.google.com"
+                          defaultValue={this.props.value}
                         />
-                        {data.name}
-                      </label>
-                    </div>,
-                  )
-                  }
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -125,4 +119,4 @@ class OptionSelectChannel extends Component {
   }
 }
 
-export default OptionSelectChannel;
+export default FilterSiteChannel;

@@ -93,35 +93,37 @@ export function createOptionChannel({ logical, type, comparison, value, channelI
   };
 }
 
-export function updateOptionChannel({ id, logical, type, comparison, value }) {
+export function updateOptionChannel({ id, logical, type, comparison, value, channelId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($optionChannel: OptionChannelInputType!) {
-        updatedAdvertiser(optionChannel: $optionChannel) {
+        updatedOptionChannel(optionChannel: $optionChannel) {
           id
           logical
           type
           comparison
           value
+          channelId
           createdAt
           updatedAt
         }
       }`;
 
-    const { data1 } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutation, {
       optionChannel: {
         id,
         logical,
         type,
         comparison,
         value,
+        channelId,
       },
     });
 
     dispatch({
       type: UPDATE_OPTION_CHANNEL,
       payload: {
-        optionChannel: data1.updatedOptionChannel,
+        optionChannel: data.updatedOptionChannel,
       },
     });
   };

@@ -16,11 +16,12 @@ import {
   updateChannel,
   deleteChannel,
 } from '../../../../actions/channels';
-import { createOptionChannel, deleteOptionChannel } from '../../../../actions/optionChannels';
+import { createOptionChannel, deleteOptionChannel, updateOptionChannel } from '../../../../actions/optionChannels';
 import { getSites } from '../../../../actions/sites';
 import Layout from '../../../../components/Layout';
 import UpdateChannelForm from '../UpdateChannelForm';
 import SelectOptionChannel from '../OptionSelectChannel';
+import FilterSiteChannel from '../OptionFilterSiteChannel';
 import Link from '../../../../components/Link';
 import s from './Channel.css';
 
@@ -40,6 +41,7 @@ class Channel extends Component {
     deleteOptionChannel: PropTypes.func,
     sites: PropTypes.object,
     getSites: PropTypes.func,
+    updateOptionChannel: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -64,23 +66,13 @@ class Channel extends Component {
       }],
       options: [{ id: 'option-1', name: 'Category', value: 'category' },
         { id: 'option-2', name: 'Browser', value: 'browser' },
-        { id: 'option-3', name: 'Domain', value: 'domain' },
-        { id: 'option-4', name: 'Address', value: 'Ip' },
-        { id: 'option-5', name: 'Language', value: 'language' },
-        { id: 'option-6', name: 'Operating system', value: 'OS' },
-        { id: 'option-7', name: 'Area', value: 'AreaCode' },
-        { id: 'option-8', name: 'City', value: 'city' },
-        { id: 'option-9', name: 'Country', value: 'Country' },
-        { id: 'option-10', name: 'Latitude/Longitude', value: 'Latlong' },
-        { id: 'option-11', name: 'Geo - ISP/Organisation', value: 'Organisation' },
-        { id: 'option-12', name: 'Postal Code', value: 'PostalCode' },
-        { id: 'option-13', name: 'Site - PageURL', value: 'PageUrl' },
-        { id: 'option-14', name: 'Site-Source', value: 'Site' },
-        { id: 'option-15', name: 'Variable', value: 'Variable' },
+        { id: 'option-3', name: 'Site - PageURL', value: 'pageUrl' },
+        { id: 'option-4', name: 'Site - Referring Page', value: 'referingPage' },
       ],
       chooseOption: [],
       showCategory: false,
       showBrowser: false,
+      countOptionChannel: 0,
     };
   }
 
@@ -89,55 +81,45 @@ class Channel extends Component {
     this.props.getSites();
   }
 
+  componentWillReceiveProps(nextProps) {
+    const {
+      options,
+    } = nextProps.channels && (nextProps.channels.editing || {});
+    if (nextProps.channels.editing.options) {
+      const length = options.length;
+      this.setState({ countOptionChannel: length });
+    }
+  }
+
   componentDidUpdate() {
     /* eslint-disable no-undef */
     const self = this;
     $('.remove-option').click(function () {
-      const type = $(this).parents('.row').attr('id');
-      if (type === 'category') {
-        self.setState({
-          showCategory: false,
-        });
-        self.props.getChannel(self.props.channelId);
-      } else if (type === 'browser') {
-        self.setState({
-          showBrowser: false,
-        });
-        self.props.getChannel(self.props.channelId);
+      const length = self.state.countOptionChannel;
+      const count = length - 1;
+      self.setState({ countOptionChannel: count });
+      const id = $(this).parents('.row').attr('id');
+      if (id) {
+        if (id === 'category') {
+          self.setState({
+            showCategory: false,
+          });
+          self.props.getChannel(self.props.channelId);
+        } else if (id === 'browser') {
+          self.setState({
+            showBrowser: false,
+          });
+          self.props.getChannel(self.props.channelId);
+        } else if (id !== 'browser' && id !== 'category') {
+          self.props.deleteOptionChannel(id).then(() => {
+            self.props.getChannel(self.props.channelId);
+          });
+        }
       }
     });
     /* eslint-enable no-undef */
   }
 
-  addOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    /* eslint-disable no-undef */
-    const currentOption = ['category', 'browser'];
-    // Create new option
-    for (let i = 0; i < currentOption.length; i += 1) {
-      const arrCategory = [];
-      const id = currentOption[i];
-      /* eslint-disable no-loop-func */
-      $(`#${id} input[type=checkbox]`).each(function () {
-        /* eslint-enable no-loop-func */
-        const val = (this.checked ? $(this).val() : '');
-        if (val !== 'on' && val.trim() !== '') {
-          arrCategory.push(val);
-        }
-      });
-      const comparison = $(`#${id} .inputTypeFilter`).val();
-      const type = $(`#${id} .box-title`).html();
-      const value = arrCategory.toString();
-      const logical = 'and';
-      const channelId = this.props.channelId;
-      if (type && comparison && value) {
-        this.enabledOption(type);
-        this.props.createOptionChannel({ logical, type, comparison, value, channelId }).then(() => {
-          this.props.getChannel(this.props.channelId);
-        });
-      }
-    }
-    /* eslint-enable no-undef */
-  }
   disabledOption(type) { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (type === 'category') {
       this.setState({
@@ -149,6 +131,7 @@ class Channel extends Component {
       });
     }
   }
+
   enabledOption(type) { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (type === 'category') {
       this.setState({
@@ -160,54 +143,113 @@ class Channel extends Component {
       });
     }
   }
+
   saveOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     /* eslint-disable no-undef */
-    const currentOption = ['category', 'browser'];
-    // Create new option
-    for (let i = 0; i < currentOption.length; i += 1) {
-      const arrCategory = [];
-      const id = currentOption[i];
-      /* eslint-disable no-loop-func */
-      $(`#${id} input[type=checkbox]`).each(function () {
-        /* eslint-enable no-loop-func */
-        const val = (this.checked ? $(this).val() : '');
-        if (val !== 'on' && val.trim() !== '') {
-          arrCategory.push(val);
+    const length = this.state.countOptionChannel;
+    for (let i = 1; i <= length; i += 1) {
+      const id = $(`#optionChannel .optionChannel-${i}`).attr('id');
+      if (id) {
+        if (id === 'category' || id === 'browser') {
+          const arrCategory = [];
+         /* eslint-disable no-loop-func */
+          $(`#${id} input[type=checkbox]`).each(function () {
+           /* eslint-enable no-loop-func */
+            const val = (this.checked ? $(this).val() : '');
+            if (val !== 'on' && val.trim() !== '') {
+              arrCategory.push(val);
+            }
+          });
+          const comparison = $(`#${id} .inputTypeFilter`).val();
+          const type = $(`#${id} .box-title`).html();
+          const value = arrCategory.toString();
+          const logical = 'and';
+          const channelId = this.props.channelId;
+          if (type && comparison && value) {
+            this.enabledOption(type);
+            /* eslint-disable max-len */
+            this.props.updateOptionChannel({ id, logical, type, comparison, value, channelId }).then(() => {
+              /* eslint-enable max-len */
+              this.props.getChannel(this.props.channelId);
+            });
+          }
+        } else if (id !== 'category' && id !== 'browser') {
+          const comparison = $(`#${id} .inputSiteFilter`).val();
+          const type = $(`#${id} .box-title`).html();
+          const value = $(`#${id} .inputChannelOptionURL`).val();
+          const logical = $(`#${id} .inputTypeFilter`).val();
+          const channelId = this.props.channelId;
+          if (type && comparison && value) {
+            /* eslint-disable max-len */
+            this.props.updateOptionChannel({ id, logical, type, comparison, value, channelId }).then(() => {
+              /* eslint-enable max-len */
+              this.props.getChannel(this.props.channelId);
+            });
+          }
         }
-      });
-      const comparison = $(`#${id} .inputTypeFilter`).val();
-      const type = $(`#${id} .box-title`).html();
-      const value = arrCategory.toString();
-      const logical = 'and';
-      const channelId = this.props.channelId;
-      if (type && comparison && value) {
-        this.enabledOption(type);
-        this.props.createOptionChannel({ logical, type, comparison, value, channelId }).then(() => {
-          this.props.getChannel(this.props.channelId);
-        });
-      }
-    }
-    // Delete option past
-    if (this.props.channels.editing && this.props.channels.editing.options.length > 0) {
-      const arrOption = this.props.channels.editing.options;
-      for (let j = 0; j < arrOption.length; j += 1) {
-        this.props.deleteOptionChannel(arrOption[j].id);
+      } else {
+        const comparison = $(`.optionChannel-${i} .inputSiteFilter`).val();
+        const type = $(`.optionChannel-${i} .box-title`).html();
+        const value = $(`.optionChannel-${i} .inputChannelOptionURL`).val();
+        const logical = $(`.optionChannel-${i} .inputTypeFilter`).val();
+        const channelId = this.props.channelId;
+        if (type && comparison && value) {
+          /* eslint-disable max-len */
+          this.props.createOptionChannel({ id, logical, type, comparison, value, channelId }).then(() => {
+            /* eslint-enable max-len */
+            this.props.getChannel(this.props.channelId);
+          });
+        }
       }
     }
   }
 
   newOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
+    /* eslint-disable no-undef */
     const value = this.inputChannelOptions.value;
-    if (this.props.channels.editing.options.length > 0) {
-      const options = this.props.channels.editing.options;
-      for (let i = 0; i < options.length; i += 1) {
-        if (value !== options[i].type) {
-          this.disabledOption(value);
+    const html = $(`#inputChannelOptions option[value=${value}]`).text();
+    if (value === 'category' || value === 'browser') {
+      if (this.props.channels.editing.options.length > 0) {
+        const options = this.props.channels.editing.options;
+        for (let i = 0; i < options.length; i += 1) {
+          if (value !== options[i].type) {
+            this.disabledOption(value);
+          }
         }
+      } else if (this.props.channels.editing.options.length === 0) {
+        this.disabledOption(value);
       }
-    } else if (this.props.channels.editing.options.length === 0) {
-      this.disabledOption(value);
+    } else {
+      this.addNewFilterSite(value, html);
     }
+    /* eslint-enable no-undef */
+  }
+
+  addNewFilterSite(type, name) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const count = this.state.countOptionChannel + 1;
+    this.setState({ countOptionChannel: count });
+    let html = '';
+    html += `<div class="row optionChannel-${count}">`;
+    html += '<div class="col-lg-12">';
+    html += '<div class="box box-solid box-primary">';
+    html += `<div class="box-header"><h3 class="box-title">${name}</h3>`;
+    html += '<div class="box-tools pull-right">';
+    html += '<button class="btn btn-box-tool remove-option" data-widget="remove"> <i class="fa fa-times" /> </button>';
+    html += '</div></div>';
+    html += '<div class="box-body"><div class="col-lg-2"> <div class="box-body"> <div class="form-group"> <div class="col-sm-12">';
+    html += '<select class="form-control inputTypeFilter"><option value="and">AND</option> <option value="or">OR</option> </select>';
+    html += '</div> </div> </div> </div>';
+    html += '<div class="col-lg-8"><div class="box-body"> <div class="row"> <form class="form-horizontal">';
+    html += '<div class="form-group">';
+    html += `<label class="col-sm-3 control-label">${name}</label>`;
+    html += '<div class="col-sm-9"><select class="form-control inputSiteFilter" >';
+    html += '<option value="==">is equal to</option> <option value="!=">is different from</option> <option value="=~">Contains</option> <option value="!~">Does not contain</option> <option value="=x">Regex match</option> <option value="!x">Regex does not match</option>';
+    html += '</select> </div> </div>';
+    html += '<div class="form-group">';
+    html += '<label class="col-sm-3 control-label" >&nbsp;</label>';
+    html += '<div class="col-sm-9"> <input type="text" class="form-control inputChannelOptionURL" placeholder="http://www.google.com" /> </div>';
+    html += '</div> </form> </div> </div> </div> </div></div> </div></div>';
+    $('#optionChannel').append(html);
   }
 
   render() {
@@ -282,7 +324,7 @@ class Channel extends Component {
                                 </div>
                               </div>
                               {/* /.box-header */}
-                              <div className="box-body" id="optionChannel">
+                              <div className="box-body">
                                 <div className="row">
                                   <div className="col-lg-12">
                                     <div className="col-lg-6 no-padding">
@@ -323,73 +365,78 @@ class Channel extends Component {
                                     </div>
                                   </div>
                                 </div>
-                                {/* /.Option NEW */}
-                                {this.state.showCategory === true ? (
-                                  <SelectOptionChannel
-                                    id="category"
-                                    name="category"
-                                    data={this.state.category}
-                                  />
-                                ) : ('')}
-                                {this.state.showBrowser === true ? (
-                                  <SelectOptionChannel
-                                    id="browser"
-                                    name="browser"
-                                    data={this.state.browser}
-                                  />
-                                ) : ('') }
-                                {/* /.Option Channel */}
-                                {this.props.channels && this.props.channels.editing &&
-                                this.props.channels.editing.options &&
-                                this.props.channels.editing.options.map((option) => {
-                                  if (option.type === 'category') {
-                                    return (<SelectOptionChannel
-                                      key={option.id}
-                                      id={option.type}
-                                      name={option.type}
-                                      value={option.value}
-                                      comparison={option.comparison}
+                                <div className="siteOption" id="optionChannel">
+                                  {/* /.Option NEW */}
+                                  {this.state.showCategory === true ? (
+                                    <SelectOptionChannel
+                                      id="category"
+                                      name="category"
                                       data={this.state.category}
-                                      deleteOptionChannel={this.props.deleteOptionChannel}
-                                      optionChannelId={option.id}
-                                    />);
-                                  } else if (option.type === 'browser') {
-                                    return (<SelectOptionChannel
-                                      id={option.type}
-                                      key={option.id}
-                                      name={option.type}
-                                      value={option.value}
-                                      comparison={option.comparison}
+                                    />
+                                  ) : ('')}
+                                  {this.state.showBrowser === true ? (
+                                    <SelectOptionChannel
+                                      id="browser"
+                                      name="browser"
                                       data={this.state.browser}
-                                      optionChannelId={option.id}
-                                      deleteOptionChannel={this.props.deleteOptionChannel}
-                                    />);
-                                  }
-                                  return false;
-                                },
-                                )}
+                                    />
+                                  ) : ('') }
+                                  {/* /.Option Channel */}
+                                  {this.props.channels && this.props.channels.editing &&
+                                  this.props.channels.editing.options &&
+                                  this.props.channels.editing.options.map((option, index) => {
+                                    if (option.type === 'category') {
+                                      return (<SelectOptionChannel
+                                        key={option.id}
+                                        id={option.type}
+                                        name={option.type}
+                                        index={index + 1}
+                                        value={option.value}
+                                        comparison={option.comparison}
+                                        data={this.state.category}
+                                        deleteOptionChannel={this.props.deleteOptionChannel}
+                                        optionChannelId={option.id}
+                                      />);
+                                    } else if (option.type === 'browser') {
+                                      return (<SelectOptionChannel
+                                        id={option.type}
+                                        key={option.id}
+                                        name={option.type}
+                                        index={index + 1}
+                                        value={option.value}
+                                        comparison={option.comparison}
+                                        data={this.state.browser}
+                                        optionChannelId={option.id}
+                                        deleteOptionChannel={this.props.deleteOptionChannel}
+                                      />);
+                                    } else if (option.type !== 'browser' && option.type !== 'category') {
+                                      return (
+                                        <FilterSiteChannel
+                                          key={option.id}
+                                          id={option.id}
+                                          index={index + 1}
+                                          logical={option.logical}
+                                          name={option.type}
+                                          value={option.value}
+                                          comparison={option.comparison}
+                                        />
+                                      );
+                                    }
+                                    return false;
+                                  },
+                                  )}
+                                </div>
                               </div>
                               <div className="box-footer">
                                 <Link
                                   to="/resource/Channel"
                                   className="btn btn-app pull-right"
                                 ><i className="fa fa-undo" /> Cancel</Link>
-                                {this.props.channels && this.props.channels.editing &&
-                                this.props.channels.editing.options &&
-                                this.props.channels.editing.options.length === 0 ?
-                                  (<Link
-                                    to="#"
-                                    className="btn btn-app pull-right"
-                                    onClick={event => this.addOptions(event)}
-                                  ><i className="fa fa-floppy-o" /> Add Options</Link>)
-                                  : (
-                                    <Link
-                                      to="#"
-                                      className="btn btn-app pull-right"
-                                      onClick={event => this.saveOptions(event)}
-                                    ><i className="fa fa-floppy-o" /> Save Options</Link>
-                                )
-                                }
+                                <Link
+                                  to="#"
+                                  className="btn btn-app pull-right"
+                                  onClick={event => this.saveOptions(event)}
+                                ><i className="fa fa-floppy-o" /> Save Options</Link>
                               </div>
                             </div>
                           </div>
@@ -421,6 +468,7 @@ const mapDispatch = {
   createOptionChannel,
   deleteOptionChannel,
   getSites,
+  updateOptionChannel,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Channel));

@@ -491,6 +491,24 @@ async function optionChannelFiction() {
       status: STATUS_ACTIVE,
       channelId: channel.id,
     });
+    // Create an OptionChannel
+    await OptionChannel.create({
+      logical: 'and',
+      type: 'pageUrl',
+      comparison: '==',
+      value: 'http://www.bongdaso.com',
+      status: STATUS_ACTIVE,
+      channelId: channel.id,
+    });
+    // Create an OptionChannel
+    await OptionChannel.create({
+      logical: 'and',
+      type: 'referingPage',
+      comparison: '!=',
+      value: 'http://www.dantri.com.vn',
+      status: STATUS_ACTIVE,
+      channelId: channel.id,
+    });
 
     console.log(chalk.green(`${optionChannel.name} is created. Passed!`));
   } else {
