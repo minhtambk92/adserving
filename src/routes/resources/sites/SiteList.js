@@ -36,7 +36,7 @@ class SiteList extends Component {
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/channel/${rowData.channelId}`}>Channel Option</Link>, cell);
+        ReactDOM.render(<Link to={`/resource/site/${rowData.id}`}>Target Channel</Link>, cell);
       },
     }, {
       data: null,
