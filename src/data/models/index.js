@@ -240,15 +240,15 @@ Banner.channel = Banner.belongsTo(Channel, {
   foreignKey: 'channelId',
 });
 
-// Each advertiser can make many campaigns
-Channel.sites = Channel.hasMany(Site, {
+// Each Site can make many channels
+Site.channels = Site.hasMany(Channel, {
   foreignKey: {
-    name: 'channelId',
+    name: 'siteId',
     allowNull: false,
   },
 });
-Site.channel = Site.belongsTo(Channel, {
-  foreignKey: 'channelId',
+Channel.site = Channel.belongsTo(Site, {
+  foreignKey: 'siteId',
 });
 
 Channel.optionChannels = Channel.hasMany(OptionChannel, {

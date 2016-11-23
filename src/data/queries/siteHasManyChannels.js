@@ -1,16 +1,16 @@
-/**
- * Created by Quy on 11/15/2016.
- */
+import {
+  GraphQLList as List,
+} from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import { Site } from '../models';
 import ChannelType from '../types/ChannelType';
 
-const siteBelongsToChannel = () => ({
-  type: ChannelType,
+const siteHasManyChannels = () => ({
+  type: new List(ChannelType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
   }),
-  resolve: resolver(Site.channel, {
+  resolve: resolver(Site.channels, {
     before(options) {
       const opts = options;
       opts.order = options.order || [];
@@ -20,5 +20,4 @@ const siteBelongsToChannel = () => ({
   }),
 });
 
-export default siteBelongsToChannel;
-
+export default siteHasManyChannels;

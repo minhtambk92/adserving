@@ -105,7 +105,6 @@ class Site extends Component {
                             getSite={this.props.getSite}
                             sites={this.props.sites}
                             checkSitesByDomain={this.props.checkSitesByDomain}
-                            channels={this.props.channels && this.props.channels.list}
                           />
                         </div>
                         {/* /.col */}

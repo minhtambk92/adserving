@@ -38,8 +38,7 @@ export function getSite(id) {
             sizeValue
             createdAt
             updatedAt
-            }
-          channelId  
+            }  
           status
           createdAt
           updatedAt
@@ -74,7 +73,6 @@ export function getSites(args = {
           email
           description
           status
-          channelId
           createdAt
           updatedAt
         }
@@ -114,7 +112,6 @@ export function checkSitesByDomain(domain) {
           email
           description
           status
-          channelId
           createdAt
           updatedAt
         }
@@ -130,7 +127,7 @@ export function checkSitesByDomain(domain) {
   };
 }
 
-export function createSite({ domain, name, email, description, status, channelId }) {
+export function createSite({ domain, name, email, description, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($site: SiteInputTypeWithoutId!) {
@@ -141,7 +138,6 @@ export function createSite({ domain, name, email, description, status, channelId
           email
           description
           status
-          channelId
           createdAt
           updatedAt
         }
@@ -154,7 +150,6 @@ export function createSite({ domain, name, email, description, status, channelId
         email,
         description,
         status,
-        channelId,
       },
     });
 
@@ -167,7 +162,7 @@ export function createSite({ domain, name, email, description, status, channelId
   };
 }
 
-export function updateSite({ id, domain, name, email, description, status, channelId }) {
+export function updateSite({ id, domain, name, email, description, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($site: SiteInputType!) {
@@ -178,7 +173,6 @@ export function updateSite({ id, domain, name, email, description, status, chann
           email
           description
           status
-          channelId
           createdAt
           updatedAt
         }
@@ -192,7 +186,6 @@ export function updateSite({ id, domain, name, email, description, status, chann
         email,
         description,
         status,
-        channelId,
       },
     });
 
@@ -216,7 +209,6 @@ export function deleteSite(id) {
           email
           description
           status
-          channelId
           createdAt
           updatedAt
           deletedAt

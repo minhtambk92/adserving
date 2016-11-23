@@ -428,6 +428,28 @@ async function campaignFiction() {
   }
 }
 
+// Sites fiction
+async function siteFiction() {
+  console.log(chalk.grey('Check current number of sites...'));
+  const sitesQuantity = await Site.count();
+
+  if (sitesQuantity === 0) {
+    console.log(chalk.red('No site found! Do a fiction...'));
+    // Create an OptionChannel
+    const site = await Site.create({
+      domain: 'http://bongdaso.com',
+      name: 'Bong Da So',
+      email: 'contact@bongdaso.com',
+      status: STATUS_ACTIVE,
+      description: 'Đơn vị đối tác của admicro',
+    });
+
+    console.log(chalk.green(`${site.name} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${sitesQuantity} site(s) found. Passed!`));
+  }
+}
+
 // Channels fiction
 async function channelFiction() {
   console.log(chalk.grey('Check current number of channels...'));
@@ -435,11 +457,14 @@ async function channelFiction() {
 
   if (channelsQuantity === 0) {
     console.log(chalk.red('No channel found! Do a fiction...'));
+    // Get id of Site
+    const site = await Site.findOne({ where: { domain: 'http://bongdaso.com' } });
     // Create an Channel
     const channel = await Channel.create({
       name: 'Channel',
       status: STATUS_ACTIVE,
       description: 'Channel của Admicro',
+      siteId: site.id,
     });
 
     console.log(chalk.green(`Super ${channel.name} is created. Passed!`));
@@ -470,31 +495,6 @@ async function optionChannelFiction() {
     console.log(chalk.green(`${optionChannel.name} is created. Passed!`));
   } else {
     console.log(chalk.green(`${optionChannelsQuantity} optionChannel(s) found. Passed!`));
-  }
-}
-
-// Sites fiction
-async function siteFiction() {
-  console.log(chalk.grey('Check current number of sites...'));
-  const sitesQuantity = await Site.count();
-
-  if (sitesQuantity === 0) {
-    console.log(chalk.red('No site found! Do a fiction...'));
-    // Get id of Channel
-    const channel = await Channel.findOne({ where: { name: 'Channel' } });
-    // Create an OptionChannel
-    const site = await Site.create({
-      domain: 'http://bongdaso.com',
-      name: 'Bong Da So',
-      email: 'contact@bongdaso.com',
-      status: STATUS_ACTIVE,
-      description: 'Đơn vị đối tác của admicro',
-      channelId: channel.id,
-    });
-
-    console.log(chalk.green(`${site.name} is created. Passed!`));
-  } else {
-    console.log(chalk.green(`${sitesQuantity} site(s) found. Passed!`));
   }
 }
 
@@ -662,9 +662,9 @@ async function fiction() {
   await userFiction();
   await advertiserFiction();
   await campaignFiction();
+  await siteFiction();
   await channelFiction();
   await optionChannelFiction();
-  await siteFiction();
   await placementFiction();
   await zoneFiction();
   await bannerFiction();

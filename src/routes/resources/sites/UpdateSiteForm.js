@@ -11,7 +11,6 @@ class UpdateSiteForm extends Component {
     getSite: PropTypes.func,
     checkSitesByDomain: PropTypes.func,
     sites: PropTypes.object,
-    channels: PropTypes.array,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -21,14 +20,12 @@ class UpdateSiteForm extends Component {
       email,
       description,
       status,
-      channelId,
     } = nextProps.site && (nextProps.site || {});
     this.inputSiteDomain.value = domain;
     this.inputSiteName.value = name;
     this.inputSiteEmail.value = email;
     this.inputSiteDescription.value = description;
     this.inputSiteStatus.value = status;
-    this.inputChannelId.value = channelId;
   }
 
   updateSite() {
@@ -37,7 +34,6 @@ class UpdateSiteForm extends Component {
     const email = this.inputSiteEmail.value;
     const description = this.inputSiteDescription.value;
     const status = this.inputSiteStatus.value;
-    const channelId = this.inputChannelId.value;
     const site = { id: this.props.siteId };
 
     if (domain && domain !== this.props.site.domain) {
@@ -57,9 +53,6 @@ class UpdateSiteForm extends Component {
     }
     if (status && status !== this.props.site.status) {
       site.status = status;
-    }
-    if (channelId && channelId !== this.props.site.channelId) {
-      site.channelId = channelId;
     }
     // site.status = document.getElementById('inputSiteStatus').value;
     this.props.updateSite(site).then(() => {
@@ -164,26 +157,6 @@ class UpdateSiteForm extends Component {
                   this.inputSiteEmail = c;
                 }}
               />
-            </div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="inputChannelId" className="col-sm-3 control-label">Channel</label>
-            <div className="col-sm-9">
-              <select
-                id="inputChannelId" className="form-control"
-                ref={c => {
-                  this.inputChannelId = c;
-                }}
-              >
-                {this.props.channels
-                && this.props.channels.map(channel => (
-                  <option
-                    key={channel.id} value={channel.id}
-                  >
-                    {channel.name}
-                  </option>
-                ))}
-              </select>
             </div>
           </div>
           <div className="form-group">

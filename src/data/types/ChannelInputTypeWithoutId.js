@@ -5,7 +5,7 @@ import { Channel } from '../models';
 const ChannelInputTypeWithoutId = new InputObjectType({
   name: 'ChannelInputTypeWithoutId',
   fields: () => Object.assign(attributeFields(Channel, {
-    only: ['name', 'description', 'status'],
+    only: ['name', 'description', 'status', 'siteId'],
   }), {
     // Additional fields
   }),

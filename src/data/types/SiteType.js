@@ -8,7 +8,7 @@ import {
 import { attributeFields } from 'graphql-sequelize';
 import { Site } from '../models';
 import siteHasManyZones from '../queries/siteHasManyZones';
-import siteBelongsToChanel from '../queries/siteBelongsToChannel';
+import siteHasManyChanels from '../queries/siteHasManyChannels';
 
 const SiteType = new ObjectType({
   name: 'SiteType',
@@ -17,7 +17,7 @@ const SiteType = new ObjectType({
   }), {
     // Additional fields
     zones: siteHasManyZones(),
-    channel: siteBelongsToChanel(),
+    channels: siteHasManyChanels(),
   }),
 });
 

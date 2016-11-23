@@ -37,6 +37,12 @@ export function getChannel(id) {
           name
           description
           status
+          site {
+            id
+            name
+            domain
+            description
+          }
           options {
             id
             type
@@ -75,6 +81,12 @@ export function getChannels(args = {
           name
           description
           status
+          site {
+            id
+            name
+            domain
+            description
+          }
           createdAt
           updatedAt
         }
@@ -103,7 +115,7 @@ export function getChannels(args = {
   };
 }
 
-export function createChannel({ name, description, status }) {
+export function createChannel({ name, description, status, siteId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($channel: ChannelInputTypeWithoutId!) {
@@ -112,6 +124,7 @@ export function createChannel({ name, description, status }) {
           name
           description
           status
+          siteId
           createdAt
           updatedAt
         }
@@ -122,6 +135,7 @@ export function createChannel({ name, description, status }) {
         name,
         description,
         status,
+        siteId,
       },
     });
 
@@ -134,7 +148,7 @@ export function createChannel({ name, description, status }) {
   };
 }
 
-export function updateChannel({ id, name, description, status }) {
+export function updateChannel({ id, name, description, status, siteId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($channel: ChannelInputType!) {
@@ -143,6 +157,7 @@ export function updateChannel({ id, name, description, status }) {
           name
           description
           status
+          siteId
           createdAt
           updatedAt
         }
@@ -154,6 +169,7 @@ export function updateChannel({ id, name, description, status }) {
         name,
         description,
         status,
+        siteId,
       },
     });
 
@@ -174,6 +190,7 @@ export function deleteChannel(id) {
           id
           name
           description
+          siteId
           createdAt
           updatedAt
           deletedAt
