@@ -21,7 +21,7 @@ import { getSites } from '../../../../actions/sites';
 import Layout from '../../../../components/Layout';
 import UpdateChannelForm from '../UpdateChannelForm';
 import SelectOptionChannel from '../OptionSelectChannel';
-import FilterSiteChannel from '../OptionFilterSiteChannel';
+import FilterSiteChannel from '../FilterSiteChannel';
 import Link from '../../../../components/Link';
 import s from './Channel.css';
 
@@ -64,15 +64,12 @@ class Channel extends Component {
       }, {
         id: 'browser-6', name: 'Netscape', value: 'Netscape',
       }],
-      options: [{ id: 'option-1', name: 'Category', value: 'category' },
-        { id: 'option-2', name: 'Browser', value: 'browser' },
+      options: [
         { id: 'option-3', name: 'Site - PageURL', value: 'pageUrl' },
         { id: 'option-4', name: 'Site - Referring Page', value: 'referingPage' },
       ],
-      chooseOption: [],
-      showCategory: false,
-      showBrowser: false,
       countOptionChannel: 0,
+      string: '',
     };
   }
 
@@ -100,17 +97,7 @@ class Channel extends Component {
       self.setState({ countOptionChannel: count });
       const id = $(this).parents('.row').attr('id');
       if (id) {
-        if (id === 'category') {
-          self.setState({
-            showCategory: false,
-          });
-          self.props.getChannel(self.props.channelId);
-        } else if (id === 'browser') {
-          self.setState({
-            showBrowser: false,
-          });
-          self.props.getChannel(self.props.channelId);
-        } else if (id !== 'browser' && id !== 'category') {
+        if (id !== 'browser' && id !== 'category') {
           self.props.deleteOptionChannel(id).then(() => {
             self.props.getChannel(self.props.channelId);
           });
@@ -118,30 +105,6 @@ class Channel extends Component {
       }
     });
     /* eslint-enable no-undef */
-  }
-
-  disabledOption(type) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    if (type === 'category') {
-      this.setState({
-        showCategory: true,
-      });
-    } else if (type === 'browser') {
-      this.setState({
-        showBrowser: true,
-      });
-    }
-  }
-
-  enabledOption(type) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    if (type === 'category') {
-      this.setState({
-        showCategory: false,
-      });
-    } else if (type === 'browser') {
-      this.setState({
-        showBrowser: false,
-      });
-    }
   }
 
   saveOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -169,6 +132,29 @@ class Channel extends Component {
             this.enabledOption(type);
             /* eslint-disable max-len */
             this.props.updateOptionChannel({ id, logical, type, comparison, value, channelId }).then(() => {
+              /* eslint-enable max-len */
+              this.props.getChannel(this.props.channelId);
+            });
+          }
+        } else if (id === 'newCategory' || id === 'newBrowser') {
+          const arrCategory = [];
+          /* eslint-disable no-loop-func */
+          $(`#${id} input[type=checkbox]`).each(function () {
+            /* eslint-enable no-loop-func */
+            const val = (this.checked ? $(this).val() : '');
+            if (val !== 'on' && val.trim() !== '') {
+              arrCategory.push(val);
+            }
+          });
+          const comparison = $(`#${id} .inputTypeFilter`).val();
+          const type = $(`#${id} .box-title`).html();
+          const value = arrCategory.toString();
+          const logical = 'and';
+          const channelId = this.props.channelId;
+          if (type && comparison && value) {
+            this.enabledOption(type);
+            /* eslint-disable max-len */
+            this.props.createOptionChannel({ logical, type, comparison, value, channelId }).then(() => {
               /* eslint-enable max-len */
               this.props.getChannel(this.props.channelId);
             });
@@ -208,18 +194,15 @@ class Channel extends Component {
     /* eslint-disable no-undef */
     const value = this.inputChannelOptions.value;
     const html = $(`#inputChannelOptions option[value=${value}]`).text();
-    if (value === 'category' || value === 'browser') {
-      if (this.props.channels.editing.options.length > 0) {
-        const options = this.props.channels.editing.options;
-        for (let i = 0; i < options.length; i += 1) {
-          if (value !== options[i].type) {
-            this.disabledOption(value);
-          }
-        }
-      } else if (this.props.channels.editing.options.length === 0) {
-        this.disabledOption(value);
-      }
+    if (value === 'category') {
+      const count = this.state.countOptionChannel + 1;
+      this.setState({ countOptionChannel: count });
+    } else if (value === 'browser') {
+      const count = this.state.countOptionChannel + 1;
+      this.setState({ countOptionChannel: count });
     } else {
+      const count = this.state.countOptionChannel + 1;
+      this.setState({ countOptionChannel: count });
       this.addNewFilterSite(value, html);
     }
     /* eslint-enable no-undef */
@@ -366,21 +349,6 @@ class Channel extends Component {
                                   </div>
                                 </div>
                                 <div className="siteOption" id="optionChannel">
-                                  {/* /.Option NEW */}
-                                  {this.state.showCategory === true ? (
-                                    <SelectOptionChannel
-                                      id="category"
-                                      name="category"
-                                      data={this.state.category}
-                                    />
-                                  ) : ('')}
-                                  {this.state.showBrowser === true ? (
-                                    <SelectOptionChannel
-                                      id="browser"
-                                      name="browser"
-                                      data={this.state.browser}
-                                    />
-                                  ) : ('') }
                                   {/* /.Option Channel */}
                                   {this.props.channels && this.props.channels.editing &&
                                   this.props.channels.editing.options &&
@@ -425,6 +393,7 @@ class Channel extends Component {
                                     return false;
                                   },
                                   )}
+                                  {this.state.string}
                                 </div>
                               </div>
                               <div className="box-footer">
