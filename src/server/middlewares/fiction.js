@@ -596,7 +596,7 @@ async function bannerFiction() {
     console.log(chalk.red('No banner found! Do a fiction...'));
     // Get id of Channel
     const channel = await Channel.findOne({ where: { name: 'Channel' } });
-    // Create an Zone
+    // Create an Banner HTML
     const banner = await Banner.create({
       name: 'Banner Top',
       html: '<script src="https://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=rsb&c=28&pli=18292301&PluID=0&w=980&h=250&ord=[timestamp]&ucm=true&ncu=$$%%TTD_CLK_ESC%%$$"></script> <noscript> <a href="%%TTD_CLK_ESC%%https%3A//bs.serving-sys.com/BurstingPipe/adServer.bs%3Fcn%3Dbrd%26FlightID%3D18292301%26Page%3D%26PluID%3D0%26Pos%3D1596347057" target="_blank"><img src="https://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=bsr&FlightID=18292301&Page=&PluID=0&Pos=1596347057" border=0 width=980 height=250></a> </noscript>',
@@ -628,7 +628,38 @@ async function bannerFiction() {
       expirationDateValue: new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00')),
       channelId: channel.id,
     });
-
+    // Create Banner Image
+    await Banner.create({
+      name: 'Banner Image',
+      html: '',
+      status: STATUS_ACTIVE,
+      width: 300,
+      height: 250,
+      keyword: 'duhoc',
+      imageUrl: 'http://static.manhhailua.com/uploads/1.jp-1479979108671.jpeg',
+      url: 'http://kenh14.vn',
+      target: '_blank',
+      adServer: '',
+      bannerHTMLType: '',
+      userIFrame: '1',
+      type: 'img',
+      weight: 1,
+      description: 'Banner Image',
+      countView: '0',
+      fixIE: '0',
+      isDefault: '0',
+      isRelative: '0',
+      impressionsBooked: '0',
+      clicksBooked: '0',
+      activationDate: '0',
+      expirationDate: '0',
+      adStore: '',
+      impressionsBookedValue: 'unlimited',
+      clicksBookedValue: 'unlimited',
+      activationDateValue: new Date(moment().format('YYYY-MM-DD 00:00:00')),
+      expirationDateValue: new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00')),
+      channelId: channel.id,
+    });
     console.log(chalk.green(`${banner.name} is created. Passed!`));
   } else {
     console.log(chalk.green(`${bannersQuantity} zone(s) found. Passed!`));
