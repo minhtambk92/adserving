@@ -187,10 +187,10 @@ class Channel extends Component {
           const logical = $(`.optionChannel-${i} .inputTypeFilter`).val();
           const channelId = this.props.channelId;
           if (type && comparison && value) {
+            $(`.optionChannel-${i}`).remove();
             /* eslint-disable max-len */
             this.props.createOptionChannel({ name, logical, type, comparison, value, channelId }).then(() => {
               /* eslint-enable max-len */
-              $(`.optionChannel-${i}`).remove();
               this.props.getChannel(this.props.channelId);
             });
           }
@@ -202,10 +202,10 @@ class Channel extends Component {
           const logical = $(`.optionChannel-${i} .inputTypeFilter`).val();
           const channelId = this.props.channelId;
           if (type && comparison && value) {
+            $(`.optionChannel-${i}`).remove();
             /* eslint-disable max-len */
             this.props.createOptionChannel({ name, logical, type, comparison, value, channelId }).then(() => {
               /* eslint-enable max-len */
-              $(`.optionChannel-${i}`).remove();
               this.props.getChannel(this.props.channelId);
             });
           }
