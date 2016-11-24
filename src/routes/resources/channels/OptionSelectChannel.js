@@ -26,7 +26,7 @@ class OptionSelectChannel extends Component {
       const arr = value.split(',');
       /* eslint-disable no-undef */
       for (let i = 0; i < arr.length; i += 1) {
-        const id = `${this.props.name}${arr[i]}`;
+        const id = `${this.props.name}${arr[i]}${this.props.index}`;
         $(`#${id}`).iCheck('check');
       }
       /* eslint-enable no-undef */
@@ -46,6 +46,7 @@ class OptionSelectChannel extends Component {
   }
 
   renderDOMLibs() {
+    const id = `optionChannelCheckBox-${this.props.index}`;
     return (
       <div className="col-lg-12">
         <div className="box box-solid box-primary">
@@ -102,23 +103,25 @@ class OptionSelectChannel extends Component {
                     </div>
                     <div className="form-group">
                       <div className="col-lg-3">&nbsp;</div>
-                      {this.props.data.map((data) =>
-                        <div className="col-sm-3" key={data.id}>
-                          <label
-                            htmlFor="inputChannelOptions"
-                            className="control-label"
-                          >
-                            <ICheck
-                              type="checkbox"
-                              id={this.props.name + data.value}
-                              className="inputOption"
-                              value={data.value}
-                            />
-                            {data.name}
-                          </label>
-                        </div>,
-                      )
-                      }
+                      <div className="col-lg-9 optionVariable" id={id}>
+                        {this.props.data.map((data) =>
+                          <div className="col-sm-3" key={data.id}>
+                            <label
+                              htmlFor="inputChannelOptions"
+                              className="control-label"
+                            >
+                              <ICheck
+                                type="checkbox"
+                                id={this.props.name + data.value + this.props.index}
+                                className="inputOption"
+                                value={data.value}
+                              />
+                              {data.name}
+                            </label>
+                          </div>,
+                        )
+                        }
+                      </div>
                     </div>
                   </form>
                 </div>

@@ -67,9 +67,9 @@ class Channel extends Component {
       options: [
         { id: 'option-1', name: 'Site - PageURL', value: 'pageUrl' },
         { id: 'option-2', name: 'Site - Referring Page', value: 'referingPage' },
-        { id: 'option-3', name: 'Site - Variable', value: 'variable' },
-        { id: 'option-4', name: 'Category', value: 'category' },
-        { id: 'option-5', name: 'Browser', value: 'browser' },
+        { id: 'option-3', name: 'Category', value: 'category' },
+        { id: 'option-4', name: 'Browser', value: 'browser' },
+        { id: 'option-5', name: 'Variable', value: 'variable' },
       ],
       countOptionChannel: 0,
       string: '',
@@ -120,7 +120,26 @@ class Channel extends Component {
     for (let i = 1; i <= length; i += 1) {
       const id = $(`#optionChannel .optionChannel-${i}`).attr('id');
       if (id) {
-        if (id === 'category' || id === 'browser') {
+        const idVariable = $(`#${id} .optionVariable`).attr('id');
+        const idV = `variable-${i}`;
+        const idCheckBox = `optionChannelCheckBox-${i}`;
+        // Update Variable Option Channel
+        if (idVariable === idV) {
+          const comparison = $(`#${id} .inputSiteFilter`).val();
+          const type = $(`#${id} .box-title`).html();
+          const name = $(`#${id} .inputChannelVariableName`).val();
+          const value = $(`#${id} .inputChannelVariableValue`).val();
+          const logical = $(`#${id} .inputTypeFilter`).val();
+          const channelId = this.props.channelId;
+          if (type && comparison && value) {
+            /* eslint-disable max-len */
+            this.props.updateOptionChannel({ id, name, logical, type, comparison, value, channelId }).then(() => {
+              /* eslint-enable max-len */
+              this.props.getChannel(this.props.channelId);
+            });
+          }
+        } else if (idCheckBox === idVariable) {
+          // Update Checkbox Option Channel
           const arrCategory = [];
           /* eslint-disable no-loop-func */
           $(`#${id} input[type=checkbox]`).each(function () {
@@ -130,56 +149,41 @@ class Channel extends Component {
               arrCategory.push(val);
             }
           });
-          const comparison = $(`#${id} .inputTypeFilter`).val();
+          const comparison = $(`#${id} .inputSiteFilter`).val();
           const type = $(`#${id} .box-title`).html();
+          const name = `${type}`;
           const value = arrCategory.toString();
-          const logical = 'and';
+          const logical = $(`#${id} .inputTypeFilter`).val();
           const channelId = this.props.channelId;
           if (type && comparison && value) {
-            this.enabledOption(type);
             /* eslint-disable max-len */
-            this.props.updateOptionChannel({ id, logical, type, comparison, value, channelId }).then(() => {
+            this.props.updateOptionChannel({ id, name, logical, type, comparison, value, channelId }).then(() => {
               /* eslint-enable max-len */
               this.props.getChannel(this.props.channelId);
             });
           }
-        } else if (id !== 'category' && id !== 'browser') {
-          const idVariable = $(`#${id} .optionVariable`).attr('id');
-          const idV = `variable-${i}`;
-          if (idVariable === idV) {
-            const comparison = $(`#${id} .inputSiteFilter`).val();
-            const type = $(`#${id} .box-title`).html();
-            const name = $(`#${id} .inputChannelVariableName`).val();
-            const value = $(`#${id} .inputChannelVariableValue`).val();
-            const logical = $(`#${id} .inputTypeFilter`).val();
-            const channelId = this.props.channelId;
-            if (type && comparison && value) {
-              /* eslint-disable max-len */
-              this.props.updateOptionChannel({ id, name, logical, type, comparison, value, channelId }).then(() => {
-                /* eslint-enable max-len */
-                this.props.getChannel(this.props.channelId);
-              });
-            }
-          } else {
-            const comparison = $(`#${id} .inputSiteFilter`).val();
-            const type = $(`#${id} .box-title`).html();
-            const name = `${type}`;
-            const value = $(`#${id} .inputChannelOptionURL`).val();
-            const logical = $(`#${id} .inputTypeFilter`).val();
-            const channelId = this.props.channelId;
-            if (type && comparison && value) {
-              /* eslint-disable max-len */
-              this.props.updateOptionChannel({ id, name, logical, type, comparison, value, channelId }).then(() => {
-                /* eslint-enable max-len */
-                this.props.getChannel(this.props.channelId);
-              });
-            }
+        } else {
+          // Update Site Option channel
+          const comparison = $(`#${id} .inputSiteFilter`).val();
+          const type = $(`#${id} .box-title`).html();
+          const name = `${type}`;
+          const value = $(`#${id} .inputChannelOptionURL`).val();
+          const logical = $(`#${id} .inputTypeFilter`).val();
+          const channelId = this.props.channelId;
+          if (type && comparison && value) {
+            /* eslint-disable max-len */
+            this.props.updateOptionChannel({ id, name, logical, type, comparison, value, channelId }).then(() => {
+              /* eslint-enable max-len */
+              this.props.getChannel(this.props.channelId);
+            });
           }
         }
       } else {
         const idVariable = $(`.optionChannel-${i} .optionVariable`).attr('id');
         const idV = `variable-${i}`;
+        const idCheckBox = `optionChannelCheckBox-${i}`;
         if (idVariable === idV) {
+          // Create Variable Option Channel
           const comparison = $(`.optionChannel-${i} .inputSiteFilter`).val();
           const type = $(`.optionChannel-${i} .box-title`).html();
           const name = $(`.optionChannel-${i} .inputChannelVariableName`).val();
@@ -194,7 +198,33 @@ class Channel extends Component {
               this.props.getChannel(this.props.channelId);
             });
           }
+        } else if (idCheckBox === idVariable) {
+          // Create Checkbox Option Channel
+          const arrCategory = [];
+          /* eslint-disable no-loop-func */
+          $(`.optionChannel-${i} input[type=checkbox]`).each(function () {
+            /* eslint-enable no-loop-func */
+            const val = (this.checked ? $(this).val() : '');
+            if (val !== 'on' && val.trim() !== '') {
+              arrCategory.push(val);
+            }
+          });
+          const comparison = $(`.optionChannel-${i} .inputSiteFilter`).val();
+          const type = $(`.optionChannel-${i} .box-title`).html();
+          const name = `${type}`;
+          const value = arrCategory.toString();
+          const logical = $(`.optionChannel-${i} .inputTypeFilter`).val();
+          const channelId = this.props.channelId;
+          if (type && comparison && value) {
+            $(`.optionChannel-${i}`).remove();
+            /* eslint-disable max-len */
+            this.props.createOptionChannel({ name, logical, type, comparison, value, channelId }).then(() => {
+              /* eslint-enable max-len */
+              this.props.getChannel(this.props.channelId);
+            });
+          }
         } else {
+          // Create Site Option Channel
           const comparison = $(`.optionChannel-${i} .inputSiteFilter`).val();
           const type = $(`.optionChannel-${i} .box-title`).html();
           const name = `${type}`;
@@ -223,11 +253,10 @@ class Channel extends Component {
       this.setState({ countOptionChannel: count });
       if (value === 'category') {
         this.addCheckBoxSite(this.state.category, value);
-      } else {
+      } else if (value === 'browser') {
         this.addCheckBoxSite(this.state.browser, value);
       }
-    }
-    if (value === 'variable') {
+    } else if (value === 'variable') {
       this.addVariable(value);
     } else {
       const count = this.state.countOptionChannel + 1;
@@ -325,12 +354,14 @@ class Channel extends Component {
     html += '</select> </div> </div>';
     html += '<div class="form-group">';
     html += '<div class="col-lg-3">&nbsp;</div>';
+    html += `<div class="col-lg-9 optionVariable" id="optionChannelCheckBox-${count}">`;
     for (let i = 0; i < data.length; i += 1) {
       html += '<div class="col-sm-3">';
       html += '<label class="control-label" >';
       html += `<input type="checkbox" value=${data[i].value} class="inputOption" />${data[i].name}`;
       html += '</label></div>';
     }
+    html += '</div>';
     html += '</div></div></form></div> </div> </div> </div> </div></div>';
     $('#optionChannel').append(html);
   }
@@ -456,7 +487,7 @@ class Channel extends Component {
                                     if (option.type === 'category') {
                                       return (<SelectOptionChannel
                                         key={option.id}
-                                        id={option.type}
+                                        id={option.id}
                                         name={option.type}
                                         index={index + 1}
                                         value={option.value}
@@ -468,7 +499,7 @@ class Channel extends Component {
                                       />);
                                     } else if (option.type === 'browser') {
                                       return (<SelectOptionChannel
-                                        id={option.type}
+                                        id={option.id}
                                         key={option.id}
                                         name={option.type}
                                         index={index + 1}

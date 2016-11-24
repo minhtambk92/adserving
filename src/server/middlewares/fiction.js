@@ -482,45 +482,45 @@ async function optionChannelFiction() {
     console.log(chalk.red('No optionChannel found! Do a fiction...'));
     // Get id of Channel
     const channel = await Channel.findOne({ where: { name: 'Channel' } });
+    // Create an OptionChannel
+    const optionChannel = await OptionChannel.create({
+      logical: 'and',
+      type: 'category',
+      comparison: '==',
+      value: 'kinh-te,van-hoa',
+      status: STATUS_ACTIVE,
+      channelId: channel.id,
+    });
     // // Create an OptionChannel
-    // const optionChannel = await OptionChannel.create({
+    // await OptionChannel.create({
     //   logical: 'and',
-    //   type: 'category',
+    //   name: 'Site - pageUrl',
+    //   type: 'pageUrl',
     //   comparison: '==',
-    //   value: 'kinh-te,van-hoa',
+    //   value: 'http://www.bongdaso.com',
     //   status: STATUS_ACTIVE,
     //   channelId: channel.id,
     // });
-    // Create an OptionChannel
-    await OptionChannel.create({
-      logical: 'and',
-      name: 'Site - pageUrl',
-      type: 'pageUrl',
-      comparison: '==',
-      value: 'http://www.bongdaso.com',
-      status: STATUS_ACTIVE,
-      channelId: channel.id,
-    });
-    // Create an OptionChannel
-    await OptionChannel.create({
-      logical: 'and',
-      name: 'Site - referingPage',
-      type: 'referingPage',
-      comparison: '!=',
-      value: 'http://www.dantri.com.vn',
-      status: STATUS_ACTIVE,
-      channelId: channel.id,
-    });
-    // Create an OptionChannel
-    const optionChannel = await OptionChannel.create({
-      logical: 'or',
-      type: 'variable',
-      comparison: '==',
-      value: 'http://www.bongdaso.com',
-      name: 'bongda',
-      status: STATUS_ACTIVE,
-      channelId: channel.id,
-    });
+    // // Create an OptionChannel
+    // await OptionChannel.create({
+    //   logical: 'and',
+    //   name: 'Site - referingPage',
+    //   type: 'referingPage',
+    //   comparison: '!=',
+    //   value: 'http://www.dantri.com.vn',
+    //   status: STATUS_ACTIVE,
+    //   channelId: channel.id,
+    // });
+    // // Create an OptionChannel
+    // const optionChannel = await OptionChannel.create({
+    //   logical: 'or',
+    //   type: 'variable',
+    //   comparison: '==',
+    //   value: 'http://www.bongdaso.com',
+    //   name: 'bongda',
+    //   status: STATUS_ACTIVE,
+    //   channelId: channel.id,
+    // });
     console.log(chalk.green(`${optionChannel.name} is created. Passed!`));
   } else {
     console.log(chalk.green(`${optionChannelsQuantity} optionChannel(s) found. Passed!`));
