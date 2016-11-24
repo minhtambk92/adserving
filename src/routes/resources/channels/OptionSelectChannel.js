@@ -13,13 +13,15 @@ class OptionSelectChannel extends Component {
     value: PropTypes.string,
     optionChannelId: PropTypes.string,
     deleteOptionChannel: PropTypes.func,
+    logical: PropTypes.string,
     index: PropTypes.number,
   };
 
   async componentDidMount() {
     await ReactDOM.render(this.renderDOMLibs(), this.portal);
     if (this.props.value && this.props.name && this.props.comparison) {
-      this.inputTypeFilter.value = this.props.comparison;
+      this.inputSiteFilter.value = this.props.comparison;
+      this.inputTypeFilter.value = this.props.logical;
       const value = this.props.value;
       const arr = value.split(',');
       /* eslint-disable no-undef */
@@ -63,7 +65,7 @@ class OptionSelectChannel extends Component {
           </div>
           {/* /.box-header */}
           <div className="box-body">
-            <div className="col-lg-4">
+            <div className="col-lg-2">
               <div className="box-body">
                 <div className="form-group">
                   <div className="col-sm-12">
@@ -73,33 +75,52 @@ class OptionSelectChannel extends Component {
                         this.inputTypeFilter = c;
                       }}
                     >
-                      <option value="==">Is any of</option>
-                      <option value="!=">Is not any of</option>
+                      <option value="and">AND</option>
+                      <option value="or">OR</option>
                     </select>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-6">
+            <div className="col-lg-8">
               <div className="box-body">
                 <div className="row">
-                  {this.props.data.map((data) =>
-                    <div className="col-sm-3" key={data.id}>
-                      <label
-                        htmlFor="inputChannelOptions"
-                        className="control-label"
-                      >
-                        <ICheck
-                          type="checkbox"
-                          id={this.props.name + data.value}
-                          className="inputOption"
-                          value={data.value}
-                        />
-                        {data.name}
-                      </label>
-                    </div>,
-                  )
-                  }
+                  <form className="form-horizontal">
+                    <div className="form-group">
+                      <label htmlFor="inputChannelOption" className="col-sm-3 control-label">Comparison</label>
+                      <div className="col-sm-9">
+                        <select
+                          className="form-control inputSiteFilter"
+                          ref={c => {
+                            this.inputSiteFilter = c;
+                          }}
+                        >
+                          <option value="==">Is any of</option>
+                          <option value="!=">Is not any of</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <div className="col-lg-3">&nbsp;</div>
+                      {this.props.data.map((data) =>
+                        <div className="col-sm-3" key={data.id}>
+                          <label
+                            htmlFor="inputChannelOptions"
+                            className="control-label"
+                          >
+                            <ICheck
+                              type="checkbox"
+                              id={this.props.name + data.value}
+                              className="inputOption"
+                              value={data.value}
+                            />
+                            {data.name}
+                          </label>
+                        </div>,
+                      )
+                      }
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>

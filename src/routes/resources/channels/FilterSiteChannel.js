@@ -9,6 +9,7 @@ class FilterSiteChannel extends Component {
     comparison: PropTypes.string,
     value: PropTypes.string,
     logical: PropTypes.string,
+    type: PropTypes.string,
     index: PropTypes.number,
   };
 
@@ -26,11 +27,16 @@ class FilterSiteChannel extends Component {
   }
 
   renderDOMLibs() {
+    const id = `${this.props.type}-${this.props.index}`;
     return (
       <div className="col-lg-12">
         <div className="box box-solid box-primary">
           <div className="box-header">
-            <h3 className="box-title">{this.props.name}</h3>
+            {this.props.type === 'variable' ? (
+              <h3 className="box-title">{this.props.type}</h3>
+            ) : (
+              <h3 className="box-title">{this.props.name}</h3>
+            )}
             <div className="box-tools pull-right">
               <button
                 className="btn btn-box-tool remove-option"
@@ -66,8 +72,7 @@ class FilterSiteChannel extends Component {
                 <div className="row">
                   <form className="form-horizontal">
                     <div className="form-group">
-                      <label htmlFor="inputChannelOption" className="col-sm-3 control-label">Site
-                        - Page URL</label>
+                      <label htmlFor="inputChannelOption" className="col-sm-3 control-label">&nbsp;</label>
                       <div className="col-sm-9">
                         <select
                           className="form-control inputSiteFilter"
@@ -84,18 +89,47 @@ class FilterSiteChannel extends Component {
                         </select>
                       </div>
                     </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputChannelOptionURL" className="col-sm-3 control-label"
-                      >&nbsp;</label>
-                      <div className="col-sm-9">
-                        <input
-                          type="text" className="form-control inputChannelOptionURL"
-                          placeholder="http://www.google.com"
-                          defaultValue={this.props.value}
-                        />
+                    {this.props.type === 'variable' ? (
+                      <div className="optionVariable" id={id}>
+                        <div className="form-group">
+                          <label
+                            htmlFor="inputChannelOptionURL" className="col-sm-3 control-label"
+                          >Name</label>
+                          <div className="col-sm-9">
+                            <input
+                              type="text" className="form-control inputChannelVariableName"
+                              placeholder="http://www.google.com"
+                              defaultValue={this.props.name}
+                            />
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <label
+                            htmlFor="inputChannelOptionURL" className="col-sm-3 control-label"
+                          >Value</label>
+                          <div className="col-sm-9">
+                            <input
+                              type="text" className="form-control inputChannelVariableValue"
+                              placeholder="http://www.google.com"
+                              defaultValue={this.props.value}
+                            />
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="form-group">
+                        <label
+                          htmlFor="inputChannelOptionURL" className="col-sm-3 control-label"
+                        >URL</label>
+                        <div className="col-sm-9">
+                          <input
+                            type="text" className="form-control inputChannelOptionURL"
+                            placeholder="http://www.google.com"
+                            defaultValue={this.props.value}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </form>
                 </div>
               </div>

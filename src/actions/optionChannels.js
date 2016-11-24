@@ -12,6 +12,7 @@ export function getOptionChannel(id) {
       query {
         optionChannels(where: {id: "${id}"}, limit: 1) {
           id
+          name
           logical
           type
           comparison
@@ -38,6 +39,7 @@ export function getOptionChannels() {
       query {
         optionChannels {
           id
+          name
           logical
           type
           comparison
@@ -58,12 +60,13 @@ export function getOptionChannels() {
   };
 }
 
-export function createOptionChannel({ logical, type, comparison, value, channelId }) {
+export function createOptionChannel({ name, logical, type, comparison, value, channelId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($optionChannel: OptionChannelInputTypeWithoutId!) {
         createdOptionChannel(optionChannel: $optionChannel) {
           id
+          name
           logical
           type
           comparison
@@ -76,6 +79,7 @@ export function createOptionChannel({ logical, type, comparison, value, channelI
 
     const { data } = await graphqlRequest(mutation, {
       optionChannel: {
+        name,
         logical,
         type,
         comparison,
@@ -93,12 +97,13 @@ export function createOptionChannel({ logical, type, comparison, value, channelI
   };
 }
 
-export function updateOptionChannel({ id, logical, type, comparison, value, channelId }) {
+export function updateOptionChannel({ id, name, logical, type, comparison, value, channelId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($optionChannel: OptionChannelInputType!) {
         updatedOptionChannel(optionChannel: $optionChannel) {
           id
+          name
           logical
           type
           comparison
@@ -112,6 +117,7 @@ export function updateOptionChannel({ id, logical, type, comparison, value, chan
     const { data } = await graphqlRequest(mutation, {
       optionChannel: {
         id,
+        name,
         logical,
         type,
         comparison,
@@ -135,6 +141,7 @@ export function deleteOptionChannel(id) {
       mutation {
         deletedOptionChannel(id: "${id}") {
           id
+          name
           logical
           type
           comparison

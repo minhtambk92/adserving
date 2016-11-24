@@ -40,6 +40,7 @@ export function getChannel(id) {
           siteId
           options {
             id
+            name
             type
             logical
             comparison

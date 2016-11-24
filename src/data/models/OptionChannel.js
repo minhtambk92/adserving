@@ -17,6 +17,10 @@ const OptionChannel = Model.define('OptionChannel', {
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   },
+  name: {
+    type: DataType.STRING,
+    defaultValue: '',
+  },
   logical: {
     type: DataType.STRING,
     defaultValue: 'and',
@@ -32,7 +36,7 @@ const OptionChannel = Model.define('OptionChannel', {
     type: DataType.STRING,
     defaultValue: '==',
     validate: {
-      isIn: [['==', '!=', '=~', '!~']],
+      isIn: [['==', '!=', '=~', '!~', '=x', '!x']],
     },
   },
   value: {
