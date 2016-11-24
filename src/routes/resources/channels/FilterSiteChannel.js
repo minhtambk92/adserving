@@ -15,13 +15,16 @@ class FilterSiteChannel extends Component {
   async componentDidMount() {
     await ReactDOM.render(this.renderDOMLibs(), this.portal);
   }
+
   componentWillReceiveProps(nextProps) {
     this.inputTypeFilter.value = nextProps.logical;
     this.inputSiteFilter.value = nextProps.comparison;
   }
+
   componentWillUnmount() {
     ReactDOM.unmountComponentAtNode(this.portal);
   }
+
   renderDOMLibs() {
     return (
       <div className="col-lg-12">

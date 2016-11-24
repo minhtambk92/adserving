@@ -115,9 +115,9 @@ class Channel extends Component {
       if (id) {
         if (id === 'category' || id === 'browser') {
           const arrCategory = [];
-         /* eslint-disable no-loop-func */
+          /* eslint-disable no-loop-func */
           $(`#${id} input[type=checkbox]`).each(function () {
-           /* eslint-enable no-loop-func */
+            /* eslint-enable no-loop-func */
             const val = (this.checked ? $(this).val() : '');
             if (val !== 'on' && val.trim() !== '') {
               arrCategory.push(val);
