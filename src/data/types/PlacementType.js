@@ -7,6 +7,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { Placement } from '../models';
 import placementHasManyPlacementBannerZones from '../queries/placementHasManyPlacementBannerZones';
 import placementBelongsToCampaign from '../queries/placementBelongsToCampaign';
+import placementHasManyBanners from '../queries/placementHasManyBanners';
 
 const PlacementType = new ObjectType({
   name: 'PlacementType',
@@ -16,6 +17,7 @@ const PlacementType = new ObjectType({
     // Additional fields
     pbzPlacement: placementHasManyPlacementBannerZones(),
     campaign: placementBelongsToCampaign(),
+    banners: placementHasManyBanners(),
   }),
 });
 
