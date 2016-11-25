@@ -50,8 +50,7 @@ export function getZone(id) {
           sizeText
           sizeValue
           status
-          pbzZone {
-            placements {
+          placements {
               id
               name
               sizeWidth
@@ -63,8 +62,7 @@ export function getZone(id) {
               campaignId
               createdAt
               updatedAt
-              }
-            }
+          }
         createdAt
         updatedAt
         }
@@ -105,8 +103,7 @@ export function getZones(args = {
           sizeText
           sizeValue
           status
-          pbzZone {
-            placements {
+          placements {
               id
               name
               sizeWidth
@@ -120,7 +117,6 @@ export function getZones(args = {
               createdAt
               updatedAt
             }
-          }
           createdAt
           updatedAt
         }

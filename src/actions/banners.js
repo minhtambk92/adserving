@@ -61,8 +61,7 @@ export function getBanner(id) {
           activationDateValue
           expirationDateValue
           channelId
-          pbzBanner {
-            placements {
+          placements {
               id
               name
               sizeWidth
@@ -76,7 +75,6 @@ export function getBanner(id) {
               createdAt
               updatedAt
             }
-          }
          clickImpression {
             id
             clickUrl
@@ -139,8 +137,7 @@ export function getBanners(args = {
           activationDateValue
           expirationDateValue
           channelId
-          pbzBanner {
-            placements {
+          placements {
               id
               name
               sizeWidth
@@ -154,7 +151,6 @@ export function getBanners(args = {
               createdAt
               updatedAt
             }
-          }
           createdAt
           updatedAt
           }

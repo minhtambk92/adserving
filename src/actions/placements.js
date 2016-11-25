@@ -41,37 +41,35 @@ export function getPlacement(id) {
           description
           status
           campaignId
-          pbzPlacement {
-            banners {
-              id
-              name
-              html
-              width
-              height
-              keyword
-              weight
-              description
-              status
-              createdAt
-              updatedAt
-            }
-            zones {
-              id
-              siteId
-              name
-              description
-              type
-              html
-              css
-              slot
-              width
-              height
-              sizeText
-              sizeValue
-              status
-              createdAt
-              updatedAt
-            }
+          banners {
+            id
+            name
+            html
+            width
+            height
+            keyword
+            weight
+            description
+            status
+            createdAt
+            updatedAt
+           }
+          zones {
+            id
+            siteId
+            name
+            description
+            type
+            html
+            css
+            slot
+            width
+            height
+            sizeText
+            sizeValue
+            status
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
@@ -214,21 +212,20 @@ export function updatePlacement({
           description
           campaignId
           status
-          pbzPlacement {
-            banners {
-              id
-              name
-              html
-              width
-              height
-              keyword
-              weight
-              description
-              status
-              createdAt
-              updatedAt
-            }
-            zones {
+          banners {
+            id
+            name
+            html
+            width
+            height
+            keyword
+            weight
+            description
+            status
+            createdAt
+            updatedAt
+          }
+          zones {
               id
               siteId
               name
@@ -245,7 +242,6 @@ export function updatePlacement({
               createdAt
               updatedAt
             }
-          }
           createdAt
           updatedAt
         }

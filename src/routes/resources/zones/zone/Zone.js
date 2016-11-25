@@ -62,8 +62,8 @@ class Zone extends Component {
       const newArr = [];
       const arrPlacement = [];
       for (let i = 0; i < pob.length; i += 1) {
-        if (pob[i].placements !== null) {
-          newArr.push(pob[i].placements.id);
+        if (pob[i] !== null) {
+          newArr.push(pob[i].id);
         }
       }
       for (let j = 0; j < allPlacement.length; j += 1) {
@@ -92,8 +92,8 @@ class Zone extends Component {
   dataPlacement(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const arrPlacement = [];
     for (let i = 0; i < arr.length; i += 1) {
-      if (arr[i].placements !== null) {
-        arrPlacement.push(arr[i].placements);
+      if (arr[i] !== null) {
+        arrPlacement.push(arr[i]);
       }
     }
     return arrPlacement;
@@ -167,9 +167,9 @@ class Zone extends Component {
                               <div className="box-body">
                                 <ListPlacementNotBelongToZone
                                   list={this.props.placements.list && this.props.zones.editing &&
-                                    this.props.zones.editing.pbzZone &&
+                                    this.props.zones.editing.placements &&
                                     this.filterPlmNotIn(this.props.placements.list,
-                                      this.props.zones.editing.pbzZone)}
+                                      this.props.zones.editing.placements)}
                                   createPlacementBannerZone={this.props.createPlacementBannerZone}
                                   getZone={this.props.getZone}
                                   getPlacements={this.props.getPlacements}
@@ -193,8 +193,8 @@ class Zone extends Component {
                               <div className="box-body">
                                 <ListPlacementOfZone
                                   list={this.props.zones && this.props.zones.editing &&
-                                  this.props.zones.editing.pbzZone &&
-                                    this.dataPlacement(this.props.zones.editing.pbzZone)}
+                                  this.props.zones.editing.placements &&
+                                    this.dataPlacement(this.props.zones.editing.placements)}
                                   /* eslint-disable max-len */
                                   removeZoneInPlacementBannerZone={this.props.removeZoneInPlacementBannerZone}
                                   /* eslint-enable max-len */

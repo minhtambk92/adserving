@@ -73,10 +73,10 @@ class Banner extends Component {
     const arrId = [];
     const arrPlacement = [];
     for (let i = 0; i < arr.length; i += 1) {
-      if (arr[i].placements !== null) {
-        if (arrId.indexOf(arr[i].placements.id) === -1) {
-          arrId.push(arr[i].placements.id);
-          arrPlacement.push(arr[i].placements);
+      if (arr[i] !== null) {
+        if (arrId.indexOf(arr[i].id) === -1) {
+          arrId.push(arr[i].id);
+          arrPlacement.push(arr[i]);
         }
       }
     }
@@ -93,8 +93,8 @@ class Banner extends Component {
       const newArr = [];
       const arrPlacement = [];
       for (let i = 0; i < pob.length; i += 1) {
-        if (pob[i].placements !== null) {
-          newArr.push(pob[i].placements.id);
+        if (pob[i] !== null) {
+          newArr.push(pob[i].id);
         }
       }
       for (let j = 0; j < allPlacement.length; j += 1) {
@@ -230,10 +230,10 @@ class Banner extends Component {
                                 <ListPlacementNotBelongBanner
                                   list={this.props.placements.list &&
                                   this.props.banners.editing &&
-                                  this.props.banners.editing.pbzBanner &&
+                                  this.props.banners.editing.placements &&
                                   this.filterPlmNotIn(
                                     this.props.placements.list,
-                                    this.props.banners.editing.pbzBanner,
+                                    this.props.banners.editing.placements,
                                   )}
                                   createPlacementBannerZone={this.props.createPlacementBannerZone}
                                   getBanner={this.props.getBanner}
@@ -258,9 +258,9 @@ class Banner extends Component {
                               <div className="box-body">
                                 <ListPlacementOfBanner
                                   list={this.props.banners.editing &&
-                                  this.props.banners.editing.pbzBanner &&
+                                  this.props.banners.editing.placements &&
                                   this.filterPlacements(
-                                    this.props.banners.editing.pbzBanner,
+                                    this.props.banners.editing.placements,
                                   )}
                                   /* eslint-disable max-len */
                                   removeBannerInPlacementBannerZone={this.props.removeBannerInPlacementBannerZone}
