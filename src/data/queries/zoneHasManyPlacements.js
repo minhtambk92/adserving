@@ -17,7 +17,14 @@ const zoneHasManyPlacements = () => ({
   resolve: resolver(Placement.placementBannerZones, {
     async after(results) {
       const placementIds = results.map(result => result.placementId);
-      return await Placement.findAll({ where: { id: { $in: placementIds } } });
+      return await Placement.findAll({
+        where: {
+          id: { $in: placementIds },
+        },
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+      });
     },
   }),
 });

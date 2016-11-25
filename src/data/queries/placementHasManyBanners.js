@@ -17,7 +17,14 @@ const placementHasManyBanners = () => ({
   resolve: resolver(Banner.placementBannerZones, {
     async after(results) {
       const bannerIds = results.map(result => result.bannerId);
-      return await Banner.findAll({ where: { id: { $in: bannerIds } } });
+      return await Banner.findAll({
+        where: {
+          id: { $in: bannerIds },
+        },
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+      });
     },
   }),
 });
