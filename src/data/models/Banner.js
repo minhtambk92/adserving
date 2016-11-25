@@ -79,69 +79,41 @@ const Banner = Model.define('Banner', {
     type: DataType.STRING,
     defaultValue: '',
   },
-  userIFrame: {
-    type: DataType.STRING,
-    allowNull: false,
-    defaultValue: '1',
-    validate: {
-      isIn: [['1', '0']],
-    },
+  isIFrame: {
+    type: DataType.BOOLEAN,
+    defaultValue: true,
   },
   countView: {
-    type: DataType.STRING,
-    allowNull: false,
-    defaultValue: '0',
-    validate: {
-      isIn: [['1', '0']],
-    },
+    type: DataType.BOOLEAN,
+    defaultValue: false,
   },
   fixIE: {
-    type: DataType.STRING,
-    allowNull: false,
-    defaultValue: '0',
-    validate: {
-      isIn: [['1', '0']],
-    },
+    type: DataType.BOOLEAN,
+    defaultValue: false,
   },
   isDefault: {
-    type: DataType.STRING,
-    allowNull: false,
-    defaultValue: '0',
-    validate: {
-      isIn: [['1', '0']],
-    },
+    type: DataType.BOOLEAN,
+    defaultValue: false,
   },
   isRelative: {
-    type: DataType.STRING,
-    allowNull: false,
-    defaultValue: '0',
-    validate: {
-      isIn: [['1', '0']],
-    },
+    type: DataType.BOOLEAN,
+    defaultValue: false,
   },
   adStore: {
     type: DataType.STRING,
     defaultValue: '',
   },
   impressionsBooked: {
-    type: DataType.STRING,
-    allowNull: false,
-    defaultValue: '0',
-    validate: {
-      isIn: [['1', '0']],
-    },
+    type: DataType.BOOLEAN,
+    defaultValue: true,
   },
   impressionsBookedValue: {
     type: DataType.STRING,
     defaultValue: 'unlimited',
   },
   clicksBooked: {
-    type: DataType.STRING,
-    allowNull: false,
-    defaultValue: '0',
-    validate: {
-      isIn: [['1', '0']],
-    },
+    type: DataType.BOOLEAN,
+    defaultValue: true,
   },
   clicksBookedValue: {
     type: DataType.STRING,

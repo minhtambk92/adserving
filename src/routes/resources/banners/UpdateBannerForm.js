@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import DropzoneComponent from 'react-dropzone-component/lib/react-dropzone';
-import { InputTags } from '../../../components/UI';
+import { InputTags, ICheck } from '../../../components/UI';
 import Link from '../../../components/Link';
 
 class UpdateBannerForm extends Component {
@@ -37,7 +37,7 @@ class UpdateBannerForm extends Component {
       target,
       type,
       imageUrl,
-      userIFrame,
+      isIFrame,
       status,
       adServer,
       bannerHTMLType,
@@ -51,7 +51,7 @@ class UpdateBannerForm extends Component {
     this.inputBannerDescription.value = description;
     this.inputBannerStatus.value = status;
     this.inputChannelId.value = channelId;
-    this.inputBannerUserIFrame.value = userIFrame;
+    this.inputBannerIsIFrame.value = isIFrame;
 
     if (type === 'html') {
       this.insertBannerHtml(html, width, height);
@@ -74,7 +74,17 @@ class UpdateBannerForm extends Component {
       }
     }
   }
-
+  componentDidUpdate() {
+    /* eslint-disable no-undef */
+    if (this.props.banner) {
+      if (this.props.banner.isIFrame === true) {
+        $('#inputBannerIsIFrame').iCheck('check');
+      } else {
+        $('#inputBannerIsIFrame').iCheck('uncheck');
+      }
+    }
+    /* eslint-enable no-undef */
+  }
   updateBanner() {
     const name = this.inputBannerName.value;
     const width = this.inputBannerWidth.value;
@@ -83,7 +93,8 @@ class UpdateBannerForm extends Component {
     const weight = this.inputBannerWeight.value;
     const description = this.inputBannerDescription.value;
     const channelId = this.inputChannelId.value;
-    const userIFrame = this.inputBannerUserIFrame.value;
+    const isIFrame = document.getElementById('inputBannerIsIFrame').checked;
+      // this.inputBannerIsIFrame.value;
     let html = '';
     let target = '';
     let imageUrl = '';
@@ -143,9 +154,7 @@ class UpdateBannerForm extends Component {
       }
       banner.imageUrl = imageUrl;
     }
-    if (userIFrame && userIFrame !== this.props.banner.userIFrame) {
-      banner.userIFrame = userIFrame;
-    }
+    banner.isIFrame = isIFrame;
     if (status && status !== this.props.banner.status) {
       banner.status = status;
     }
@@ -465,19 +474,16 @@ class UpdateBannerForm extends Component {
           </div>
           <div className="form-group">
             <label
-              htmlFor="inputBannerUserIFrame"
+              htmlFor="inputBannerIsIFrame"
               className="col-sm-2 control-label"
             >User IFrame</label>
             <div className="col-sm-10">
-              <select
-                id="inputBannerTarget" className="form-control"
+              <ICheck
+                type="checkbox" id="inputBannerIsIFrame" className="form-control"
                 ref={c => {
-                  this.inputBannerUserIFrame = c;
+                  this.inputBannerIsIFrame = c;
                 }}
-              >
-                <option value="1">YES</option>
-                <option value="0">NO</option>
-              </select>
+              />
             </div>
           </div>
           <div className="form-group">

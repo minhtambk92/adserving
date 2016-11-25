@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import { DatePicker } from '../../../components/UI';
+import { DatePicker, ICheck } from '../../../components/UI';
 import Link from '../../../components/Link';
 
 class UpdateBannerForm extends Component {
@@ -65,6 +65,26 @@ class UpdateBannerForm extends Component {
       }
       // self.props.getBanner(self.props.bannerId);
     });
+
+    // // show impressions Booked
+    $('#inputImpressionsBooked').on('ifClicked', () => {
+      const impressionsBooked = document.getElementById('inputImpressionsBooked').checked;
+      if (impressionsBooked === true) {
+        self.setState({ showImpressionsBooked: true });
+      } else if (impressionsBooked === false) {
+        self.setState({ showImpressionsBooked: false });
+      }
+    });
+
+    // show clicks Booked
+    $('#inputClicksBooked').on('ifClicked', () => {
+      const showClicksBooked = document.getElementById('inputClicksBooked').checked;
+      if (showClicksBooked === true) {
+        self.setState({ showClicksBooked: true });
+      } else if (showClicksBooked === false) {
+        self.setState({ showClicksBooked: false });
+      }
+    });
     /* eslint-enable no-undef */
   }
 
@@ -94,22 +114,21 @@ class UpdateBannerForm extends Component {
       const length = nextProps.banner.clickImpression.length;
       this.setState({ countLinkClickImpression: length });
     }
-    if (impressionsBooked === '1') {
+    if (impressionsBooked === true) {
+      this.setState({ showImpressionsBooked: false });
+    } else if (impressionsBooked === false) {
       this.setState({ showImpressionsBooked: true });
       if (this.inputBannerImpressionsBooked !== undefined) {
         this.inputBannerImpressionsBooked.value = impressionsBookedValue;
       }
-    } else if (impressionsBooked === '0') {
-      this.setState({ showImpressionsBooked: false });
     }
-    this.inputClicksBooked.value = clicksBooked;
-    if (clicksBooked === '1') {
+    if (clicksBooked === true) {
+      this.setState({ showClicksBooked: false });
+    } else if (clicksBooked === false) {
       this.setState({ showClicksBooked: true });
       if (this.inputBannerClicksBooked !== undefined) {
         this.inputBannerClicksBooked.value = clicksBookedValue;
       }
-    } else if (clicksBooked === '0') {
-      this.setState({ showClicksBooked: false });
     }
     this.inputActivationDate.value = activationDate;
     if (activationDate === '1') {
@@ -132,6 +151,43 @@ class UpdateBannerForm extends Component {
     }
   }
 
+  componentDidUpdate() {
+    /* eslint-disable no-undef */
+    if (this.props.banner) {
+      if (this.props.banner.countView === true) {
+        $('#inputBannerCountView').iCheck('check');
+      } else {
+        $('#inputBannerCountView').iCheck('uncheck');
+      }
+      if (this.props.banner.fixIE === true) {
+        $('#inputBannerFixIE').iCheck('check');
+      } else {
+        $('#inputBannerFixIE').iCheck('uncheck');
+      }
+      if (this.props.banner.isDefault === true) {
+        $('#inputBannerIsDefault').iCheck('check');
+      } else {
+        $('#inputBannerIsDefault').iCheck('uncheck');
+      }
+      if (this.props.banner.isRelative === true) {
+        $('#inputBannerIsRelative').iCheck('check');
+      } else {
+        $('#inputBannerIsRelative').iCheck('uncheck');
+      }
+      // if (this.props.banner.impressionsBooked === true) {
+      //   $('#inputImpressionsBooked').iCheck('check');
+      // } else {
+      //   $('#inputImpressionsBooked').iCheck('uncheck');
+      // }
+      // if (this.props.banner.clicksBooked === true) {
+      //   $('#inputClicksBooked').iCheck('check');
+      // } else {
+      //   $('#inputClicksBooked').iCheck('uncheck');
+      // }
+    }
+    /* eslint-enable no-undef */
+  }
+
   chooseExpirationDate() { // eslint-disable-line no-unused-vars, class-methods-use-this
     const expirationDate = this.inputExpirationDate.value;
     if (expirationDate === '1') {
@@ -150,44 +206,26 @@ class UpdateBannerForm extends Component {
     }
   }
 
-  chooseImpressionsBooked() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const impressionsBooked = this.inputImpressionsBooked.value;
-    if (impressionsBooked === '1') {
-      this.setState({ showImpressionsBooked: true });
-    } else if (impressionsBooked === '0') {
-      this.setState({ showImpressionsBooked: false });
-    }
-  }
-
-  chooseClicksBooked() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const clicksBooked = this.inputClicksBooked.value;
-    if (clicksBooked === '1') {
-      this.setState({ showClicksBooked: true });
-    } else if (clicksBooked === '0') {
-      this.setState({ showClicksBooked: false });
-    }
-  }
-
   updateBanner() {
-    const countView = this.inputBannerCountView.value;
-    const fixIE = this.inputBannerFixIE.value;
-    const isDefault = this.inputBannerIsDefault.value;
-    const isRelative = this.inputBannerIsRelative.value;
+    const countView = document.getElementById('inputBannerCountView').checked;
+    const fixIE = document.getElementById('inputBannerFixIE').checked;
+    const isDefault = document.getElementById('inputBannerIsDefault').checked;
+    const isRelative = document.getElementById('inputBannerIsRelative').checked;
     const adStore = this.inputBannerAdStore.value;
-    const impressionsBooked = this.inputImpressionsBooked.value;
+    const impressionsBooked = document.getElementById('inputImpressionsBooked').checked;
     let impressionsBookedValue = '';
-    if (impressionsBooked === '1') {
+    if (impressionsBooked === true) {
       this.setState({ showImpressionsBooked: true });
       impressionsBookedValue = this.inputBannerImpressionsBooked.value;
-    } else if (impressionsBooked === '0') {
+    } else if (impressionsBooked === false) {
       impressionsBookedValue = 'unlimited';
     }
-    const clicksBooked = this.inputClicksBooked.value;
+    const clicksBooked = document.getElementById('inputClicksBooked').checked;
     let clicksBookedValue = '';
-    if (clicksBooked === '1') {
+    if (clicksBooked === true) {
       this.setState({ showClicksBooked: true });
       clicksBookedValue = this.inputBannerClicksBooked.value;
-    } else if (clicksBooked === '0') {
+    } else if (clicksBooked === false) {
       clicksBookedValue = 'unlimited';
     }
     const activationDate = this.inputActivationDate.value;
@@ -205,18 +243,10 @@ class UpdateBannerForm extends Component {
       expirationDateValue = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00'));
     }
     const banner = { id: this.props.bannerId };
-    if (countView && countView !== this.props.banner.countView) {
-      banner.countView = countView;
-    }
-    if (fixIE && fixIE !== this.props.banner.fixIE) {
-      banner.fixIE = fixIE;
-    }
-    if (isDefault && isDefault !== this.props.banner.isDefault) {
-      banner.isDefault = isDefault;
-    }
-    if (isRelative && isRelative !== this.props.banner.isRelative) {
-      banner.isRelative = isRelative;
-    }
+    banner.countView = countView;
+    banner.fixIE = fixIE;
+    banner.isDefault = isDefault;
+    banner.isRelative = isRelative;
     if (adStore && adStore !== this.props.banner.adStore) {
       banner.adStore = adStore;
     }
@@ -300,19 +330,16 @@ class UpdateBannerForm extends Component {
               <form className="form-horizontal">
                 <div className="form-group">
                   <label
-                    htmlFor="inputBannerUserIFrame"
+                    htmlFor="inputBannerIsIFrame"
                     className="col-sm-2 control-label"
                   >Count View Banner</label>
                   <div className="col-sm-8">
-                    <select
-                      id="inputBannerCountView" className="form-control"
+                    <ICheck
+                      type="checkbox" id="inputBannerCountView" className="form-control"
                       ref={c => {
                         this.inputBannerCountView = c;
                       }}
-                    >
-                      <option value="0">NO</option>
-                      <option value="1">YES</option>
-                    </select>
+                    />
                   </div>
                 </div>
                 <div className="form-group">
@@ -321,15 +348,12 @@ class UpdateBannerForm extends Component {
                     className="col-sm-2 control-label"
                   >Fix IE(User for banner fail in IE)</label>
                   <div className="col-sm-8">
-                    <select
-                      id="inputBannerFixIE" className="form-control"
+                    <ICheck
+                      type="checkbox" id="inputBannerFixIE" className="form-control"
                       ref={c => {
                         this.inputBannerFixIE = c;
                       }}
-                    >
-                      <option value="0">NO</option>
-                      <option value="1">YES</option>
-                    </select>
+                    />
                   </div>
                 </div>
                 <div className="form-group">
@@ -338,15 +362,12 @@ class UpdateBannerForm extends Component {
                     className="col-sm-2 control-label"
                   >Is Default(Banner default)</label>
                   <div className="col-sm-8">
-                    <select
-                      id="inputBannerIsDefault" className="form-control"
+                    <ICheck
+                      type="checkbox" id="inputBannerIsDefault" className="form-control"
                       ref={c => {
                         this.inputBannerIsDefault = c;
                       }}
-                    >
-                      <option value="0">NO</option>
-                      <option value="1">YES</option>
-                    </select>
+                    />
                   </div>
                 </div>
                 <div className="form-group">
@@ -355,16 +376,12 @@ class UpdateBannerForm extends Component {
                     className="col-sm-2 control-label"
                   >Relative()</label>
                   <div className="col-sm-8">
-                    <select
-                      id="inputBannerIsRelative" className="form-control"
-                      placeholder="Marking the banner will appear on one page"
+                    <ICheck
+                      type="checkbox" id="inputBannerIsRelative" className="form-control"
                       ref={c => {
                         this.inputBannerIsRelative = c;
                       }}
-                    >
-                      <option value="0">NO</option>
-                      <option value="1">YES</option>
-                    </select>
+                    />
                   </div>
                 </div>
                 <div className="form-group">
@@ -407,17 +424,16 @@ class UpdateBannerForm extends Component {
                     htmlFor="inputImpressionsBooked"
                     className="col-sm-2 control-label"
                   >Impressions Booked</label>
-                  <div className="col-sm-8">
-                    <select
-                      id="inputImpressionsBooked" className="form-control"
+                  <div className="col-sm-1">
+                    <ICheck
+                      type="checkbox" id="inputImpressionsBooked" className="form-control"
                       ref={c => {
                         this.inputImpressionsBooked = c;
                       }}
-                      onChange={event => this.chooseImpressionsBooked(event)}
-                    >
-                      <option value="0">Unlimited</option>
-                      <option value="1">Input Impressions Booked</option>
-                    </select>
+                    />
+                  </div>
+                  <div className="col-sm-9">
+                    Unlimited
                   </div>
                 </div>
                 { this.state.showImpressionsBooked === true ? (
@@ -443,25 +459,22 @@ class UpdateBannerForm extends Component {
                     htmlFor="inputClicksBooked"
                     className="col-sm-2 control-label"
                   >Clicks Booked</label>
-                  <div className="col-sm-8">
-                    <select
-                      id="inputClicksBooked" className="form-control"
+                  <div className="col-sm-1">
+                    <ICheck
+                      type="checkbox" id="inputClicksBooked" className="form-control"
                       ref={c => {
                         this.inputClicksBooked = c;
                       }}
-                      onChange={event => this.chooseClicksBooked(event)}
-                    >
-                      <option value="0">Unlimited</option>
-                      <option value="1">Input Clicks Booked</option>
-                    </select>
+                    />
                   </div>
+                  <div className="col-sm-9">Unlimited</div>
                 </div>
                 {this.state.showClicksBooked === true ? (
                   <div className="form-group">
                     <label
                       htmlFor="inputBannerClicksBooked"
                       className="col-sm-2 control-label"
-                    >Clicks Booked</label>
+                    >&nbsp;</label>
                     <div className="col-sm-8">
                       <input
                         type="text" className="form-control"
@@ -590,7 +603,8 @@ class UpdateBannerForm extends Component {
                     >
                       <button
                         type="button" className="close closeClickImpression" aria-hidden="true"
-                      >×</button>
+                      >×
+                      </button>
                       <div className="form-group">
                         <label
                           htmlFor="inputLinkClick"

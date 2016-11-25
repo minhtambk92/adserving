@@ -4,7 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import style from 'react-dropzone-component/styles/filepicker.css';
 import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
 import DropzoneComponent from 'react-dropzone-component/lib/react-dropzone';
-import { InputTags } from '../../../components/UI';
+import { InputTags, ICheck } from '../../../components/UI';
 import Link from '../../../components/Link';
 
 class CreateBannerForm extends Component {
@@ -51,6 +51,13 @@ class CreateBannerForm extends Component {
     };
   }
 
+
+  componentDidMount() {
+    /* eslint-disable no-undef */
+    $('#inputBannerIsIFrame').iCheck('check');
+    /* eslint-enable no-undef */
+  }
+
   onInputChange(event) {
     event.persist();
     this.setState((previousState) => ({
@@ -81,7 +88,7 @@ class CreateBannerForm extends Component {
     const description = this.inputBannerDescription.value;
     const channelId = this.inputChannelId.value;
     const type = this.inputBannerType.value;
-    const userIFrame = this.inputBannerUserIFrame.value;
+    const isIFrame = document.getElementById('inputBannerIsIFrame').checked;
     let target = '';
     let url = '';
     let imageUrl = '';
@@ -105,10 +112,10 @@ class CreateBannerForm extends Component {
     }
     const status = this.inputBannerStatus.value;
     const keyword = document.getElementById('inputBannerKeyWord').value;
-    const countView = '0';
-    const fixIE = '0';
-    const isDefault = '0';
-    const isRelative = '0';
+    const countView = false;
+    const fixIE = false;
+    const isDefault = false;
+    const isRelative = false;
     const impressionsBooked = '0';
     const clicksBooked = '0';
     const activationDate = '0';
@@ -131,7 +138,7 @@ class CreateBannerForm extends Component {
         url,
         target,
         imageUrl,
-        userIFrame,
+        isIFrame,
         status,
         adServer,
         bannerHTMLType,
@@ -414,19 +421,16 @@ class CreateBannerForm extends Component {
           </div>
           <div className="form-group">
             <label
-              htmlFor="inputBannerUserIFrame"
+              htmlFor="inputBannerIsIFrame"
               className="col-sm-2 control-label"
             >User IFrame</label>
             <div className="col-sm-10">
-              <select
-                id="inputBannerTarget" className="form-control"
+              <ICheck
+                type="checkbox" id="inputBannerIsIFrame" className="form-control"
                 ref={c => {
-                  this.inputBannerUserIFrame = c;
+                  this.inputBannerIsIFrame = c;
                 }}
-              >
-                <option value="1">YES</option>
-                <option value="0">NO</option>
-              </select>
+              />
             </div>
           </div>
           <div className="form-group">

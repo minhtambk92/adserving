@@ -43,7 +43,7 @@ export function getBanner(id) {
           imageUrl
           url
           target
-          userIFrame
+          isIFrame
           status
           adServer
           bannerHTMLType
@@ -121,7 +121,7 @@ export function getBanners(args = {
           imageUrl
           url
           target
-          userIFrame
+          isIFrame
           status
           adServer
           bannerHTMLType
@@ -193,7 +193,7 @@ export function createBanner({
   url,
   target,
   imageUrl,
-  userIFrame,
+  isIFrame,
   status,
   adServer,
   bannerHTMLType,
@@ -228,7 +228,7 @@ export function createBanner({
           url
           target
           imageUrl
-          userIFrame
+          isIFrame
           status
           adServer
           bannerHTMLType
@@ -264,7 +264,7 @@ export function createBanner({
         url,
         target,
         imageUrl,
-        userIFrame,
+        isIFrame,
         status,
         adServer,
         bannerHTMLType,
@@ -307,7 +307,7 @@ export function updateBanner({
   url,
   target,
   imageUrl,
-  userIFrame,
+  isIFrame,
   status,
   adServer,
   bannerHTMLType,
@@ -342,7 +342,7 @@ export function updateBanner({
           imageUrl
           url
           target
-          userIFrame
+          isIFrame
           status
           adServer
           bannerHTMLType
@@ -379,7 +379,7 @@ export function updateBanner({
         url,
         target,
         imageUrl,
-        userIFrame,
+        isIFrame,
         status,
         adServer,
         bannerHTMLType,
@@ -426,7 +426,7 @@ export function deleteBanner(id) {
           imageUrl
           url
           target
-          userIFrame
+          isIFrame
           status
           adServer
           bannerHTMLType

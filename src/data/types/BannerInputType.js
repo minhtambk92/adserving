@@ -10,7 +10,7 @@ const BannerInputType = new InputObjectType({
     // Additional fields
     status: { type: StringType },
     type: { type: StringType },
-    userIFrame: { type: StringType },
+    isIFrame: { type: StringType },
     countView: { type: StringType },
     fixIE: { type: StringType },
     isDefault: { type: StringType },
