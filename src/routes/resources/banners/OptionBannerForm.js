@@ -26,6 +26,7 @@ class UpdateBannerForm extends Component {
       showClicksBooked: false,
       countLinkClickImpression: 0,
       string: '',
+      arrClickImpression: [],
     };
   }
 
@@ -37,19 +38,7 @@ class UpdateBannerForm extends Component {
       const length = this.state.countLinkClickImpression;
       const count = length + 1;
       self.setState({ countLinkClickImpression: count });
-      let html = '';
-      html += `<div class="clickImpression-${count}">`;
-      html += '<button type="button" class="close closeClickImpression" aria-hidden="true">×</button>';
-      html += '<div class="form-group">';
-      html += '<label class="col-sm-2 control-label" >Link Click</label>';
-      html += '<div class="col-sm-8">';
-      html += `<input type="text" class="form-control" id="inputLinkClick-${count}" placeholder="1000" /></div></div>`;
-      html += '<div class="form-group">';
-      html += '<label class="col-sm-2 control-label" >Link Impression</label>';
-      html += '<div class="col-sm-8">';
-      html += `<input type="text" class="form-control" id="inputLinkImpression-${count}" placeholder="1000"/></div></div>`;
-      html += '</div>';
-      $('#link-click-impression').append(html);
+      self.setState({ arrClickImpression: self.state.arrClickImpression.concat([count]) });
     });
 
     // Delete
@@ -632,6 +621,25 @@ class UpdateBannerForm extends Component {
                         </div>
                       </div>
                     </div>))}
+                  {this.state.arrClickImpression && this.state.arrClickImpression.map((count) => (
+                    <div key={`clickImpression-${count}`} className={`clickImpression-${count}`}>
+                      <button type="button" className="close closeClickImpression" aria-hidden="true">×</button>
+                      <div className="form-group">
+                        <label htmlFor="inputLinkClick" className="col-sm-2 control-label">Link Click</label>
+                        <div className="col-sm-8">
+                          <input type="text" className="form-control" id={`inputLinkClick-${count}`} placeholder="1000" />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="inputLinkImpression" className="col-sm-2 control-label">Link Impression</label>
+                        <div className="col-sm-8">
+                          <input
+                            type="text" className="form-control" id={`inputLinkImpression-${count}`}
+                            placeholder="1000"
+                          /></div>
+                      </div>
+                    </div>
+                  ))}
                   {this.state.string}
                 </div>
               </form>
