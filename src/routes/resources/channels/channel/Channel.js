@@ -72,6 +72,9 @@ class Channel extends Component {
         { id: 'option-5', name: 'Variable', value: 'variable' },
       ],
       countOptionChannel: 0,
+      newFilterSite: [],
+      arrVariable: [],
+      arrCheckBox: [],
       string: '',
     };
   }
@@ -99,9 +102,6 @@ class Channel extends Component {
     });
     const self = this;
     $('.remove-option').click(function () {
-      const length = self.state.countOptionChannel;
-      const count = length - 1;
-      self.setState({ countOptionChannel: count });
       const id = $(this).parents('.row').attr('id');
       if (id) {
         if (id !== 'browser' && id !== 'category') {
@@ -269,101 +269,30 @@ class Channel extends Component {
   addNewFilterSite(type, name) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const count = this.state.countOptionChannel + 1;
     this.setState({ countOptionChannel: count });
-    let html = '';
-    html += `<div class="row optionChannel-${count}">`;
-    html += '<div class="col-lg-12">';
-    html += '<div class="box box-solid box-primary">';
-    html += `<div class="box-header"><h3 class="box-title">${name}</h3>`;
-    html += '<div class="box-tools pull-right">';
-    html += '<button class="btn btn-box-tool remove-option" data-widget="remove"> <i class="fa fa-times" /> </button>';
-    html += '</div></div>';
-    html += '<div class="box-body"><div class="col-lg-2"> <div class="box-body"> <div class="form-group"> <div class="col-sm-12">';
-    html += '<select class="form-control inputTypeFilter"><option value="and">AND</option> <option value="or">OR</option> </select>';
-    html += '</div> </div> </div> </div>';
-    html += '<div class="col-lg-8"><div class="box-body"> <div class="row"> <form class="form-horizontal">';
-    html += '<div class="form-group">';
-    html += `<label class="col-sm-3 control-label">${name}</label>`;
-    html += '<div class="col-sm-9"><select class="form-control inputSiteFilter" >';
-    html += '<option value="==">is equal to</option> <option value="!=">is different from</option> <option value="=~">Contains</option> <option value="!~">Does not contain</option> <option value="=x">Regex match</option> <option value="!x">Regex does not match</option>';
-    html += '</select> </div> </div>';
-    html += '<div class="form-group">';
-    html += '<label class="col-sm-3 control-label" >&nbsp;</label>';
-    html += '<div class="col-sm-9"> <input type="text" class="form-control inputChannelOptionURL" placeholder="http://www.google.com" /> </div>';
-    html += '</div> </form> </div> </div> </div> </div></div> </div></div>';
-    $('#optionChannel').append(html);
+    const ob = {};
+    ob.type = type;
+    ob.name = name;
+    ob.count = count;
+    this.setState({ newFilterSite: this.state.newFilterSite.concat([ob]) });
   }
 
   addVariable(name) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const count = this.state.countOptionChannel + 1;
     this.setState({ countOptionChannel: count });
-    let html = '';
-    html += `<div class="row optionChannel-${count}">`;
-    html += '<div class="col-lg-12">';
-    html += '<div class="box box-solid box-primary">';
-    html += `<div class="box-header"><h3 class="box-title">${name}</h3>`;
-    html += '<div class="box-tools pull-right">';
-    html += '<button class="btn btn-box-tool remove-option" data-widget="remove"> <i class="fa fa-times" /> </button>';
-    html += '</div></div>';
-    html += '<div class="box-body"><div class="col-lg-2"> <div class="box-body"> <div class="form-group"> <div class="col-sm-12">';
-    html += '<select class="form-control inputTypeFilter"><option value="and">AND</option> <option value="or">OR</option> </select>';
-    html += '</div> </div> </div> </div>';
-    html += '<div class="col-lg-8"><div class="box-body"> <div class="row"> <form class="form-horizontal">';
-    html += '<div class="form-group">';
-    html += '<label class="col-sm-3 control-label">&nbsp;</label>';
-    html += '<div class="col-sm-9"><select class="form-control inputSiteFilter" >';
-    html += '<option value="==">is equal to</option> <option value="!=">is different from</option> <option value="=~">Contains</option> <option value="!~">Does not contain</option> <option value="=x">Regex match</option> <option value="!x">Regex does not match</option>';
-    html += '</select> </div> </div>';
-    html += `<div class="optionVariable" id="variable-${count}">`;
-    html += '<div class="form-group">';
-    html += '<label class="col-sm-3 control-label" >Name</label>';
-    html += '<div class="col-sm-9"> <input type="text" class="form-control inputChannelVariableName" placeholder="http://www.google.com" /> </div>';
-    html += '</div>';
-    html += '<div class="form-group">';
-    html += '<label class="col-sm-3 control-label" >value</label>';
-    html += '<div class="col-sm-9"> <input type="text" class="form-control inputChannelVariableValue" placeholder="http://www.google.com" /> </div>';
-    html += '</div>';
-    html += '</div>';
-    html += '</form> </div> </div> </div> </div></div> </div></div>';
-    $('#optionChannel').append(html);
+    const ob = {};
+    ob.name = name;
+    ob.count = count;
+    this.setState({ arrVariable: this.state.arrVariable.concat([ob]) });
   }
 
   addCheckBoxSite(data, name) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const count = this.state.countOptionChannel + 1;
     this.setState({ countOptionChannel: count });
-    let html = '';
-    html += `<div class="row optionChannel-${count}">`;
-    html += '<div class="col-lg-12">';
-    html += '<div class="box box-solid box-primary">';
-    html += '<div class="box-header">';
-    html += `<h3 class="box-title">${name}</h3>`;
-    html += '<div class="box-tools pull-right">';
-    html += '<button class="btn btn-box-tool remove-option" data-widget="remove"> <i class="fa fa-times" /> </button>';
-    html += '</div></div>';
-    html += '<div class="box-body">';
-    html += '<div class="col-lg-2"> <div class="box-body"> <div class="form-group"> <div class="col-sm-12">';
-    html += '<select class="form-control inputTypeFilter" > <option value="and">AND</option> <option value="and">OR</option> </select>';
-    html += '</div> </div> </div> </div>';
-    html += '<div class="col-lg-8">';
-    html += '<div class="box-body">';
-    html += '<div class="row">';
-    html += '<form class="form-horizontal">';
-    html += '<div class="form-group">';
-    html += '<label for="inputChannelOption" class="col-sm-3 control-label">Comparison</label>';
-    html += '<div class="col-sm-9"><select class="form-control inputSiteFilter">';
-    html += '<option value="==">Is any of</option><option value="!=">Is not any of</option>';
-    html += '</select> </div> </div>';
-    html += '<div class="form-group">';
-    html += '<div class="col-lg-3">&nbsp;</div>';
-    html += `<div class="col-lg-9 optionVariable" id="optionChannelCheckBox-${count}">`;
-    for (let i = 0; i < data.length; i += 1) {
-      html += '<div class="col-sm-3">';
-      html += '<label class="control-label" >';
-      html += `<input type="checkbox" value=${data[i].value} class="inputOption" />${data[i].name}`;
-      html += '</label></div>';
-    }
-    html += '</div>';
-    html += '</div></div></form></div> </div> </div> </div> </div></div>';
-    $('#optionChannel').append(html);
+    const ob = {};
+    ob.name = name;
+    ob.count = count;
+    ob.data = data;
+    this.setState({ arrCheckBox: this.state.arrCheckBox.concat([ob]) });
   }
 
   render() {
@@ -539,6 +468,29 @@ class Channel extends Component {
                                     return false;
                                   },
                                   )}
+                                  {this.state.newFilterSite
+                                  && this.state.newFilterSite.map((ob) => (
+                                    <FilterSiteChannel
+                                      key={ob.count}
+                                      index={ob.count}
+                                      name={ob.name}
+                                    />
+                                  ))}
+                                  {this.state.arrVariable && this.state.arrVariable.map((ob) => (
+                                    <FilterSiteChannel
+                                      key={ob.count}
+                                      index={ob.count}
+                                      type="variable"
+                                    />
+                                  ))}
+                                  {this.state.arrCheckBox && this.state.arrCheckBox.map((ob) => (
+                                    <SelectOptionChannel
+                                      key={ob.count}
+                                      index={ob.count}
+                                      name={ob.name}
+                                      data={ob.data}
+                                    />
+                                  ))}
                                   {this.state.string}
                                 </div>
                               </div>
