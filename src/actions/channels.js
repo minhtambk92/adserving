@@ -77,12 +77,7 @@ export function getChannels(args = {
           name
           description
           status
-          site {
-            id
-            name
-            domain
-            description
-          }
+          siteId
           createdAt
           updatedAt
         }

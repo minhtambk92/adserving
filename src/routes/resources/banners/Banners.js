@@ -57,8 +57,8 @@ class Banners extends Component {
 
     const notMatchPlacement = (
       placementId !== undefined &&
-      typeof banner.pbzBanner === 'object' &&
-      JSON.stringify(banner.pbzBanner).indexOf(placementId) === -1
+      typeof banner.placements === 'object' &&
+      JSON.stringify(banner.placements).indexOf(placementId) === -1
     );
 
     const notMatchStatus = (
