@@ -112,17 +112,17 @@ class CreateBannerForm extends Component {
     }
     const status = this.inputBannerStatus.value;
     const keyword = document.getElementById('inputBannerKeyWord').value;
-    const isCountView = false;
+    const isCountView = true;
     const isFixIE = false;
     const isDefault = false;
     const isRelative = false;
-    const impressionsBooked = '0';
-    const clicksBooked = '0';
-    const activationDate = '0';
-    const expirationDate = '0';
+    const isImpressionsBooked = true;
+    const isClicksBooked = true;
+    const activationDate = true;
+    const expirationDate = true;
     const adStore = '';
-    const impressionsBookedValue = 'unlimited';
-    const clicksBookedValue = 'unlimited';
+    const impressionsBooked = 'unlimited';
+    const clicksBooked = 'unlimited';
     const activationDateValue = new Date(moment().format('YYYY-MM-DD 00:00:00'));
     const expirationDateValue = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00'));
     if (name && keyword && width && description && type && channelId) {
@@ -146,13 +146,13 @@ class CreateBannerForm extends Component {
         isFixIE,
         isDefault,
         isRelative,
-        impressionsBooked,
-        clicksBooked,
+        isImpressionsBooked,
+        isClicksBooked,
         activationDate,
         expirationDate,
         adStore,
-        impressionsBookedValue,
-        clicksBookedValue,
+        impressionsBooked,
+        clicksBooked,
         activationDateValue,
         expirationDateValue,
         channelId,

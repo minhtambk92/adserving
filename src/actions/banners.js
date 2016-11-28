@@ -51,13 +51,13 @@ export function getBanner(id) {
           isFixIE
           isDefault 
           isRelative
-          impressionsBooked
-          clicksBooked
+          isImpressionsBooked
+          isClicksBooked
           activationDate
           expirationDate
           adStore
-          impressionsBookedValue
-          clicksBookedValue
+          impressionsBooked
+          clicksBooked
           activationDateValue
           expirationDateValue
           channelId
@@ -127,13 +127,13 @@ export function getBanners(args = {
           isFixIE
           isDefault 
           isRelative
-          impressionsBooked
-          clicksBooked
+          isImpressionsBooked
+          isClicksBooked
           activationDate
           expirationDate
           adStore
-          impressionsBookedValue
-          clicksBookedValue
+          impressionsBooked
+          clicksBooked
           activationDateValue
           expirationDateValue
           channelId
@@ -197,13 +197,13 @@ export function createBanner({
   isFixIE,
   isDefault,
   isRelative,
-  impressionsBooked,
-  clicksBooked,
+  isImpressionsBooked,
+  isClicksBooked,
   activationDate,
   expirationDate,
   adStore,
-  impressionsBookedValue,
-  clicksBookedValue,
+  impressionsBooked,
+  clicksBooked,
   activationDateValue,
   expirationDateValue,
   channelId,
@@ -232,13 +232,13 @@ export function createBanner({
           isFixIE
           isDefault 
           isRelative
-          impressionsBooked
-          clicksBooked
+          isImpressionsBooked
+          isClicksBooked
           activationDate
           expirationDate
           adStore
-          impressionsBookedValue
-          clicksBookedValue
+          impressionsBooked
+          clicksBooked
           activationDateValue
           expirationDateValue
           channelId
@@ -268,13 +268,13 @@ export function createBanner({
         isFixIE,
         isDefault,
         isRelative,
-        impressionsBooked,
-        clicksBooked,
+        isImpressionsBooked,
+        isClicksBooked,
         activationDate,
         expirationDate,
         adStore,
-        impressionsBookedValue,
-        clicksBookedValue,
+        impressionsBooked,
+        clicksBooked,
         activationDateValue,
         expirationDateValue,
         channelId,
@@ -311,13 +311,13 @@ export function updateBanner({
   isFixIE,
   isDefault,
   isRelative,
-  impressionsBooked,
-  clicksBooked,
+  isImpressionsBooked,
+  isClicksBooked,
   activationDate,
   expirationDate,
   adStore,
-  impressionsBookedValue,
-  clicksBookedValue,
+  impressionsBooked,
+  clicksBooked,
   activationDateValue,
   expirationDateValue,
   channelId,
@@ -346,13 +346,13 @@ export function updateBanner({
           isFixIE
           isDefault 
           isRelative
-          impressionsBooked
-          clicksBooked
+          isImpressionsBooked
+          isClicksBooked
           activationDate
           expirationDate
           adStore
-          impressionsBookedValue
-          clicksBookedValue
+          impressionsBooked
+          clicksBooked
           activationDateValue
           expirationDateValue
           channelId
@@ -383,13 +383,13 @@ export function updateBanner({
         isFixIE,
         isDefault,
         isRelative,
-        impressionsBooked,
-        clicksBooked,
+        isImpressionsBooked,
+        isClicksBooked,
         activationDate,
         expirationDate,
         adStore,
-        impressionsBookedValue,
-        clicksBookedValue,
+        impressionsBooked,
+        clicksBooked,
         activationDateValue,
         expirationDateValue,
         channelId,
@@ -430,13 +430,13 @@ export function deleteBanner(id) {
           isFixIE
           isDefault 
           isRelative
-          impressionsBooked
-          clicksBooked
+          isImpressionsBooked
+          isClicksBooked
           activationDate
           expirationDate
           adStore
-          impressionsBookedValue
-          clicksBookedValue
+          impressionsBooked
+          clicksBooked
           activationDateValue
           expirationDateValue
           channelId

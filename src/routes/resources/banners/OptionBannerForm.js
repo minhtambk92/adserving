@@ -35,8 +35,8 @@ class UpdateBannerForm extends Component {
       checkIsFixIE: false,
       checkIsDefault: false,
       checkIsRelative: false,
-      impressionsBooked: false,
-      clicksBooked: false,
+      isImpressionsBooked: false,
+      isClicksBooked: false,
       checkImpressionsBooked: false,
       checkClicksBooked: false,
       activationDate: false,
@@ -112,28 +112,28 @@ class UpdateBannerForm extends Component {
       }
     });
     // // show impressions Booked
-    $('#inputImpressionsBooked').on('ifClicked', () => {
-      const impressionsBooked = document.getElementById('inputImpressionsBooked').checked;
+    $('#inputIsImpressionsBooked').on('ifClicked', () => {
+      const isImpressionsBooked = document.getElementById('inputIsImpressionsBooked').checked;
       self.setState({ checkImpressionsBooked: true });
-      if (impressionsBooked === true) {
+      if (isImpressionsBooked === true) {
         self.setState({ showImpressionsBooked: true });
-        self.setState({ impressionsBooked: false });
-      } else if (impressionsBooked === false) {
+        self.setState({ isImpressionsBooked: false });
+      } else if (isImpressionsBooked === false) {
         self.setState({ showImpressionsBooked: false });
-        self.setState({ impressionsBooked: true });
+        self.setState({ isImpressionsBooked: true });
       }
     });
 
     // show clicks Booked
-    $('#inputClicksBooked').on('ifClicked', () => {
-      const showClicksBooked = document.getElementById('inputClicksBooked').checked;
+    $('#inputIsClicksBooked').on('ifClicked', () => {
+      const showClicksBooked = document.getElementById('inputIsClicksBooked').checked;
       self.setState({ checkClicksBooked: true });
       if (showClicksBooked === true) {
         self.setState({ showClicksBooked: true });
-        self.setState({ clicksBooked: false });
+        self.setState({ isClicksBooked: false });
       } else if (showClicksBooked === false) {
         self.setState({ showClicksBooked: false });
-        self.setState({ clicksBooked: true });
+        self.setState({ isClicksBooked: true });
       }
     });
     $('#inputActivationDate').on('ifClicked', () => {
@@ -163,43 +163,43 @@ class UpdateBannerForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     const {
-      impressionsBooked,
-      clicksBooked,
+      isImpressionsBooked,
+      isClicksBooked,
       activationDate,
       expirationDate,
       adStore,
-      impressionsBookedValue,
-      clicksBookedValue,
+      impressionsBooked,
+      clicksBooked,
       activationDateValue,
       expirationDateValue,
     } = nextProps.banner && (nextProps.banner || {});
     this.inputBannerAdStore.value = adStore;
-    this.inputImpressionsBooked.value = impressionsBooked;
+    this.inputIsImpressionsBooked.value = isImpressionsBooked;
     if (nextProps.banner.clickImpression) {
       const length = nextProps.banner.clickImpression.length;
       this.setState({ countLinkClickImpression: length });
     }
-    if (this.state.impressionsBooked === true) {
+    if (this.state.isImpressionsBooked === true) {
       this.setState({ showImpressionsBooked: false });
-    } else if (this.state.impressionsBooked === false) {
-      if (impressionsBooked === true) {
+    } else if (this.state.isImpressionsBooked === false) {
+      if (isImpressionsBooked === true) {
         this.setState({ showImpressionsBooked: false });
-      } else if (impressionsBooked === false) {
+      } else if (isImpressionsBooked === false) {
         this.setState({ showImpressionsBooked: true });
         if (this.inputBannerImpressionsBooked !== undefined) {
-          this.inputBannerImpressionsBooked.value = impressionsBookedValue;
+          this.inputBannerImpressionsBooked.value = impressionsBooked;
         }
       }
     }
-    if (this.state.clicksBooked === true) {
+    if (this.state.isClicksBooked === true) {
       this.setState({ showClicksBooked: false });
-    } else if (this.state.clicksBooked === false) {
-      if (clicksBooked === true) {
+    } else if (this.state.isClicksBooked === false) {
+      if (isClicksBooked === true) {
         this.setState({ showClicksBooked: false });
-      } else if (clicksBooked === false) {
+      } else if (isClicksBooked === false) {
         this.setState({ showClicksBooked: true });
-        if (this.inputBannerClicksBooked !== undefined) {
-          this.inputBannerClicksBooked.value = clicksBookedValue;
+        if (this.inputBannerisClicksBooked !== undefined) {
+          this.inputBannerisClicksBooked.value = clicksBooked;
         }
       }
     }
@@ -272,24 +272,24 @@ class UpdateBannerForm extends Component {
         }
       }
 
-      if (this.state.impressionsBooked === true) {
-        $('#inputImpressionsBooked').iCheck('check');
-      } else if (this.state.impressionsBooked === false) {
-        if (this.props.banner.impressionsBooked === true
+      if (this.state.isImpressionsBooked === true) {
+        $('#inputIsImpressionsBooked').iCheck('check');
+      } else if (this.state.isImpressionsBooked === false) {
+        if (this.props.banner.isImpressionsBooked === true
           && this.state.checkImpressionsBooked === false) {
-          $('#inputImpressionsBooked').iCheck('check');
-        } else if (this.props.banner.impressionsBooked === false) {
-          $('#inputImpressionsBooked').iCheck('uncheck');
+          $('#inputIsImpressionsBooked').iCheck('check');
+        } else if (this.props.banner.isImpressionsBooked === false) {
+          $('#inputIsImpressionsBooked').iCheck('uncheck');
         }
       }
 
-      if (this.state.clicksBooked === true) {
-        $('#inputClicksBooked').iCheck('check');
-      } else if (this.state.clicksBooked === false) {
-        if (this.props.banner.clicksBooked === true && this.state.checkClicksBooked === false) {
-          $('#inputClicksBooked').iCheck('check');
-        } else if (this.props.banner.clicksBooked === false) {
-          $('#inputClicksBooked').iCheck('uncheck');
+      if (this.state.isClicksBooked === true) {
+        $('#inputIsClicksBooked').iCheck('check');
+      } else if (this.state.isClicksBooked === false) {
+        if (this.props.banner.isClicksBooked === true && this.state.checkClicksBooked === false) {
+          $('#inputIsClicksBooked').iCheck('check');
+        } else if (this.props.banner.isClicksBooked === false) {
+          $('#inputIsClicksBooked').iCheck('uncheck');
         }
       }
 
@@ -323,20 +323,20 @@ class UpdateBannerForm extends Component {
     const isDefault = document.getElementById('inputBannerIsDefault').checked;
     const isRelative = document.getElementById('inputBannerIsRelative').checked;
     const adStore = this.inputBannerAdStore.value;
-    const impressionsBooked = document.getElementById('inputImpressionsBooked').checked;
-    let impressionsBookedValue = '';
-    if (impressionsBooked === true) {
-      impressionsBookedValue = 'unlimited';
-    } else if (impressionsBooked === false) {
-      impressionsBookedValue = this.inputBannerImpressionsBooked.value;
+    const isImpressionsBooked = document.getElementById('inputIsImpressionsBooked').checked;
+    let impressionsBooked = '';
+    if (isImpressionsBooked === true) {
+      impressionsBooked = 'unlimited';
+    } else if (isImpressionsBooked === false) {
+      impressionsBooked = this.inputBannerImpressionsBooked.value;
     }
-    const clicksBooked = document.getElementById('inputClicksBooked').checked;
-    let clicksBookedValue = '';
-    if (clicksBooked === true) {
-      clicksBookedValue = 'unlimited';
-    } else if (clicksBooked === false) {
-      if (this.inputBannerClicksBooked !== undefined) {
-        clicksBookedValue = this.inputBannerClicksBooked.value;
+    const isClicksBooked = document.getElementById('inputIsClicksBooked').checked;
+    let clicksBooked = '';
+    if (isClicksBooked === true) {
+      clicksBooked = 'unlimited';
+    } else if (isClicksBooked === false) {
+      if (this.inputBannerisClicksBooked !== undefined) {
+        clicksBooked = this.inputBannerisClicksBooked.value;
       }
     }
     const activationDate = document.getElementById('inputActivationDate').checked;
@@ -361,10 +361,10 @@ class UpdateBannerForm extends Component {
     if (adStore && adStore !== this.props.banner.adStore) {
       banner.adStore = adStore;
     }
+    banner.isImpressionsBooked = isImpressionsBooked;
+    banner.isClicksBooked = isClicksBooked;
     banner.impressionsBooked = impressionsBooked;
     banner.clicksBooked = clicksBooked;
-    banner.impressionsBookedValue = impressionsBookedValue;
-    banner.clicksBookedValue = clicksBookedValue;
     banner.activationDate = activationDate;
     banner.activationDateValue = activationDateValue;
     banner.expirationDate = expirationDate;
@@ -515,14 +515,14 @@ class UpdateBannerForm extends Component {
                 {/* /Impressions Booked */}
                 <div className="form-group">
                   <label
-                    htmlFor="inputImpressionsBooked"
+                    htmlFor="inputIsImpressionsBooked"
                     className="col-sm-2 control-label"
                   >Impressions Booked</label>
                   <div className="col-sm-1">
                     <ICheck
-                      type="checkbox" id="inputImpressionsBooked" className="form-control"
+                      type="checkbox" id="inputIsImpressionsBooked" className="form-control"
                       ref={c => {
-                        this.inputImpressionsBooked = c;
+                        this.inputIsImpressionsBooked = c;
                       }}
                     />
                   </div>
@@ -550,14 +550,14 @@ class UpdateBannerForm extends Component {
                 {/* /Click Booked */}
                 <div className="form-group">
                   <label
-                    htmlFor="inputClicksBooked"
+                    htmlFor="inputIsClicksBooked"
                     className="col-sm-2 control-label"
                   >Clicks Booked</label>
                   <div className="col-sm-1">
                     <ICheck
-                      type="checkbox" id="inputClicksBooked" className="form-control"
+                      type="checkbox" id="inputIsClicksBooked" className="form-control"
                       ref={c => {
-                        this.inputClicksBooked = c;
+                        this.inputIsClicksBooked = c;
                       }}
                     />
                   </div>
@@ -566,15 +566,15 @@ class UpdateBannerForm extends Component {
                 {this.state.showClicksBooked === true ? (
                   <div className="form-group">
                     <label
-                      htmlFor="inputBannerClicksBooked"
+                      htmlFor="inputBannerisClicksBooked"
                       className="col-sm-2 control-label"
                     >&nbsp;</label>
                     <div className="col-sm-8">
                       <input
                         type="text" className="form-control"
-                        id="inputBannerClicksBooked" placeholder="1000"
+                        id="inputBannerisClicksBooked" placeholder="1000"
                         ref={c => {
-                          this.inputBannerClicksBooked = c;
+                          this.inputBannerisClicksBooked = c;
                         }}
                       />
                     </div>
