@@ -47,8 +47,8 @@ export function getBanner(id) {
           status
           adServer
           bannerHTMLType
-          countView
-          fixIE
+          isCountView
+          isFixIE
           isDefault 
           isRelative
           impressionsBooked
@@ -123,8 +123,8 @@ export function getBanners(args = {
           status
           adServer
           bannerHTMLType
-          countView
-          fixIE
+          isCountView
+          isFixIE
           isDefault 
           isRelative
           impressionsBooked
@@ -193,8 +193,8 @@ export function createBanner({
   status,
   adServer,
   bannerHTMLType,
-  countView,
-  fixIE,
+  isCountView,
+  isFixIE,
   isDefault,
   isRelative,
   impressionsBooked,
@@ -228,8 +228,8 @@ export function createBanner({
           status
           adServer
           bannerHTMLType
-          countView
-          fixIE
+          isCountView
+          isFixIE
           isDefault 
           isRelative
           impressionsBooked
@@ -264,8 +264,8 @@ export function createBanner({
         status,
         adServer,
         bannerHTMLType,
-        countView,
-        fixIE,
+        isCountView,
+        isFixIE,
         isDefault,
         isRelative,
         impressionsBooked,
@@ -307,8 +307,8 @@ export function updateBanner({
   status,
   adServer,
   bannerHTMLType,
-  countView,
-  fixIE,
+  isCountView,
+  isFixIE,
   isDefault,
   isRelative,
   impressionsBooked,
@@ -342,8 +342,8 @@ export function updateBanner({
           status
           adServer
           bannerHTMLType
-          countView
-          fixIE
+          isCountView
+          isFixIE
           isDefault 
           isRelative
           impressionsBooked
@@ -379,8 +379,8 @@ export function updateBanner({
         status,
         adServer,
         bannerHTMLType,
-        countView,
-        fixIE,
+        isCountView,
+        isFixIE,
         isDefault,
         isRelative,
         impressionsBooked,
@@ -426,8 +426,8 @@ export function deleteBanner(id) {
           status
           adServer
           bannerHTMLType
-          countView
-          fixIE
+          isCountView
+          isFixIE
           isDefault 
           isRelative
           impressionsBooked

@@ -112,8 +112,8 @@ class CreateBannerForm extends Component {
     }
     const status = this.inputBannerStatus.value;
     const keyword = document.getElementById('inputBannerKeyWord').value;
-    const countView = false;
-    const fixIE = false;
+    const isCountView = false;
+    const isFixIE = false;
     const isDefault = false;
     const isRelative = false;
     const impressionsBooked = '0';
@@ -142,8 +142,8 @@ class CreateBannerForm extends Component {
         status,
         adServer,
         bannerHTMLType,
-        countView,
-        fixIE,
+        isCountView,
+        isFixIE,
         isDefault,
         isRelative,
         impressionsBooked,

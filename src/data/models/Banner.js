@@ -83,11 +83,11 @@ const Banner = Model.define('Banner', {
     type: DataType.BOOLEAN,
     defaultValue: true,
   },
-  countView: {
+  isCountView: {
     type: DataType.BOOLEAN,
-    defaultValue: false,
+    defaultValue: true,
   },
-  fixIE: {
+  isFixIE: {
     type: DataType.BOOLEAN,
     defaultValue: false,
   },
@@ -120,31 +120,19 @@ const Banner = Model.define('Banner', {
     defaultValue: 'unlimited',
   },
   activationDate: {
-    type: DataType.STRING,
-    allowNull: false,
-    defaultValue: '0',
-    validate: {
-      isIn: [['1', '0']],
-    },
+    type: DataType.BOOLEAN,
+    defaultValue: true,
   },
   activationDateValue: {
     type: DataType.DATE,
   },
   expirationDate: {
-    type: DataType.STRING,
-    allowNull: false,
-    defaultValue: '0',
-    validate: {
-      isIn: [['1', '0']],
-    },
+    type: DataType.BOOLEAN,
+    defaultValue: true,
   },
   expirationDateValue: {
     type: DataType.DATE,
   },
-  // clickImpressionsUrl: {
-  //   type: DataType.ARRAY(DataType.STRING),
-  //   defaultValue: [],
-  // },
   status: {
     type: DataType.STRING,
     allowNull: false,
