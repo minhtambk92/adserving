@@ -39,8 +39,8 @@ class UpdateBannerForm extends Component {
       isClicksBooked: false,
       checkImpressionsBooked: false,
       checkClicksBooked: false,
-      activationDate: false,
-      expirationDate: false,
+      isActivationDate: false,
+      isExpirationDate: false,
       checkExpirationDate: false,
       checkActivationDate: false,
     };
@@ -136,26 +136,26 @@ class UpdateBannerForm extends Component {
         self.setState({ isClicksBooked: true });
       }
     });
-    $('#inputActivationDate').on('ifClicked', () => {
-      const activationDate = document.getElementById('inputActivationDate').checked;
+    $('#inputIsActivationDate').on('ifClicked', () => {
+      const isActivationDate = document.getElementById('inputIsActivationDate').checked;
       self.setState({ checkActivationDate: true });
-      if (activationDate === true) {
+      if (isActivationDate === true) {
         self.setState({ showActivationDate: true });
-        self.setState({ activationDate: false });
-      } else if (activationDate === false) {
+        self.setState({ isActivationDate: false });
+      } else if (isActivationDate === false) {
         self.setState({ showActivationDate: false });
-        self.setState({ activationDate: true });
+        self.setState({ isActivationDate: true });
       }
     });
-    $('#inputExpirationDate').on('ifClicked', () => {
-      const showExpirationDate = document.getElementById('inputExpirationDate').checked;
+    $('#inputIsExpirationDate').on('ifClicked', () => {
+      const showExpirationDate = document.getElementById('inputIsExpirationDate').checked;
       self.setState({ checkExpirationDate: true });
       if (showExpirationDate === true) {
         self.setState({ showExpirationDate: true });
-        self.setState({ expirationDate: false });
+        self.setState({ isExpirationDate: false });
       } else if (showExpirationDate === false) {
         self.setState({ showExpirationDate: false });
-        self.setState({ expirationDate: true });
+        self.setState({ isExpirationDate: true });
       }
     });
     /* eslint-enable no-undef */
@@ -165,13 +165,13 @@ class UpdateBannerForm extends Component {
     const {
       isImpressionsBooked,
       isClicksBooked,
-      activationDate,
-      expirationDate,
+      isActivationDate,
+      isExpirationDate,
       adStore,
       impressionsBooked,
       clicksBooked,
-      activationDateValue,
-      expirationDateValue,
+      activationDate,
+      expirationDate,
     } = nextProps.banner && (nextProps.banner || {});
     this.inputBannerAdStore.value = adStore;
     this.inputIsImpressionsBooked.value = isImpressionsBooked;
@@ -198,32 +198,32 @@ class UpdateBannerForm extends Component {
         this.setState({ showClicksBooked: false });
       } else if (isClicksBooked === false) {
         this.setState({ showClicksBooked: true });
-        if (this.inputBannerisClicksBooked !== undefined) {
-          this.inputBannerisClicksBooked.value = clicksBooked;
+        if (this.inputBannerClicksBooked !== undefined) {
+          this.inputBannerClicksBooked.value = clicksBooked;
         }
       }
     }
-    if (this.state.activationDate === true) {
+    if (this.state.isActivationDate === true) {
       this.setState({ showActivationDate: false });
-    } else if (this.state.activationDate === false) {
-      if (activationDate === true) {
+    } else if (this.state.isActivationDate === false) {
+      if (isActivationDate === true) {
         this.setState({ showActivationDate: false });
-      } else if (activationDate === false) {
+      } else if (isActivationDate === false) {
         this.setState({ showActivationDate: true });
         if (this.inputBannerActivationDate !== undefined) {
-          this.inputBannerActivationDate.value = moment(new Date(activationDateValue)).format('L');
+          document.getElementById('inputBannerActivationDate').value = moment(new Date(activationDate)).format('L');
         }
       }
     }
-    if (this.state.expirationDate === true) {
+    if (this.state.isExpirationDate === true) {
       this.setState({ showExpirationDate: false });
-    } else if (this.state.expirationDate === false) {
-      if (expirationDate === true) {
+    } else if (this.state.isExpirationDate === false) {
+      if (isExpirationDate === true) {
         this.setState({ showExpirationDate: false });
-      } else if (expirationDate === false) {
+      } else if (isExpirationDate === false) {
         this.setState({ showExpirationDate: true });
         if (this.inputBannerExpirationDate !== undefined) {
-          document.getElementById('inputBannerExpirationDate').value = moment(new Date(expirationDateValue)).format('L');
+          document.getElementById('inputBannerExpirationDate').value = moment(new Date(expirationDate)).format('L');
         }
       }
     }
@@ -293,24 +293,25 @@ class UpdateBannerForm extends Component {
         }
       }
 
-      if (this.state.activationDate === true) {
-        $('#inputActivationDate').iCheck('check');
-      } else if (this.state.activationDate === false) {
-        if (this.props.banner.activationDate === true
+      if (this.state.isActivationDate === true) {
+        $('#inputIsActivationDate').iCheck('check');
+      } else if (this.state.isActivationDate === false) {
+        if (this.props.banner.isActivationDate === true
           && this.state.checkActivationDate === false) {
-          $('#inputActivationDate').iCheck('check');
-        } else if (this.props.banner.activationDate === false) {
-          $('#inputActivationDate').iCheck('uncheck');
+          $('#inputIsActivationDate').iCheck('check');
+        } else if (this.props.banner.isActivationDate === false) {
+          $('#inputIsActivationDate').iCheck('uncheck');
         }
       }
 
-      if (this.state.expirationDate === true) {
-        $('#inputExpirationDate').iCheck('check');
-      } else if (this.state.expirationDate === false) {
-        if (this.props.banner.expirationDate === true && this.state.checkExpirationDate === false) {
-          $('#inputExpirationDate').iCheck('check');
-        } else if (this.props.banner.expirationDate === false) {
-          $('#inputExpirationDate').iCheck('uncheck');
+      if (this.state.isExpirationDate === true) {
+        $('#inputIsExpirationDate').iCheck('check');
+      } else if (this.state.isExpirationDate === false) {
+        if (this.props.banner.isExpirationDate === true &&
+          this.state.checkExpirationDate === false) {
+          $('#inputIsExpirationDate').iCheck('check');
+        } else if (this.props.banner.isExpirationDate === false) {
+          $('#inputIsExpirationDate').iCheck('uncheck');
         }
       }
     }
@@ -335,23 +336,23 @@ class UpdateBannerForm extends Component {
     if (isClicksBooked === true) {
       clicksBooked = 'unlimited';
     } else if (isClicksBooked === false) {
-      if (this.inputBannerisClicksBooked !== undefined) {
-        clicksBooked = this.inputBannerisClicksBooked.value;
+      if (this.inputBannerClicksBooked !== undefined) {
+        clicksBooked = this.inputBannerClicksBooked.value;
       }
     }
-    const activationDate = document.getElementById('inputActivationDate').checked;
-    let activationDateValue = '';
-    if (activationDate === false) {
-      activationDateValue = new Date(moment(new Date(document.getElementById('inputBannerActivationDate').value)).format('YYYY-MM-DD 00:00:00'));
-    } else if (activationDate === true) {
-      activationDateValue = new Date(moment().format('YYYY-MM-DD 00:00:00'));
+    const isActivationDate = document.getElementById('inputIsActivationDate').checked;
+    let activationDate = '';
+    if (isActivationDate === false) {
+      activationDate = new Date(moment(new Date(document.getElementById('inputBannerActivationDate').value)).format('YYYY-MM-DD 00:00:00'));
+    } else if (isActivationDate === true) {
+      activationDate = new Date(moment().format('YYYY-MM-DD 00:00:00'));
     }
-    const expirationDate = document.getElementById('inputExpirationDate').checked;
-    let expirationDateValue = new Date();
-    if (expirationDate === false) {
-      expirationDateValue = new Date(moment(new Date(document.getElementById('inputBannerExpirationDate').value)).format('YYYY-MM-DD 00:00:00'));
-    } else if (expirationDate === true) {
-      expirationDateValue = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00'));
+    const isExpirationDate = document.getElementById('inputIsExpirationDate').checked;
+    let expirationDate = new Date();
+    if (isExpirationDate === false) {
+      expirationDate = new Date(moment(new Date(document.getElementById('inputBannerExpirationDate').value)).format('YYYY-MM-DD 00:00:00'));
+    } else if (isExpirationDate === true) {
+      expirationDate = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00'));
     }
     const banner = { id: this.props.bannerId };
     banner.isCountView = isCountView;
@@ -365,10 +366,10 @@ class UpdateBannerForm extends Component {
     banner.isClicksBooked = isClicksBooked;
     banner.impressionsBooked = impressionsBooked;
     banner.clicksBooked = clicksBooked;
+    banner.isActivationDate = isActivationDate;
     banner.activationDate = activationDate;
-    banner.activationDateValue = activationDateValue;
+    banner.isExpirationDate = isExpirationDate;
     banner.expirationDate = expirationDate;
-    banner.expirationDateValue = expirationDateValue;
     this.props.updateBanner(banner).then(() => {
     });
     this.addLinkClickAndImpression();
@@ -566,15 +567,15 @@ class UpdateBannerForm extends Component {
                 {this.state.showClicksBooked === true ? (
                   <div className="form-group">
                     <label
-                      htmlFor="inputBannerisClicksBooked"
+                      htmlFor="inputBannerClicksBooked"
                       className="col-sm-2 control-label"
                     >&nbsp;</label>
                     <div className="col-sm-8">
                       <input
                         type="text" className="form-control"
-                        id="inputBannerisClicksBooked" placeholder="1000"
+                        id="inputBannerClicksBooked" placeholder="1000"
                         ref={c => {
-                          this.inputBannerisClicksBooked = c;
+                          this.inputBannerClicksBooked = c;
                         }}
                       />
                     </div>
@@ -602,14 +603,14 @@ class UpdateBannerForm extends Component {
               <form className="form-horizontal">
                 <div className="form-group">
                   <label
-                    htmlFor="inputActivationDate"
+                    htmlFor="inputIsActivationDate"
                     className="col-sm-2 control-label"
                   >Activation Date</label>
                   <div className="col-sm-1">
                     <ICheck
-                      type="checkbox" id="inputActivationDate" className="form-control"
+                      type="checkbox" id="inputIsActivationDate" className="form-control"
                       ref={c => {
-                        this.inputActivationDate = c;
+                        this.inputIsActivationDate = c;
                       }}
                     />
                   </div>
@@ -639,14 +640,14 @@ class UpdateBannerForm extends Component {
                   </div>) : ('')}
                 <div className="form-group">
                   <label
-                    htmlFor="inputExpirationDate"
+                    htmlFor="inputIsExpirationDate"
                     className="col-sm-2 control-label"
                   >Expiration Date</label>
                   <div className="col-sm-1">
                     <ICheck
-                      type="checkbox" id="inputExpirationDate" className="form-control"
+                      type="checkbox" id="inputIsExpirationDate" className="form-control"
                       ref={c => {
-                        this.inputExpirationDate = c;
+                        this.inputIsExpirationDate = c;
                       }}
                     />
                   </div>

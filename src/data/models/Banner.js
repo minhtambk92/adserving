@@ -119,18 +119,18 @@ const Banner = Model.define('Banner', {
     type: DataType.STRING,
     defaultValue: 'unlimited',
   },
-  activationDate: {
+  isActivationDate: {
     type: DataType.BOOLEAN,
     defaultValue: true,
   },
-  activationDateValue: {
+  activationDate: {
     type: DataType.DATE,
   },
-  expirationDate: {
+  isExpirationDate: {
     type: DataType.BOOLEAN,
     defaultValue: true,
   },
-  expirationDateValue: {
+  expirationDate: {
     type: DataType.DATE,
   },
   status: {

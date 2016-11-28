@@ -53,13 +53,13 @@ export function getBanner(id) {
           isRelative
           isImpressionsBooked
           isClicksBooked
-          activationDate
-          expirationDate
+          isActivationDate
+          isExpirationDate
           adStore
           impressionsBooked
           clicksBooked
-          activationDateValue
-          expirationDateValue
+          activationDate
+          expirationDate
           channelId
           placements {
               id
@@ -129,13 +129,13 @@ export function getBanners(args = {
           isRelative
           isImpressionsBooked
           isClicksBooked
-          activationDate
-          expirationDate
+          isActivationDate
+          isExpirationDate
           adStore
           impressionsBooked
           clicksBooked
-          activationDateValue
-          expirationDateValue
+          activationDate
+          expirationDate
           channelId
           placements {
               id
@@ -199,13 +199,13 @@ export function createBanner({
   isRelative,
   isImpressionsBooked,
   isClicksBooked,
-  activationDate,
-  expirationDate,
+  isActivationDate,
+  isExpirationDate,
   adStore,
   impressionsBooked,
   clicksBooked,
-  activationDateValue,
-  expirationDateValue,
+  activationDate,
+  expirationDate,
   channelId,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -234,13 +234,13 @@ export function createBanner({
           isRelative
           isImpressionsBooked
           isClicksBooked
-          activationDate
-          expirationDate
+          isActivationDate
+          isExpirationDate
           adStore
           impressionsBooked
           clicksBooked
-          activationDateValue
-          expirationDateValue
+          activationDate
+          expirationDate
           channelId
           createdAt
           updatedAt
@@ -270,13 +270,13 @@ export function createBanner({
         isRelative,
         isImpressionsBooked,
         isClicksBooked,
-        activationDate,
-        expirationDate,
+        isActivationDate,
+        isExpirationDate,
         adStore,
         impressionsBooked,
         clicksBooked,
-        activationDateValue,
-        expirationDateValue,
+        activationDate,
+        expirationDate,
         channelId,
       },
     });
@@ -313,13 +313,13 @@ export function updateBanner({
   isRelative,
   isImpressionsBooked,
   isClicksBooked,
-  activationDate,
-  expirationDate,
+  isActivationDate,
+  isExpirationDate,
   adStore,
   impressionsBooked,
   clicksBooked,
-  activationDateValue,
-  expirationDateValue,
+  activationDate,
+  expirationDate,
   channelId,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -348,13 +348,13 @@ export function updateBanner({
           isRelative
           isImpressionsBooked
           isClicksBooked
-          activationDate
-          expirationDate
+          isActivationDate
+          isExpirationDate
           adStore
           impressionsBooked
           clicksBooked
-          activationDateValue
-          expirationDateValue
+          activationDate
+          expirationDate
           channelId
           createdAt
           updatedAt
@@ -385,13 +385,13 @@ export function updateBanner({
         isRelative,
         isImpressionsBooked,
         isClicksBooked,
-        activationDate,
-        expirationDate,
+        isActivationDate,
+        isExpirationDate,
         adStore,
         impressionsBooked,
         clicksBooked,
-        activationDateValue,
-        expirationDateValue,
+        activationDate,
+        expirationDate,
         channelId,
       },
     });
@@ -432,13 +432,13 @@ export function deleteBanner(id) {
           isRelative
           isImpressionsBooked
           isClicksBooked
-          activationDate
-          expirationDate
+          isActivationDate
+          isExpirationDate
           adStore
           impressionsBooked
           clicksBooked
-          activationDateValue
-          expirationDateValue
+          activationDate
+          expirationDate
           channelId
           createdAt
           updatedAt
