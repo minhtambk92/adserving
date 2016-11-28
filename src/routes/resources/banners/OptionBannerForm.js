@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import { DatePicker, ICheck } from '../../../components/UI';
+import ClickImpressionForm from './ClickImpressionForm';
 import Link from '../../../components/Link';
 
 class UpdateBannerForm extends Component {
@@ -686,60 +687,18 @@ class UpdateBannerForm extends Component {
                 <div className="col-sm-12" id="link-click-impression">
                   { this.props.banner && this.props.banner.clickImpression
                   && this.props.banner.clickImpression.map((clickImpression, index) => (
-                    <div
-                      key={clickImpression.id} id={clickImpression.id}
-                      className={`clickImpression-${index + 1}`}
-                    >
-                      <button
-                        type="button" className="close closeClickImpression" aria-hidden="true"
-                      >×
-                      </button>
-                      <div className="form-group">
-                        <label
-                          htmlFor="inputLinkClick"
-                          className="col-sm-2 control-label"
-                        >Link Click</label>
-                        <div className="col-sm-8">
-                          <input
-                            type="text" className="form-control"
-                            id={`inputLinkClick-${index + 1}`} placeholder="1000"
-                            defaultValue={clickImpression.clickUrl}
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label
-                          htmlFor="inputLinkImpression"
-                          className="col-sm-2 control-label"
-                        >Link Impression</label>
-                        <div className="col-sm-8">
-                          <input
-                            type="text" className="form-control"
-                            id={`inputLinkImpression-${index + 1}`} placeholder="1000"
-                            defaultValue={clickImpression.impressionUrl}
-                          />
-                        </div>
-                      </div>
-                    </div>))}
+                    <ClickImpressionForm
+                      key={clickImpression.id}
+                      id={clickImpression.id}
+                      index={index + 1}
+                      clickUrl={clickImpression.clickUrl}
+                      impressionUrl={clickImpression.impressionUrl}
+                    />))}
                   {this.state.arrClickImpression && this.state.arrClickImpression.map((count) => (
-                    <div key={`clickImpression-${count}`} className={`clickImpression-${count}`}>
-                      <button type="button" className="close closeClickImpression" aria-hidden="true">×</button>
-                      <div className="form-group">
-                        <label htmlFor="inputLinkClick" className="col-sm-2 control-label">Link Click</label>
-                        <div className="col-sm-8">
-                          <input type="text" className="form-control" id={`inputLinkClick-${count}`} placeholder="1000" />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="inputLinkImpression" className="col-sm-2 control-label">Link Impression</label>
-                        <div className="col-sm-8">
-                          <input
-                            type="text" className="form-control" id={`inputLinkImpression-${count}`}
-                            placeholder="1000"
-                          /></div>
-                      </div>
-                    </div>
-                  ))}
+                    <ClickImpressionForm
+                      key={count}
+                      index={count}
+                    />))}
                   {this.state.string}
                 </div>
               </form>
