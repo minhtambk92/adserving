@@ -4,7 +4,7 @@ import { DatePicker, ICheck } from '../../../components/UI';
 import ClickImpressionForm from './ClickImpressionForm';
 import Link from '../../../components/Link';
 
-class UpdateBannerForm extends Component {
+class OptionBannerForm extends Component {
 
   static propTypes = {
     bannerId: PropTypes.string.isRequired,
@@ -721,4 +721,4 @@ class UpdateBannerForm extends Component {
   }
 }
 
-export default UpdateBannerForm;
+export default OptionBannerForm;
