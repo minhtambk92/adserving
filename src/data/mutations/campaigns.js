@@ -3,9 +3,9 @@ import {
   GraphQLID as IDType,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import CampaignType from '../types/CampaignType';
-import CampaignInputType from '../types/CampaignInputType';
-import CampaignInputTypeWithoutId from '../types/CampaignInputTypeWithoutId';
+import CampaignType from '../types/campaign/CampaignType';
+import CampaignInputType from '../types/campaign/CampaignInputType';
+import CampaignInputTypeWithoutId from '../types/campaign/CampaignInputTypeWithoutId';
 import { Campaign } from '../models';
 
 const campaigns = {

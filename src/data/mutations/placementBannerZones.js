@@ -3,9 +3,9 @@ import {
   GraphQLID as IDType,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import PlacementBannerZoneType from '../types/PlacementBannerZoneType';
-import PlacementBannerZoneInputType from '../types/PlacementBannerZoneInputType';
-import PlacementBannerZoneInputTypeWithoutId from '../types/PlacementBannerZoneInputTypeWithoutId';
+import PlacementBannerZoneType from '../types/placementBannerZone/PlacementBannerZoneType';
+import PlacementBannerZoneInputType from '../types/placementBannerZone/PlacementBannerZoneInputType';
+import PlacementBannerZoneInputTypeWithoutId from '../types/placementBannerZone/PlacementBannerZoneInputTypeWithoutId';
 import { PlacementBannerZone } from '../models';
 
 const placementBannerZones = {

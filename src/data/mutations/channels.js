@@ -3,9 +3,9 @@ import {
   GraphQLID as IDType,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import ChannelType from '../types/ChannelType';
-import ChannelInputType from '../types/ChannelInputType';
-import ChannelInputTypeWithoutId from '../types/ChannelInputTypeWithoutId';
+import ChannelType from '../types/channel/ChannelType';
+import ChannelInputType from '../types/channel/ChannelInputType';
+import ChannelInputTypeWithoutId from '../types/channel/ChannelInputTypeWithoutId';
 import { Channel } from '../models';
 
 const channels = {

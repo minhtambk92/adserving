@@ -3,9 +3,9 @@ import {
   GraphQLID as IDType,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import AdvertiserType from '../types/AdvertiserType';
-import AdvertiserInputType from '../types/AdvertiserInputType';
-import AdvertiserInputTypeWithoutId from '../types/AdvertiserInputTypeWithoutId';
+import AdvertiserType from '../types/advertiser/AdvertiserType';
+import AdvertiserInputType from '../types/advertiser/AdvertiserInputType';
+import AdvertiserInputTypeWithoutId from '../types/advertiser/AdvertiserInputTypeWithoutId';
 import { Advertiser } from '../models';
 
 const advertisers = {

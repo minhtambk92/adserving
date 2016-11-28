@@ -3,9 +3,9 @@ import {
   GraphQLID as IDType,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import OptionChannelType from '../types/OptionChannelType';
-import OptionChannelInputType from '../types/OptionChannelInputType';
-import OptionChannelInputTypeWithoutId from '../types/OptionChannelInputTypeWithoutId';
+import OptionChannelType from '../types/optionChannel/OptionChannelType';
+import OptionChannelInputType from '../types/optionChannel/OptionChannelInputType';
+import OptionChannelInputTypeWithoutId from '../types/optionChannel/OptionChannelInputTypeWithoutId';
 import { OptionChannel } from '../models';
 
 const optionChannels = {

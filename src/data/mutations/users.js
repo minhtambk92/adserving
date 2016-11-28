@@ -9,9 +9,9 @@ import {
   resolver,
 } from 'graphql-sequelize';
 import { genSaltSync, hashSync } from 'bcrypt';
-import UserType from '../types/UserType';
-import UserInputType from '../types/UserInputType';
-import UserInputTypeWithoutId from '../types/UserInputTypeWithoutId';
+import UserType from '../types/user/UserType';
+import UserInputType from '../types/user/UserInputType';
+import UserInputTypeWithoutId from '../types/user/UserInputTypeWithoutId';
 import {
   Role,
   User,

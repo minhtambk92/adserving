@@ -3,9 +3,9 @@ import {
   GraphQLID as IDType,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import BannerType from '../types/BannerType';
-import BannerInputType from '../types/BannerInputType';
-import BannerInputTypeWithoutId from '../types/BannerInputTypeWithoutId';
+import BannerType from '../types/banner/BannerType';
+import BannerInputType from '../types/banner/BannerInputType';
+import BannerInputTypeWithoutId from '../types/banner/BannerInputTypeWithoutId';
 import { Banner } from '../models';
 
 const banners = {
