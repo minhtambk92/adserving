@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import CampaignType from '../../types/campaign/CampaignType';
-import { Campaign } from '../models';
+import { Campaign } from '../../models';
 
 const campaigns = {
   type: new List(CampaignType),

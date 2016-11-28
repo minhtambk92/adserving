@@ -3,7 +3,7 @@
  */
 import { GraphQLList as List } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { Channel } from '../models';
+import { Channel } from '../../models';
 import OptionChannelType from '../../types/optionChannel/OptionChannelType';
 
 const channelHasManyOptionChannels = () => ({

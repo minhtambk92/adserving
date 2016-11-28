@@ -6,7 +6,7 @@ import {
   GraphQLObjectType as ObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Channel } from '../models';
+import { Channel } from '../../models';
 import channelHasManyOptionChannels from '../../queries/channel/channelHasManyOptionChannels';
 import channelBelongsToSite from '../../queries/channel/channelBelongsToSite';
 import channelHasManyBanners from '../../queries/channel/channelHasManyBanners';

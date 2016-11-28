@@ -1,6 +1,6 @@
 import { GraphQLList as List } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { Campaign } from '../models';
+import { Campaign } from '../../models';
 import PlacementType from '../../types/placement/PlacementType';
 
 const campaignHasManyPlacements = () => ({

@@ -1,6 +1,6 @@
 import { GraphQLInputObjectType as InputObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Banner } from '../models';
+import { Banner } from '../../models';
 
 const BannerInputTypeWithoutId = new InputObjectType({
   name: 'BannerInputTypeWithoutId',

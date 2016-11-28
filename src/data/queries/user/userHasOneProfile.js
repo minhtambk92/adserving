@@ -3,7 +3,7 @@
  */
 
 import { defaultListArgs, resolver } from 'graphql-sequelize';
-import { User } from '../models';
+import { User } from '../../models';
 import UserProfileType from '../../types/userProfile/UserProfileType';
 
 const userHasOneProfile = () => ({

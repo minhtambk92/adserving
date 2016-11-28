@@ -1,5 +1,5 @@
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { Placement } from '../models';
+import { Placement } from '../../models';
 import CampaignType from '../../types/campaign/CampaignType';
 
 const placementBelongsToCampaign = () => ({

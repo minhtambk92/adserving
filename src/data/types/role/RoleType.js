@@ -6,7 +6,7 @@ import {
   GraphQLObjectType as ObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Role } from '../models';
+import { Role } from '../../models';
 import roleBelongsToManyUsers from '../../queries/role/roleBelongsToManyUsers';
 
 const RoleType = new ObjectType({

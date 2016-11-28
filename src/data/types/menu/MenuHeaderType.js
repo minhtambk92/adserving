@@ -6,7 +6,7 @@ import {
   GraphQLObjectType as ObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { MenuHeader } from '../models';
+import { MenuHeader } from '../../models';
 
 const MenuHeaderType = new ObjectType({
   name: 'MenuHeaderType',

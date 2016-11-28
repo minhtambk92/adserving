@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import UserType from '../../types/user/UserType';
-import { User } from '../models';
+import { User } from '../../models';
 
 const users = {
   type: new List(UserType),

@@ -6,7 +6,7 @@ import {
   GraphQLObjectType as ObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Site } from '../models';
+import { Site } from '../../models';
 import siteHasManyZones from '../../queries/site/siteHasManyZones';
 import siteHasManyChanels from '../../queries/site/siteHasManyChannels';
 

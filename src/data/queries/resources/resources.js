@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import ResourceType from '../../types/resource/ResourceType';
-import { Resource } from '../models';
+import { Resource } from '../../models';
 
 const resources = {
   type: new List(ResourceType),

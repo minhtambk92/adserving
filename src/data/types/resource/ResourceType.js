@@ -6,7 +6,7 @@ import {
   GraphQLObjectType as ObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Resource } from '../models';
+import { Resource } from '../../models';
 
 const ResourceType = new ObjectType({
   name: 'ResourceType',

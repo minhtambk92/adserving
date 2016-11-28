@@ -6,7 +6,7 @@ import {
   GraphQLInputObjectType as InputObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Role } from '../models';
+import { Role } from '../../models';
 
 const RoleInputTypeWithoutId = new InputObjectType({
   name: 'RoleInputTypeWithoutId',

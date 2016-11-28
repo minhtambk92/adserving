@@ -3,7 +3,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import ClickImpressionType from '../../types/clickImpression/ClickImpressionType';
-import { ClickImpression } from '../models';
+import { ClickImpression } from '../../models';
 
 const clickImpressions = {
   type: new List(ClickImpressionType),

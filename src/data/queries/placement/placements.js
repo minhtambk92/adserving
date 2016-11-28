@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import PlacementType from '../../types/placement/PlacementType';
-import { Placement } from '../models';
+import { Placement } from '../../models';
 
 const placements = {
   type: new List(PlacementType),

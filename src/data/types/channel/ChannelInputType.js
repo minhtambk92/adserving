@@ -1,6 +1,6 @@
 import { GraphQLInputObjectType as InputObjectType, GraphQLString as StringType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Channel } from '../models';
+import { Channel } from '../../models';
 
 const ChannelInputType = new InputObjectType({
   name: 'ChannelInputType',

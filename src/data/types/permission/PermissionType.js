@@ -6,7 +6,7 @@ import {
   GraphQLObjectType as ObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Permission } from '../models';
+import { Permission } from '../../models';
 
 const PermissionType = new ObjectType({
   name: 'PermissionType',

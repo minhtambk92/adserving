@@ -2,7 +2,7 @@
  * Created by Quy on 11/15/2016.
  */
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { OptionChannel } from '../models';
+import { OptionChannel } from '../../models';
 import ChannelType from '../../types/channel/ChannelType';
 
 const optionChannelBelongsToChannel = () => ({

@@ -6,7 +6,7 @@ import {
   GraphQLList as List,
 } from 'graphql';
 import { defaultListArgs, resolver } from 'graphql-sequelize';
-import { Role } from '../models';
+import { Role } from '../../models';
 import UserType from '../../types/user/UserType';
 
 const roleBelongsToManyUsers = () => ({

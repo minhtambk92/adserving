@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import RoleType from '../../types/role/RoleType';
-import { Role } from '../models';
+import { Role } from '../../models';
 
 const roles = {
   type: new List(RoleType),

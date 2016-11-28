@@ -1,6 +1,6 @@
 import { GraphQLInputObjectType as InputObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { OptionChannel } from '../models';
+import { OptionChannel } from '../../models';
 
 const OptionChannelInputTypeWithoutId = new InputObjectType({
   name: 'OptionChannelInputTypeWithoutId',

@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import OptionChannelType from '../../types/optionChannel/OptionChannelType';
-import { OptionChannel } from '../models';
+import { OptionChannel } from '../../models';
 
 const optionChannels = {
   type: new List(OptionChannelType),

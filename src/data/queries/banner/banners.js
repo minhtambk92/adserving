@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import BannerType from '../../types/banner/BannerType';
-import { Banner } from '../models';
+import { Banner } from '../../models';
 
 const banners = {
   type: new List(BannerType),

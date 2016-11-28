@@ -1,7 +1,7 @@
 import { GraphQLList as List } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import PlacementBannerZoneType from '../../types/placementBannerZone/PlacementBannerZoneType';
-import { PlacementBannerZone } from '../models';
+import { PlacementBannerZone } from '../../models';
 
 const placementBannerZones = {
   type: new List(PlacementBannerZoneType),

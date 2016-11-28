@@ -6,7 +6,7 @@ import {
   GraphQLInputObjectType as InputObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Resource } from '../models';
+import { Resource } from '../../models';
 
 const ResourceInputTypeWithoutId = new InputObjectType({
   name: 'ResourceInputTypeWithoutId',

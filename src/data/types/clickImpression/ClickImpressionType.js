@@ -1,6 +1,6 @@
 import { GraphQLObjectType as ObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { ClickImpression } from '../models';
+import { ClickImpression } from '../../models';
 import clickImpressionBelongsToBanner from '../../queries/clickImpression/clickImpressionBelongsToBanner';
 
 const ClickImpressionType = new ObjectType({

@@ -1,6 +1,6 @@
 import { GraphQLInputObjectType as InputObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Placement } from '../models';
+import { Placement } from '../../models';
 
 const PlacementInputTypeWithoutId = new InputObjectType({
   name: 'PlacementInputTypeWithoutId',

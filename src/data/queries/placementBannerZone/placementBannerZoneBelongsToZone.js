@@ -1,5 +1,5 @@
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { PlacementBannerZone } from '../models';
+import { PlacementBannerZone } from '../../models';
 import ZoneType from '../../types/zone/ZoneType';
 
 const placementBannerZoneBelongsToZone = () => ({

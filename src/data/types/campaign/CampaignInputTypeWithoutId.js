@@ -1,6 +1,6 @@
 import { GraphQLInputObjectType as InputObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Campaign } from '../models';
+import { Campaign } from '../../models';
 
 const CampaignInputTypeWithoutId = new InputObjectType({
   name: 'CampaignInputTypeWithoutId',

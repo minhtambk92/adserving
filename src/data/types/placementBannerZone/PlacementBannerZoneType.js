@@ -1,6 +1,6 @@
 import { GraphQLObjectType as ObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { PlacementBannerZone } from '../models';
+import { PlacementBannerZone } from '../../models';
 import placementBannerZoneBelongsToBanner from '../../queries/placementBannerZone/placementBannerZoneBelongsToBanner';
 import placementBannerZoneBelongsToZone from '../../queries/placementBannerZone/placementBannerZoneBelongsToZone';
 import placementBannerZoneBelongsToPlacement from '../../queries/placementBannerZone/placementBannerZoneBelongsToPlacement';

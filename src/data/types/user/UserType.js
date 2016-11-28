@@ -6,7 +6,7 @@ import {
   GraphQLObjectType as ObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { User } from '../models';
+import { User } from '../../models';
 import userBelongsToManyRoles from '../../queries/user/userBelongsToManyRoles';
 import userHasOneProfile from '../../queries/user/userHasOneProfile';
 

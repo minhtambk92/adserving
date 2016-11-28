@@ -3,7 +3,7 @@
  */
 
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { Channel } from '../models';
+import { Channel } from '../../models';
 import SiteType from '../../types/site/SiteType';
 
 const channelBelongsToSite = () => ({

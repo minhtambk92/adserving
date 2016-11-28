@@ -1,6 +1,6 @@
 import { GraphQLList as List } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { Banner } from '../models';
+import { Banner } from '../../models';
 import ClickImpressionType from '../../types/clickImpression/ClickImpressionType';
 
 const bannerHasManyClickImpressions = () => ({

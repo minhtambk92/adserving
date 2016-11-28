@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import MenuItemType from '../../types/menu/MenuItemType';
-import { MenuItem } from '../models';
+import { MenuItem } from '../../models';
 
 const menuItems = {
   type: new List(MenuItemType),

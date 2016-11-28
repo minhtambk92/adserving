@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import PermissionType from '../../types/permission/PermissionType';
-import { Permission } from '../models';
+import { Permission } from '../../models';
 
 const permissions = {
   type: new List(PermissionType),

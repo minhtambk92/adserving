@@ -8,7 +8,7 @@ import {
   GraphQLID as ID,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Resource } from '../models';
+import { Resource } from '../../models';
 
 const ResourceInputType = new InputObjectType({
   name: 'ResourceInputType',

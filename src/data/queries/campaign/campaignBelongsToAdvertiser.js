@@ -1,5 +1,5 @@
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { Campaign } from '../models';
+import { Campaign } from '../../models';
 import AdvertiserType from '../../types/advertiser/AdvertiserType';
 
 const campaignBelongsToAdvertiser = () => ({

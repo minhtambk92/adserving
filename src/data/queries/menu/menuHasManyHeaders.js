@@ -6,7 +6,7 @@ import {
   GraphQLList as List,
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { Menu } from '../models';
+import { Menu } from '../../models';
 import MenuHeaderType from '../../types/menu/MenuHeaderType';
 
 const menuHasManyHeaders = () => ({

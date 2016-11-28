@@ -8,7 +8,7 @@ import {
   GraphQLID as ID,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Role } from '../models';
+import { Role } from '../../models';
 
 const RoleInputType = new InputObjectType({
   name: 'RoleInputType',

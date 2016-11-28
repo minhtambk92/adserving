@@ -1,6 +1,6 @@
 import { GraphQLInputObjectType as InputObjectType, GraphQLString as StringType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Advertiser } from '../models';
+import { Advertiser } from '../../models';
 
 const AdvertiserInputType = new InputObjectType({
   name: 'AdvertiserInputType',

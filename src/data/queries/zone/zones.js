@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import ZoneType from '../../types/zone/ZoneType';
-import { Zone } from '../models';
+import { Zone } from '../../models';
 
 const zones = {
   type: new List(ZoneType),

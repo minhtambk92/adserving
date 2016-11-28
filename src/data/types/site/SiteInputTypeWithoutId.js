@@ -6,7 +6,7 @@ import {
   GraphQLInputObjectType as InputObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Site } from '../models';
+import { Site } from '../../models';
 
 const SiteInputTypeWithoutId = new InputObjectType({
   name: 'SiteInputTypeWithoutId',

@@ -1,6 +1,6 @@
 import { GraphQLInputObjectType as InputObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { ClickImpression } from '../models';
+import { ClickImpression } from '../../models';
 
 const ClickImpressionInputType = new InputObjectType({
   name: 'ClickImpressionInputType',

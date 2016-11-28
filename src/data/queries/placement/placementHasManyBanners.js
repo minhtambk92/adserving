@@ -6,7 +6,7 @@ import {
   GraphQLList as List,
 } from 'graphql';
 import { defaultListArgs, resolver } from 'graphql-sequelize';
-import { Banner } from '../models';
+import { Banner } from '../../models';
 import BannerType from '../../types/banner/BannerType';
 
 const placementHasManyBanners = () => ({

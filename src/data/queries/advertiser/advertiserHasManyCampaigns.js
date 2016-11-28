@@ -1,6 +1,6 @@
 import { GraphQLList as List } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { Advertiser } from '../models';
+import { Advertiser } from '../../models';
 import CampaignType from '../../types/campaign/CampaignType';
 
 const advertiserHasManyCampaigns = () => ({

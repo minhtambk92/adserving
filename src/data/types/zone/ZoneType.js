@@ -1,6 +1,6 @@
 import { GraphQLObjectType as ObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Zone } from '../models';
+import { Zone } from '../../models';
 import zoneBelongsToSite from '../../queries/zone/zoneBelongsToSite';
 import zoneHasManyPlacements from '../../queries/zone/zoneHasManyPlacements';
 

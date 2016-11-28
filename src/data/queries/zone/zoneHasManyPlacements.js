@@ -6,7 +6,7 @@ import {
   GraphQLList as List,
 } from 'graphql';
 import { defaultListArgs, resolver } from 'graphql-sequelize';
-import { Placement } from '../models';
+import { Placement } from '../../models';
 import PlacementType from '../../types/placement/PlacementType';
 
 const zoneHasManyPlacements = () => ({

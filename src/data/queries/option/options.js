@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import OptionType from '../../types/option/OptionType';
-import { Option } from '../models';
+import { Option } from '../../models';
 
 const option = {
   type: new List(OptionType),

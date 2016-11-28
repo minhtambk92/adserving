@@ -6,7 +6,7 @@ import {
   GraphQLObjectType as ObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Option } from '../models';
+import { Option } from '../../models';
 
 const OptionType = new ObjectType({
   name: 'OptionType',

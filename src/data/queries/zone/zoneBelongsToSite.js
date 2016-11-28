@@ -3,7 +3,7 @@
  */
 
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { Zone } from '../models';
+import { Zone } from '../../models';
 import SiteType from '../../types/site/SiteType';
 
 const zoneBelongsToSite = () => ({

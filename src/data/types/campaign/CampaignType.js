@@ -4,7 +4,7 @@
 
 import { GraphQLObjectType as ObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Campaign } from '../models';
+import { Campaign } from '../../models';
 import campaignBelongsToAdvertiser from '../../queries/campaign/campaignBelongsToAdvertiser';
 import campaignHasManyPlacements from '../../queries/campaign/campaignHasManyPlacements';
 

@@ -1,5 +1,5 @@
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { ClickImpression } from '../models';
+import { ClickImpression } from '../../models';
 import BannerType from '../../types/banner/BannerType';
 
 const clickImpressionBelongsToBanner = () => ({

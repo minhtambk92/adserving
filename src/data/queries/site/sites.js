@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import SiteType from '../../types/site/SiteType';
-import { Site } from '../models';
+import { Site } from '../../models';
 
 const sites = {
   type: new List(SiteType),

@@ -6,7 +6,7 @@ import {
   GraphQLObjectType as ObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { MenuItem } from '../models';
+import { MenuItem } from '../../models';
 import menuItemHasManyChildItems from '../../queries/menuItem/menuItemHasManyChildItems';
 
 const MenuItemType = new ObjectType({

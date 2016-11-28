@@ -4,7 +4,7 @@ import {
   GraphQLInt as IntType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Placement } from '../models';
+import { Placement } from '../../models';
 
 const PlacementInputType = new InputObjectType({
   name: 'PlacementInputType',

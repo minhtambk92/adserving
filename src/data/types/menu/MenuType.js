@@ -6,7 +6,7 @@ import {
   GraphQLObjectType as ObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Menu } from '../models';
+import { Menu } from '../../models';
 import menuHasManyHeaders from '../../queries/menu/menuHasManyHeaders';
 import menuHasManyItems from '../../queries/menu/menuHasManyItems';
 

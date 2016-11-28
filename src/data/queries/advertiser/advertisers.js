@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import AdvertiserType from '../../types/advertiser/AdvertiserType';
-import { Advertiser } from '../models';
+import { Advertiser } from '../../models';
 
 const advertisers = {
   type: new List(AdvertiserType),

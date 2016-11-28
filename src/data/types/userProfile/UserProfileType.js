@@ -6,7 +6,7 @@ import {
   GraphQLObjectType as ObjectType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { UserProfile } from '../models';
+import { UserProfile } from '../../models';
 
 const UserProfileType = new ObjectType({
   name: 'UserProfileType',

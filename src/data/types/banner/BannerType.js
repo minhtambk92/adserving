@@ -1,6 +1,6 @@
 import { GraphQLObjectType as ObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { Banner } from '../models';
+import { Banner } from '../../models';
 import bannerBelongsToChannel from '../../queries/banner/bannerBelongsToChannel';
 import bannerHasManyClickImpressions from '../../queries/banner/bannerHasManyClickImpressions';
 import bannerHasManyPlacements from '../../queries/banner/bannerHasManyPlacements';

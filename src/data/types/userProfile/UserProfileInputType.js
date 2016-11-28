@@ -4,7 +4,7 @@ import {
   GraphQLString as StringType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { UserProfile } from '../models';
+import { UserProfile } from '../../models';
 
 const UserProfileInputType = new InputObjectType({
   name: 'UserProfileInputType',

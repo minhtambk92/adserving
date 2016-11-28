@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import ChannelType from '../../types/channel/ChannelType';
-import { Channel } from '../models';
+import { Channel } from '../../models';
 
 const channels = {
   type: new List(ChannelType),
