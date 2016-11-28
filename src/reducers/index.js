@@ -19,6 +19,8 @@ import channels from './channels';
 import optionChannels from './optionChannels';
 import clickImpressions from './clickImpressions';
 
+import page from './pages';
+
 export default combineReducers({
   resources,
   menus,
@@ -39,4 +41,6 @@ export default combineReducers({
   channels,
   optionChannels,
   clickImpressions,
+
+  page,
 });
