@@ -9,6 +9,7 @@ class AdvertiserList extends Component {
   static propTypes = {
     list: PropTypes.array,
   };
+
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
       data: 'id',

@@ -9,12 +9,6 @@ import {
   SET_PAGE_ADVERTISER_ACTIVE_TAB,
 } from '../../constants';
 
-export function getPageAdvertiserActiveTab() {
-  return async (dispatch, getState) => {
-    console.log(getState()); // eslint-disable-line
-  };
-}
-
 export function setPageAdvertiserActiveTab(tabName) {
   return async (dispatch) => {
     dispatch({

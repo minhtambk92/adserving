@@ -20,6 +20,7 @@ const pageTitle = 'Home';
 const pageSubTitle = 'Control panel';
 
 class Advertisers extends Component {
+
   static propTypes = {
     advertisers: PropTypes.object,
     getAdvertisers: PropTypes.func,

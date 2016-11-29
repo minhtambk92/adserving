@@ -7,6 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
@@ -16,6 +18,9 @@ import {
   updateAdvertiser,
   deleteAdvertiser,
 } from '../../../../actions/advertisers';
+import {
+  setPageAdvertiserActiveTab,
+} from '../../../../actions/pages/advertisers';
 import { createCampaign } from '../../../../actions/campaigns';
 import Layout from '../../../../components/Layout';
 import CampaignList from '../../campaigns/CampaignList';
@@ -29,9 +34,11 @@ class Advertiser extends Component {
 
   static propTypes = {
     advertiserId: PropTypes.string.isRequired,
+    page: PropTypes.object,
     advertisers: PropTypes.object,
     updateAdvertiser: PropTypes.func,
     getAdvertiser: PropTypes.func,
+    setPageAdvertiserActiveTab: PropTypes.func,
     campaigns: PropTypes.object,
     createCampaign: PropTypes.func,
     deleteAdvertiser: PropTypes.func,
@@ -40,6 +47,18 @@ class Advertiser extends Component {
   componentWillMount() {
     this.props.getAdvertiser(this.props.advertiserId);
   }
+
+  componentDidMount() {
+    // Set latest active tab
+    $('.advertiser-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
+  onTabClick(event) {
+    event.persist();
+    this.props.setPageAdvertiserActiveTab(event.target.getAttribute('data-id'));
+  }
+
   render() {
     return (
       <Layout
@@ -53,17 +72,21 @@ class Advertiser extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="nav-tabs-custom">
+              <div className="nav-tabs-custom advertiser-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
-                    <a href="#editAdvertiser" data-toggle="tab">
-                      Edit Advertiser
-                    </a>
+                    <a
+                      href="#editAdvertiser" data-toggle="tab"
+                      data-id="editAdvertiser"
+                      onClick={event => this.onTabClick(event)}
+                    >Edit Advertiser</a>
                   </li>
                   <li>
-                    <a href="#addCampaign" data-toggle="tab">
-                      Add Campaign
-                    </a>
+                    <a
+                      href="#addCampaign" data-toggle="tab"
+                      data-id="addCampaign"
+                      onClick={event => this.onTabClick(event)}
+                    >Add Campaign</a>
                   </li>
                 </ul>
                 <div className="tab-content">
@@ -158,6 +181,7 @@ class Advertiser extends Component {
 }
 
 const mapState = (state) => ({
+  page: state.page.advertisers,
   advertisers: state.advertisers,
   campaigns: state.campaigns,
 });
@@ -166,6 +190,7 @@ const mapDispatch = {
   getAdvertiser,
   updateAdvertiser,
   deleteAdvertiser,
+  setPageAdvertiserActiveTab,
   createCampaign,
 };
 
