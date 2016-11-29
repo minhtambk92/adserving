@@ -8,7 +8,16 @@ class AdvertiserList extends Component {
 
   static propTypes = {
     list: PropTypes.array,
+    setPageAdvertiserActiveTab: PropTypes.func,
   };
+  onTabClickCampaign(event) {
+    event.persist();
+    this.props.setPageAdvertiserActiveTab('addCampaign');
+  }
+  onTabClickAdvertiser(event) {
+    event.persist();
+    this.props.setPageAdvertiserActiveTab('editAdvertiser');
+  }
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
@@ -28,7 +37,10 @@ class AdvertiserList extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/advertiser/${rowData.id}`}>{cellData}</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/advertiser/${rowData.id}`}
+          onClick={(event) => this.onTabClickAdvertiser(event)}
+        >{cellData}</Link>, cell);
       },
     }, {
       data: 'email',
@@ -37,7 +49,10 @@ class AdvertiserList extends Component {
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/advertiser/${rowData.id}`}>New Campaign</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/advertiser/${rowData.id}`}
+          onClick={(event) => this.onTabClickCampaign(event)}
+        >New Campaign</Link>, cell);
       },
     }];
   }
