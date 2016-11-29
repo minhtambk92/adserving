@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getChannels, createChannel, getChannelsFilters, setChannelsFilters } from '../../../actions/channels';
 import { getSites } from '../../../actions/sites';
+import { setPageChannelActiveTab } from '../../../actions/pages/channels';
 import Layout from '../../../components/Layout';
 import CreateChannelForm from './CreateChannelForm';
 import ChannelList from './ChannelList';
@@ -31,6 +32,7 @@ class Channels extends Component {
     createChannel: PropTypes.func,
     sites: PropTypes.object,
     getSites: PropTypes.func,
+    setPageChannelActiveTab: PropTypes.func,
   };
 
   componentWillMount() {
@@ -115,7 +117,10 @@ class Channels extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <ChannelList list={this.getFilteredChannels()} />
+                  <ChannelList
+                    list={this.getFilteredChannels()}
+                    setPageChannelActiveTab={this.props.setPageChannelActiveTab}
+                  />
                 </div>
                 {/* /.box-body */}
               </div>
@@ -141,6 +146,7 @@ const mapDispatch = {
   createChannel,
   getSites,
   getChannelsFilters,
+  setPageChannelActiveTab,
   setChannelsFilters,
 };
 

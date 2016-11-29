@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSites, createSite, checkSitesByDomain } from '../../../actions/sites';
 import { getChannels } from '../../../actions/channels';
+import { setPageSiteActiveTab } from '../../../actions/pages/sites'
 import Layout from '../../../components/Layout';
 import SiteList from './SiteList';
 import CreateSiteForm from './CreateSiteForm';
@@ -30,6 +31,7 @@ class Sites extends Component {
     createSite: PropTypes.func,
     getChannels: PropTypes.func,
     channels: PropTypes.object,
+    setPageSiteActiveTab: PropTypes.func,
   };
 
   componentWillMount() {
@@ -87,7 +89,10 @@ class Sites extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <SiteList list={sites && sites.list} />
+                  <SiteList
+                    list={sites && sites.list}
+                    setPageSiteActiveTab={this.props.setPageSiteActiveTab}
+                  />
                 </div>
                 {/* /.box-body */}
               </div>
@@ -113,6 +118,7 @@ const mapDispatch = {
   checkSitesByDomain,
   createSite,
   getChannels,
+  setPageSiteActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Sites));

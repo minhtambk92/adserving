@@ -7,6 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import { connect } from 'react-redux';
@@ -40,15 +42,18 @@ class Campaign extends Component {
     placements: PropTypes.object,
     createPlacement: PropTypes.func,
   };
+
   componentWillMount() {
     this.props.getCampaign(this.props.campaignId);
     this.props.getAdvertisers();
   }
+
   componentDidMount() {
     // Set latest active tab
     $('.campaign-edit-box ul li').removeClass('active');
     $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
   }
+
   render() {
     return (
       <Layout
@@ -84,7 +89,10 @@ class Campaign extends Component {
                           <div className="box-header with-border">
                             <h3 className="box-title">Change campaign information</h3>
                             <div className="box-tools pull-right">
-                              <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                              <button
+                                type="button" className="btn btn-box-tool"
+                                data-widget="collapse"
+                              >
                                 <i className="fa fa-minus" />
                               </button>
                             </div>
@@ -113,7 +121,10 @@ class Campaign extends Component {
                               <div className="box-header with-border">
                                 <h3 className="box-title">Create New Placement</h3>
                                 <div className="box-tools pull-right">
-                                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                                  <button
+                                    type="button" className="btn btn-box-tool"
+                                    data-widget="collapse"
+                                  >
                                     <i className="fa fa-minus" />
                                   </button>
                                 </div>

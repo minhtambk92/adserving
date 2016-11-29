@@ -8,8 +8,16 @@ class ZoneList extends Component {
 
   static propTypes = {
     list: PropTypes.array,
+    setPageZoneActiveTab: PropTypes.func,
   };
-
+  onTabClickZone(event) {
+    event.persist();
+    this.props.setPageZoneActiveTab('editZone');
+  }
+  onTabClickNewPlacement(event) {
+    event.persist();
+    this.props.setPageZoneActiveTab('addPlacement');
+  }
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
       data: 'id',
@@ -28,7 +36,10 @@ class ZoneList extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/zone/${rowData.id}`}>{cellData}</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/zone/${rowData.id}`}
+          onClick={(event) => this.onTabClickZone(event)}
+        >{cellData}</Link>, cell);
       },
     }, {
       data: 'sizeText',
@@ -37,7 +48,10 @@ class ZoneList extends Component {
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/zone/${rowData.id}`}>New Placement</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/zone/${rowData.id}`}
+          onClick={(event) => this.onTabClickNewPlacement(event)}
+        >New Placement</Link>, cell);
       },
     }];
   }

@@ -7,6 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import style from 'react-dropzone-component/styles/filepicker.css';
 import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
@@ -41,6 +43,7 @@ class Banner extends Component {
 
   static propTypes = {
     bannerId: PropTypes.string.isRequired,
+    page: PropTypes.object,
     banners: PropTypes.object,
     getBanner: PropTypes.func,
     updateBanner: PropTypes.func,
@@ -67,6 +70,12 @@ class Banner extends Component {
     this.props.getCampaigns();
     this.props.getPlacements();
     this.props.getChannels();
+  }
+
+  componentDidMount() {
+    // Set latest active tab
+    $('.banner-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
   }
 
   filterPlacements(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -134,14 +143,14 @@ class Banner extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="nav-tabs-custom">
+              <div className="nav-tabs-custom banner-edit-box">
                 <ul className="nav nav-tabs">
-                  <li>
+                  <li className="active">
                     <a href="#editBanner" data-toggle="tab">
                       Edit Banner
                     </a>
                   </li>
-                  <li className="active">
+                  <li>
                     <a href="#optionBanner" data-toggle="tab">
                       Option Banner
                     </a>
@@ -154,7 +163,7 @@ class Banner extends Component {
                 </ul>
                 <div className="tab-content">
                   {/* /#EditBanner */}
-                  <div className="tab-pane" id="editBanner">
+                  <div className="tab-pane active" id="editBanner">
                     <div className="row">
                       <section className="col-lg-12">
                         <div className="box box-info">
@@ -183,7 +192,7 @@ class Banner extends Component {
                     </div>
                   </div>
                   {/* /#OptionBanner */}
-                  <div className="tab-pane active" id="optionBanner">
+                  <div className="tab-pane" id="optionBanner">
                     <div className="row">
                       <section className="col-lg-12">
                         <div className="box box-info">
@@ -318,6 +327,7 @@ class Banner extends Component {
 }
 
 const mapState = (state) => ({
+  page: state.page.banners,
   banners: state.banners,
   campaigns: state.campaigns,
   placements: state.placements,

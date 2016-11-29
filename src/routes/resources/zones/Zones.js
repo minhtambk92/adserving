@@ -20,6 +20,7 @@ import {
   setZonesFilters,
 } from '../../../actions/zones';
 import { getPlacements } from '../../../actions/placements';
+import { setPageZoneActiveTab } from '../../../actions/pages/zones';
 import Layout from '../../../components/Layout';
 import CreateZoneForm from './CreateZoneForm';
 import FilterZonesForm from './FilterZonesForm';
@@ -41,6 +42,7 @@ class Zones extends Component {
     createZone: PropTypes.func,
     placements: PropTypes.object,
     getPlacements: PropTypes.func,
+    setPageZoneActiveTab: PropTypes.func,
   };
 
   componentWillMount() {
@@ -145,7 +147,10 @@ class Zones extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <ZoneList list={this.getFilteredZones()} />
+                  <ZoneList
+                    list={this.getFilteredZones()}
+                    setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                  />
                 </div>
                 {/* /.box-body */}
               </div>
@@ -174,6 +179,7 @@ const mapDispatch = {
   getZones,
   createZone,
   getPlacements,
+  setPageZoneActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zones));

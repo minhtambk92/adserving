@@ -1,13 +1,13 @@
 /* eslint-disable import/prefer-default-export */
 
 import {
-  SET_PAGE_PLACEMENT_ACTIVE_TAB,
+  SET_PAGE_CHANNEL_ACTIVE_TAB,
 } from '../../constants';
 
-export function setPagePlacementActiveTab(tabName) {
+export function setPageChannelActiveTab(tabName) {
   return async (dispatch) => {
     dispatch({
-      type: SET_PAGE_PLACEMENT_ACTIVE_TAB,
+      type: SET_PAGE_CHANNEL_ACTIVE_TAB,
       payload: {
         tabName,
       },

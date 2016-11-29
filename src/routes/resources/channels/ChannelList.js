@@ -8,7 +8,16 @@ class ChannelList extends Component {
 
   static propTypes = {
     list: PropTypes.array,
+    setPageChannelActiveTab: PropTypes.func,
   };
+  onTabClickEditChannel(event) {
+    event.persist();
+    this.props.setPageChannelActiveTab('editChannel');
+  }
+  onTabClickOptionChannel(event) {
+    event.persist();
+    this.props.setPageChannelActiveTab('optionChannel');
+  }
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
       data: 'id',
@@ -27,14 +36,20 @@ class ChannelList extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/channel/${rowData.id}`}>{cellData}</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/channel/${rowData.id}`}
+          onClick={(event) => this.onTabClickEditChannel(event)}
+        >{cellData}</Link>, cell);
       },
     }, {
       data: 'description',
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/channel/${rowData.id}`}>Option</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/channel/${rowData.id}`}
+          onClick={(event) => this.onTabClickOptionChannel(event)}
+        >Option</Link>, cell);
       },
     }];
   }

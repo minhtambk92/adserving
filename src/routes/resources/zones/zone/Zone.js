@@ -7,6 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
@@ -15,7 +17,11 @@ import { getZone, updateZone, deleteZone } from '../../../../actions/zones';
 import { getSites } from '../../../../actions/sites';
 import { getPlacements, createPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
-import { createPlacementBannerZone, removeZone, removeZoneInPlacementBannerZone } from '../../../../actions/placementBannerZones';
+import {
+  createPlacementBannerZone,
+  removeZone,
+  removeZoneInPlacementBannerZone,
+} from '../../../../actions/placementBannerZones';
 import Layout from '../../../../components/Layout';
 import ListPlacementNotBelongToZone from '../ListPlacementNotBelongToZone';
 import ListPlacementOfZone from '../ListPlacementOfZone';
@@ -29,6 +35,7 @@ class Zone extends Component {
 
   static propTypes = {
     zoneId: PropTypes.string.isRequired,
+    page: PropTypes.object,
     zones: PropTypes.object,
     getZone: PropTypes.func,
     updateZone: PropTypes.func,
@@ -52,6 +59,13 @@ class Zone extends Component {
     this.props.getPlacements();
     this.props.getCampaigns();
   }
+
+  componentDidMount() {
+    // Set latest active tab
+    $('.zone-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
   filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (allPlacement.length === 0) {
       return [];
@@ -89,6 +103,7 @@ class Zone extends Component {
     }
     return false;
   }
+
   dataPlacement(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const arrPlacement = [];
     for (let i = 0; i < arr.length; i += 1) {
@@ -98,6 +113,7 @@ class Zone extends Component {
     }
     return arrPlacement;
   }
+
   render() {
     return (
       <Layout
@@ -111,7 +127,7 @@ class Zone extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="nav-tabs-custom">
+              <div className="nav-tabs-custom zone-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
                     <a href="#editZone" data-toggle="tab">
@@ -133,7 +149,10 @@ class Zone extends Component {
                           <div className="box-header with-border">
                             <h3 className="box-title">Change Zone Information</h3>
                             <div className="box-tools pull-right">
-                              <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                              <button
+                                type="button" className="btn btn-box-tool"
+                                data-widget="collapse"
+                              >
                                 <i className="fa fa-minus" />
                               </button>
                             </div>
@@ -217,7 +236,10 @@ class Zone extends Component {
                           <div className="box-header with-border">
                             <h3 className="box-title">Create New Placements</h3>
                             <div className="box-tools pull-right">
-                              <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                              <button
+                                type="button" className="btn btn-box-tool"
+                                data-widget="collapse"
+                              >
                                 <i className="fa fa-minus" />
                               </button>
                             </div>
@@ -250,6 +272,7 @@ class Zone extends Component {
 }
 
 const mapState = (state) => ({
+  page: state.page.zones,
   zones: state.zones,
   sites: state.sites,
   placements: state.placements,

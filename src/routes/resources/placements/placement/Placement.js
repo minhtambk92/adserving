@@ -7,6 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
@@ -14,7 +16,12 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getPlacement, updatePlacement, deletePlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
 import { getBanners } from '../../../../actions/banners';
-import { createPlacementBannerZone, removePlacement, removeBannerInPlacementBannerZone, removeZoneInPlacementBannerZone } from '../../../../actions/placementBannerZones';
+import {
+  createPlacementBannerZone,
+  removePlacement,
+  removeBannerInPlacementBannerZone,
+  removeZoneInPlacementBannerZone,
+} from '../../../../actions/placementBannerZones';
 import { getZones } from '../../../../actions/zones';
 import Layout from '../../../../components/Layout';
 import ListBannerNotBelongPlacement from '../ListBannerNotBelongPlacement';
@@ -54,6 +61,7 @@ class Placement extends Component {
     this.props.getBanners();
     this.props.getZones();
   }
+
   componentDidMount() {
     // Set latest active tab
     $('.placement-edit-box ul li').removeClass('active');
@@ -97,6 +105,7 @@ class Placement extends Component {
     }
     return false;
   }
+
   filterZones(allZones, zof) { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (allZones.length === 0) {
       return [];
@@ -134,6 +143,7 @@ class Placement extends Component {
     }
     return false;
   }
+
   dataBanner(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const arrBanner = [];
     for (let i = 0; i < arr.length; i += 1) {
@@ -143,6 +153,7 @@ class Placement extends Component {
     }
     return arrBanner;
   }
+
   dataZone(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const arrZone = [];
     for (let i = 0; i < arr.length; i += 1) {
@@ -193,7 +204,10 @@ class Placement extends Component {
                           <div className="box-header with-border">
                             <h3 className="box-title">Change Placement information</h3>
                             <div className="box-tools pull-right">
-                              <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                              <button
+                                type="button" className="btn btn-box-tool"
+                                data-widget="collapse"
+                              >
                                 <i className="fa fa-minus" />
                               </button>
                             </div>

@@ -7,7 +7,21 @@ class BannerList extends Component {
 
   static propTypes = {
     list: PropTypes.array,
+    setPageBannerActiveTab: PropTypes.func,
+
   };
+  onTabClickBanner(event) {
+    event.persist();
+    this.props.setPageBannerActiveTab('editBanner');
+  }
+  onTabClickNewPlacement(event) {
+    event.persist();
+    this.props.setPageBannerActiveTab('addPlacement');
+  }
+  onTabClickOptionBanner(event) {
+    event.persist();
+    this.props.setPageBannerActiveTab('optionBanner');
+  }
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
       data: 'id',
@@ -26,7 +40,10 @@ class BannerList extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/banner/${rowData.id}`}>{cellData}</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/banner/${rowData.id}`}
+          onClick={(event) => this.onTabClickBanner(event)}
+        >{cellData}</Link>, cell);
       },
     }, {
       data: null,
@@ -34,12 +51,18 @@ class BannerList extends Component {
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/channel/${rowData.channelId}`}>Target Channel</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/banner/${rowData.id}`}
+          onClick={(event) => this.onTabClickOptionBanner(event)}
+        >Option Banner</Link>, cell);
       },
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/banner/${rowData.id}`}>New Placement</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/banner/${rowData.id}`}
+          onClick={(event) => this.onTabClickNewPlacement(event)}
+        >New Placement</Link>, cell);
       },
     }];
   }

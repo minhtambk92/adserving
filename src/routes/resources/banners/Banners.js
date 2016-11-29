@@ -19,6 +19,7 @@ import {
 } from '../../../actions/banners';
 import { getPlacements } from '../../../actions/placements';
 import { getChannels } from '../../../actions/channels';
+import { setPageBannerActiveTab } from '../../../actions/pages/banners';
 import Layout from '../../../components/Layout';
 import BannerList from './BannerList';
 import CreateBannerForm from './CreateBannerForm';
@@ -39,6 +40,7 @@ class Banners extends Component {
     getPlacements: PropTypes.func,
     getChannels: PropTypes.func,
     channels: PropTypes.object,
+    setPageBannerActiveTab: PropTypes.func,
   };
 
   componentWillMount() {
@@ -129,7 +131,10 @@ class Banners extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <BannerList list={this.getFilteredBanners()} />
+                  <BannerList
+                    list={this.getFilteredBanners()}
+                    setPageBannerActiveTab={this.props.setPageBannerActiveTab}
+                  />
                 </div>
                 {/* /.box-body */}
               </div>
@@ -158,6 +163,7 @@ const mapDispatch = {
   setBannersFilters,
   getPlacements,
   getChannels,
+  setPageBannerActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banners));

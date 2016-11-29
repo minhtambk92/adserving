@@ -7,6 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -28,6 +30,7 @@ class Site extends Component {
 
   static propTypes = {
     siteId: PropTypes.string.isRequired,
+    page: PropTypes.object,
     sites: PropTypes.object,
     getSite: PropTypes.func,
     updateSite: PropTypes.func,
@@ -45,6 +48,12 @@ class Site extends Component {
     this.props.getChannels();
   }
 
+  componentDidMount() {
+    // Set latest active tab
+    $('.site-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
   render() {
     return (
       <Layout
@@ -58,7 +67,7 @@ class Site extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="nav-tabs-custom">
+              <div className="nav-tabs-custom site-edit-box">
                 <ul className="nav nav-tabs">
                   <li>
                     <a href="#editSite" data-toggle="tab">
@@ -223,6 +232,7 @@ class Site extends Component {
 }
 
 const mapState = (state) => ({
+  page: state.page.sites,
   sites: state.sites,
   zones: state.zones,
   channels: state.channels,

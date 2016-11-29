@@ -7,7 +7,23 @@ class SiteList extends Component {
 
   static propTypes = {
     list: PropTypes.array,
+    setPageSiteActiveTab: PropTypes.func,
   };
+
+  onTabClickEditSite(event) {
+    event.persist();
+    this.props.setPageSiteActiveTab('editSite');
+  }
+
+  onTabClickAddChannel(event) {
+    event.persist();
+    this.props.setPageSiteActiveTab('addChannel');
+  }
+
+  onTabClickAddZone(event) {
+    event.persist();
+    this.props.setPageSiteActiveTab('addZone');
+  }
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
@@ -27,7 +43,10 @@ class SiteList extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/site/${rowData.id}`}>{cellData}</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/site/${rowData.id}`}
+          onClick={(event) => this.onTabClickEditSite(event)}
+        >{cellData}</Link>, cell);
       },
     }, {
       data: 'domain',
@@ -36,15 +55,22 @@ class SiteList extends Component {
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/site/${rowData.id}`}>Target Channel</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/site/${rowData.id}`}
+          onClick={(event) => this.onTabClickAddChannel(event)}
+        >Target Channel</Link>, cell);
       },
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/site/${rowData.id}`}>New Zone</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/site/${rowData.id}`}
+          onClick={(event) => this.onTabClickAddZone(event)}
+        >New Zone</Link>, cell);
       },
     }];
   }
+
   render() {
     // Open the portal
     return (
