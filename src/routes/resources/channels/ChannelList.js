@@ -30,11 +30,6 @@ class ChannelList extends Component {
         ReactDOM.render(<Link to={`/resource/channel/${rowData.id}`}>{cellData}</Link>, cell);
       },
     }, {
-      data: null,
-      createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/site/${rowData.site.id}`}>{rowData.site.name}</Link>, cell);
-      },
-    }, {
       data: 'description',
     }, {
       data: null,
@@ -59,7 +54,6 @@ class ChannelList extends Component {
           <tr>
             <th><ICheck type="checkbox" className="inputChooseAllChannels" /></th>
             <th>Name</th>
-            <th>Site</th>
             <th>Description</th>
             <th>&nbsp;</th>
           </tr>
@@ -68,7 +62,6 @@ class ChannelList extends Component {
           <tr>
             <th><ICheck type="checkbox" className="inputChooseAllChannels" /></th>
             <th>Name</th>
-            <th>Site</th>
             <th>Description</th>
             <th>&nbsp;</th>
           </tr>

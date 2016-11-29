@@ -3,9 +3,9 @@ import {
   GraphQLID as IDType,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import PlacementType from '../types/PlacementType';
-import PlacementInputType from '../types/PlacementInputType';
-import PlacementInputTypeWithoutId from '../types/PlacementInputTypeWithoutId';
+import PlacementType from '../types/placement/PlacementType';
+import PlacementInputType from '../types/placement/PlacementInputType';
+import PlacementInputTypeWithoutId from '../types/placement/PlacementInputTypeWithoutId';
 import { Placement } from '../models';
 
 const placements = {

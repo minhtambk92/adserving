@@ -3,29 +3,29 @@
  */
 
 import { GraphQLObjectType as ObjectType } from 'graphql';
-import resources from './resources';
-import menus from './menus';
-import menuHeaders from './menuHeaders';
-import menuItems from './menuItems';
-import options from './options';
+import resources from './resources/resources';
+import menus from './menu/menus';
+import menuHeaders from './menu/menuHeaders';
+import menuItems from './menuItem/menuItems';
+import options from './option/options';
 import me from './me';
 import content from './content';
 import news from './news';
 import intl from './intl';
-import campaigns from './campaigns';
-import placements from './placements';
-import banners from './banners';
-import permissions from './permissions';
-import roles from './roles';
-import users from './users';
-import advertisers from './advertisers';
-import sites from './sites';
-import zones from './zones';
-import channels from './channels';
+import campaigns from './campaign/campaigns';
+import placements from './placement/placements';
+import banners from './banner/banners';
+import permissions from './permission/permissions';
+import roles from './role/roles';
+import users from './user/users';
+import advertisers from './advertiser/advertisers';
+import sites from './site/sites';
+import zones from './zone/zones';
+import channels from './channel/channels';
 import filters from './filters';
-import placementBannerZones from './placementBannerZones';
-import optionChannels from './optionChannels';
-import clickImpressions from './clickImpressions';
+import placementBannerZones from './placementBannerZone/placementBannerZones';
+import optionChannels from './optionChannel/optionChannels';
+import clickImpressions from './clickImpression/clickImpressions';
 
 const queries = new ObjectType({
   name: 'Query',

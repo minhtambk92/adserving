@@ -6,9 +6,9 @@ import {
   GraphQLID as IDType,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import RoleType from '../types/RoleType';
-import RoleInputType from '../types/RoleInputType';
-import RoleInputTypeWithoutId from '../types/RoleInputTypeWithoutId';
+import RoleType from '../types/role/RoleType';
+import RoleInputType from '../types/role/RoleInputType';
+import RoleInputTypeWithoutId from '../types/role/RoleInputTypeWithoutId';
 import { Role } from '../models';
 
 const roles = {

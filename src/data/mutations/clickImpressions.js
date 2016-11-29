@@ -3,9 +3,9 @@ import {
   GraphQLID as IDType,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import ClickImpressionType from '../types/ClickImpressionType';
-import ClickImpressionInputType from '../types/ClickImpressionInputType';
-import ClickImpressionInputTypeWithoutId from '../types/ClickImpressionInputTypeWithoutId';
+import ClickImpressionType from '../types/clickImpression/ClickImpressionType';
+import ClickImpressionInputType from '../types/clickImpression/ClickImpressionInputType';
+import ClickImpressionInputTypeWithoutId from '../types/clickImpression/ClickImpressionInputTypeWithoutId';
 import { ClickImpression } from '../models';
 
 const clickImpressions = {

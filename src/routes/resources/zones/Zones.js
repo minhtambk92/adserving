@@ -69,8 +69,8 @@ class Zones extends Component {
 
     const notMatchPlacement = (
       placementId !== undefined &&
-      typeof zone.pbzZone === 'object' &&
-      JSON.stringify(zone.pbzZone).indexOf(placementId) === -1
+      typeof zone.placements === 'object' &&
+      JSON.stringify(zone.placements).indexOf(placementId) === -1
     );
 
     const notMatchStatus = (

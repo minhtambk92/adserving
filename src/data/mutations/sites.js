@@ -6,9 +6,9 @@ import {
   GraphQLID as IDType,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import SiteType from '../types/SiteType';
-import SiteInputType from '../types/SiteInputType';
-import SiteInputTypeWithoutId from '../types/SiteInputTypeWithoutId';
+import SiteType from '../types/site/SiteType';
+import SiteInputType from '../types/site/SiteInputType';
+import SiteInputTypeWithoutId from '../types/site/SiteInputTypeWithoutId';
 import { Site } from '../models';
 
 const sites = {

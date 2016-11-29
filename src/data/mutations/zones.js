@@ -6,9 +6,9 @@ import {
   GraphQLID as IDType,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import ZoneType from '../types/ZoneType';
-import ZoneInputType from '../types/ZoneInputType';
-import ZoneInputTypeWithoutId from '../types/ZoneInputTypeWithoutId';
+import ZoneType from '../types/zone/ZoneType';
+import ZoneInputType from '../types/zone/ZoneInputType';
+import ZoneInputTypeWithoutId from '../types/zone/ZoneInputTypeWithoutId';
 import { Zone } from '../models';
 
 const zones = {

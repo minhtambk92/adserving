@@ -6,9 +6,9 @@ import {
   GraphQLID as IDType,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import ResourceType from '../types/ResourceType';
-import ResourceInputType from '../types/ResourceInputType';
-import ResourceInputTypeWithoutId from '../types/ResourceInputTypeWithoutId';
+import ResourceType from '../types/resource/ResourceType';
+import ResourceInputType from '../types/resource/ResourceInputType';
+import ResourceInputTypeWithoutId from '../types/resource/ResourceInputTypeWithoutId';
 import { Resource } from '../models';
 
 const resources = {
