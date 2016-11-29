@@ -4,7 +4,11 @@
 
 import { combineReducers } from 'redux';
 import advertisers from './advertisers';
+import campaigns from './campaigns';
+import placements from './placements';
 
 export default combineReducers({
   advertisers,
+  campaigns,
+  placements,
 });

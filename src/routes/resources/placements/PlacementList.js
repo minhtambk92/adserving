@@ -10,8 +10,20 @@ class PlacementList extends Component {
   static propTypes = {
     containerWidth: PropTypes.number,
     list: PropTypes.array,
+    setPagePlacementActiveTab: PropTypes.func,
   };
-
+  onTabClickEditPlacement(event) {
+    event.persist();
+    this.props.setPagePlacementActiveTab('editPlacement');
+  }
+  onTabClickAddBanner(event) {
+    event.persist();
+    this.props.setPagePlacementActiveTab('addBanner');
+  }
+  onTabClickAddZone(event) {
+    event.persist();
+    this.props.setPagePlacementActiveTab('addZone');
+  }
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     const columns = [{
       data: 'id',
@@ -30,7 +42,10 @@ class PlacementList extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>{cellData}</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/placement/${rowData.id}`}
+          onClick={(event) => this.onTabClickEditPlacement(event)}
+        >{cellData}</Link>, cell);
       },
     }, {
       data: null,
@@ -47,12 +62,18 @@ class PlacementList extends Component {
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>New Zone</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/placement/${rowData.id}`}
+          onClick={(event) => this.onTabClickAddZone(event)}
+        >New Zone</Link>, cell);
       },
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>New Banner</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/placement/${rowData.id}`}
+          onClick={(event) => this.onTabClickAddBanner(event)}
+        >New Banner</Link>, cell);
       },
     }];
     return columns;

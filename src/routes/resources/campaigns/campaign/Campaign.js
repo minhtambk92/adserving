@@ -30,6 +30,7 @@ class Campaign extends Component {
 
   static propTypes = {
     campaignId: PropTypes.string.isRequired,
+    page: PropTypes.object,
     campaigns: PropTypes.object,
     advertisers: PropTypes.object,
     getCampaign: PropTypes.func,
@@ -42,6 +43,11 @@ class Campaign extends Component {
   componentWillMount() {
     this.props.getCampaign(this.props.campaignId);
     this.props.getAdvertisers();
+  }
+  componentDidMount() {
+    // Set latest active tab
+    $('.campaign-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
   }
   render() {
     return (
@@ -56,7 +62,7 @@ class Campaign extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="nav-tabs-custom">
+              <div className="nav-tabs-custom campaign-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
                     <a href="#editCampaign" data-toggle="tab">
@@ -159,6 +165,7 @@ class Campaign extends Component {
 }
 
 const mapState = (state) => ({
+  page: state.page.campaigns,
   campaigns: state.campaigns,
   placements: state.placements,
   advertisers: state.advertisers,

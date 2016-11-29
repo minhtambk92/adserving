@@ -30,6 +30,7 @@ class Placement extends Component {
 
   static propTypes = {
     placementId: PropTypes.string.isRequired,
+    page: PropTypes.object,
     placements: PropTypes.object,
     campaigns: PropTypes.object,
     getPlacement: PropTypes.func,
@@ -52,6 +53,11 @@ class Placement extends Component {
     this.props.getCampaigns();
     this.props.getBanners();
     this.props.getZones();
+  }
+  componentDidMount() {
+    // Set latest active tab
+    $('.placement-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
   }
 
   filterBanner(allBanner, bof) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -160,7 +166,7 @@ class Placement extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="nav-tabs-custom">
+              <div className="nav-tabs-custom placement-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
                     <a href="#editPlacement" data-toggle="tab">
@@ -341,6 +347,7 @@ class Placement extends Component {
 }
 
 const mapState = (state) => ({
+  page: state.page.placements,
   placements: state.placements,
   campaigns: state.campaigns,
   banners: state.banners,

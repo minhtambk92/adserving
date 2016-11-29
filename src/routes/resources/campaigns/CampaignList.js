@@ -9,8 +9,16 @@ class CampaignList extends Component {
 
   static propTypes = {
     list: PropTypes.array,
+    setPageCampaignActiveTab: PropTypes.func,
   };
-
+  onTabClickCampaign(event) {
+    event.persist();
+    this.props.setPageCampaignActiveTab('editCampaign');
+  }
+  onTabClickPlacement(event) {
+    event.persist();
+    this.props.setPageCampaignActiveTab('addPlacement');
+  }
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
       data: 'id',
@@ -29,7 +37,10 @@ class CampaignList extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/campaign/${rowData.id}`}>{cellData}</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/campaign/${rowData.id}`}
+          onClick={(event) => this.onTabClickCampaign(event)}
+        >{cellData}</Link>, cell);
       },
     }, {
       data: 'startTime',
@@ -40,7 +51,10 @@ class CampaignList extends Component {
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/campaign/${rowData.id}`}>New Placement</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/campaign/${rowData.id}`}
+          onClick={(event) => this.onTabClickPlacement(event)}
+        >New Placement</Link>, cell);
       },
     }];
   }
