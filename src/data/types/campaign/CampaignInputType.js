@@ -16,6 +16,9 @@ const CampaignInputType = new InputObjectType({
       'viewPerSession',
       'timeResetViewCount',
       'weight',
+      'revenueType',
+      'expireValueCPM',
+      'maxCPMPerDay',
       'description',
     ],
   }), {

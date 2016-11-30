@@ -328,14 +328,14 @@ class OptionBannerForm extends Component {
     const isImpressionsBooked = document.getElementById('inputIsImpressionsBooked').checked;
     let impressionsBooked = '';
     if (isImpressionsBooked === true) {
-      impressionsBooked = 'unlimited';
+      impressionsBooked = -1;
     } else if (isImpressionsBooked === false) {
       impressionsBooked = this.inputBannerImpressionsBooked.value;
     }
     const isClicksBooked = document.getElementById('inputIsClicksBooked').checked;
     let clicksBooked = '';
     if (isClicksBooked === true) {
-      clicksBooked = 'unlimited';
+      clicksBooked = -1;
     } else if (isClicksBooked === false) {
       if (this.inputBannerClicksBooked !== undefined) {
         clicksBooked = this.inputBannerClicksBooked.value;

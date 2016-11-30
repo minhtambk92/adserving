@@ -121,8 +121,8 @@ class CreateBannerForm extends Component {
     const isActivationDate = true;
     const isExpirationDate = true;
     const adStore = '';
-    const impressionsBooked = 'unlimited';
-    const clicksBooked = 'unlimited';
+    const impressionsBooked = -1;
+    const clicksBooked = -1;
     const activationDate = new Date(moment().format('YYYY-MM-DD 00:00:00'));
     const expirationDate = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00'));
     if (name && keyword && width && description && type && channelId) {
