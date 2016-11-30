@@ -40,7 +40,10 @@ class CreateCampaignForm extends Component {
     const status = this.inputCampaignStatus.value;
     if (name && advertiserId && startTime && endTime && views && viewPerSession
       && timeResetViewCount && weight && description) {
-      if (moment(startTime).format('x') < moment(endTime).format('x')) {
+      const now = moment().format('x');
+      const start = moment(startTime).format('x');
+      const end = moment(endTime).format('x');
+      if ((start < end) && (now < start)) {
         this.props.createCampaign({
           advertiserId,
           name,

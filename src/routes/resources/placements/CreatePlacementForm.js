@@ -43,7 +43,10 @@ class CreatePlacementForm extends Component {
     }
     const status = this.inputPlacementStatus.value;
     if (name && startTime && endTime && sizeHeight && sizeWidth && weight && description) {
-      if (moment(startTime).format('x') < moment(endTime).format('x')) {
+      const now = moment().format('x');
+      const start = moment(startTime).format('x');
+      const end = moment(endTime).format('x');
+      if ((start < end) && (now < start)) {
         this.props.createPlacement({
           name,
           startTime,

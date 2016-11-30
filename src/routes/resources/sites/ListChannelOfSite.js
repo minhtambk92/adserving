@@ -7,7 +7,16 @@ class ListChannelOfSite extends Component {
 
   static propTypes = {
     list: PropTypes.array,
+    setPageChannelActiveTab: PropTypes.func,
   };
+  onTabClickEditChannel(event) {
+    event.persist();
+    this.props.setPageChannelActiveTab('editChannel');
+  }
+  onTabClickOptionChannel(event) {
+    event.persist();
+    this.props.setPageChannelActiveTab('optionChannel');
+  }
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
       data: 'id',
@@ -26,13 +35,19 @@ class ListChannelOfSite extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/channel/${rowData.id}`}>{rowData.name}</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/channel/${rowData.id}`}
+          onClick={(event) => this.onTabClickEditChannel(event)}
+        >{rowData.name}</Link>, cell);
       },
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
-        ReactDOM.render(<Link to={`/resource/channel/${rowData.id}`}>Option</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/channel/${rowData.id}`}
+          onClick={(event) => this.onTabClickOptionChannel(event)}
+        >Option</Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];

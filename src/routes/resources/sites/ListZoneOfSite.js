@@ -7,7 +7,16 @@ class ListZoneOfSite extends Component {
 
   static propTypes = {
     list: PropTypes.array,
+    setPageZoneActiveTab: PropTypes.func,
   };
+  onTabClickEditZone(event) {
+    event.persist();
+    this.props.setPageZoneActiveTab('editZone');
+  }
+  onTabClickAddPlacement(event) {
+    event.persist();
+    this.props.setPageZoneActiveTab('addPlacement');
+  }
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
       data: 'id',
@@ -26,7 +35,10 @@ class ListZoneOfSite extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/zone/${rowData.id}`}>{rowData.name}</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/zone/${rowData.id}`}
+          onClick={(event) => this.onTabClickEditZone(event)}
+        >{rowData.name}</Link>, cell);
       },
     }, {
       data: 'sizeText',
@@ -34,7 +46,10 @@ class ListZoneOfSite extends Component {
       data: null,
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
-        ReactDOM.render(<Link to={`/resource/zone/${rowData.id}`}>Add Placement</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/zone/${rowData.id}`}
+          onClick={(event) => this.onTabClickAddPlacement(event)}
+        >Add Placement</Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];

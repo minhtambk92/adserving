@@ -15,6 +15,8 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSite, updateSite, deleteSite, checkSitesByDomain } from '../../../../actions/sites';
 import { createZone } from '../../../../actions/zones';
 import { getChannels, createChannel } from '../../../../actions/channels';
+import { setPageZoneActiveTab } from '../../../../actions/pages/zones';
+import { setPageChannelActiveTab } from '../../../../actions/pages/channels';
 import Layout from '../../../../components/Layout';
 import ListZoneOfSite from '../ListZoneOfSite';
 import ListChannelOfSite from '../ListChannelOfSite';
@@ -41,6 +43,8 @@ class Site extends Component {
     getChannels: PropTypes.func,
     createChannel: PropTypes.func,
     channels: PropTypes.object,
+    setPageZoneActiveTab: PropTypes.func,
+    setPageChannelActiveTab: PropTypes.func,
   };
 
   componentWillMount() {
@@ -149,7 +153,7 @@ class Site extends Component {
                             <div className="box box-info">
                               <div className="box-header with-border">
                                 <h3 className="box-title">
-                                  List of zones: {this.props.sites.editing ?
+                                  List zones of Site: {this.props.sites.editing ?
                                   this.props.sites.editing.name : '...'}
                                 </h3>
                               </div>
@@ -159,6 +163,7 @@ class Site extends Component {
                                   list={this.props.sites.editing &&
                                       this.props.sites.editing.zones &&
                                       this.props.sites.editing.zones}
+                                  setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                                 />
                               </div>
                               {/* /.box-body */}
@@ -201,7 +206,7 @@ class Site extends Component {
                             <div className="box box-info">
                               <div className="box-header with-border">
                                 <h3 className="box-title">
-                                  List of channels: {this.props.sites.editing ?
+                                  List channels of Site: {this.props.sites.editing ?
                                   this.props.sites.editing.name : '...'}
                                 </h3>
                               </div>
@@ -211,6 +216,7 @@ class Site extends Component {
                                   list={this.props.sites.editing &&
                                   this.props.sites.editing.channels &&
                                   this.props.sites.editing.channels}
+                                  setPageChannelActiveTab={this.props.setPageChannelActiveTab}
                                 />
                               </div>
                               {/* /.box-body */}
@@ -246,6 +252,8 @@ const mapDispatch = {
   checkSitesByDomain,
   createChannel,
   getChannels,
+  setPageChannelActiveTab,
+  setPageZoneActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Site));
