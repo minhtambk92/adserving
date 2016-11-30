@@ -14,9 +14,6 @@ class DatePicker extends Component {
     /* eslint-disable no-undef */
     $(this.input).datepicker({
       ...this.props.options,
-      autoclose: true,
-      todayHighlight: 'TRUE',
-      minDate: 0,
     });
     /* eslint-enable no-undef */
   }
@@ -31,12 +28,16 @@ class DatePicker extends Component {
         startDate: dateStart,
         autoclose: true,
         setDate: dateStart,
+        todayHighlight: 'TRUE',
+        minDate: 0,
       });
     } else if (nextProps.name === 'end') {
       $(this.input).datepicker({
         startDate: dateEnd,
         autoclose: true,
         setDate: dateEnd,
+        todayHighlight: 'TRUE',
+        minDate: 0,
       });
       /* eslint-disable no-underscore-dangle */
       // $(this.input).datepicker('update', moment().add(1, 'month')._d);
