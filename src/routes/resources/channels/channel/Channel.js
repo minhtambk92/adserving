@@ -117,11 +117,9 @@ class Channel extends Component {
     $('.remove-option').click(function () {
       const id = $(this).parents('.row').attr('id');
       if (id) {
-        if (id !== 'browser' && id !== 'category') {
-          self.props.deleteOptionChannel(id).then(() => {
-            self.props.getChannel(self.props.channelId);
-          });
-        }
+        self.props.deleteOptionChannel(id).then(() => {
+          self.props.getChannel(self.props.channelId);
+        });
       }
     });
     /* eslint-enable no-undef */
