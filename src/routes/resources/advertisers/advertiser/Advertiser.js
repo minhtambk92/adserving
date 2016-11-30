@@ -21,6 +21,7 @@ import {
 import {
   setPageAdvertiserActiveTab,
 } from '../../../../actions/pages/advertisers';
+import { setPageCampaignActiveTab } from '../../../../actions/pages/campaigns';
 import { createCampaign } from '../../../../actions/campaigns';
 import Layout from '../../../../components/Layout';
 import CampaignList from '../../campaigns/CampaignList';
@@ -42,6 +43,7 @@ class Advertiser extends Component {
     campaigns: PropTypes.object,
     createCampaign: PropTypes.func,
     deleteAdvertiser: PropTypes.func,
+    setPageCampaignActiveTab: PropTypes.func,
   };
 
   componentWillMount() {
@@ -159,6 +161,7 @@ class Advertiser extends Component {
                                   list={this.props.advertisers.editing &&
                                   this.props.advertisers.editing.campaigns
                                   && this.props.advertisers.editing.campaigns}
+                                  setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
                                 />
                               </div>
                               {/* /.box-body */}
@@ -192,6 +195,7 @@ const mapDispatch = {
   deleteAdvertiser,
   setPageAdvertiserActiveTab,
   createCampaign,
+  setPageCampaignActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Advertiser));

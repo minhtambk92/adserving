@@ -374,7 +374,7 @@ class Channel extends Component {
                     </a>
                   </li>
                   <li>
-                    <a href="#addOption" data-toggle="tab">
+                    <a href="#optionChannel" data-toggle="tab">
                       Option Channel
                     </a>
                   </li>
@@ -386,7 +386,7 @@ class Channel extends Component {
                         {/* BOX: FORM OF CREATE NEW WEBSITE */}
                         <div className="box box-info">
                           <div className="box-header with-border">
-                            <h3 className="box-title">Change Channel information</h3>
+                            <h3 className="box-title">Change information</h3>
                             <div className="box-tools pull-right">
                               <button
                                 type="button" className="btn btn-box-tool"
@@ -409,7 +409,7 @@ class Channel extends Component {
                       </section>
                     </div>
                   </div>
-                  <div className="active tab-pane" id="addOption">
+                  <div className="active tab-pane" id="optionChannel">
                     <div className="row">
                       <section className="col-lg-12">
                         <div className="row">

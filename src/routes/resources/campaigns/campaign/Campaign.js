@@ -20,6 +20,7 @@ import {
 } from '../../../../actions/campaigns';
 import { getAdvertisers } from '../../../../actions/advertisers';
 import { createPlacement } from '../../../../actions/placements';
+import { setPagePlacementActiveTab } from '../../../../actions/pages/placements';
 import Layout from '../../../../components/Layout';
 import PlacementList from '../../placements/PlacementList';
 import UpdateCampaignForm from '../UpdateCampaignForm';
@@ -41,6 +42,7 @@ class Campaign extends Component {
     deleteCampaign: PropTypes.func,
     placements: PropTypes.object,
     createPlacement: PropTypes.func,
+    setPagePlacementActiveTab: PropTypes.func,
   };
 
   componentWillMount() {
@@ -154,6 +156,7 @@ class Campaign extends Component {
                                   list={this.props.campaigns.editing &&
                                     this.props.campaigns.editing.placements &&
                                     this.props.campaigns.editing.placements}
+                                  setPagePlacementActiveTab={this.props.setPagePlacementActiveTab}
                                 />
                               </div>
                               {/* /.box-body */}
@@ -188,6 +191,7 @@ const mapDispatch = {
   getAdvertisers,
   deleteCampaign,
   createPlacement,
+  setPagePlacementActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Campaign));
