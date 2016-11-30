@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { ICheck } from '../../../components/UI';
 import Link from '../../../components/Link';
 
 class CreateAdvertiserForm extends Component {
@@ -13,17 +14,32 @@ class CreateAdvertiserForm extends Component {
     this.inputAdvertiserContact.value = null;
     this.inputAdvertiserEmail.value = null;
     this.inputAdvertiserDescription.value = null;
+    this.inputAdvertiserReportInterval.value = null;
+    this.inputAdvertiserIsEmailReport.value = null;
+    this.inputAdvertiserIsEmailStatus.value = null;
   }
 
   createAdvertiser() {
     const name = this.inputAdvertiserName.value;
     const contact = this.inputAdvertiserContact.value;
     const email = this.inputAdvertiserEmail.value;
+    const isEmailStatus = document.getElementById('inputAdvertiserIsEmailStatus').checked;
+    const isEmailReport = document.getElementById('inputAdvertiserIsEmailReport').checked;
+    const reportInterval = this.inputAdvertiserReportInterval.value;
     const description = this.inputAdvertiserDescription.value;
-    const status = this.inputAdvetiserStatus.value;
+    const status = this.inputAdvertiserStatus.value;
 
     if (contact && name && email && description) {
-      this.props.createAdvertiser({ email, name, contact, description, status }).then(() => {
+      this.props.createAdvertiser({
+        email,
+        name,
+        contact,
+        isEmailStatus,
+        isEmailReport,
+        reportInterval,
+        description,
+        status,
+      }).then(() => {
         this.clearInput();
       });
     }
@@ -50,7 +66,10 @@ class CreateAdvertiserForm extends Component {
           </div>
           {/* contact */}
           <div className="form-group">
-            <label htmlFor="inputAdvertiserContact" className="col-sm-2 control-label">Contact</label>
+            <label
+              htmlFor="inputAdvertiserContact"
+              className="col-sm-2 control-label"
+            >Contact</label>
             <div className="col-sm-10">
               <input
                 type="text" className="form-control" id="inputAdvertiserContact"
@@ -77,6 +96,55 @@ class CreateAdvertiserForm extends Component {
               />
             </div>
           </div>
+          {/* isEmailStatus */}
+          <div className="form-group">
+            <div className="col-sm-2">&nbsp;</div>
+            <div className="col-sm-2">
+              <ICheck
+                type="checkbox" id="inputAdvertiserIsEmailStatus" className="form-control"
+                ref={c => {
+                  this.inputAdvertiserIsEmailStatus = c;
+                }}
+              />
+            </div>
+            <label
+              htmlFor="inputBannerIsDefault"
+              className="col-sm-6"
+            >Email when a campaign is automatically activated/deactivated</label>
+          </div>
+          {/* isEmailReport */}
+          <div className="form-group">
+            <div className="col-sm-2">&nbsp;</div>
+            <div className="col-sm-2">
+              <ICheck
+                type="checkbox" id="inputAdvertiserIsEmailReport" className="form-control"
+                ref={c => {
+                  this.inputAdvertiserIsEmailReport = c;
+                }}
+              />
+            </div>
+            <label
+              htmlFor="inputBannerIsDefault"
+              className="col-sm-6"
+            >Email campaign delivery reports</label>
+          </div>
+          {/* reportInterval */}
+          <div className="form-group">
+            <div className="col-sm-2">&nbsp;</div>
+            <div className="col-sm-2">
+              <input
+                type="text" className="form-control" id="inputAdvertiserReportInterval"
+                placeholder="7"
+                ref={c => {
+                  this.inputAdvertiserReportInterval = c;
+                }}
+              />
+            </div>
+            <label
+              htmlFor="inputAdvertiserEmail"
+              className="col-sm-6"
+            >Number of days between campaign delivery reports</label>
+          </div>
           {/* status */}
           <div className="form-group">
             <label
@@ -87,7 +155,7 @@ class CreateAdvertiserForm extends Component {
               <select
                 id="inputAdvertiserStatus" className="form-control"
                 ref={c => {
-                  this.inputAdvetiserStatus = c;
+                  this.inputAdvertiserStatus = c;
                 }}
               >
                 <option value="active">Active</option>

@@ -391,6 +391,9 @@ async function advertiserFiction() {
       status: STATUS_ACTIVE,
       contact: '0988333777',
       description: 'Đơn vị quảng cáo admicro',
+      isEmailReport: false,
+      isEmailStatus: false,
+      reportInterval: 7,
     });
 
     console.log(chalk.green(`${advertiser.name} is created. Passed!`));
