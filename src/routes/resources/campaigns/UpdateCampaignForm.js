@@ -124,9 +124,7 @@ class UpdateCampaignForm extends Component {
     if (revenueType && revenueType !== this.props.campaign.revenueType) {
       campaign.revenueType = revenueType;
     }
-
     campaign.expireValueCPM = expireValueCPM;
-
     campaign.maxCPMPerDay = maxCPMPerDay;
 
     if (description &&
