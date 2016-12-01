@@ -15,7 +15,8 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getPlacement, updatePlacement, deletePlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
-import { getBanners } from '../../../../actions/banners';
+import { getBanners, createBanner } from '../../../../actions/banners';
+import { getChannels } from '../../../../actions/channels';
 import {
   createPlacementBannerZone,
   removePlacement,
@@ -29,6 +30,7 @@ import ListBannerOfPlacement from '../ListBannerOfPlacement';
 import ListZoneNotBelongPlacement from '../ListZoneNotBelongPlacement';
 import ListZoneOfPlacement from '../ListZoneOfPlacement';
 import UpdatePlacementForm from '../UpdatePlacementForm';
+import CreateBannerForm from '../../banners/CreateBannerForm';
 import s from './Placement.css';
 
 const pageTitle = 'Placement';
@@ -53,12 +55,16 @@ class Placement extends Component {
     removePlacement: PropTypes.func,
     removeBannerInPlacementBannerZone: PropTypes.func,
     removeZoneInPlacementBannerZone: PropTypes.func,
+    createBanner: PropTypes.func,
+    getChannels: PropTypes.func,
+    channels: PropTypes.object,
   };
 
   componentWillMount() {
     this.props.getPlacement(this.props.placementId);
     this.props.getCampaigns();
     this.props.getBanners();
+    this.props.getChannels();
     this.props.getZones();
   }
 
@@ -285,6 +291,19 @@ class Placement extends Component {
                             {/* /.box */}
                           </section>
                         </div>
+                        <div className="row">
+                          <div className="col-lg-6">
+                            <CreateBannerForm
+                              createBanner={this.props.createBanner}
+                              channels={this.props.channels && this.props.channels.list}
+                              placementId={this.props.placementId}
+                              getPlacement={this.props.getPlacement}
+                              banners={this.props.banners && this.props.banners.list}
+                              getBanners={this.props.getBanners}
+                              createPlacementBannerZone={this.props.createPlacementBannerZone}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -367,6 +386,7 @@ const mapState = (state) => ({
   banners: state.banners,
   placementBannerZones: state.placementBannerZones,
   zones: state.zones,
+  channels: state.channels,
 });
 
 const mapDispatch = {
@@ -380,6 +400,8 @@ const mapDispatch = {
   removePlacement,
   removeBannerInPlacementBannerZone,
   removeZoneInPlacementBannerZone,
+  createBanner,
+  getChannels,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placement));

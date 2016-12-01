@@ -13,6 +13,11 @@ class CreateBannerForm extends Component {
     filters: PropTypes.object,
     createBanner: PropTypes.func,
     channels: PropTypes.array,
+    placementId: PropTypes.string,
+    createPlacementBannerZone: PropTypes.func,
+    getPlacement: PropTypes.func,
+    banners: PropTypes.array,
+    getBanners: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -158,6 +163,18 @@ class CreateBannerForm extends Component {
         channelId,
       }).then(() => {
         this.clearInput();
+        if (this.props.placementId) {
+          const bannerId = this.props.banners[0].id;
+          const zoneId = null;
+          const placementId = this.props.placementId;
+          if (placementId && bannerId) {
+            this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+              this.props.getPlacement(this.props.placementId).then(() => {
+                this.props.getBanners();
+              });
+            });
+          }
+        }
       });
     }
   }
