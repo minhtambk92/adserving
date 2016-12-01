@@ -54,7 +54,11 @@ class UpdateBannerForm extends Component {
     this.inputBannerIsIFrame.value = isIFrame;
 
     if (type === 'html') {
-      this.insertBannerHtml(html, width, height);
+      if (isIFrame === true) {
+        this.insertBannerHtml(html, width, height);
+      } else {
+        document.getElementById('banner').innerHTML = '';
+      }
       if (this.inputBannerHTML !== undefined && this.inputBannerHTMLType.value !== undefined &&
         this.inputBannerHTMLType.value !== undefined) {
         this.state.checkTypeBanner = 'html';
@@ -67,13 +71,14 @@ class UpdateBannerForm extends Component {
       this.state.imageUrl = imageUrl;
       this.state.checkTypeBanner = 'img';
       if (this.inputBannerImageUrl !== undefined && this.inputBannerTarget !== undefined
-      && this.inputBannerUrl !== undefined) {
+        && this.inputBannerUrl !== undefined) {
         this.inputBannerTarget.value = target;
         this.inputBannerUrl.value = url;
         this.inputBannerImageUrl.value = imageUrl;
       }
     }
   }
+
   componentDidUpdate() {
     /* eslint-disable no-undef */
     if (this.props.banner) {
@@ -85,6 +90,7 @@ class UpdateBannerForm extends Component {
     }
     /* eslint-enable no-undef */
   }
+
   updateBanner() {
     const name = this.inputBannerName.value;
     const width = this.inputBannerWidth.value;
@@ -94,7 +100,7 @@ class UpdateBannerForm extends Component {
     const description = this.inputBannerDescription.value;
     const channelId = this.inputChannelId.value;
     const isIFrame = document.getElementById('inputBannerIsIFrame').checked;
-      // this.inputBannerIsIFrame.value;
+    // this.inputBannerIsIFrame.value;
     let html = '';
     let target = '';
     let imageUrl = '';
