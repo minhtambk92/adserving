@@ -42,8 +42,8 @@ const Zone = Model.define('Zone', {
     defaultValue: '',
   },
   slot: {
-    type: DataType.STRING,
-    defaultValue: '',
+    type: DataType.INTEGER,
+    defaultValue: 1,
   },
   height: {
     type: DataType.INTEGER,
@@ -60,6 +60,46 @@ const Zone = Model.define('Zone', {
   sizeValue: {
     type: DataType.STRING,
     defaultValue: '',
+  },
+  delivery: {
+    type: DataType.INTEGER,
+    defaultValue: 3,
+  },
+  targetIFrame: {
+    type: DataType.STRING,
+    validate: {
+      isIn: [['_blank', '_top', '0']],
+    },
+  },
+  isShowBannerAgain: {
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+  },
+  source: {
+    type: DataType.TEXT,
+    defaultValue: '',
+  },
+  isShowCampaignAgain: {
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+  },
+  isShowTextBanner: {
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  },
+  characterSet: {
+    type: DataType.STRING,
+  },
+  supportThirdParty: {
+    type: DataType.STRING,
+    defaultValue: '0',
+    validate: {
+      isIn: [['doubleclick', 'max', 'generic', '0']],
+    },
+  },
+  isIncludeDescription: {
+    type: DataType.BOOLEAN,
+    defaultValue: true,
   },
   status: {
     type: DataType.STRING,

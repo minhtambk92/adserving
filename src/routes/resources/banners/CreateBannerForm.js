@@ -123,7 +123,7 @@ class CreateBannerForm extends Component {
     const adStore = '';
     const impressionsBooked = -1;
     const clicksBooked = -1;
-    const activationDate = new Date(moment().format('YYYY-MM-DD 00:00:00'));
+    const activationDate = new Date();
     const expirationDate = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00'));
     if (name && keyword && width && description && type && channelId) {
       this.props.createBanner({

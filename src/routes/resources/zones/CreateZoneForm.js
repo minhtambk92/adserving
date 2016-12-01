@@ -106,6 +106,15 @@ class CreateZoneForm extends Component {
       sizeText = 'Custom (Text ad)';
       sizeValue = '';
     }
+    const delivery = this.inputZoneDelivery.value;
+    const targetIFrame = '0';
+    const isShowBannerAgain = true;
+    const source = '';
+    const isShowCampaignAgain = true;
+    const isShowTextBanner = false;
+    const characterSet = 'autoDetect';
+    const supportThirdParty = '0';
+    const isIncludeDescription = true;
     const status = this.inputZoneStatus.value;
     const description = this.inputZoneDescription.value;
     if (name && siteId && type && description && slot) {
@@ -120,6 +129,15 @@ class CreateZoneForm extends Component {
         height,
         sizeText,
         sizeValue,
+        delivery,
+        targetIFrame,
+        isShowBannerAgain,
+        source,
+        isShowCampaignAgain,
+        isShowTextBanner,
+        characterSet,
+        supportThirdParty,
+        isIncludeDescription,
         status,
         description,
       });
@@ -315,11 +333,48 @@ class CreateZoneForm extends Component {
               className="col-sm-2 control-label"
             >Slot</label>
             <div className="col-sm-10">
-              <input
-                type="text" className="form-control" id="inputZoneSlot"
-                placeholder="..."
+              <select
+                id="inputZoneSlot"
+                className="form-control"
                 ref={c => {
                   this.inputZoneSlot = c;
+                }}
+              >
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+              </select>
+            </div>
+          </div>
+          <div className="form-group">
+            <label
+              htmlFor="inputZoneDelivery"
+              className="col-sm-2 control-label"
+            >Delivery</label>
+            <div className="col-sm-10">
+              <input
+                type="number"
+                className="form-control" id="inputZoneDelivery"
+                placeholder="3"
+                ref={c => {
+                  this.inputZoneDelivery = c;
                 }}
               />
             </div>

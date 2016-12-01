@@ -27,6 +27,7 @@ import ListPlacementNotBelongToZone from '../ListPlacementNotBelongToZone';
 import ListPlacementOfZone from '../ListPlacementOfZone';
 import UpdateZoneForm from '../UpdateZoneForm';
 import CreatePlacementInZone from '../../placements/CreatePlacementForm';
+import ZoneSettingForm from '../SettingZoneForm';
 import s from './Zone.css';
 
 const pageTitle = 'Zone';
@@ -135,6 +136,11 @@ class Zone extends Component {
                     </a>
                   </li>
                   <li>
+                    <a href="#settingZone" data-toggle="tab">
+                      Setting
+                    </a>
+                  </li>
+                  <li>
                     <a href="#addPlacement" data-toggle="tab">
                       Add Placement
                     </a>
@@ -166,6 +172,34 @@ class Zone extends Component {
                             zoneId={this.props.zoneId}
                             getZone={this.props.getZone}
                             removeZone={this.props.removeZone}
+                          />
+                        </div>
+                        {/* /.col */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="tab-pane" id="settingZone">
+                    <div className="row">
+                      <div className="col-lg-12">
+                        {/* BOX: FORM OF CREATE A NEW ZONE */}
+                        <div className="box box-info">
+                          <div className="box-header with-border">
+                            <h3 className="box-title">Tag Setting</h3>
+                            <div className="box-tools pull-right">
+                              <button
+                                type="button" className="btn btn-box-tool"
+                                data-widget="collapse"
+                              >
+                                <i className="fa fa-minus" />
+                              </button>
+                            </div>
+                          </div>
+                          {/* /.box-header */}
+                          <ZoneSettingForm
+                            zone={this.props.zones && this.props.zones.editing}
+                            updateZone={this.props.updateZone}
+                            zoneId={this.props.zoneId}
+                            getZone={this.props.getZone}
                           />
                         </div>
                         {/* /.col */}

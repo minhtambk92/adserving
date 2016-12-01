@@ -346,7 +346,7 @@ class OptionBannerForm extends Component {
     if (isActivationDate === false) {
       activationDate = new Date(moment(new Date(document.getElementById('inputBannerActivationDate').value)).format('YYYY-MM-DD 00:00:00'));
     } else if (isActivationDate === true) {
-      activationDate = new Date(moment().format('YYYY-MM-DD 00:00:00'));
+      activationDate = new Date();
     }
     const isExpirationDate = document.getElementById('inputIsExpirationDate').checked;
     let expirationDate = new Date();
