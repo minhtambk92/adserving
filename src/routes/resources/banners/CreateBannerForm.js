@@ -169,9 +169,7 @@ class CreateBannerForm extends Component {
           const placementId = this.props.placementId;
           if (placementId && bannerId) {
             this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
-              this.props.getPlacement(this.props.placementId).then(() => {
-                this.props.getBanners();
-              });
+              this.props.getPlacement(this.props.placementId);
             });
           }
         }

@@ -23,7 +23,8 @@ import {
   removeBannerInPlacementBannerZone,
   removeZoneInPlacementBannerZone,
 } from '../../../../actions/placementBannerZones';
-import { getZones } from '../../../../actions/zones';
+import { getZones, createZone } from '../../../../actions/zones';
+import { getSites } from '../../../../actions/sites';
 import Layout from '../../../../components/Layout';
 import ListBannerNotBelongPlacement from '../ListBannerNotBelongPlacement';
 import ListBannerOfPlacement from '../ListBannerOfPlacement';
@@ -31,6 +32,7 @@ import ListZoneNotBelongPlacement from '../ListZoneNotBelongPlacement';
 import ListZoneOfPlacement from '../ListZoneOfPlacement';
 import UpdatePlacementForm from '../UpdatePlacementForm';
 import CreateBannerForm from '../../banners/CreateBannerForm';
+import CreateZoneForm from '../../zones/CreateZoneForm';
 import s from './Placement.css';
 
 const pageTitle = 'Placement';
@@ -58,6 +60,9 @@ class Placement extends Component {
     createBanner: PropTypes.func,
     getChannels: PropTypes.func,
     channels: PropTypes.object,
+    createZone: PropTypes.func,
+    getSites: PropTypes.func,
+    sites: PropTypes.object,
   };
 
   componentWillMount() {
@@ -66,6 +71,7 @@ class Placement extends Component {
     this.props.getBanners();
     this.props.getChannels();
     this.props.getZones();
+    this.props.getSites();
   }
 
   componentDidMount() {
@@ -365,6 +371,19 @@ class Placement extends Component {
                             {/* /.box */}
                           </section>
                         </div>
+                        <div className="row">
+                          <div className="col-lg-6">
+                            <CreateZoneForm
+                              createZone={this.props.createZone}
+                              sites={this.props.sites && this.props.sites.list}
+                              placementId={this.props.placementId}
+                              getPlacement={this.props.getPlacement}
+                              zones={this.props.zones && this.props.zones.list}
+                              getZones={this.props.getZones}
+                              createPlacementBannerZone={this.props.createPlacementBannerZone}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -387,6 +406,7 @@ const mapState = (state) => ({
   placementBannerZones: state.placementBannerZones,
   zones: state.zones,
   channels: state.channels,
+  sites: state.sites,
 });
 
 const mapDispatch = {
@@ -402,6 +422,8 @@ const mapDispatch = {
   removeZoneInPlacementBannerZone,
   createBanner,
   getChannels,
+  createZone,
+  getSites,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placement));

@@ -9,6 +9,11 @@ class CreateZoneForm extends Component {
     sites: PropTypes.array,
     getSite: PropTypes.func,
     siteId: PropTypes.string,
+    placementId: PropTypes.string,
+    createPlacementBannerZone: PropTypes.func,
+    getPlacement: PropTypes.func,
+    zones: PropTypes.array,
+    getZones: PropTypes.func,
   };
   constructor(props, context) {
     super(props, context);
@@ -144,6 +149,18 @@ class CreateZoneForm extends Component {
       this.clearInput();
       if (this.props.siteId) {
         this.props.getSite(this.props.siteId);
+      }
+      if (this.props.placementId) {
+        this.props.getZones().then(() => {
+          const zoneId = this.props.zones[0].id;
+          const bannerId = null;
+          const placementId = this.props.placementId;
+          if (placementId && zoneId) {
+            this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+              this.props.getPlacement(this.props.placementId);
+            });
+          }
+        });
       }
     }
   }
