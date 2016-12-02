@@ -573,10 +573,10 @@ async function zoneFiction() {
     // Create an Zone
     const zone = await Zone.create({
       name: 'Zone Top',
-      width: 468,
-      height: 60,
-      sizeText: 'IAB Full Banner (468 x 60)',
-      sizeValue: '468x60',
+      width: 300,
+      height: 600,
+      sizeText: 'Customer (300 x 600)',
+      sizeValue: 'custom',
       slot: 3,
       type: 'type-1',
       html: 'html',

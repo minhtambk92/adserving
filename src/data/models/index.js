@@ -35,6 +35,7 @@ import Filter from './Filter';
 import PlacementBannerZone from './PlacementBannerZone';
 import OptionChannel from './OptionChannel';
 import ClickImpression from './ClickImpression';
+import ShareZone from './ShareZone';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -282,6 +283,16 @@ Placement.campaign = Placement.belongsTo(Campaign, {
   as: 'campaign',
 });
 
+// Each zone can use many share of ads
+Zone.shareZones = Zone.hasMany(ShareZone, {
+  foreignKey: 'zoneId',
+});
+
+// Each share zone can only belong to one zone
+ShareZone.zone = ShareZone.belongsTo(Zone, {
+  foreignKey: 'zoneId',
+});
+
 function sync(...args) {
   return sequelize.sync(...args);
 }
@@ -311,4 +322,5 @@ export {
   PlacementBannerZone,
   OptionChannel,
   ClickImpression,
+  ShareZone,
 };

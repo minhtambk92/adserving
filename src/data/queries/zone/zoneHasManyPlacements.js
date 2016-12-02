@@ -1,7 +1,3 @@
-/**
- * Created by Manhhailua on 11/25/16.
- */
-
 import {
   GraphQLList as List,
 } from 'graphql';

@@ -14,7 +14,9 @@ class CreateZoneForm extends Component {
     getPlacement: PropTypes.func,
     zones: PropTypes.array,
     getZones: PropTypes.func,
+    createShareZone: PropTypes.func,
   };
+
   constructor(props, context) {
     super(props, context);
 
@@ -22,6 +24,7 @@ class CreateZoneForm extends Component {
       checkTypeZone: true,
     };
   }
+
   onKeyDown(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputZoneSize.value = 'custom';
   }
@@ -145,14 +148,14 @@ class CreateZoneForm extends Component {
         isIncludeDescription,
         status,
         description,
-      });
-      this.clearInput();
-      if (this.props.siteId) {
-        this.props.getSite(this.props.siteId);
-      }
-      if (this.props.placementId) {
-        this.props.getZones().then(() => {
-          const zoneId = this.props.zones[0].id;
+      }).then(() => {
+        this.clearInput();
+        const zoneId = this.props.zones[0].id;
+        this.props.createShareZone({ name, width, height, description, zoneId });
+        if (this.props.siteId) {
+          this.props.getSite(this.props.siteId);
+        }
+        if (this.props.placementId) {
           const bannerId = null;
           const placementId = this.props.placementId;
           if (placementId && zoneId) {
@@ -160,8 +163,8 @@ class CreateZoneForm extends Component {
               this.props.getPlacement(this.props.placementId);
             });
           }
-        });
-      }
+        }
+      });
     }
   }
 

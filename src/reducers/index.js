@@ -18,6 +18,7 @@ import zones from './zones';
 import channels from './channels';
 import optionChannels from './optionChannels';
 import clickImpressions from './clickImpressions';
+import shareZones from './shareZones';
 
 import page from './pages';
 
@@ -41,6 +42,6 @@ export default combineReducers({
   channels,
   optionChannels,
   clickImpressions,
-
+  shareZones,
   page,
 });
