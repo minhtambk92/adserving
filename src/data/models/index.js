@@ -36,6 +36,7 @@ import PlacementBanner from './PlacementBanner';
 import OptionChannel from './OptionChannel';
 import ClickImpression from './ClickImpression';
 import Share from './Share';
+import SharePlacement from './SharePlacement';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -286,6 +287,23 @@ Share.zone = Share.belongsTo(Zone, {
   foreignKey: 'zoneId',
 });
 
+SharePlacement.placement = SharePlacement.belongsTo(Placement, {
+  foreignKey: 'placementId',
+});
+
+SharePlacement.share = SharePlacement.belongsTo(Share, {
+  foreignKey: 'shareId',
+});
+
+Placement.sharePlacements = Placement.hasMany(SharePlacement, {
+  foreignKey: 'placementId',
+});
+
+Share.sharePlacements = Share.hasMany(SharePlacement, {
+  foreignKey: 'shareId',
+});
+
+
 function sync(...args) {
   return sequelize.sync(...args);
 }
@@ -316,4 +334,5 @@ export {
   OptionChannel,
   ClickImpression,
   Share,
+  SharePlacement,
 };

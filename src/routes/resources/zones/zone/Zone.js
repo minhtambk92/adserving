@@ -17,13 +17,8 @@ import { getZone, updateZone, deleteZone } from '../../../../actions/zones';
 import { getSites } from '../../../../actions/sites';
 import { getPlacements, createPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
-import {
-  createPlacementBanner,
-} from '../../../../actions/placementBanners';
 import { createShare, updateShare, deleteShare } from '../../../../actions/shares';
 import Layout from '../../../../components/Layout';
-import ListPlacementNotBelongToZone from '../ListPlacementNotBelongToZone';
-import ListPlacementOfZone from '../ListPlacementOfZone';
 import UpdateZoneForm from '../UpdateZoneForm';
 import CreatePlacementInZone from '../../placements/CreatePlacementForm';
 import ZoneSettingForm from '../SettingZoneForm';
@@ -49,7 +44,6 @@ class Zone extends Component {
     campaigns: PropTypes.object,
     getCampaigns: PropTypes.func,
     placementBanners: PropTypes.object,
-    createPlacementBanner: PropTypes.func,
     updateShare: PropTypes.func,
     createShare: PropTypes.func,
     deleteShare: PropTypes.func,
@@ -241,91 +235,6 @@ class Zone extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className="tab-pane" id="addPlacement">
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <div className="row">
-                          <section className="col-lg-6">
-                            {/* BOX: LIST OF Placements */}
-                            <div className="box box-info">
-                              <div className="box-header with-border">
-                                <h3 className="box-title">List Placement</h3>
-                              </div>
-                              {/* /.box-header */}
-                              <div className="box-body">
-                                <ListPlacementNotBelongToZone
-                                  list={this.props.placements.list && this.props.zones.editing &&
-                                    this.props.zones.editing.placements &&
-                                    this.filterPlmNotIn(this.props.placements.list,
-                                      this.props.zones.editing.placements)}
-                                  createPlacementBanner={this.props.createPlacementBanner}
-                                  getZone={this.props.getZone}
-                                  getPlacements={this.props.getPlacements}
-                                  zoneId={this.props.zoneId}
-                                />
-                              </div>
-                              {/* /.box-body */}
-                            </div>
-                            {/* /.box */}
-                          </section>
-                          <section className="col-lg-6">
-                            {/* BOX: LIST OF Placements */}
-                            <div className="box box-info">
-                              <div className="box-header with-border">
-                                <h3 className="box-title">
-                                  List placements of {this.props.zones.editing ?
-                                  this.props.zones.editing.name : '...'}
-                                </h3>
-                              </div>
-                              {/* /.box-header */}
-                              <div className="box-body">
-                                <ListPlacementOfZone
-                                  list={this.props.zones && this.props.zones.editing &&
-                                  this.props.zones.editing.placements &&
-                                    this.dataPlacement(this.props.zones.editing.placements)}
-                                  getPlacements={this.props.getPlacements}
-                                  getZone={this.props.getZone}
-                                  zoneId={this.props.zoneId}
-                                />
-                              </div>
-                              {/* /.box-body */}
-                            </div>
-                            {/* /.box */}
-                          </section>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <section className="col-lg-6">
-                        {/* BOX: FORM OF CREATE NEW PlacementS */}
-                        <div className="box box-info">
-                          <div className="box-header with-border">
-                            <h3 className="box-title">Create New Placements</h3>
-                            <div className="box-tools pull-right">
-                              <button
-                                type="button" className="btn btn-box-tool"
-                                data-widget="collapse"
-                              >
-                                <i className="fa fa-minus" />
-                              </button>
-                            </div>
-                          </div>
-                          {/* /.box-header */}
-                          {/* form start */}
-                          <CreatePlacementInZone
-                            createPlacement={this.props.createPlacement}
-                            zoneId={this.props.zoneId}
-                            campaigns={this.props.campaigns && this.props.campaigns.list}
-                            getPlacements={this.props.getPlacements}
-                            placements={this.props.placements && this.props.placements.list}
-                            getZone={this.props.getZone}
-                            createPlacementBanner={this.props.createPlacementBanner}
-                          />
-                        </div>
-                        {/* /.col */}
-                      </section>
-                    </div>
-                  </div>
                 </div>
               </div>
             </section>
@@ -343,7 +252,6 @@ const mapState = (state) => ({
   sites: state.sites,
   placements: state.placements,
   campaigns: state.campaigns,
-  placementBanners: state.placementBanners,
 });
 
 const mapDispatch = {
@@ -354,7 +262,6 @@ const mapDispatch = {
   getPlacements,
   getCampaigns,
   createPlacement,
-  createPlacementBanner,
   createShare,
   updateShare,
   deleteShare,

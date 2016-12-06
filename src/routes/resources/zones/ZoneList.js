@@ -14,9 +14,9 @@ class ZoneList extends Component {
     event.persist();
     this.props.setPageZoneActiveTab('editZone');
   }
-  onTabClickNewPlacement(event) {
+  onTabClickShareZone(event) {
     event.persist();
-    this.props.setPageZoneActiveTab('addPlacement');
+    this.props.setPageZoneActiveTab('shareZone');
   }
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
@@ -50,7 +50,7 @@ class ZoneList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/zone/${rowData.id}`}
-          onClick={(event) => this.onTabClickNewPlacement(event)}
+          onClick={(event) => this.onTabClickShareZone(event)}
         >New Placement</Link>, cell);
       },
     }];

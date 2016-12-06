@@ -31,6 +31,7 @@ import {
   PlacementBanner,
   ClickImpression,
   Share,
+  SharePlacement,
 } from '../../data/models';
 import { host } from '../../config';
 
@@ -604,7 +605,7 @@ async function zoneFiction() {
 }
 
 // SharedZone
-async function sharedZoneFiction() {
+async function sharedFiction() {
   console.log(chalk.grey('Check current number of share Zone...'));
   const shareQuantity = await Share.count();
 
@@ -614,9 +615,9 @@ async function sharedZoneFiction() {
     const zone = await Zone.findOne({ where: { name: 'Zone Top' } });
     // Create an Share
     const share = await Share.create({
-      name: 'Zone Top',
+      name: 'Share 1',
       html: '<div class="hello"></div>',
-      css: '',
+      css: 'css',
       description: 'Zone 300x300',
       zoneId: zone.id,
     });
@@ -624,6 +625,29 @@ async function sharedZoneFiction() {
     console.log(chalk.green(`Super ${share.name} is created. Passed!`));
   } else {
     console.log(chalk.green(`${shareQuantity} share Zone(s) found. Passed!`));
+  }
+}
+
+// SharedPlacement
+async function sharedPlacementFiction() {
+  console.log(chalk.grey('Check current number of share Zone...'));
+  const sharePlacementQuantity = await SharePlacement.count();
+
+  if (sharePlacementQuantity === 0) {
+    console.log(chalk.red('No share zone found! Do a fiction...'));
+    // Get id of Share
+    const share = await Share.findOne({ where: { name: 'Share 1' } });
+    // Get id of Share
+    const placement = await Placement.findOne({ where: { name: 'Placement' } });
+    // Create an Share
+    const sharePlacement = await SharePlacement.create({
+      shareId: share.id,
+      placementId: placement.id,
+    });
+
+    console.log(chalk.green(`Super ${sharePlacement.id} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${sharePlacementQuantity} share Placement(s) found. Passed!`));
   }
 }
 
@@ -764,8 +788,9 @@ async function fiction() {
   await optionChannelFiction();
   await placementFiction();
   await zoneFiction();
-  await sharedZoneFiction();
+  await sharedFiction();
   await bannerFiction();
+  await sharedPlacementFiction();
   await placementBannerFiction();
   await clickImpressionFiction();
   console.log(chalk.magenta(`Your application is now ready at http://${host}/`));

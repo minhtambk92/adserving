@@ -10,7 +10,6 @@ class CreateZoneForm extends Component {
     getSite: PropTypes.func,
     siteId: PropTypes.string,
     placementId: PropTypes.string,
-    createPlacementBanner: PropTypes.func,
     getPlacement: PropTypes.func,
     zones: PropTypes.array,
     getZones: PropTypes.func,
@@ -154,15 +153,6 @@ class CreateZoneForm extends Component {
         this.props.createShare({ name, html, css, description, zoneId });
         if (this.props.siteId) {
           this.props.getSite(this.props.siteId);
-        }
-        if (this.props.placementId) {
-          const bannerId = null;
-          const placementId = this.props.placementId;
-          if (placementId && zoneId) {
-            this.props.createPlacementBanner({ placementId, bannerId, zoneId }).then(() => {
-              this.props.getPlacement(this.props.placementId);
-            });
-          }
         }
       });
     }
