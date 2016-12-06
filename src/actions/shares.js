@@ -2,22 +2,22 @@
 /* eslint-disable import/prefer-default-export */
 
 import {
-  GET_SHARE_ZONE,
-  GET_SHARE_ZONES,
-  CREATE_SHARE_ZONE,
-  UPDATE_SHARE_ZONE,
-  DELETE_SHARE_ZONE,
+  GET_SHARE,
+  GET_SHARES,
+  CREATE_SHARE,
+  UPDATE_SHARE,
+  DELETE_SHARE,
 } from '../constants';
 
-export function getShareZone(id) {
+export function getShare(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        shareZones(where: {id: "${id}"}, limit: 1) {
+        shares(where: {id: "${id}"}, limit: 1) {
           id
           name
-          width
-          height
+          html
+          css
           description
           zoneId
           createdAt
@@ -28,15 +28,15 @@ export function getShareZone(id) {
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_SHARE_ZONE,
+      type: GET_SHARE,
       payload: {
-        shareZone: data.shareZones.shift(),
+        share: data.shares.shift(),
       },
     });
   };
 }
 
-export function getShareZones(args = {
+export function getShares(args = {
   where: {},
   limit: 0,
   order: '',
@@ -46,11 +46,11 @@ export function getShareZones(args = {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query ($where: JSON, $order: String, $limit: Int) {
-        shareZones(where: $where, order: $order, limit: $limit) {
+        shares(where: $where, order: $order, limit: $limit) {
           id
           name
-          width
-          height
+          html
+          css
           description
           zoneId
           createdAt
@@ -59,7 +59,7 @@ export function getShareZones(args = {
       }`;
 
     const variables = Object.assign({}, args);
-    const filters = await getState().shareZones.filters;
+    const filters = await getState().shares.filters;
 
     if (
       options.globalFilters &&
@@ -73,23 +73,23 @@ export function getShareZones(args = {
     const { data } = await graphqlRequest(query, variables);
 
     dispatch({
-      type: GET_SHARE_ZONES,
+      type: GET_SHARES,
       payload: {
-        shareZones: data.shareZones,
+        shares: data.shares,
       },
     });
   };
 }
 
-export function createShareZone({ name, width, height, description, zoneId }) {
+export function createShare({ name, html, css, description, zoneId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($shareZone: ShareZoneInputTypeWithoutId!) {
-        createdShareZone(shareZone: $shareZone) {
+      mutation ($share: ShareInputTypeWithoutId!) {
+        createdShare(share: $share) {
           id
           name
-          width
-          height
+          html
+          css
           description
           zoneId
           createdAt
@@ -98,33 +98,33 @@ export function createShareZone({ name, width, height, description, zoneId }) {
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      shareZone: {
+      share: {
         name,
-        width,
-        height,
+        html,
+        css,
         description,
         zoneId,
       },
     });
 
     dispatch({
-      type: CREATE_SHARE_ZONE,
+      type: CREATE_SHARE,
       payload: {
-        shareZone: data.createdShareZone,
+        share: data.createdShare,
       },
     });
   };
 }
 
-export function updateShareZone({ id, name, width, height, description, zoneId }) {
+export function updateShare({ id, name, html, css, description, zoneId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($shareZone: ShareZoneInputType!) {
-        updatedShareZone(shareZone: $shareZone) {
+      mutation ($share: ShareInputType!) {
+        updatedShare(share: $share) {
           id
           name
-          width
-          height
+          html
+          css
           description
           zoneId
           createdAt
@@ -133,34 +133,34 @@ export function updateShareZone({ id, name, width, height, description, zoneId }
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      shareZone: {
+      share: {
         id,
         name,
-        width,
-        height,
+        html,
+        css,
         description,
         zoneId,
       },
     });
 
     dispatch({
-      type: UPDATE_SHARE_ZONE,
+      type: UPDATE_SHARE,
       payload: {
-        shareZone: data.updatedShareZone,
+        share: data.updatedShare,
       },
     });
   };
 }
 
-export function deleteShareZone(id) {
+export function deleteShare(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
-        deletedShareZone(id: "${id}") {
+        deletedShare(id: "${id}") {
           id
           name
-          width
-          height
+          html
+          css
           description
           zoneId
           createdAt
@@ -172,9 +172,9 @@ export function deleteShareZone(id) {
     const { data } = await graphqlRequest(mutation);
 
     dispatch({
-      type: DELETE_SHARE_ZONE,
+      type: DELETE_SHARE,
       payload: {
-        shareZone: data.deletedShareZone,
+        share: data.deletedShare,
       },
     });
   };

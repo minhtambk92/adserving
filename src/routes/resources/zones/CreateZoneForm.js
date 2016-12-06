@@ -14,7 +14,7 @@ class CreateZoneForm extends Component {
     getPlacement: PropTypes.func,
     zones: PropTypes.array,
     getZones: PropTypes.func,
-    createShareZone: PropTypes.func,
+    createShare: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -151,7 +151,7 @@ class CreateZoneForm extends Component {
       }).then(() => {
         this.clearInput();
         const zoneId = this.props.zones[0].id;
-        this.props.createShareZone({ name, width, height, description, zoneId });
+        this.props.createShare({ name, html, css, description, zoneId });
         if (this.props.siteId) {
           this.props.getSite(this.props.siteId);
         }

@@ -59,6 +59,13 @@ export function getZone(id) {
           supportThirdParty
           isIncludeDescription
           status
+          shares {
+            id
+            name
+            html
+            css
+            description
+          }
           placements {
               id
               name
@@ -121,6 +128,13 @@ export function getZones(args = {
           supportThirdParty
           isIncludeDescription
           status
+          shares {
+            id
+            name
+            html
+            css
+            description
+          }
           placements {
               id
               name

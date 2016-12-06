@@ -30,6 +30,7 @@ import {
   Banner,
   PlacementBannerZone,
   ClickImpression,
+  Share,
 } from '../../data/models';
 import { host } from '../../config';
 
@@ -602,6 +603,30 @@ async function zoneFiction() {
   }
 }
 
+// SharedZone
+async function sharedZoneFiction() {
+  console.log(chalk.grey('Check current number of share Zone...'));
+  const shareQuantity = await Share.count();
+
+  if (shareQuantity === 0) {
+    console.log(chalk.red('No share zone found! Do a fiction...'));
+    // Get id of Zone
+    const zone = await Zone.findOne({ where: { name: 'Zone Top' } });
+    // Create an Share
+    const share = await Share.create({
+      name: 'Zone Top',
+      html: '<div class="hello"></div>',
+      css: '',
+      description: 'Zone 300x300',
+      zoneId: zone.id,
+    });
+
+    console.log(chalk.green(`Super ${share.name} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${shareQuantity} share Zone(s) found. Passed!`));
+  }
+}
+
 // Banners fiction
 async function bannerFiction() {
   console.log(chalk.grey('Check current number of banners...'));
@@ -742,6 +767,7 @@ async function fiction() {
   await optionChannelFiction();
   await placementFiction();
   await zoneFiction();
+  await sharedZoneFiction();
   await bannerFiction();
   await placementBannerZoneFiction();
   await clickImpressionFiction();

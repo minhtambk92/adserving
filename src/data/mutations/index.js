@@ -16,7 +16,7 @@ import banners from './banners';
 import channels from './channels';
 import optionChannels from './optionChannels';
 import clickImpressions from './clickImpressions';
-import shareZones from './shareZones';
+import shares from './shares';
 
 const mutations = new ObjectType({
   name: 'Mutation',
@@ -34,7 +34,7 @@ const mutations = new ObjectType({
     ...channels,
     ...optionChannels,
     ...clickImpressions,
-    ...shareZones,
+    ...shares,
   },
 });
 

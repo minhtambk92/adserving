@@ -1,16 +1,13 @@
-import {
-  GraphQLList as List,
-} from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import ShareZoneType from '../../types/shareZone/ShareZoneType';
-import { ShareZone } from '../../models';
+import { Share } from '../../models';
+import ZoneType from '../../types/zone/ZoneType';
 
-const shareZones = {
-  type: new List(ShareZoneType),
+const shareBelongsToZone = () => ({
+  type: ZoneType,
   args: Object.assign(defaultListArgs(), {
     // Additional params
   }),
-  resolve: resolver(ShareZone, {
+  resolve: resolver(Share.zone, {
     before(options) {
       const opts = options;
       opts.order = options.order || [];
@@ -18,6 +15,6 @@ const shareZones = {
       return opts;
     },
   }),
-};
+});
 
-export default shareZones;
+export default shareBelongsToZone;

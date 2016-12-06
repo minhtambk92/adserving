@@ -35,7 +35,7 @@ import Filter from './Filter';
 import PlacementBannerZone from './PlacementBannerZone';
 import OptionChannel from './OptionChannel';
 import ClickImpression from './ClickImpression';
-import ShareZone from './ShareZone';
+import Share from './Share';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -284,12 +284,12 @@ Placement.campaign = Placement.belongsTo(Campaign, {
 });
 
 // Each zone can use many share of ads
-Zone.shareZones = Zone.hasMany(ShareZone, {
+Zone.shares = Zone.hasMany(Share, {
   foreignKey: 'zoneId',
 });
 
 // Each share zone can only belong to one zone
-ShareZone.zone = ShareZone.belongsTo(Zone, {
+Share.zone = Share.belongsTo(Zone, {
   foreignKey: 'zoneId',
 });
 
@@ -322,5 +322,5 @@ export {
   PlacementBannerZone,
   OptionChannel,
   ClickImpression,
-  ShareZone,
+  Share,
 };

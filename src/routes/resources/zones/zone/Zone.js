@@ -22,13 +22,14 @@ import {
   removeZone,
   removeZoneInPlacementBannerZone,
 } from '../../../../actions/placementBannerZones';
+import { createShare, updateShare, deleteShare } from '../../../../actions/shares';
 import Layout from '../../../../components/Layout';
 import ListPlacementNotBelongToZone from '../ListPlacementNotBelongToZone';
 import ListPlacementOfZone from '../ListPlacementOfZone';
 import UpdateZoneForm from '../UpdateZoneForm';
 import CreatePlacementInZone from '../../placements/CreatePlacementForm';
 import ZoneSettingForm from '../SettingZoneForm';
-import ShareZoneForm from '../ShareZoneForm';
+import ShareForm from '../ShareForm';
 import s from './Zone.css';
 
 const pageTitle = 'Zone';
@@ -53,6 +54,9 @@ class Zone extends Component {
     createPlacementBannerZone: PropTypes.func,
     removeZone: PropTypes.func,
     removeZoneInPlacementBannerZone: PropTypes.func,
+    updateShare: PropTypes.func,
+    createShare: PropTypes.func,
+    deleteShare: PropTypes.func,
   };
 
   componentWillMount() {
@@ -218,7 +222,7 @@ class Zone extends Component {
                         {/* BOX: FORM OF CREATE A NEW ZONE */}
                         <div className="box box-info">
                           <div className="box-header with-border">
-                            <h3 className="box-title">Share Zone</h3>
+                            <h3 className="box-title">List Share</h3>
                             <div className="box-tools pull-right">
                               <button
                                 type="button" className="btn btn-box-tool"
@@ -229,10 +233,13 @@ class Zone extends Component {
                             </div>
                           </div>
                           {/* /.box-header */}
-                          <ShareZoneForm
+                          <ShareForm
                             zone={this.props.zones && this.props.zones.editing}
                             zoneId={this.props.zoneId}
                             getZone={this.props.getZone}
+                            createZoneShare={this.props.createShare}
+                            updateZoneShare={this.props.updateShare}
+                            deleteZoneShare={this.props.deleteShare}
                           />
                         </div>
                         {/* /.col */}
@@ -358,6 +365,9 @@ const mapDispatch = {
   createPlacementBannerZone,
   removeZone,
   removeZoneInPlacementBannerZone,
+  createShare,
+  updateShare,
+  deleteShare,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zone));

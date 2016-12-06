@@ -10,7 +10,7 @@
 import DataType from 'sequelize';
 import Model from '../sequelize';
 
-const ShareZone = Model.define('ShareZone', {
+const Share = Model.define('Share', {
 
   id: {
     type: DataType.UUID,
@@ -21,13 +21,13 @@ const ShareZone = Model.define('ShareZone', {
     type: DataType.STRING,
     defaultValue: '',
   },
-  width: {
-    type: DataType.INTEGER,
-    defaultValue: 0,
+  html: {
+    type: DataType.STRING,
+    defaultValue: '',
   },
-  height: {
-    type: DataType.INTEGER,
-    defaultValue: 0,
+  css: {
+    type: DataType.STRING,
+    defaultValue: '',
   },
   description: {
     type: DataType.STRING,
@@ -40,4 +40,4 @@ const ShareZone = Model.define('ShareZone', {
 
 });
 
-export default ShareZone;
+export default Share;
