@@ -13,7 +13,6 @@ class shareForm extends Component {
     createZoneShare: PropTypes.func,
     updateZoneShare: PropTypes.func,
     deleteZoneShare: PropTypes.func,
-    removeShare: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -38,7 +37,6 @@ class shareForm extends Component {
       const id = $(this).parents('.list-zone-shared').attr('id');
       if (id) {
         self.props.deleteZoneShare(id).then(() => {
-          self.props.removeShare(id);
           self.props.getZone(self.props.zoneId);
           $(this).parent().css('display', 'none');
         });

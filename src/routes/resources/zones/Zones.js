@@ -89,6 +89,7 @@ class Zones extends Component {
 
     return !(notMatchPlacement || notMatchStatus || notMatchSite || notMatchType);
   }
+
   render() {
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>

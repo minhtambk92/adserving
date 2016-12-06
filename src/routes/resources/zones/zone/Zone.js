@@ -18,7 +18,11 @@ import { getSites } from '../../../../actions/sites';
 import { getPlacements, createPlacement, getPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
 import { createShare, updateShare, deleteShare } from '../../../../actions/shares';
-import { createSharePlacement, removeShareInSharePlacement, removeShare } from '../../../../actions/sharePlacements';
+import {
+  createSharePlacement,
+  removeShareInSharePlacement,
+  removeShare,
+} from '../../../../actions/sharePlacements';
 import Layout from '../../../../components/Layout';
 import UpdateZoneForm from '../UpdateZoneForm';
 import ListPlacementOfShare from '../ListPlacementOfShare';
@@ -253,7 +257,8 @@ class Zone extends Component {
                               {/* BOX: LIST OF Placements */}
                               <div className="box box-info">
                                 <div className="box-header with-border">
-                                  <h3 className="box-title">List Placement Not Belong To {share.name}</h3>
+                                  <h3 className="box-title">
+                                    List Placement Not Belong To {share.name}</h3>
                                 </div>
                                 {/* /.box-header */}
                                 <div className="box-body">
