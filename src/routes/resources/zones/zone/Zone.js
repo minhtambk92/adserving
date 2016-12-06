@@ -15,12 +15,14 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getZone, updateZone, deleteZone } from '../../../../actions/zones';
 import { getSites } from '../../../../actions/sites';
-import { getPlacements, createPlacement } from '../../../../actions/placements';
+import { getPlacements, createPlacement, getPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
 import { createShare, updateShare, deleteShare } from '../../../../actions/shares';
+import { createSharePlacement, removeShareInSharePlacement, removeShare } from '../../../../actions/sharePlacements';
 import Layout from '../../../../components/Layout';
 import UpdateZoneForm from '../UpdateZoneForm';
-import CreatePlacementInZone from '../../placements/CreatePlacementForm';
+import ListPlacementOfShare from '../ListPlacementOfShare';
+import ListPlacementNotBelongToShare from '../ListPlacementNotBelongToShare';
 import ZoneSettingForm from '../SettingZoneForm';
 import ShareForm from '../ShareForm';
 import s from './Zone.css';
@@ -47,6 +49,10 @@ class Zone extends Component {
     updateShare: PropTypes.func,
     createShare: PropTypes.func,
     deleteShare: PropTypes.func,
+    removeShareInSharePlacement: PropTypes.func,
+    createSharePlacement: PropTypes.func,
+    removeShare: PropTypes.func,
+    getPlacement: PropTypes.func,
   };
 
   componentWillMount() {
@@ -229,9 +235,72 @@ class Zone extends Component {
                             createZoneShare={this.props.createShare}
                             updateZoneShare={this.props.updateShare}
                             deleteZoneShare={this.props.deleteShare}
+                            removeShare={this.props.removeShare}
                           />
                         </div>
                         {/* /.col */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="tab-pane" id="addPlacement">
+                    <div className="row">
+                      <div className="col-lg-12">
+                        {this.props.zones && this.props.zones.editing &&
+                        this.props.zones.editing.shares &&
+                        this.props.zones.editing.shares.map((share) => (
+                          <div className="row" key={share.id}>
+                            <section className="col-lg-6">
+                              {/* BOX: LIST OF Placements */}
+                              <div className="box box-info">
+                                <div className="box-header with-border">
+                                  <h3 className="box-title">List Placement Not Belong To {share.name}</h3>
+                                </div>
+                                {/* /.box-header */}
+                                <div className="box-body">
+                                  <ListPlacementNotBelongToShare
+                                    list={this.props.placements && this.props.placements.list &&
+                                    this.filterPlmNotIn(this.props.placements.list,
+                                    share.placements)}
+                                    createSharePlacement={this.props.createSharePlacement}
+                                    getZone={this.props.getZone}
+                                    getPlacements={this.props.getPlacements}
+                                    zoneId={this.props.zoneId}
+                                    shareId={share.id}
+                                    getPlacement={this.props.getPlacement}
+                                    zone={this.props.zones && this.props.zones.editing}
+                                  />
+                                </div>
+                                {/* /.box-body */}
+                              </div>
+                              {/* /.box */}
+                            </section>
+                            <section className="col-lg-6">
+                              {/* BOX: LIST OF Placements */}
+                              <div className="box box-info">
+                                <div className="box-header with-border">
+                                  <h3 className="box-title">
+                                    List placements of {share.name}
+                                  </h3>
+                                </div>
+                                {/* /.box-header */}
+                                <div className="box-body">
+                                  <ListPlacementOfShare
+                                    list={this.dataPlacement(share.placements)}
+                                    /* eslint-disable max-len */
+                                    removeShareInSharePlacement={this.props.removeShareInSharePlacement}
+                                    /* eslint-enable max-len */
+                                    getPlacements={this.props.getPlacements}
+                                    getZone={this.props.getZone}
+                                    zoneId={this.props.zoneId}
+                                    shareId={share.id}
+                                  />
+                                </div>
+                                {/* /.box-body */}
+                              </div>
+                              {/* /.box */}
+                            </section>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -252,6 +321,7 @@ const mapState = (state) => ({
   sites: state.sites,
   placements: state.placements,
   campaigns: state.campaigns,
+  sharePlacements: state.sharePlacements,
 });
 
 const mapDispatch = {
@@ -265,6 +335,10 @@ const mapDispatch = {
   createShare,
   updateShare,
   deleteShare,
+  createSharePlacement,
+  removeShareInSharePlacement,
+  removeShare,
+  getPlacement,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zone));

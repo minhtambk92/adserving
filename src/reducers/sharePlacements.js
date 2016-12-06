@@ -1,17 +1,13 @@
 import { combineReducers } from 'redux';
 import {
-  GET_SHARE_PLACEMENTS,
-  GET_SHARE_PLACEMENT,
+  REMOVE_SHARE_IN_SHARE_PLACEMENT,
+  REMOVE_PLACEMENT,
   CREATE_SHARE_PLACEMENT,
-  UPDATE_SHARE_PLACEMENT,
   DELETE_SHARE_PLACEMENT,
 } from '../constants';
 
 function list(state = [], action) {
   switch (action.type) {
-    case GET_SHARE_PLACEMENTS: {
-      return action.payload.sharePlacements;
-    }
     case CREATE_SHARE_PLACEMENT: {
       return [
         action.payload.sharePlacement,
@@ -26,11 +22,11 @@ function list(state = [], action) {
 
 function editing(state = {}, action) {
   switch (action.type) {
-    case GET_SHARE_PLACEMENT: {
-      return action.payload.sharePlacement;
+    case REMOVE_PLACEMENT: {
+      return null;
     }
-    case UPDATE_SHARE_PLACEMENT: {
-      return action.payload.sharePlacement;
+    case REMOVE_SHARE_IN_SHARE_PLACEMENT: {
+      return null;
     }
     case DELETE_SHARE_PLACEMENT: {
       return null;

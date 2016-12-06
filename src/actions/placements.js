@@ -195,36 +195,6 @@ export function updatePlacement({
           description
           campaignId
           status
-          banners {
-            id
-            name
-            html
-            width
-            height
-            keyword
-            weight
-            description
-            status
-            createdAt
-            updatedAt
-          }
-          zones {
-              id
-              siteId
-              name
-              description
-              type
-              html
-              css
-              slot
-              width
-              height
-              sizeText
-              sizeValue
-              status
-              createdAt
-              updatedAt
-            }
           createdAt
           updatedAt
         }

@@ -14,6 +14,11 @@ class ZoneList extends Component {
     event.persist();
     this.props.setPageZoneActiveTab('editZone');
   }
+
+  onTabClickSettingZone(event) {
+    event.persist();
+    this.props.setPageZoneActiveTab('settingZone');
+  }
   onTabClickShareZone(event) {
     event.persist();
     this.props.setPageZoneActiveTab('shareZone');
@@ -44,14 +49,20 @@ class ZoneList extends Component {
     }, {
       data: 'sizeText',
     }, {
-      data: 'description',
-    }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/zone/${rowData.id}`}
           onClick={(event) => this.onTabClickShareZone(event)}
-        >New Placement</Link>, cell);
+        >Share Zone</Link>, cell);
+      },
+    }, {
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link
+          to={`/resource/zone/${rowData.id}`}
+          onClick={(event) => this.onTabClickSettingZone(event)}
+        >Setting</Link>, cell);
       },
     }];
   }
@@ -71,7 +82,7 @@ class ZoneList extends Component {
             <th><ICheck type="checkbox" className="inputChooseAllZones" /></th>
             <th>Name</th>
             <th>Type</th>
-            <th>Description</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}
@@ -80,7 +91,7 @@ class ZoneList extends Component {
             <th><ICheck type="checkbox" className="inputChooseAllZones" /></th>
             <th>Name</th>
             <th>Type</th>
-            <th>Description</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}

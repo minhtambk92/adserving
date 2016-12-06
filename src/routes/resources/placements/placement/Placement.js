@@ -22,6 +22,7 @@ import {
   removePlacement,
   removeBannerInPlacementBanner,
 } from '../../../../actions/placementBanners';
+import { removePlacementInSharePlacement } from '../../../../actions/sharePlacements';
 import Layout from '../../../../components/Layout';
 import ListBannerNotBelongPlacement from '../ListBannerNotBelongPlacement';
 import ListBannerOfPlacement from '../ListBannerOfPlacement';
@@ -52,6 +53,7 @@ class Placement extends Component {
     getChannels: PropTypes.func,
     channels: PropTypes.object,
     createZone: PropTypes.func,
+    removePlacementInSharePlacement: PropTypes.func,
   };
 
   componentWillMount() {
@@ -167,6 +169,7 @@ class Placement extends Component {
                             getPlacement={this.props.getPlacement}
                             campaigns={this.props.campaigns && this.props.campaigns.list}
                             removePlacement={this.props.removePlacement}
+                            removePlacementInSharePlacement={this.props.removePlacementInSharePlacement}
                           />
                         </div>
                         {/* /.col */}
@@ -267,6 +270,7 @@ const mapState = (state) => ({
   zones: state.zones,
   channels: state.channels,
   sites: state.sites,
+  sharePlacements: state.sharePlacements,
 });
 
 const mapDispatch = {
@@ -280,6 +284,7 @@ const mapDispatch = {
   removeBannerInPlacementBanner,
   createBanner,
   getChannels,
+  removePlacementInSharePlacement,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placement));

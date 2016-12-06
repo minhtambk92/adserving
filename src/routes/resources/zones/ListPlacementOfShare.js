@@ -9,8 +9,9 @@ class ListPlacementOfZone extends Component {
     zoneId: PropTypes.string.isRequired,
     list: PropTypes.array,
     getPlacements: PropTypes.func,
-    removeZoneInPlacementBanner: PropTypes.func,
+    removeShareInSharePlacement: PropTypes.func,
     getZone: PropTypes.func,
+    shareId: PropTypes.string,
   };
 
   dataTableOptions() {
@@ -42,7 +43,7 @@ class ListPlacementOfZone extends Component {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link
           to="#"
-          onClick={() => this.removePlacement(rowData.id)}
+          onClick={() => this.removePlacementToShare(rowData.id)}
         >
           Remove
         </Link>, cell);
@@ -51,11 +52,11 @@ class ListPlacementOfZone extends Component {
     }];
   }
 
-  removePlacement(id) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const zId = this.props.zoneId;
+  removePlacementToShare(id) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const shareId = this.props.shareId;
     const placementId = id;
-    if (placementId && zId) {
-      this.props.removeZoneInPlacementBanner({ placementId, zId }).then(() => {
+    if (placementId && shareId) {
+      this.props.removeShareInSharePlacement({ placementId, shareId }).then(() => {
         this.props.getZone(this.props.zoneId).then(() => {
           this.props.getPlacements();
         });

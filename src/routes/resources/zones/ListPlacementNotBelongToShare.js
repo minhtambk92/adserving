@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import ReactDOM from 'react-dom';
 import { DataTables, ICheck } from '../../../components/UI/';
 import Link from '../../../components/Link';
@@ -8,10 +9,13 @@ class ListPlacementNotBelongToZone extends Component {
     zoneId: PropTypes.string.isRequired,
     containerWidth: PropTypes.number,
     list: PropTypes.array,
-    pushZoneToPlacement: PropTypes.func,
     getZone: PropTypes.func,
-    createPlacementBanner: PropTypes.func,
+    createSharePlacement: PropTypes.func,
     getPlacements: PropTypes.func,
+    shareId: PropTypes.string,
+    getPlacement: PropTypes.func,
+    placements: PropTypes.object,
+    zone: PropTypes.object,
   };
 
   dataTableOptions() {
@@ -43,9 +47,9 @@ class ListPlacementNotBelongToZone extends Component {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link
           to="#"
-          onClick={() => this.pushZoneToPlacement(rowData.id)}
+          onClick={() => this.pushPlacementToShare(rowData.id)}
         >
-          Add To Zone
+          Add To Share
         </Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
@@ -53,18 +57,23 @@ class ListPlacementNotBelongToZone extends Component {
   }
 
   /* eslint-disable max-len */
-  pushZoneToPlacement(id) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const zoneId = this.props.zoneId;
-    const bannerId = null;
+  pushPlacementToShare(id) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const shareId = this.props.shareId;
     const placementId = id;
-    if (placementId && zoneId) {
-      this.props.createPlacementBanner({ placementId, bannerId, zoneId }).then(() => {
-        this.props.getZone(this.props.zoneId).then(() => {
-          this.props.getPlacements();
+    if (placementId && shareId) {
+      const newP = _.filter(this.props.list, { id: placementId });
+      if (newP[0].sizeWidth <= this.props.zone.width && newP[0].sizeHeight <= this.props.zone.height) {
+        this.props.createSharePlacement({ placementId, shareId }).then(() => {
+          this.props.getZone(this.props.zoneId).then(() => {
+            this.props.getPlacements();
+          });
         });
-      });
+      } else {
+        console.log('khong them dc');
+      }
     }
   }
+
   /* eslint-enable max-len */
 
   render() {
