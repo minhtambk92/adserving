@@ -70,7 +70,7 @@ class CreateCampaignForm extends Component {
       const now = moment().format('x');
       const start = moment(startTime).format('x');
       const end = moment(endTime).format('x');
-      if ((start < end) && (now < start)) {
+      if ((start < end) && (now < end)) {
         this.props.createCampaign({
           advertiserId,
           name,
@@ -200,8 +200,8 @@ class CreateCampaignForm extends Component {
             <div className="typeCPM">
               <div className="form-group">
                 <div className="col-sm-2">&nbsp;</div>
-                <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-2 control-label">Expire Value CPM</label>
-                <div className="col-sm-8">
+                <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Expire Value CPM</label>
+                <div className="col-sm-7">
                   <input
                     type="number" className="form-control" id="inputCampaignExpireValueCPM"
                     placeholder="1000"
@@ -213,8 +213,8 @@ class CreateCampaignForm extends Component {
               </div>
               <div className="form-group">
                 <div className="col-sm-2">&nbsp;</div>
-                <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-2 control-label">Max CPM per Day</label>
-                <div className="col-sm-8">
+                <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Max CPM per Day</label>
+                <div className="col-sm-7">
                   <input
                     type="number" className="form-control" id="inputCampaignMaxCPMPerDay"
                     placeholder="1000"

@@ -46,7 +46,7 @@ class CreatePlacementForm extends Component {
       const now = moment().format('x');
       const start = moment(startTime).format('x');
       const end = moment(endTime).format('x');
-      if ((start < end) && (now < start)) {
+      if ((start < end) && (now < end)) {
         this.props.createPlacement({
           name,
           startTime,
