@@ -27,6 +27,7 @@ import placementBanners from './placementBanner/placementBanners';
 import optionChannels from './optionChannel/optionChannels';
 import clickImpressions from './clickImpression/clickImpressions';
 import shares from './share/shares';
+import sharePlacements from './sharePlacement/sharePlacements';
 
 const queries = new ObjectType({
   name: 'Query',
@@ -55,6 +56,7 @@ const queries = new ObjectType({
     optionChannels,
     clickImpressions,
     shares,
+    sharePlacements,
   },
 });
 
