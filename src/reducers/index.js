@@ -19,6 +19,7 @@ import channels from './channels';
 import optionChannels from './optionChannels';
 import clickImpressions from './clickImpressions';
 import shares from './shares';
+import sharePlacements from './sharePlacements';
 
 import page from './pages';
 
@@ -43,5 +44,6 @@ export default combineReducers({
   optionChannels,
   clickImpressions,
   shares,
+  sharePlacements,
   page,
 });
