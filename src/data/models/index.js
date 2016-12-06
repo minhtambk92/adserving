@@ -32,7 +32,7 @@ import Site from './Site';
 import Zone from './Zone';
 import Channel from './Channel';
 import Filter from './Filter';
-import PlacementBannerZone from './PlacementBannerZone';
+import PlacementBanner from './PlacementBanner';
 import OptionChannel from './OptionChannel';
 import ClickImpression from './ClickImpression';
 import Share from './Share';
@@ -180,29 +180,22 @@ Role.users = Role.belongsToMany(User, {
   as: 'users',
 });
 
-PlacementBannerZone.placement = PlacementBannerZone.belongsTo(Placement, {
+PlacementBanner.placement = PlacementBanner.belongsTo(Placement, {
   foreignKey: 'placementId',
 });
 
-PlacementBannerZone.banner = PlacementBannerZone.belongsTo(Banner, {
+PlacementBanner.banner = PlacementBanner.belongsTo(Banner, {
   foreignKey: 'bannerId',
 });
 
-PlacementBannerZone.zone = PlacementBannerZone.belongsTo(Zone, {
-  foreignKey: 'zoneId',
-});
-
-Placement.placementBannerZones = Placement.hasMany(PlacementBannerZone, {
+Placement.placementBanners = Placement.hasMany(PlacementBanner, {
   foreignKey: 'placementId',
 });
 
-Banner.placementBannerZones = Banner.hasMany(PlacementBannerZone, {
+Banner.placementBanners = Banner.hasMany(PlacementBanner, {
   foreignKey: 'bannerId',
 });
 
-Zone.placementBannerZones = Zone.hasMany(PlacementBannerZone, {
-  foreignKey: 'zoneId',
-});
 
 // Each site has many zones
 Site.zones = Site.hasMany(Zone, {
@@ -319,7 +312,7 @@ export {
   Zone,
   Channel,
   Filter,
-  PlacementBannerZone,
+  PlacementBanner,
   OptionChannel,
   ClickImpression,
   Share,

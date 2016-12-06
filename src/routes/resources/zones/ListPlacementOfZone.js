@@ -9,7 +9,7 @@ class ListPlacementOfZone extends Component {
     zoneId: PropTypes.string.isRequired,
     list: PropTypes.array,
     getPlacements: PropTypes.func,
-    removeZoneInPlacementBannerZone: PropTypes.func,
+    removeZoneInPlacementBanner: PropTypes.func,
     getZone: PropTypes.func,
   };
 
@@ -55,7 +55,7 @@ class ListPlacementOfZone extends Component {
     const zId = this.props.zoneId;
     const placementId = id;
     if (placementId && zId) {
-      this.props.removeZoneInPlacementBannerZone({ placementId, zId }).then(() => {
+      this.props.removeZoneInPlacementBanner({ placementId, zId }).then(() => {
         this.props.getZone(this.props.zoneId).then(() => {
           this.props.getPlacements();
         });

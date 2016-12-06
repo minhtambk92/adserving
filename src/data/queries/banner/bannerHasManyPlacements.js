@@ -10,7 +10,7 @@ const bannerHasManyPlacements = () => ({
   args: Object.assign(defaultListArgs(), {
     // Additional params
   }),
-  resolve: resolver(Placement.placementBannerZones, {
+  resolve: resolver(Placement.placementBanners, {
     async after(results) {
       const placementIds = results.map(result => result.placementId);
       return await Placement.findAll({

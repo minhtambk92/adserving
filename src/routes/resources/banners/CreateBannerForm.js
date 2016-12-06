@@ -14,7 +14,7 @@ class CreateBannerForm extends Component {
     createBanner: PropTypes.func,
     channels: PropTypes.array,
     placementId: PropTypes.string,
-    createPlacementBannerZone: PropTypes.func,
+    createPlacementBanner: PropTypes.func,
     getPlacement: PropTypes.func,
     banners: PropTypes.array,
     getBanners: PropTypes.func,
@@ -168,7 +168,7 @@ class CreateBannerForm extends Component {
           const zoneId = null;
           const placementId = this.props.placementId;
           if (placementId && bannerId) {
-            this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+            this.props.createPlacementBanner({ placementId, bannerId, zoneId }).then(() => {
               this.props.getPlacement(this.props.placementId);
             });
           }

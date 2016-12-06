@@ -28,7 +28,7 @@ import {
   Placement,
   Zone,
   Banner,
-  PlacementBannerZone,
+  PlacementBanner,
   ClickImpression,
   Share,
 } from '../../data/models';
@@ -706,29 +706,26 @@ async function bannerFiction() {
   }
 }
 
-// PlacementBannerZones Fiction
-async function placementBannerZoneFiction() {
-  console.log(chalk.grey('Check current number of placementBannerZones...'));
-  const placementBannerZonesQuantity = await PlacementBannerZone.count();
+// PlacementBanners Fiction
+async function placementBannerFiction() {
+  console.log(chalk.grey('Check current number of placementBanners...'));
+  const placementBannersQuantity = await PlacementBanner.count();
 
-  if (placementBannerZonesQuantity === 0) {
-    console.log(chalk.red('No placementBannerZone found! Do a fiction...'));
-    // Get id of Site
-    const zone = await Zone.findOne({ where: { name: 'Zone Top' } });
+  if (placementBannersQuantity === 0) {
+    console.log(chalk.red('No placementBanner found! Do a fiction...'));
     // Get id of Placement
     const placement = await Placement.findOne({ where: { name: 'Placement' } });
     // Get Id of Banner
     const banner = await Banner.findOne({ where: { name: 'Banner Top' } });
     // Create an Zone
-    await PlacementBannerZone.create({
+    await PlacementBanner.create({
       placementId: placement.id,
       bannerId: banner.id,
-      zoneId: zone.id,
     });
 
-    console.log(chalk.green('placementBannerZone is created. Passed!'));
+    console.log(chalk.green('placementBanner is created. Passed!'));
   } else {
-    console.log(chalk.green(`${placementBannerZonesQuantity} placementBannerZone(s) found. Passed!`));
+    console.log(chalk.green(`${placementBannersQuantity} placementBanner(s) found. Passed!`));
   }
 }
 
@@ -769,7 +766,7 @@ async function fiction() {
   await zoneFiction();
   await sharedZoneFiction();
   await bannerFiction();
-  await placementBannerZoneFiction();
+  await placementBannerFiction();
   await clickImpressionFiction();
   console.log(chalk.magenta(`Your application is now ready at http://${host}/`));
 }

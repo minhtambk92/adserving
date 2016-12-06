@@ -20,10 +20,7 @@ class PlacementList extends Component {
     event.persist();
     this.props.setPagePlacementActiveTab('addBanner');
   }
-  onTabClickAddZone(event) {
-    event.persist();
-    this.props.setPagePlacementActiveTab('addZone');
-  }
+
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     const columns = [{
       data: 'id',
@@ -64,14 +61,6 @@ class PlacementList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/placement/${rowData.id}`}
-          onClick={(event) => this.onTabClickAddZone(event)}
-        >New Zone</Link>, cell);
-      },
-    }, {
-      data: null,
-      createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link
-          to={`/resource/placement/${rowData.id}`}
           onClick={(event) => this.onTabClickAddBanner(event)}
         >New Banner</Link>, cell);
       },
@@ -105,7 +94,6 @@ class PlacementList extends Component {
             <th>Start Time</th>
             <th>End Time</th>
             <th>&nbsp;</th>
-            <th>&nbsp;</th>
           </tr>
         )}
         tfoot={(
@@ -115,7 +103,6 @@ class PlacementList extends Component {
             <th>Size(px)</th>
             <th>Start Time</th>
             <th>End Time</th>
-            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}

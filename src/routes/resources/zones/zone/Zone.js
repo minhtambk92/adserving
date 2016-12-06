@@ -18,10 +18,8 @@ import { getSites } from '../../../../actions/sites';
 import { getPlacements, createPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
 import {
-  createPlacementBannerZone,
-  removeZone,
-  removeZoneInPlacementBannerZone,
-} from '../../../../actions/placementBannerZones';
+  createPlacementBanner,
+} from '../../../../actions/placementBanners';
 import { createShare, updateShare, deleteShare } from '../../../../actions/shares';
 import Layout from '../../../../components/Layout';
 import ListPlacementNotBelongToZone from '../ListPlacementNotBelongToZone';
@@ -50,10 +48,8 @@ class Zone extends Component {
     getPlacements: PropTypes.func,
     campaigns: PropTypes.object,
     getCampaigns: PropTypes.func,
-    placementBannerZones: PropTypes.object,
-    createPlacementBannerZone: PropTypes.func,
-    removeZone: PropTypes.func,
-    removeZoneInPlacementBannerZone: PropTypes.func,
+    placementBanners: PropTypes.object,
+    createPlacementBanner: PropTypes.func,
     updateShare: PropTypes.func,
     createShare: PropTypes.func,
     deleteShare: PropTypes.func,
@@ -181,7 +177,6 @@ class Zone extends Component {
                             sites={this.props.sites && this.props.sites.list}
                             zoneId={this.props.zoneId}
                             getZone={this.props.getZone}
-                            removeZone={this.props.removeZone}
                           />
                         </div>
                         {/* /.col */}
@@ -263,7 +258,7 @@ class Zone extends Component {
                                     this.props.zones.editing.placements &&
                                     this.filterPlmNotIn(this.props.placements.list,
                                       this.props.zones.editing.placements)}
-                                  createPlacementBannerZone={this.props.createPlacementBannerZone}
+                                  createPlacementBanner={this.props.createPlacementBanner}
                                   getZone={this.props.getZone}
                                   getPlacements={this.props.getPlacements}
                                   zoneId={this.props.zoneId}
@@ -288,9 +283,6 @@ class Zone extends Component {
                                   list={this.props.zones && this.props.zones.editing &&
                                   this.props.zones.editing.placements &&
                                     this.dataPlacement(this.props.zones.editing.placements)}
-                                  /* eslint-disable max-len */
-                                  removeZoneInPlacementBannerZone={this.props.removeZoneInPlacementBannerZone}
-                                  /* eslint-enable max-len */
                                   getPlacements={this.props.getPlacements}
                                   getZone={this.props.getZone}
                                   zoneId={this.props.zoneId}
@@ -327,7 +319,7 @@ class Zone extends Component {
                             getPlacements={this.props.getPlacements}
                             placements={this.props.placements && this.props.placements.list}
                             getZone={this.props.getZone}
-                            createPlacementBannerZone={this.props.createPlacementBannerZone}
+                            createPlacementBanner={this.props.createPlacementBanner}
                           />
                         </div>
                         {/* /.col */}
@@ -351,7 +343,7 @@ const mapState = (state) => ({
   sites: state.sites,
   placements: state.placements,
   campaigns: state.campaigns,
-  placementBannerZones: state.placementBannerZones,
+  placementBanners: state.placementBanners,
 });
 
 const mapDispatch = {
@@ -362,9 +354,7 @@ const mapDispatch = {
   getPlacements,
   getCampaigns,
   createPlacement,
-  createPlacementBannerZone,
-  removeZone,
-  removeZoneInPlacementBannerZone,
+  createPlacementBanner,
   createShare,
   updateShare,
   deleteShare,

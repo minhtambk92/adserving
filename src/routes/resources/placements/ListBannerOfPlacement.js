@@ -11,7 +11,7 @@ class ListBannerOfPlacement extends Component {
     list: PropTypes.array,
     removeBannerToPlacement: PropTypes.func,
     getPlacement: PropTypes.func,
-    removeBannerInPlacementBannerZone: PropTypes.func,
+    removeBannerInPlacementBanner: PropTypes.func,
     getBanners: PropTypes.func,
   };
 
@@ -57,7 +57,7 @@ class ListBannerOfPlacement extends Component {
     const placementId = this.props.placementId;
     const bId = bannerId;
     if (placementId && bId) {
-      this.props.removeBannerInPlacementBannerZone({ placementId, bId }).then(() => {
+      this.props.removeBannerInPlacementBanner({ placementId, bId }).then(() => {
         this.props.getBanners();
         this.props.getPlacement(placementId).then(() => {
         });

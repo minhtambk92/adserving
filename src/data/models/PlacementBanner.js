@@ -5,7 +5,7 @@
 import DataType from 'sequelize';
 import Model from '../sequelize';
 
-const PlacementBannerZone = Model.define('PlacementBannerZone', {
+const PlacementBanner = Model.define('PlacementBanner', {
   id: {
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
@@ -17,12 +17,9 @@ const PlacementBannerZone = Model.define('PlacementBannerZone', {
   bannerId: {
     type: DataType.UUID,
   },
-  zoneId: {
-    type: DataType.UUID,
-  },
 
 }, {
   // Additional options
 });
 
-export default PlacementBannerZone;
+export default PlacementBanner;

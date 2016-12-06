@@ -10,7 +10,7 @@ class ListPlacementOfBanner extends Component {
     containerWidth: PropTypes.number,
     list: PropTypes.array,
     getPlacements: PropTypes.func,
-    removeBannerInPlacementBannerZone: PropTypes.func,
+    removeBannerInPlacementBanner: PropTypes.func,
     getBanner: PropTypes.func,
   };
 
@@ -53,7 +53,7 @@ class ListPlacementOfBanner extends Component {
     const bId = this.props.bannerId;
     const placementId = id;
     if (placementId && bId) {
-      this.props.removeBannerInPlacementBannerZone({ placementId, bId }).then(() => {
+      this.props.removeBannerInPlacementBanner({ placementId, bId }).then(() => {
         this.props.getBanner(this.props.bannerId).then(() => {
           this.props.getPlacements();
         });

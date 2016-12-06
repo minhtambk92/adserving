@@ -1,13 +1,13 @@
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { PlacementBannerZone } from '../../models';
-import ZoneType from '../../types/zone/ZoneType';
+import { PlacementBanner } from '../../models';
+import PlacementType from '../../types/placement/PlacementType';
 
-const placementBannerZoneBelongsToZone = () => ({
-  type: ZoneType,
+const placementBannerBelongsToPlacement = () => ({
+  type: PlacementType,
   args: Object.assign(defaultListArgs(), {
     // Additional params
   }),
-  resolve: resolver(PlacementBannerZone.zone, {
+  resolve: resolver(PlacementBanner.placement, {
     before(options) {
       const opts = options;
       opts.order = options.order || [];
@@ -17,4 +17,4 @@ const placementBannerZoneBelongsToZone = () => ({
   }),
 });
 
-export default placementBannerZoneBelongsToZone;
+export default placementBannerBelongsToPlacement;

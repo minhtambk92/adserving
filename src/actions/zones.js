@@ -66,19 +66,6 @@ export function getZone(id) {
             css
             description
           }
-          placements {
-              id
-              name
-              sizeWidth
-              sizeHeight
-              startTime
-              endTime
-              weight
-              description
-              campaignId
-              createdAt
-              updatedAt
-          }
         createdAt
         updatedAt
         }
@@ -135,20 +122,6 @@ export function getZones(args = {
             css
             description
           }
-          placements {
-              id
-              name
-              sizeWidth
-              sizeHeight
-              startTime
-              endTime
-              weight
-              description
-              campaignId
-              status
-              createdAt
-              updatedAt
-            }
           createdAt
           updatedAt
         }

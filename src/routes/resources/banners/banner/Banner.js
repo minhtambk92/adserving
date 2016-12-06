@@ -19,10 +19,10 @@ import { getCampaigns } from '../../../../actions/campaigns';
 import { createPlacement, getPlacements } from '../../../../actions/placements';
 import { getChannels } from '../../../../actions/channels';
 import {
-  createPlacementBannerZone,
+  createPlacementBanner,
   removeBanner,
-  removeBannerInPlacementBannerZone,
-} from '../../../../actions/placementBannerZones';
+  removeBannerInPlacementBanner,
+} from '../../../../actions/placementBanners';
 import {
   createClickImpression,
   deleteClickImpression,
@@ -52,13 +52,13 @@ class Banner extends Component {
     getCampaigns: PropTypes.func,
     createPlacement: PropTypes.func,
     placements: PropTypes.object,
-    createPlacementBannerZone: PropTypes.func,
+    createPlacementBanner: PropTypes.func,
     getPlacements: PropTypes.func,
-    placementBannerZones: PropTypes.object,
+    placementBanners: PropTypes.object,
     removeBanner: PropTypes.func,
     getChannels: PropTypes.func,
     channels: PropTypes.object,
-    removeBannerInPlacementBannerZone: PropTypes.func,
+    removeBannerInPlacementBanner: PropTypes.func,
     createClickImpression: PropTypes.func,
     deleteClickImpression: PropTypes.func,
     updateClickImpression: PropTypes.func,
@@ -244,7 +244,7 @@ class Banner extends Component {
                                     this.props.placements.list,
                                     this.props.banners.editing.placements,
                                   )}
-                                  createPlacementBannerZone={this.props.createPlacementBannerZone}
+                                  createPlacementBanner={this.props.createPlacementBanner}
                                   getBanner={this.props.getBanner}
                                   getPlacements={this.props.getPlacements}
                                   bannerId={this.props.bannerId}
@@ -272,7 +272,7 @@ class Banner extends Component {
                                     this.props.banners.editing.placements,
                                   )}
                                   /* eslint-disable max-len */
-                                  removeBannerInPlacementBannerZone={this.props.removeBannerInPlacementBannerZone}
+                                  removeBannerInPlacementBanner={this.props.removeBannerInPlacementBanner}
                                   /* eslint-enable max-len */
                                   getPlacements={this.props.getPlacements}
                                   getBanner={this.props.getBanner}
@@ -306,7 +306,7 @@ class Banner extends Component {
                                 getPlacements={this.props.getPlacements}
                                 placements={this.props.placements && this.props.placements.list}
                                 getBanner={this.props.getBanner}
-                                createPlacementBannerZone={this.props.createPlacementBannerZone}
+                                createPlacementBanner={this.props.createPlacementBanner}
                               />
                             </div>
                             {/* /.col */}
@@ -333,7 +333,7 @@ const mapState = (state) => ({
   placements: state.placements,
   channels: state.channels,
   clickImpressions: state.clickImpressions,
-  placementBannerZones: state.placementBannerZones,
+  placementBanners: state.placementBanners,
 });
 
 const mapDispatch = {
@@ -342,10 +342,10 @@ const mapDispatch = {
   deleteBanner,
   getCampaigns,
   createPlacement,
-  createPlacementBannerZone,
+  createPlacementBanner,
   getPlacements,
   removeBanner,
-  removeBannerInPlacementBannerZone,
+  removeBannerInPlacementBanner,
   getChannels,
   createClickImpression,
   deleteClickImpression,

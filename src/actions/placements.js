@@ -54,23 +54,6 @@ export function getPlacement(id) {
             createdAt
             updatedAt
            }
-          zones {
-            id
-            siteId
-            name
-            description
-            type
-            html
-            css
-            slot
-            width
-            height
-            sizeText
-            sizeValue
-            status
-            createdAt
-            updatedAt
-          }
           createdAt
           updatedAt
         }

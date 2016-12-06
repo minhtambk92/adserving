@@ -10,7 +10,7 @@ class CreateZoneForm extends Component {
     getSite: PropTypes.func,
     siteId: PropTypes.string,
     placementId: PropTypes.string,
-    createPlacementBannerZone: PropTypes.func,
+    createPlacementBanner: PropTypes.func,
     getPlacement: PropTypes.func,
     zones: PropTypes.array,
     getZones: PropTypes.func,
@@ -159,7 +159,7 @@ class CreateZoneForm extends Component {
           const bannerId = null;
           const placementId = this.props.placementId;
           if (placementId && zoneId) {
-            this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+            this.props.createPlacementBanner({ placementId, bannerId, zoneId }).then(() => {
               this.props.getPlacement(this.props.placementId);
             });
           }

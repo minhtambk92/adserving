@@ -10,7 +10,7 @@ class ListPlacementNotBelongToZone extends Component {
     list: PropTypes.array,
     pushZoneToPlacement: PropTypes.func,
     getZone: PropTypes.func,
-    createPlacementBannerZone: PropTypes.func,
+    createPlacementBanner: PropTypes.func,
     getPlacements: PropTypes.func,
   };
 
@@ -58,7 +58,7 @@ class ListPlacementNotBelongToZone extends Component {
     const bannerId = null;
     const placementId = id;
     if (placementId && zoneId) {
-      this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+      this.props.createPlacementBanner({ placementId, bannerId, zoneId }).then(() => {
         this.props.getZone(this.props.zoneId).then(() => {
           this.props.getPlacements();
         });

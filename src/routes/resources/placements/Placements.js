@@ -118,8 +118,9 @@ class Placements extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <PlacemenList list={this.getFilteredPlacements()}
-                                setPagePlacementActiveTab={this.props.setPagePlacementActiveTab}
+                  <PlacemenList
+                    list={this.getFilteredPlacements()}
+                    setPagePlacementActiveTab={this.props.setPagePlacementActiveTab}
                   />
                 </div>
                 {/* /.box-body */}

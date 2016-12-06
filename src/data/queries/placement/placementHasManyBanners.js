@@ -14,7 +14,7 @@ const placementHasManyBanners = () => ({
   args: Object.assign(defaultListArgs(), {
     // Additional params
   }),
-  resolve: resolver(Banner.placementBannerZones, {
+  resolve: resolver(Banner.placementBanners, {
     async after(results) {
       const bannerIds = results.map(result => result.bannerId);
       return await Banner.findAll({
