@@ -47,7 +47,7 @@ class PlacementList extends Component {
     }, {
       data: null,
       render: (data, type, row) => {
-        const size = `${row.sizeWidth} x ${row.sizeHeight}`;
+        const size = `${row.sizeWidth}px x ${row.sizeHeight}px`;
         return size;
       },
     }, {
