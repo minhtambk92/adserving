@@ -162,6 +162,9 @@ class Advertiser extends Component {
                                   this.props.advertisers.editing.campaigns
                                   && this.props.advertisers.editing.campaigns}
                                   setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
+                                  createCampaign={this.props.createCampaign}
+                                  advertiserId={this.props.advertiserId}
+                                  getAdvertiser={this.props.getAdvertiser}
                                 />
                               </div>
                               {/* /.box-body */}

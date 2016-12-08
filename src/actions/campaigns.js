@@ -54,7 +54,10 @@ export function getCampaign(id) {
             endTime
             weight
             description
+            campaignId
             status
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt

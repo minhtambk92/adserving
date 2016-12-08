@@ -1,5 +1,5 @@
 import {
-  CREATE_PLACEMENT_BANNER, REMOVE_PLACEMENT_BANNER, DELETE_BANNER,
+  CREATE_PLACEMENT_BANNER, REMOVE_PLACEMENT_BANNER, DELETE_BANNER, GET_PLACEMENT_BY_BANNER_ID,
 } from '../constants';
 
 export default function placementBanners(state = {}, action) {
@@ -8,6 +8,12 @@ export default function placementBanners(state = {}, action) {
       return {
         ...state,
         list: action.payload.placementBanner,
+      };
+    }
+    case GET_PLACEMENT_BY_BANNER_ID: {
+      return {
+        ...state,
+        list: action.payload.placementBanners,
       };
     }
     case REMOVE_PLACEMENT_BANNER: {

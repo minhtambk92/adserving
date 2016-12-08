@@ -121,6 +121,7 @@ class Placements extends Component {
                   <PlacemenList
                     list={this.getFilteredPlacements()}
                     setPagePlacementActiveTab={this.props.setPagePlacementActiveTab}
+                    createPlacement={this.props.createPlacement}
                   />
                 </div>
                 {/* /.box-body */}

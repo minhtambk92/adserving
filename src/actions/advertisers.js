@@ -22,6 +22,7 @@ export function getAdvertiser(id) {
           status
           campaigns {
             id
+            advertiserId
             name
             startTime
             endTime
@@ -29,6 +30,9 @@ export function getAdvertiser(id) {
             viewPerSession
             timeResetViewCount
             weight
+            revenueType
+            expireValueCPM
+            maxCPMPerDay
             description
             status
             createdAt

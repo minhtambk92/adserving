@@ -122,6 +122,7 @@ class Campaigns extends Component {
                   <CampaignList
                     list={this.getFilteredCampaigns()}
                     setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
+                    createCampaign={this.props.createCampaign}
                   />
                 </div>
                 {/* /.box-body */}

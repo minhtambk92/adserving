@@ -11,14 +11,48 @@ class PlacementList extends Component {
     containerWidth: PropTypes.number,
     list: PropTypes.array,
     setPagePlacementActiveTab: PropTypes.func,
+    createPlacement: PropTypes.func,
+    getCampaign: PropTypes.func,
+    campaignId: PropTypes.string,
   };
+
   onTabClickEditPlacement(event) {
     event.persist();
     this.props.setPagePlacementActiveTab('editPlacement');
   }
+
   onTabClickAddBanner(event) {
     event.persist();
     this.props.setPagePlacementActiveTab('addBanner');
+  }
+
+  duplicatePlacement(data) {
+    const name = `Copy of ${data.name}`;
+    const startTime = data.startTime;
+    const endTime = data.endTime;
+    const sizeWidth = data.sizeWidth;
+    const sizeHeight = data.sizeHeight;
+    const weight = data.weight;
+    const description = data.description;
+    const campaignId = data.campaignId;
+    const status = data.status;
+    if (name && startTime && endTime && sizeHeight && sizeWidth && weight && description) {
+      this.props.createPlacement({
+        name,
+        startTime,
+        endTime,
+        sizeWidth,
+        sizeHeight,
+        weight,
+        description,
+        campaignId,
+        status,
+      }).then(() => {
+        if (this.props.campaignId) {
+          this.props.getCampaign(this.props.campaignId);
+        }
+      });
+    }
   }
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -64,9 +98,18 @@ class PlacementList extends Component {
           onClick={(event) => this.onTabClickAddBanner(event)}
         >New Banner</Link>, cell);
       },
+    }, {
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link
+          to="#"
+          onClick={() => this.duplicatePlacement(rowData)}
+        >Duplicate</Link>, cell);
+      },
     }];
     return columns;
   }
+
   render() {
     let data = [];
     if (this.props.list) {
@@ -94,6 +137,7 @@ class PlacementList extends Component {
             <th>Start Time</th>
             <th>End Time</th>
             <th>&nbsp;</th>
+            <th>&nbsp;</th>
           </tr>
         )}
         tfoot={(
@@ -103,6 +147,7 @@ class PlacementList extends Component {
             <th>Size(px)</th>
             <th>Start Time</th>
             <th>End Time</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}

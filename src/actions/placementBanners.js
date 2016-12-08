@@ -1,6 +1,7 @@
 import {
   CREATE_PLACEMENT_BANNER,
   REMOVE_PLACEMENT_BANNER,
+  GET_PLACEMENT_BY_BANNER_ID,
   DELETE_BANNER,
 } from '../constants';
 
@@ -149,5 +150,43 @@ export function removeBanner(bId) {
         });
       }
     }
+  };
+}
+
+export function getPlacementsByBannerId(id) {
+  return async (dispatch, getState, { graphqlRequest }) => {
+    const query = `
+      query {
+        placementBanners(where: {bannerId: "${id}"}) {
+          id
+          placements {
+          id
+          name
+          sizeWidth
+          sizeHeight
+          startTime
+          endTime
+          weight
+          description
+          campaignId
+          status
+          createdAt
+          updatedAt
+          }
+          bannerId
+          createdAt
+          updatedAt
+          deletedAt
+        }
+      }`;
+
+    const { data } = await graphqlRequest(query);
+
+    dispatch({
+      type: GET_PLACEMENT_BY_BANNER_ID,
+      payload: {
+        placementBanners: data.placementBanners,
+      },
+    });
   };
 }

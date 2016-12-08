@@ -14,6 +14,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getChannels, createChannel, getChannelsFilters, setChannelsFilters } from '../../../actions/channels';
 import { getSites } from '../../../actions/sites';
 import { setPageChannelActiveTab } from '../../../actions/pages/channels';
+import { getOptionChannelByChannelId, createOptionChannel } from '../../../actions/optionChannels';
 import Layout from '../../../components/Layout';
 import CreateChannelForm from './CreateChannelForm';
 import ChannelList from './ChannelList';
@@ -33,6 +34,9 @@ class Channels extends Component {
     sites: PropTypes.object,
     getSites: PropTypes.func,
     setPageChannelActiveTab: PropTypes.func,
+    getOptionChannelByChannelId: PropTypes.func,
+    optionChannels: PropTypes.object,
+    createOptionChannel: PropTypes.func,
   };
 
   componentWillMount() {
@@ -120,6 +124,11 @@ class Channels extends Component {
                   <ChannelList
                     list={this.getFilteredChannels()}
                     setPageChannelActiveTab={this.props.setPageChannelActiveTab}
+                    createChannel={this.props.createChannel}
+                    getOptionChannelByChannelId={this.props.getOptionChannelByChannelId}
+                    optionChannels={this.props.optionChannels}
+                    createOptionChannel={this.props.createOptionChannel}
+                    channels={this.props.channels}
                   />
                 </div>
                 {/* /.box-body */}
@@ -139,6 +148,7 @@ class Channels extends Component {
 const mapState = (state) => ({
   channels: state.channels,
   sites: state.sites,
+  optionChannels: state.optionChannels,
 });
 
 const mapDispatch = {
@@ -148,6 +158,8 @@ const mapDispatch = {
   getChannelsFilters,
   setPageChannelActiveTab,
   setChannelsFilters,
+  getOptionChannelByChannelId,
+  createOptionChannel,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Channels));

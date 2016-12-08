@@ -2,18 +2,18 @@
 /* eslint-disable import/prefer-default-export */
 
 import {
-  GET_SHARE,
+  GET_SHARE_BY_ZONE_ID,
   GET_SHARES,
   CREATE_SHARE,
   UPDATE_SHARE,
   DELETE_SHARE,
 } from '../constants';
 
-export function getShare(id) {
+export function getShareByZoneId(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        shares(where: {id: "${id}"}, limit: 1) {
+        shares(where: {zoneId: "${id}"}) {
           id
           name
           html
@@ -28,9 +28,9 @@ export function getShare(id) {
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_SHARE,
+      type: GET_SHARE_BY_ZONE_ID,
       payload: {
-        share: data.shares.shift(),
+        shares: data.shares,
       },
     });
   };

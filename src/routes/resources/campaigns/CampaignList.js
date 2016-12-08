@@ -10,15 +10,59 @@ class CampaignList extends Component {
   static propTypes = {
     list: PropTypes.array,
     setPageCampaignActiveTab: PropTypes.func,
+    createCampaign: PropTypes.func,
+    advertiserId: PropTypes.string,
+    getAdvertiser: PropTypes.func,
   };
+
   onTabClickCampaign(event) {
     event.persist();
     this.props.setPageCampaignActiveTab('editCampaign');
   }
+
   onTabClickPlacement(event) {
     event.persist();
     this.props.setPageCampaignActiveTab('addPlacement');
   }
+
+  duplicateCampaign(data) {
+    const name = `Copy of ${data.name}`;
+    const advertiserId = data.advertiserId;
+    const startTime = data.startTime;
+    const endTime = data.endTime;
+    const views = data.views;
+    const viewPerSession = data.viewPerSession;
+    const timeResetViewCount = data.timeResetViewCount;
+    const weight = data.weight;
+    const description = data.description;
+    const status = data.status;
+    const revenueType = data.revenueType;
+    const expireValueCPM = data.expireValueCPM;
+    const maxCPMPerDay = data.maxCPMPerDay;
+    if (name && advertiserId && startTime && endTime && views && viewPerSession
+      && timeResetViewCount && weight && description) {
+      this.props.createCampaign({
+        advertiserId,
+        name,
+        startTime,
+        endTime,
+        views,
+        viewPerSession,
+        timeResetViewCount,
+        weight,
+        revenueType,
+        expireValueCPM,
+        maxCPMPerDay,
+        description,
+        status,
+      }).then(() => {
+        if (this.props.advertiserId) {
+          this.props.getAdvertiser(this.props.advertiserId);
+        }
+      });
+    }
+  }
+
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
       data: 'id',
@@ -56,8 +100,17 @@ class CampaignList extends Component {
           onClick={(event) => this.onTabClickPlacement(event)}
         >New Placement</Link>, cell);
       },
+    }, {
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link
+          to="#"
+          onClick={() => this.duplicateCampaign(rowData)}
+        >Duplicate</Link>, cell);
+      },
     }];
   }
+
   render() {
     let data = [];
     if (this.props.list) {
@@ -84,6 +137,7 @@ class CampaignList extends Component {
             <th>Start Time</th>
             <th>End Time</th>
             <th>&nbsp;</th>
+            <th>&nbsp;</th>
           </tr>
         )}
         tfoot={(
@@ -92,6 +146,7 @@ class CampaignList extends Component {
             <th>Name</th>
             <th>Start Time</th>
             <th>End Time</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}

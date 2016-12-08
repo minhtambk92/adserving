@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSites, createSite, checkSitesByDomain } from '../../../actions/sites';
 import { getChannels } from '../../../actions/channels';
-import { setPageSiteActiveTab } from '../../../actions/pages/sites'
+import { setPageSiteActiveTab } from '../../../actions/pages/sites';
 import Layout from '../../../components/Layout';
 import SiteList from './SiteList';
 import CreateSiteForm from './CreateSiteForm';
@@ -38,17 +38,6 @@ class Sites extends Component {
     this.props.getSites();
     this.props.getChannels();
   }
-
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    /* eslint-enable no-undef */
-  }
-
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    /* eslint-enable no-undef */
-  }
-
 
   render() {
     const { sites } = this.props;
@@ -92,6 +81,7 @@ class Sites extends Component {
                   <SiteList
                     list={sites && sites.list}
                     setPageSiteActiveTab={this.props.setPageSiteActiveTab}
+                    createSite={this.props.createSite}
                   />
                 </div>
                 {/* /.box-body */}

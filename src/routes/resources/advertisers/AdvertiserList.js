@@ -9,6 +9,7 @@ class AdvertiserList extends Component {
   static propTypes = {
     list: PropTypes.array,
     setPageAdvertiserActiveTab: PropTypes.func,
+    createAdvertiser: PropTypes.func,
   };
   onTabClickCampaign(event) {
     event.persist();
@@ -17,6 +18,30 @@ class AdvertiserList extends Component {
   onTabClickAdvertiser(event) {
     event.persist();
     this.props.setPageAdvertiserActiveTab('editAdvertiser');
+  }
+
+  duplicateAdvertiser(data) {
+    const name = `Copy of ${data.name}`;
+    const contact = data.contact;
+    const email = data.email;
+    const isEmailStatus = data.isEmailStatus;
+    const isEmailReport = data.isEmailReport;
+    const reportInterval = data.reportInterval;
+    const description = data.description;
+    const status = data.status;
+
+    if (contact && name && email && description) {
+      this.props.createAdvertiser({
+        email,
+        name,
+        contact,
+        isEmailStatus,
+        isEmailReport,
+        reportInterval,
+        description,
+        status,
+      });
+    }
   }
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -54,6 +79,14 @@ class AdvertiserList extends Component {
           onClick={(event) => this.onTabClickCampaign(event)}
         >New Campaign</Link>, cell);
       },
+    }, {
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link
+          to="#"
+          onClick={() => this.duplicateAdvertiser(rowData)}
+        >Dupicate</Link>, cell);
+      },
     }];
   }
 
@@ -75,6 +108,7 @@ class AdvertiserList extends Component {
             <th>Email</th>
             <th>Contact</th>
             <th>&nbsp;</th>
+            <th>&nbsp;</th>
           </tr>
         )}
         tfoot={(
@@ -83,6 +117,7 @@ class AdvertiserList extends Component {
             <th>Name</th>
             <th>Email</th>
             <th>Contact</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}

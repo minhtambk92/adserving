@@ -20,6 +20,7 @@ import {
 import { getPlacements } from '../../../actions/placements';
 import { getChannels } from '../../../actions/channels';
 import { setPageBannerActiveTab } from '../../../actions/pages/banners';
+import { getPlacementsByBannerId, createPlacementBanner } from '../../../actions/placementBanners';
 import Layout from '../../../components/Layout';
 import BannerList from './BannerList';
 import CreateBannerForm from './CreateBannerForm';
@@ -41,6 +42,9 @@ class Banners extends Component {
     getChannels: PropTypes.func,
     channels: PropTypes.object,
     setPageBannerActiveTab: PropTypes.func,
+    placementBanners: PropTypes.object,
+    getPlacementsByBannerId: PropTypes.func,
+    createPlacementBanner: PropTypes.func,
   };
 
   componentWillMount() {
@@ -134,6 +138,11 @@ class Banners extends Component {
                   <BannerList
                     list={this.getFilteredBanners()}
                     setPageBannerActiveTab={this.props.setPageBannerActiveTab}
+                    createBanner={this.props.createBanner}
+                    banners={this.props.banners}
+                    placementBanners={this.props.placementBanners}
+                    getPlacementsByBannerId={this.props.getPlacementsByBannerId}
+                    createPlacementBanner={this.props.createPlacementBanner}
                   />
                 </div>
                 {/* /.box-body */}
@@ -154,6 +163,7 @@ const mapState = (state) => ({
   banners: state.banners,
   placements: state.placements,
   channels: state.channels,
+  placementBanners: state.placementBanners,
 });
 
 const mapDispatch = {
@@ -164,6 +174,8 @@ const mapDispatch = {
   getPlacements,
   getChannels,
   setPageBannerActiveTab,
+  getPlacementsByBannerId,
+  createPlacementBanner,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banners));

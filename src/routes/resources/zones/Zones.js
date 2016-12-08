@@ -20,7 +20,7 @@ import {
   setZonesFilters,
 } from '../../../actions/zones';
 import { setPageZoneActiveTab } from '../../../actions/pages/zones';
-import { createShare } from '../../../actions/shares';
+import { createShare, getShareByZoneId } from '../../../actions/shares';
 import Layout from '../../../components/Layout';
 import CreateZoneForm from './CreateZoneForm';
 import FilterZonesForm from './FilterZonesForm';
@@ -42,6 +42,8 @@ class Zones extends Component {
     createZone: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
     createShare: PropTypes.func,
+    getShareByZoneId: PropTypes.func,
+    shares: PropTypes.object,
   };
 
   componentWillMount() {
@@ -135,6 +137,11 @@ class Zones extends Component {
                   <ZoneList
                     list={this.getFilteredZones()}
                     setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                    createZone={this.props.createZone}
+                    createShare={this.props.createShare}
+                    zones={this.props.zones}
+                    shares={this.props.shares}
+                    getShareByZoneId={this.props.getShareByZoneId}
                   />
                 </div>
                 {/* /.box-body */}
@@ -165,6 +172,7 @@ const mapDispatch = {
   createZone,
   setPageZoneActiveTab,
   createShare,
+  getShareByZoneId,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zones));

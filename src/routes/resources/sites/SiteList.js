@@ -8,6 +8,7 @@ class SiteList extends Component {
   static propTypes = {
     list: PropTypes.array,
     setPageSiteActiveTab: PropTypes.func,
+    createSite: PropTypes.func,
   };
 
   onTabClickEditSite(event) {
@@ -23,6 +24,19 @@ class SiteList extends Component {
   onTabClickAddZone(event) {
     event.persist();
     this.props.setPageSiteActiveTab('addZone');
+  }
+
+  duplicateSite(data) {
+    const random = Math.floor((Math.random() * 1000000) + 1);
+    const domain = `http://demo${random}.com.vn`;
+    const name = `Copy of ${data.name}`;
+    const email = data.email;
+    const description = data.description;
+    const status = data.status;
+
+    if (domain && name && email && description && status) {
+      this.props.createSite({ domain, name, email, description, status });
+    }
   }
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -68,6 +82,14 @@ class SiteList extends Component {
           onClick={(event) => this.onTabClickAddZone(event)}
         >New Zone</Link>, cell);
       },
+    }, {
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link
+          to="#"
+          onClick={() => this.duplicateSite(rowData)}
+        >Duplicate</Link>, cell);
+      },
     }];
   }
 
@@ -90,6 +112,7 @@ class SiteList extends Component {
             <th>Email</th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
+            <th>&nbsp;</th>
           </tr>
         )}
         tfoot={(
@@ -98,6 +121,7 @@ class SiteList extends Component {
             <th>Name</th>
             <th>Domain</th>
             <th>Email</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>

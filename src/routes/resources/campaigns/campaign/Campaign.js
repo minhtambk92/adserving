@@ -157,6 +157,9 @@ class Campaign extends Component {
                                     this.props.campaigns.editing.placements &&
                                     this.props.campaigns.editing.placements}
                                   setPagePlacementActiveTab={this.props.setPagePlacementActiveTab}
+                                  createPlacement={this.props.createPlacement}
+                                  campaignId={this.props.campaignId}
+                                  getCampaign={this.props.getCampaign}
                                 />
                               </div>
                               {/* /.box-body */}

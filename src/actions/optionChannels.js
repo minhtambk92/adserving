@@ -1,22 +1,23 @@
 import {
-  GET_OPTION_CHANNEL,
+  GET_OPTION_CHANNEL_BY_CHANNEL_ID,
   CREATE_OPTION_CHANNEL,
   GET_OPTION_CHANNELS,
   UPDATE_OPTION_CHANNEL,
   DELETE_OPTION_CHANNEL,
 } from '../constants';
 
-export function getOptionChannel(id) {
+export function getOptionChannelByChannelId(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        optionChannels(where: {id: "${id}"}, limit: 1) {
+        optionChannels(where: {channelId: "${id}"}) {
           id
           name
           logical
           type
           comparison
           value
+          channelId
           createdAt
           updatedAt
         }
@@ -25,9 +26,9 @@ export function getOptionChannel(id) {
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_OPTION_CHANNEL,
+      type: GET_OPTION_CHANNEL_BY_CHANNEL_ID,
       payload: {
-        optionChannels: data.optionChannels.shift(),
+        optionChannels: data.optionChannels,
       },
     });
   };
