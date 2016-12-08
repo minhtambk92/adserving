@@ -28,7 +28,7 @@ import UpdateZoneForm from '../UpdateZoneForm';
 import ListPlacementOfShare from '../ListPlacementOfShare';
 import ListPlacementNotBelongToShare from '../ListPlacementNotBelongToShare';
 import ZoneSettingForm from '../SettingZoneForm';
-import ShareForm from '../ShareForm';
+import ListShare from '../ListShare';
 import s from './Zone.css';
 
 const pageTitle = 'Zone';
@@ -108,16 +108,6 @@ class Zone extends Component {
       }
     }
     return false;
-  }
-
-  dataPlacement(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const arrPlacement = [];
-    for (let i = 0; i < arr.length; i += 1) {
-      if (arr[i] !== null) {
-        arrPlacement.push(arr[i]);
-      }
-    }
-    return arrPlacement;
   }
 
   render() {
@@ -232,15 +222,26 @@ class Zone extends Component {
                             </div>
                           </div>
                           {/* /.box-header */}
-                          <ShareForm
-                            zone={this.props.zones && this.props.zones.editing}
-                            zoneId={this.props.zoneId}
-                            getZone={this.props.getZone}
-                            createZoneShare={this.props.createShare}
-                            updateZoneShare={this.props.updateShare}
-                            deleteZoneShare={this.props.deleteShare}
-                            removeShare={this.props.removeShare}
-                          />
+                          <form className="form-horizontal">
+                            <div className="box-body">
+                              <div className="row">
+                                <div className="col-lg-12" id="shareZoneForm">
+                                  <ListShare
+                                    list={this.props.zones && this.props.zones.editing
+                                    && this.props.zones.editing.shares}
+                                    deleteShareZone={this.props.deleteShare}
+                                    getZone={this.props.getZone}
+                                    zoneId={this.props.zoneId}
+                                    updateShareZone={this.props.updateShare}
+                                    createShareZone={this.props.createShare}
+                                    removeShare={this.props.removeShare}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            {/* /.box-body */}
+                            {/* /.box-footer */}
+                          </form>
                         </div>
                         {/* /.col */}
                       </div>
@@ -290,7 +291,7 @@ class Zone extends Component {
                                 {/* /.box-header */}
                                 <div className="box-body">
                                   <ListPlacementOfShare
-                                    list={this.dataPlacement(share.placements)}
+                                    list={share.placements}
                                     /* eslint-disable max-len */
                                     removeShareInSharePlacement={this.props.removeShareInSharePlacement}
                                     /* eslint-enable max-len */

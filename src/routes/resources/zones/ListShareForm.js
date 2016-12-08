@@ -53,7 +53,7 @@ class ListShareForm extends Component {
             <div className="col-sm-10">
               <textarea
                 className="form-control"
-                rows="5" placeholder="More info..."
+                rows="3" placeholder="More info..."
                 id={`inputShareHTML-${this.props.index}`}
                 defaultValue={this.props.childZone ? this.props.childZone.html : ''}
               />
@@ -66,7 +66,7 @@ class ListShareForm extends Component {
             <div className="col-sm-10">
               <textarea
                 className="form-control" id={`inputShareCSS-${this.props.index}`}
-                rows="5" placeholder="More info..."
+                rows="3" placeholder="More info..."
                 defaultValue={this.props.childZone ? this.props.childZone.css : ''}
               />
             </div>
@@ -79,7 +79,7 @@ class ListShareForm extends Component {
             <div className="col-sm-10">
               <textarea
                 className="form-control" id={`inputShareDescription-${this.props.index}`}
-                rows="5" placeholder="More info..."
+                rows="3" placeholder="More info..."
                 defaultValue={this.props.childZone ? this.props.childZone.description : ''}
               />
             </div>
