@@ -50,10 +50,40 @@ export function getPlacement(id) {
             keyword
             weight
             description
+            type
+            imageUrl
+            url
+            target
+            isIFrame
             status
+            adServer
+            bannerHTMLType
+            isCountView
+            isFixIE
+            isDefault 
+            isRelative
+            isImpressionsBooked
+            isClicksBooked
+            isActivationDate
+            isExpirationDate
+            adStore
+            impressionsBooked
+            clicksBooked
+            activationDate
+            expirationDate
+            placements {
+              id
+              name
+            }
+            channelId
+             clickImpression {
+                id
+                clickUrl
+                impressionUrl
+             }
             createdAt
             updatedAt
-           }
+          }
           createdAt
           updatedAt
         }

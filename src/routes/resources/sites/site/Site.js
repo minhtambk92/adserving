@@ -17,6 +17,8 @@ import { createZone } from '../../../../actions/zones';
 import { getChannels, createChannel } from '../../../../actions/channels';
 import { setPageZoneActiveTab } from '../../../../actions/pages/zones';
 import { setPageChannelActiveTab } from '../../../../actions/pages/channels';
+import { createShare } from '../../../../actions/shares';
+import { createOptionChannel } from  '../../../../actions/optionChannels'
 import Layout from '../../../../components/Layout';
 import ListZoneOfSite from '../ListZoneOfSite';
 import ListChannelOfSite from '../ListChannelOfSite';
@@ -45,6 +47,9 @@ class Site extends Component {
     channels: PropTypes.object,
     setPageZoneActiveTab: PropTypes.func,
     setPageChannelActiveTab: PropTypes.func,
+    createShare: PropTypes.func,
+    shares: PropTypes.object,
+    createOptionChannel: PropTypes.func,
   };
 
   componentWillMount() {
@@ -125,7 +130,7 @@ class Site extends Component {
                     <div className="row">
                       <div className="col-lg-12">
                         <div className="row">
-                          <section className="col-lg-6">
+                          <section className="col-lg-5">
                             {/* BOX: FORM OF CREATE A NEW ZONE */}
                             <div className="box box-info">
                               <div className="box-header with-border">
@@ -148,7 +153,7 @@ class Site extends Component {
                             </div>
                             {/* /.col */}
                           </section>
-                          <section className="col-lg-6">
+                          <section className="col-lg-7">
                             {/* BOX: LIST OF ZONES */}
                             <div className="box box-info">
                               <div className="box-header with-border">
@@ -164,6 +169,11 @@ class Site extends Component {
                                       this.props.sites.editing.zones &&
                                       this.props.sites.editing.zones}
                                   setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                                  createZone={this.props.createZone}
+                                  createShare={this.props.createShare}
+                                  zones={this.props.zones}
+                                  getSite={this.props.getSite}
+                                  siteId={this.props.siteId}
                                 />
                               </div>
                               {/* /.box-body */}
@@ -217,6 +227,11 @@ class Site extends Component {
                                   this.props.sites.editing.channels &&
                                   this.props.sites.editing.channels}
                                   setPageChannelActiveTab={this.props.setPageChannelActiveTab}
+                                  createChannel={this.props.createChannel}
+                                  channels={this.props.channels}
+                                  siteId={this.props.siteId}
+                                  createOptionChannel={this.props.createOptionChannel}
+                                  getSite={this.props.getSite}
                                 />
                               </div>
                               {/* /.box-body */}
@@ -242,6 +257,7 @@ const mapState = (state) => ({
   sites: state.sites,
   zones: state.zones,
   channels: state.channels,
+  shares: state.shares,
 });
 
 const mapDispatch = {
@@ -254,6 +270,8 @@ const mapDispatch = {
   getChannels,
   setPageChannelActiveTab,
   setPageZoneActiveTab,
+  createShare,
+  createOptionChannel,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Site));

@@ -26,6 +26,7 @@ export function getSite(id) {
           status
           zones {
             id
+            siteId
             name
             description
             type
@@ -36,6 +37,23 @@ export function getSite(id) {
             height
             sizeText
             sizeValue
+            delivery
+            targetIFrame
+            isShowBannerAgain
+            source
+            isShowCampaignAgain
+            isShowTextBanner
+            characterSet
+            supportThirdParty
+            isIncludeDescription
+            status
+            shares {
+              id
+              name
+              html
+              css
+              description
+            }
             createdAt
             updatedAt
           }
@@ -44,7 +62,16 @@ export function getSite(id) {
             name
             description
             status
-            siteId
+            options {
+              id
+              name
+              logical
+              type
+              comparison
+              value
+              createdAt
+              updatedAt
+            }
             createdAt
             updatedAt
           }

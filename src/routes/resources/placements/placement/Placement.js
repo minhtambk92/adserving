@@ -23,6 +23,7 @@ import {
   removeBannerInPlacementBanner,
 } from '../../../../actions/placementBanners';
 import { removePlacementInSharePlacement } from '../../../../actions/sharePlacements';
+import { createClickImpression } from  '../../../../actions/clickImpressions';
 import Layout from '../../../../components/Layout';
 import ListBannerNotBelongPlacement from '../ListBannerNotBelongPlacement';
 import ListBannerOfPlacement from '../ListBannerOfPlacement';
@@ -54,6 +55,7 @@ class Placement extends Component {
     channels: PropTypes.object,
     createZone: PropTypes.func,
     removePlacementInSharePlacement: PropTypes.func,
+    createClickImpression: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -241,6 +243,11 @@ class Placement extends Component {
                                   getPlacement={this.props.getPlacement}
                                   getBanners={this.props.getBanners}
                                   placementId={this.props.placementId}
+                                  createBanner={this.props.createBanner}
+                                  channels={this.props.channels && this.props.channels.list}
+                                  createPlacementBanner={this.props.createPlacementBanner}
+                                  banners={this.props.banners}
+                                  createClickImpression={this.props.createClickImpression}
                                 />
                               </div>
                               {/* /.box-body */}
@@ -317,6 +324,7 @@ const mapDispatch = {
   createBanner,
   getChannels,
   removePlacementInSharePlacement,
+  createClickImpression,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placement));

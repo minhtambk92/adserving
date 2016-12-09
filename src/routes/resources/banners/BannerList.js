@@ -13,6 +13,9 @@ class BannerList extends Component {
     banners: PropTypes.object,
     placementBanners: PropTypes.object,
     createPlacementBanner: PropTypes.func,
+    clickImpressions: PropTypes.object,
+    getClickImpressionByBannerId: PropTypes.func,
+    createClickImpression: PropTypes.func,
   };
 
   onTabClickBanner(event) {
@@ -92,13 +95,24 @@ class BannerList extends Component {
         expirationDate,
         channelId,
       }).then(() => {
-        this.props.getPlacementsByBannerId(data.id).then(() => {
+        // this.props.getPlacementsByBannerId(data.id).then(() => {
+        //   const bannerId = this.props.banners.list[0].id;
+        //   if (this.props.placementBanners) {
+        //     const arrPlacement = this.props.placementBanners.list;
+        //     for (let i = 0; i < arrPlacement.length; i += 1) {
+        //       const placementId = arrPlacement[i].placements.id;
+        //       this.props.createPlacementBanner({ placementId, bannerId });
+        //     }
+        //   }
+        // });
+        this.props.getClickImpressionByBannerId(data.id).then(() => {
           const bannerId = this.props.banners.list[0].id;
-          if (this.props.placementBanners) {
-            const arrPlacement = this.props.placementBanners.list;
-            for (let i = 0; i < arrPlacement.length; i += 1) {
-              const placementId = arrPlacement[i].placements.id;
-              this.props.createPlacementBanner({ placementId, bannerId });
+          if (this.props.clickImpressions) {
+            const arrClickImpressions = this.props.clickImpressions.list;
+            for (let j = 0; j < arrClickImpressions.length; j += 1) {
+              const clickUrl = arrClickImpressions[j].clickUrl;
+              const impressionUrl = arrClickImpressions[j].impressionUrl;
+              this.props.createClickImpression({ clickUrl, impressionUrl, bannerId });
             }
           }
         });
