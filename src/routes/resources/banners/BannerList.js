@@ -95,16 +95,6 @@ class BannerList extends Component {
         expirationDate,
         channelId,
       }).then(() => {
-        // this.props.getPlacementsByBannerId(data.id).then(() => {
-        //   const bannerId = this.props.banners.list[0].id;
-        //   if (this.props.placementBanners) {
-        //     const arrPlacement = this.props.placementBanners.list;
-        //     for (let i = 0; i < arrPlacement.length; i += 1) {
-        //       const placementId = arrPlacement[i].placements.id;
-        //       this.props.createPlacementBanner({ placementId, bannerId });
-        //     }
-        //   }
-        // });
         this.props.getClickImpressionByBannerId(data.id).then(() => {
           const bannerId = this.props.banners.list[0].id;
           if (this.props.clickImpressions) {
