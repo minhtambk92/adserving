@@ -78,20 +78,6 @@ class Banner extends Component {
     $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
   }
 
-  filterPlacements(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const arrId = [];
-    const arrPlacement = [];
-    for (let i = 0; i < arr.length; i += 1) {
-      if (arr[i] !== null) {
-        if (arrId.indexOf(arr[i].id) === -1) {
-          arrId.push(arr[i].id);
-          arrPlacement.push(arr[i]);
-        }
-      }
-    }
-    return arrPlacement;
-  }
-
   filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const arrPlacement = allPlacement;
     for (let i = 0, len = pob.length; i < len; i += 1) {
@@ -242,10 +228,7 @@ class Banner extends Component {
                               <div className="box-body">
                                 <ListPlacementOfBanner
                                   list={this.props.banners.editing &&
-                                  this.props.banners.editing.placements &&
-                                  this.filterPlacements(
-                                    this.props.banners.editing.placements,
-                                  )}
+                                  this.props.banners.editing.placements}
                                   /* eslint-disable max-len */
                                   removeBannerInPlacementBanner={this.props.removeBannerInPlacementBanner}
                                   /* eslint-enable max-len */
