@@ -10,6 +10,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -59,6 +60,13 @@ class Zone extends Component {
     getPlacement: PropTypes.func,
   };
 
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      arrShare: {},
+    };
+  }
+
   componentWillMount() {
     this.props.getZone(this.props.zoneId);
     this.props.getSites();
@@ -70,6 +78,28 @@ class Zone extends Component {
     // Set latest active tab
     $('.zone-edit-box ul li').removeClass('active');
     $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      shares,
+    } = nextProps.zones && (nextProps.zones.editing || {});
+    if (shares) {
+      const arr = [];
+      arr.push(shares[0]);
+      this.setState({ arrShare: shares[0] });
+    }
+  }
+
+  getFilteredShare() {
+    const isFilter = this.inputSelectShare.value;
+    let arr = [];
+    if (isFilter) {
+      if (this.props.zones && this.props.zones.editing && this.props.zones.editing.shares) {
+        arr = _.filter(this.props.zones.editing.shares, { id: isFilter });
+      }
+    }
+    this.setState({ arrShare: arr[0] });
   }
 
   filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -111,6 +141,7 @@ class Zone extends Component {
   }
 
   render() {
+    const share = this.state.arrShare;
     return (
       <Layout
         pageTitle={
@@ -250,10 +281,43 @@ class Zone extends Component {
                   <div className="tab-pane" id="addPlacement">
                     <div className="row">
                       <div className="col-lg-12">
-                        {this.props.zones && this.props.zones.editing &&
-                        this.props.zones.editing.shares &&
-                        this.props.zones.editing.shares.map((share) => (
-                          <div className="row" key={share.id}>
+                        <div className="col-lg-6 no-padding">
+                          <div className="box box-solid box-default">
+                            <div className="box-body">
+                              <div className="form-group">
+                                <label
+                                  htmlFor="inputSelectValue" className="col-sm-5 control-label"
+                                >Choose Share Zone</label>
+                                <div className="col-sm-7 no-padding">
+                                  <select
+                                    id="inputSelectShare" className="form-control"
+                                    ref={c => {
+                                      this.inputSelectShare = c;
+                                    }}
+                                    onChange={event => this.getFilteredShare(event)}
+                                  >
+                                    {this.props.zones && this.props.zones.editing &&
+                                    this.props.zones.editing.shares &&
+                                    this.props.zones.editing.shares.map((option) =>
+                                      <option
+                                        key={option.id}
+                                        value={option.id}
+                                      >
+                                        {option.name}
+                                      </option>,
+                                    )}
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-lg-12">
+                        {this.state.arrShare ? (
+                          <div className="row">
                             <section className="col-lg-6">
                               {/* BOX: LIST OF Placements */}
                               <div className="box box-info">
@@ -306,7 +370,7 @@ class Zone extends Component {
                               {/* /.box */}
                             </section>
                           </div>
-                        ))}
+                        ) : ''}
                       </div>
                     </div>
                   </div>

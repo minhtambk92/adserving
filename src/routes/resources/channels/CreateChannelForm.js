@@ -1,3 +1,5 @@
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import Link from '../../../components/Link';
 
@@ -25,6 +27,12 @@ class CreateChannelForm extends Component {
       siteId = this.props.siteId;
     } else {
       siteId = this.inputSiteId.value;
+    }
+    if (!name) {
+      $('#inputChannelName').parents('.form-group').addClass('has-error ');
+      setTimeout(() => {
+        $('#inputChannelName').parents('.form-group').removeClass('has-error ');
+      }, 2000);
     }
     if (name && description && siteId) {
       this.props.createChannel({ name, description, status, siteId }).then(() => {

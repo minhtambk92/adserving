@@ -1,3 +1,5 @@
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import { ICheck } from '../../../components/UI';
 import Link from '../../../components/Link';
@@ -17,6 +19,8 @@ class CreateAdvertiserForm extends Component {
     this.inputAdvertiserReportInterval.value = null;
     this.inputAdvertiserIsEmailReport.value = null;
     this.inputAdvertiserIsEmailStatus.value = null;
+    $('#inputAdvertiserIsEmailReport').iCheck('uncheck');
+    $('#inputAdvertiserIsEmailStatus').iCheck('uncheck');
   }
 
   createAdvertiser() {
@@ -28,8 +32,24 @@ class CreateAdvertiserForm extends Component {
     const reportInterval = this.inputAdvertiserReportInterval.value;
     const description = this.inputAdvertiserDescription.value;
     const status = this.inputAdvertiserStatus.value;
-
-    if (contact && name && email && description) {
+    if (!name) {
+      $('#inputAdvertiserName').parents('.form-group').addClass('has-error ');
+      setTimeout(() => {
+        $('#inputAdvertiserName').parents('.form-group').removeClass('has-error ');
+      }, 2000);
+    }
+    if (!contact) {
+      $('#inputAdvertiserContact').parents('.form-group').addClass('has-error ');
+      setTimeout(() => {
+        $('#inputAdvertiserContact').parents('.form-group').removeClass('has-error ');
+      }, 2000);
+    }
+    if (!email) {
+      $('#inputAdvertiserEmail').parents('.form-group').addClass('has-error ');
+      setTimeout(() => {
+        $('#inputAdvertiserEmail').parents('.form-group').removeClass('has-error ');
+      }, 2000);
+    } else if (contact && name && email && description) {
       this.props.createAdvertiser({
         email,
         name,

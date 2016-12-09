@@ -56,6 +56,14 @@ class Placement extends Component {
     removePlacementInSharePlacement: PropTypes.func,
   };
 
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      createBanner: false,
+    };
+  }
+
   componentWillMount() {
     this.props.getPlacement(this.props.placementId);
     this.props.getCampaigns();
@@ -117,6 +125,10 @@ class Placement extends Component {
     return arrBanner;
   }
 
+  createBannerInPlacement() {
+    this.setState({ createBanner: true });
+  }
+
   render() {
     return (
       <Layout
@@ -169,7 +181,9 @@ class Placement extends Component {
                             getPlacement={this.props.getPlacement}
                             campaigns={this.props.campaigns && this.props.campaigns.list}
                             removePlacement={this.props.removePlacement}
+                            /* eslint-disable max-len */
                             removePlacementInSharePlacement={this.props.removePlacementInSharePlacement}
+                            /* eslint-enable max-len */
                           />
                         </div>
                         {/* /.col */}
@@ -235,17 +249,35 @@ class Placement extends Component {
                           </section>
                         </div>
                         <div className="row">
-                          <div className="col-lg-6">
-                            <CreateBannerForm
-                              createBanner={this.props.createBanner}
-                              channels={this.props.channels && this.props.channels.list}
-                              placementId={this.props.placementId}
-                              getPlacement={this.props.getPlacement}
-                              banners={this.props.banners && this.props.banners.list}
-                              getBanners={this.props.getBanners}
-                              createPlacementBanner={this.props.createPlacementBanner}
-                            />
-                          </div>
+                          {this.state.createBanner === false ? (
+                            <div className="form-group">
+                              <div className="col-sm-2">
+                                <button
+                                  type="button"
+                                  id="createBannerInPlacement"
+                                  onClick={(event) => this.createBannerInPlacement(event)}
+                                  className="btn btn-block btn-info btn-sm"
+                                >
+                                  Create Share
+                                </button>
+                              </div>
+                              <div className="col-sm-10">
+                                &nbsp;
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="col-lg-12">
+                              <CreateBannerForm
+                                createBanner={this.props.createBanner}
+                                channels={this.props.channels && this.props.channels.list}
+                                placementId={this.props.placementId}
+                                getPlacement={this.props.getPlacement}
+                                banners={this.props.banners && this.props.banners.list}
+                                getBanners={this.props.getBanners}
+                                createPlacementBanner={this.props.createPlacementBanner}
+                              />
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
