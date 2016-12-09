@@ -10,6 +10,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -23,7 +24,7 @@ import {
   removeBannerInPlacementBanner,
 } from '../../../../actions/placementBanners';
 import { removePlacementInSharePlacement } from '../../../../actions/sharePlacements';
-import { createClickImpression } from  '../../../../actions/clickImpressions';
+import { createClickImpression } from '../../../../actions/clickImpressions';
 import Layout from '../../../../components/Layout';
 import ListBannerNotBelongPlacement from '../ListBannerNotBelongPlacement';
 import ListBannerOfPlacement from '../ListBannerOfPlacement';
@@ -80,48 +81,13 @@ class Placement extends Component {
   }
 
   filterBanner(allBanner, bof) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    if (allBanner.length === 0) {
-      return [];
-    } else if (bof.length === 0) {
-      return allBanner;
-    } else if (bof.length > 0 && allBanner.length > 0) {
-      const arrId = [];
-      const newArr = [];
-      const arrBanner = [];
-      for (let i = 0; i < bof.length; i += 1) {
-        if (bof[i] !== null) {
-          newArr.push(bof[i].id);
+    const arrBanner = allBanner;
+    for (let i = 0, len = bof.length; i < len; i += 1) {
+      for (let j = 0, len2 = arrBanner.length; j < len2; j += 1) {
+        if (bof[i].id === arrBanner[j].id) {
+          arrBanner.splice(j, 1);
+          len2 = arrBanner.length;
         }
-      }
-      for (let j = 0; j < allBanner.length; j += 1) {
-        arrId.push(allBanner[j].id);
-      }
-      for (let k = 0; k < newArr.length; k += 1) {
-        if (arrId.indexOf(newArr[k]) > -1) {
-          arrId.splice(arrId.indexOf(newArr[k]), 1);
-        }
-      }
-      if (arrId.length > 0) {
-        for (let m = 0; m < allBanner.length; m += 1) {
-          for (let h = 0; h < arrId.length; h += 1) {
-            if (allBanner[m].id === arrId[h]) {
-              arrBanner.push(allBanner[m]);
-            }
-          }
-        }
-        return arrBanner;
-      } else if (arrId.length === 0) {
-        return [];
-      }
-    }
-    return false;
-  }
-
-  dataBanner(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const arrBanner = [];
-    for (let i = 0; i < arr.length; i += 1) {
-      if (arr[i] !== null) {
-        arrBanner.push(arr[i]);
       }
     }
     return arrBanner;
@@ -235,8 +201,7 @@ class Placement extends Component {
                               <div className="box-body">
                                 <ListBannerOfPlacement
                                   list={this.props.placements && this.props.placements.editing &&
-                                    this.props.placements.editing.banners &&
-                                    this.dataBanner(this.props.placements.editing.banners)}
+                                    this.props.placements.editing.banners}
                                   /* eslint-disable max-len */
                                   removeBannerInPlacementBanner={this.props.removeBannerInPlacementBanner}
                                   /* eslint-enable max-len */
