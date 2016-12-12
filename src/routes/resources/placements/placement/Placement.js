@@ -10,7 +10,6 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -95,6 +94,10 @@ class Placement extends Component {
 
   createBannerInPlacement() {
     this.setState({ createBanner: true });
+  }
+
+  hideCreateBanner() {
+    this.setState({ createBanner: false });
   }
 
   render() {
@@ -239,15 +242,34 @@ class Placement extends Component {
                             </div>
                           ) : (
                             <div className="col-lg-12">
-                              <CreateBannerForm
-                                createBanner={this.props.createBanner}
-                                channels={this.props.channels && this.props.channels.list}
-                                placementId={this.props.placementId}
-                                getPlacement={this.props.getPlacement}
-                                banners={this.props.banners && this.props.banners.list}
-                                getBanners={this.props.getBanners}
-                                createPlacementBanner={this.props.createPlacementBanner}
-                              />
+                              <div className="box box-info">
+                                <div className="box-header with-border">
+                                  <h3 className="box-title">ADD NEW BANNER
+                                  </h3>
+                                  <div className="box-tools pull-right">
+                                    <button
+                                      type="button"
+                                      className="btn btn-box-tool"
+                                      onClick={event => this.hideCreateBanner(event)}
+                                    >
+                                      <i className="fa fa-remove" />
+                                    </button>
+                                  </div>
+                                </div>
+                                {/* /.box-header */}
+                                <div className="box-body">
+                                  <CreateBannerForm
+                                    createBanner={this.props.createBanner}
+                                    channels={this.props.channels && this.props.channels.list}
+                                    placementId={this.props.placementId}
+                                    getPlacement={this.props.getPlacement}
+                                    banners={this.props.banners && this.props.banners.list}
+                                    getBanners={this.props.getBanners}
+                                    createPlacementBanner={this.props.createPlacementBanner}
+                                  />
+                                </div>
+                                {/* /.box-body */}
+                              </div>
                             </div>
                           )}
                         </div>
