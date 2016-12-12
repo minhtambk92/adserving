@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { DataTables, ICheck } from '../../../components/UI/';
 import Link from '../../../components/Link';
 
-class ListPlacementOfZone extends Component {
+class ListPlacementOfShare extends Component {
 
   static propTypes = {
     zoneId: PropTypes.string.isRequired,
@@ -104,4 +104,4 @@ class ListPlacementOfZone extends Component {
   }
 }
 
-export default ListPlacementOfZone;
+export default ListPlacementOfShare;

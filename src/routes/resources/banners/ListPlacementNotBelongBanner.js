@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
 import { DataTables, ICheck } from '../../../components/UI/';
 
-class ListPlacementNotBelongToZone extends Component {
+class ListPlacementNotBelongToBanner extends Component {
   static propTypes = {
     bannerId: PropTypes.string.isRequired,
     containerWidth: PropTypes.number,
@@ -105,4 +105,4 @@ class ListPlacementNotBelongToZone extends Component {
   }
 }
 
-export default ListPlacementNotBelongToZone;
+export default ListPlacementNotBelongToBanner;
