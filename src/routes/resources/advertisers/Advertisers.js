@@ -11,6 +11,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getAdvertisers, createAdvertiser } from '../../../actions/advertisers';
+import { setPageAdvertiserActiveTab } from '../../../actions/pages/advertisers';
 import Layout from '../../../components/Layout';
 import CreateAdvertiserForm from './CreateAdvertiserForm';
 import AdvertiserList from './AdvertiserList';
@@ -25,6 +26,7 @@ class Advertisers extends Component {
     advertisers: PropTypes.object,
     getAdvertisers: PropTypes.func,
     createAdvertiser: PropTypes.func,
+    setPageAdvertiserActiveTab: PropTypes.func,
   };
 
   componentWillMount() {
@@ -68,7 +70,8 @@ class Advertisers extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <AdvertiserList list={advertisers && advertisers.list} />
+                  <AdvertiserList list={advertisers && advertisers.list}
+                                  setPageAdvertiserActiveTab={this.props.setPageAdvertiserActiveTab}/>
                 </div>
                 {/* /.box-body */}
               </div>
@@ -91,6 +94,7 @@ const mapState = (state) => ({
 const mapDispatch = {
   getAdvertisers,
   createAdvertiser,
+  setPageAdvertiserActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Advertisers));

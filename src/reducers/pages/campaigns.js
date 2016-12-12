@@ -1,15 +1,11 @@
-/**
- * Created by Manhhailua on 11/28/16.
- */
-
 import { combineReducers } from 'redux';
 import {
-  SET_PAGE_ADVERTISER_ACTIVE_TAB,
+  SET_PAGE_CAMPAIGN_ACTIVE_TAB,
 } from '../../constants';
 
-function activeTab(state = 'editAdvertiser', action) {
+function activeTab(state = 'editCampaign', action) {
   switch (action.type) {
-    case SET_PAGE_ADVERTISER_ACTIVE_TAB: {
+    case SET_PAGE_CAMPAIGN_ACTIVE_TAB: {
       return action.payload.tabName;
     }
     default: {
