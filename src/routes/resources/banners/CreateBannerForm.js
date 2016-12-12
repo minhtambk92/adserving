@@ -13,6 +13,11 @@ class CreateBannerForm extends Component {
     filters: PropTypes.object,
     createBanner: PropTypes.func,
     channels: PropTypes.array,
+    placementId: PropTypes.string,
+    createPlacementBanner: PropTypes.func,
+    getPlacement: PropTypes.func,
+    banners: PropTypes.array,
+    getBanners: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -121,9 +126,9 @@ class CreateBannerForm extends Component {
     const isActivationDate = true;
     const isExpirationDate = true;
     const adStore = '';
-    const impressionsBooked = 'unlimited';
-    const clicksBooked = 'unlimited';
-    const activationDate = new Date(moment().format('YYYY-MM-DD 00:00:00'));
+    const impressionsBooked = -1;
+    const clicksBooked = -1;
+    const activationDate = new Date();
     const expirationDate = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00'));
     if (name && keyword && width && description && type && channelId) {
       this.props.createBanner({
@@ -158,6 +163,16 @@ class CreateBannerForm extends Component {
         channelId,
       }).then(() => {
         this.clearInput();
+        if (this.props.placementId) {
+          const bannerId = this.props.banners[0].id;
+          const zoneId = null;
+          const placementId = this.props.placementId;
+          if (placementId && bannerId) {
+            this.props.createPlacementBanner({ placementId, bannerId, zoneId }).then(() => {
+              this.props.getPlacement(this.props.placementId);
+            });
+          }
+        }
       });
     }
   }

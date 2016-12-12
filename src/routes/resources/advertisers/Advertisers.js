@@ -70,8 +70,11 @@ class Advertisers extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <AdvertiserList list={advertisers && advertisers.list}
-                                  setPageAdvertiserActiveTab={this.props.setPageAdvertiserActiveTab}/>
+                  <AdvertiserList
+                    list={advertisers && advertisers.list}
+                    setPageAdvertiserActiveTab={this.props.setPageAdvertiserActiveTab}
+                    createAdvertiser={this.props.createAdvertiser}
+                  />
                 </div>
                 {/* /.box-body */}
               </div>

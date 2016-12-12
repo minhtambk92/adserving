@@ -50,24 +50,37 @@ export function getPlacement(id) {
             keyword
             weight
             description
-            status
-            createdAt
-            updatedAt
-           }
-          zones {
-            id
-            siteId
-            name
-            description
             type
-            html
-            css
-            slot
-            width
-            height
-            sizeText
-            sizeValue
+            imageUrl
+            url
+            target
+            isIFrame
             status
+            adServer
+            bannerHTMLType
+            isCountView
+            isFixIE
+            isDefault 
+            isRelative
+            isImpressionsBooked
+            isClicksBooked
+            isActivationDate
+            isExpirationDate
+            adStore
+            impressionsBooked
+            clicksBooked
+            activationDate
+            expirationDate
+            placements {
+              id
+              name
+            }
+            channelId
+             clickImpression {
+                id
+                clickUrl
+                impressionUrl
+             }
             createdAt
             updatedAt
           }
@@ -212,36 +225,6 @@ export function updatePlacement({
           description
           campaignId
           status
-          banners {
-            id
-            name
-            html
-            width
-            height
-            keyword
-            weight
-            description
-            status
-            createdAt
-            updatedAt
-          }
-          zones {
-              id
-              siteId
-              name
-              description
-              type
-              html
-              css
-              slot
-              width
-              height
-              sizeText
-              sizeValue
-              status
-              createdAt
-              updatedAt
-            }
           createdAt
           updatedAt
         }

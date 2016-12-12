@@ -7,7 +7,109 @@ class BannerList extends Component {
 
   static propTypes = {
     list: PropTypes.array,
+    setPageBannerActiveTab: PropTypes.func,
+    createBanner: PropTypes.func,
+    getPlacementsByBannerId: PropTypes.func,
+    banners: PropTypes.object,
+    placementBanners: PropTypes.object,
+    createPlacementBanner: PropTypes.func,
+    clickImpressions: PropTypes.object,
+    getClickImpressionByBannerId: PropTypes.func,
+    createClickImpression: PropTypes.func,
   };
+
+  onTabClickBanner(event) {
+    event.persist();
+    this.props.setPageBannerActiveTab('editBanner');
+  }
+
+  onTabClickNewPlacement(event) {
+    event.persist();
+    this.props.setPageBannerActiveTab('addPlacement');
+  }
+
+  onTabClickOptionBanner(event) {
+    event.persist();
+    this.props.setPageBannerActiveTab('optionBanner');
+  }
+
+  duplicateBanner(data) {
+    const name = `Copy of ${data.name}`;
+    const width = data.width;
+    const height = data.height;
+    const weight = data.weight;
+    const description = data.description;
+    const channelId = data.channelId;
+    const type = data.type;
+    const isIFrame = data.isIFrame;
+    const target = data.target;
+    const url = data.url;
+    const imageUrl = data.imageUrl;
+    const html = data.html;
+    const bannerHTMLType = data.bannerHTMLType;
+    const adServer = data.adServer;
+    const status = data.status;
+    const keyword = data.keyword;
+    const isCountView = data.isCountView;
+    const isFixIE = data.isFixIE;
+    const isDefault = data.isDefault;
+    const isRelative = data.isRelative;
+    const isImpressionsBooked = data.isImpressionsBooked;
+    const isClicksBooked = data.isClicksBooked;
+    const isActivationDate = data.isActivationDate;
+    const isExpirationDate = data.isExpirationDate;
+    const adStore = data.adStore;
+    const impressionsBooked = data.impressionsBooked;
+    const clicksBooked = data.clicksBooked;
+    const activationDate = data.activationDate;
+    const expirationDate = data.expirationDate;
+    if (name && keyword && width && description && type && channelId) {
+      this.props.createBanner({
+        name,
+        html,
+        width,
+        height,
+        keyword,
+        weight,
+        description,
+        type,
+        url,
+        target,
+        imageUrl,
+        isIFrame,
+        status,
+        adServer,
+        bannerHTMLType,
+        isCountView,
+        isFixIE,
+        isDefault,
+        isRelative,
+        isImpressionsBooked,
+        isClicksBooked,
+        isActivationDate,
+        isExpirationDate,
+        adStore,
+        impressionsBooked,
+        clicksBooked,
+        activationDate,
+        expirationDate,
+        channelId,
+      }).then(() => {
+        this.props.getClickImpressionByBannerId(data.id).then(() => {
+          const bannerId = this.props.banners.list[0].id;
+          if (this.props.clickImpressions) {
+            const arrClickImpressions = this.props.clickImpressions.list;
+            for (let j = 0; j < arrClickImpressions.length; j += 1) {
+              const clickUrl = arrClickImpressions[j].clickUrl;
+              const impressionUrl = arrClickImpressions[j].impressionUrl;
+              this.props.createClickImpression({ clickUrl, impressionUrl, bannerId });
+            }
+          }
+        });
+      });
+    }
+  }
+
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
       data: 'id',
@@ -26,7 +128,10 @@ class BannerList extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/banner/${rowData.id}`}>{cellData}</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/banner/${rowData.id}`}
+          onClick={(event) => this.onTabClickBanner(event)}
+        >{cellData}</Link>, cell);
       },
     }, {
       data: null,
@@ -34,15 +139,30 @@ class BannerList extends Component {
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/channel/${rowData.channelId}`}>Target Channel</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/banner/${rowData.id}`}
+          onClick={(event) => this.onTabClickOptionBanner(event)}
+        >Option Banner</Link>, cell);
       },
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/banner/${rowData.id}`}>New Placement</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/banner/${rowData.id}`}
+          onClick={(event) => this.onTabClickNewPlacement(event)}
+        >New Placement</Link>, cell);
+      },
+    }, {
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link
+          to="#"
+          onClick={() => this.duplicateBanner(rowData)}
+        >Duplicate</Link>, cell);
       },
     }];
   }
+
   render() {
     // Open the portal
     return (
@@ -61,6 +181,7 @@ class BannerList extends Component {
             <th>Size</th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
+            <th>&nbsp;</th>
           </tr>
         )}
         tfoot={(
@@ -68,6 +189,7 @@ class BannerList extends Component {
             <th><ICheck type="checkbox" className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>

@@ -10,12 +10,14 @@ import sites from './sites';
 import advertisers from './advertisers';
 import campaigns from './campaigns';
 import placements from './placements';
-import placementBannerZones from './placementBannerZones';
+import placementBanners from './placementBanners';
 import zones from './zones';
 import banners from './banners';
 import channels from './channels';
 import optionChannels from './optionChannels';
 import clickImpressions from './clickImpressions';
+import shares from './shares';
+import sharePlacements from './sharePlacements';
 
 const mutations = new ObjectType({
   name: 'Mutation',
@@ -25,7 +27,7 @@ const mutations = new ObjectType({
     ...users,
     ...sites,
     ...advertisers,
-    ...placementBannerZones,
+    ...placementBanners,
     ...campaigns,
     ...placements,
     ...banners,
@@ -33,6 +35,8 @@ const mutations = new ObjectType({
     ...channels,
     ...optionChannels,
     ...clickImpressions,
+    ...shares,
+    ...sharePlacements,
   },
 });
 

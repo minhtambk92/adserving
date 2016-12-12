@@ -1,17 +1,17 @@
 import {
   GET_CLICK_IMPRESSIONS,
   CREATE_CLICK_IMPRESSION,
-  GET_CLICK_IMPRESSION,
+  GET_CLICK_IMPRESSION_BY_BANNER_ID,
   UPDATE_CLICK_IMPRESSION,
   DELETE_CLICK_IMPRESSION,
 } from '../constants/';
 
 
-export function getClickImpression(id) {
+export function getClickImpressionByBannerId(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        clickImpressions(where: {id: "${id}"}) {
+        clickImpressions(where: {bannerId: "${id}"}) {
          id
          clickUrl
          impressionUrl
@@ -24,9 +24,9 @@ export function getClickImpression(id) {
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_CLICK_IMPRESSION,
+      type: GET_CLICK_IMPRESSION_BY_BANNER_ID,
       payload: {
-        clickImpression: data.clickImpressions.shift(),
+        clickImpressions: data.clickImpressions,
       },
     });
   };

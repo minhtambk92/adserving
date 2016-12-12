@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getCampaigns, createCampaign, getCampaignsFilters, setCampaignsFilters } from '../../../actions/campaigns';
 import { getAdvertisers } from '../../../actions/advertisers';
+import { setPageCampaignActiveTab } from '../../../actions/pages/campaigns';
 import Layout from '../../../components/Layout';
 import CreateCampaignForm from './CreateCampaignForm';
 import FilterCampaignsForm from './FilterCampaignsForm';
@@ -31,6 +32,7 @@ class Campaigns extends Component {
     createCampaign: PropTypes.func,
     getAdvertisers: PropTypes.func,
     advertisers: PropTypes.object,
+    setPageCampaignActiveTab: PropTypes.func,
   };
   componentWillMount() {
     this.props.getCampaigns();
@@ -117,7 +119,11 @@ class Campaigns extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <CampaignList list={this.getFilteredCampaigns()} />
+                  <CampaignList
+                    list={this.getFilteredCampaigns()}
+                    setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
+                    createCampaign={this.props.createCampaign}
+                  />
                 </div>
                 {/* /.box-body */}
               </div>
@@ -143,6 +149,7 @@ const mapDispatch = {
   getCampaigns,
   createCampaign,
   getAdvertisers,
+  setPageCampaignActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Campaigns));

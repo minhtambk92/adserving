@@ -6,7 +6,7 @@ const AdvertiserInputType = new InputObjectType({
   name: 'AdvertiserInputType',
   fields: () => Object.assign(attributeFields(Advertiser, {
     // Additional options
-    only: ['id', 'email', 'name', 'contact', 'description'],
+    only: ['id', 'email', 'name', 'isEmailReport', 'isEmailStatus', 'reportInterval', 'contact', 'description'],
   }), {
     // Additional fields
     status: { type: StringType },

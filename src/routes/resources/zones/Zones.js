@@ -19,7 +19,8 @@ import {
   getZonesFilters,
   setZonesFilters,
 } from '../../../actions/zones';
-import { getPlacements } from '../../../actions/placements';
+import { setPageZoneActiveTab } from '../../../actions/pages/zones';
+import { createShare, getShareByZoneId } from '../../../actions/shares';
 import Layout from '../../../components/Layout';
 import CreateZoneForm from './CreateZoneForm';
 import FilterZonesForm from './FilterZonesForm';
@@ -39,25 +40,16 @@ class Zones extends Component {
     zones: PropTypes.object,
     getZones: PropTypes.func,
     createZone: PropTypes.func,
-    placements: PropTypes.object,
-    getPlacements: PropTypes.func,
+    setPageZoneActiveTab: PropTypes.func,
+    createShare: PropTypes.func,
+    getShareByZoneId: PropTypes.func,
+    shares: PropTypes.object,
   };
 
   componentWillMount() {
     this.props.getSites();
     this.props.getZonesFilters();
-    this.props.getPlacements();
     this.props.getZones();
-  }
-
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    /* eslint-enable no-undef */
-  }
-
-  componentDidUpdate() {
-    /* eslint-disable no-undef */
-    /* eslint-enable no-undef */
   }
 
   getFilteredZones() {
@@ -65,13 +57,7 @@ class Zones extends Component {
   }
 
   isFiltered(zone) {
-    const { placementId, status, siteId, type } = this.props.zones.filters;
-
-    const notMatchPlacement = (
-      placementId !== undefined &&
-      typeof zone.placements === 'object' &&
-      JSON.stringify(zone.placements).indexOf(placementId) === -1
-    );
+    const { status, siteId, type } = this.props.zones.filters;
 
     const notMatchStatus = (
       status !== undefined && status !== zone.status
@@ -83,8 +69,9 @@ class Zones extends Component {
       type !== undefined && type !== zone.type
     );
 
-    return !(notMatchPlacement || notMatchStatus || notMatchSite || notMatchType);
+    return !(notMatchStatus || notMatchSite || notMatchType);
   }
+
   render() {
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
@@ -104,7 +91,6 @@ class Zones extends Component {
                 {/* /.box-header */}
                 <FilterZonesForm
                   sites={this.props.sites.list}
-                  placements={this.props.placements.list}
                   filters={this.props.zones.filters}
                   setZonesFilters={this.props.setZonesFilters}
                 />
@@ -129,7 +115,10 @@ class Zones extends Component {
                 <CreateZoneForm
                   filters={this.props.zones.filters}
                   sites={this.props.sites.list}
+                  createShare={this.props.createShare}
                   createZone={this.props.createZone}
+                  zones={this.props.zones && this.props.zones.list}
+                  getZones={this.props.getZones}
                 />
               </div>
               {/* /.col */}
@@ -145,7 +134,15 @@ class Zones extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <ZoneList list={this.getFilteredZones()} />
+                  <ZoneList
+                    list={this.getFilteredZones()}
+                    setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                    createZone={this.props.createZone}
+                    createShare={this.props.createShare}
+                    zones={this.props.zones}
+                    shares={this.props.shares}
+                    getShareByZoneId={this.props.getShareByZoneId}
+                  />
                 </div>
                 {/* /.box-body */}
               </div>
@@ -164,7 +161,7 @@ class Zones extends Component {
 const mapState = (state) => ({
   sites: state.sites,
   zones: state.zones,
-  placements: state.placements,
+  shares: state.shares,
 });
 
 const mapDispatch = {
@@ -173,7 +170,9 @@ const mapDispatch = {
   getSites,
   getZones,
   createZone,
-  getPlacements,
+  setPageZoneActiveTab,
+  createShare,
+  getShareByZoneId,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zones));

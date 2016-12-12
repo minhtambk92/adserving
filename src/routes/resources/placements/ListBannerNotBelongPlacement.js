@@ -11,7 +11,7 @@ class PlacementList extends Component {
     list: PropTypes.array,
     pushBannerToPlacement: PropTypes.func,
     getPlacement: PropTypes.func,
-    createPlacementBannerZone: PropTypes.func,
+    createPlacementBanner: PropTypes.func,
     getBanners: PropTypes.func,
   };
   dataTableOptions() {
@@ -53,10 +53,9 @@ class PlacementList extends Component {
   }
   /* eslint-disable max-len */
   pushBannerToPlacement(bannerId) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const zoneId = null;
     const placementId = this.props.placementId;
     if (placementId && bannerId) {
-      this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+      this.props.createPlacementBanner({ placementId, bannerId }).then(() => {
         this.props.getPlacement(this.props.placementId).then(() => {
           this.props.getBanners();
         });

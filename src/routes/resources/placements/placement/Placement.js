@@ -7,21 +7,29 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getPlacement, updatePlacement, deletePlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
-import { getBanners } from '../../../../actions/banners';
-import { createPlacementBannerZone, removePlacement, removeBannerInPlacementBannerZone, removeZoneInPlacementBannerZone } from '../../../../actions/placementBannerZones';
-import { getZones } from '../../../../actions/zones';
+import { getBanners, createBanner } from '../../../../actions/banners';
+import { getChannels } from '../../../../actions/channels';
+import {
+  createPlacementBanner,
+  removePlacement,
+  removeBannerInPlacementBanner,
+} from '../../../../actions/placementBanners';
+import { removePlacementInSharePlacement } from '../../../../actions/sharePlacements';
+import { createClickImpression } from '../../../../actions/clickImpressions';
 import Layout from '../../../../components/Layout';
 import ListBannerNotBelongPlacement from '../ListBannerNotBelongPlacement';
 import ListBannerOfPlacement from '../ListBannerOfPlacement';
-import ListZoneNotBelongPlacement from '../ListZoneNotBelongPlacement';
-import ListZoneOfPlacement from '../ListZoneOfPlacement';
 import UpdatePlacementForm from '../UpdatePlacementForm';
+import CreateBannerForm from '../../banners/CreateBannerForm';
 import s from './Placement.css';
 
 const pageTitle = 'Placement';
@@ -30,6 +38,7 @@ class Placement extends Component {
 
   static propTypes = {
     placementId: PropTypes.string.isRequired,
+    page: PropTypes.object,
     placements: PropTypes.object,
     campaigns: PropTypes.object,
     getPlacement: PropTypes.func,
@@ -38,113 +47,54 @@ class Placement extends Component {
     getCampaigns: PropTypes.func,
     banners: PropTypes.object,
     getBanners: PropTypes.func,
-    placementBannerZones: PropTypes.object,
-    createPlacementBannerZone: PropTypes.func,
-    zones: PropTypes.object,
-    getZones: PropTypes.func,
+    placementBanners: PropTypes.object,
+    createPlacementBanner: PropTypes.func,
     removePlacement: PropTypes.func,
-    removeBannerInPlacementBannerZone: PropTypes.func,
-    removeZoneInPlacementBannerZone: PropTypes.func,
+    removeBannerInPlacementBanner: PropTypes.func,
+    createBanner: PropTypes.func,
+    getChannels: PropTypes.func,
+    channels: PropTypes.object,
+    createZone: PropTypes.func,
+    removePlacementInSharePlacement: PropTypes.func,
+    createClickImpression: PropTypes.func,
   };
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      createBanner: false,
+    };
+  }
 
   componentWillMount() {
     this.props.getPlacement(this.props.placementId);
     this.props.getCampaigns();
     this.props.getBanners();
-    this.props.getZones();
+    this.props.getChannels();
+  }
+
+  componentDidMount() {
+    // Set latest active tab
+    $('.placement-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
   }
 
   filterBanner(allBanner, bof) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    if (allBanner.length === 0) {
-      return [];
-    } else if (bof.length === 0) {
-      return allBanner;
-    } else if (bof.length > 0 && allBanner.length > 0) {
-      const arrId = [];
-      const newArr = [];
-      const arrBanner = [];
-      for (let i = 0; i < bof.length; i += 1) {
-        if (bof[i] !== null) {
-          newArr.push(bof[i].id);
+    const arrBanner = allBanner;
+    for (let i = 0, len = bof.length; i < len; i += 1) {
+      for (let j = 0, len2 = arrBanner.length; j < len2; j += 1) {
+        if (bof[i].id === arrBanner[j].id) {
+          arrBanner.splice(j, 1);
+          len2 = arrBanner.length;
         }
-      }
-      for (let j = 0; j < allBanner.length; j += 1) {
-        arrId.push(allBanner[j].id);
-      }
-      for (let k = 0; k < newArr.length; k += 1) {
-        if (arrId.indexOf(newArr[k]) > -1) {
-          arrId.splice(arrId.indexOf(newArr[k]), 1);
-        }
-      }
-      if (arrId.length > 0) {
-        for (let m = 0; m < allBanner.length; m += 1) {
-          for (let h = 0; h < arrId.length; h += 1) {
-            if (allBanner[m].id === arrId[h]) {
-              arrBanner.push(allBanner[m]);
-            }
-          }
-        }
-        return arrBanner;
-      } else if (arrId.length === 0) {
-        return [];
-      }
-    }
-    return false;
-  }
-  filterZones(allZones, zof) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    if (allZones.length === 0) {
-      return [];
-    } else if (zof.length === 0) {
-      return allZones;
-    } else if (zof.length > 0 && allZones.length > 0) {
-      const arrId = [];
-      const newArr = [];
-      const arrZones = [];
-      for (let i = 0; i < zof.length; i += 1) {
-        if (zof[i] !== null) {
-          newArr.push(zof[i].id);
-        }
-      }
-      for (let j = 0; j < allZones.length; j += 1) {
-        arrId.push(allZones[j].id);
-      }
-      for (let k = 0; k < newArr.length; k += 1) {
-        if (arrId.indexOf(newArr[k]) > -1) {
-          arrId.splice(arrId.indexOf(newArr[k]), 1);
-        }
-      }
-      if (arrId.length > 0) {
-        for (let m = 0; m < allZones.length; m += 1) {
-          for (let h = 0; h < arrId.length; h += 1) {
-            if (allZones[m].id === arrId[h]) {
-              arrZones.push(allZones[m]);
-            }
-          }
-        }
-        return arrZones;
-      } else if (arrId.length === 0) {
-        return [];
-      }
-    }
-    return false;
-  }
-  dataBanner(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const arrBanner = [];
-    for (let i = 0; i < arr.length; i += 1) {
-      if (arr[i] !== null) {
-        arrBanner.push(arr[i]);
       }
     }
     return arrBanner;
   }
-  dataZone(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const arrZone = [];
-    for (let i = 0; i < arr.length; i += 1) {
-      if (arr[i] !== null) {
-        arrZone.push(arr[i]);
-      }
-    }
-    return arrZone;
+
+  createBannerInPlacement() {
+    this.setState({ createBanner: true });
   }
 
   render() {
@@ -160,7 +110,7 @@ class Placement extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="nav-tabs-custom">
+              <div className="nav-tabs-custom placement-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
                     <a href="#editPlacement" data-toggle="tab">
@@ -170,11 +120,6 @@ class Placement extends Component {
                   <li>
                     <a href="#addBanner" data-toggle="tab">
                       Add Banner
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#addZone" data-toggle="tab">
-                      Add Zone
                     </a>
                   </li>
                 </ul>
@@ -187,7 +132,10 @@ class Placement extends Component {
                           <div className="box-header with-border">
                             <h3 className="box-title">Change Placement information</h3>
                             <div className="box-tools pull-right">
-                              <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                              <button
+                                type="button" className="btn btn-box-tool"
+                                data-widget="collapse"
+                              >
                                 <i className="fa fa-minus" />
                               </button>
                             </div>
@@ -201,6 +149,9 @@ class Placement extends Component {
                             getPlacement={this.props.getPlacement}
                             campaigns={this.props.campaigns && this.props.campaigns.list}
                             removePlacement={this.props.removePlacement}
+                            /* eslint-disable max-len */
+                            removePlacementInSharePlacement={this.props.removePlacementInSharePlacement}
+                            /* eslint-enable max-len */
                           />
                         </div>
                         {/* /.col */}
@@ -226,7 +177,7 @@ class Placement extends Component {
                                     this.filterBanner(this.props.banners.list,
                                       this.props.placements.editing.banners,
                                     )}
-                                  createPlacementBannerZone={this.props.createPlacementBannerZone}
+                                  createPlacementBanner={this.props.createPlacementBanner}
                                   getPlacement={this.props.getPlacement}
                                   getBanners={this.props.getBanners}
                                   placementId={this.props.placementId}
@@ -250,14 +201,18 @@ class Placement extends Component {
                               <div className="box-body">
                                 <ListBannerOfPlacement
                                   list={this.props.placements && this.props.placements.editing &&
-                                    this.props.placements.editing.banners &&
-                                    this.dataBanner(this.props.placements.editing.banners)}
+                                    this.props.placements.editing.banners}
                                   /* eslint-disable max-len */
-                                  removeBannerInPlacementBannerZone={this.props.removeBannerInPlacementBannerZone}
+                                  removeBannerInPlacementBanner={this.props.removeBannerInPlacementBanner}
                                   /* eslint-enable max-len */
                                   getPlacement={this.props.getPlacement}
                                   getBanners={this.props.getBanners}
                                   placementId={this.props.placementId}
+                                  createBanner={this.props.createBanner}
+                                  channels={this.props.channels && this.props.channels.list}
+                                  createPlacementBanner={this.props.createPlacementBanner}
+                                  banners={this.props.banners}
+                                  createClickImpression={this.props.createClickImpression}
                                 />
                               </div>
                               {/* /.box-body */}
@@ -265,66 +220,36 @@ class Placement extends Component {
                             {/* /.box */}
                           </section>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="tab-pane" id="addZone">
-                    <div className="row">
-                      <div className="col-lg-12">
                         <div className="row">
-                          <section className="col-lg-6">
-                            {/* BOX: LIST OF Placements */}
-                            <div className="box box-info">
-                              <div className="box-header with-border">
-                                <h3 className="box-title">List All Zones</h3>
+                          {this.state.createBanner === false ? (
+                            <div className="form-group">
+                              <div className="col-sm-2">
+                                <button
+                                  type="button"
+                                  id="createBannerInPlacement"
+                                  onClick={(event) => this.createBannerInPlacement(event)}
+                                  className="btn btn-block btn-info btn-sm"
+                                >
+                                  Create Share
+                                </button>
                               </div>
-                              {/* /.box-header */}
-                              <div className="box-body">
-                                <ListZoneNotBelongPlacement
-                                  list={this.props.zones && this.props.zones.list &&
-                                  this.props.placements &&
-                                  this.props.placements.editing &&
-                                    this.props.placements.editing.zones &&
-                                    this.filterZones(this.props.zones.list,
-                                      this.props.placements.editing.zones)}
-                                  createPlacementBannerZone={this.props.createPlacementBannerZone}
-                                  getPlacement={this.props.getPlacement}
-                                  getZones={this.props.getZones}
-                                  placementId={this.props.placementId}
-                                />
+                              <div className="col-sm-10">
+                                &nbsp;
                               </div>
-                              {/* /.box-body */}
                             </div>
-                            {/* /.box */}
-                          </section>
-                          <section className="col-lg-6">
-                            {/* BOX: LIST OF Placements */}
-                            <div className="box box-info">
-                              <div className="box-header with-border">
-                                <h3 className="box-title">List Zone Of {
-                                  this.props.placements.editing ?
-                                    this.props.placements.editing.name : '...'
-                                }
-                                </h3>
-                              </div>
-                              {/* /.box-header */}
-                              <div className="box-body">
-                                <ListZoneOfPlacement
-                                  list={this.props.placements && this.props.placements.editing &&
-                                    this.props.placements.editing.zones &&
-                                    this.dataZone(this.props.placements.editing.zones)}
-                                  /* eslint-disable max-len */
-                                  removeZoneInPlacementBannerZone={this.props.removeZoneInPlacementBannerZone}
-                                  /* eslint-enable max-len */
-                                  getPlacement={this.props.getPlacement}
-                                  getZones={this.props.getZones}
-                                  placementId={this.props.placementId}
-                                />
-                              </div>
-                              {/* /.box-body */}
+                          ) : (
+                            <div className="col-lg-12">
+                              <CreateBannerForm
+                                createBanner={this.props.createBanner}
+                                channels={this.props.channels && this.props.channels.list}
+                                placementId={this.props.placementId}
+                                getPlacement={this.props.getPlacement}
+                                banners={this.props.banners && this.props.banners.list}
+                                getBanners={this.props.getBanners}
+                                createPlacementBanner={this.props.createPlacementBanner}
+                              />
                             </div>
-                            {/* /.box */}
-                          </section>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -341,11 +266,15 @@ class Placement extends Component {
 }
 
 const mapState = (state) => ({
+  page: state.page.placements,
   placements: state.placements,
   campaigns: state.campaigns,
   banners: state.banners,
-  placementBannerZones: state.placementBannerZones,
+  placementBanners: state.placementBanners,
   zones: state.zones,
+  channels: state.channels,
+  sites: state.sites,
+  sharePlacements: state.sharePlacements,
 });
 
 const mapDispatch = {
@@ -354,11 +283,13 @@ const mapDispatch = {
   deletePlacement,
   getCampaigns,
   getBanners,
-  createPlacementBannerZone,
-  getZones,
+  createPlacementBanner,
   removePlacement,
-  removeBannerInPlacementBannerZone,
-  removeZoneInPlacementBannerZone,
+  removeBannerInPlacementBanner,
+  createBanner,
+  getChannels,
+  removePlacementInSharePlacement,
+  createClickImpression,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placement));

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import {
-  GET_OPTION_CHANNEL,
+  GET_OPTION_CHANNEL_BY_CHANNEL_ID,
   GET_OPTION_CHANNELS,
   CREATE_OPTION_CHANNEL,
   UPDATE_OPTION_CHANNEL,
@@ -9,6 +9,9 @@ import {
 
 function list(state = [], action) {
   switch (action.type) {
+    case GET_OPTION_CHANNEL_BY_CHANNEL_ID: {
+      return action.payload.optionChannels;
+    }
     case GET_OPTION_CHANNELS: {
       return action.payload.optionChannels;
     }
@@ -23,9 +26,6 @@ function list(state = [], action) {
 
 function editing(state = {}, action) {
   switch (action.type) {
-    case GET_OPTION_CHANNEL: {
-      return action.payload.optionChannel;
-    }
     case UPDATE_OPTION_CHANNEL: {
       return action.payload.optionChannel;
     }

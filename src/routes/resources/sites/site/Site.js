@@ -7,12 +7,18 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getSite, updateSite, deleteSite, checkSitesByDomain } from '../../../../actions/sites';
 import { createZone } from '../../../../actions/zones';
 import { getChannels, createChannel } from '../../../../actions/channels';
+import { setPageZoneActiveTab } from '../../../../actions/pages/zones';
+import { setPageChannelActiveTab } from '../../../../actions/pages/channels';
+import { createShare } from '../../../../actions/shares';
+import { createOptionChannel } from  '../../../../actions/optionChannels'
 import Layout from '../../../../components/Layout';
 import ListZoneOfSite from '../ListZoneOfSite';
 import ListChannelOfSite from '../ListChannelOfSite';
@@ -28,6 +34,7 @@ class Site extends Component {
 
   static propTypes = {
     siteId: PropTypes.string.isRequired,
+    page: PropTypes.object,
     sites: PropTypes.object,
     getSite: PropTypes.func,
     updateSite: PropTypes.func,
@@ -38,11 +45,22 @@ class Site extends Component {
     getChannels: PropTypes.func,
     createChannel: PropTypes.func,
     channels: PropTypes.object,
+    setPageZoneActiveTab: PropTypes.func,
+    setPageChannelActiveTab: PropTypes.func,
+    createShare: PropTypes.func,
+    shares: PropTypes.object,
+    createOptionChannel: PropTypes.func,
   };
 
   componentWillMount() {
     this.props.getSite(this.props.siteId);
     this.props.getChannels();
+  }
+
+  componentDidMount() {
+    // Set latest active tab
+    $('.site-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
   }
 
   render() {
@@ -58,7 +76,7 @@ class Site extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="nav-tabs-custom">
+              <div className="nav-tabs-custom site-edit-box">
                 <ul className="nav nav-tabs">
                   <li>
                     <a href="#editSite" data-toggle="tab">
@@ -112,7 +130,7 @@ class Site extends Component {
                     <div className="row">
                       <div className="col-lg-12">
                         <div className="row">
-                          <section className="col-lg-6">
+                          <section className="col-lg-5">
                             {/* BOX: FORM OF CREATE A NEW ZONE */}
                             <div className="box box-info">
                               <div className="box-header with-border">
@@ -135,12 +153,12 @@ class Site extends Component {
                             </div>
                             {/* /.col */}
                           </section>
-                          <section className="col-lg-6">
+                          <section className="col-lg-7">
                             {/* BOX: LIST OF ZONES */}
                             <div className="box box-info">
                               <div className="box-header with-border">
                                 <h3 className="box-title">
-                                  List of zones: {this.props.sites.editing ?
+                                  List zones of Site: {this.props.sites.editing ?
                                   this.props.sites.editing.name : '...'}
                                 </h3>
                               </div>
@@ -150,6 +168,12 @@ class Site extends Component {
                                   list={this.props.sites.editing &&
                                       this.props.sites.editing.zones &&
                                       this.props.sites.editing.zones}
+                                  setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                                  createZone={this.props.createZone}
+                                  createShare={this.props.createShare}
+                                  zones={this.props.zones}
+                                  getSite={this.props.getSite}
+                                  siteId={this.props.siteId}
                                 />
                               </div>
                               {/* /.box-body */}
@@ -192,7 +216,7 @@ class Site extends Component {
                             <div className="box box-info">
                               <div className="box-header with-border">
                                 <h3 className="box-title">
-                                  List of channels: {this.props.sites.editing ?
+                                  List channels of Site: {this.props.sites.editing ?
                                   this.props.sites.editing.name : '...'}
                                 </h3>
                               </div>
@@ -202,6 +226,12 @@ class Site extends Component {
                                   list={this.props.sites.editing &&
                                   this.props.sites.editing.channels &&
                                   this.props.sites.editing.channels}
+                                  setPageChannelActiveTab={this.props.setPageChannelActiveTab}
+                                  createChannel={this.props.createChannel}
+                                  channels={this.props.channels}
+                                  siteId={this.props.siteId}
+                                  createOptionChannel={this.props.createOptionChannel}
+                                  getSite={this.props.getSite}
                                 />
                               </div>
                               {/* /.box-body */}
@@ -223,9 +253,11 @@ class Site extends Component {
 }
 
 const mapState = (state) => ({
+  page: state.page.sites,
   sites: state.sites,
   zones: state.zones,
   channels: state.channels,
+  shares: state.shares,
 });
 
 const mapDispatch = {
@@ -236,6 +268,10 @@ const mapDispatch = {
   checkSitesByDomain,
   createChannel,
   getChannels,
+  setPageChannelActiveTab,
+  setPageZoneActiveTab,
+  createShare,
+  createOptionChannel,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Site));

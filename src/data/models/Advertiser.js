@@ -37,6 +37,18 @@ const Advertisers = Model.define('Advertisers', {
     type: DataType.TEXT,
     defaultValue: '',
   },
+  isEmailReport: {
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  },
+  isEmailStatus: {
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  },
+  reportInterval: {
+    type: DataType.INTEGER,
+    defaultValue: 7,
+  },
   status: {
     type: DataType.STRING,
     allowNull: false,

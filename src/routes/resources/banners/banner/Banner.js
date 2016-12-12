@@ -7,6 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import style from 'react-dropzone-component/styles/filepicker.css';
 import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
@@ -17,10 +19,10 @@ import { getCampaigns } from '../../../../actions/campaigns';
 import { createPlacement, getPlacements } from '../../../../actions/placements';
 import { getChannels } from '../../../../actions/channels';
 import {
-  createPlacementBannerZone,
+  createPlacementBanner,
   removeBanner,
-  removeBannerInPlacementBannerZone,
-} from '../../../../actions/placementBannerZones';
+  removeBannerInPlacementBanner,
+} from '../../../../actions/placementBanners';
 import {
   createClickImpression,
   deleteClickImpression,
@@ -41,6 +43,7 @@ class Banner extends Component {
 
   static propTypes = {
     bannerId: PropTypes.string.isRequired,
+    page: PropTypes.object,
     banners: PropTypes.object,
     getBanner: PropTypes.func,
     updateBanner: PropTypes.func,
@@ -49,13 +52,13 @@ class Banner extends Component {
     getCampaigns: PropTypes.func,
     createPlacement: PropTypes.func,
     placements: PropTypes.object,
-    createPlacementBannerZone: PropTypes.func,
+    createPlacementBanner: PropTypes.func,
     getPlacements: PropTypes.func,
-    placementBannerZones: PropTypes.object,
+    placementBanners: PropTypes.object,
     removeBanner: PropTypes.func,
     getChannels: PropTypes.func,
     channels: PropTypes.object,
-    removeBannerInPlacementBannerZone: PropTypes.func,
+    removeBannerInPlacementBanner: PropTypes.func,
     createClickImpression: PropTypes.func,
     deleteClickImpression: PropTypes.func,
     updateClickImpression: PropTypes.func,
@@ -69,56 +72,23 @@ class Banner extends Component {
     this.props.getChannels();
   }
 
-  filterPlacements(arr) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const arrId = [];
-    const arrPlacement = [];
-    for (let i = 0; i < arr.length; i += 1) {
-      if (arr[i] !== null) {
-        if (arrId.indexOf(arr[i].id) === -1) {
-          arrId.push(arr[i].id);
-          arrPlacement.push(arr[i]);
+  componentDidMount() {
+    // Set latest active tab
+    $('.banner-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
+  filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const arrPlacement = allPlacement;
+    for (let i = 0, len = pob.length; i < len; i += 1) {
+      for (let j = 0, len2 = arrPlacement.length; j < len2; j += 1) {
+        if (pob[i].id === arrPlacement[j].id) {
+          arrPlacement.splice(j, 1);
+          len2 = arrPlacement.length;
         }
       }
     }
     return arrPlacement;
-  }
-
-  filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    if (allPlacement.length === 0) {
-      return [];
-    } else if (pob.length === 0) {
-      return allPlacement;
-    } else if (pob.length > 0 && allPlacement.length > 0) {
-      const arrId = [];
-      const newArr = [];
-      const arrPlacement = [];
-      for (let i = 0; i < pob.length; i += 1) {
-        if (pob[i] !== null) {
-          newArr.push(pob[i].id);
-        }
-      }
-      for (let j = 0; j < allPlacement.length; j += 1) {
-        arrId.push(allPlacement[j].id);
-      }
-      for (let k = 0; k < newArr.length; k += 1) {
-        if (arrId.indexOf(newArr[k]) > -1) {
-          arrId.splice(arrId.indexOf(newArr[k]), 1);
-        }
-      }
-      if (arrId.length > 0) {
-        for (let m = 0; m < allPlacement.length; m += 1) {
-          for (let h = 0; h < arrId.length; h += 1) {
-            if (allPlacement[m].id === arrId[h]) {
-              arrPlacement.push(allPlacement[m]);
-            }
-          }
-        }
-        return arrPlacement;
-      } else if (arrId.length === 0) {
-        return [];
-      }
-    }
-    return false;
   }
 
   render() {
@@ -134,14 +104,14 @@ class Banner extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="nav-tabs-custom">
+              <div className="nav-tabs-custom banner-edit-box">
                 <ul className="nav nav-tabs">
-                  <li>
+                  <li className="active">
                     <a href="#editBanner" data-toggle="tab">
                       Edit Banner
                     </a>
                   </li>
-                  <li className="active">
+                  <li>
                     <a href="#optionBanner" data-toggle="tab">
                       Option Banner
                     </a>
@@ -154,7 +124,7 @@ class Banner extends Component {
                 </ul>
                 <div className="tab-content">
                   {/* /#EditBanner */}
-                  <div className="tab-pane" id="editBanner">
+                  <div className="tab-pane active" id="editBanner">
                     <div className="row">
                       <section className="col-lg-12">
                         <div className="box box-info">
@@ -183,7 +153,7 @@ class Banner extends Component {
                     </div>
                   </div>
                   {/* /#OptionBanner */}
-                  <div className="tab-pane active" id="optionBanner">
+                  <div className="tab-pane" id="optionBanner">
                     <div className="row">
                       <section className="col-lg-12">
                         <div className="box box-info">
@@ -235,7 +205,7 @@ class Banner extends Component {
                                     this.props.placements.list,
                                     this.props.banners.editing.placements,
                                   )}
-                                  createPlacementBannerZone={this.props.createPlacementBannerZone}
+                                  createPlacementBanner={this.props.createPlacementBanner}
                                   getBanner={this.props.getBanner}
                                   getPlacements={this.props.getPlacements}
                                   bannerId={this.props.bannerId}
@@ -258,12 +228,9 @@ class Banner extends Component {
                               <div className="box-body">
                                 <ListPlacementOfBanner
                                   list={this.props.banners.editing &&
-                                  this.props.banners.editing.placements &&
-                                  this.filterPlacements(
-                                    this.props.banners.editing.placements,
-                                  )}
+                                  this.props.banners.editing.placements}
                                   /* eslint-disable max-len */
-                                  removeBannerInPlacementBannerZone={this.props.removeBannerInPlacementBannerZone}
+                                  removeBannerInPlacementBanner={this.props.removeBannerInPlacementBanner}
                                   /* eslint-enable max-len */
                                   getPlacements={this.props.getPlacements}
                                   getBanner={this.props.getBanner}
@@ -297,7 +264,7 @@ class Banner extends Component {
                                 getPlacements={this.props.getPlacements}
                                 placements={this.props.placements && this.props.placements.list}
                                 getBanner={this.props.getBanner}
-                                createPlacementBannerZone={this.props.createPlacementBannerZone}
+                                createPlacementBanner={this.props.createPlacementBanner}
                               />
                             </div>
                             {/* /.col */}
@@ -318,12 +285,13 @@ class Banner extends Component {
 }
 
 const mapState = (state) => ({
+  page: state.page.banners,
   banners: state.banners,
   campaigns: state.campaigns,
   placements: state.placements,
   channels: state.channels,
   clickImpressions: state.clickImpressions,
-  placementBannerZones: state.placementBannerZones,
+  placementBanners: state.placementBanners,
 });
 
 const mapDispatch = {
@@ -332,10 +300,10 @@ const mapDispatch = {
   deleteBanner,
   getCampaigns,
   createPlacement,
-  createPlacementBannerZone,
+  createPlacementBanner,
   getPlacements,
   removeBanner,
-  removeBannerInPlacementBannerZone,
+  removeBannerInPlacementBanner,
   getChannels,
   createClickImpression,
   deleteClickImpression,

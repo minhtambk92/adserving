@@ -28,8 +28,10 @@ import {
   Placement,
   Zone,
   Banner,
-  PlacementBannerZone,
+  PlacementBanner,
   ClickImpression,
+  Share,
+  SharePlacement,
 } from '../../data/models';
 import { host } from '../../config';
 
@@ -391,6 +393,9 @@ async function advertiserFiction() {
       status: STATUS_ACTIVE,
       contact: '0988333777',
       description: 'Đơn vị quảng cáo admicro',
+      isEmailReport: false,
+      isEmailStatus: false,
+      reportInterval: 7,
     });
 
     console.log(chalk.green(`${advertiser.name} is created. Passed!`));
@@ -417,6 +422,9 @@ async function campaignFiction() {
       viewPerSession: 20,
       timeResetViewCount: 24,
       weight: 1,
+      revenueType: 'cpm',
+      expireValueCPM: 2345,
+      maxCPMPerDay: 2908,
       status: STATUS_ACTIVE,
       description: 'Campaign của Admicro',
       advertiserId: advertiser.id,
@@ -567,16 +575,25 @@ async function zoneFiction() {
     // Create an Zone
     const zone = await Zone.create({
       name: 'Zone Top',
-      width: 468,
-      height: 60,
-      sizeText: 'IAB Full Banner (468 x 60)',
-      sizeValue: '468x60',
-      slot: '1',
+      width: 300,
+      height: 600,
+      sizeText: 'Customer (300 x 600)',
+      sizeValue: 'custom',
+      slot: 3,
       type: 'type-1',
       html: 'html',
       css: 'css',
       status: STATUS_ACTIVE,
       weight: 1,
+      delivery: 3,
+      targetIFrame: '0',
+      isShowBannerAgain: true,
+      source: '',
+      isShowCampaignAgain: true,
+      isShowTextBanner: false,
+      characterSet: 'autoDetect',
+      supportThirdParty: '0',
+      isIncludeDescription: true,
       description: 'Zone Top of Bong Da So',
       siteId: site.id,
     });
@@ -584,6 +601,53 @@ async function zoneFiction() {
     console.log(chalk.green(`${zone.name} is created. Passed!`));
   } else {
     console.log(chalk.green(`${zonesQuantity} zone(s) found. Passed!`));
+  }
+}
+
+// SharedZone
+async function sharedFiction() {
+  console.log(chalk.grey('Check current number of share Zone...'));
+  const shareQuantity = await Share.count();
+
+  if (shareQuantity === 0) {
+    console.log(chalk.red('No share zone found! Do a fiction...'));
+    // Get id of Zone
+    const zone = await Zone.findOne({ where: { name: 'Zone Top' } });
+    // Create an Share
+    const share = await Share.create({
+      name: 'Share 1',
+      html: '<div class="hello"></div>',
+      css: 'css',
+      description: 'Zone 300x300',
+      zoneId: zone.id,
+    });
+
+    console.log(chalk.green(`Super ${share.name} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${shareQuantity} share Zone(s) found. Passed!`));
+  }
+}
+
+// SharedPlacement
+async function sharedPlacementFiction() {
+  console.log(chalk.grey('Check current number of share Zone...'));
+  const sharePlacementQuantity = await SharePlacement.count();
+
+  if (sharePlacementQuantity === 0) {
+    console.log(chalk.red('No share zone found! Do a fiction...'));
+    // Get id of Share
+    const share = await Share.findOne({ where: { name: 'Share 1' } });
+    // Get id of Share
+    const placement = await Placement.findOne({ where: { name: 'Placement' } });
+    // Create an Share
+    const sharePlacement = await SharePlacement.create({
+      shareId: share.id,
+      placementId: placement.id,
+    });
+
+    console.log(chalk.green(`Super ${sharePlacement.id} is created. Passed!`));
+  } else {
+    console.log(chalk.green(`${sharePlacementQuantity} share Placement(s) found. Passed!`));
   }
 }
 
@@ -622,8 +686,8 @@ async function bannerFiction() {
       isActivationDate: true,
       isExpirationDate: true,
       adStore: '',
-      impressionsBooked: 'unlimited',
-      clicksBooked: 'unlimited',
+      impressionsBooked: -1,
+      clicksBooked: -1,
       activationDate: new Date(moment().format('YYYY-MM-DD 00:00:00')),
       expirationDate: new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00')),
       channelId: channel.id,
@@ -654,8 +718,8 @@ async function bannerFiction() {
       isActivationDate: true,
       isExpirationDate: true,
       adStore: '',
-      impressionsBooked: 'unlimited',
-      clicksBooked: 'unlimited',
+      impressionsBooked: -1,
+      clicksBooked: -1,
       activationDate: new Date(moment().format('YYYY-MM-DD 00:00:00')),
       expirationDate: new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00')),
       channelId: channel.id,
@@ -666,29 +730,26 @@ async function bannerFiction() {
   }
 }
 
-// PlacementBannerZones Fiction
-async function placementBannerZoneFiction() {
-  console.log(chalk.grey('Check current number of placementBannerZones...'));
-  const placementBannerZonesQuantity = await PlacementBannerZone.count();
+// PlacementBanners Fiction
+async function placementBannerFiction() {
+  console.log(chalk.grey('Check current number of placementBanners...'));
+  const placementBannersQuantity = await PlacementBanner.count();
 
-  if (placementBannerZonesQuantity === 0) {
-    console.log(chalk.red('No placementBannerZone found! Do a fiction...'));
-    // Get id of Site
-    const zone = await Zone.findOne({ where: { name: 'Zone Top' } });
+  if (placementBannersQuantity === 0) {
+    console.log(chalk.red('No placementBanner found! Do a fiction...'));
     // Get id of Placement
     const placement = await Placement.findOne({ where: { name: 'Placement' } });
     // Get Id of Banner
     const banner = await Banner.findOne({ where: { name: 'Banner Top' } });
     // Create an Zone
-    await PlacementBannerZone.create({
+    await PlacementBanner.create({
       placementId: placement.id,
       bannerId: banner.id,
-      zoneId: zone.id,
     });
 
-    console.log(chalk.green('placementBannerZone is created. Passed!'));
+    console.log(chalk.green('placementBanner is created. Passed!'));
   } else {
-    console.log(chalk.green(`${placementBannerZonesQuantity} placementBannerZone(s) found. Passed!`));
+    console.log(chalk.green(`${placementBannersQuantity} placementBanner(s) found. Passed!`));
   }
 }
 
@@ -727,8 +788,10 @@ async function fiction() {
   await optionChannelFiction();
   await placementFiction();
   await zoneFiction();
+  await sharedFiction();
   await bannerFiction();
-  await placementBannerZoneFiction();
+  await sharedPlacementFiction();
+  await placementBannerFiction();
   await clickImpressionFiction();
   console.log(chalk.magenta(`Your application is now ready at http://${host}/`));
 }

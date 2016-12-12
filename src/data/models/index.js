@@ -32,9 +32,11 @@ import Site from './Site';
 import Zone from './Zone';
 import Channel from './Channel';
 import Filter from './Filter';
-import PlacementBannerZone from './PlacementBannerZone';
+import PlacementBanner from './PlacementBanner';
 import OptionChannel from './OptionChannel';
 import ClickImpression from './ClickImpression';
+import Share from './Share';
+import SharePlacement from './SharePlacement';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -179,29 +181,22 @@ Role.users = Role.belongsToMany(User, {
   as: 'users',
 });
 
-PlacementBannerZone.placement = PlacementBannerZone.belongsTo(Placement, {
+PlacementBanner.placement = PlacementBanner.belongsTo(Placement, {
   foreignKey: 'placementId',
 });
 
-PlacementBannerZone.banner = PlacementBannerZone.belongsTo(Banner, {
+PlacementBanner.banner = PlacementBanner.belongsTo(Banner, {
   foreignKey: 'bannerId',
 });
 
-PlacementBannerZone.zone = PlacementBannerZone.belongsTo(Zone, {
-  foreignKey: 'zoneId',
-});
-
-Placement.placementBannerZones = Placement.hasMany(PlacementBannerZone, {
+Placement.placementBanners = Placement.hasMany(PlacementBanner, {
   foreignKey: 'placementId',
 });
 
-Banner.placementBannerZones = Banner.hasMany(PlacementBannerZone, {
+Banner.placementBanners = Banner.hasMany(PlacementBanner, {
   foreignKey: 'bannerId',
 });
 
-Zone.placementBannerZones = Zone.hasMany(PlacementBannerZone, {
-  foreignKey: 'zoneId',
-});
 
 // Each site has many zones
 Site.zones = Site.hasMany(Zone, {
@@ -282,6 +277,33 @@ Placement.campaign = Placement.belongsTo(Campaign, {
   as: 'campaign',
 });
 
+// Each zone can use many share of ads
+Zone.shares = Zone.hasMany(Share, {
+  foreignKey: 'zoneId',
+});
+
+// Each share zone can only belong to one zone
+Share.zone = Share.belongsTo(Zone, {
+  foreignKey: 'zoneId',
+});
+
+SharePlacement.placement = SharePlacement.belongsTo(Placement, {
+  foreignKey: 'placementId',
+});
+
+SharePlacement.share = SharePlacement.belongsTo(Share, {
+  foreignKey: 'shareId',
+});
+
+Placement.sharePlacements = Placement.hasMany(SharePlacement, {
+  foreignKey: 'placementId',
+});
+
+Share.sharePlacements = Share.hasMany(SharePlacement, {
+  foreignKey: 'shareId',
+});
+
+
 function sync(...args) {
   return sequelize.sync(...args);
 }
@@ -308,7 +330,9 @@ export {
   Zone,
   Channel,
   Filter,
-  PlacementBannerZone,
+  PlacementBanner,
   OptionChannel,
   ClickImpression,
+  Share,
+  SharePlacement,
 };

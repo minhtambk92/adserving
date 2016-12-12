@@ -16,7 +16,7 @@ class CreatePlacementForm extends Component {
     bannerId: PropTypes.string,
     getBanner: PropTypes.func,
     placements: PropTypes.array,
-    createPlacementBannerZone: PropTypes.func,
+    createPlacementBanner: PropTypes.func,
     getPlacements: PropTypes.func,
   };
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -43,7 +43,10 @@ class CreatePlacementForm extends Component {
     }
     const status = this.inputPlacementStatus.value;
     if (name && startTime && endTime && sizeHeight && sizeWidth && weight && description) {
-      if (moment(startTime).format('x') < moment(endTime).format('x')) {
+      const now = moment().format('x');
+      const start = moment(startTime).format('x');
+      const end = moment(endTime).format('x');
+      if ((start < end) && (now < end)) {
         this.props.createPlacement({
           name,
           startTime,
@@ -62,7 +65,7 @@ class CreatePlacementForm extends Component {
             const placementId = this.props.placements[0].id;
             const zoneId = this.props.zoneId;
             const bannerId = null;
-            this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+            this.props.createPlacementBanner({ placementId, bannerId, zoneId }).then(() => {
               this.props.getZone(this.props.zoneId);
               this.props.getPlacements();
             });
@@ -70,7 +73,7 @@ class CreatePlacementForm extends Component {
             const placementId = this.props.placements[0].id;
             const bannerId = this.props.bannerId;
             const zoneId = null;
-            this.props.createPlacementBannerZone({ placementId, bannerId, zoneId }).then(() => {
+            this.props.createPlacementBanner({ placementId, bannerId, zoneId }).then(() => {
               this.props.getBanner(this.props.bannerId);
               this.props.getPlacements();
             });

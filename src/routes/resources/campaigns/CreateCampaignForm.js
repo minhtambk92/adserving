@@ -13,6 +13,14 @@ class CreateCampaignForm extends Component {
     getAdvertiser: PropTypes.func,
   };
 
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      showCPM: false,
+    };
+  }
+
   clearInput(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputCampaignName.value = null;
     this.inputCampaignViews.value = null;
@@ -20,6 +28,15 @@ class CreateCampaignForm extends Component {
     this.inputCampaignTimeResetViewCount.value = null;
     this.inputCampaignWeight.value = null;
     this.inputCampaignDescription.value = null;
+  }
+
+  changeRevenueType() { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const revenueType = this.inputCampaignRevenueType.value;
+    if (revenueType === 'cpm') {
+      this.setState({ showCPM: true });
+    } else {
+      this.setState({ showCPM: false });
+    }
   }
 
   createCampaign() {
@@ -38,9 +55,22 @@ class CreateCampaignForm extends Component {
     const weight = this.inputCampaignWeight.value;
     const description = this.inputCampaignDescription.value;
     const status = this.inputCampaignStatus.value;
+    const revenueType = this.inputCampaignRevenueType.value;
+    let expireValueCPM = 0;
+    let maxCPMPerDay = 0;
+    if (this.state.showCPM === true && revenueType === 'cpm') {
+      expireValueCPM = this.inputCampaignExpireValueCPM.value;
+      maxCPMPerDay = this.inputCampaignMaxCPMPerDay.value;
+    } else if (this.state.showCPM === false) {
+      expireValueCPM = 0;
+      maxCPMPerDay = 0;
+    }
     if (name && advertiserId && startTime && endTime && views && viewPerSession
       && timeResetViewCount && weight && description) {
-      if (moment(startTime).format('x') < moment(endTime).format('x')) {
+      const now = moment().format('x');
+      const start = moment(startTime).format('x');
+      const end = moment(endTime).format('x');
+      if ((start < end) && (now < end)) {
         this.props.createCampaign({
           advertiserId,
           name,
@@ -50,10 +80,14 @@ class CreateCampaignForm extends Component {
           viewPerSession,
           timeResetViewCount,
           weight,
+          revenueType,
+          expireValueCPM,
+          maxCPMPerDay,
           description,
           status,
         }).then(() => {
           this.clearInput();
+          this.setState({ showCPM: false });
           if (this.props.advertiserId) {
             this.props.getAdvertiser(this.props.advertiserId);
           }
@@ -140,9 +174,62 @@ class CreateCampaignForm extends Component {
               />
             </div>
           </div>
-
           <div className="form-group">
-            <label htmlFor="inputCampaignViews" className="col-sm-2 control-label">Total Views</label>
+            <label
+              htmlFor="inputCampaignRevenueType"
+              className="col-sm-2 control-label"
+            >Revenue Information</label>
+            <div className="col-sm-10">
+              <select
+                id="inputCampaignRevenueType" className="form-control"
+                onChange={event => this.changeRevenueType(event)}
+                ref={c => {
+                  this.inputCampaignRevenueType = c;
+                }}
+              >
+                <option value="cpd">CPD</option>
+                <option value="cpm">CPM</option>
+                <option value="cpc">CPC</option>
+                <option value="cpa">CPA</option>
+                <option value="tenancy">Tenancy</option>
+              </select>
+            </div>
+          </div>
+          {/* /.SHOW CPM */}
+          {this.state.showCPM === true ? (
+            <div className="typeCPM">
+              <div className="form-group">
+                <div className="col-sm-2">&nbsp;</div>
+                <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Expire Value CPM</label>
+                <div className="col-sm-7">
+                  <input
+                    type="number" className="form-control" id="inputCampaignExpireValueCPM"
+                    placeholder="1000"
+                    ref={c => {
+                      this.inputCampaignExpireValueCPM = c;
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <div className="col-sm-2">&nbsp;</div>
+                <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Max CPM per Day</label>
+                <div className="col-sm-7">
+                  <input
+                    type="number" className="form-control" id="inputCampaignMaxCPMPerDay"
+                    placeholder="1000"
+                    ref={c => {
+                      this.inputCampaignMaxCPMPerDay = c;
+                    }}
+                  />
+                </div>
+              </div>
+            </div>) : ('')}
+          <div className="form-group">
+            <label
+              htmlFor="inputCampaignViews"
+              className="col-sm-2 control-label"
+            >Total Views</label>
             <div className="col-sm-10">
               <input
                 type="number" className="form-control" id="inputCampaignViews"

@@ -23,9 +23,11 @@ import sites from './site/sites';
 import zones from './zone/zones';
 import channels from './channel/channels';
 import filters from './filters';
-import placementBannerZones from './placementBannerZone/placementBannerZones';
+import placementBanners from './placementBanner/placementBanners';
 import optionChannels from './optionChannel/optionChannels';
 import clickImpressions from './clickImpression/clickImpressions';
+import shares from './share/shares';
+import sharePlacements from './sharePlacement/sharePlacements';
 
 const queries = new ObjectType({
   name: 'Query',
@@ -50,9 +52,11 @@ const queries = new ObjectType({
     zones,
     channels,
     filters,
-    placementBannerZones,
+    placementBanners,
     optionChannels,
     clickImpressions,
+    shares,
+    sharePlacements,
   },
 });
 

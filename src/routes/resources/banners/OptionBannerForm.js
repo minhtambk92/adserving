@@ -328,14 +328,14 @@ class OptionBannerForm extends Component {
     const isImpressionsBooked = document.getElementById('inputIsImpressionsBooked').checked;
     let impressionsBooked = '';
     if (isImpressionsBooked === true) {
-      impressionsBooked = 'unlimited';
+      impressionsBooked = -1;
     } else if (isImpressionsBooked === false) {
       impressionsBooked = this.inputBannerImpressionsBooked.value;
     }
     const isClicksBooked = document.getElementById('inputIsClicksBooked').checked;
     let clicksBooked = '';
     if (isClicksBooked === true) {
-      clicksBooked = 'unlimited';
+      clicksBooked = -1;
     } else if (isClicksBooked === false) {
       if (this.inputBannerClicksBooked !== undefined) {
         clicksBooked = this.inputBannerClicksBooked.value;
@@ -346,7 +346,7 @@ class OptionBannerForm extends Component {
     if (isActivationDate === false) {
       activationDate = new Date(moment(new Date(document.getElementById('inputBannerActivationDate').value)).format('YYYY-MM-DD 00:00:00'));
     } else if (isActivationDate === true) {
-      activationDate = new Date(moment().format('YYYY-MM-DD 00:00:00'));
+      activationDate = new Date();
     }
     const isExpirationDate = document.getElementById('inputIsExpirationDate').checked;
     let expirationDate = new Date();
@@ -371,9 +371,11 @@ class OptionBannerForm extends Component {
     banner.activationDate = activationDate;
     banner.isExpirationDate = isExpirationDate;
     banner.expirationDate = expirationDate;
-    this.props.updateBanner(banner).then(() => {
-    });
-    this.addLinkClickAndImpression();
+    if (moment(new Date(activationDate)).format('x') < moment(new Date(expirationDate)).format('x')) {
+      this.props.updateBanner(banner).then(() => {
+      });
+      this.addLinkClickAndImpression();
+    }
   }
 
   addLinkClickAndImpression() { // eslint-disable-line no-unused-vars, class-methods-use-this

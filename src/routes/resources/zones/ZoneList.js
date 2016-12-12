@@ -8,7 +8,95 @@ class ZoneList extends Component {
 
   static propTypes = {
     list: PropTypes.array,
+    setPageZoneActiveTab: PropTypes.func,
+    createZone: PropTypes.func,
+    createShare: PropTypes.func,
+    zones: PropTypes.object,
+    shares: PropTypes.object,
+    getShareByZoneId: PropTypes.func,
   };
+
+  onTabClickZone(event) {
+    event.persist();
+    this.props.setPageZoneActiveTab('editZone');
+  }
+
+  onTabClickSettingZone(event) {
+    event.persist();
+    this.props.setPageZoneActiveTab('settingZone');
+  }
+
+  onTabClickShareZone(event) {
+    event.persist();
+    this.props.setPageZoneActiveTab('shareZone');
+  }
+
+  duplicateZoneAndShare(data) {
+    const name = `Copy Of ${data.name}`;
+    const siteId = data.siteId;
+    const type = data.type;
+    const html = data.html;
+    const css = data.css;
+    const slot = data.slot;
+    const width = data.width;
+    const height = data.height;
+    const sizeText = data.sizeText;
+    const sizeValue = data.sizeValue;
+    const delivery = data.delivery;
+    const targetIFrame = data.targetIFrame;
+    const isShowBannerAgain = data.isShowBannerAgain;
+    const source = data.source;
+    const isShowCampaignAgain = data.isShowCampaignAgain;
+    const isShowTextBanner = data.isShowTextBanner;
+    const characterSet = data.characterSet;
+    const supportThirdParty = data.supportThirdParty;
+    const isIncludeDescription = data.isIncludeDescription;
+    const status = data.status;
+    const description = data.description;
+    if (name && siteId && type && description && slot) {
+      this.props.createZone({
+        name,
+        siteId,
+        type,
+        html,
+        css,
+        slot,
+        width,
+        height,
+        sizeText,
+        sizeValue,
+        delivery,
+        targetIFrame,
+        isShowBannerAgain,
+        source,
+        isShowCampaignAgain,
+        isShowTextBanner,
+        characterSet,
+        supportThirdParty,
+        isIncludeDescription,
+        status,
+        description,
+      }).then(() => {
+        const zoneId = this.props.zones.list[0].id;
+        this.props.getShareByZoneId(data.id).then(() => {
+          if (this.props.shares) {
+            const arrShares = this.props.shares.list;
+            for (let i = 0; i < arrShares.length; i += 1) {
+              /* eslint-disable no-shadow */
+              const name = arrShares[i].name;
+              const css = arrShares[i].css;
+              const html = arrShares[i].html;
+              const description = arrShares[i].description;
+              /* eslint-enable no-shadow */
+              if (name && css && html) {
+                this.props.createShare({ name, html, css, description, zoneId });
+              }
+            }
+          }
+        });
+      });
+    }
+  }
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
@@ -28,25 +116,54 @@ class ZoneList extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/zone/${rowData.id}`}>{cellData}</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/zone/${rowData.id}`}
+          onClick={(event) => this.onTabClickZone(event)}
+        >{cellData}</Link>, cell);
       },
     }, {
       data: 'sizeText',
     }, {
-      data: 'description',
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link
+          to={`/resource/zone/${rowData.id}`}
+          onClick={(event) => this.onTabClickShareZone(event)}
+        >Share Zone</Link>, cell);
+      },
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/zone/${rowData.id}`}>New Placement</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/zone/${rowData.id}`}
+          onClick={(event) => this.onTabClickSettingZone(event)}
+        >Setting</Link>, cell);
+      },
+    }, {
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link
+          to="#"
+          onClick={() => this.duplicateZoneAndShare(rowData)}
+        >Duplicate</Link>, cell);
       },
     }];
   }
+
   render() {
     // Open the portal
+    let data = [];
+    if (this.props.list) {
+      if (this.props.list.length === 0) {
+        data = [];
+      } else {
+        data = this.props.list;
+      }
+    }
     return (
       <DataTables
         className="table table-bordered table-striped"
-        data={this.props.list}
+        data={data}
         options={{
           columns: this.dataTableOptions(),
           destroy: true,
@@ -57,7 +174,8 @@ class ZoneList extends Component {
             <th><ICheck type="checkbox" className="inputChooseAllZones" /></th>
             <th>Name</th>
             <th>Type</th>
-            <th>Description</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}
@@ -66,7 +184,8 @@ class ZoneList extends Component {
             <th><ICheck type="checkbox" className="inputChooseAllZones" /></th>
             <th>Name</th>
             <th>Type</th>
-            <th>Description</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}

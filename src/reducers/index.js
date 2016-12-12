@@ -9,7 +9,7 @@ import content from './content';
 import advertisers from './advertisers';
 import campaigns from './campaigns';
 import placements from './placements';
-import placementBannerZones from './placementBannerZones';
+import placementBanners from './placementBanners';
 import banners from './banners';
 import sites from './sites';
 import roles from './roles';
@@ -18,6 +18,8 @@ import zones from './zones';
 import channels from './channels';
 import optionChannels from './optionChannels';
 import clickImpressions from './clickImpressions';
+import shares from './shares';
+import sharePlacements from './sharePlacements';
 
 import page from './pages';
 
@@ -31,7 +33,7 @@ export default combineReducers({
   content,
   advertisers,
   placements,
-  placementBannerZones,
+  placementBanners,
   campaigns,
   banners,
   sites,
@@ -41,6 +43,7 @@ export default combineReducers({
   channels,
   optionChannels,
   clickImpressions,
-
+  shares,
+  sharePlacements,
   page,
 });

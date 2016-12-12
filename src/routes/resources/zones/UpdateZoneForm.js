@@ -30,6 +30,7 @@ class UpdateZoneForm extends Component {
       width,
       height,
       sizeValue,
+      delivery,
       status,
     } = nextProps.zone && (nextProps.zone || {});
 
@@ -40,6 +41,7 @@ class UpdateZoneForm extends Component {
     this.inputZoneCss.value = css;
     this.inputZoneSlot.value = slot;
     this.inputZoneStatus.value = status;
+    this.inputZoneDelivery.value = delivery;
     this.inputZoneDescription.value = description;
     if (type !== 'type-3') {
       this.state.checkTypeZone = true;
@@ -100,6 +102,7 @@ class UpdateZoneForm extends Component {
     const slot = this.inputZoneSlot.value;
     const status = this.inputZoneStatus.value;
     const description = this.inputZoneDescription.value;
+    const delivery = this.inputZoneDelivery.value;
     let sizeText = '';
     let sizeValue = '';
     let height = 0;
@@ -164,6 +167,10 @@ class UpdateZoneForm extends Component {
     }
     if (sizeValue && sizeValue !== this.props.zone.sizeValue) {
       zone.sizeValue = sizeValue;
+    }
+
+    if (delivery && delivery !== this.props.zone.delivery) {
+      zone.delivery = delivery;
     }
 
     if (status && status !== this.props.zone.status) {
@@ -365,11 +372,48 @@ class UpdateZoneForm extends Component {
               className="col-sm-2 control-label"
             >Slot</label>
             <div className="col-sm-10">
-              <input
-                type="text" className="form-control" id="inputZoneSlot"
-                placeholder="..."
+              <select
+                id="inputZoneSlot"
+                className="form-control"
                 ref={c => {
                   this.inputZoneSlot = c;
+                }}
+              >
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+              </select>
+            </div>
+          </div>
+          <div className="form-group">
+            <label
+              htmlFor="inputZoneDelivery"
+              className="col-sm-2 control-label"
+            >Delivery</label>
+            <div className="col-sm-10">
+              <input
+                type="number"
+                className="form-control" id="inputZoneDelivery"
+                placeholder="3"
+                ref={c => {
+                  this.inputZoneDelivery = c;
                 }}
               />
             </div>

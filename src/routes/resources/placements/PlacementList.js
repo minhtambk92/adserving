@@ -10,7 +10,50 @@ class PlacementList extends Component {
   static propTypes = {
     containerWidth: PropTypes.number,
     list: PropTypes.array,
+    setPagePlacementActiveTab: PropTypes.func,
+    createPlacement: PropTypes.func,
+    getCampaign: PropTypes.func,
+    campaignId: PropTypes.string,
   };
+
+  onTabClickEditPlacement(event) {
+    event.persist();
+    this.props.setPagePlacementActiveTab('editPlacement');
+  }
+
+  onTabClickAddBanner(event) {
+    event.persist();
+    this.props.setPagePlacementActiveTab('addBanner');
+  }
+
+  duplicatePlacement(data) {
+    const name = `Copy of ${data.name}`;
+    const startTime = data.startTime;
+    const endTime = data.endTime;
+    const sizeWidth = data.sizeWidth;
+    const sizeHeight = data.sizeHeight;
+    const weight = data.weight;
+    const description = data.description;
+    const campaignId = data.campaignId;
+    const status = data.status;
+    if (name && startTime && endTime && sizeHeight && sizeWidth && weight && description) {
+      this.props.createPlacement({
+        name,
+        startTime,
+        endTime,
+        sizeWidth,
+        sizeHeight,
+        weight,
+        description,
+        campaignId,
+        status,
+      }).then(() => {
+        if (this.props.campaignId) {
+          this.props.getCampaign(this.props.campaignId);
+        }
+      });
+    }
+  }
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     const columns = [{
@@ -30,12 +73,15 @@ class PlacementList extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>{cellData}</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/placement/${rowData.id}`}
+          onClick={(event) => this.onTabClickEditPlacement(event)}
+        >{cellData}</Link>, cell);
       },
     }, {
       data: null,
       render: (data, type, row) => {
-        const size = `${row.sizeWidth} x ${row.sizeHeight}`;
+        const size = `${row.sizeWidth}px x ${row.sizeHeight}px`;
         return size;
       },
     }, {
@@ -47,16 +93,23 @@ class PlacementList extends Component {
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>New Zone</Link>, cell);
+        ReactDOM.render(<Link
+          to={`/resource/placement/${rowData.id}`}
+          onClick={(event) => this.onTabClickAddBanner(event)}
+        >New Banner</Link>, cell);
       },
     }, {
       data: null,
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>New Banner</Link>, cell);
+        ReactDOM.render(<Link
+          to="#"
+          onClick={() => this.duplicatePlacement(rowData)}
+        >Duplicate</Link>, cell);
       },
     }];
     return columns;
   }
+
   render() {
     let data = [];
     if (this.props.list) {

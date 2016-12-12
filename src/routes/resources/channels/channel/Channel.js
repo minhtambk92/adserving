@@ -7,6 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
@@ -16,7 +18,11 @@ import {
   updateChannel,
   deleteChannel,
 } from '../../../../actions/channels';
-import { createOptionChannel, deleteOptionChannel, updateOptionChannel } from '../../../../actions/optionChannels';
+import {
+  createOptionChannel,
+  deleteOptionChannel,
+  updateOptionChannel,
+} from '../../../../actions/optionChannels';
 import { getSites } from '../../../../actions/sites';
 import Layout from '../../../../components/Layout';
 import UpdateChannelForm from '../UpdateChannelForm';
@@ -31,6 +37,7 @@ class Channel extends Component {
 
   static propTypes = {
     channelId: PropTypes.string.isRequired,
+    page: PropTypes.object,
     channels: PropTypes.object,
     updateChannel: PropTypes.func,
     getChannel: PropTypes.func,
@@ -84,6 +91,12 @@ class Channel extends Component {
     this.props.getSites();
   }
 
+  componentDidMount() {
+    // Set latest active tab
+    $('.channel-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
   componentWillReceiveProps(nextProps) {
     const {
       options,
@@ -104,11 +117,9 @@ class Channel extends Component {
     $('.remove-option').click(function () {
       const id = $(this).parents('.row').attr('id');
       if (id) {
-        if (id !== 'browser' && id !== 'category') {
-          self.props.deleteOptionChannel(id).then(() => {
-            self.props.getChannel(self.props.channelId);
-          });
-        }
+        self.props.deleteOptionChannel(id).then(() => {
+          self.props.getChannel(self.props.channelId);
+        });
       }
     });
     /* eslint-enable no-undef */
@@ -133,7 +144,15 @@ class Channel extends Component {
           const channelId = this.props.channelId;
           if (type && comparison && value) {
             /* eslint-disable max-len */
-            this.props.updateOptionChannel({ id, name, logical, type, comparison, value, channelId }).then(() => {
+            this.props.updateOptionChannel({
+              id,
+              name,
+              logical,
+              type,
+              comparison,
+              value,
+              channelId,
+            }).then(() => {
               /* eslint-enable max-len */
               this.props.getChannel(this.props.channelId);
             });
@@ -157,7 +176,15 @@ class Channel extends Component {
           const channelId = this.props.channelId;
           if (type && comparison && value) {
             /* eslint-disable max-len */
-            this.props.updateOptionChannel({ id, name, logical, type, comparison, value, channelId }).then(() => {
+            this.props.updateOptionChannel({
+              id,
+              name,
+              logical,
+              type,
+              comparison,
+              value,
+              channelId,
+            }).then(() => {
               /* eslint-enable max-len */
               this.props.getChannel(this.props.channelId);
             });
@@ -172,7 +199,15 @@ class Channel extends Component {
           const channelId = this.props.channelId;
           if (type && comparison && value) {
             /* eslint-disable max-len */
-            this.props.updateOptionChannel({ id, name, logical, type, comparison, value, channelId }).then(() => {
+            this.props.updateOptionChannel({
+              id,
+              name,
+              logical,
+              type,
+              comparison,
+              value,
+              channelId,
+            }).then(() => {
               /* eslint-enable max-len */
               this.props.getChannel(this.props.channelId);
             });
@@ -193,7 +228,14 @@ class Channel extends Component {
           if (type && comparison && value) {
             $(`.optionChannel-${i}`).remove();
             /* eslint-disable max-len */
-            this.props.createOptionChannel({ name, logical, type, comparison, value, channelId }).then(() => {
+            this.props.createOptionChannel({
+              name,
+              logical,
+              type,
+              comparison,
+              value,
+              channelId,
+            }).then(() => {
               /* eslint-enable max-len */
               this.props.getChannel(this.props.channelId);
             });
@@ -218,7 +260,14 @@ class Channel extends Component {
           if (type && comparison && value) {
             $(`.optionChannel-${i}`).remove();
             /* eslint-disable max-len */
-            this.props.createOptionChannel({ name, logical, type, comparison, value, channelId }).then(() => {
+            this.props.createOptionChannel({
+              name,
+              logical,
+              type,
+              comparison,
+              value,
+              channelId,
+            }).then(() => {
               /* eslint-enable max-len */
               this.props.getChannel(this.props.channelId);
             });
@@ -234,7 +283,14 @@ class Channel extends Component {
           if (type && comparison && value) {
             $(`.optionChannel-${i}`).remove();
             /* eslint-disable max-len */
-            this.props.createOptionChannel({ name, logical, type, comparison, value, channelId }).then(() => {
+            this.props.createOptionChannel({
+              name,
+              logical,
+              type,
+              comparison,
+              value,
+              channelId,
+            }).then(() => {
               /* eslint-enable max-len */
               this.props.getChannel(this.props.channelId);
             });
@@ -308,15 +364,15 @@ class Channel extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="nav-tabs-custom">
+              <div className="nav-tabs-custom channel-edit-box">
                 <ul className="nav nav-tabs">
-                  <li>
+                  <li className="active">
                     <a href="#editChannel" data-toggle="tab">
                       Edit Channel
                     </a>
                   </li>
-                  <li className="active">
-                    <a href="#addOption" data-toggle="tab">
+                  <li>
+                    <a href="#optionChannel" data-toggle="tab">
                       Option Channel
                     </a>
                   </li>
@@ -328,7 +384,7 @@ class Channel extends Component {
                         {/* BOX: FORM OF CREATE NEW WEBSITE */}
                         <div className="box box-info">
                           <div className="box-header with-border">
-                            <h3 className="box-title">Change Channel information</h3>
+                            <h3 className="box-title">Change information</h3>
                             <div className="box-tools pull-right">
                               <button
                                 type="button" className="btn btn-box-tool"
@@ -351,7 +407,7 @@ class Channel extends Component {
                       </section>
                     </div>
                   </div>
-                  <div className="active tab-pane" id="addOption">
+                  <div className="active tab-pane" id="optionChannel">
                     <div className="row">
                       <section className="col-lg-12">
                         <div className="row">
@@ -523,6 +579,7 @@ class Channel extends Component {
 }
 
 const mapState = (state) => ({
+  page: state.page.channels,
   channels: state.channels,
   optionChannels: state.optionChannels,
   sites: state.sites,

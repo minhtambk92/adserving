@@ -15,10 +15,14 @@ export function getAdvertiser(id) {
           email
           name
           contact
+          isEmailReport
+          isEmailStatus
+          reportInterval
           description
           status
           campaigns {
             id
+            advertiserId
             name
             startTime
             endTime
@@ -26,6 +30,9 @@ export function getAdvertiser(id) {
             viewPerSession
             timeResetViewCount
             weight
+            revenueType
+            expireValueCPM
+            maxCPMPerDay
             description
             status
             createdAt
@@ -56,6 +63,9 @@ export function getAdvertisers() {
           email
           name
           contact
+          isEmailReport
+          isEmailStatus
+          reportInterval
           description
           status
           createdAt
@@ -74,7 +84,11 @@ export function getAdvertisers() {
   };
 }
 
-export function createAdvertiser({ email, name, contact, description, status }) {
+export function createAdvertiser({
+  email, name, contact, isEmailReport,
+  isEmailStatus,
+  reportInterval, description, status,
+}) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($advertiser: AdvertiserInputTypeWithoutId!) {
@@ -83,6 +97,9 @@ export function createAdvertiser({ email, name, contact, description, status }) 
           email
           name
           contact
+          isEmailReport
+          isEmailStatus
+          reportInterval
           description
           status
           createdAt
@@ -95,6 +112,9 @@ export function createAdvertiser({ email, name, contact, description, status }) 
         email,
         name,
         contact,
+        isEmailReport,
+        isEmailStatus,
+        reportInterval,
         description,
         status,
       },
@@ -109,7 +129,11 @@ export function createAdvertiser({ email, name, contact, description, status }) 
   };
 }
 
-export function updateAdvertiser({ id, email, name, contact, description, status }) {
+export function updateAdvertiser({
+  id, email, name, contact, isEmailReport,
+  isEmailStatus,
+  reportInterval, description, status,
+}) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($advertiser: AdvertiserInputType!) {
@@ -118,6 +142,9 @@ export function updateAdvertiser({ id, email, name, contact, description, status
           email
           name
           contact
+          isEmailReport
+          isEmailStatus
+          reportInterval
           description
           status
           createdAt
@@ -131,6 +158,9 @@ export function updateAdvertiser({ id, email, name, contact, description, status
         email,
         name,
         contact,
+        isEmailReport,
+        isEmailStatus,
+        reportInterval,
         description,
         status,
       },
@@ -154,6 +184,9 @@ export function deleteAdvertiser(id) {
           email
           name
           contact
+          isEmailReport
+          isEmailStatus
+          reportInterval
           description
           status
           createdAt

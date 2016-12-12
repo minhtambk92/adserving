@@ -6,7 +6,7 @@ const ChannelInputType = new InputObjectType({
   name: 'ChannelInputType',
   fields: () => Object.assign(attributeFields(Channel, {
     // Additional options
-    only: ['id', 'name', 'description', 'siteId'],
+    only: ['id', 'name', 'description'],
   }), {
     // Additional fields
     status: { type: StringType },

@@ -7,6 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import { connect } from 'react-redux';
@@ -18,6 +20,7 @@ import {
 } from '../../../../actions/campaigns';
 import { getAdvertisers } from '../../../../actions/advertisers';
 import { createPlacement } from '../../../../actions/placements';
+import { setPagePlacementActiveTab } from '../../../../actions/pages/placements';
 import Layout from '../../../../components/Layout';
 import PlacementList from '../../placements/PlacementList';
 import UpdateCampaignForm from '../UpdateCampaignForm';
@@ -30,6 +33,7 @@ class Campaign extends Component {
 
   static propTypes = {
     campaignId: PropTypes.string.isRequired,
+    page: PropTypes.object,
     campaigns: PropTypes.object,
     advertisers: PropTypes.object,
     getCampaign: PropTypes.func,
@@ -38,11 +42,20 @@ class Campaign extends Component {
     deleteCampaign: PropTypes.func,
     placements: PropTypes.object,
     createPlacement: PropTypes.func,
+    setPagePlacementActiveTab: PropTypes.func,
   };
+
   componentWillMount() {
     this.props.getCampaign(this.props.campaignId);
     this.props.getAdvertisers();
   }
+
+  componentDidMount() {
+    // Set latest active tab
+    $('.campaign-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
   render() {
     return (
       <Layout
@@ -56,7 +69,7 @@ class Campaign extends Component {
         <div>
           <div className="row">
             <section className="col-lg-12">
-              <div className="nav-tabs-custom">
+              <div className="nav-tabs-custom campaign-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
                     <a href="#editCampaign" data-toggle="tab">
@@ -76,9 +89,12 @@ class Campaign extends Component {
                         {/* BOX: FORM OF CREATE NEW WEBSITE */}
                         <div className="box box-info">
                           <div className="box-header with-border">
-                            <h3 className="box-title">Change campaign information</h3>
+                            <h3 className="box-title">Change information</h3>
                             <div className="box-tools pull-right">
-                              <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                              <button
+                                type="button" className="btn btn-box-tool"
+                                data-widget="collapse"
+                              >
                                 <i className="fa fa-minus" />
                               </button>
                             </div>
@@ -107,7 +123,10 @@ class Campaign extends Component {
                               <div className="box-header with-border">
                                 <h3 className="box-title">Create New Placement</h3>
                                 <div className="box-tools pull-right">
-                                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                                  <button
+                                    type="button" className="btn btn-box-tool"
+                                    data-widget="collapse"
+                                  >
                                     <i className="fa fa-minus" />
                                   </button>
                                 </div>
@@ -137,6 +156,10 @@ class Campaign extends Component {
                                   list={this.props.campaigns.editing &&
                                     this.props.campaigns.editing.placements &&
                                     this.props.campaigns.editing.placements}
+                                  setPagePlacementActiveTab={this.props.setPagePlacementActiveTab}
+                                  createPlacement={this.props.createPlacement}
+                                  campaignId={this.props.campaignId}
+                                  getCampaign={this.props.getCampaign}
                                 />
                               </div>
                               {/* /.box-body */}
@@ -159,6 +182,7 @@ class Campaign extends Component {
 }
 
 const mapState = (state) => ({
+  page: state.page.campaigns,
   campaigns: state.campaigns,
   placements: state.placements,
   advertisers: state.advertisers,
@@ -170,6 +194,7 @@ const mapDispatch = {
   getAdvertisers,
   deleteCampaign,
   createPlacement,
+  setPagePlacementActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Campaign));

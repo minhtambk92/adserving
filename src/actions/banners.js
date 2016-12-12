@@ -72,18 +72,6 @@ export function getBanner(id) {
               description
               campaignId
               status
-              zones {
-                id
-                site {
-                  id
-                  name
-                  status
-                  channels {
-                    id
-                    name
-                  }
-                }
-              }
               createdAt
               updatedAt
             }

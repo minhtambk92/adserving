@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
-class FilterCampaignsForm extends Component {
+class FilterZonesForm extends Component {
 
   static propTypes = {
     filters: PropTypes.object,
     sites: PropTypes.array.isRequired,
-    placements: PropTypes.array.isRequired,
     setZonesFilters: PropTypes.func.isRequired,
   };
 
@@ -21,33 +20,6 @@ class FilterCampaignsForm extends Component {
     return (
       <form className="form-horizontal">
         <div className="box-body">
-          <div className="form-group">
-            <label
-              htmlFor="inputZonesFilterPlacement"
-              className="col-sm-2 control-label"
-            >Placement</label>
-            <div className="col-sm-10">
-              <select
-                id="inputZonesFilterPlacement"
-                className="form-control select2"
-                style={{ width: '100%' }}
-                ref={c => {
-                  this.inputZonesFilterPlacement = c;
-                }}
-                onChange={event => this.onFilterChange(event, 'placementId')}
-                defaultValue={this.props.filters &&
-                          this.props.filters.placementId}
-              >
-                <option value="null">All placements</option>
-                {this.props.placements &&
-                this.props.placements.map(placement => (
-                  <option
-                    key={placement.id} value={placement.id}
-                  >{placement.name}</option>
-                ))}
-              </select>
-            </div>
-          </div>
           <div className="form-group">
             <label
               htmlFor="inputZonesFilterSite"
@@ -123,4 +95,4 @@ class FilterCampaignsForm extends Component {
   }
 }
 
-export default FilterCampaignsForm;
+export default FilterZonesForm;

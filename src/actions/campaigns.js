@@ -40,6 +40,9 @@ export function getCampaign(id) {
           viewPerSession
           timeResetViewCount
           weight
+          revenueType
+          expireValueCPM
+          maxCPMPerDay
           description
           status
           placements {
@@ -51,7 +54,10 @@ export function getCampaign(id) {
             endTime
             weight
             description
+            campaignId
             status
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
@@ -89,6 +95,9 @@ export function getCampaigns(args = {
           viewPerSession
           timeResetViewCount
           weight
+          revenueType
+          expireValueCPM
+          maxCPMPerDay
           status
           description
           createdAt
@@ -126,6 +135,9 @@ export function createCampaign({
   viewPerSession,
   timeResetViewCount,
   weight,
+  revenueType,
+  expireValueCPM,
+  maxCPMPerDay,
   description,
   status,
 }) {
@@ -142,6 +154,9 @@ export function createCampaign({
           viewPerSession
           timeResetViewCount
           weight
+          revenueType
+          expireValueCPM
+          maxCPMPerDay
           description
           status
           createdAt
@@ -159,6 +174,9 @@ export function createCampaign({
         viewPerSession,
         timeResetViewCount,
         weight,
+        revenueType,
+        expireValueCPM,
+        maxCPMPerDay,
         description,
         status,
       },
@@ -183,6 +201,9 @@ export function updateCampaign({
   viewPerSession,
   timeResetViewCount,
   weight,
+  revenueType,
+  expireValueCPM,
+  maxCPMPerDay,
   description,
   status,
 }) {
@@ -199,6 +220,9 @@ export function updateCampaign({
           viewPerSession
           timeResetViewCount
           weight
+          revenueType
+          expireValueCPM
+          maxCPMPerDay
           description
           status
           createdAt
@@ -217,6 +241,9 @@ export function updateCampaign({
         viewPerSession,
         timeResetViewCount,
         weight,
+        revenueType,
+        expireValueCPM,
+        maxCPMPerDay,
         description,
         status,
       },
@@ -245,6 +272,9 @@ export function deleteCampaign(id) {
           viewPerSession
           timeResetViewCount
           weight
+          revenueType
+          expireValueCPM
+          maxCPMPerDay
           description
           status
           createdAt

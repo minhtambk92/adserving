@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getPlacements, createPlacement, getPlacementsFilters, setPlacementsFilters } from '../../../actions/placements';
 import { getCampaigns } from '../../../actions/campaigns';
+import { setPagePlacementActiveTab } from '../../../actions/pages/placements';
 import Layout from '../../../components/Layout';
 import PlacemenList from './PlacementList';
 import CreatePlacementForm from './CreatePlacementForm';
@@ -31,6 +32,7 @@ class Placements extends Component {
     createPlacement: PropTypes.func,
     campaigns: PropTypes.object,
     getCampaigns: PropTypes.func,
+    setPagePlacementActiveTab: PropTypes.func,
   };
 
   componentWillMount() {
@@ -116,7 +118,11 @@ class Placements extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <PlacemenList list={this.getFilteredPlacements()} />
+                  <PlacemenList
+                    list={this.getFilteredPlacements()}
+                    setPagePlacementActiveTab={this.props.setPagePlacementActiveTab}
+                    createPlacement={this.props.createPlacement}
+                  />
                 </div>
                 {/* /.box-body */}
               </div>
@@ -142,6 +148,7 @@ const mapDispatch = {
   getCampaigns,
   getPlacementsFilters,
   setPlacementsFilters,
+  setPagePlacementActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placements));

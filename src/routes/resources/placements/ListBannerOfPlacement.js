@@ -11,9 +11,100 @@ class ListBannerOfPlacement extends Component {
     list: PropTypes.array,
     removeBannerToPlacement: PropTypes.func,
     getPlacement: PropTypes.func,
-    removeBannerInPlacementBannerZone: PropTypes.func,
+    removeBannerInPlacementBanner: PropTypes.func,
     getBanners: PropTypes.func,
+    createBanner: PropTypes.func,
+    banners: PropTypes.object,
+    createPlacementBanner: PropTypes.func,
+    clickImpressions: PropTypes.object,
+    createClickImpression: PropTypes.func,
   };
+
+  duplicateBannerOfPlacement(data) {
+    const name = `Copy of ${data.name}`;
+    const width = data.width;
+    const height = data.height;
+    const weight = data.weight;
+    const description = data.description;
+    const channelId = data.channelId;
+    const type = data.type;
+    const isIFrame = data.isIFrame;
+    const target = data.target;
+    const url = data.url;
+    const imageUrl = data.imageUrl;
+    const html = data.html;
+    const bannerHTMLType = data.bannerHTMLType;
+    const adServer = data.adServer;
+    const status = data.status;
+    const keyword = data.keyword;
+    const isCountView = data.isCountView;
+    const isFixIE = data.isFixIE;
+    const isDefault = data.isDefault;
+    const isRelative = data.isRelative;
+    const isImpressionsBooked = data.isImpressionsBooked;
+    const isClicksBooked = data.isClicksBooked;
+    const isActivationDate = data.isActivationDate;
+    const isExpirationDate = data.isExpirationDate;
+    const adStore = data.adStore;
+    const impressionsBooked = data.impressionsBooked;
+    const clicksBooked = data.clicksBooked;
+    const activationDate = data.activationDate;
+    const expirationDate = data.expirationDate;
+    if (name && keyword && width && description && type && channelId) {
+      this.props.createBanner({
+        name,
+        html,
+        width,
+        height,
+        keyword,
+        weight,
+        description,
+        type,
+        url,
+        target,
+        imageUrl,
+        isIFrame,
+        status,
+        adServer,
+        bannerHTMLType,
+        isCountView,
+        isFixIE,
+        isDefault,
+        isRelative,
+        isImpressionsBooked,
+        isClicksBooked,
+        isActivationDate,
+        isExpirationDate,
+        adStore,
+        impressionsBooked,
+        clicksBooked,
+        activationDate,
+        expirationDate,
+        channelId,
+      }).then(() => {
+        const bannerId = this.props.banners.list[0].id;
+        if (data.placements.length > 0) {
+          const arrPlacement = data.placements;
+          for (let i = 0; i < arrPlacement.length; i += 1) {
+            const placementId = arrPlacement[i].id;
+            this.props.createPlacementBanner({ placementId, bannerId }).then(() => {
+              this.props.getPlacement(this.props.placementId);
+            });
+          }
+        }
+        if (data.clickImpression.length > 0) {
+          const arrClickImpressions = data.clickImpression;
+          for (let j = 0; j < arrClickImpressions.length; j += 1) {
+            const clickUrl = arrClickImpressions[j].clickUrl;
+            const impressionUrl = arrClickImpressions[j].impressionUrl;
+            this.props.createClickImpression({ clickUrl, impressionUrl, bannerId }).then(() => {
+              this.props.getPlacement(this.props.placementId);
+            });
+          }
+        }
+      });
+    }
+  }
 
   dataTableOptions() {
     return [{
@@ -50,6 +141,18 @@ class ListBannerOfPlacement extends Component {
         </Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
+    }, {
+      data: null,
+      createdCell: (cell, cellData, rowData) => {
+        /* eslint-disable jsx-a11y/no-static-element-interactions */
+        ReactDOM.render(<Link
+          to="#"
+          onClick={() => this.duplicateBannerOfPlacement(rowData)}
+        >
+          Duplicate
+        </Link>, cell);
+        /* eslint-enable jsx-a11y/no-static-element-interactions */
+      },
     }];
   }
 
@@ -57,7 +160,7 @@ class ListBannerOfPlacement extends Component {
     const placementId = this.props.placementId;
     const bId = bannerId;
     if (placementId && bId) {
-      this.props.removeBannerInPlacementBannerZone({ placementId, bId }).then(() => {
+      this.props.removeBannerInPlacementBanner({ placementId, bId }).then(() => {
         this.props.getBanners();
         this.props.getPlacement(placementId).then(() => {
         });
@@ -90,6 +193,7 @@ class ListBannerOfPlacement extends Component {
             <th>Name</th>
             <th>Size(px)</th>
             <th>&nbsp;</th>
+            <th>&nbsp;</th>
           </tr>
         )}
         tfoot={(
@@ -97,6 +201,7 @@ class ListBannerOfPlacement extends Component {
             <th><ICheck type="checkbox" className="inputChooseAllBanners" /></th>
             <th>Name</th>
             <th>Size(px)</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         )}

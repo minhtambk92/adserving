@@ -53,6 +53,20 @@ const Campaign = Model.define('Campaign', {
     type: DataType.TEXT,
     defaultValue: '',
   },
+  revenueType: {
+    type: DataType.STRING,
+    validate: {
+      isIn: [['cpd', 'cpc', 'cpm', 'cpa', 'tenancy']],
+    },
+  },
+  expireValueCPM: {
+    type: DataType.INTEGER,
+    defaultValue: 0,
+  },
+  maxCPMPerDay: {
+    type: DataType.INTEGER,
+    defaultValue: 0,
+  },
   status: {
     type: DataType.STRING,
     allowNull: false,

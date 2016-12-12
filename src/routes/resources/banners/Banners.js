@@ -19,6 +19,9 @@ import {
 } from '../../../actions/banners';
 import { getPlacements } from '../../../actions/placements';
 import { getChannels } from '../../../actions/channels';
+import { setPageBannerActiveTab } from '../../../actions/pages/banners';
+import { getPlacementsByBannerId, createPlacementBanner } from '../../../actions/placementBanners';
+import { getClickImpressionByBannerId, createClickImpression } from '../../../actions/clickImpressions';
 import Layout from '../../../components/Layout';
 import BannerList from './BannerList';
 import CreateBannerForm from './CreateBannerForm';
@@ -39,6 +42,13 @@ class Banners extends Component {
     getPlacements: PropTypes.func,
     getChannels: PropTypes.func,
     channels: PropTypes.object,
+    setPageBannerActiveTab: PropTypes.func,
+    placementBanners: PropTypes.object,
+    getPlacementsByBannerId: PropTypes.func,
+    createPlacementBanner: PropTypes.func,
+    getClickImpressionByBannerId: PropTypes.func,
+    clickImpressions: PropTypes.object,
+    createClickImpression: PropTypes.func,
   };
 
   componentWillMount() {
@@ -129,7 +139,18 @@ class Banners extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <BannerList list={this.getFilteredBanners()} />
+                  <BannerList
+                    list={this.getFilteredBanners()}
+                    setPageBannerActiveTab={this.props.setPageBannerActiveTab}
+                    createBanner={this.props.createBanner}
+                    banners={this.props.banners}
+                    placementBanners={this.props.placementBanners}
+                    getPlacementsByBannerId={this.props.getPlacementsByBannerId}
+                    createPlacementBanner={this.props.createPlacementBanner}
+                    getClickImpressionByBannerId={this.props.getClickImpressionByBannerId}
+                    clickImpressions={this.props.clickImpressions}
+                    createClickImpression={this.props.createClickImpression}
+                  />
                 </div>
                 {/* /.box-body */}
               </div>
@@ -149,6 +170,8 @@ const mapState = (state) => ({
   banners: state.banners,
   placements: state.placements,
   channels: state.channels,
+  placementBanners: state.placementBanners,
+  clickImpressions: state.clickImpressions,
 });
 
 const mapDispatch = {
@@ -158,6 +181,11 @@ const mapDispatch = {
   setBannersFilters,
   getPlacements,
   getChannels,
+  setPageBannerActiveTab,
+  getPlacementsByBannerId,
+  createPlacementBanner,
+  getClickImpressionByBannerId,
+  createClickImpression,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banners));
