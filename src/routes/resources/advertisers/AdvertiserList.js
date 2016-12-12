@@ -73,6 +73,7 @@ class AdvertiserList extends Component {
       data: 'contact',
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/advertiser/${rowData.id}`}
@@ -81,6 +82,7 @@ class AdvertiserList extends Component {
       },
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"

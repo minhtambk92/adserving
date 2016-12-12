@@ -138,6 +138,7 @@ class BannerList extends Component {
       render: (data, type, row) => `${row.width}px x ${row.height}px`,
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/banner/${rowData.id}`}
@@ -146,6 +147,7 @@ class BannerList extends Component {
       },
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/banner/${rowData.id}`}
@@ -154,6 +156,7 @@ class BannerList extends Component {
       },
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"

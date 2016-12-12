@@ -125,6 +125,7 @@ class ZoneList extends Component {
       data: 'sizeText',
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/zone/${rowData.id}`}
@@ -133,6 +134,7 @@ class ZoneList extends Component {
       },
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/zone/${rowData.id}`}
@@ -141,6 +143,7 @@ class ZoneList extends Component {
       },
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"

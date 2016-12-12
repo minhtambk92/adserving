@@ -230,19 +230,17 @@ class Zone extends Component {
                           {/* /.box-header */}
                           <form className="form-horizontal">
                             <div className="box-body">
-                              <div className="row">
-                                <div className="col-lg-12" id="shareZoneForm">
-                                  <ListShare
-                                    list={this.props.zones && this.props.zones.editing
+                              <div className="col-lg-12" id="shareZoneForm">
+                                <ListShare
+                                  list={this.props.zones && this.props.zones.editing
                                     && this.props.zones.editing.shares}
-                                    deleteShareZone={this.props.deleteShare}
-                                    getZone={this.props.getZone}
-                                    zoneId={this.props.zoneId}
-                                    updateShareZone={this.props.updateShare}
-                                    createShareZone={this.props.createShare}
-                                    removeShare={this.props.removeShare}
-                                  />
-                                </div>
+                                  deleteShareZone={this.props.deleteShare}
+                                  getZone={this.props.getZone}
+                                  zoneId={this.props.zoneId}
+                                  updateShareZone={this.props.updateShare}
+                                  createShareZone={this.props.createShare}
+                                  removeShare={this.props.removeShare}
+                                />
                               </div>
                             </div>
                             {/* /.box-body */}

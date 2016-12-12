@@ -94,6 +94,7 @@ class CampaignList extends Component {
       render: data => (data ? moment(new Date(data)).format('L') : ''),
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/campaign/${rowData.id}`}
@@ -102,6 +103,7 @@ class CampaignList extends Component {
       },
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"

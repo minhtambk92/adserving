@@ -39,6 +39,7 @@ class ListPlacementOfShare extends Component {
       render: (data, type, row) => `${row.sizeWidth}px x ${row.sizeHeight}px`,
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link

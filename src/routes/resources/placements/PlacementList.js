@@ -92,6 +92,7 @@ class PlacementList extends Component {
       render: data => (data ? moment(new Date(data)).format('L') : ''),
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/placement/${rowData.id}`}
@@ -100,6 +101,7 @@ class PlacementList extends Component {
       },
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"
