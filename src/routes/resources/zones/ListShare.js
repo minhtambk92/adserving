@@ -113,7 +113,7 @@ class ListShare extends Component {
     const html = $(`#inputShareHTML-${i}`).val();
     const description = $(`#inputShareDescription-${i}`).val();
     if (id) {
-      if (name && css && html) {
+      if (name) {
         this.props.updateShareZone({ id, name, html, css, description }).then(() => {
           this.props.getZone(this.props.zoneId).then(() => {
             this.setState({ share: {} });
@@ -136,7 +136,7 @@ class ListShare extends Component {
     const html = $(`#inputShareHTML-${i}`).val();
     const description = $(`#inputShareDescription-${i}`).val();
     if (!id) {
-      if (name && css && html) {
+      if (name) {
         const zoneId = this.props.zoneId;
         this.props.createShareZone({ name, html, css, description, zoneId }).then(() => {
           this.props.getZone(this.props.zoneId);

@@ -79,16 +79,41 @@ class Banner extends Component {
   }
 
   filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const arrPlacement = allPlacement;
-    for (let i = 0, len = pob.length; i < len; i += 1) {
-      for (let j = 0, len2 = arrPlacement.length; j < len2; j += 1) {
-        if (pob[i].id === arrPlacement[j].id) {
-          arrPlacement.splice(j, 1);
-          len2 = arrPlacement.length;
+    if (allPlacement.length === 0) {
+      return [];
+    } else if (pob.length === 0) {
+      return allPlacement;
+    } else if (pob.length > 0 && allPlacement.length > 0) {
+      const arrId = [];
+      const newArr = [];
+      const arrPlacement = [];
+      for (let i = 0; i < pob.length; i += 1) {
+        if (pob[i] !== null) {
+          newArr.push(pob[i].id);
         }
       }
+      for (let j = 0; j < allPlacement.length; j += 1) {
+        arrId.push(allPlacement[j].id);
+      }
+      for (let k = 0; k < newArr.length; k += 1) {
+        if (arrId.indexOf(newArr[k]) > -1) {
+          arrId.splice(arrId.indexOf(newArr[k]), 1);
+        }
+      }
+      if (arrId.length > 0) {
+        for (let m = 0; m < allPlacement.length; m += 1) {
+          for (let h = 0; h < arrId.length; h += 1) {
+            if (allPlacement[m].id === arrId[h]) {
+              arrPlacement.push(allPlacement[m]);
+            }
+          }
+        }
+        return arrPlacement;
+      } else if (arrId.length === 0) {
+        return [];
+      }
     }
-    return arrPlacement;
+    return false;
   }
 
   render() {
