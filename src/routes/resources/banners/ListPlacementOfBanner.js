@@ -39,6 +39,7 @@ class ListPlacementOfBanner extends Component {
       render: (data, type, row) => `${row.sizeWidth}px x ${row.sizeHeight}px`,
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(
           <Link

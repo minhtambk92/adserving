@@ -68,6 +68,7 @@ class SiteList extends Component {
       data: 'email',
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/site/${rowData.id}`}
@@ -76,6 +77,7 @@ class SiteList extends Component {
       },
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/site/${rowData.id}`}
@@ -84,6 +86,7 @@ class SiteList extends Component {
       },
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"

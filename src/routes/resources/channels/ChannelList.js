@@ -94,6 +94,7 @@ class ChannelList extends Component {
       data: 'description',
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/channel/${rowData.id}`}
@@ -102,6 +103,7 @@ class ChannelList extends Component {
       },
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"
