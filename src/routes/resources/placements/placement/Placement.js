@@ -244,7 +244,7 @@ class Placement extends Component {
                             <div className="col-lg-12">
                               <div className="box box-info">
                                 <div className="box-header with-border">
-                                  <h3 className="box-title">ADD NEW BANNER
+                                  <h3 className="box-title">NEW BANNER
                                   </h3>
                                   <div className="box-tools pull-right">
                                     <button

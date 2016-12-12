@@ -7,7 +7,7 @@ import Link from '../../../components/Link';
 import { DataTables, ICheck } from '../../../components/UI/';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-class ShareList extends Component {
+class ListShare extends Component {
 
   static propTypes = {
     list: PropTypes.array,
@@ -259,4 +259,4 @@ class ShareList extends Component {
   }
 }
 
-export default ShareList;
+export default ListShare;
