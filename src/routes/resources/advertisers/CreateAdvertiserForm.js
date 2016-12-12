@@ -34,20 +34,26 @@ class CreateAdvertiserForm extends Component {
     const status = this.inputAdvertiserStatus.value;
     if (!name) {
       $('#inputAdvertiserName').parents('.form-group').addClass('has-error ');
+      $('#inputAdvertiserName').parents('.form-group').find('.col-sm-10').append('<span class="help-block">Please input name advertiser</span>');
       setTimeout(() => {
         $('#inputAdvertiserName').parents('.form-group').removeClass('has-error ');
+        $('#inputAdvertiserName').parents('.form-group').find('.col-sm-10 .help-block').remove();
       }, 2000);
     }
     if (!contact) {
       $('#inputAdvertiserContact').parents('.form-group').addClass('has-error ');
+      $('#inputAdvertiserContact').parents('.form-group').find('.col-sm-10').append('<span class="help-block">Please input contact</span>');
       setTimeout(() => {
         $('#inputAdvertiserContact').parents('.form-group').removeClass('has-error ');
+        $('#inputAdvertiserContact').parents('.form-group').find('.col-sm-10 .help-block').remove();
       }, 2000);
     }
     if (!email) {
       $('#inputAdvertiserEmail').parents('.form-group').addClass('has-error ');
+      $('#inputAdvertiserEmail').parents('.form-group').find('.col-sm-10').append('<span class="help-block">Please input email</span>');
       setTimeout(() => {
         $('#inputAdvertiserEmail').parents('.form-group').removeClass('has-error ');
+        $('#inputAdvertiserEmail').parents('.form-group').find('.col-sm-10 .help-block').remove();
       }, 2000);
     } else if (contact && name && email && description) {
       this.props.createAdvertiser({
@@ -92,7 +98,7 @@ class CreateAdvertiserForm extends Component {
             >Contact</label>
             <div className="col-sm-10">
               <input
-                type="text" className="form-control" id="inputAdvertiserContact"
+                type="tel" className="form-control" id="inputAdvertiserContact"
                 placeholder="0987654321"
                 ref={c => {
                   this.inputAdvertiserContact = c;
@@ -108,7 +114,7 @@ class CreateAdvertiserForm extends Component {
             >Email</label>
             <div className="col-sm-10">
               <input
-                type="text" className="form-control" id="inputAdvertiserEmail"
+                type="email" className="form-control" id="inputAdvertiserEmail"
                 placeholder="contact@dantri.com.vn"
                 ref={c => {
                   this.inputAdvertiserEmail = c;
