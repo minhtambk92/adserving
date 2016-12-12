@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { DataTables, ICheck } from '../../../components/UI/';
 import Link from '../../../components/Link';
 
-class PlacementList extends Component {
+class ListBannerNotBelongPlacement extends Component {
 
   static propTypes = {
     placementId: PropTypes.string.isRequired,
@@ -103,4 +103,4 @@ class PlacementList extends Component {
   }
 }
 
-export default PlacementList;
+export default ListBannerNotBelongPlacement;

@@ -126,12 +126,12 @@ class CreateChannelForm extends Component {
             to="#"
             className="btn btn-app pull-right"
             onClick={event => this.clearInput(event)}
-          ><i className="fa fa-eraser"/> Clear</Link>
+          ><i className="fa fa-eraser" /> Clear</Link>
           <Link
             to="#"
             className="btn btn-app pull-right"
             onClick={event => this.createChannel(event)}
-          ><i className="fa fa-check"/> Confirm</Link>
+          ><i className="fa fa-check" /> Confirm</Link>
         </div>
         {/* /.box-footer */}
       </form>

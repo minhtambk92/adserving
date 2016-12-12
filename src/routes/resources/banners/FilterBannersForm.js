@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-class FilterCampaignsForm extends Component {
+class FilterBannersForm extends Component {
 
   static propTypes = {
     filters: PropTypes.object,
@@ -77,4 +77,4 @@ class FilterCampaignsForm extends Component {
   }
 }
 
-export default FilterCampaignsForm;
+export default FilterBannersForm;

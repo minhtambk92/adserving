@@ -30,6 +30,7 @@ import s from './Banners.css';
 
 const pageTitle = 'Home';
 const pageSubTitle = 'Control panel';
+
 class Banners extends Component {
 
   static propTypes = {
