@@ -128,9 +128,10 @@ class ListBannerOfPlacement extends Component {
       },
     }, {
       data: null,
-      render: (data, type, rowData) => `${rowData.width}px x ${rowData.height}px`,
+      render: (data, type, rowData) => `${rowData.width} x ${rowData.height}`,
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link

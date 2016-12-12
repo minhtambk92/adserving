@@ -36,9 +36,10 @@ class ListBannerNotBelongPlacement extends Component {
       },
     }, {
       data: null,
-      render: (data, type, row) => `${row.width}px x ${row.height}px`,
+      render: (data, type, row) => `${row.width} x ${row.height}`,
     }, {
       data: null,
+      orderable: false,
       createdCell: (cell, cellData, rowData) => {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link

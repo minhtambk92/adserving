@@ -168,7 +168,7 @@ class Zone extends Component {
                   </li>
                   <li className="active">
                     <a href="#shareZone" data-toggle="tab">
-                      Share Zone
+                      Share
                     </a>
                   </li>
                   <li>
@@ -238,41 +238,17 @@ class Zone extends Component {
                   </div>
                   <div className="tab-pane" id="shareZone">
                     <div className="row">
-                      <div className="col-lg-12">
-                        {/* BOX: FORM OF CREATE A NEW ZONE */}
-                        <div className="box box-info">
-                          <div className="box-header with-border">
-                            <h3 className="box-title">List Share</h3>
-                            <div className="box-tools pull-right">
-                              <button
-                                type="button" className="btn btn-box-tool"
-                                data-widget="collapse"
-                              >
-                                <i className="fa fa-minus" />
-                              </button>
-                            </div>
-                          </div>
-                          {/* /.box-header */}
-                          <form className="form-horizontal">
-                            <div className="box-body">
-                              <div className="col-lg-12" id="shareZoneForm">
-                                <ListShare
-                                  list={this.props.zones && this.props.zones.editing
+                      <div className="col-lg-12" id="shareZoneForm">
+                        <ListShare
+                          list={this.props.zones && this.props.zones.editing
                                     && this.props.zones.editing.shares}
-                                  deleteShareZone={this.props.deleteShare}
-                                  getZone={this.props.getZone}
-                                  zoneId={this.props.zoneId}
-                                  updateShareZone={this.props.updateShare}
-                                  createShareZone={this.props.createShare}
-                                  removeShare={this.props.removeShare}
-                                />
-                              </div>
-                            </div>
-                            {/* /.box-body */}
-                            {/* /.box-footer */}
-                          </form>
-                        </div>
-                        {/* /.col */}
+                          deleteShareZone={this.props.deleteShare}
+                          getZone={this.props.getZone}
+                          zoneId={this.props.zoneId}
+                          updateShareZone={this.props.updateShare}
+                          createShareZone={this.props.createShare}
+                          removeShare={this.props.removeShare}
+                        />
                       </div>
                     </div>
                   </div>
