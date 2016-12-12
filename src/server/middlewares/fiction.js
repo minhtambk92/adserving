@@ -155,31 +155,51 @@ async function menusFiction() {
         });
       }
 
-      const inventory = await Menu.create({
+      const agency = await Menu.create({
         url: '#',
-        name: 'Inventory',
-        icon: '<i class="fa fa-briefcase"></i>',
+        name: 'Agency',
+        icon: '<i class="fa fa-id-card-o"></i>',
         parentId: menu.id,
         order: 2,
         type: TYPE_MENU_ITEM,
       });
 
-      if (inventory) {
+      if (agency) {
         await Menu.bulkCreate([{
           url: '/resource/advertiser',
           name: 'Advertisers',
           icon: '<i class="fa fa-circle-o"></i>',
-          parentId: inventory.id,
+          parentId: agency.id,
           order: 0,
           type: TYPE_MENU_ITEM,
         }, {
           url: '/resource/campaign',
           name: 'Campaigns',
           icon: '<i class="fa fa-circle-o"></i>',
-          parentId: inventory.id,
+          parentId: agency.id,
           order: 1,
           type: TYPE_MENU_ITEM,
         }, {
+          url: '/resource/site',
+          name: 'Sites',
+          icon: '<i class="fa fa-circle-o"></i>',
+          parentId: agency.id,
+          order: 4,
+          type: TYPE_MENU_ITEM,
+        }]);
+      }
+
+      const inventory = await Menu.create({
+        url: '#',
+        name: 'Inventory',
+        icon: '<i class="fa fa-briefcase"></i>',
+        parentId: menu.id,
+        order: 3,
+        type: TYPE_MENU_ITEM,
+      });
+
+      if (inventory) {
+        await Menu.bulkCreate([{
           url: '/resource/banner',
           name: 'Banners',
           icon: '<i class="fa fa-circle-o"></i>',
@@ -192,13 +212,6 @@ async function menusFiction() {
           icon: '<i class="fa fa-circle-o"></i>',
           parentId: inventory.id,
           order: 3,
-          type: TYPE_MENU_ITEM,
-        }, {
-          url: '/resource/site',
-          name: 'Sites',
-          icon: '<i class="fa fa-circle-o"></i>',
-          parentId: inventory.id,
-          order: 4,
           type: TYPE_MENU_ITEM,
         }, {
           url: '/resource/zone',
@@ -221,7 +234,7 @@ async function menusFiction() {
         url: '#',
         name: 'Configuration',
         parentId: menu.id,
-        order: 3,
+        order: 4,
         type: TYPE_MENU_HEADER,
       });
 
@@ -230,7 +243,7 @@ async function menusFiction() {
         name: 'Settings',
         icon: '<i class="fa fa-gears"></i>',
         parentId: menu.id,
-        order: 4,
+        order: 5,
         type: TYPE_MENU_ITEM,
       });
 
@@ -261,7 +274,7 @@ async function menusFiction() {
         name: 'Users',
         icon: '<i class="fa fa-user"></i>',
         parentId: menu.id,
-        order: 5,
+        order: 6,
         type: TYPE_MENU_ITEM,
       });
 
@@ -288,7 +301,7 @@ async function menusFiction() {
         name: 'Resources',
         icon: '<i class="fa fa-industry"></i>',
         parentId: menu.id,
-        order: 6,
+        order: 7,
         type: TYPE_MENU_ITEM,
       });
 
