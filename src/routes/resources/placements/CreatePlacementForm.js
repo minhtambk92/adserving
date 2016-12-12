@@ -90,9 +90,9 @@ class CreatePlacementForm extends Component {
         <div className="box-body">
           <div className="form-group">
             <label
-              htmlFor="inputPlacementName" className="col-sm-2 control-label"
+              htmlFor="inputPlacementName" className="col-sm-3 control-label"
             >Name</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <input
                 type="text" className="form-control" id="inputPlacementName"
                 placeholder="Admicro"
@@ -104,8 +104,8 @@ class CreatePlacementForm extends Component {
           </div>
           { this.props.campaignId ? ('') : (
             <div className="form-group has-feedback">
-              <label htmlFor="inputCampaign" className="col-sm-2 control-label">Campaign</label>
-              <div className="col-sm-10">
+              <label htmlFor="inputCampaign" className="col-sm-3 control-label">Campaign</label>
+              <div className="col-sm-9">
                 <select
                   id="inputCampaign" className="form-control"
                   ref={c => {
@@ -121,8 +121,8 @@ class CreatePlacementForm extends Component {
             </div>
           ) }
           <div className="form-group has-feedback">
-            <label htmlFor="inputPlacementStartTime" className="col-sm-2 control-label">Start Time:</label>
-            <div className=" col-sm-10 date">
+            <label htmlFor="inputPlacementStartTime" className="col-sm-3 control-label">Start Time:</label>
+            <div className=" col-sm-9 date">
               <span className="fa fa-calendar form-control-feedback" />
               {/* /DatePicker */}
               <DatePicker
@@ -134,8 +134,8 @@ class CreatePlacementForm extends Component {
             </div>
           </div>
           <div className="form-group has-feedback">
-            <label htmlFor="inputPlacementEndTime" className="col-sm-2 control-label">End Time:</label>
-            <div className=" col-sm-10 date">
+            <label htmlFor="inputPlacementEndTime" className="col-sm-3 control-label">End Time:</label>
+            <div className=" col-sm-9 date">
               <span className="fa fa-calendar form-control-feedback" />
               {/* /DatePicker */}
               <DatePicker
@@ -148,8 +148,8 @@ class CreatePlacementForm extends Component {
           </div>
 
           <div className="form-group">
-            <label htmlFor="inputPlacementSizeWidth" className="col-sm-2 control-label">Size(Width)</label>
-            <div className="col-sm-10">
+            <label htmlFor="inputPlacementSizeWidth" className="col-sm-3 control-label">Size(Width)</label>
+            <div className="col-sm-9">
               <input
                 type="number" className="form-control"
                 id="inputPlacementSizeWidth"
@@ -161,8 +161,8 @@ class CreatePlacementForm extends Component {
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="inputPlacementSizeHeight" className="col-sm-2 control-label">Size(Height)</label>
-            <div className="col-sm-10">
+            <label htmlFor="inputPlacementSizeHeight" className="col-sm-3 control-label">Size(Height)</label>
+            <div className="col-sm-9">
               <input
                 type="number" className="form-control"
                 id="inputPlacementSizeHeight"
@@ -176,9 +176,9 @@ class CreatePlacementForm extends Component {
           <div className="form-group">
             <label
               htmlFor="inputPlacementWeight"
-              className="col-sm-2 control-label"
+              className="col-sm-3 control-label"
             >Weight</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <input
                 type="number" className="form-control" id="inputPlacementWeight"
                 placeholder="1"
@@ -191,9 +191,9 @@ class CreatePlacementForm extends Component {
           <div className="form-group">
             <label
               htmlFor="inputPlacementStatus"
-              className="col-sm-2 control-label"
+              className="col-sm-3 control-label"
             >Status</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <select
                 id="inputPlacementStatus" className="form-control"
                 ref={c => {
@@ -208,9 +208,9 @@ class CreatePlacementForm extends Component {
           <div className="form-group">
             <label
               htmlFor="inputPlacementDescription"
-              className="col-sm-2 control-label"
+              className="col-sm-3 control-label"
             >Description</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <textarea
                 className="form-control" id="inputPlacementDescription"
                 rows="5" placeholder="More info..."

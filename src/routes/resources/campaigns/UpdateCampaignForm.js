@@ -154,9 +154,9 @@ class UpdateCampaignForm extends Component {
         <div className="box-body">
           <div className="form-group">
             <label
-              htmlFor="inputCampaignName" className="col-sm-2 control-label"
+              htmlFor="inputCampaignName" className="col-sm-3 control-label"
             >Name</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <input
                 type="text" className="form-control" id="inputCampaignName"
                 placeholder="Admicro"
@@ -168,9 +168,9 @@ class UpdateCampaignForm extends Component {
           </div>
           <div className="form-group">
             <label
-              htmlFor="inputAdvertiser" className="col-sm-2 control-label"
+              htmlFor="inputAdvertiser" className="col-sm-3 control-label"
             >Advertiser</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <select
                 id="inputAdvertiser" className="form-control"
                 ref={c => {
@@ -187,9 +187,9 @@ class UpdateCampaignForm extends Component {
           </div>
           <div className="form-group has-feedback">
             <label
-              htmlFor="inputCampaignStartTime" className="col-sm-2 control-label"
+              htmlFor="inputCampaignStartTime" className="col-sm-3 control-label"
             >Start Time:</label>
-            <div className=" col-sm-10 date">
+            <div className=" col-sm-9 date">
               <span className="fa fa-calendar form-control-feedback" />
               {/* /.box-body */}
               <DatePicker
@@ -202,9 +202,9 @@ class UpdateCampaignForm extends Component {
           </div>
           <div className="form-group has-feedback">
             <label
-              htmlFor="inputCampaignEndTime" className="col-sm-2 control-label"
+              htmlFor="inputCampaignEndTime" className="col-sm-3 control-label"
             >End Time:</label>
-            <div className=" col-sm-10 date">
+            <div className=" col-sm-9 date">
               <span className="fa fa-calendar form-control-feedback" />
               {/* /.box-body */}
               <DatePicker
@@ -218,9 +218,9 @@ class UpdateCampaignForm extends Component {
           <div className="form-group">
             <label
               htmlFor="inputCampaignRevenueType"
-              className="col-sm-2 control-label"
+              className="col-sm-3 control-label"
             >Revenue Information</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <select
                 id="inputCampaignRevenueType" className="form-control"
                 onChange={event => this.changeRevenueType(event)}
@@ -240,8 +240,8 @@ class UpdateCampaignForm extends Component {
           {this.state.showCPM === true ? (
             <div className="typeCPM">
               <div className="form-group">
-                <div className="col-sm-2">&nbsp;</div>
-                <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-2 control-label">Expire Value CPM</label>
+                <div className="col-sm-3">&nbsp;</div>
+                <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Expire Value CPM</label>
                 <div className="col-sm-8">
                   <input
                     type="number" className="form-control" id="inputCampaignExpireValueCPM"
@@ -253,8 +253,8 @@ class UpdateCampaignForm extends Component {
                 </div>
               </div>
               <div className="form-group">
-                <div className="col-sm-2">&nbsp;</div>
-                <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-2 control-label">Max CPM per Day</label>
+                <div className="col-sm-3">&nbsp;</div>
+                <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Max CPM per Day</label>
                 <div className="col-sm-8">
                   <input
                     type="number" className="form-control" id="inputCampaignMaxCPMPerDay"
@@ -268,9 +268,9 @@ class UpdateCampaignForm extends Component {
             </div>) : ('')}
           <div className="form-group">
             <label
-              htmlFor="inputCampaignViews" className="col-sm-2 control-label"
+              htmlFor="inputCampaignViews" className="col-sm-3 control-label"
             >Total Views</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <input
                 type="number" className="form-control" id="inputCampaignViews"
                 placeholder="1000"
@@ -283,9 +283,9 @@ class UpdateCampaignForm extends Component {
           <div className="form-group">
             <label
               htmlFor="inputCampaignViewPerSession"
-              className="col-sm-2 control-label"
+              className="col-sm-3 control-label"
             >Views/Session</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <input
                 type="number" className="form-control" id="inputCampaignViewPerSession"
                 placeholder="10"
@@ -298,9 +298,9 @@ class UpdateCampaignForm extends Component {
           <div className="form-group">
             <label
               htmlFor="inputCampaignTimeResetViewCount"
-              className="col-sm-2 control-label"
+              className="col-sm-3 control-label"
             >Time reset view(h)</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <input
                 type="number" className="form-control"
                 id="inputCampaignTimeResetViewCount"
@@ -314,9 +314,9 @@ class UpdateCampaignForm extends Component {
           <div className="form-group">
             <label
               htmlFor="inputCampaignWeight"
-              className="col-sm-2 control-label"
+              className="col-sm-3 control-label"
             >Weight</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <input
                 type="number" className="form-control" id="inputCampaignWeight"
                 placeholder="1"
@@ -329,9 +329,9 @@ class UpdateCampaignForm extends Component {
           <div className="form-group">
             <label
               htmlFor="inputCampaignStatus"
-              className="col-sm-2 control-label"
+              className="col-sm-3 control-label"
             >Status</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <select
                 id="inputCampaignStatus" className="form-control"
                 ref={c => {
@@ -347,9 +347,9 @@ class UpdateCampaignForm extends Component {
           <div className="form-group">
             <label
               htmlFor="inputCampaignDescription"
-              className="col-sm-2 control-label"
+              className="col-sm-3 control-label"
             >Description</label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
               <textarea
                 className="form-control" id="inputCampaignDescription" rows="5"
                 placeholder="More info..."
