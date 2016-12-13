@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getZone, updateZone, deleteZone } from '../../../../actions/zones';
+import { setPageZoneActiveTab, setCurrentShare } from '../../../../actions/pages/zones';
 import { getSites } from '../../../../actions/sites';
 import { getPlacements, createPlacement, getPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
@@ -58,6 +59,8 @@ class Zone extends Component {
     createSharePlacement: PropTypes.func,
     removeShare: PropTypes.func,
     getPlacement: PropTypes.func,
+    setPageZoneActiveTab: PropTypes.func,
+    setCurrentShare: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -85,9 +88,22 @@ class Zone extends Component {
       shares,
     } = nextProps.zones && (nextProps.zones.editing || {});
     if (shares) {
-      const arr = [];
-      arr.push(shares[0]);
-      this.setState({ arrShare: shares[0] });
+      if (this.props.page.currentShare) {
+        $('.zone-edit-box ul li').removeClass('active');
+        $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+        this.inputSelectShare.value = this.props.page.currentShare;
+        for (let i = 0; i < shares.length; i += 1) {
+          if (this.props.page.currentShare === shares[i].id) {
+            const arr = [];
+            arr.push(shares[i]);
+            this.setState({ arrShare: shares[i] });
+          }
+        }
+      } else {
+        const arr = [];
+        arr.push(shares[0]);
+        this.setState({ arrShare: shares[0] });
+      }
     }
   }
 
@@ -103,16 +119,41 @@ class Zone extends Component {
   }
 
   filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const arrPlacement = allPlacement;
-    for (let i = 0, len = pob.length; i < len; i += 1) {
-      for (let j = 0, len2 = arrPlacement.length; j < len2; j += 1) {
-        if (pob[i].id === arrPlacement[j].id) {
-          arrPlacement.splice(j, 1);
-          len2 = arrPlacement.length;
+    if (allPlacement.length === 0) {
+      return [];
+    } else if (pob.length === 0) {
+      return allPlacement;
+    } else if (pob.length > 0 && allPlacement.length > 0) {
+      const arrId = [];
+      const newArr = [];
+      const arrPlacement = [];
+      for (let i = 0; i < pob.length; i += 1) {
+        if (pob[i] !== null) {
+          newArr.push(pob[i].id);
         }
       }
+      for (let j = 0; j < allPlacement.length; j += 1) {
+        arrId.push(allPlacement[j].id);
+      }
+      for (let k = 0; k < newArr.length; k += 1) {
+        if (arrId.indexOf(newArr[k]) > -1) {
+          arrId.splice(arrId.indexOf(newArr[k]), 1);
+        }
+      }
+      if (arrId.length > 0) {
+        for (let m = 0; m < allPlacement.length; m += 1) {
+          for (let h = 0; h < arrId.length; h += 1) {
+            if (allPlacement[m].id === arrId[h]) {
+              arrPlacement.push(allPlacement[m]);
+            }
+          }
+        }
+        return arrPlacement;
+      } else if (arrId.length === 0) {
+        return [];
+      }
     }
-    return arrPlacement;
+    return false;
   }
 
   render() {
@@ -143,7 +184,7 @@ class Zone extends Component {
                   </li>
                   <li className="active">
                     <a href="#shareZone" data-toggle="tab">
-                      Share Zone
+                      Share
                     </a>
                   </li>
                   <li>
@@ -213,41 +254,19 @@ class Zone extends Component {
                   </div>
                   <div className="tab-pane" id="shareZone">
                     <div className="row">
-                      <div className="col-lg-12">
-                        {/* BOX: FORM OF CREATE A NEW ZONE */}
-                        <div className="box box-info">
-                          <div className="box-header with-border">
-                            <h3 className="box-title">List Share</h3>
-                            <div className="box-tools pull-right">
-                              <button
-                                type="button" className="btn btn-box-tool"
-                                data-widget="collapse"
-                              >
-                                <i className="fa fa-minus" />
-                              </button>
-                            </div>
-                          </div>
-                          {/* /.box-header */}
-                          <form className="form-horizontal">
-                            <div className="box-body">
-                              <div className="col-lg-12" id="shareZoneForm">
-                                <ListShare
-                                  list={this.props.zones && this.props.zones.editing
+                      <div className="col-lg-12" id="shareZoneForm">
+                        <ListShare
+                          list={this.props.zones && this.props.zones.editing
                                     && this.props.zones.editing.shares}
-                                  deleteShareZone={this.props.deleteShare}
-                                  getZone={this.props.getZone}
-                                  zoneId={this.props.zoneId}
-                                  updateShareZone={this.props.updateShare}
-                                  createShareZone={this.props.createShare}
-                                  removeShare={this.props.removeShare}
-                                />
-                              </div>
-                            </div>
-                            {/* /.box-body */}
-                            {/* /.box-footer */}
-                          </form>
-                        </div>
-                        {/* /.col */}
+                          deleteShareZone={this.props.deleteShare}
+                          getZone={this.props.getZone}
+                          zoneId={this.props.zoneId}
+                          updateShareZone={this.props.updateShare}
+                          createShareZone={this.props.createShare}
+                          removeShare={this.props.removeShare}
+                          setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                          setCurrentShare={this.props.setCurrentShare}
+                        />
                       </div>
                     </div>
                   </div>
@@ -383,6 +402,8 @@ const mapDispatch = {
   removeShareInSharePlacement,
   removeShare,
   getPlacement,
+  setPageZoneActiveTab,
+  setCurrentShare,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zone));

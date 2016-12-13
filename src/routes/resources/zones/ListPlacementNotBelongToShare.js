@@ -40,7 +40,7 @@ class ListPlacementNotBelongToZone extends Component {
       },
     }, {
       data: null,
-      render: (data, type, row) => `${row.sizeWidth}px x ${row.sizeHeight}px`,
+      render: (data, type, row) => `${row.sizeWidth} x ${row.sizeHeight}`,
     }, {
       data: null,
       orderable: false,

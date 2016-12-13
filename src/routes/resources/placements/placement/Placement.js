@@ -80,16 +80,41 @@ class Placement extends Component {
   }
 
   filterBanner(allBanner, bof) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const arrBanner = allBanner;
-    for (let i = 0, len = bof.length; i < len; i += 1) {
-      for (let j = 0, len2 = arrBanner.length; j < len2; j += 1) {
-        if (bof[i].id === arrBanner[j].id) {
-          arrBanner.splice(j, 1);
-          len2 = arrBanner.length;
+    if (allBanner.length === 0) {
+      return [];
+    } else if (bof.length === 0) {
+      return allBanner;
+    } else if (bof.length > 0 && allBanner.length > 0) {
+      const arrId = [];
+      const newArr = [];
+      const arrBanner = [];
+      for (let i = 0; i < bof.length; i += 1) {
+        if (bof[i] !== null) {
+          newArr.push(bof[i].id);
         }
       }
+      for (let j = 0; j < allBanner.length; j += 1) {
+        arrId.push(allBanner[j].id);
+      }
+      for (let k = 0; k < newArr.length; k += 1) {
+        if (arrId.indexOf(newArr[k]) > -1) {
+          arrId.splice(arrId.indexOf(newArr[k]), 1);
+        }
+      }
+      if (arrId.length > 0) {
+        for (let m = 0; m < allBanner.length; m += 1) {
+          for (let h = 0; h < arrId.length; h += 1) {
+            if (allBanner[m].id === arrId[h]) {
+              arrBanner.push(allBanner[m]);
+            }
+          }
+        }
+        return arrBanner;
+      } else if (arrId.length === 0) {
+        return [];
+      }
     }
-    return arrBanner;
+    return false;
   }
 
   createBannerInPlacement() {
@@ -233,7 +258,7 @@ class Placement extends Component {
                                   onClick={(event) => this.createBannerInPlacement(event)}
                                   className="btn btn-block btn-info btn-sm"
                                 >
-                                  Create Share
+                                  Create Banner
                                 </button>
                               </div>
                               <div className="col-sm-10">

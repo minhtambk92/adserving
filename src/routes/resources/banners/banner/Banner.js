@@ -65,6 +65,14 @@ class Banner extends Component {
 
   };
 
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      createPlacement: false,
+    };
+  }
+
   componentWillMount() {
     this.props.getBanner(this.props.bannerId);
     this.props.getCampaigns();
@@ -79,16 +87,49 @@ class Banner extends Component {
   }
 
   filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const arrPlacement = allPlacement;
-    for (let i = 0, len = pob.length; i < len; i += 1) {
-      for (let j = 0, len2 = arrPlacement.length; j < len2; j += 1) {
-        if (pob[i].id === arrPlacement[j].id) {
-          arrPlacement.splice(j, 1);
-          len2 = arrPlacement.length;
+    if (allPlacement.length === 0) {
+      return [];
+    } else if (pob.length === 0) {
+      return allPlacement;
+    } else if (pob.length > 0 && allPlacement.length > 0) {
+      const arrId = [];
+      const newArr = [];
+      const arrPlacement = [];
+      for (let i = 0; i < pob.length; i += 1) {
+        if (pob[i] !== null) {
+          newArr.push(pob[i].id);
         }
       }
+      for (let j = 0; j < allPlacement.length; j += 1) {
+        arrId.push(allPlacement[j].id);
+      }
+      for (let k = 0; k < newArr.length; k += 1) {
+        if (arrId.indexOf(newArr[k]) > -1) {
+          arrId.splice(arrId.indexOf(newArr[k]), 1);
+        }
+      }
+      if (arrId.length > 0) {
+        for (let m = 0; m < allPlacement.length; m += 1) {
+          for (let h = 0; h < arrId.length; h += 1) {
+            if (allPlacement[m].id === arrId[h]) {
+              arrPlacement.push(allPlacement[m]);
+            }
+          }
+        }
+        return arrPlacement;
+      } else if (arrId.length === 0) {
+        return [];
+      }
     }
-    return arrPlacement;
+    return false;
+  }
+
+  createPlacementInBanner() {
+    this.setState({ createPlacement: true });
+  }
+
+  hideCreatePlacement() {
+    this.setState({ createPlacement: false });
   }
 
   render() {
@@ -243,7 +284,23 @@ class Banner extends Component {
                           </section>
                         </div>
                         <div className="row">
-                          <section className="col-lg-6">
+                          {this.state.createPlacement === false ? (
+                            <div className="form-group">
+                              <div className="col-sm-2">
+                                <button
+                                  type="button"
+                                  id="createBannerInPlacement"
+                                  onClick={(event) => this.createPlacementInBanner(event)}
+                                  className="btn btn-block btn-info btn-sm"
+                                >
+                                  Create Placement
+                                </button>
+                              </div>
+                              <div className="col-sm-10">
+                                &nbsp;
+                              </div>
+                            </div>
+                          ) : (<div className="col-lg-12">
                             {/* BOX: CREATE */}
                             <div className="box box-info">
                               <div className="box-header with-border">
@@ -251,8 +308,8 @@ class Banner extends Component {
                                 <div className="box-tools pull-right">
                                   <button
                                     type="button" className="btn btn-box-tool"
-                                    data-widget="collapse"
-                                  ><i className="fa fa-minus" /></button>
+                                    onClick={event => this.hideCreatePlacement(event)}
+                                  ><i className="fa fa-remove" /></button>
                                 </div>
                               </div>
                               {/* /.box-header */}
@@ -268,7 +325,7 @@ class Banner extends Component {
                               />
                             </div>
                             {/* /.col */}
-                          </section>
+                          </div>)}
                         </div>
                       </div>
                     </div>

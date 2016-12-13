@@ -42,6 +42,7 @@ export const UPDATE_SITE = 'UPDATE_SITE';
 export const DELETE_SITE = 'DELETE_SITE';
 export const CHECK_SITE_BY_DOMAIN = 'CHECK_SITE_BY_DOMAIN';
 export const SET_PAGE_SITE_ACTIVE_TAB = 'SET_PAGE_SITE_ACTIVE_TAB';
+export const SET_CURRENT_SHARE = 'SET_CURRENT_SHARE';
 
 export const GET_ZONE = 'GET_ZONE';
 export const GET_ZONES = 'GET_ZONES';

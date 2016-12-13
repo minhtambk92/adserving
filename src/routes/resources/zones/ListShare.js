@@ -17,6 +17,8 @@ class ListShare extends Component {
     updateShareZone: PropTypes.func,
     createShareZone: PropTypes.func,
     removeShare: PropTypes.func,
+    setPageZoneActiveTab: PropTypes.func,
+    setCurrentShare: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -51,6 +53,14 @@ class ListShare extends Component {
     });
   }
 
+  onTabClickAddPlacement(event, id) {
+    event.persist();
+    this.props.setPageZoneActiveTab('addPlacement');
+    this.props.setCurrentShare(id).then(() => {
+      this.props.getZone(this.props.zoneId);
+    });
+  }
+
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     return [{
       data: 'id',
@@ -70,6 +80,15 @@ class ListShare extends Component {
       data: 'name',
     }, {
       data: 'description',
+    }, {
+      data: null,
+      orderable: false,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link
+          to={`/resource/zone/${this.props.zoneId}`}
+          onClick={(event) => this.onTabClickAddPlacement(event, rowData.id)}
+        >Add Placement</Link>, cell);
+      },
     }, {
       data: null,
       orderable: false,
@@ -113,11 +132,12 @@ class ListShare extends Component {
     const html = $(`#inputShareHTML-${i}`).val();
     const description = $(`#inputShareDescription-${i}`).val();
     if (id) {
-      if (name && css && html) {
+      if (name) {
         this.props.updateShareZone({ id, name, html, css, description }).then(() => {
           this.props.getZone(this.props.zoneId).then(() => {
             this.setState({ share: {} });
             this.setState({ showEdit: false });
+            this.props.setPageZoneActiveTab('shareZone');
           });
         });
       }
@@ -136,7 +156,7 @@ class ListShare extends Component {
     const html = $(`#inputShareHTML-${i}`).val();
     const description = $(`#inputShareDescription-${i}`).val();
     if (!id) {
-      if (name && css && html) {
+      if (name) {
         const zoneId = this.props.zoneId;
         this.props.createShareZone({ name, html, css, description, zoneId }).then(() => {
           this.props.getZone(this.props.zoneId);
@@ -144,6 +164,7 @@ class ListShare extends Component {
         $(`.list-zone-share-${i}`).remove();
       }
     }
+    this.props.setPageZoneActiveTab('shareZone');
     this.setState({ showCreate: false });
   }
 
@@ -167,94 +188,114 @@ class ListShare extends Component {
     }
     return (
       <div className="row">
-        <div className="row">
-          <div className="col-sm-6">
-            <DataTables
-              className="table table-bordered table-striped"
-              data={data}
-              options={{
-                columns: this.dataTableOptions(),
-                destroy: true,
-                order: [[1, 'DESC']],
-              }}
-              thead={(
-                <tr>
-                  <th><ICheck type="checkbox" className="inputChooseAllShares" /></th>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>&nbsp;</th>
-                  <th>&nbsp;</th>
-                </tr>
-              )}
-              tfoot={(
-                <tr>
-                  <th><ICheck type="checkbox" className="inputChooseAllShares" /></th>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>&nbsp;</th>
-                  <th>&nbsp;</th>
-                </tr>
-              )}
-            />
-          </div>
-          <div className="col-sm-6" id="shareForm">
-            {this.state.showEdit === true ? (
-              <div className="editShare">
-                <ListShareForm
-                  id={this.state.share.id}
-                  childZone={this.state.share}
-                  index={1}
+        <div className="col-sm-6">
+          <div className="box box-solid box-primary">
+            <div className="box-header">
+              <h3 className="box-title">List Share of Zone</h3>
+            </div>
+            {/* /.box-header */}
+            <div className="box-body">
+              <div className="listShare">
+                <DataTables
+                  className="table table-bordered table-striped"
+                  data={data}
+                  options={{
+                    columns: this.dataTableOptions(),
+                    destroy: true,
+                    order: [[1, 'DESC']],
+                  }}
+                  thead={(
+                    <tr>
+                      <th><ICheck type="checkbox" className="inputChooseAllShares" /></th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                    </tr>
+                  )}
+                  tfoot={(
+                    <tr>
+                      <th><ICheck type="checkbox" className="inputChooseAllShares" /></th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                    </tr>
+                  )}
                 />
-                <div className="box-footer">
-                  <Link
-                    to="#"
-                    className="btn btn-app pull-right"
-                    onClick={event => this.save(event)}
-                  ><i className="fa fa-floppy-o" /> Save</Link>
-                </div>
-              </div>
-            ) : ''}
-            {this.state.showCreate === true && this.state.showEdit === false &&
-            <div className="shareZoneForm">
-              <ListShareForm
-                index={1}
-                key={1}
-              />
-              <div className="box-footer">
-                <Link
-                  to="#"
-                  className="btn btn-app pull-right"
-                  onClick={event => this.clear(event)}
-                >
-                  <i className="fa fa-undo" />
-                  Clear
-                </Link>
-                <Link
-                  to="#"
-                  className="btn btn-app pull-right"
-                  onClick={event => this.createShare(event)}
-                ><i className="fa fa-floppy-o" /> Save</Link>
               </div>
             </div>
-            }
-            {this.state.showCreate === false && this.state.showEdit === false ? (
-              <div className="form-group">
-                <div className="col-sm-3">
-                  <button
-                    type="button"
-                    id="createShareZone"
-                    onClick={(event) => this.addShare(event)}
-                    className="btn btn-block btn-info btn-sm"
-                  >
-                    Create Share
-                  </button>
-                </div>
-                <div className="col-sm-9">
-                  &nbsp;
+            {/* /.box-body */}
+          </div>
+        </div>
+        <div className="col-sm-6" id="shareForm">
+          {this.state.showEdit === true ? (
+            <div className="box box-solid box-primary">
+              <div className="box-header">
+                <h3 className="box-title">Edit Share</h3>
+              </div>
+              {/* /.box-header */}
+              <div className="box-body">
+                <div className="editShare">
+                  <ListShareForm
+                    id={this.state.share.id}
+                    childZone={this.state.share}
+                    index={1}
+                  />
+                  <div className="box-footer">
+                    <Link
+                      to="#"
+                      className="btn btn-app pull-right"
+                      onClick={event => this.save(event)}
+                    ><i className="fa fa-floppy-o" /> Save</Link>
+                  </div>
                 </div>
               </div>
-            ) : ('')}
+              {/* /.box-body */}
+            </div>
+          ) : ''}
+          {this.state.showCreate === true && this.state.showEdit === false &&
+          <div className="shareZoneForm">
+            <ListShareForm
+              index={1}
+              key={1}
+            />
+            <div className="box-footer">
+              <Link
+                to="#"
+                className="btn btn-app pull-right"
+                onClick={event => this.clear(event)}
+              >
+                <i className="fa fa-undo" />
+                Clear
+              </Link>
+              <Link
+                to="#"
+                className="btn btn-app pull-right"
+                onClick={event => this.createShare(event)}
+              ><i className="fa fa-floppy-o" /> Save</Link>
+            </div>
           </div>
+          }
+          {this.state.showCreate === false && this.state.showEdit === false ? (
+            <div className="form-group">
+              <div className="col-sm-3">
+                <button
+                  type="button"
+                  id="createShareZone"
+                  onClick={(event) => this.addShare(event)}
+                  className="btn btn-block btn-info btn-sm"
+                >
+                  Create Share
+                </button>
+              </div>
+              <div className="col-sm-9">
+                &nbsp;
+              </div>
+            </div>
+          ) : ('')}
         </div>
       </div>
     );
