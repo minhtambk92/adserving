@@ -179,6 +179,13 @@ async function menusFiction() {
           parentId: agency.id,
           order: 1,
           type: TYPE_MENU_ITEM,
+        }, {
+          url: '/resource/banner',
+          name: 'Banners',
+          icon: '<i class="fa fa-circle-o"></i>',
+          parentId: agency.id,
+          order: 2,
+          type: TYPE_MENU_ITEM,
         }]);
       }
 
@@ -207,25 +214,18 @@ async function menusFiction() {
           order: 1,
           type: TYPE_MENU_ITEM,
         }, {
-          url: '/resource/banner',
-          name: 'Banners',
-          icon: '<i class="fa fa-circle-o"></i>',
-          parentId: publisher.id,
-          order: 2,
-          type: TYPE_MENU_ITEM,
-        }, {
           url: '/resource/placement',
           name: 'Placements',
           icon: '<i class="fa fa-circle-o"></i>',
           parentId: publisher.id,
-          order: 3,
+          order: 2,
           type: TYPE_MENU_ITEM,
         }, {
           url: '/resource/channel',
           name: 'Target Channels',
           icon: '<i class="fa fa-circle-o"></i>',
           parentId: publisher.id,
-          order: 4,
+          order: 3,
           type: TYPE_MENU_ITEM,
         }]);
       }
