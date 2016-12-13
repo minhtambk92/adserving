@@ -55,60 +55,59 @@ class UpdateChannelForm extends Component {
   render() {
     return (
       <form className="form-horizontal">
-        <div className="box-body">
-          {/* Name */}
-          <div className="form-group">
-            <label
-              htmlFor="inputChannelName"
-              className="col-sm-3 control-label"
-            >Name</label>
-            <div className="col-sm-9">
-              <input
-                type="text" className="form-control" id="inputChannelName"
-                placeholder="Dan Tri"
-                ref={c => {
-                  this.inputChannelName = c;
-                }}
-              />
-            </div>
-          </div>
-          {/* Description */}
-          <div className="form-group">
-            <label
-              htmlFor="inputChannelDescription"
-              className="col-sm-3 control-label"
-            >Description</label>
-            <div className="col-sm-9">
-              <textarea
-                className="form-control" id="inputChannelDescription"
-                rows="5" placeholder="More info..."
-                ref={c => {
-                  this.inputChannelDescription = c;
-                }}
-              />
-            </div>
-          </div>
-          {/* Status */}
-          <div className="form-group">
-            <label
-              htmlFor="inputChannelStatus"
-              className="col-sm-3 control-label"
-            >Status</label>
-            <div className="col-sm-9">
-              <select
-                id="inputChannelStatus" className="form-control"
-                ref={c => {
-                  this.inputChannelStatus = c;
-                }}
-              >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
-            </div>
+        <div className="form-group">
+          <label
+            htmlFor="inputChannelName"
+            className="col-sm-2 control-label"
+          >Name</label>
+          <div className="col-sm-10">
+            <input
+              type="text" className="form-control" id="inputChannelName"
+              placeholder="Dan Tri"
+              ref={c => {
+                this.inputChannelName = c;
+              }}
+            />
           </div>
         </div>
-        {/* /.box-body */}
-        <div className="box-footer">
+
+        <div className="form-group">
+          <label
+            htmlFor="inputChannelDescription"
+            className="col-sm-2 control-label"
+          >Description</label>
+          <div className="col-sm-10">
+            <textarea
+              className="form-control" id="inputChannelDescription"
+              rows="5" placeholder="More info..."
+              ref={c => {
+                this.inputChannelDescription = c;
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label
+            htmlFor="inputChannelStatus"
+            className="col-sm-2 control-label"
+          >Status</label>
+          <div className="col-sm-10">
+            <select
+              id="inputChannelStatus" className="form-control"
+              ref={c => {
+                this.inputChannelStatus = c;
+              }}
+            >
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+
+        <hr />
+
+        <div className="clearfix">
           <Link
             to="/resource/Channel"
             className="btn btn-app pull-right"

@@ -367,204 +367,158 @@ class Channel extends Component {
               <div className="nav-tabs-custom channel-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
-                    <a href="#editChannel" data-toggle="tab">
-                      Edit Channel
-                    </a>
+                    <a href="#editChannel" data-toggle="tab">Edit Channel</a>
                   </li>
                   <li>
-                    <a href="#optionChannel" data-toggle="tab">
-                      Option Channel
-                    </a>
+                    <a href="#optionChannel" data-toggle="tab">Option Channel</a>
                   </li>
                 </ul>
+
                 <div className="tab-content">
-                  <div className="tab-pane" id="editChannel">
-                    <div className="row">
-                      <section className="col-lg-12">
-                        {/* BOX: FORM OF CREATE NEW WEBSITE */}
-                        <div className="box box-info">
-                          <div className="box-header with-border">
-                            <h3 className="box-title">Change information</h3>
-                            <div className="box-tools pull-right">
-                              <button
-                                type="button" className="btn btn-box-tool"
-                                data-widget="collapse"
-                              ><i className="fa fa-minus" /></button>
-                            </div>
-                          </div>
-                          {/* /.box-header */}
-                          {/* form start */}
-                          <UpdateChannelForm
-                            channel={this.props.channels && this.props.channels.editing}
-                            updateChannel={this.props.updateChannel}
-                            deleteChannel={this.props.deleteChannel}
-                            channelId={this.props.channelId}
-                            getChannel={this.props.getChannel}
-                            sites={this.props.sites && this.props.sites.list}
-                          />
-                        </div>
-                        {/* /.col */}
-                      </section>
-                    </div>
+                  <div className="active tab-pane" id="editChannel">
+                    <UpdateChannelForm
+                      channel={this.props.channels.editing}
+                      updateChannel={this.props.updateChannel}
+                      deleteChannel={this.props.deleteChannel}
+                      channelId={this.props.channelId}
+                      getChannel={this.props.getChannel}
+                      sites={this.props.sites.list}
+                    />
                   </div>
-                  <div className="active tab-pane" id="optionChannel">
-                    <div className="row">
-                      <section className="col-lg-12">
-                        <div className="row">
-                          <div className="col-lg-12">
-                            <div className="box box-info">
-                              <div className="box-header with-border">
-                                <h3 className="box-title">Add Option</h3>
-                                <div className="box-tools pull-right">
-                                  <button
-                                    type="button" className="btn btn-box-tool"
-                                    data-widget="collapse"
-                                  ><i className="fa fa-minus" /></button>
-                                </div>
-                              </div>
-                              {/* /.box-header */}
-                              <div className="box-body">
-                                <div className="row">
-                                  <div className="col-lg-12">
-                                    <div className="col-lg-6 no-padding">
-                                      <div className="box box-solid box-default">
-                                        <div className="box-body">
-                                          <div className="form-group">
-                                            <div className="col-sm-10 no-padding">
-                                              <select
-                                                id="inputChannelOptions" className="form-control"
-                                                ref={c => {
-                                                  this.inputChannelOptions = c;
-                                                }}
-                                              >
-                                                {this.state.options.map((option) =>
-                                                  <option
-                                                    key={option.value}
-                                                    value={option.value}
-                                                  >
-                                                    {option.name}
-                                                  </option>,
-                                                )}
-                                              </select>
-                                            </div>
-                                            <div className="col-sm-2">
-                                              <span className="input-group-btn">
-                                                <button
-                                                  type="button" className="btn btn-primary btn-flat"
-                                                  id="addNewOption"
-                                                  onClick={event => this.newOptions(event)}
-                                                >
-                                                  Add
-                                                </button>
-                                              </span>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="siteOption" id="optionChannel">
-                                  {/* /.Option Channel */}
-                                  {this.props.channels && this.props.channels.editing &&
-                                  this.props.channels.editing.options &&
-                                  this.props.channels.editing.options.map((option, index) => {
-                                    if (option.type === 'category') {
-                                      return (<SelectOptionChannel
-                                        key={option.id}
-                                        id={option.id}
-                                        name={option.type}
-                                        index={index + 1}
-                                        value={option.value}
-                                        comparison={option.comparison}
-                                        data={this.state.category}
-                                        logical={option.logical}
-                                        deleteOptionChannel={this.props.deleteOptionChannel}
-                                        optionChannelId={option.id}
-                                      />);
-                                    } else if (option.type === 'browser') {
-                                      return (<SelectOptionChannel
-                                        id={option.id}
-                                        key={option.id}
-                                        name={option.type}
-                                        index={index + 1}
-                                        value={option.value}
-                                        comparison={option.comparison}
-                                        data={this.state.browser}
-                                        logical={option.logical}
-                                        optionChannelId={option.id}
-                                        deleteOptionChannel={this.props.deleteOptionChannel}
-                                      />);
-                                    } else if (option.type === 'variable') {
-                                      return (
-                                        <FilterSiteChannel
-                                          key={option.id}
-                                          id={option.id}
-                                          index={index + 1}
-                                          type={option.type}
-                                          logical={option.logical}
-                                          name={option.name}
-                                          value={option.value}
-                                          comparison={option.comparison}
-                                        />
-                                      );
-                                    } else if (option.type !== 'browser' && option.type !== 'category' && option.type !== 'variable') {
-                                      return (
-                                        <FilterSiteChannel
-                                          key={option.id}
-                                          id={option.id}
-                                          index={index + 1}
-                                          logical={option.logical}
-                                          name={option.name}
-                                          value={option.value}
-                                          comparison={option.comparison}
-                                        />
-                                      );
-                                    }
-                                    return false;
-                                  },
-                                  )}
-                                  {this.state.newFilterSite
-                                  && this.state.newFilterSite.map((ob) => (
-                                    <FilterSiteChannel
-                                      key={ob.count}
-                                      index={ob.count}
-                                      name={ob.name}
-                                    />
-                                  ))}
-                                  {this.state.arrVariable && this.state.arrVariable.map((ob) => (
-                                    <FilterSiteChannel
-                                      key={ob.count}
-                                      index={ob.count}
-                                      type="variable"
-                                    />
-                                  ))}
-                                  {this.state.arrCheckBox && this.state.arrCheckBox.map((ob) => (
-                                    <SelectOptionChannel
-                                      key={ob.count}
-                                      index={ob.count}
-                                      name={ob.name}
-                                      data={ob.data}
-                                    />
-                                  ))}
-                                  {this.state.string}
-                                </div>
-                              </div>
-                              <div className="box-footer">
-                                <Link
-                                  to="/resource/Channel"
-                                  className="btn btn-app pull-right"
-                                ><i className="fa fa-undo" /> Cancel</Link>
-                                <Link
-                                  to="#"
-                                  className="btn btn-app pull-right"
-                                  onClick={event => this.saveOptions(event)}
-                                ><i className="fa fa-floppy-o" /> Save Options</Link>
-                              </div>
-                            </div>
-                          </div>
+
+                  <div className="tab-pane" id="optionChannel">
+                    <div className="form-group">
+                      <div className="row">
+                        <div className="col-sm-10">
+                          <select
+                            id="inputChannelOptions" className="form-control"
+                            ref={c => {
+                              this.inputChannelOptions = c;
+                            }}
+                          >
+                            {this.state.options.map((option) =>
+                              <option
+                                key={option.value}
+                                value={option.value}
+                              >
+                                {option.name}
+                              </option>,
+                            )}
+                          </select>
                         </div>
-                      </section>
+                        <div className="col-sm-2">
+                          <span className="input-group-btn">
+                            <button
+                              type="button" className="btn btn-primary btn-block"
+                              id="addNewOption"
+                              onClick={event => this.newOptions(event)}
+                            >
+                              Add
+                            </button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <hr />
+
+                    <div className="siteOption" id="optionChannel">
+                      {/* /.Option Channel */}
+                      {this.props.channels && this.props.channels.editing &&
+                      this.props.channels.editing.options &&
+                      this.props.channels.editing.options.map((option, index) => {
+                        if (option.type === 'category') {
+                          return (<SelectOptionChannel
+                            key={option.id}
+                            id={option.id}
+                            name={option.type}
+                            index={index + 1}
+                            value={option.value}
+                            comparison={option.comparison}
+                            data={this.state.category}
+                            logical={option.logical}
+                            deleteOptionChannel={this.props.deleteOptionChannel}
+                            optionChannelId={option.id}
+                          />);
+                        } else if (option.type === 'browser') {
+                          return (<SelectOptionChannel
+                            id={option.id}
+                            key={option.id}
+                            name={option.type}
+                            index={index + 1}
+                            value={option.value}
+                            comparison={option.comparison}
+                            data={this.state.browser}
+                            logical={option.logical}
+                            optionChannelId={option.id}
+                            deleteOptionChannel={this.props.deleteOptionChannel}
+                          />);
+                        } else if (option.type === 'variable') {
+                          return (
+                            <FilterSiteChannel
+                              key={option.id}
+                              id={option.id}
+                              index={index + 1}
+                              type={option.type}
+                              logical={option.logical}
+                              name={option.name}
+                              value={option.value}
+                              comparison={option.comparison}
+                            />
+                          );
+                        } else if (option.type !== 'browser' && option.type !== 'category' && option.type !== 'variable') {
+                          return (
+                            <FilterSiteChannel
+                              key={option.id}
+                              id={option.id}
+                              index={index + 1}
+                              logical={option.logical}
+                              name={option.name}
+                              value={option.value}
+                              comparison={option.comparison}
+                            />
+                          );
+                        }
+                        return false;
+                      })}
+                      {this.state.newFilterSite
+                      && this.state.newFilterSite.map((ob) => (
+                        <FilterSiteChannel
+                          key={ob.count}
+                          index={ob.count}
+                          name={ob.name}
+                        />
+                      ))}
+                      {this.state.arrVariable && this.state.arrVariable.map((ob) => (
+                        <FilterSiteChannel
+                          key={ob.count}
+                          index={ob.count}
+                          type="variable"
+                        />
+                      ))}
+                      {this.state.arrCheckBox && this.state.arrCheckBox.map((ob) => (
+                        <SelectOptionChannel
+                          key={ob.count}
+                          index={ob.count}
+                          name={ob.name}
+                          data={ob.data}
+                        />
+                      ))}
+                      {this.state.string}
+                    </div>
+
+                    <hr />
+
+                    <div className="post clearfix">
+                      <Link
+                        to="/resource/Channel"
+                        className="btn btn-app pull-right"
+                      ><i className="fa fa-undo" /> Cancel</Link>
+                      <Link
+                        to="#"
+                        className="btn btn-app pull-right"
+                        onClick={event => this.saveOptions(event)}
+                      ><i className="fa fa-floppy-o" /> Save</Link>
                     </div>
                   </div>
                 </div>
