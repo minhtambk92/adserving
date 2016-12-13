@@ -258,7 +258,7 @@ class Placement extends Component {
                                   onClick={(event) => this.createBannerInPlacement(event)}
                                   className="btn btn-block btn-info btn-sm"
                                 >
-                                  Create Share
+                                  Create Banner
                                 </button>
                               </div>
                               <div className="col-sm-10">

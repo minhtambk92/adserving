@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getZone, updateZone, deleteZone } from '../../../../actions/zones';
+import { setPageZoneActiveTab, setCurrentShare } from '../../../../actions/pages/zones';
 import { getSites } from '../../../../actions/sites';
 import { getPlacements, createPlacement, getPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
@@ -58,6 +59,8 @@ class Zone extends Component {
     createSharePlacement: PropTypes.func,
     removeShare: PropTypes.func,
     getPlacement: PropTypes.func,
+    setPageZoneActiveTab: PropTypes.func,
+    setCurrentShare: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -85,9 +88,22 @@ class Zone extends Component {
       shares,
     } = nextProps.zones && (nextProps.zones.editing || {});
     if (shares) {
-      const arr = [];
-      arr.push(shares[0]);
-      this.setState({ arrShare: shares[0] });
+      if (this.props.page.currentShare) {
+        $('.zone-edit-box ul li').removeClass('active');
+        $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+        this.inputSelectShare.value = this.props.page.currentShare;
+        for (let i = 0; i < shares.length; i += 1) {
+          if (this.props.page.currentShare === shares[i].id) {
+            const arr = [];
+            arr.push(shares[i]);
+            this.setState({ arrShare: shares[i] });
+          }
+        }
+      } else {
+        const arr = [];
+        arr.push(shares[0]);
+        this.setState({ arrShare: shares[0] });
+      }
     }
   }
 
@@ -248,6 +264,8 @@ class Zone extends Component {
                           updateShareZone={this.props.updateShare}
                           createShareZone={this.props.createShare}
                           removeShare={this.props.removeShare}
+                          setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                          setCurrentShare={this.props.setCurrentShare}
                         />
                       </div>
                     </div>
@@ -384,6 +402,8 @@ const mapDispatch = {
   removeShareInSharePlacement,
   removeShare,
   getPlacement,
+  setPageZoneActiveTab,
+  setCurrentShare,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zone));
