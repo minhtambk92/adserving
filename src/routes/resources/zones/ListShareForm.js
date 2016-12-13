@@ -91,7 +91,7 @@ class ListShareForm extends Component {
 
   render() {
     // Open the portal
-    const className = `box box-info list-zone-shared list-zone-share-${this.props.index}`;
+    const className = `box list-zone-shared list-zone-share-${this.props.index}`;
     return (
       <div
         className={className}

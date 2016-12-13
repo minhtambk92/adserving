@@ -113,7 +113,7 @@ class Campaigns extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: LIST OF campaigns */}
-              <div className="box box-info">
+              <div className="box">
                 <div className="box-header with-border">
                   <h3 className="box-title">List Campaign</h3>
                 </div>

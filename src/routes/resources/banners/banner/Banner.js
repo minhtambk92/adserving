@@ -168,7 +168,7 @@ class Banner extends Component {
                   <div className="tab-pane active" id="editBanner">
                     <div className="row">
                       <section className="col-lg-12">
-                        <div className="box box-info">
+                        <div className="box">
                           <div className="box-header with-border">
                             <h3 className="box-title">Change Banner information</h3>
                             <div className="box-tools pull-right">
@@ -197,7 +197,7 @@ class Banner extends Component {
                   <div className="tab-pane" id="optionBanner">
                     <div className="row">
                       <section className="col-lg-12">
-                        <div className="box box-info">
+                        <div className="box">
                           <div className="box-header with-border">
                             <h3 className="box-title">Option</h3>
                             <div className="box-tools pull-right">
@@ -232,7 +232,7 @@ class Banner extends Component {
                         <div className="row">
                           <section className="col-lg-6">
                             {/* BOX: LIST OF Placements */}
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">List Placement</h3>
                               </div>
@@ -258,7 +258,7 @@ class Banner extends Component {
                           </section>
                           <section className="col-lg-6">
                             {/* BOX: LIST OF Placements */}
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">
                                   List Placement Of {this.props.banners.editing ?
@@ -302,7 +302,7 @@ class Banner extends Component {
                             </div>
                           ) : (<div className="col-lg-12">
                             {/* BOX: CREATE */}
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">Create New Placement</h3>
                                 <div className="box-tools pull-right">

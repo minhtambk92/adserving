@@ -87,7 +87,7 @@ class Campaign extends Component {
                     <div className="row">
                       <section className="col-lg-12">
                         {/* BOX: FORM OF CREATE NEW WEBSITE */}
-                        <div className="box box-info">
+                        <div className="box">
                           <div className="box-header with-border">
                             <h3 className="box-title">Change information</h3>
                             <div className="box-tools pull-right">
@@ -119,7 +119,7 @@ class Campaign extends Component {
                         <div className="row">
                           <section className="col-lg-5">
                             {/* BOX: FORM OF CREATE NEW PlacementS */}
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">Create New Placement</h3>
                                 <div className="box-tools pull-right">
@@ -143,7 +143,7 @@ class Campaign extends Component {
                           </section>
                           <section className="col-lg-7">
                             {/* BOX: LIST OF Placements */}
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">List Placement of {
                                   this.props.campaigns.editing ?

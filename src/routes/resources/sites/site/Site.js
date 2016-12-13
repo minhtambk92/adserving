@@ -18,7 +18,7 @@ import { getChannels, createChannel } from '../../../../actions/channels';
 import { setPageZoneActiveTab } from '../../../../actions/pages/zones';
 import { setPageChannelActiveTab } from '../../../../actions/pages/channels';
 import { createShare } from '../../../../actions/shares';
-import { createOptionChannel } from  '../../../../actions/optionChannels'
+import { createOptionChannel } from '../../../../actions/optionChannels'
 import Layout from '../../../../components/Layout';
 import ListZoneOfSite from '../ListZoneOfSite';
 import ListChannelOfSite from '../ListChannelOfSite';
@@ -99,7 +99,7 @@ class Site extends Component {
                     <div className="row">
                       <section className="col-lg-12">
                         {/* BOX: FORM OF CREATE NEW WEBSITE */}
-                        <div className="box box-info">
+                        <div className="box">
                           <div className="box-header with-border">
                             <h3 className="box-title">Change site information</h3>
                             <div className="box-tools pull-right">
@@ -132,7 +132,7 @@ class Site extends Component {
                         <div className="row">
                           <section className="col-lg-5">
                             {/* BOX: FORM OF CREATE A NEW ZONE */}
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">Create New Zone</h3>
                                 <div className="box-tools pull-right">
@@ -155,7 +155,7 @@ class Site extends Component {
                           </section>
                           <section className="col-lg-7">
                             {/* BOX: LIST OF ZONES */}
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">
                                   List zones of Site: {this.props.sites.editing ?
@@ -190,7 +190,7 @@ class Site extends Component {
                         <div className="row">
                           <section className="col-lg-6">
                             {/* BOX: FORM OF CREATE A NEW CHANNEL */}
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">Create New Channel</h3>
                                 <div className="box-tools pull-right">
@@ -213,7 +213,7 @@ class Site extends Component {
                           </section>
                           <section className="col-lg-6">
                             {/* BOX: LIST OF ZONES */}
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">
                                   List channels of Site: {this.props.sites.editing ?
