@@ -410,304 +410,309 @@ class OptionBannerForm extends Component {
   render() {
     return (
       <div>
-        <div className="box-body">
-          {/* /Setting Detail */}
-          <div className="box box-default">
-            <div className="box-header with-border">
-              <h3 className="box-title">Setting</h3>
-              <div className="box-tools pull-right">
-                <button
-                  type="button" className="btn btn-box-tool"
-                  data-widget="collapse"
-                >
-                  <i className="fa fa-minus" />
-                </button>
-              </div>
+        {/* /Setting Detail */}
+        <div className="box box-default">
+          <div className="box-header with-border">
+            <h3 className="box-title">Setting</h3>
+            <div className="box-tools pull-right">
+              <button
+                type="button" className="btn btn-box-tool"
+                data-widget="collapse"
+              >
+                <i className="fa fa-minus" />
+              </button>
             </div>
-            <div className="box-body">
-              <form className="form-horizontal">
+          </div>
+          <div className="box-body">
+            <form className="form-horizontal">
+              <div className="form-group">
+                <label
+                  htmlFor="inputBannerIsIFrame"
+                  className="col-sm-2 control-label"
+                >Count View Banner</label>
+                <div className="col-sm-8">
+                  <ICheck
+                    type="checkbox" id="inputBannerIsCountView" className="form-control"
+                    ref={c => {
+                      this.inputBannerIsCountView = c;
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <label
+                  htmlFor="inputBannerIsFixIE"
+                  className="col-sm-2 control-label"
+                >Fix IE(User for banner fail in IE)</label>
+                <div className="col-sm-8">
+                  <ICheck
+                    type="checkbox" id="inputBannerIsFixIE" className="form-control"
+                    ref={c => {
+                      this.inputBannerIsFixIE = c;
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <label
+                  htmlFor="inputBannerIsDefault"
+                  className="col-sm-2 control-label"
+                >Is Default(Banner default)</label>
+                <div className="col-sm-8">
+                  <ICheck
+                    type="checkbox" id="inputBannerIsDefault" className="form-control"
+                    ref={c => {
+                      this.inputBannerIsDefault = c;
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <label
+                  htmlFor="inputBannerIsRelative"
+                  className="col-sm-2 control-label"
+                >Relative()</label>
+                <div className="col-sm-8">
+                  <ICheck
+                    type="checkbox" id="inputBannerIsRelative" className="form-control"
+                    ref={c => {
+                      this.inputBannerIsRelative = c;
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <label
+                  htmlFor="inputBannerAdStore"
+                  className="col-sm-2 control-label"
+                >URL Ad-Store</label>
+                <div className="col-sm-8">
+                  <input
+                    type="text" className="form-control"
+                    id="inputBannerAdStore" placeholder="1"
+                    defaultValue="rd[timestamp]&rtu=-1"
+                    ref={c => {
+                      this.inputBannerAdStore = c;
+                    }}
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        {/* /Inventory Detail */}
+        <div className="box box-default">
+          <div className="box-header with-border">
+            <h3 className="box-title">Inventory Detail</h3>
+            <div className="box-tools pull-right">
+              <button
+                type="button" className="btn btn-box-tool"
+                data-widget="collapse"
+              >
+                <i className="fa fa-minus" />
+              </button>
+            </div>
+          </div>
+          <div className="box-body">
+            <form className="form-horizontal">
+              {/* /Impressions Booked */}
+              <div className="form-group">
+                <label
+                  htmlFor="inputIsImpressionsBooked"
+                  className="col-sm-2 control-label"
+                >Impressions Booked</label>
+                <div className="col-sm-1">
+                  <ICheck
+                    type="checkbox" id="inputIsImpressionsBooked" className="form-control"
+                    ref={c => {
+                      this.inputIsImpressionsBooked = c;
+                    }}
+                  />
+                </div>
+                <div className="col-sm-9">
+                  Unlimited
+                </div>
+              </div>
+              { this.state.showImpressionsBooked === true ? (
                 <div className="form-group">
                   <label
-                    htmlFor="inputBannerIsIFrame"
+                    htmlFor="inputBannerImpressionsBooked"
                     className="col-sm-2 control-label"
-                  >Count View Banner</label>
+                  >&nbsp;</label>
                   <div className="col-sm-8">
-                    <ICheck
-                      type="checkbox" id="inputBannerIsCountView" className="form-control"
+                    <input
+                      type="number" className="form-control"
+                      id="inputBannerImpressionsBooked" placeholder="1000"
                       ref={c => {
-                        this.inputBannerIsCountView = c;
+                        this.inputBannerImpressionsBooked = c;
                       }}
                     />
                   </div>
                 </div>
-                <div className="form-group">
-                  <label
-                    htmlFor="inputBannerIsFixIE"
-                    className="col-sm-2 control-label"
-                  >Fix IE(User for banner fail in IE)</label>
-                  <div className="col-sm-8">
-                    <ICheck
-                      type="checkbox" id="inputBannerIsFixIE" className="form-control"
-                      ref={c => {
-                        this.inputBannerIsFixIE = c;
-                      }}
-                    />
-                  </div>
+              ) : ('') }
+              {/* /Click Booked */}
+              <div className="form-group">
+                <label
+                  htmlFor="inputIsClicksBooked"
+                  className="col-sm-2 control-label"
+                >Clicks Booked</label>
+                <div className="col-sm-1">
+                  <ICheck
+                    type="checkbox" id="inputIsClicksBooked" className="form-control"
+                    ref={c => {
+                      this.inputIsClicksBooked = c;
+                    }}
+                  />
                 </div>
+                <div className="col-sm-9">Unlimited</div>
+              </div>
+              {this.state.showClicksBooked === true ? (
                 <div className="form-group">
                   <label
-                    htmlFor="inputBannerIsDefault"
+                    htmlFor="inputBannerClicksBooked"
                     className="col-sm-2 control-label"
-                  >Is Default(Banner default)</label>
-                  <div className="col-sm-8">
-                    <ICheck
-                      type="checkbox" id="inputBannerIsDefault" className="form-control"
-                      ref={c => {
-                        this.inputBannerIsDefault = c;
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label
-                    htmlFor="inputBannerIsRelative"
-                    className="col-sm-2 control-label"
-                  >Relative()</label>
-                  <div className="col-sm-8">
-                    <ICheck
-                      type="checkbox" id="inputBannerIsRelative" className="form-control"
-                      ref={c => {
-                        this.inputBannerIsRelative = c;
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label
-                    htmlFor="inputBannerAdStore"
-                    className="col-sm-2 control-label"
-                  >URL Ad-Store</label>
+                  >&nbsp;</label>
                   <div className="col-sm-8">
                     <input
                       type="text" className="form-control"
-                      id="inputBannerAdStore" placeholder="1"
-                      defaultValue="rd[timestamp]&rtu=-1"
+                      id="inputBannerClicksBooked" placeholder="1000"
                       ref={c => {
-                        this.inputBannerAdStore = c;
+                        this.inputBannerClicksBooked = c;
                       }}
                     />
                   </div>
                 </div>
-              </form>
-            </div>
-          </div>
-          {/* /Inventory Detail */}
-          <div className="box box-default">
-            <div className="box-header with-border">
-              <h3 className="box-title">Inventory Detail</h3>
-              <div className="box-tools pull-right">
-                <button
-                  type="button" className="btn btn-box-tool"
-                  data-widget="collapse"
-                >
-                  <i className="fa fa-minus" />
-                </button>
-              </div>
-            </div>
-            <div className="box-body">
-              <form className="form-horizontal">
-                {/* /Impressions Booked */}
-                <div className="form-group">
-                  <label
-                    htmlFor="inputIsImpressionsBooked"
-                    className="col-sm-2 control-label"
-                  >Impressions Booked</label>
-                  <div className="col-sm-1">
-                    <ICheck
-                      type="checkbox" id="inputIsImpressionsBooked" className="form-control"
-                      ref={c => {
-                        this.inputIsImpressionsBooked = c;
-                      }}
-                    />
-                  </div>
-                  <div className="col-sm-9">
-                    Unlimited
-                  </div>
-                </div>
-                { this.state.showImpressionsBooked === true ? (
-                  <div className="form-group">
-                    <label
-                      htmlFor="inputBannerImpressionsBooked"
-                      className="col-sm-2 control-label"
-                    >&nbsp;</label>
-                    <div className="col-sm-8">
-                      <input
-                        type="number" className="form-control"
-                        id="inputBannerImpressionsBooked" placeholder="1000"
-                        ref={c => {
-                          this.inputBannerImpressionsBooked = c;
-                        }}
-                      />
-                    </div>
-                  </div>
-                ) : ('') }
-                {/* /Click Booked */}
-                <div className="form-group">
-                  <label
-                    htmlFor="inputIsClicksBooked"
-                    className="col-sm-2 control-label"
-                  >Clicks Booked</label>
-                  <div className="col-sm-1">
-                    <ICheck
-                      type="checkbox" id="inputIsClicksBooked" className="form-control"
-                      ref={c => {
-                        this.inputIsClicksBooked = c;
-                      }}
-                    />
-                  </div>
-                  <div className="col-sm-9">Unlimited</div>
-                </div>
-                {this.state.showClicksBooked === true ? (
-                  <div className="form-group">
-                    <label
-                      htmlFor="inputBannerClicksBooked"
-                      className="col-sm-2 control-label"
-                    >&nbsp;</label>
-                    <div className="col-sm-8">
-                      <input
-                        type="text" className="form-control"
-                        id="inputBannerClicksBooked" placeholder="1000"
-                        ref={c => {
-                          this.inputBannerClicksBooked = c;
-                        }}
-                      />
-                    </div>
-                  </div>
-                ) : ('')}
-              </form>
-            </div>
-          </div>
-          {/* /Contract Detail */}
-          <div className="box box-default">
-            <div className="box-header with-border">
-              <h3 className="box-title">Contract Detail</h3>
-              <div className="box-tools pull-right">
-                <button
-                  type="button" className="btn btn-box-tool"
-                  data-widget="collapse"
-                >
-                  <i
-                    className="fa fa-minus"
-                  />
-                </button>
-              </div>
-            </div>
-            <div className="box-body">
-              <form className="form-horizontal">
-                <div className="form-group">
-                  <label
-                    htmlFor="inputIsActivationDate"
-                    className="col-sm-2 control-label"
-                  >Activation Date</label>
-                  <div className="col-sm-1">
-                    <ICheck
-                      type="checkbox" id="inputIsActivationDate" className="form-control"
-                      ref={c => {
-                        this.inputIsActivationDate = c;
-                      }}
-                    />
-                  </div>
-                  <div className="col-sm-9">Active Immediately</div>
-                </div>
-                { this.state.showActivationDate === true ? (
-                  <div className="form-group has-feedback">
-                    <label
-                      htmlFor="inputBannerActivationDate"
-                      className="col-sm-2 control-label"
-                    >
-                      &nbsp;
-                    </label>
-                    <div className=" col-sm-8 date">
-                      <span className="fa fa-calendar form-control-feedback" />
-                      {/* /DatePicker */}
-                      <DatePicker
-                        id="inputBannerActivationDate"
-                        type="text"
-                        className="form-control pull-right"
-                        name="start"
-                        ref={c => {
-                          this.inputBannerActivationDate = c;
-                        }}
-                      />
-                    </div>
-                  </div>) : ('')}
-                <div className="form-group">
-                  <label
-                    htmlFor="inputIsExpirationDate"
-                    className="col-sm-2 control-label"
-                  >Expiration Date</label>
-                  <div className="col-sm-1">
-                    <ICheck
-                      type="checkbox" id="inputIsExpirationDate" className="form-control"
-                      ref={c => {
-                        this.inputIsExpirationDate = c;
-                      }}
-                    />
-                  </div>
-                  <div className="col-sm-9">Dont Expire</div>
-                </div>
-                {this.state.showExpirationDate === true ? (
-                  <div className="form-group has-feedback">
-                    <label
-                      htmlFor="inputBannerExpirationDate"
-                      className="col-sm-2 control-label"
-                    >
-                      &nbsp;
-                    </label>
-                    <div className=" col-sm-8 date">
-                      <span className="fa fa-calendar form-control-feedback" />
-                      {/* /DatePicker */}
-                      <DatePicker
-                        id="inputBannerExpirationDate"
-                        type="text"
-                        className="form-control pull-right"
-                        name="end"
-                        ref={c => {
-                          this.inputBannerExpirationDate = c;
-                        }}
-                      />
-                    </div>
-                  </div>
-                ) : ('')}
-                <div className="form-group">
-                  <div
-                    id="addNewLink"
-                    className="col-sm-6"
-                  > Add Link Click and Impressions
-                  </div>
-                </div>
-                <div className="col-sm-12" id="link-click-impression">
-                  { this.props.banner && this.props.banner.clickImpression
-                  && this.props.banner.clickImpression.map((clickImpression, index) => (
-                    <ClickImpressionForm
-                      key={clickImpression.id}
-                      id={clickImpression.id}
-                      index={index + 1}
-                      clickUrl={clickImpression.clickUrl}
-                      impressionUrl={clickImpression.impressionUrl}
-                    />))}
-                  {this.state.arrClickImpression && this.state.arrClickImpression.map((count) => (
-                    <ClickImpressionForm
-                      key={count}
-                      index={count}
-                    />))}
-                  {this.state.string}
-                </div>
-              </form>
-            </div>
+              ) : ('')}
+            </form>
           </div>
         </div>
-        <div className="box-footer">
+        {/* /Contract Detail */}
+        <div className="box box-default">
+          <div className="box-header with-border">
+            <h3 className="box-title">Contract Detail</h3>
+            <div className="box-tools pull-right">
+              <button
+                type="button" className="btn btn-box-tool"
+                data-widget="collapse"
+              >
+                <i
+                  className="fa fa-minus"
+                />
+              </button>
+            </div>
+          </div>
+          <div className="box-body">
+            <form className="form-horizontal">
+              <div className="form-group">
+                <label
+                  htmlFor="inputIsActivationDate"
+                  className="col-sm-2 control-label"
+                >Activation Date</label>
+                <div className="col-sm-1">
+                  <ICheck
+                    type="checkbox" id="inputIsActivationDate" className="form-control"
+                    ref={c => {
+                      this.inputIsActivationDate = c;
+                    }}
+                  />
+                </div>
+                <div className="col-sm-9">Active Immediately</div>
+              </div>
+              { this.state.showActivationDate === true ? (
+                <div className="form-group has-feedback">
+                  <label
+                    htmlFor="inputBannerActivationDate"
+                    className="col-sm-2 control-label"
+                  >
+                    &nbsp;
+                  </label>
+                  <div className=" col-sm-8 date">
+                    <span className="fa fa-calendar form-control-feedback" />
+                    {/* /DatePicker */}
+                    <DatePicker
+                      id="inputBannerActivationDate"
+                      type="text"
+                      className="form-control pull-right"
+                      name="start"
+                      ref={c => {
+                        this.inputBannerActivationDate = c;
+                      }}
+                    />
+                  </div>
+                </div>) : ('')}
+              <div className="form-group">
+                <label
+                  htmlFor="inputIsExpirationDate"
+                  className="col-sm-2 control-label"
+                >Expiration Date</label>
+                <div className="col-sm-1">
+                  <ICheck
+                    type="checkbox" id="inputIsExpirationDate" className="form-control"
+                    ref={c => {
+                      this.inputIsExpirationDate = c;
+                    }}
+                  />
+                </div>
+                <div className="col-sm-9">Dont Expire</div>
+              </div>
+              {this.state.showExpirationDate === true ? (
+                <div className="form-group has-feedback">
+                  <label
+                    htmlFor="inputBannerExpirationDate"
+                    className="col-sm-2 control-label"
+                  >
+                    &nbsp;
+                  </label>
+                  <div className=" col-sm-8 date">
+                    <span className="fa fa-calendar form-control-feedback" />
+                    {/* /DatePicker */}
+                    <DatePicker
+                      id="inputBannerExpirationDate"
+                      type="text"
+                      className="form-control pull-right"
+                      name="end"
+                      ref={c => {
+                        this.inputBannerExpirationDate = c;
+                      }}
+                    />
+                  </div>
+                </div>
+              ) : ('')}
+
+              <div className="col-sm-12" id="link-click-impression">
+                {this.props.banner && this.props.banner.clickImpression &&
+                this.props.banner.clickImpression.map((clickImpression, index) => (
+                  <ClickImpressionForm
+                    key={clickImpression.id}
+                    id={clickImpression.id}
+                    index={index + 1}
+                    clickUrl={clickImpression.clickUrl}
+                    impressionUrl={clickImpression.impressionUrl}
+                  />
+                ))}
+                {this.state.arrClickImpression && this.state.arrClickImpression.map((count) => (
+                  <ClickImpressionForm
+                    key={count}
+                    index={count}
+                  />
+                ))}
+                {this.state.string}
+              </div>
+
+              <div className="clearfix">
+                <button
+                  type="button"
+                  id="addNewLink"
+                  className="btn btn-primary"
+                >Add Tracking URL</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <hr />
+
+        <div className="clearfix">
           <Link
             to="/resource/banner"
             className="btn btn-app pull-right"

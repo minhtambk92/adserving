@@ -28,7 +28,7 @@ import CreateBannerForm from './CreateBannerForm';
 import FilterBannersForm from './FilterBannersForm';
 import s from './Banners.css';
 
-const pageTitle = 'Home';
+const pageTitle = 'Banners';
 const pageSubTitle = 'Control panel';
 
 class Banners extends Component {

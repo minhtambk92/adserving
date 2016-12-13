@@ -33,7 +33,7 @@ class ClickImpressionForm extends Component {
           <div className="col-sm-8">
             <input
               type="text" className="form-control"
-              id={`inputLinkClick-${this.props.index}`} placeholder="1000"
+              id={`inputLinkClick-${this.props.index}`} placeholder="http://..."
               defaultValue={this.props.clickUrl}
             />
           </div>
@@ -46,7 +46,7 @@ class ClickImpressionForm extends Component {
           <div className="col-sm-8">
             <input
               type="text" className="form-control"
-              id={`inputLinkImpression-${this.props.index}`} placeholder="1000"
+              id={`inputLinkImpression-${this.props.index}`} placeholder="http://..."
               defaultValue={this.props.impressionUrl}
             />
           </div>
