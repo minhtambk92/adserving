@@ -109,11 +109,11 @@ class UpdateChannelForm extends Component {
 
         <div className="clearfix">
           <Link
-            to="/resource/Channel"
+            to="/resource/channel"
             className="btn btn-app pull-right"
           ><i className="fa fa-undo" /> Cancel</Link>
           <Link
-            to="/resource/Channel"
+            to="/resource/channel"
             className="btn btn-app pull-right"
             onClick={event => this.deleteChannel(event)}
           ><i className="fa fa-trash-o" /> Delete</Link>

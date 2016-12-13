@@ -511,7 +511,7 @@ class Channel extends Component {
 
                     <div className="post clearfix">
                       <Link
-                        to="/resource/Channel"
+                        to="/resource/channel"
                         className="btn btn-app pull-right"
                       ><i className="fa fa-undo" /> Cancel</Link>
                       <Link
