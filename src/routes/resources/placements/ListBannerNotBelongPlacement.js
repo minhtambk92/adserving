@@ -14,6 +14,7 @@ class ListBannerNotBelongPlacement extends Component {
     createPlacementBanner: PropTypes.func,
     getBanners: PropTypes.func,
   };
+
   dataTableOptions() {
     return [{
       data: 'id',
@@ -52,6 +53,7 @@ class ListBannerNotBelongPlacement extends Component {
       },
     }];
   }
+
   /* eslint-disable max-len */
   pushBannerToPlacement(bannerId) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const placementId = this.props.placementId;
@@ -63,6 +65,7 @@ class ListBannerNotBelongPlacement extends Component {
       });
     }
   }
+
   /* eslint-enable max-len */
   render() {
     let data = [];

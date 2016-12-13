@@ -11,7 +11,12 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getPlacements, createPlacement, getPlacementsFilters, setPlacementsFilters } from '../../../actions/placements';
+import {
+  getPlacements,
+  createPlacement,
+  getPlacementsFilters,
+  setPlacementsFilters
+} from '../../../actions/placements';
 import { getCampaigns } from '../../../actions/campaigns';
 import { setPagePlacementActiveTab } from '../../../actions/pages/placements';
 import Layout from '../../../components/Layout';
@@ -24,6 +29,7 @@ const pageTitle = 'Placements';
 const pageSubTitle = 'Control panel';
 
 class Placements extends Component {
+
   static propTypes = {
     getPlacementsFilters: PropTypes.func,
     setPlacementsFilters: PropTypes.func,
@@ -44,6 +50,7 @@ class Placements extends Component {
   getFilteredPlacements() {
     return _.filter(this.props.placements.list, placement => this.isFiltered(placement));
   }
+
   isFiltered(placement) {
     const filters = this.props.placements.filters;
 
@@ -137,6 +144,7 @@ class Placements extends Component {
   }
 
 }
+
 const mapState = (state) => ({
   placements: state.placements,
   campaigns: state.campaigns,

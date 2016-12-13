@@ -35,7 +35,7 @@ class FilterPlacementsForm extends Component {
                 }}
                 onChange={event => this.onFilterChange(event, 'campaignId')}
                 defaultValue={this.props.filters &&
-                          this.props.filters.campaignId}
+                this.props.filters.campaignId}
               >
                 <option value="null">All campaigns</option>
                 {this.props.campaigns &&
@@ -47,6 +47,7 @@ class FilterPlacementsForm extends Component {
               </select>
             </div>
           </div>
+
           <div className="form-group">
             <label
               htmlFor="inputPlacementsFilterStatus"
@@ -60,7 +61,7 @@ class FilterPlacementsForm extends Component {
                 }}
                 onChange={event => this.onFilterChange(event, 'status')}
                 defaultValue={this.props.filters &&
-                          this.props.filters.status}
+                this.props.filters.status}
               >
                 <option value="null">All states</option>
                 <option value="active">Active</option>

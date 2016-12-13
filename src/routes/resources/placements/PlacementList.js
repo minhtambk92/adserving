@@ -56,7 +56,7 @@ class PlacementList extends Component {
   }
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const columns = [{
+    return [{
       data: 'id',
       orderable: false,
       createdCell: (cell, cellData) => {
@@ -80,10 +80,7 @@ class PlacementList extends Component {
       },
     }, {
       data: null,
-      render: (data, type, row) => {
-        const size = `${row.sizeWidth} x ${row.sizeHeight}`;
-        return size;
-      },
+      render: (data, type, row) => `${row.sizeWidth} x ${row.sizeHeight}`,
     }, {
       data: 'startTime',
       render: data => (data ? moment(new Date(data)).format('L') : ''),
@@ -109,7 +106,6 @@ class PlacementList extends Component {
         >Duplicate</Link>, cell);
       },
     }];
-    return columns;
   }
 
   render() {

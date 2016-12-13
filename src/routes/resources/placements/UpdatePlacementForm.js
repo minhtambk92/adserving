@@ -39,6 +39,7 @@ class UpdatePlacementForm extends Component {
     this.inputCampaign.value = campaignId;
     this.inputPlacementStatus.value = status;
   }
+
   updatePlacement() {
     const name = this.inputPlacementName.value;
     const sizeWidth = this.inputPlacementSizeWidth.value;
@@ -54,6 +55,7 @@ class UpdatePlacementForm extends Component {
     if (name && name !== this.props.placement.name) {
       placement.name = name;
     }
+
     if (startTime && startTime !== this.props.placement.startTime) {
       placement.startTime = startTime;
     }
@@ -61,6 +63,7 @@ class UpdatePlacementForm extends Component {
     if (endTime && endTime !== this.props.placement.endTime) {
       placement.endTime = endTime;
     }
+
     if (weight && weight !== this.props.placement.weight) {
       placement.weight = weight;
     }
@@ -68,18 +71,23 @@ class UpdatePlacementForm extends Component {
     if (description && description !== this.props.placement.description) {
       placement.description = description;
     }
+
     if (sizeWidth && sizeWidth !== this.props.placement.sizeWidth) {
       placement.sizeWidth = sizeWidth;
     }
+
     if (sizeHeight && sizeHeight !== this.props.placement.sizeHeight) {
       placement.sizeHeight = sizeHeight;
     }
+
     if (campaignId && campaignId !== this.props.placement.campaignId) {
       placement.campaignId = campaignId;
     }
+
     if (status && status !== this.props.placement.status) {
       placement.status = status;
     }
+
     if (moment(new Date(startTime)).format('x') < moment(new Date(endTime)).format('x')) {
       this.props.updatePlacement(placement).then(() => {
         this.props.getPlacement(this.props.placementId);
@@ -114,7 +122,8 @@ class UpdatePlacementForm extends Component {
               />
             </div>
           </div>
-          <div className="form-group has-feedback">
+
+          <div className="form-group">
             <label htmlFor="inputCampaign" className="col-sm-2 control-label">Campaign</label>
             <div className="col-sm-10">
               <select
@@ -134,7 +143,8 @@ class UpdatePlacementForm extends Component {
               </select>
             </div>
           </div>
-          <div className="form-group has-feedback">
+
+          <div className="form-group">
             <label
               htmlFor="inputPlacementStartTime" className="col-sm-2 control-label"
             >
@@ -151,7 +161,8 @@ class UpdatePlacementForm extends Component {
               />
             </div>
           </div>
-          <div className="form-group has-feedback">
+
+          <div className="form-group">
             <label
               htmlFor="inputPlacementEndTime" className="col-sm-2 control-label"
             >
@@ -183,6 +194,7 @@ class UpdatePlacementForm extends Component {
               />
             </div>
           </div>
+
           <div className="form-group">
             <label htmlFor="inputPlacementSizeHeight" className="col-sm-2 control-label">
               Size (Height)
@@ -197,6 +209,7 @@ class UpdatePlacementForm extends Component {
               />
             </div>
           </div>
+
           <div className="form-group">
             <label
               htmlFor="inputPlacementWeight"
@@ -212,6 +225,7 @@ class UpdatePlacementForm extends Component {
               />
             </div>
           </div>
+
           <div className="form-group">
             <label
               htmlFor="inputPlacementStatus"
@@ -229,6 +243,7 @@ class UpdatePlacementForm extends Component {
               </select>
             </div>
           </div>
+
           <div className="form-group">
             <label
               htmlFor="inputPlacementDescription"
@@ -246,6 +261,7 @@ class UpdatePlacementForm extends Component {
           </div>
         </div>
         {/* /.box-body */}
+
         <div className="box-footer">
           <Link
             to="/resource/placement"

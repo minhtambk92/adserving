@@ -50,6 +50,7 @@ class ListBannerOfPlacement extends Component {
     const clicksBooked = data.clicksBooked;
     const activationDate = data.activationDate;
     const expirationDate = data.expirationDate;
+
     if (name && keyword && width && description && type && channelId) {
       this.props.createBanner({
         name,
@@ -83,6 +84,7 @@ class ListBannerOfPlacement extends Component {
         channelId,
       }).then(() => {
         const bannerId = this.props.banners.list[0].id;
+
         if (data.placements.length > 0) {
           const arrPlacement = data.placements;
           for (let i = 0; i < arrPlacement.length; i += 1) {
@@ -92,6 +94,7 @@ class ListBannerOfPlacement extends Component {
             });
           }
         }
+
         if (data.clickImpression.length > 0) {
           const arrClickImpressions = data.clickImpression;
           for (let j = 0; j < arrClickImpressions.length; j += 1) {
