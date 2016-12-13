@@ -90,6 +90,7 @@ class CreateAdvertiserForm extends Component {
               />
             </div>
           </div>
+
           {/* contact */}
           <div className="form-group">
             <label
@@ -106,6 +107,7 @@ class CreateAdvertiserForm extends Component {
               />
             </div>
           </div>
+
           {/* email */}
           <div className="form-group">
             <label
@@ -122,6 +124,7 @@ class CreateAdvertiserForm extends Component {
               />
             </div>
           </div>
+
           {/* isEmailStatus */}
           <div className="form-group">
             <div className="col-sm-2">&nbsp;</div>
@@ -138,6 +141,7 @@ class CreateAdvertiserForm extends Component {
               className="col-sm-6"
             >Email when a campaign is automatically activated/deactivated</label>
           </div>
+
           {/* isEmailReport */}
           <div className="form-group">
             <div className="col-sm-2">&nbsp;</div>
@@ -154,6 +158,7 @@ class CreateAdvertiserForm extends Component {
               className="col-sm-6"
             >Email campaign delivery reports</label>
           </div>
+
           {/* reportInterval */}
           <div className="form-group">
             <div className="col-sm-2">&nbsp;</div>
@@ -171,6 +176,7 @@ class CreateAdvertiserForm extends Component {
               className="col-sm-6"
             >Number of days between campaign delivery reports</label>
           </div>
+
           {/* status */}
           <div className="form-group">
             <label
@@ -189,6 +195,7 @@ class CreateAdvertiserForm extends Component {
               </select>
             </div>
           </div>
+
           {/* description */}
           <div className="form-group">
             <label
@@ -206,6 +213,7 @@ class CreateAdvertiserForm extends Component {
             </div>
           </div>
         </div>
+
         {/* /.box-body */}
         <div className="box-footer">
           <Link

@@ -103,6 +103,8 @@ class CreateCampaignForm extends Component {
     return (
       <form className="form-horizontal">
         <div className="box-body">
+
+          {/* Name */}
           <div className="form-group">
             <label
               htmlFor="inputCampaignName" className="col-sm-3 control-label"
@@ -117,6 +119,8 @@ class CreateCampaignForm extends Component {
               />
             </div>
           </div>
+
+          {/* AdvertiserId */}
           { this.props.advertiserId ? ('') : (
             <div className="form-group">
               <label htmlFor="inputAdvertiser" className="col-sm-3 control-label">Advertiser</label>
@@ -139,7 +143,9 @@ class CreateCampaignForm extends Component {
               </div>
             </div>
           )}
-          <div className="form-group has-feedback">
+
+          {/* Start Time */}
+          <div className="form-group ">
             <label
               htmlFor="inputCampaignStartTime" className="col-sm-3 control-label"
             >
@@ -156,7 +162,9 @@ class CreateCampaignForm extends Component {
               />
             </div>
           </div>
-          <div className="form-group has-feedback">
+
+          {/* EndTime */}
+          <div className="form-group ">
             <label
               htmlFor="inputCampaignEndTime"
               className="col-sm-3 control-label"
@@ -174,6 +182,8 @@ class CreateCampaignForm extends Component {
               />
             </div>
           </div>
+
+          {/* Revenue Information */}
           <div className="form-group">
             <label
               htmlFor="inputCampaignRevenueType"
@@ -195,6 +205,7 @@ class CreateCampaignForm extends Component {
               </select>
             </div>
           </div>
+
           {/* /.SHOW CPM */}
           {this.state.showCPM === true ? (
             <div className="typeCPM">
@@ -225,6 +236,8 @@ class CreateCampaignForm extends Component {
                 </div>
               </div>
             </div>) : ('')}
+
+          {/* Total Views */}
           <div className="form-group">
             <label
               htmlFor="inputCampaignViews"
@@ -240,6 +253,8 @@ class CreateCampaignForm extends Component {
               />
             </div>
           </div>
+
+          {/* Views/Session */}
           <div className="form-group">
             <label htmlFor="inputCampaignViewPerSession" className="col-sm-3 control-label">Views/Session</label>
             <div className="col-sm-9">
@@ -252,6 +267,8 @@ class CreateCampaignForm extends Component {
               />
             </div>
           </div>
+
+          {/* Time reset */}
           <div className="form-group">
             <label htmlFor="inputCampaignTimeResetViewCount" className="col-sm-3 control-label">Time reset view(h)</label>
             <div className="col-sm-9">
@@ -265,6 +282,8 @@ class CreateCampaignForm extends Component {
               />
             </div>
           </div>
+
+          {/* Weight */}
           <div className="form-group">
             <label
               htmlFor="inputCampaignWeight"
@@ -280,6 +299,8 @@ class CreateCampaignForm extends Component {
               />
             </div>
           </div>
+
+          {/* Status */}
           <div className="form-group">
             <label
               htmlFor="inputCampaignStatus"
@@ -298,6 +319,7 @@ class CreateCampaignForm extends Component {
             </div>
           </div>
 
+          {/* Description */}
           <div className="form-group">
             <label
               htmlFor="inputCampaignDescription"
@@ -314,6 +336,7 @@ class CreateCampaignForm extends Component {
             </div>
           </div>
         </div>
+
         {/* /.box-body */}
         <div className="box-footer">
           <Link

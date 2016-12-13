@@ -98,6 +98,8 @@ class UpdateAdvertiserForm extends Component {
     return (
       <form className="form-horizontal">
         <div className="box-body">
+
+          {/* Name */}
           <div className="form-group">
             <label
               htmlFor="inputAdvertiserName"
@@ -113,6 +115,8 @@ class UpdateAdvertiserForm extends Component {
               />
             </div>
           </div>
+
+          {/* Contact */}
           <div className="form-group">
             <label
               htmlFor="inputAdvertiserContact" className="col-sm-2 control-label"
@@ -127,6 +131,8 @@ class UpdateAdvertiserForm extends Component {
               />
             </div>
           </div>
+
+          {/* Email */}
           <div className="form-group">
             <label
               htmlFor="inputAdvertiserEmail"
@@ -142,6 +148,7 @@ class UpdateAdvertiserForm extends Component {
               />
             </div>
           </div>
+
           {/* isEmailStatus */}
           <div className="form-group">
             <div className="col-sm-2">&nbsp;</div>
@@ -158,6 +165,7 @@ class UpdateAdvertiserForm extends Component {
               className="col-sm-6"
             >Email when a campaign is automatically activated/deactivated</label>
           </div>
+
           {/* isEmailReport */}
           <div className="form-group">
             <div className="col-sm-2">&nbsp;</div>
@@ -174,6 +182,7 @@ class UpdateAdvertiserForm extends Component {
               className="col-sm-6"
             >Email campaign delivery reports</label>
           </div>
+
           {/* reportInterval */}
           <div className="form-group">
             <div className="col-sm-2">&nbsp;</div>
@@ -191,6 +200,8 @@ class UpdateAdvertiserForm extends Component {
               className="col-sm-6"
             >Number of days between campaign delivery reports</label>
           </div>
+
+          {/* Status */}
           <div className="form-group">
             <label
               htmlFor="inputAdvertiserStatus"
@@ -208,6 +219,8 @@ class UpdateAdvertiserForm extends Component {
               </select>
             </div>
           </div>
+
+          {/* Description */}
           <div className="form-group">
             <label
               htmlFor="inputAdvertiserDescription"
