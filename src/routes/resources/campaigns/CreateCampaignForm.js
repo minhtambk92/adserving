@@ -201,7 +201,7 @@ class CreateCampaignForm extends Component {
               <div className="form-group">
                 <div className="col-sm-3">&nbsp;</div>
                 <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Expire Value CPM</label>
-                <div className="col-sm-7">
+                <div className="col-sm-6">
                   <input
                     type="number" className="form-control" id="inputCampaignExpireValueCPM"
                     placeholder="1000"
@@ -214,7 +214,7 @@ class CreateCampaignForm extends Component {
               <div className="form-group">
                 <div className="col-sm-3">&nbsp;</div>
                 <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Max CPM per Day</label>
-                <div className="col-sm-7">
+                <div className="col-sm-6">
                   <input
                     type="number" className="form-control" id="inputCampaignMaxCPMPerDay"
                     placeholder="1000"

@@ -135,7 +135,7 @@ class BannerList extends Component {
       },
     }, {
       data: null,
-      render: (data, type, row) => `${row.width}px x ${row.height}px`,
+      render: (data, type, row) => `${row.width} x ${row.height}`,
     }, {
       data: null,
       orderable: false,
