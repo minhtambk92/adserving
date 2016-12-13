@@ -87,28 +87,14 @@ class Campaign extends Component {
                     <div className="row">
                       <section className="col-lg-12">
                         {/* BOX: FORM OF CREATE NEW WEBSITE */}
-                        <div className="box box-info">
-                          <div className="box-header with-border">
-                            <h3 className="box-title">Change information</h3>
-                            <div className="box-tools pull-right">
-                              <button
-                                type="button" className="btn btn-box-tool"
-                                data-widget="collapse"
-                              >
-                                <i className="fa fa-minus" />
-                              </button>
-                            </div>
-                          </div>
-                          {/* /.box-header */}
-                          <UpdateCampaignForm
-                            campaign={this.props.campaigns && this.props.campaigns.editing}
-                            updateCampaign={this.props.updateCampaign}
-                            advertisers={this.props.advertisers && this.props.advertisers.list}
-                            deleteCampaign={this.props.deleteCampaign}
-                            campaignId={this.props.campaignId}
-                            getCampaign={this.props.getCampaign}
-                          />
-                        </div>
+                        <UpdateCampaignForm
+                          campaign={this.props.campaigns && this.props.campaigns.editing}
+                          updateCampaign={this.props.updateCampaign}
+                          advertisers={this.props.advertisers && this.props.advertisers.list}
+                          deleteCampaign={this.props.deleteCampaign}
+                          campaignId={this.props.campaignId}
+                          getCampaign={this.props.getCampaign}
+                        />
                         {/* /.col */}
                       </section>
                     </div>
@@ -119,7 +105,7 @@ class Campaign extends Component {
                         <div className="row">
                           <section className="col-lg-5">
                             {/* BOX: FORM OF CREATE NEW PlacementS */}
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">Create New Placement</h3>
                                 <div className="box-tools pull-right">
@@ -143,7 +129,7 @@ class Campaign extends Component {
                           </section>
                           <section className="col-lg-7">
                             {/* BOX: LIST OF Placements */}
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">List Placement of {
                                   this.props.campaigns.editing ?

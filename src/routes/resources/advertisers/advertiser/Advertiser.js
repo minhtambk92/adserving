@@ -95,28 +95,13 @@ class Advertiser extends Component {
                   <div className="active tab-pane" id="editAdvertiser">
                     <div className="row">
                       <section className="col-lg-12">
-                        {/* BOX: FORM OF CREATE NEW WEBSITE */}
-                        <div className="box box-info">
-                          <div className="box-header with-border">
-                            <h3 className="box-title">Change Advertiser information</h3>
-                            <div className="box-tools pull-right">
-                              <button
-                                type="button" className="btn btn-box-tool"
-                                data-widget="collapse"
-                              ><i className="fa fa-minus" /></button>
-                            </div>
-                          </div>
-                          {/* /.box-header */}
-                          {/* form start */}
-                          <UpdateAdvertiserForm
-                            advertiser={this.props.advertisers && this.props.advertisers.editing}
-                            updateAdvertiser={this.props.updateAdvertiser}
-                            deleteAdvertiser={this.props.deleteAdvertiser}
-                            advertiserId={this.props.advertiserId}
-                            getAdvertiser={this.props.getAdvertiser}
-                          />
-                        </div>
-                        {/* /.col */}
+                        <UpdateAdvertiserForm
+                          advertiser={this.props.advertisers && this.props.advertisers.editing}
+                          updateAdvertiser={this.props.updateAdvertiser}
+                          deleteAdvertiser={this.props.deleteAdvertiser}
+                          advertiserId={this.props.advertiserId}
+                          getAdvertiser={this.props.getAdvertiser}
+                        />
                       </section>
                     </div>
                   </div>
@@ -125,7 +110,7 @@ class Advertiser extends Component {
                       <section className="col-lg-12">
                         <div className="row">
                           <div className="col-lg-5">
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">Add New Campaign</h3>
                                 <div className="box-tools pull-right">
@@ -146,7 +131,7 @@ class Advertiser extends Component {
                           </div>
                           <div className="col-lg-7">
                             {/* BOX: LIST OF campaigns */}
-                            <div className="box box-info">
+                            <div className="box">
                               <div className="box-header with-border">
                                 <h3 className="box-title">Campaigns of {
                                   pageTitle

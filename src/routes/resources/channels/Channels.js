@@ -92,7 +92,7 @@ class Channels extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE NEW WEB Channel */}
-              <div className="box box-info collapsed-box">
+              <div className="box collapsed-box">
                 <div className="box-header with-border">
                   <h3 className="box-title">Add new Channel</h3>
                   <div className="box-tools pull-right">

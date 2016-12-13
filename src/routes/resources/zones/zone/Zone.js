@@ -198,7 +198,7 @@ class Zone extends Component {
                     <div className="row">
                       <div className="col-lg-12">
                         {/* BOX: FORM OF CREATE A NEW ZONE */}
-                        <div className="box box-info">
+                        <div className="box">
                           <div className="box-header with-border">
                             <h3 className="box-title">Change Zone Information</h3>
                             <div className="box-tools pull-right">
@@ -228,7 +228,7 @@ class Zone extends Component {
                     <div className="row">
                       <div className="col-lg-12">
                         {/* BOX: FORM OF CREATE A NEW ZONE */}
-                        <div className="box box-info">
+                        <div className="box">
                           <div className="box-header with-border">
                             <h3 className="box-title">Tag Setting</h3>
                             <div className="box-tools pull-right">
@@ -312,7 +312,7 @@ class Zone extends Component {
                           <div className="row">
                             <section className="col-lg-6">
                               {/* BOX: LIST OF Placements */}
-                              <div className="box box-info">
+                              <div className="box">
                                 <div className="box-header with-border">
                                   <h3 className="box-title">
                                     List Placement Not Belong To {share.name}</h3>
@@ -339,7 +339,7 @@ class Zone extends Component {
                             </section>
                             <section className="col-lg-6">
                               {/* BOX: LIST OF Placements */}
-                              <div className="box box-info">
+                              <div className="box">
                                 <div className="box-header with-border">
                                   <h3 className="box-title">
                                     List placements of {share.name}
