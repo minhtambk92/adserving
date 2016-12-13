@@ -65,6 +65,14 @@ class Banner extends Component {
 
   };
 
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      createPlacement: false,
+    };
+  }
+
   componentWillMount() {
     this.props.getBanner(this.props.bannerId);
     this.props.getCampaigns();
@@ -114,6 +122,14 @@ class Banner extends Component {
       }
     }
     return false;
+  }
+
+  createPlacementInBanner() {
+    this.setState({ createPlacement: true });
+  }
+
+  hideCreatePlacement() {
+    this.setState({ createPlacement: false });
   }
 
   render() {
@@ -268,7 +284,23 @@ class Banner extends Component {
                           </section>
                         </div>
                         <div className="row">
-                          <section className="col-lg-6">
+                          {this.state.createPlacement === false ? (
+                            <div className="form-group">
+                              <div className="col-sm-2">
+                                <button
+                                  type="button"
+                                  id="createBannerInPlacement"
+                                  onClick={(event) => this.createPlacementInBanner(event)}
+                                  className="btn btn-block btn-info btn-sm"
+                                >
+                                  Create Placement
+                                </button>
+                              </div>
+                              <div className="col-sm-10">
+                                &nbsp;
+                              </div>
+                            </div>
+                          ) : (<div className="col-lg-12">
                             {/* BOX: CREATE */}
                             <div className="box box-info">
                               <div className="box-header with-border">
@@ -276,8 +308,8 @@ class Banner extends Component {
                                 <div className="box-tools pull-right">
                                   <button
                                     type="button" className="btn btn-box-tool"
-                                    data-widget="collapse"
-                                  ><i className="fa fa-minus" /></button>
+                                    onClick={event => this.hideCreatePlacement(event)}
+                                  ><i className="fa fa-remove" /></button>
                                 </div>
                               </div>
                               {/* /.box-header */}
@@ -293,7 +325,7 @@ class Banner extends Component {
                               />
                             </div>
                             {/* /.col */}
-                          </section>
+                          </div>)}
                         </div>
                       </div>
                     </div>
