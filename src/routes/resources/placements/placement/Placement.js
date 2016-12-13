@@ -167,7 +167,7 @@ class Placement extends Component {
                     <div className="row">
                       <div className="col-lg-6">
                         {/* BOX: LIST OF Placements */}
-                        <div className="box box-info">
+                        <div className="box">
                           <div className="box-header with-border">
                             <h3 className="box-title">List All Banner</h3>
                           </div>
@@ -193,7 +193,7 @@ class Placement extends Component {
 
                       <div className="col-lg-6">
                         {/* BOX: LIST OF Placements */}
-                        <div className="box box-info">
+                        <div className="box">
                           <div className="box-header with-border">
                             <h3 className="box-title">List Banner Of {
                               this.props.placements.editing ?
@@ -232,14 +232,14 @@ class Placement extends Component {
                             type="button"
                             id="createBannerInPlacement"
                             onClick={(event) => this.createBannerInPlacement(event)}
-                            className="btn btn-block btn-info"
+                            className="btn btn-block btn-primary"
                           >
                             Create Banner
                           </button>
                         </div>
                       ) : (
                         <div className="col-lg-12">
-                          <div className="box box-info">
+                          <div className="box">
                             <div className="box-header with-border">
                               <h3 className="box-title">Create new banner</h3>
                               <div className="box-tools pull-right">
