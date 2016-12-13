@@ -141,164 +141,133 @@ class Placement extends Component {
               <div className="nav-tabs-custom placement-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
-                    <a href="#editPlacement" data-toggle="tab">
-                      Edit Placement
-                    </a>
+                    <a href="#editPlacement" data-toggle="tab">Edit Placement</a>
                   </li>
                   <li>
-                    <a href="#addBanner" data-toggle="tab">
-                      Add Banner
-                    </a>
+                    <a href="#addBanner" data-toggle="tab">Add Banner</a>
                   </li>
                 </ul>
                 <div className="tab-content">
                   <div className="active tab-pane" id="editPlacement">
-                    <div className="row">
-                      <section className="col-lg-12">
-                        {/* BOX: FORM OF CREATE NEW WEBSITE */}
-                        <div className="box box-info">
-                          <div className="box-header with-border">
-                            <h3 className="box-title">Change Placement information</h3>
-                            <div className="box-tools pull-right">
-                              <button
-                                type="button" className="btn btn-box-tool"
-                                data-widget="collapse"
-                              >
-                                <i className="fa fa-minus" />
-                              </button>
-                            </div>
-                          </div>
-                          {/* /.box-header */}
-                          <UpdatePlacementForm
-                            placement={this.props.placements && this.props.placements.editing}
-                            updatePlacement={this.props.updatePlacement}
-                            deletePlacement={this.props.deletePlacement}
-                            placementId={this.props.placementId}
-                            getPlacement={this.props.getPlacement}
-                            campaigns={this.props.campaigns && this.props.campaigns.list}
-                            removePlacement={this.props.removePlacement}
-                            /* eslint-disable max-len */
-                            removePlacementInSharePlacement={this.props.removePlacementInSharePlacement}
-                            /* eslint-enable max-len */
-                          />
-                        </div>
-                        {/* /.col */}
-                      </section>
-                    </div>
+                    <UpdatePlacementForm
+                      placement={this.props.placements && this.props.placements.editing}
+                      updatePlacement={this.props.updatePlacement}
+                      deletePlacement={this.props.deletePlacement}
+                      placementId={this.props.placementId}
+                      getPlacement={this.props.getPlacement}
+                      campaigns={this.props.campaigns && this.props.campaigns.list}
+                      removePlacement={this.props.removePlacement}
+                      /* eslint-disable max-len */
+                      removePlacementInSharePlacement={this.props.removePlacementInSharePlacement}
+                      /* eslint-enable max-len */
+                    />
                   </div>
+
                   <div className="tab-pane" id="addBanner">
                     <div className="row">
-                      <div className="col-lg-12">
-                        <div className="row">
-                          <section className="col-lg-6">
-                            {/* BOX: LIST OF Placements */}
-                            <div className="box box-info">
-                              <div className="box-header with-border">
-                                <h3 className="box-title">List All Banner</h3>
-                              </div>
-                              {/* /.box-header */}
-                              <div className="box-body">
-                                <ListBannerNotBelongPlacement
-                                  list={this.props.banners && this.props.banners.list
-                                   && this.props.placements && this.props.placements.editing &&
-                                    this.props.placements.editing.banners &&
-                                    this.filterBanner(this.props.banners.list,
-                                      this.props.placements.editing.banners,
-                                    )}
-                                  createPlacementBanner={this.props.createPlacementBanner}
-                                  getPlacement={this.props.getPlacement}
-                                  getBanners={this.props.getBanners}
-                                  placementId={this.props.placementId}
-                                />
-                              </div>
-                              {/* /.box-body */}
-                            </div>
-                            {/* /.box */}
-                          </section>
-                          <section className="col-lg-6">
-                            {/* BOX: LIST OF Placements */}
-                            <div className="box box-info">
-                              <div className="box-header with-border">
-                                <h3 className="box-title">List Banner Of {
-                                  this.props.placements.editing ?
-                                    this.props.placements.editing.name : '...'
-                                }
-                                </h3>
-                              </div>
-                              {/* /.box-header */}
-                              <div className="box-body">
-                                <ListBannerOfPlacement
-                                  list={this.props.placements && this.props.placements.editing &&
-                                    this.props.placements.editing.banners}
-                                  /* eslint-disable max-len */
-                                  removeBannerInPlacementBanner={this.props.removeBannerInPlacementBanner}
-                                  /* eslint-enable max-len */
-                                  getPlacement={this.props.getPlacement}
-                                  getBanners={this.props.getBanners}
-                                  placementId={this.props.placementId}
-                                  createBanner={this.props.createBanner}
-                                  channels={this.props.channels && this.props.channels.list}
-                                  createPlacementBanner={this.props.createPlacementBanner}
-                                  banners={this.props.banners}
-                                  createClickImpression={this.props.createClickImpression}
-                                />
-                              </div>
-                              {/* /.box-body */}
-                            </div>
-                            {/* /.box */}
-                          </section>
+                      <div className="col-lg-6">
+                        {/* BOX: LIST OF Placements */}
+                        <div className="box box-info">
+                          <div className="box-header with-border">
+                            <h3 className="box-title">List All Banner</h3>
+                          </div>
+                          {/* /.box-header */}
+                          <div className="box-body">
+                            <ListBannerNotBelongPlacement
+                              list={this.props.banners && this.props.banners.list
+                              && this.props.placements && this.props.placements.editing &&
+                              this.props.placements.editing.banners &&
+                              this.filterBanner(this.props.banners.list,
+                                this.props.placements.editing.banners,
+                              )}
+                              createPlacementBanner={this.props.createPlacementBanner}
+                              getPlacement={this.props.getPlacement}
+                              getBanners={this.props.getBanners}
+                              placementId={this.props.placementId}
+                            />
+                          </div>
+                          {/* /.box-body */}
                         </div>
-                        <div className="row">
-                          {this.state.createBanner === false ? (
-                            <div className="form-group">
-                              <div className="col-sm-2">
+                        {/* /.box */}
+                      </div>
+
+                      <div className="col-lg-6">
+                        {/* BOX: LIST OF Placements */}
+                        <div className="box box-info">
+                          <div className="box-header with-border">
+                            <h3 className="box-title">List Banner Of {
+                              this.props.placements.editing ?
+                                this.props.placements.editing.name : '...'
+                            }
+                            </h3>
+                          </div>
+                          {/* /.box-header */}
+                          <div className="box-body">
+                            <ListBannerOfPlacement
+                              list={this.props.placements && this.props.placements.editing &&
+                              this.props.placements.editing.banners}
+                              /* eslint-disable max-len */
+                              removeBannerInPlacementBanner={this.props.removeBannerInPlacementBanner}
+                              /* eslint-enable max-len */
+                              getPlacement={this.props.getPlacement}
+                              getBanners={this.props.getBanners}
+                              placementId={this.props.placementId}
+                              createBanner={this.props.createBanner}
+                              channels={this.props.channels && this.props.channels.list}
+                              createPlacementBanner={this.props.createPlacementBanner}
+                              banners={this.props.banners}
+                              createClickImpression={this.props.createClickImpression}
+                            />
+                          </div>
+                          {/* /.box-body */}
+                        </div>
+                        {/* /.box */}
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      {this.state.createBanner === false ? (
+                        <div className="col-sm-2">
+                          <button
+                            type="button"
+                            id="createBannerInPlacement"
+                            onClick={(event) => this.createBannerInPlacement(event)}
+                            className="btn btn-block btn-info"
+                          >
+                            Create Banner
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="col-lg-12">
+                          <div className="box box-info">
+                            <div className="box-header with-border">
+                              <h3 className="box-title">Create new banner</h3>
+                              <div className="box-tools pull-right">
                                 <button
                                   type="button"
-                                  id="createBannerInPlacement"
-                                  onClick={(event) => this.createBannerInPlacement(event)}
-                                  className="btn btn-block btn-info btn-sm"
+                                  className="btn btn-box-tool"
+                                  onClick={event => this.hideCreateBanner(event)}
                                 >
-                                  Create Banner
+                                  <i className="fa fa-remove" />
                                 </button>
                               </div>
-                              <div className="col-sm-10">
-                                &nbsp;
-                              </div>
                             </div>
-                          ) : (
-                            <div className="col-lg-12">
-                              <div className="box box-info">
-                                <div className="box-header with-border">
-                                  <h3 className="box-title">NEW BANNER
-                                  </h3>
-                                  <div className="box-tools pull-right">
-                                    <button
-                                      type="button"
-                                      className="btn btn-box-tool"
-                                      onClick={event => this.hideCreateBanner(event)}
-                                    >
-                                      <i className="fa fa-remove" />
-                                    </button>
-                                  </div>
-                                </div>
-                                {/* /.box-header */}
-                                <div className="box-body">
-                                  <CreateBannerForm
-                                    createBanner={this.props.createBanner}
-                                    channels={this.props.channels && this.props.channels.list}
-                                    placementId={this.props.placementId}
-                                    getPlacement={this.props.getPlacement}
-                                    banners={this.props.banners && this.props.banners.list}
-                                    getBanners={this.props.getBanners}
-                                    createPlacementBanner={this.props.createPlacementBanner}
-                                  />
-                                </div>
-                                {/* /.box-body */}
-                              </div>
+                            {/* /.box-header */}
+                            <div className="box-body">
+                              <CreateBannerForm
+                                createBanner={this.props.createBanner}
+                                channels={this.props.channels.list}
+                                placementId={this.props.placementId}
+                                getPlacement={this.props.getPlacement}
+                                banners={this.props.banners.list}
+                                getBanners={this.props.getBanners}
+                                createPlacementBanner={this.props.createPlacementBanner}
+                              />
                             </div>
-                          )}
+                            {/* /.box-body */}
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 </div>

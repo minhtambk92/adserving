@@ -101,168 +101,167 @@ class UpdatePlacementForm extends Component {
   deletePlacement() {
     this.props.deletePlacement(this.props.placementId);
     this.props.removePlacement(this.props.placementId);
-    this.props.removePlacementInSharePlacement(this.props.placementId)
+    this.props.removePlacementInSharePlacement(this.props.placementId);
   }
 
   render() {
     return (
       <form className="form-horizontal">
-        <div className="box-body">
-          <div className="form-group">
-            <label
-              htmlFor="inputPlacementName" className="col-sm-2 control-label"
-            >Name</label>
-            <div className="col-sm-10">
-              <input
-                type="text" className="form-control" id="inputPlacementName"
-                placeholder="Admicro"
-                ref={c => {
-                  this.inputPlacementName = c;
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="inputCampaign" className="col-sm-2 control-label">Campaign</label>
-            <div className="col-sm-10">
-              <select
-                id="inputCampaign" className="form-control"
-                ref={c => {
-                  this.inputCampaign = c;
-                }}
-              >
-                {this.props.campaigns
-                && this.props.campaigns.map(campaign => (
-                  <option
-                    key={campaign.id} value={campaign.id}
-                  >
-                    {campaign.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label
-              htmlFor="inputPlacementStartTime" className="col-sm-2 control-label"
-            >
-              Start Time:
-            </label>
-            <div className=" col-sm-10 date">
-              <span className="fa fa-calendar form-control-feedback" />
-              {/* /DatePicker */}
-              <DatePicker
-                id="inputPlacementStartTime"
-                type="text"
-                className="form-control pull-right"
-                name="start"
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label
-              htmlFor="inputPlacementEndTime" className="col-sm-2 control-label"
-            >
-              End Time:
-            </label>
-            <div className=" col-sm-10 date">
-              <span className="fa fa-calendar form-control-feedback" />
-              {/* /DatePicker */}
-              <DatePicker
-                id="inputPlacementEndTime"
-                type="text"
-                className="form-control pull-right"
-                name="end"
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="inputPlacementSizeWidth" className="col-sm-2 control-label">
-              Size (Width)
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text" className="form-control" id="inputPlacementSizeWidth"
-                placeholder="300"
-                ref={c => {
-                  this.inputPlacementSizeWidth = c;
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="inputPlacementSizeHeight" className="col-sm-2 control-label">
-              Size (Height)
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text" className="form-control" id="inputPlacementSizeHeight"
-                placeholder="300"
-                ref={c => {
-                  this.inputPlacementSizeHeight = c;
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label
-              htmlFor="inputPlacementWeight"
-              className="col-sm-2 control-label"
-            >Weight</label>
-            <div className="col-sm-10">
-              <input
-                type="number" className="form-control" id="inputPlacementWeight"
-                placeholder="1"
-                ref={c => {
-                  this.inputPlacementWeight = c;
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label
-              htmlFor="inputPlacementStatus"
-              className="col-sm-2 control-label"
-            >Status</label>
-            <div className="col-sm-10">
-              <select
-                id="inputPlacementStatus" className="form-control"
-                ref={c => {
-                  this.inputPlacementStatus = c;
-                }}
-              >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label
-              htmlFor="inputPlacementDescription"
-              className="col-sm-2 control-label"
-            >Description</label>
-            <div className="col-sm-10">
-              <textarea
-                className="form-control" id="inputPlacementDescription"
-                rows="5" placeholder="More info..."
-                ref={c => {
-                  this.inputPlacementDescription = c;
-                }}
-              />
-            </div>
+        <div className="form-group">
+          <label
+            htmlFor="inputPlacementName" className="col-sm-2 control-label"
+          >Name</label>
+          <div className="col-sm-10">
+            <input
+              type="text" className="form-control" id="inputPlacementName"
+              placeholder="Admicro"
+              ref={c => {
+                this.inputPlacementName = c;
+              }}
+            />
           </div>
         </div>
-        {/* /.box-body */}
 
-        <div className="box-footer">
+        <div className="form-group">
+          <label htmlFor="inputCampaign" className="col-sm-2 control-label">Campaign</label>
+          <div className="col-sm-10">
+            <select
+              id="inputCampaign" className="form-control"
+              ref={c => {
+                this.inputCampaign = c;
+              }}
+            >
+              {this.props.campaigns
+              && this.props.campaigns.map(campaign => (
+                <option
+                  key={campaign.id} value={campaign.id}
+                >
+                  {campaign.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className="form-group has-feedback">
+          <label
+            htmlFor="inputPlacementStartTime" className="col-sm-2 control-label"
+          >
+            Start Time:
+          </label>
+          <div className=" col-sm-10 date">
+            <span className="fa fa-calendar form-control-feedback" />
+            {/* /DatePicker */}
+            <DatePicker
+              id="inputPlacementStartTime"
+              type="text"
+              className="form-control pull-right"
+              name="start"
+            />
+          </div>
+        </div>
+
+        <div className="form-group has-feedback">
+          <label
+            htmlFor="inputPlacementEndTime" className="col-sm-2 control-label"
+          >
+            End Time:
+          </label>
+          <div className=" col-sm-10 date">
+            <span className="fa fa-calendar form-control-feedback" />
+            {/* /DatePicker */}
+            <DatePicker
+              id="inputPlacementEndTime"
+              type="text"
+              className="form-control pull-right"
+              name="end"
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="inputPlacementSizeWidth" className="col-sm-2 control-label">
+            Size (Width)
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="text" className="form-control" id="inputPlacementSizeWidth"
+              placeholder="300"
+              ref={c => {
+                this.inputPlacementSizeWidth = c;
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="inputPlacementSizeHeight" className="col-sm-2 control-label">
+            Size (Height)
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="text" className="form-control" id="inputPlacementSizeHeight"
+              placeholder="300"
+              ref={c => {
+                this.inputPlacementSizeHeight = c;
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label
+            htmlFor="inputPlacementWeight"
+            className="col-sm-2 control-label"
+          >Weight</label>
+          <div className="col-sm-10">
+            <input
+              type="number" className="form-control" id="inputPlacementWeight"
+              placeholder="1"
+              ref={c => {
+                this.inputPlacementWeight = c;
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label
+            htmlFor="inputPlacementStatus"
+            className="col-sm-2 control-label"
+          >Status</label>
+          <div className="col-sm-10">
+            <select
+              id="inputPlacementStatus" className="form-control"
+              ref={c => {
+                this.inputPlacementStatus = c;
+              }}
+            >
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label
+            htmlFor="inputPlacementDescription"
+            className="col-sm-2 control-label"
+          >Description</label>
+          <div className="col-sm-10">
+            <textarea
+              className="form-control" id="inputPlacementDescription"
+              rows="5" placeholder="More info..."
+              ref={c => {
+                this.inputPlacementDescription = c;
+              }}
+            />
+          </div>
+        </div>
+
+        <hr />
+
+        <div className="clearfix">
           <Link
             to="/resource/placement"
             className="btn btn-app pull-right"
