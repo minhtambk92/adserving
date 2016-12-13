@@ -182,7 +182,7 @@ async function menusFiction() {
         }]);
       }
 
-      const inventory = await Menu.create({
+      const publisher = await Menu.create({
         url: '#',
         name: 'Publisher',
         icon: '<i class="fa fa-briefcase"></i>',
@@ -191,40 +191,40 @@ async function menusFiction() {
         type: TYPE_MENU_ITEM,
       });
 
-      if (inventory) {
+      if (publisher) {
         await Menu.bulkCreate([{
           url: '/resource/site',
           name: 'Sites',
           icon: '<i class="fa fa-circle-o"></i>',
-          parentId: agency.id,
+          parentId: publisher.id,
           order: 0,
           type: TYPE_MENU_ITEM,
         }, {
           url: '/resource/zone',
           name: 'Zones',
           icon: '<i class="fa fa-circle-o"></i>',
-          parentId: inventory.id,
+          parentId: publisher.id,
           order: 1,
           type: TYPE_MENU_ITEM,
         }, {
           url: '/resource/banner',
           name: 'Banners',
           icon: '<i class="fa fa-circle-o"></i>',
-          parentId: inventory.id,
+          parentId: publisher.id,
           order: 2,
           type: TYPE_MENU_ITEM,
         }, {
           url: '/resource/placement',
           name: 'Placements',
           icon: '<i class="fa fa-circle-o"></i>',
-          parentId: inventory.id,
+          parentId: publisher.id,
           order: 3,
           type: TYPE_MENU_ITEM,
         }, {
           url: '/resource/channel',
           name: 'Target Channels',
           icon: '<i class="fa fa-circle-o"></i>',
-          parentId: inventory.id,
+          parentId: publisher.id,
           order: 4,
           type: TYPE_MENU_ITEM,
         }]);
