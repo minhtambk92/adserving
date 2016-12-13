@@ -148,19 +148,13 @@ class Banner extends Component {
               <div className="nav-tabs-custom banner-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
-                    <a href="#editBanner" data-toggle="tab">
-                      Edit Banner
-                    </a>
+                    <a href="#editBanner" data-toggle="tab">Edit Banner</a>
                   </li>
                   <li>
-                    <a href="#optionBanner" data-toggle="tab">
-                      Option Banner
-                    </a>
+                    <a href="#optionBanner" data-toggle="tab">Option Banner</a>
                   </li>
                   <li>
-                    <a href="#addPlacement" data-toggle="tab">
-                      Add Placement
-                    </a>
+                    <a href="#addPlacement" data-toggle="tab">Add Placement</a>
                   </li>
                 </ul>
                 <div className="tab-content">
@@ -181,13 +175,13 @@ class Banner extends Component {
                             </div>
                           </div>
                           <UpdateBannerForm
-                            banner={this.props.banners && this.props.banners.editing}
+                            banner={this.props.banners.editing}
                             updateBanner={this.props.updateBanner}
                             deleteBanner={this.props.deleteBanner}
                             bannerId={this.props.bannerId}
                             getBanner={this.props.getBanner}
                             removeBanner={this.props.removeBanner}
-                            channels={this.props.channels && this.props.channels.list}
+                            channels={this.props.channels.list}
                           />
                         </div>
                       </section>
@@ -212,11 +206,11 @@ class Banner extends Component {
                             </div>
                           </div>
                           <OptionBannerForm
-                            banner={this.props.banners && this.props.banners.editing}
+                            banner={this.props.banners.editing}
                             updateBanner={this.props.updateBanner}
                             bannerId={this.props.bannerId}
                             getBanner={this.props.getBanner}
-                            channels={this.props.channels && this.props.channels.list}
+                            channels={this.props.channels.list}
                             createClickImpression={this.props.createClickImpression}
                             deleteClickImpression={this.props.deleteClickImpression}
                             updateClickImpression={this.props.updateClickImpression}

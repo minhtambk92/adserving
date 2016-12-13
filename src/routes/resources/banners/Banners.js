@@ -124,7 +124,7 @@ class Banners extends Component {
                 <CreateBannerForm
                   filters={this.props.banners.filters}
                   createBanner={this.props.createBanner}
-                  channels={this.props.channels && this.props.channels.list}
+                  channels={this.props.channels.list}
                 />
               </div>
               {/* /.col */}
