@@ -179,19 +179,12 @@ async function menusFiction() {
           parentId: agency.id,
           order: 1,
           type: TYPE_MENU_ITEM,
-        }, {
-          url: '/resource/site',
-          name: 'Sites',
-          icon: '<i class="fa fa-circle-o"></i>',
-          parentId: agency.id,
-          order: 4,
-          type: TYPE_MENU_ITEM,
         }]);
       }
 
       const inventory = await Menu.create({
         url: '#',
-        name: 'Inventory',
+        name: 'Publisher',
         icon: '<i class="fa fa-briefcase"></i>',
         parentId: menu.id,
         order: 3,
@@ -200,6 +193,20 @@ async function menusFiction() {
 
       if (inventory) {
         await Menu.bulkCreate([{
+          url: '/resource/site',
+          name: 'Sites',
+          icon: '<i class="fa fa-circle-o"></i>',
+          parentId: agency.id,
+          order: 0,
+          type: TYPE_MENU_ITEM,
+        }, {
+          url: '/resource/zone',
+          name: 'Zones',
+          icon: '<i class="fa fa-circle-o"></i>',
+          parentId: inventory.id,
+          order: 1,
+          type: TYPE_MENU_ITEM,
+        }, {
           url: '/resource/banner',
           name: 'Banners',
           icon: '<i class="fa fa-circle-o"></i>',
@@ -214,18 +221,11 @@ async function menusFiction() {
           order: 3,
           type: TYPE_MENU_ITEM,
         }, {
-          url: '/resource/zone',
-          name: 'Zones',
-          icon: '<i class="fa fa-circle-o"></i>',
-          parentId: inventory.id,
-          order: 5,
-          type: TYPE_MENU_ITEM,
-        }, {
           url: '/resource/channel',
           name: 'Target Channels',
           icon: '<i class="fa fa-circle-o"></i>',
           parentId: inventory.id,
-          order: 6,
+          order: 4,
           type: TYPE_MENU_ITEM,
         }]);
       }
