@@ -151,217 +151,215 @@ class UpdateCampaignForm extends Component {
   render() {
     return (
       <form className="form-horizontal">
-        <div className="box-body">
-          <div className="form-group">
-            <label
-              htmlFor="inputCampaignName" className="col-sm-3 control-label"
-            >Name</label>
-            <div className="col-sm-9">
-              <input
-                type="text" className="form-control" id="inputCampaignName"
-                placeholder="Admicro"
-                ref={c => {
-                  this.inputCampaignName = c;
-                }}
-              />
-            </div>
+        <div className="form-group">
+          <label
+            htmlFor="inputCampaignName" className="col-sm-3 control-label"
+          >Name</label>
+          <div className="col-sm-9">
+            <input
+              type="text" className="form-control" id="inputCampaignName"
+              placeholder="Admicro"
+              ref={c => {
+                this.inputCampaignName = c;
+              }}
+            />
           </div>
-          <div className="form-group">
-            <label
-              htmlFor="inputAdvertiser" className="col-sm-3 control-label"
-            >Advertiser</label>
-            <div className="col-sm-9">
-              <select
-                id="inputAdvertiser" className="form-control"
-                ref={c => {
-                  this.inputAdvertiser = c;
-                }}
-              >
-                {this.props.advertisers &&
-                this.props.advertisers.map(advertiser => (
-                  <option key={advertiser.id} value={advertiser.id}>
-                    {advertiser.name}</option>
-                ))}
-              </select>
-            </div>
+        </div>
+        <div className="form-group">
+          <label
+            htmlFor="inputAdvertiser" className="col-sm-3 control-label"
+          >Advertiser</label>
+          <div className="col-sm-9">
+            <select
+              id="inputAdvertiser" className="form-control"
+              ref={c => {
+                this.inputAdvertiser = c;
+              }}
+            >
+              {this.props.advertisers &&
+              this.props.advertisers.map(advertiser => (
+                <option key={advertiser.id} value={advertiser.id}>
+                  {advertiser.name}</option>
+              ))}
+            </select>
           </div>
-          <div className="form-group has-feedback">
-            <label
-              htmlFor="inputCampaignStartTime" className="col-sm-3 control-label"
-            >Start Time:</label>
-            <div className=" col-sm-9 date">
-              <span className="fa fa-calendar form-control-feedback" />
-              {/* /.box-body */}
-              <DatePicker
-                id="inputCampaignStartTime"
-                type="text"
-                className="form-control pull-right"
-                name="start"
-              />
-            </div>
+        </div>
+        <div className="form-group has-feedback">
+          <label
+            htmlFor="inputCampaignStartTime" className="col-sm-3 control-label"
+          >Start Time:</label>
+          <div className=" col-sm-9 date">
+            <span className="fa fa-calendar form-control-feedback" />
+            {/* /.box-body */}
+            <DatePicker
+              id="inputCampaignStartTime"
+              type="text"
+              className="form-control pull-right"
+              name="start"
+            />
           </div>
-          <div className="form-group has-feedback">
-            <label
-              htmlFor="inputCampaignEndTime" className="col-sm-3 control-label"
-            >End Time:</label>
-            <div className=" col-sm-9 date">
-              <span className="fa fa-calendar form-control-feedback" />
-              {/* /.box-body */}
-              <DatePicker
-                id="inputCampaignEndTime"
-                type="text"
-                className="form-control pull-right"
-                name="end"
-              />
-            </div>
+        </div>
+        <div className="form-group has-feedback">
+          <label
+            htmlFor="inputCampaignEndTime" className="col-sm-3 control-label"
+          >End Time:</label>
+          <div className=" col-sm-9 date">
+            <span className="fa fa-calendar form-control-feedback" />
+            {/* /.box-body */}
+            <DatePicker
+              id="inputCampaignEndTime"
+              type="text"
+              className="form-control pull-right"
+              name="end"
+            />
           </div>
-          <div className="form-group">
-            <label
-              htmlFor="inputCampaignRevenueType"
-              className="col-sm-3 control-label"
-            >Revenue Information</label>
-            <div className="col-sm-9">
-              <select
-                id="inputCampaignRevenueType" className="form-control"
-                onChange={event => this.changeRevenueType(event)}
-                ref={c => {
-                  this.inputCampaignRevenueType = c;
-                }}
-              >
-                <option value="cpd">CPD</option>
-                <option value="cpm">CPM</option>
-                <option value="cpc">CPC</option>
-                <option value="cpa">CPA</option>
-                <option value="tenancy">Tenancy</option>
-              </select>
-            </div>
+        </div>
+        <div className="form-group">
+          <label
+            htmlFor="inputCampaignRevenueType"
+            className="col-sm-3 control-label"
+          >Revenue Information</label>
+          <div className="col-sm-9">
+            <select
+              id="inputCampaignRevenueType" className="form-control"
+              onChange={event => this.changeRevenueType(event)}
+              ref={c => {
+                this.inputCampaignRevenueType = c;
+              }}
+            >
+              <option value="cpd">CPD</option>
+              <option value="cpm">CPM</option>
+              <option value="cpc">CPC</option>
+              <option value="cpa">CPA</option>
+              <option value="tenancy">Tenancy</option>
+            </select>
           </div>
-          {/* /.SHOW CPM */}
-          {this.state.showCPM === true ? (
-            <div className="typeCPM">
-              <div className="form-group">
-                <div className="col-sm-3">&nbsp;</div>
-                <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Expire Value CPM</label>
-                <div className="col-sm-6">
-                  <input
-                    type="number" className="form-control" id="inputCampaignExpireValueCPM"
-                    placeholder="1000"
-                    ref={c => {
-                      this.inputCampaignExpireValueCPM = c;
-                    }}
-                  />
-                </div>
+        </div>
+        {/* /.SHOW CPM */}
+        {this.state.showCPM === true ? (
+          <div className="typeCPM">
+            <div className="form-group">
+              <div className="col-sm-3">&nbsp;</div>
+              <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Expire Value CPM</label>
+              <div className="col-sm-6">
+                <input
+                  type="number" className="form-control" id="inputCampaignExpireValueCPM"
+                  placeholder="1000"
+                  ref={c => {
+                    this.inputCampaignExpireValueCPM = c;
+                  }}
+                />
               </div>
-              <div className="form-group">
-                <div className="col-sm-3">&nbsp;</div>
-                <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Max CPM per Day</label>
-                <div className="col-sm-6">
-                  <input
-                    type="number" className="form-control" id="inputCampaignMaxCPMPerDay"
-                    placeholder="1000"
-                    ref={c => {
-                      this.inputCampaignMaxCPMPerDay = c;
-                    }}
-                  />
-                </div>
+            </div>
+            <div className="form-group">
+              <div className="col-sm-3">&nbsp;</div>
+              <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Max CPM per Day</label>
+              <div className="col-sm-6">
+                <input
+                  type="number" className="form-control" id="inputCampaignMaxCPMPerDay"
+                  placeholder="1000"
+                  ref={c => {
+                    this.inputCampaignMaxCPMPerDay = c;
+                  }}
+                />
               </div>
-            </div>) : ('')}
-          <div className="form-group">
-            <label
-              htmlFor="inputCampaignViews" className="col-sm-3 control-label"
-            >Total Views</label>
-            <div className="col-sm-9">
-              <input
-                type="number" className="form-control" id="inputCampaignViews"
-                placeholder="1000"
-                ref={c => {
-                  this.inputCampaignViews = c;
-                }}
-              />
             </div>
+          </div>) : ('')}
+        <div className="form-group">
+          <label
+            htmlFor="inputCampaignViews" className="col-sm-3 control-label"
+          >Total Views</label>
+          <div className="col-sm-9">
+            <input
+              type="number" className="form-control" id="inputCampaignViews"
+              placeholder="1000"
+              ref={c => {
+                this.inputCampaignViews = c;
+              }}
+            />
           </div>
-          <div className="form-group">
-            <label
-              htmlFor="inputCampaignViewPerSession"
-              className="col-sm-3 control-label"
-            >Views/Session</label>
-            <div className="col-sm-9">
-              <input
-                type="number" className="form-control" id="inputCampaignViewPerSession"
-                placeholder="10"
-                ref={c => {
-                  this.inputCampaignViewPerSession = c;
-                }}
-              />
-            </div>
+        </div>
+        <div className="form-group">
+          <label
+            htmlFor="inputCampaignViewPerSession"
+            className="col-sm-3 control-label"
+          >Views/Session</label>
+          <div className="col-sm-9">
+            <input
+              type="number" className="form-control" id="inputCampaignViewPerSession"
+              placeholder="10"
+              ref={c => {
+                this.inputCampaignViewPerSession = c;
+              }}
+            />
           </div>
-          <div className="form-group">
-            <label
-              htmlFor="inputCampaignTimeResetViewCount"
-              className="col-sm-3 control-label"
-            >Time reset view(h)</label>
-            <div className="col-sm-9">
-              <input
-                type="number" className="form-control"
-                id="inputCampaignTimeResetViewCount"
-                placeholder="24"
-                ref={c => {
-                  this.inputCampaignTimeResetViewCount = c;
-                }}
-              />
-            </div>
+        </div>
+        <div className="form-group">
+          <label
+            htmlFor="inputCampaignTimeResetViewCount"
+            className="col-sm-3 control-label"
+          >Time reset view(h)</label>
+          <div className="col-sm-9">
+            <input
+              type="number" className="form-control"
+              id="inputCampaignTimeResetViewCount"
+              placeholder="24"
+              ref={c => {
+                this.inputCampaignTimeResetViewCount = c;
+              }}
+            />
           </div>
-          <div className="form-group">
-            <label
-              htmlFor="inputCampaignWeight"
-              className="col-sm-3 control-label"
-            >Weight</label>
-            <div className="col-sm-9">
-              <input
-                type="number" className="form-control" id="inputCampaignWeight"
-                placeholder="1"
-                ref={c => {
-                  this.inputCampaignWeight = c;
-                }}
-              />
-            </div>
+        </div>
+        <div className="form-group">
+          <label
+            htmlFor="inputCampaignWeight"
+            className="col-sm-3 control-label"
+          >Weight</label>
+          <div className="col-sm-9">
+            <input
+              type="number" className="form-control" id="inputCampaignWeight"
+              placeholder="1"
+              ref={c => {
+                this.inputCampaignWeight = c;
+              }}
+            />
           </div>
-          <div className="form-group">
-            <label
-              htmlFor="inputCampaignStatus"
-              className="col-sm-3 control-label"
-            >Status</label>
-            <div className="col-sm-9">
-              <select
-                id="inputCampaignStatus" className="form-control"
-                ref={c => {
-                  this.inputCampaignStatus = c;
-                }}
-              >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
-            </div>
+        </div>
+        <div className="form-group">
+          <label
+            htmlFor="inputCampaignStatus"
+            className="col-sm-3 control-label"
+          >Status</label>
+          <div className="col-sm-9">
+            <select
+              id="inputCampaignStatus" className="form-control"
+              ref={c => {
+                this.inputCampaignStatus = c;
+              }}
+            >
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
           </div>
+        </div>
 
-          <div className="form-group">
-            <label
-              htmlFor="inputCampaignDescription"
-              className="col-sm-3 control-label"
-            >Description</label>
-            <div className="col-sm-9">
-              <textarea
-                className="form-control" id="inputCampaignDescription" rows="5"
-                placeholder="More info..."
-                ref={c => {
-                  this.inputCampaignDescription = c;
-                }}
-              />
-            </div>
+        <div className="form-group">
+          <label
+            htmlFor="inputCampaignDescription"
+            className="col-sm-3 control-label"
+          >Description</label>
+          <div className="col-sm-9">
+            <textarea
+              className="form-control" id="inputCampaignDescription" rows="5"
+              placeholder="More info..."
+              ref={c => {
+                this.inputCampaignDescription = c;
+              }}
+            />
           </div>
         </div>
         {/* /.box-body */}
-        <div className="box-footer">
+        <div className="clearfix">
           {/* eslint-disable jsx-a11y/no-static-element-interactions */}
           <Link
             to="/resource/campaign"
