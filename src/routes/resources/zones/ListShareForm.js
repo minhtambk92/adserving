@@ -9,11 +9,9 @@ class ListShareForm extends Component {
   };
 
   render() {
-    // Open the portal
-    const className = `box list-zone-shared list-zone-share-${this.props.index}`;
     return (
       <div
-        className={className}
+        className={`box list-zone-shared list-zone-share-${this.props.index}`}
         id={this.props.id}
       >
         <div className={`form-horizontal ListShare-${this.props.index}`}>
@@ -27,12 +25,11 @@ class ListShareForm extends Component {
                 className="btn btn-box-tool remove-share-zone"
                 data-widget="remove"
               >
-                <i
-                  className="fa fa-times"
-                />
+                <i className="fa fa-times" />
               </button>
             </div>
           </div>
+
           <div className="box-body">
             <div className="form-group">
               <label
@@ -46,6 +43,7 @@ class ListShareForm extends Component {
                 />
               </div>
             </div>
+
             <div className="form-group">
               <label
                 htmlFor={`inputShareHTML-${this.props.index}`} className="col-sm-2 control-label"
@@ -59,6 +57,7 @@ class ListShareForm extends Component {
                 />
               </div>
             </div>
+
             <div className="form-group">
               <label
                 htmlFor={`inputShareCSS-${this.props.index}`} className="col-sm-2 control-label"
@@ -71,6 +70,7 @@ class ListShareForm extends Component {
                 />
               </div>
             </div>
+
             <div className="form-group">
               <label
                 htmlFor={`inputShareDescription-${this.props.index}`}

@@ -177,24 +177,16 @@ class Zone extends Component {
               <div className="nav-tabs-custom zone-edit-box">
                 <ul className="nav nav-tabs">
                   <li>
-                    <a href="#editZone" data-toggle="tab">
-                      Edit Zone
-                    </a>
+                    <a href="#editZone" data-toggle="tab">Edit Zone</a>
                   </li>
                   <li>
-                    <a href="#settingZone" data-toggle="tab">
-                      Setting
-                    </a>
+                    <a href="#settingZone" data-toggle="tab">Setting</a>
                   </li>
                   <li className="active">
-                    <a href="#shareZone" data-toggle="tab">
-                      Share
-                    </a>
+                    <a href="#shareZone" data-toggle="tab">Share</a>
                   </li>
                   <li>
-                    <a href="#addPlacement" data-toggle="tab">
-                      Add Placement
-                    </a>
+                    <a href="#addPlacement" data-toggle="tab">Add Placement</a>
                   </li>
                 </ul>
 
@@ -305,9 +297,7 @@ class Zone extends Component {
                               {/* BOX: LIST OF Placements */}
                               <div className="box">
                                 <div className="box-header with-border">
-                                  <h3 className="box-title">
-                                    List placements of {share.name}
-                                  </h3>
+                                  <h3 className="box-title">List placements of {share.name}</h3>
                                 </div>
                                 {/* /.box-header */}
                                 <div className="box-body">
