@@ -43,10 +43,18 @@ class UpdateCampaignForm extends Component {
     this.inputAdvertiser.value = advertiserId;
     document.getElementById('inputCampaignStartTime').value = moment(new Date(startTime)).format('L');
     document.getElementById('inputCampaignEndTime').value = moment(new Date(endTime)).format('L');
-    this.inputCampaignViews.value = views;
-    this.inputCampaignViewPerSession.value = viewPerSession;
-    this.inputCampaignTimeResetViewCount.value = timeResetViewCount;
-    this.inputCampaignWeight.value = weight;
+    if (views) {
+      this.inputCampaignViews.value = views;
+    }
+    if (viewPerSession) {
+      this.inputCampaignViewPerSession.value = viewPerSession;
+    }
+    if (weight) {
+      this.inputCampaignWeight.value = weight;
+    }
+    if (timeResetViewCount) {
+      this.inputCampaignTimeResetViewCount.value = timeResetViewCount;
+    }
     this.inputCampaignRevenueType.value = revenueType;
     if (revenueType === 'cpm') {
       this.setState({ showCPM: true });
