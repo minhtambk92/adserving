@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import ListShareForm from './ListShareForm';
+import ListShareForm from './ShareForm';
 import Link from '../../../components/Link';
 import { DataTables, ICheck } from '../../../components/UI/';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -233,49 +233,44 @@ class ListShare extends Component {
         <div className="col-sm-6" id="shareForm">
           {this.state.showEdit === true ? (
             <div className="box">
-              <div className="box-header">
-                <h3 className="box-title">Edit Share</h3>
-              </div>
-              {/* /.box-header */}
-              <div className="box-body">
-                <div className="editShare">
-                  <ListShareForm
-                    id={this.state.share.id}
-                    childZone={this.state.share}
-                    index={1}
-                  />
-                  <div className="box-footer">
-                    <Link
-                      to="#"
-                      className="btn btn-app pull-right"
-                      onClick={event => this.save(event)}
-                    ><i className="fa fa-floppy-o" /> Save</Link>
-                  </div>
+              <div className="editShare">
+                <ListShareForm
+                  id={this.state.share.id}
+                  childZone={this.state.share}
+                  index={1}
+                />
+                <div className="clearfix">
+                  <Link
+                    to="#"
+                    className="btn btn-app pull-right"
+                    onClick={event => this.save(event)}
+                  ><i className="fa fa-floppy-o" /> Save</Link>
                 </div>
               </div>
-              {/* /.box-body */}
             </div>
           ) : ''}
           {this.state.showCreate === true && this.state.showEdit === false &&
-          <div className="shareZoneForm">
-            <ListShareForm
-              index={1}
-              key={1}
-            />
-            <div className="box-footer">
-              <Link
-                to="#"
-                className="btn btn-app pull-right"
-                onClick={event => this.clear(event)}
-              >
-                <i className="fa fa-undo" />
-                Clear
-              </Link>
-              <Link
-                to="#"
-                className="btn btn-app pull-right"
-                onClick={event => this.createShare(event)}
-              ><i className="fa fa-floppy-o" /> Save</Link>
+          <div className="box">
+            <div className="shareZoneForm">
+              <ListShareForm
+                index={1}
+                key={1}
+              />
+              <div className="clearfix">
+                <Link
+                  to="#"
+                  className="btn btn-app pull-right"
+                  onClick={event => this.clear(event)}
+                >
+                  <i className="fa fa-undo" />
+                  Clear
+                </Link>
+                <Link
+                  to="#"
+                  className="btn btn-app pull-right"
+                  onClick={event => this.createShare(event)}
+                ><i className="fa fa-floppy-o" /> Save</Link>
+              </div>
             </div>
           </div>
           }
