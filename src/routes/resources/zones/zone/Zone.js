@@ -180,19 +180,18 @@ class Zone extends Component {
             <section className="col-lg-12">
               <div className="nav-tabs-custom zone-edit-box">
                 <ul className="nav nav-tabs">
-                  <li>
+                  <li className="active">
                     <a href="#editZone" data-toggle="tab">Edit</a>
                   </li>
                   <li>
                     <a href="#settingZone" data-toggle="tab">Settings</a>
                   </li>
-                  <li className="active">
+                  <li>
                     <a href="#shareZone" data-toggle="tab">Shares</a>
                   </li>
                   <li>
                     <a
-                      href="#addPlacement"
-                      data-toggle="tab"
+                      href="#addPlacement" data-toggle="tab"
                       onClick={event => this.setTabPlacement(event)}
                     >Placements</a>
                   </li>
@@ -201,10 +200,10 @@ class Zone extends Component {
                 <div className="tab-content">
                   <div className="active tab-pane" id="editZone">
                     <UpdateZoneForm
-                      zone={this.props.zones && this.props.zones.editing}
+                      zone={this.props.zones.editing}
                       updateZone={this.props.updateZone}
                       deleteZone={this.props.deleteZone}
-                      sites={this.props.sites && this.props.sites.list}
+                      sites={this.props.sites.list}
                       zoneId={this.props.zoneId}
                       getZone={this.props.getZone}
                     />
@@ -212,7 +211,7 @@ class Zone extends Component {
 
                   <div className="tab-pane" id="settingZone">
                     <ZoneSettingForm
-                      zone={this.props.zones && this.props.zones.editing}
+                      zone={this.props.zones.editing}
                       updateZone={this.props.updateZone}
                       zoneId={this.props.zoneId}
                       getZone={this.props.getZone}
@@ -221,8 +220,7 @@ class Zone extends Component {
 
                   <div className="tab-pane" id="shareZone">
                     <ListShare
-                      list={this.props.zones && this.props.zones.editing
-                      && this.props.zones.editing.shares}
+                      list={this.props.zones.editing && this.props.zones.editing.shares}
                       deleteShareZone={this.props.deleteShare}
                       getZone={this.props.getZone}
                       zoneId={this.props.zoneId}
@@ -277,17 +275,18 @@ class Zone extends Component {
                                 {/* /.box-header */}
                                 <div className="box-body">
                                   <ListPlacementNotBelongToShare
-                                    list={this.props.placements && this.props.placements.list &&
-                                    share.placements &&
-                                    this.filterPlmNotIn(this.props.placements.list,
-                                      share.placements)}
+                                    list={this.props.placements.list && share.placements &&
+                                    this.filterPlmNotIn(
+                                      this.props.placements.list,
+                                      share.placements,
+                                    )}
                                     createSharePlacement={this.props.createSharePlacement}
                                     getZone={this.props.getZone}
                                     getPlacements={this.props.getPlacements}
                                     zoneId={this.props.zoneId}
                                     shareId={share.id}
                                     getPlacement={this.props.getPlacement}
-                                    zone={this.props.zones && this.props.zones.editing}
+                                    zone={this.props.zones.editing}
                                     setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                                     setCurrentShare={this.props.setCurrentShare}
                                   />
@@ -307,9 +306,9 @@ class Zone extends Component {
                                 <div className="box-body">
                                   <ListPlacementOfShare
                                     list={share.placements}
-                                    /* eslint-disable max-len */
-                                    removeShareInSharePlacement={this.props.removeShareInSharePlacement}
-                                    /* eslint-enable max-len */
+                                    removeShareInSharePlacement={
+                                      this.props.removeShareInSharePlacement
+                                    }
                                     getPlacements={this.props.getPlacements}
                                     getZone={this.props.getZone}
                                     zoneId={this.props.zoneId}
