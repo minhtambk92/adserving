@@ -16,6 +16,8 @@ class ListPlacementNotBelongToZone extends Component {
     getPlacement: PropTypes.func,
     placements: PropTypes.object,
     zone: PropTypes.object,
+    setCurrentShare: PropTypes.func,
+    setPageZoneActiveTab: PropTypes.func,
   };
 
   dataTableOptions() {
@@ -62,6 +64,8 @@ class ListPlacementNotBelongToZone extends Component {
     const shareId = this.props.shareId;
     const placementId = id;
     if (placementId && shareId) {
+      this.props.setCurrentShare(shareId);
+      this.props.setPageZoneActiveTab('addPlacement');
       const newP = _.filter(this.props.list, { id: placementId });
       if (newP[0].sizeWidth <= this.props.zone.width && newP[0].sizeHeight <= this.props.zone.height) {
         this.props.createSharePlacement({ placementId, shareId }).then(() => {

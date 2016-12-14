@@ -89,8 +89,6 @@ class Zone extends Component {
     } = nextProps.zones && (nextProps.zones.editing || {});
     if (shares) {
       if (this.props.page.currentShare) {
-        $('.zone-edit-box ul li').removeClass('active');
-        $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
         this.inputSelectShare.value = this.props.page.currentShare;
         for (let i = 0; i < shares.length; i += 1) {
           if (this.props.page.currentShare === shares[i].id) {
@@ -105,6 +103,12 @@ class Zone extends Component {
         this.setState({ arrShare: shares[0] });
       }
     }
+  }
+
+  componentDidUpdate() {
+    // Set latest active tab
+    $('.zone-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
   }
 
   getFilteredShare() {
@@ -331,6 +335,8 @@ class Zone extends Component {
                                     shareId={share.id}
                                     getPlacement={this.props.getPlacement}
                                     zone={this.props.zones && this.props.zones.editing}
+                                    setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                                    setCurrentShare={this.props.setCurrentShare}
                                   />
                                 </div>
                                 {/* /.box-body */}
@@ -356,6 +362,8 @@ class Zone extends Component {
                                     getZone={this.props.getZone}
                                     zoneId={this.props.zoneId}
                                     shareId={share.id}
+                                    setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                                    setCurrentShare={this.props.setCurrentShare}
                                   />
                                 </div>
                                 {/* /.box-body */}

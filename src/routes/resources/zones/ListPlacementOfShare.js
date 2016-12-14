@@ -12,6 +12,8 @@ class ListPlacementOfShare extends Component {
     removeShareInSharePlacement: PropTypes.func,
     getZone: PropTypes.func,
     shareId: PropTypes.string,
+    setCurrentShare: PropTypes.func,
+    setPageZoneActiveTab: PropTypes.func,
   };
 
   dataTableOptions() {
@@ -57,6 +59,8 @@ class ListPlacementOfShare extends Component {
     const shareId = this.props.shareId;
     const placementId = id;
     if (placementId && shareId) {
+      this.props.setCurrentShare(shareId);
+      this.props.setPageZoneActiveTab('addPlacement');
       this.props.removeShareInSharePlacement({ placementId, shareId }).then(() => {
         this.props.getZone(this.props.zoneId).then(() => {
           this.props.getPlacements();

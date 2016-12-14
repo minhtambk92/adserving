@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 
 class ListShareForm extends Component {
 
@@ -20,7 +19,9 @@ class ListShareForm extends Component {
         <div className={`form-horizontal ListShare-${this.props.index}`}>
           <div className="box-header with-border">
             <h3
-              className="box-title">{this.props.childZone ? this.props.childZone.name : 'Add New'}</h3>
+              className="box-title"
+            >
+              {this.props.childZone ? this.props.childZone.name : 'Add New'}</h3>
             <div className="box-tools pull-right">
               <button
                 className="btn btn-box-tool remove-share-zone"
