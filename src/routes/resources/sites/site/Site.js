@@ -78,7 +78,7 @@ class Site extends Component {
             <section className="col-lg-12">
               <div className="nav-tabs-custom site-edit-box">
                 <ul className="nav nav-tabs">
-                  <li>
+                  <li className="active">
                     <a href="#editSite" data-toggle="tab">
                       Edit Site
                     </a>
@@ -88,7 +88,7 @@ class Site extends Component {
                       Add Zone
                     </a>
                   </li>
-                  <li className="active">
+                  <li>
                     <a href="#addChannel" data-toggle="tab">
                       Add Channel
                     </a>
