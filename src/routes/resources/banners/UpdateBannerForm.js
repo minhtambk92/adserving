@@ -203,6 +203,8 @@ class UpdateBannerForm extends Component {
           this.options.thumbnail.call(this, mockFile, img);
           mockFile.previewElement.classList.add('dz-success');
           mockFile.previewElement.classList.add('dz-complete');
+          mockFile.previewElement.classList.add('dz-processing');
+          mockFile.previewElement.classList.add('dz-success');
         },
       };
       /* eslint-enable */
