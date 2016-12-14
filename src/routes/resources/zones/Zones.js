@@ -98,6 +98,7 @@ class Zones extends Component {
               {/* /.col */}
             </section>
           </div>
+
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: FORM OF CREATE A NEW ZONE */}

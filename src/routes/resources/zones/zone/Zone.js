@@ -177,112 +177,93 @@ class Zone extends Component {
               <div className="nav-tabs-custom zone-edit-box">
                 <ul className="nav nav-tabs">
                   <li>
-                    <a href="#editZone" data-toggle="tab">
-                      Edit Zone
-                    </a>
+                    <a href="#editZone" data-toggle="tab">Edit Zone</a>
                   </li>
                   <li>
-                    <a href="#settingZone" data-toggle="tab">
-                      Setting
-                    </a>
+                    <a href="#settingZone" data-toggle="tab">Setting</a>
                   </li>
                   <li className="active">
-                    <a href="#shareZone" data-toggle="tab">
-                      Share
-                    </a>
+                    <a href="#shareZone" data-toggle="tab">Share</a>
                   </li>
                   <li>
-                    <a href="#addPlacement" data-toggle="tab">
-                      Add Placement
-                    </a>
+                    <a href="#addPlacement" data-toggle="tab">Add Placement</a>
                   </li>
                 </ul>
+
                 <div className="tab-content">
                   <div className="active tab-pane" id="editZone">
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <UpdateZoneForm
-                          zone={this.props.zones && this.props.zones.editing}
-                          updateZone={this.props.updateZone}
-                          deleteZone={this.props.deleteZone}
-                          sites={this.props.sites && this.props.sites.list}
-                          zoneId={this.props.zoneId}
-                          getZone={this.props.getZone}
-                        />
-                      </div>
-                    </div>
+                    <UpdateZoneForm
+                      zone={this.props.zones && this.props.zones.editing}
+                      updateZone={this.props.updateZone}
+                      deleteZone={this.props.deleteZone}
+                      sites={this.props.sites && this.props.sites.list}
+                      zoneId={this.props.zoneId}
+                      getZone={this.props.getZone}
+                    />
                   </div>
+
                   <div className="tab-pane" id="settingZone">
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <ZoneSettingForm
-                          zone={this.props.zones && this.props.zones.editing}
-                          updateZone={this.props.updateZone}
-                          zoneId={this.props.zoneId}
-                          getZone={this.props.getZone}
-                        />
-                      </div>
-                    </div>
+                    <ZoneSettingForm
+                      zone={this.props.zones && this.props.zones.editing}
+                      updateZone={this.props.updateZone}
+                      zoneId={this.props.zoneId}
+                      getZone={this.props.getZone}
+                    />
                   </div>
+
                   <div className="tab-pane" id="shareZone">
-                    <div className="row">
-                      <div className="col-lg-12" id="shareZoneForm">
-                        <ListShare
-                          list={this.props.zones && this.props.zones.editing
-                                    && this.props.zones.editing.shares}
-                          deleteShareZone={this.props.deleteShare}
-                          getZone={this.props.getZone}
-                          zoneId={this.props.zoneId}
-                          updateShareZone={this.props.updateShare}
-                          createShareZone={this.props.createShare}
-                          removeShare={this.props.removeShare}
-                          setPageZoneActiveTab={this.props.setPageZoneActiveTab}
-                          setCurrentShare={this.props.setCurrentShare}
-                        />
-                      </div>
-                    </div>
+                    <ListShare
+                      list={this.props.zones && this.props.zones.editing
+                      && this.props.zones.editing.shares}
+                      deleteShareZone={this.props.deleteShare}
+                      getZone={this.props.getZone}
+                      zoneId={this.props.zoneId}
+                      updateShareZone={this.props.updateShare}
+                      createShareZone={this.props.createShare}
+                      removeShare={this.props.removeShare}
+                      setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                      setCurrentShare={this.props.setCurrentShare}
+                    />
                   </div>
+
                   <div className="tab-pane" id="addPlacement">
                     <div className="row">
                       <div className="col-lg-12">
-                        <div className="col-lg-6 no-padding">
-                          <div className="box box-solid box-default">
-                            <div className="box-body">
-                              <div className="form-group">
-                                <label
-                                  htmlFor="inputSelectValue" className="col-sm-5 control-label"
-                                >Choose Share Zone</label>
-                                <div className="col-sm-7 no-padding">
-                                  <select
-                                    id="inputSelectShare" className="form-control"
-                                    ref={c => {
-                                      this.inputSelectShare = c;
-                                    }}
-                                    onChange={event => this.getFilteredShare(event)}
-                                  >
-                                    {this.props.zones && this.props.zones.editing &&
-                                    this.props.zones.editing.shares &&
-                                    this.props.zones.editing.shares.map((option) =>
-                                      <option
-                                        key={option.id}
-                                        value={option.id}
-                                      >
-                                        {option.name}
-                                      </option>,
-                                    )}
-                                  </select>
-                                </div>
-                              </div>
+                        <div className="form-horizontal">
+                          <div className="form-group">
+                            <label
+                              className="col-sm-3 control-label"
+                              htmlFor="inputSelectValue"
+                            >Choose Share Zone</label>
+                            <div className="col-sm-9">
+                              <select
+                                id="inputSelectShare" className="form-control"
+                                ref={c => {
+                                  this.inputSelectShare = c;
+                                }}
+                                onChange={event => this.getFilteredShare(event)}
+                              >
+                                {this.props.zones.editing && this.props.zones.editing.shares &&
+                                this.props.zones.editing.shares.map((option) => (
+                                  <option
+                                    key={option.id}
+                                    value={option.id}
+                                  >{option.name}</option>
+                                ))}
+                              </select>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+
+                    <hr />
+
                     <div className="row">
                       <div className="col-lg-12">
                         {this.state.arrShare ? (
                           <div className="row">
-                            <section className="col-lg-6">
+                            <div className="col-lg-6">
                               {/* BOX: LIST OF Placements */}
                               <div className="box">
                                 <div className="box-header with-border">
@@ -295,7 +276,7 @@ class Zone extends Component {
                                     list={this.props.placements && this.props.placements.list &&
                                     share.placements &&
                                     this.filterPlmNotIn(this.props.placements.list,
-                                    share.placements)}
+                                      share.placements)}
                                     createSharePlacement={this.props.createSharePlacement}
                                     getZone={this.props.getZone}
                                     getPlacements={this.props.getPlacements}
@@ -310,14 +291,13 @@ class Zone extends Component {
                                 {/* /.box-body */}
                               </div>
                               {/* /.box */}
-                            </section>
-                            <section className="col-lg-6">
+                            </div>
+
+                            <div className="col-lg-6">
                               {/* BOX: LIST OF Placements */}
                               <div className="box">
                                 <div className="box-header with-border">
-                                  <h3 className="box-title">
-                                    List placements of {share.name}
-                                  </h3>
+                                  <h3 className="box-title">List placements of {share.name}</h3>
                                 </div>
                                 {/* /.box-header */}
                                 <div className="box-body">
@@ -337,7 +317,7 @@ class Zone extends Component {
                                 {/* /.box-body */}
                               </div>
                               {/* /.box */}
-                            </section>
+                            </div>
                           </div>
                         ) : ''}
                       </div>
