@@ -201,58 +201,26 @@ class Zone extends Component {
                   <div className="active tab-pane" id="editZone">
                     <div className="row">
                       <div className="col-lg-12">
-                        {/* BOX: FORM OF CREATE A NEW ZONE */}
-                        <div className="box">
-                          <div className="box-header with-border">
-                            <h3 className="box-title">Change Zone Information</h3>
-                            <div className="box-tools pull-right">
-                              <button
-                                type="button" className="btn btn-box-tool"
-                                data-widget="collapse"
-                              >
-                                <i className="fa fa-minus" />
-                              </button>
-                            </div>
-                          </div>
-                          {/* /.box-header */}
-                          <UpdateZoneForm
-                            zone={this.props.zones && this.props.zones.editing}
-                            updateZone={this.props.updateZone}
-                            deleteZone={this.props.deleteZone}
-                            sites={this.props.sites && this.props.sites.list}
-                            zoneId={this.props.zoneId}
-                            getZone={this.props.getZone}
-                          />
-                        </div>
-                        {/* /.col */}
+                        <UpdateZoneForm
+                          zone={this.props.zones && this.props.zones.editing}
+                          updateZone={this.props.updateZone}
+                          deleteZone={this.props.deleteZone}
+                          sites={this.props.sites && this.props.sites.list}
+                          zoneId={this.props.zoneId}
+                          getZone={this.props.getZone}
+                        />
                       </div>
                     </div>
                   </div>
                   <div className="tab-pane" id="settingZone">
                     <div className="row">
                       <div className="col-lg-12">
-                        {/* BOX: FORM OF CREATE A NEW ZONE */}
-                        <div className="box">
-                          <div className="box-header with-border">
-                            <h3 className="box-title">Tag Setting</h3>
-                            <div className="box-tools pull-right">
-                              <button
-                                type="button" className="btn btn-box-tool"
-                                data-widget="collapse"
-                              >
-                                <i className="fa fa-minus" />
-                              </button>
-                            </div>
-                          </div>
-                          {/* /.box-header */}
-                          <ZoneSettingForm
-                            zone={this.props.zones && this.props.zones.editing}
-                            updateZone={this.props.updateZone}
-                            zoneId={this.props.zoneId}
-                            getZone={this.props.getZone}
-                          />
-                        </div>
-                        {/* /.col */}
+                        <ZoneSettingForm
+                          zone={this.props.zones && this.props.zones.editing}
+                          updateZone={this.props.updateZone}
+                          zoneId={this.props.zoneId}
+                          getZone={this.props.getZone}
+                        />
                       </div>
                     </div>
                   </div>

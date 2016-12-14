@@ -189,7 +189,7 @@ class ListShare extends Component {
     return (
       <div className="row">
         <div className="col-sm-6">
-          <div className="box box-solid box-primary">
+          <div className="box">
             <div className="box-header">
               <h3 className="box-title">List Share of Zone</h3>
             </div>
@@ -232,7 +232,7 @@ class ListShare extends Component {
         </div>
         <div className="col-sm-6" id="shareForm">
           {this.state.showEdit === true ? (
-            <div className="box box-solid box-primary">
+            <div className="box">
               <div className="box-header">
                 <h3 className="box-title">Edit Share</h3>
               </div>
@@ -280,21 +280,14 @@ class ListShare extends Component {
           </div>
           }
           {this.state.showCreate === false && this.state.showEdit === false ? (
-            <div className="form-group">
-              <div className="col-sm-3">
-                <button
-                  type="button"
-                  id="createShareZone"
-                  onClick={(event) => this.addShare(event)}
-                  className="btn btn-block btn-info btn-sm"
-                >
-                  Create Share
-                </button>
-              </div>
-              <div className="col-sm-9">
-                &nbsp;
-              </div>
-            </div>
+            <button
+              type="button"
+              id="createShareZone"
+              onClick={(event) => this.addShare(event)}
+              className="btn btn-primary"
+            >
+              Create Share
+            </button>
           ) : ('')}
         </div>
       </div>

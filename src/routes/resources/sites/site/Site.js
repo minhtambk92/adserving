@@ -18,7 +18,7 @@ import { getChannels, createChannel } from '../../../../actions/channels';
 import { setPageZoneActiveTab } from '../../../../actions/pages/zones';
 import { setPageChannelActiveTab } from '../../../../actions/pages/channels';
 import { createShare } from '../../../../actions/shares';
-import { createOptionChannel } from '../../../../actions/optionChannels'
+import { createOptionChannel } from '../../../../actions/optionChannels';
 import Layout from '../../../../components/Layout';
 import ListZoneOfSite from '../ListZoneOfSite';
 import ListChannelOfSite from '../ListChannelOfSite';
@@ -99,29 +99,15 @@ class Site extends Component {
                     <div className="row">
                       <section className="col-lg-12">
                         {/* BOX: FORM OF CREATE NEW WEBSITE */}
-                        <div className="box">
-                          <div className="box-header with-border">
-                            <h3 className="box-title">Change site information</h3>
-                            <div className="box-tools pull-right">
-                              <button
-                                type="button" className="btn btn-box-tool"
-                                data-widget="collapse"
-                              >
-                                <i className="fa fa-minus" />
-                              </button>
-                            </div>
-                          </div>
-                          {/* /.box-header */}
-                          <UpdateSiteForm
-                            site={this.props.sites && this.props.sites.editing}
-                            updateSite={this.props.updateSite}
-                            deleteSite={this.props.deleteSite}
-                            siteId={this.props.siteId}
-                            getSite={this.props.getSite}
-                            sites={this.props.sites}
-                            checkSitesByDomain={this.props.checkSitesByDomain}
-                          />
-                        </div>
+                        <UpdateSiteForm
+                          site={this.props.sites && this.props.sites.editing}
+                          updateSite={this.props.updateSite}
+                          deleteSite={this.props.deleteSite}
+                          siteId={this.props.siteId}
+                          getSite={this.props.getSite}
+                          sites={this.props.sites}
+                          checkSitesByDomain={this.props.checkSitesByDomain}
+                        />
                         {/* /.col */}
                       </section>
                     </div>
