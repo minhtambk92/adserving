@@ -430,7 +430,7 @@ class OptionBannerForm extends Component {
                   htmlFor="inputBannerIsIFrame"
                   className="col-sm-2 control-label"
                 >Count View Banner</label>
-                <div className="col-sm-8">
+                <div className="col-sm-8 checkbox">
                   <ICheck
                     type="checkbox" id="inputBannerIsCountView" className="form-control"
                     ref={c => {
@@ -444,7 +444,7 @@ class OptionBannerForm extends Component {
                   htmlFor="inputBannerIsFixIE"
                   className="col-sm-2 control-label"
                 >Fix IE(User for banner fail in IE)</label>
-                <div className="col-sm-8">
+                <div className="col-sm-8 checkbox">
                   <ICheck
                     type="checkbox" id="inputBannerIsFixIE" className="form-control"
                     ref={c => {
@@ -458,7 +458,7 @@ class OptionBannerForm extends Component {
                   htmlFor="inputBannerIsDefault"
                   className="col-sm-2 control-label"
                 >Is Default(Banner default)</label>
-                <div className="col-sm-8">
+                <div className="col-sm-8 checkbox">
                   <ICheck
                     type="checkbox" id="inputBannerIsDefault" className="form-control"
                     ref={c => {
@@ -472,7 +472,7 @@ class OptionBannerForm extends Component {
                   htmlFor="inputBannerIsRelative"
                   className="col-sm-2 control-label"
                 >Relative()</label>
-                <div className="col-sm-8">
+                <div className="col-sm-8 checkbox">
                   <ICheck
                     type="checkbox" id="inputBannerIsRelative" className="form-control"
                     ref={c => {
@@ -521,7 +521,7 @@ class OptionBannerForm extends Component {
                   htmlFor="inputIsImpressionsBooked"
                   className="col-sm-2 control-label"
                 >Impressions Booked</label>
-                <div className="col-sm-1">
+                <div className="col-sm-1 checkbox">
                   <ICheck
                     type="checkbox" id="inputIsImpressionsBooked" className="form-control"
                     ref={c => {
@@ -529,7 +529,7 @@ class OptionBannerForm extends Component {
                     }}
                   />
                 </div>
-                <div className="col-sm-9">
+                <div className="col-sm-9 checkbox">
                   Unlimited
                 </div>
               </div>
@@ -556,7 +556,7 @@ class OptionBannerForm extends Component {
                   htmlFor="inputIsClicksBooked"
                   className="col-sm-2 control-label"
                 >Clicks Booked</label>
-                <div className="col-sm-1">
+                <div className="col-sm-1 checkbox">
                   <ICheck
                     type="checkbox" id="inputIsClicksBooked" className="form-control"
                     ref={c => {
@@ -564,7 +564,7 @@ class OptionBannerForm extends Component {
                     }}
                   />
                 </div>
-                <div className="col-sm-9">Unlimited</div>
+                <div className="col-sm-9 checkbox">Unlimited</div>
               </div>
               {this.state.showClicksBooked === true ? (
                 <div className="form-group">
@@ -608,7 +608,7 @@ class OptionBannerForm extends Component {
                   htmlFor="inputIsActivationDate"
                   className="col-sm-2 control-label"
                 >Activation Date</label>
-                <div className="col-sm-1">
+                <div className="col-sm-1 checkbox">
                   <ICheck
                     type="checkbox" id="inputIsActivationDate" className="form-control"
                     ref={c => {
@@ -616,7 +616,7 @@ class OptionBannerForm extends Component {
                     }}
                   />
                 </div>
-                <div className="col-sm-9">Active Immediately</div>
+                <div className="col-sm-9 checkbox">Active Immediately</div>
               </div>
               { this.state.showActivationDate === true ? (
                 <div className="form-group has-feedback">
@@ -645,7 +645,7 @@ class OptionBannerForm extends Component {
                   htmlFor="inputIsExpirationDate"
                   className="col-sm-2 control-label"
                 >Expiration Date</label>
-                <div className="col-sm-1">
+                <div className="col-sm-1 checkbox">
                   <ICheck
                     type="checkbox" id="inputIsExpirationDate" className="form-control"
                     ref={c => {
@@ -653,7 +653,7 @@ class OptionBannerForm extends Component {
                     }}
                   />
                 </div>
-                <div className="col-sm-9">Dont Expire</div>
+                <div className="col-sm-9 checkbox">Dont Expire</div>
               </div>
               {this.state.showExpirationDate === true ? (
                 <div className="form-group has-feedback">

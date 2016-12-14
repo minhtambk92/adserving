@@ -128,7 +128,7 @@ class CreateAdvertiserForm extends Component {
           {/* isEmailStatus */}
           <div className="form-group">
             <div className="col-sm-2">&nbsp;</div>
-            <div className="col-sm-2">
+            <div className="col-sm-2 checkbox">
               <ICheck
                 type="checkbox" id="inputAdvertiserIsEmailStatus" className="form-control"
                 ref={c => {
@@ -145,7 +145,7 @@ class CreateAdvertiserForm extends Component {
           {/* isEmailReport */}
           <div className="form-group">
             <div className="col-sm-2">&nbsp;</div>
-            <div className="col-sm-2">
+            <div className="col-sm-2 checkbox">
               <ICheck
                 type="checkbox" id="inputAdvertiserIsEmailReport" className="form-control"
                 ref={c => {

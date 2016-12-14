@@ -489,7 +489,7 @@ class UpdateBannerForm extends Component {
             htmlFor="inputBannerIsIFrame"
             className="col-sm-2 control-label"
           >Use iframe</label>
-          <div className="col-sm-10">
+          <div className="col-sm-10 checkbox">
             <ICheck
               type="checkbox" id="inputBannerIsIFrame" className="form-control"
               ref={c => {
