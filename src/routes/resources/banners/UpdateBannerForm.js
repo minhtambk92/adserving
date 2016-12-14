@@ -45,9 +45,15 @@ class UpdateBannerForm extends Component {
     } = nextProps.banner && (nextProps.banner || {});
     this.state.keyWord = keyword;
     this.inputBannerName.value = name;
-    this.inputBannerWidth.value = width;
-    this.inputBannerHeight.value = height;
-    this.inputBannerWeight.value = weight;
+    if (width) {
+      this.inputBannerWidth.value = width;
+    }
+    if (height) {
+      this.inputBannerHeight.value = height;
+    }
+    if (weight) {
+      this.inputBannerWeight.value = weight;
+    }
     this.inputBannerDescription.value = description;
     this.inputBannerStatus.value = status;
     this.inputChannelId.value = channelId;
