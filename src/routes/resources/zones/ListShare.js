@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import ListShareForm from './ShareForm';
+import ShareForm from './ShareForm';
 import Link from '../../../components/Link';
 import { DataTables, ICheck } from '../../../components/UI/';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -234,7 +234,7 @@ class ListShare extends Component {
           {this.state.showEdit === true ? (
             <div className="box">
               <div className="editShare">
-                <ListShareForm
+                <ShareForm
                   id={this.state.share.id}
                   childZone={this.state.share}
                   index={1}
@@ -252,7 +252,7 @@ class ListShare extends Component {
           {this.state.showCreate === true && this.state.showEdit === false &&
           <div className="box">
             <div className="shareZoneForm">
-              <ListShareForm
+              <ShareForm
                 index={1}
                 key={1}
               />
