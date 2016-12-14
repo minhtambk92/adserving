@@ -115,7 +115,7 @@ class Resource extends Component {
           <div className="row">
             <section className="col-lg-12">
               {/* BOX: UPDATE */}
-              <div className="box box-primary">
+              <div className="box">
                 <div className="box-header with-border">
                   <h3 className="box-title">Change resource information</h3>
                   <div className="box-tools pull-right">
