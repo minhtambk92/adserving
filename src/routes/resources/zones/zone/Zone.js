@@ -122,6 +122,10 @@ class Zone extends Component {
     this.setState({ arrShare: arr[0] });
   }
 
+  setTabPlacement() {
+    this.props.setPageZoneActiveTab('addPlacement');
+  }
+
   filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (allPlacement.length === 0) {
       return [];
@@ -186,7 +190,11 @@ class Zone extends Component {
                     <a href="#shareZone" data-toggle="tab">Share</a>
                   </li>
                   <li>
-                    <a href="#addPlacement" data-toggle="tab">Add Placement</a>
+                    <a
+                      href="#addPlacement"
+                      data-toggle="tab"
+                      onClick={event => this.setTabPlacement(event)}
+                    >Add Placement</a>
                   </li>
                 </ul>
 
