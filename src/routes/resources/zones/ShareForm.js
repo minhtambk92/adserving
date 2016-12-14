@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-class ListShareForm extends Component {
+class ShareForm extends Component {
 
   static propTypes = {
     index: PropTypes.number,
@@ -88,4 +88,4 @@ class ListShareForm extends Component {
   }
 }
 
-export default ListShareForm;
+export default ShareForm;

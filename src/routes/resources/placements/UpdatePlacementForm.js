@@ -32,9 +32,15 @@ class UpdatePlacementForm extends Component {
     this.inputPlacementName.value = name;
     document.getElementById('inputPlacementStartTime').value = moment(new Date(startTime)).format('L');
     document.getElementById('inputPlacementEndTime').value = moment(new Date(endTime)).format('L');
-    this.inputPlacementSizeWidth.value = sizeWidth;
-    this.inputPlacementSizeHeight.value = sizeHeight;
-    this.inputPlacementWeight.value = weight;
+    if (sizeWidth) {
+      this.inputPlacementSizeWidth.value = sizeHeight;
+    }
+    if (sizeHeight) {
+      this.inputPlacementSizeHeight.value = sizeHeight;
+    }
+    if (weight) {
+      this.inputPlacementWeight.value = weight;
+    }
     this.inputPlacementDescription.value = description;
     this.inputCampaign.value = campaignId;
     this.inputPlacementStatus.value = status;
@@ -185,7 +191,7 @@ class UpdatePlacementForm extends Component {
           </label>
           <div className="col-sm-10">
             <input
-              type="text" className="form-control" id="inputPlacementSizeWidth"
+              type="number" className="form-control" id="inputPlacementSizeWidth"
               placeholder="300"
               ref={c => {
                 this.inputPlacementSizeWidth = c;
@@ -200,7 +206,7 @@ class UpdatePlacementForm extends Component {
           </label>
           <div className="col-sm-10">
             <input
-              type="text" className="form-control" id="inputPlacementSizeHeight"
+              type="number" className="form-control" id="inputPlacementSizeHeight"
               placeholder="300"
               ref={c => {
                 this.inputPlacementSizeHeight = c;
