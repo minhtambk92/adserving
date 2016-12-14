@@ -181,20 +181,20 @@ class Zone extends Component {
               <div className="nav-tabs-custom zone-edit-box">
                 <ul className="nav nav-tabs">
                   <li>
-                    <a href="#editZone" data-toggle="tab">Edit Zone</a>
+                    <a href="#editZone" data-toggle="tab">Edit</a>
                   </li>
                   <li>
-                    <a href="#settingZone" data-toggle="tab">Setting</a>
+                    <a href="#settingZone" data-toggle="tab">Settings</a>
                   </li>
                   <li className="active">
-                    <a href="#shareZone" data-toggle="tab">Share</a>
+                    <a href="#shareZone" data-toggle="tab">Shares</a>
                   </li>
                   <li>
                     <a
                       href="#addPlacement"
                       data-toggle="tab"
                       onClick={event => this.setTabPlacement(event)}
-                    >Add Placement</a>
+                    >Placements</a>
                   </li>
                 </ul>
 
@@ -236,31 +236,27 @@ class Zone extends Component {
 
                   <div className="tab-pane" id="addPlacement">
                     <div className="row">
-                      <div className="col-lg-12">
-                        <div className="form-horizontal">
-                          <div className="form-group">
-                            <label
-                              className="col-sm-3 control-label"
-                              htmlFor="inputSelectValue"
-                            >Choose Share Zone</label>
-                            <div className="col-sm-9">
-                              <select
-                                id="inputSelectShare" className="form-control"
-                                ref={c => {
-                                  this.inputSelectShare = c;
-                                }}
-                                onChange={event => this.getFilteredShare(event)}
-                              >
-                                {this.props.zones.editing && this.props.zones.editing.shares &&
-                                this.props.zones.editing.shares.map((option) => (
-                                  <option
-                                    key={option.id}
-                                    value={option.id}
-                                  >{option.name}</option>
-                                ))}
-                              </select>
-                            </div>
-                          </div>
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <label
+                            className="control-label"
+                            htmlFor="inputSelectValue"
+                          >Choose a share</label>
+                          <select
+                            id="inputSelectShare" className="form-control"
+                            ref={c => {
+                              this.inputSelectShare = c;
+                            }}
+                            onChange={event => this.getFilteredShare(event)}
+                          >
+                            {this.props.zones.editing && this.props.zones.editing.shares &&
+                            this.props.zones.editing.shares.map((option) => (
+                              <option
+                                key={option.id}
+                                value={option.id}
+                              >{option.name}</option>
+                            ))}
+                          </select>
                         </div>
                       </div>
                     </div>
