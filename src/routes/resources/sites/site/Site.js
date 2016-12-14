@@ -94,137 +94,127 @@ class Site extends Component {
                     </a>
                   </li>
                 </ul>
+
                 <div className="tab-content">
                   <div className="tab-pane" id="editSite">
-                    <div className="row">
-                      <section className="col-lg-12">
-                        {/* BOX: FORM OF CREATE NEW WEBSITE */}
-                        <UpdateSiteForm
-                          site={this.props.sites && this.props.sites.editing}
-                          updateSite={this.props.updateSite}
-                          deleteSite={this.props.deleteSite}
-                          siteId={this.props.siteId}
-                          getSite={this.props.getSite}
-                          sites={this.props.sites}
-                          checkSitesByDomain={this.props.checkSitesByDomain}
-                        />
-                        {/* /.col */}
-                      </section>
-                    </div>
+                    {/* BOX: FORM OF CREATE NEW WEBSITE */}
+                    <UpdateSiteForm
+                      site={this.props.sites.editing}
+                      updateSite={this.props.updateSite}
+                      deleteSite={this.props.deleteSite}
+                      siteId={this.props.siteId}
+                      getSite={this.props.getSite}
+                      sites={this.props.sites}
+                      checkSitesByDomain={this.props.checkSitesByDomain}
+                    />
                   </div>
+
                   <div className="tab-pane" id="addZone">
                     <div className="row">
-                      <div className="col-lg-12">
-                        <div className="row">
-                          <section className="col-lg-5">
-                            {/* BOX: FORM OF CREATE A NEW ZONE */}
-                            <div className="box">
-                              <div className="box-header with-border">
-                                <h3 className="box-title">Create New Zone</h3>
-                                <div className="box-tools pull-right">
-                                  <button
-                                    type="button" className="btn btn-box-tool"
-                                    data-widget="collapse"
-                                  >
-                                    <i className="fa fa-minus" />
-                                  </button>
-                                </div>
-                              </div>
-                              {/* /.box-header */}
-                              <CreateZoneInSite
-                                createZone={this.props.createZone}
-                                getSite={this.props.getSite}
-                                siteId={this.props.siteId}
-                              />
+                      <div className="col-lg-5">
+                        {/* BOX: FORM OF CREATE A NEW ZONE */}
+                        <div className="box">
+                          <div className="box-header with-border">
+                            <h3 className="box-title">Create New Zone</h3>
+                            <div className="box-tools pull-right">
+                              <button
+                                type="button" className="btn btn-box-tool"
+                                data-widget="collapse"
+                              >
+                                <i className="fa fa-minus" />
+                              </button>
                             </div>
-                            {/* /.col */}
-                          </section>
-                          <section className="col-lg-7">
-                            {/* BOX: LIST OF ZONES */}
-                            <div className="box">
-                              <div className="box-header with-border">
-                                <h3 className="box-title">
-                                  List zones of Site: {this.props.sites.editing ?
-                                  this.props.sites.editing.name : '...'}
-                                </h3>
-                              </div>
-                              {/* /.box-header */}
-                              <div className="box-body">
-                                <ListZoneOfSite
-                                  list={this.props.sites.editing &&
-                                      this.props.sites.editing.zones &&
-                                      this.props.sites.editing.zones}
-                                  setPageZoneActiveTab={this.props.setPageZoneActiveTab}
-                                  createZone={this.props.createZone}
-                                  createShare={this.props.createShare}
-                                  zones={this.props.zones}
-                                  getSite={this.props.getSite}
-                                  siteId={this.props.siteId}
-                                />
-                              </div>
-                              {/* /.box-body */}
-                            </div>
-                            {/* /.box */}
-                          </section>
+                          </div>
+                          {/* /.box-header */}
+                          <CreateZoneInSite
+                            createZone={this.props.createZone}
+                            getSite={this.props.getSite}
+                            siteId={this.props.siteId}
+                          />
                         </div>
+                        {/* /.col */}
+                      </div>
+
+                      <div className="col-lg-7">
+                        {/* BOX: LIST OF ZONES */}
+                        <div className="box">
+                          <div className="box-header with-border">
+                            <h3 className="box-title">
+                              List zones of Site: {this.props.sites.editing ?
+                              this.props.sites.editing.name : '...'}
+                            </h3>
+                          </div>
+                          {/* /.box-header */}
+                          <div className="box-body">
+                            <ListZoneOfSite
+                              list={this.props.sites.editing && this.props.sites.editing.zones}
+                              setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                              createZone={this.props.createZone}
+                              createShare={this.props.createShare}
+                              zones={this.props.zones}
+                              getSite={this.props.getSite}
+                              siteId={this.props.siteId}
+                            />
+                          </div>
+                          {/* /.box-body */}
+                        </div>
+                        {/* /.box */}
                       </div>
                     </div>
                   </div>
+
                   <div className="active tab-pane" id="addChannel">
                     <div className="row">
-                      <div className="col-lg-12">
-                        <div className="row">
-                          <section className="col-lg-6">
-                            {/* BOX: FORM OF CREATE A NEW CHANNEL */}
-                            <div className="box">
-                              <div className="box-header with-border">
-                                <h3 className="box-title">Create New Channel</h3>
-                                <div className="box-tools pull-right">
-                                  <button
-                                    type="button" className="btn btn-box-tool"
-                                    data-widget="collapse"
-                                  >
-                                    <i className="fa fa-minus" />
-                                  </button>
-                                </div>
-                              </div>
-                              {/* /.box-header */}
-                              <CreateChannelForm
-                                createChannel={this.props.createChannel}
-                                siteId={this.props.siteId}
-                                getSite={this.props.getSite}
-                              />
+                      <div className="col-lg-6">
+                        {/* BOX: FORM OF CREATE A NEW CHANNEL */}
+                        <div className="box">
+                          <div className="box-header with-border">
+                            <h3 className="box-title">Create New Channel</h3>
+                            <div className="box-tools pull-right">
+                              <button
+                                type="button" className="btn btn-box-tool"
+                                data-widget="collapse"
+                              >
+                                <i className="fa fa-minus" />
+                              </button>
                             </div>
-                            {/* /.col */}
-                          </section>
-                          <section className="col-lg-6">
-                            {/* BOX: LIST OF ZONES */}
-                            <div className="box">
-                              <div className="box-header with-border">
-                                <h3 className="box-title">
-                                  List channels of Site: {this.props.sites.editing ?
-                                  this.props.sites.editing.name : '...'}
-                                </h3>
-                              </div>
-                              {/* /.box-header */}
-                              <div className="box-body">
-                                <ListChannelOfSite
-                                  list={this.props.sites.editing &&
-                                  this.props.sites.editing.channels &&
-                                  this.props.sites.editing.channels}
-                                  setPageChannelActiveTab={this.props.setPageChannelActiveTab}
-                                  createChannel={this.props.createChannel}
-                                  channels={this.props.channels}
-                                  siteId={this.props.siteId}
-                                  createOptionChannel={this.props.createOptionChannel}
-                                  getSite={this.props.getSite}
-                                />
-                              </div>
-                              {/* /.box-body */}
-                            </div>
-                            {/* /.box */}
-                          </section>
+                          </div>
+                          {/* /.box-header */}
+                          <CreateChannelForm
+                            createChannel={this.props.createChannel}
+                            siteId={this.props.siteId}
+                            getSite={this.props.getSite}
+                          />
                         </div>
+                        {/* /.col */}
+                      </div>
+
+                      <div className="col-lg-6">
+                        {/* BOX: LIST OF ZONES */}
+                        <div className="box">
+                          <div className="box-header with-border">
+                            <h3 className="box-title">
+                              List channels of Site: {this.props.sites.editing ?
+                              this.props.sites.editing.name : '...'}
+                            </h3>
+                          </div>
+                          {/* /.box-header */}
+                          <div className="box-body">
+                            <ListChannelOfSite
+                              list={this.props.sites.editing &&
+                              this.props.sites.editing.channels &&
+                              this.props.sites.editing.channels}
+                              setPageChannelActiveTab={this.props.setPageChannelActiveTab}
+                              createChannel={this.props.createChannel}
+                              channels={this.props.channels}
+                              siteId={this.props.siteId}
+                              createOptionChannel={this.props.createOptionChannel}
+                              getSite={this.props.getSite}
+                            />
+                          </div>
+                          {/* /.box-body */}
+                        </div>
+                        {/* /.box */}
                       </div>
                     </div>
                   </div>
