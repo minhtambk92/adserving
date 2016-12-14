@@ -86,125 +86,123 @@ class UpdateUserForm extends Component {
 
     return (
       <form className="form-horizontal">
-        <div className="box-body">
-          {/* email */}
-          <div className="form-group">
-            <label
-              htmlFor="inputUserEmail"
-              className="col-sm-2 control-label"
-            >Email</label>
-            <div className="col-sm-10">
-              <input
-                type="text" className="form-control" id="inputUserEmail"
-                placeholder="contact@dantri.com.vn"
-                ref={c => {
-                  this.inputUserEmail = c;
-                }}
-              />
-            </div>
+        {/* email */}
+        <div className="form-group">
+          <label
+            htmlFor="inputUserEmail"
+            className="col-sm-2 control-label"
+          >Email</label>
+          <div className="col-sm-10">
+            <input
+              type="text" className="form-control" id="inputUserEmail"
+              placeholder="contact@dantri.com.vn"
+              ref={c => {
+                this.inputUserEmail = c;
+              }}
+            />
           </div>
-          {/* role */}
-          <div className="form-group">
-            <label
-              htmlFor="inputUserRoles"
-              className="col-sm-2 control-label"
-            >Role</label>
-            <div className="col-sm-10">
-              <Select2
-                id="inputUserRoles"
-                className="form-control"
-                style={{ width: '100%' }}
-                data-placeholder="Select roles"
-                defaultValue={this.state.currentRoles}
-                multiple
-                ref={c => {
-                  this.inputUserRoles = c;
-                }}
-              >
-                <optgroup>
-                  {roleList.map(role => (
-                    <option
-                      key={role.id} value={role.uniqueName}
-                    >{role.name}</option>
-                  ))}
-                </optgroup>
-              </Select2>
-            </div>
+        </div>
+        {/* role */}
+        <div className="form-group">
+          <label
+            htmlFor="inputUserRoles"
+            className="col-sm-2 control-label"
+          >Role</label>
+          <div className="col-sm-10">
+            <Select2
+              id="inputUserRoles"
+              className="form-control"
+              style={{ width: '100%' }}
+              data-placeholder="Select roles"
+              defaultValue={this.state.currentRoles}
+              multiple
+              ref={c => {
+                this.inputUserRoles = c;
+              }}
+            >
+              <optgroup>
+                {roleList.map(role => (
+                  <option
+                    key={role.id} value={role.uniqueName}
+                  >{role.name}</option>
+                ))}
+              </optgroup>
+            </Select2>
           </div>
-          {/* password */}
-          <div className="form-group">
-            <label
-              htmlFor="inputUserPassword"
-              className="col-sm-2 control-label"
-            >Password</label>
-            <div className="col-sm-10">
-              <input
-                type="password" className="form-control" id="inputUserPassword"
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                ref={c => {
-                  this.inputUserPassword = c;
-                }}
-              />
-            </div>
+        </div>
+        {/* password */}
+        <div className="form-group">
+          <label
+            htmlFor="inputUserPassword"
+            className="col-sm-2 control-label"
+          >Password</label>
+          <div className="col-sm-10">
+            <input
+              type="password" className="form-control" id="inputUserPassword"
+              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+              ref={c => {
+                this.inputUserPassword = c;
+              }}
+            />
           </div>
-          {/* passwordConfirmation */}
-          <div className="form-group">
-            <label
-              htmlFor="inputUserPasswordConfirmation"
-              className="col-sm-2 control-label"
-            >Password again</label>
-            <div className="col-sm-10">
-              <input
-                type="password" className="form-control"
-                id="inputUserPasswordConfirmation"
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                ref={c => {
-                  this.inputUserPasswordConfirmation = c;
-                }}
-              />
-            </div>
+        </div>
+        {/* passwordConfirmation */}
+        <div className="form-group">
+          <label
+            htmlFor="inputUserPasswordConfirmation"
+            className="col-sm-2 control-label"
+          >Password again</label>
+          <div className="col-sm-10">
+            <input
+              type="password" className="form-control"
+              id="inputUserPasswordConfirmation"
+              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+              ref={c => {
+                this.inputUserPasswordConfirmation = c;
+              }}
+            />
           </div>
-          {/* emailConfirmed */}
-          <div className="form-group">
-            <label
-              htmlFor="inputUserEmailConfirmed"
-              className="col-sm-2 control-label"
-            >Email confirmed</label>
-            <div className="col-sm-10">
-              <select
-                id="inputUserEmailConfirmed"
-                className="form-control"
-                ref={c => {
-                  this.inputUserEmailConfirmed = c;
-                }}
-              >
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-            </div>
+        </div>
+        {/* emailConfirmed */}
+        <div className="form-group">
+          <label
+            htmlFor="inputUserEmailConfirmed"
+            className="col-sm-2 control-label"
+          >Email confirmed</label>
+          <div className="col-sm-10">
+            <select
+              id="inputUserEmailConfirmed"
+              className="form-control"
+              ref={c => {
+                this.inputUserEmailConfirmed = c;
+              }}
+            >
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
           </div>
-          {/* status */}
-          <div className="form-group">
-            <label
-              htmlFor="inputUserStatus"
-              className="col-sm-2 control-label"
-            >Status</label>
-            <div className="col-sm-10">
-              <select
-                id="inputUserStatus"
-                className="form-control"
-                ref={c => {
-                  this.inputUserStatus = c;
-                }}
-              >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
-            </div>
+        </div>
+        {/* status */}
+        <div className="form-group">
+          <label
+            htmlFor="inputUserStatus"
+            className="col-sm-2 control-label"
+          >Status</label>
+          <div className="col-sm-10">
+            <select
+              id="inputUserStatus"
+              className="form-control"
+              ref={c => {
+                this.inputUserStatus = c;
+              }}
+            >
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
           </div>
         </div>
         {/* /.box-body */}
-        <div className="box-footer">
+        <div className="clearfix">
           <Link
             to="/resource/user" className="btn btn-app pull-right"
           ><i className="fa fa-undo" /> Cancel</Link>
