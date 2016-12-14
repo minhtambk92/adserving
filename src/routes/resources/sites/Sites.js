@@ -40,7 +40,6 @@ class Sites extends Component {
   }
 
   render() {
-    const { sites } = this.props;
     return (
       <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
         <div>
@@ -79,7 +78,7 @@ class Sites extends Component {
                 {/* /.box-header */}
                 <div className="box-body">
                   <SiteList
-                    list={sites && sites.list}
+                    list={this.props.sites.list}
                     setPageSiteActiveTab={this.props.setPageSiteActiveTab}
                     createSite={this.props.createSite}
                   />
