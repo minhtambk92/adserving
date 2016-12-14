@@ -181,20 +181,20 @@ class Zone extends Component {
               <div className="nav-tabs-custom zone-edit-box">
                 <ul className="nav nav-tabs">
                   <li>
-                    <a href="#editZone" data-toggle="tab">Edit Zone</a>
+                    <a href="#editZone" data-toggle="tab">Edit</a>
                   </li>
                   <li>
-                    <a href="#settingZone" data-toggle="tab">Setting</a>
+                    <a href="#settingZone" data-toggle="tab">Settings</a>
                   </li>
                   <li className="active">
-                    <a href="#shareZone" data-toggle="tab">Share</a>
+                    <a href="#shareZone" data-toggle="tab">Shares</a>
                   </li>
                   <li>
                     <a
                       href="#addPlacement"
                       data-toggle="tab"
                       onClick={event => this.setTabPlacement(event)}
-                    >Add Placement</a>
+                    >Placements</a>
                   </li>
                 </ul>
 
