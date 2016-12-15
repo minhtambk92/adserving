@@ -55,6 +55,10 @@ class EditShareForm extends Component {
     }
   }
 
+  removeShareFormEdit() {
+    this.props.setStatusShareFormEdit(false);
+  }
+
   render() {
     return (
       <div
@@ -69,7 +73,7 @@ class EditShareForm extends Component {
           <div className="box-tools pull-right">
             <button
               className="btn btn-box-tool remove-share-zone"
-              data-widget="remove"
+              onClick={event => this.removeShareFormEdit(event)}
             >
               <i className="fa fa-times" />
             </button>

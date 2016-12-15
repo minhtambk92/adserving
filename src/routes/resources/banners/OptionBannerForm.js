@@ -346,14 +346,18 @@ class OptionBannerForm extends Component {
     if (isActivationDate === false) {
       activationDate = new Date(moment(new Date(document.getElementById('inputBannerActivationDate').value)).format('YYYY-MM-DD 00:00:00'));
     } else if (isActivationDate === true) {
-      activationDate = new Date();
+      if (this.props.banner.isActivationDate === true) {
+        activationDate = this.props.banner.activationDate;
+      } else {
+        activationDate = new Date();
+      }
     }
     const isExpirationDate = document.getElementById('inputIsExpirationDate').checked;
     let expirationDate = new Date();
     if (isExpirationDate === false) {
-      expirationDate = new Date(moment(new Date(document.getElementById('inputBannerExpirationDate').value)).format('YYYY-MM-DD 00:00:00'));
+      expirationDate = new Date(moment(new Date(document.getElementById('inputBannerExpirationDate').value)).format('YYYY-MM-DD 23:59:59'));
     } else if (isExpirationDate === true) {
-      expirationDate = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00'));
+      expirationDate = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 23:59:59'));
     }
     const banner = { id: this.props.bannerId };
     banner.isCountView = isCountView;

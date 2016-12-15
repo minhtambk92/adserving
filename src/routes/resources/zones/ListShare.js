@@ -31,11 +31,9 @@ class ListShare extends Component {
     super(props, context);
     this.state = {
       share: {},
-      showEdit: false,
       index: 1,
       numberShare: 1,
       arrShare: [],
-      showCreate: false,
     };
   }
 

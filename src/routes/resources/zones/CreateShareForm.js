@@ -40,6 +40,10 @@ class CreateShareForm extends Component {
     this.props.setPageZoneActiveTab('shareZone');
   }
 
+  removeCreateForm() {
+    this.props.setStatusShareFormCreate(false);
+  }
+
   render() {
     return (
       <div
@@ -53,7 +57,7 @@ class CreateShareForm extends Component {
           <div className="box-tools pull-right">
             <button
               className="btn btn-box-tool remove-share-zone"
-              data-widget="remove"
+              onClick={event => this.removeCreateForm(event)}
             >
               <i className="fa fa-times" />
             </button>
