@@ -33,8 +33,8 @@ export function getPlacement(id) {
         placements(where: {id: "${id}"}, limit: 1) {
           id
           name
-          sizeWidth
-          sizeHeight
+          width
+          height
           startTime
           endTime
           weight
@@ -113,8 +113,8 @@ export function getPlacements(args = {
         placements(where: $where, order: $order, limit: $limit) {
           id
           name
-          sizeWidth
-          sizeHeight
+          width
+          height
           startTime
           endTime
           weight
@@ -149,8 +149,8 @@ export function getPlacements(args = {
 
 export function createPlacement({
   name,
-  sizeWidth,
-  sizeHeight,
+  width,
+  height,
   startTime,
   endTime,
   weight,
@@ -164,8 +164,8 @@ export function createPlacement({
         createdPlacement(placement: $placement) {
           id
           name
-          sizeWidth
-          sizeHeight
+          width
+          height
           startTime
           endTime
           weight
@@ -180,8 +180,8 @@ export function createPlacement({
     const { data } = await graphqlRequest(mutation, {
       placement: {
         name,
-        sizeWidth,
-        sizeHeight,
+        width,
+        height,
         startTime,
         endTime,
         weight,
@@ -202,8 +202,8 @@ export function createPlacement({
 export function updatePlacement({
   id,
   name,
-  sizeWidth,
-  sizeHeight,
+  width,
+  height,
   startTime,
   endTime,
   weight,
@@ -217,8 +217,8 @@ export function updatePlacement({
         updatedPlacement(placement: $placement) {
           id
           name
-          sizeWidth
-          sizeHeight
+          width
+          height
           startTime
           endTime
           weight
@@ -234,8 +234,8 @@ export function updatePlacement({
       placement: {
         id,
         name,
-        sizeWidth,
-        sizeHeight,
+        width,
+        height,
         startTime,
         endTime,
         weight,
@@ -261,8 +261,8 @@ export function deletePlacement(id) {
         deletedPlacement(id: "${id}") {
           id
           name
-          sizeWidth
-          sizeHeight
+          width
+          height
           startTime
           endTime
           weight

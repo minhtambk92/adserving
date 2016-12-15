@@ -562,8 +562,8 @@ async function placementFiction() {
       name: 'Placement',
       startTime: new Date(moment().format('YYYY-MM-DD 00:00:00')),
       endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 00:00:00')),
-      sizeWidth: 300,
-      sizeHeight: 300,
+      width: 300,
+      height: 300,
       status: STATUS_ACTIVE,
       weight: 1,
       description: 'placement of Bong Da So',
@@ -635,6 +635,22 @@ async function sharedFiction() {
       zoneId: zone.id,
     });
 
+    await Share.create({
+      name: 'Share 2',
+      html: '<div class="hello"></div>',
+      css: 'css',
+      description: 'Zone 300x600',
+      zoneId: zone.id,
+    });
+
+    await Share.create({
+      name: 'Share 3',
+      html: '<div class="hello"></div>',
+      css: 'css',
+      description: 'Zone 300x250',
+      zoneId: zone.id,
+    });
+
     console.log(chalk.green(`Super ${share.name} is created. Passed!`));
   } else {
     console.log(chalk.green(`${shareQuantity} share Zone(s) found. Passed!`));
@@ -688,7 +704,7 @@ async function bannerFiction() {
       bannerHTMLType: '9',
       isIFrame: true,
       type: 'html',
-      weight: 1,
+      weight: 20,
       description: 'Banner Top of Bong Da So',
       isCountView: false,
       isFixIE: false,
@@ -720,7 +736,7 @@ async function bannerFiction() {
       bannerHTMLType: '',
       isIFrame: true,
       type: 'img',
-      weight: 1,
+      weight: 10,
       description: 'Banner Image',
       isCountView: false,
       isFixIE: false,

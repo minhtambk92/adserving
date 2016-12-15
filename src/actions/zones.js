@@ -68,8 +68,8 @@ export function getZone(id) {
             placements {
               id
               name
-              sizeWidth
-              sizeHeight
+              width
+              height
               startTime
               endTime
               weight
@@ -138,8 +138,8 @@ export function getZones(args = {
             placements {
               id
               name
-              sizeWidth
-              sizeHeight
+              width
+              height
               startTime
               endTime
               weight

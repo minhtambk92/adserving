@@ -7,8 +7,8 @@ const PlacementInputTypeWithoutId = new InputObjectType({
   fields: () => Object.assign(attributeFields(Placement, {
     only: [
       'name',
-      'sizeWidth',
-      'sizeHeight',
+      'width',
+      'height',
       'startTime',
       'endTime',
       'weight',

@@ -21,8 +21,8 @@ const PlacementInputType = new InputObjectType({
   }), {
     // Additional fields
     name: { type: StringType },
-    sizeWidth: { type: IntType },
-    sizeHeight: { type: IntType },
+    width: { type: IntType },
+    height: { type: IntType },
     status: { type: StringType },
   }),
 });

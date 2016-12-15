@@ -22,8 +22,8 @@ class CreatePlacementForm extends Component {
 
   clearInput(event) { // eslint-disable-line no-unused-vars
     this.inputPlacementName.value = null;
-    this.inputPlacementSizeWidth.value = null;
-    this.inputPlacementSizeHeight.value = null;
+    this.inputPlacementWidth.value = null;
+    this.inputPlacementHeight.value = null;
     this.inputPlacementWeight.value = null;
     this.inputPlacementDescription.value = null;
   }
@@ -32,8 +32,8 @@ class CreatePlacementForm extends Component {
     const name = this.inputPlacementName.value;
     const startTime = new Date(moment(new Date(document.getElementById('inputPlacementStartTime').value)).format('YYYY-MM-DD 00:00:00'));
     const endTime = new Date(moment(new Date(document.getElementById('inputPlacementEndTime').value)).format('YYYY-MM-DD 00:00:00'));
-    const sizeWidth = this.inputPlacementSizeWidth.value;
-    const sizeHeight = this.inputPlacementSizeHeight.value;
+    const width = this.inputPlacementWidth.value;
+    const height = this.inputPlacementHeight.value;
     const weight = this.inputPlacementWeight.value;
     const description = this.inputPlacementDescription.value;
     let campaignId = '';
@@ -43,7 +43,7 @@ class CreatePlacementForm extends Component {
       campaignId = this.inputCampaign.value;
     }
     const status = this.inputPlacementStatus.value;
-    if (name && startTime && endTime && sizeHeight && sizeWidth && weight && description) {
+    if (name && startTime && endTime && height && width && weight && description) {
       const now = moment().format('x');
       const start = moment(startTime).format('x');
       const end = moment(endTime).format('x');
@@ -52,8 +52,8 @@ class CreatePlacementForm extends Component {
           name,
           startTime,
           endTime,
-          sizeWidth,
-          sizeHeight,
+          width,
+          height,
           weight,
           description,
           campaignId,
@@ -153,29 +153,29 @@ class CreatePlacementForm extends Component {
 
           <div className="form-group">
             <label
-              htmlFor="inputPlacementSizeWidth"
+              htmlFor="inputPlacementWidth"
               className="col-sm-2 control-label"
             >Size(Width)</label>
             <div className="col-sm-10">
               <input
                 type="number" className="form-control"
-                id="inputPlacementSizeWidth"
+                id="inputPlacementWidth"
                 placeholder="300"
                 ref={c => {
-                  this.inputPlacementSizeWidth = c;
+                  this.inputPlacementWidth = c;
                 }}
               />
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="inputPlacementSizeHeight" className="col-sm-2 control-label">Size(Height)</label>
+            <label htmlFor="inputPlacementHeight" className="col-sm-2 control-label">Size(Height)</label>
             <div className="col-sm-10">
               <input
                 type="number" className="form-control"
-                id="inputPlacementSizeHeight"
+                id="inputPlacementHeight"
                 placeholder="300"
                 ref={c => {
-                  this.inputPlacementSizeHeight = c;
+                  this.inputPlacementHeight = c;
                 }}
               />
             </div>

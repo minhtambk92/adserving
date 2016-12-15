@@ -21,8 +21,8 @@ class UpdatePlacementForm extends Component {
       name,
       startTime,
       endTime,
-      sizeWidth,
-      sizeHeight,
+      width,
+      height,
       weight,
       description,
       campaignId,
@@ -32,11 +32,11 @@ class UpdatePlacementForm extends Component {
     this.inputPlacementName.value = name;
     document.getElementById('inputPlacementStartTime').value = moment(new Date(startTime)).format('L');
     document.getElementById('inputPlacementEndTime').value = moment(new Date(endTime)).format('L');
-    if (sizeWidth) {
-      this.inputPlacementSizeWidth.value = sizeHeight;
+    if (width) {
+      this.inputPlacementWidth.value = height;
     }
-    if (sizeHeight) {
-      this.inputPlacementSizeHeight.value = sizeHeight;
+    if (height) {
+      this.inputPlacementHeight.value = height;
     }
     if (weight) {
       this.inputPlacementWeight.value = weight;
@@ -48,8 +48,8 @@ class UpdatePlacementForm extends Component {
 
   updatePlacement() {
     const name = this.inputPlacementName.value;
-    const sizeWidth = this.inputPlacementSizeWidth.value;
-    const sizeHeight = this.inputPlacementSizeHeight.value;
+    const width = this.inputPlacementWidth.value;
+    const height = this.inputPlacementHeight.value;
     const startTime = document.getElementById('inputPlacementStartTime').value;
     const endTime = document.getElementById('inputPlacementEndTime').value;
     const weight = this.inputPlacementWeight.value;
@@ -78,12 +78,12 @@ class UpdatePlacementForm extends Component {
       placement.description = description;
     }
 
-    if (sizeWidth && sizeWidth !== this.props.placement.sizeWidth) {
-      placement.sizeWidth = sizeWidth;
+    if (width && width !== this.props.placement.width) {
+      placement.width = width;
     }
 
-    if (sizeHeight && sizeHeight !== this.props.placement.sizeHeight) {
-      placement.sizeHeight = sizeHeight;
+    if (height && height !== this.props.placement.height) {
+      placement.height = height;
     }
 
     if (campaignId && campaignId !== this.props.placement.campaignId) {
@@ -186,30 +186,30 @@ class UpdatePlacementForm extends Component {
         </div>
 
         <div className="form-group">
-          <label htmlFor="inputPlacementSizeWidth" className="col-sm-2 control-label">
+          <label htmlFor="inputPlacementWidth" className="col-sm-2 control-label">
             Size (Width)
           </label>
           <div className="col-sm-10">
             <input
-              type="number" className="form-control" id="inputPlacementSizeWidth"
+              type="number" className="form-control" id="inputPlacementWidth"
               placeholder="300"
               ref={c => {
-                this.inputPlacementSizeWidth = c;
+                this.inputPlacementWidth = c;
               }}
             />
           </div>
         </div>
 
         <div className="form-group">
-          <label htmlFor="inputPlacementSizeHeight" className="col-sm-2 control-label">
+          <label htmlFor="inputPlacementHeight" className="col-sm-2 control-label">
             Size (Height)
           </label>
           <div className="col-sm-10">
             <input
-              type="number" className="form-control" id="inputPlacementSizeHeight"
+              type="number" className="form-control" id="inputPlacementHeight"
               placeholder="300"
               ref={c => {
-                this.inputPlacementSizeHeight = c;
+                this.inputPlacementHeight = c;
               }}
             />
           </div>

@@ -49,7 +49,7 @@ class Sites extends Component {
               {/* BOX: FORM OF CREATE A NEW WEBSITE */}
               <div className="box collapsed-box">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Create a new website</h3>
+                  <h3 className="box-title">Add New website</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn btn-box-tool" data-widget="collapse">
                       <i className="fa fa-plus" />
