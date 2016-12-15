@@ -109,7 +109,7 @@ class Banners extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: FORM OF CREATE NEW WEB BANNER */}
+              {/* BOX: FORM OF ADD NEW WEB BANNER */}
               <div className="box collapsed-box">
                 <div className="box-header with-border">
                   <h3 className="box-title">Create a new Banner</h3>

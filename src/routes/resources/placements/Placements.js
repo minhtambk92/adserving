@@ -15,7 +15,7 @@ import {
   getPlacements,
   createPlacement,
   getPlacementsFilters,
-  setPlacementsFilters
+  setPlacementsFilters,
 } from '../../../actions/placements';
 import { getCampaigns } from '../../../actions/campaigns';
 import { setPagePlacementActiveTab } from '../../../actions/pages/placements';
@@ -97,7 +97,7 @@ class Placements extends Component {
               {/* BOX: FORM OF CREATE NEW PlacementS */}
               <div className="box collapsed-box">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Create New Placements</h3>
+                  <h3 className="box-title">Add New Placements</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn btn-box-tool" data-widget="collapse">
                       <i className="fa fa-plus" />

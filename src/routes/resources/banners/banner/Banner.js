@@ -260,7 +260,7 @@ class Banner extends Component {
                         {/* BOX: CREATE */}
                         <div className="box">
                           <div className="box-header with-border">
-                            <h3 className="box-title">Create New Placement</h3>
+                            <h3 className="box-title">Add New Placement</h3>
                             <div className="box-tools pull-right">
                               <button
                                 type="button" className="btn btn-box-tool"
