@@ -38,7 +38,7 @@ class EditShareForm extends Component {
 
   save() {
     const i = this.state.index;
-    const id = $(`.list-zone-share-${i}`).attr('id');
+    const id = $(`.list-zone-share-edit-${i}`).attr('id');
     const name = $('#inputEditShareName').val();
     const css = $('#inputEditShareCSS').val();
     const html = $('#inputEditShareHTML').val();
@@ -62,7 +62,7 @@ class EditShareForm extends Component {
   render() {
     return (
       <div
-        className={`list-zone-shared list-zone-share-${this.props.index}`}
+        className={`list-zone-shared list-zone-share-edit-${this.props.index}`}
         id={this.props.id}
       >
         <div className="box-header with-border">

@@ -34,6 +34,8 @@ class ListShare extends Component {
       index: 1,
       numberShare: 1,
       arrShare: [],
+      countShare: 0,
+      arrCreateShare: [],
     };
   }
 
@@ -158,13 +160,24 @@ class ListShare extends Component {
   editShareZone(data) {
     this.props.setStatusShareFormEdit(true).then(() => {
       if (this.props.page.statusEdit === true) {
+        const length = this.state.numberShare;
+        const count = length + 1;
+        this.setState({ countShare: count });
+        this.setState({ arrShare: [].concat(count) });
         this.setState({ share: data });
       }
     });
   }
 
   addShare() {
-    this.props.setStatusShareFormCreate(true);
+    this.props.setStatusShareFormCreate(true).then(() => {
+      if (this.props.page.statusCreate === true) {
+        const length = this.state.numberShare;
+        const count = length + 1;
+        this.setState({ countShare: count });
+        this.setState({ arrCreateShare: [].concat(count) });
+      }
+    });
   }
 
   render() {
@@ -224,8 +237,9 @@ class ListShare extends Component {
           </div>
         </div>
         <div className="col-sm-12" id="shareForm">
-          {this.props.page.statusEdit === true ? (
-            <div className="box">
+          {this.props.page.statusEdit === true &&
+          this.state.arrShare && this.state.arrShare.map((count) => (
+            <div className="box" key={count}>
               <div className="editShare">
                 <EditShareForm
                   id={this.state.share.id}
@@ -240,24 +254,28 @@ class ListShare extends Component {
                 />
               </div>
             </div>
-          ) : ''}
-          {this.props.page.statusCreate === true && this.props.page.statusEdit === false &&
-          <div className="box">
-            <div className="shareZoneForm">
-              <CreateShareForm
-                id={this.state.share.id}
-                index={1}
-                createShareZone={this.props.createShareZone}
-                getZone={this.props.getZone}
-                zoneId={this.props.zoneId}
-                setPageZoneActiveTab={this.props.setPageZoneActiveTab}
-                setStatusShareFormCreate={this.props.setStatusShareFormCreate}
-                page={this.props.page}
-              />
+          ))}
+          {this.props.page.statusCreate === true && this.state.arrCreateShare
+          && this.state.arrCreateShare.map((count) => (
+            <div className="box" key={count}>
+              <div className="shareZoneForm">
+                <CreateShareForm
+                  id={this.state.share.id}
+                  index={1}
+                  createShareZone={this.props.createShareZone}
+                  getZone={this.props.getZone}
+                  zoneId={this.props.zoneId}
+                  setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                  setStatusShareFormCreate={this.props.setStatusShareFormCreate}
+                  page={this.props.page}
+                />
+              </div>
             </div>
-          </div>
+          ))
           }
-          {this.props.page.statusCreate === false && this.props.page.statusEdit === false ? (
+          {((this.props.page.statusCreate === false && this.props.page.statusEdit === false) ||
+          (this.state.arrCreateShare && this.state.arrCreateShare.length === 0
+          && this.props.page.statusEdit === false)) ? (
             <button
               type="button"
               id="createShareZone"
