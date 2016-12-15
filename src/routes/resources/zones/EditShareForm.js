@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import Link from '../../../components/Link';
 
-class ShareForm extends Component {
+class EditShareForm extends Component {
 
   static propTypes = {
     index: PropTypes.number,
@@ -16,6 +16,8 @@ class ShareForm extends Component {
     removeShare: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
     setCurrentShare: PropTypes.func,
+    setStatusShareFormEdit: PropTypes.func,
+    page: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -25,31 +27,32 @@ class ShareForm extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.childZone) {
+      this.inputEditShareName.value = nextProps.childZone.name;
+      this.inputEditShareCSS.value = nextProps.childZone.css;
+      this.inputEditShareDescription.value = nextProps.childZone.description;
+      this.inputEditShareHTML.value = nextProps.childZone.html;
+    }
+  }
+
   save() {
     const i = this.state.index;
     const id = $(`.list-zone-share-${i}`).attr('id');
-    const name = $(`#inputShareName-${i}`).val();
-    const css = $(`#inputShareCSS-${i}`).val();
-    const html = $(`#inputShareHTML-${i}`).val();
-    const description = $(`#inputShareDescription-${i}`).val();
+    const name = $('#inputEditShareName').val();
+    const css = $('#inputEditShareCSS').val();
+    const html = $('#inputEditShareHTML').val();
+    const description = $('#inputEditShareDescription').val();
     if (id) {
       if (name) {
         this.props.updateShareZone({ id, name, html, css, description }).then(() => {
           this.props.getZone(this.props.zoneId).then(() => {
-            this.setState({ share: {} });
-            this.setState({ showEdit: false });
             this.props.setPageZoneActiveTab('shareZone');
+            this.props.setStatusShareFormEdit(false);
           });
         });
       }
     }
-  }
-  clear() {
-    const i = this.state.index;
-    $(`#inputShareName-${i}`).val('');
-    $(`#inputShareCSS-${i}`).val('');
-    $(`#inputShareHTML-${i}`).val('');
-    $(`#inputShareDescription-${i}`).val('');
   }
 
   render() {
@@ -62,7 +65,7 @@ class ShareForm extends Component {
           <h3
             className="box-title"
           >
-            {this.props.childZone ? (`Edit: ${this.props.childZone.name}`) : ('Add New')}</h3>
+            {`Edit: ${this.props.childZone.name}`}</h3>
           <div className="box-tools pull-right">
             <button
               className="btn btn-box-tool remove-share-zone"
@@ -76,40 +79,46 @@ class ShareForm extends Component {
           <div className={`form-horizontal ListShare-${this.props.index}`}>
             <div className="form-group">
               <label
-                htmlFor={`inputShareName-${this.props.index}`} className="col-sm-2 control-label"
+                htmlFor="inputEditShareName" className="col-sm-2 control-label"
               >Name</label>
               <div className="col-sm-10">
                 <input
-                  type="text" className="form-control" id={`inputShareName-${this.props.index}`}
-                  defaultValue={this.props.childZone ? this.props.childZone.name : ''}
+                  type="text" className="form-control" id="inputEditShareName"
                   placeholder="Name"
+                  ref={c => {
+                    this.inputEditShareName = c;
+                  }}
                 />
               </div>
             </div>
 
             <div className="form-group">
               <label
-                htmlFor={`inputShareHTML-${this.props.index}`} className="col-sm-2 control-label"
+                htmlFor="inputEditShareHTML" className="col-sm-2 control-label"
               >HTML</label>
               <div className="col-sm-10">
                 <textarea
                   className="form-control"
                   rows="3" placeholder="More info..."
-                  id={`inputShareHTML-${this.props.index}`}
-                  defaultValue={this.props.childZone ? this.props.childZone.html : ''}
+                  id="inputEditShareHTML"
+                  ref={c => {
+                    this.inputEditShareHTML = c;
+                  }}
                 />
               </div>
             </div>
 
             <div className="form-group">
               <label
-                htmlFor={`inputShareCSS-${this.props.index}`} className="col-sm-2 control-label"
+                htmlFor="inputEditShareCSS" className="col-sm-2 control-label"
               >CSS</label>
               <div className="col-sm-10">
                 <textarea
-                  className="form-control" id={`inputShareCSS-${this.props.index}`}
+                  className="form-control" id="inputEditShareCSS"
                   rows="3" placeholder="More info..."
-                  defaultValue={this.props.childZone ? this.props.childZone.css : ''}
+                  ref={c => {
+                    this.inputEditShareCSS = c;
+                  }}
                 />
               </div>
             </div>
@@ -121,42 +130,26 @@ class ShareForm extends Component {
               >Description</label>
               <div className="col-sm-10">
                 <textarea
-                  className="form-control" id={`inputShareDescription-${this.props.index}`}
+                  className="form-control" id="inputEditShareDescription"
                   rows="3" placeholder="More info..."
-                  defaultValue={this.props.childZone ? this.props.childZone.description : ''}
+                  ref={c => {
+                    this.inputEditShareDescription = c;
+                  }}
                 />
               </div>
             </div>
           </div>
         </div>
-        {this.props.childZone ? (
-          <div className="box-footer">
-            <Link
-              to="#"
-              className="btn btn-app pull-right"
-              onClick={event => this.save(event)}
-            ><i className="fa fa-floppy-o" /> Save</Link>
-          </div>
-        ) : (
-          <div className="box-footer">
-            <Link
-              to="#"
-              className="btn btn-app pull-right"
-              onClick={event => this.clear(event)}
-            >
-              <i className="fa fa-undo" />
-              Clear
-            </Link>
-            <Link
-              to="#"
-              className="btn btn-app pull-right"
-              onClick={event => this.createShare(event)}
-            ><i className="fa fa-floppy-o" /> Save</Link>
-          </div>
-        )}
+        <div className="box-footer">
+          <Link
+            to="#"
+            className="btn btn-app pull-right"
+            onClick={event => this.save(event)}
+          ><i className="fa fa-floppy-o" /> Save</Link>
+        </div>
       </div>
     );
   }
 }
 
-export default ShareForm;
+export default EditShareForm;

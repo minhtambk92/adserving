@@ -15,7 +15,12 @@ import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getZone, updateZone, deleteZone } from '../../../../actions/zones';
-import { setPageZoneActiveTab, setCurrentShare } from '../../../../actions/pages/zones';
+import {
+  setPageZoneActiveTab,
+  setCurrentShare,
+  setStatusShareFormEdit,
+  setStatusShareFormCreate,
+} from '../../../../actions/pages/zones';
 import { getSites } from '../../../../actions/sites';
 import { getPlacements, createPlacement, getPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
@@ -61,6 +66,9 @@ class Zone extends Component {
     getPlacement: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
     setCurrentShare: PropTypes.func,
+    shares: PropTypes.object,
+    setStatusShareFormEdit: PropTypes.func,
+    setStatusShareFormCreate: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -126,6 +134,10 @@ class Zone extends Component {
     this.props.setPageZoneActiveTab('addPlacement');
   }
 
+  setTabShare() {
+    this.props.setPageZoneActiveTab('shareZone');
+  }
+
   filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (allPlacement.length === 0) {
       return [];
@@ -187,7 +199,10 @@ class Zone extends Component {
                     <a href="#settingZone" data-toggle="tab">Settings</a>
                   </li>
                   <li>
-                    <a href="#shareZone" data-toggle="tab">Shares</a>
+                    <a
+                      href="#shareZone" data-toggle="tab"
+                      onClick={event => this.setTabShare(event)}
+                    >Shares</a>
                   </li>
                   <li>
                     <a
@@ -228,7 +243,12 @@ class Zone extends Component {
                       createShareZone={this.props.createShare}
                       removeShare={this.props.removeShare}
                       setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                      createSharePlacement={this.props.createSharePlacement}
                       setCurrentShare={this.props.setCurrentShare}
+                      page={this.props.page}
+                      shares={this.props.shares}
+                      setStatusShareFormEdit={this.props.setStatusShareFormEdit}
+                      setStatusShareFormCreate={this.props.setStatusShareFormCreate}
                     />
                   </div>
 
@@ -343,6 +363,7 @@ const mapState = (state) => ({
   sites: state.sites,
   placements: state.placements,
   campaigns: state.campaigns,
+  shares: state.shares,
   sharePlacements: state.sharePlacements,
 });
 
@@ -363,6 +384,8 @@ const mapDispatch = {
   getPlacement,
   setPageZoneActiveTab,
   setCurrentShare,
+  setStatusShareFormEdit,
+  setStatusShareFormCreate,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zone));
