@@ -48,7 +48,7 @@ router.post('/logout', (req, res) => {
   return res.sendStatus(202);
 });
 
-router.post('/core-js', async(req, res) => {
+router.post('/core-js', async (req, res) => {
   const corePath = path.join(rootPath, 'public/corejs');
   const builtCorePath = path.join(rootPath, 'build/public/corejs');
   const zoneId = req.body.zoneId;

@@ -71,10 +71,22 @@ class ListShare extends Component {
     const name = `Copy of ${data.name}`;
     const css = data.css;
     const html = data.html;
+    const width = data.width;
+    const height = data.height;
+    const weight = data.weight;
     const description = data.description;
     if (name) {
       const zoneId = this.props.zoneId;
-      this.props.createShareZone({ name, html, css, description, zoneId }).then(() => {
+      this.props.createShareZone({
+        name,
+        html,
+        css,
+        width,
+        height,
+        weight,
+        description,
+        zoneId,
+      }).then(() => {
         if (this.props.shares && this.props.shares.list) {
           const shareId = this.props.shares.list[0].id;
           const arrPlacement = data.placements;
