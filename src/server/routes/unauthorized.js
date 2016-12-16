@@ -4,6 +4,8 @@
 
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import fetch from 'node-fetch';
+import fs from 'fs';
 import { auth } from '../../config';
 import passport from '../authentications/local';
 
@@ -43,6 +45,93 @@ router.post('/logout', (req, res) => {
   res.clearCookie('id_token');
 
   return res.sendStatus(202);
+});
+
+router.post('/core-js', async(req, res) => {
+  try {
+    const zoneId = req.body.zoneId;
+    const coreResponse = await fetch('http://corejs.manhhailua.com/build/Library.min.js');
+    let coreContent = await coreResponse.text();
+
+    const zoneResponse = await fetch(`http://adserving.manhhailua.com/graphql?query={
+      zones(where: {id: "${zoneId}"}, limit: 1) {
+        id
+        name
+        description
+        type
+        html
+        css
+        slot
+        width
+        height
+        shares {
+          id
+          name
+          html
+          css
+          width
+          height
+          weight
+          placements {
+            id
+            name
+            description
+            sizeWidth
+            sizeHeight
+            weight
+            startTime
+            endTime
+            status
+            banners {
+              id
+              name
+              html
+              width
+              height
+              keyword
+              weight
+              description
+              type
+              imageUrl
+              url
+              target
+              adServer
+              bannerHTMLType
+              isIFrame
+              isCountView
+              isFixIE
+              isDefault
+              clickImpression {
+                id
+                clickUrl
+                impressionUrl
+              }
+            }
+          }
+        }
+      }
+    }`);
+
+    const zoneData = await zoneResponse.json();
+    const coreName = `arf-${zoneId}.min.js`;
+    const coreFile = `/home/nginx/domains/static.manhhailua.com/public/corejs/${coreName}`;
+
+    coreContent = coreContent.replace('"{{zoneDataObject}}"', JSON.stringify(zoneData));
+    coreContent = coreContent.replace('{{zoneId}}', zoneId);
+
+    fs.truncateSync(coreFile, 0); // Overwrite
+    fs.writeFileSync(coreFile, coreContent); // Write content to file
+    fs.chmodSync(coreFile, 644); // For read
+
+    res.send(`
+      <!-- Ads Zone -->
+      <zone id="${zoneId}"></zone>
+      <script src="//static.manhhailua.com/corejs/arf-${zoneId}.min.js"></script>
+      <!-- / Ads Zone -->
+    `);
+  } catch (error) {
+    res.send(new Error(error));
+  }
 });
 
 export default router;

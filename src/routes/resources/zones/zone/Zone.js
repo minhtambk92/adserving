@@ -31,6 +31,7 @@ import ListPlacementOfShare from '../ListPlacementOfShare';
 import ListPlacementNotBelongToShare from '../ListPlacementNotBelongToShare';
 import ZoneSettingForm from '../SettingZoneForm';
 import ListShare from '../ListShare';
+import AdsCode from '../AdsCode';
 import s from './Zone.css';
 
 const pageTitle = 'Zone';
@@ -195,6 +196,12 @@ class Zone extends Component {
                       onClick={event => this.setTabPlacement(event)}
                     >Placements</a>
                   </li>
+                  <li>
+                    <a href="#apiData" data-toggle="tab">API Data</a>
+                  </li>
+                  <li>
+                    <a href="#adsCode" data-toggle="tab">Code</a>
+                  </li>
                 </ul>
 
                 <div className="tab-content">
@@ -263,7 +270,7 @@ class Zone extends Component {
 
                     <div className="row">
                       <div className="col-lg-12">
-                        {this.state.arrShare ? (
+                        {this.state.arrShare && (
                           <div className="row">
                             <div className="col-lg-6">
                               {/* BOX: LIST OF Placements */}
@@ -322,9 +329,17 @@ class Zone extends Component {
                               {/* /.box */}
                             </div>
                           </div>
-                        ) : ''}
+                        )}
                       </div>
                     </div>
+                  </div>
+
+                  <div className="tab-pane" id="apiData">
+                    <p>API Data</p>
+                  </div>
+
+                  <div className="tab-pane" id="adsCode">
+                    <AdsCode zone={this.props.zones.editing} />
                   </div>
                 </div>
               </div>
