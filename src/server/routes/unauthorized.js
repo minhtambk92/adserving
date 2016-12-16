@@ -49,10 +49,11 @@ router.post('/logout', (req, res) => {
 });
 
 router.post('/core-js', async (req, res) => {
-  const corePath = path.join(rootPath, 'public/corejs');
-  const builtCorePath = path.join(rootPath, 'build/public/corejs');
+  const coreJsFolderName = 'corejs';
+  const corePath = path.join(rootPath, `public/${coreJsFolderName}`);
+  const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
   const zoneId = req.body.zoneId;
-  const coreResponse = await fetch('http://corejs.manhhailua.com/build/Library.min.js');
+  const coreResponse = await fetch('http://corejs.manhhailua.com/build/Library.js');
   let coreContent = await coreResponse.text();
 
   // Create {rootPath}/public/corejs folder if it is not existed
@@ -65,7 +66,7 @@ router.post('/core-js', async (req, res) => {
     fs.mkdirSync(builtCorePath, 0o755);
   }
 
-  const zoneResponse = await fetch(`http://rsk.quynd.com/graphql?query={
+  const zoneResponse = await fetch(`http://${host}/graphql?query={
     zones(where: {id: "${zoneId}"}, limit: 1) {
       id
       name
@@ -140,7 +141,7 @@ router.post('/core-js', async (req, res) => {
   res.send(`
     <!-- Ads Zone -->
     <zone id="${zoneId}"></zone>
-    <script src="//${host}/corejs/arf-${zoneId}.min.js"></script>
+    <script src="//${host}/${coreJsFolderName}/arf-${zoneId}.min.js"></script>
     <!-- / Ads Zone -->
   `);
 });
