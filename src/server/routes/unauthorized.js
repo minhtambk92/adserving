@@ -47,90 +47,86 @@ router.post('/logout', (req, res) => {
   return res.sendStatus(202);
 });
 
-router.post('/core-js', async(req, res) => {
-  try {
-    const zoneId = req.body.zoneId;
-    const coreResponse = await fetch('http://corejs.manhhailua.com/build/Library.min.js');
-    let coreContent = await coreResponse.text();
+router.post('/core-js', async (req, res) => {
+  const zoneId = req.body.zoneId;
+  const coreResponse = await fetch('http://corejs.manhhailua.com/build/Library.min.js');
+  let coreContent = await coreResponse.text();
 
-    const zoneResponse = await fetch(`http://rsk.quynd.com/graphql?query={
-      zones(where: {id: "${zoneId}"}, limit: 1) {
+  const zoneResponse = await fetch(`http://rsk.quynd.com/graphql?query={
+    zones(where: {id: "${zoneId}"}, limit: 1) {
+      id
+      name
+      description
+      type
+      html
+      css
+      slot
+      width
+      height
+      shares {
         id
         name
-        description
-        type
         html
         css
-        slot
         width
         height
-        shares {
+        weight
+        placements {
           id
           name
-          html
-          css
+          description
           width
           height
           weight
-          placements {
+          startTime
+          endTime
+          status
+          banners {
             id
             name
-            description
+            html
             width
             height
+            keyword
             weight
-            startTime
-            endTime
-            status
-            banners {
+            description
+            type
+            imageUrl
+            url
+            target
+            adServer
+            bannerHTMLType
+            isIFrame
+            isCountView
+            isFixIE
+            isDefault
+            tracks {
               id
-              name
-              html
-              width
-              height
-              keyword
-              weight
-              description
-              type
-              imageUrl
-              url
-              target
-              adServer
-              bannerHTMLType
-              isIFrame
-              isCountView
-              isFixIE
-              isDefault
-              tracks {
-                id
-                clickUrl
-                impressionUrl
-              }
+              clickUrl
+              impressionUrl
             }
           }
         }
       }
-    }`);
+    }
+  }`);
 
-    const zoneData = await zoneResponse.json();
-    const coreName = `arf-${zoneId}.min.js`;
-    const coreFile = `/home/nginx/domains/static.manhhailua.com/public/corejs/${coreName}`;
+  const zoneData = await zoneResponse.json();
+  const coreName = `arf-${zoneId}.min.js`;
+  const coreFile = `/home/nginx/domains/static.manhhailua.com/public/corejs/${coreName}`;
 
-    coreContent = coreContent.replace('"{{zoneDataObject}}"', JSON.stringify(zoneData));
-    coreContent = coreContent.replace('{{zoneId}}', zoneId);
-    // fs.truncateSync(coreFile, 0); // Overwrite
-    fs.writeFileSync(coreFile, coreContent); // Write content to file
-    fs.chmodSync(coreFile, 644); // For read
+  coreContent = coreContent.replace('"{{zoneDataObject}}"', JSON.stringify(zoneData));
+  coreContent = coreContent.replace('{{zoneId}}', zoneId);
 
-    res.send(`
-      <!-- Ads Zone -->
-      <zone id="${zoneId}"></zone>
-      <script src="//static.manhhailua.com/corejs/arf-${zoneId}.min.js"></script>
-      <!-- / Ads Zone -->
-    `);
-  } catch (error) {
-    res.send(new Error(error));
-  }
+  fs.writeFileSync(coreFile, coreContent); // Write content to file
+  fs.chmodSync(coreFile, 0o644); // Chmod to 644
+
+  res.send(`
+    <!-- Ads Zone -->
+    <zone id="${zoneId}"></zone>
+    <script src="//static.manhhailua.com/corejs/arf-${zoneId}.min.js"></script>
+    <!-- / Ads Zone -->
+  `);
 });
 
 export default router;

@@ -28,7 +28,7 @@ class AdsCode extends Component {
 
     const coreUrl = await resp.text();
 
-    this.outputAdsCode.value = coreUrl;
+    this.outputAdsCode.value = await resp.text();
   }
 
   render() {
