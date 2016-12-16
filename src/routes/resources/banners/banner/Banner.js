@@ -246,12 +246,12 @@ class Banner extends Component {
 
                     <div className="row">
                       {this.state.createPlacement === false ? (
-                        <div className="col-sm-2">
+                        <div className="col-sm-6">
                           <button
                             type="button"
                             id="createBannerInPlacement"
                             onClick={(event) => this.createPlacementInBanner(event)}
-                            className="btn btn-block btn-primary"
+                            className="btn btn-primary"
                           >
                             Create Placement
                           </button>

@@ -76,7 +76,7 @@ export function getPlacement(id) {
               name
             }
             channelId
-             track {
+             tracks {
                 id
                 clickUrl
                 impressionUrl
