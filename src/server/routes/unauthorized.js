@@ -5,8 +5,9 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
+import path from 'path';
 import fs from 'fs';
-import { auth } from '../../config';
+import { auth, host, rootPath } from '../../config';
 import passport from '../authentications/local';
 
 const router = express.Router(); // eslint-disable-line new-cap
@@ -47,10 +48,22 @@ router.post('/logout', (req, res) => {
   return res.sendStatus(202);
 });
 
-router.post('/core-js', async (req, res) => {
+router.post('/core-js', async(req, res) => {
+  const corePath = path.join(rootPath, 'public/corejs');
+  const builtCorePath = path.join(rootPath, 'build/public/corejs');
   const zoneId = req.body.zoneId;
   const coreResponse = await fetch('http://corejs.manhhailua.com/build/Library.min.js');
   let coreContent = await coreResponse.text();
+
+  // Create {rootPath}/public/corejs folder if it is not existed
+  if (!fs.existsSync(corePath)) {
+    fs.mkdirSync(corePath, 0o755);
+  }
+
+  // Create {rootPath}/build/public/corejs folder if it is not existed
+  if (!fs.existsSync(builtCorePath)) {
+    fs.mkdirSync(builtCorePath, 0o755);
+  }
 
   const zoneResponse = await fetch(`http://rsk.quynd.com/graphql?query={
     zones(where: {id: "${zoneId}"}, limit: 1) {
@@ -113,18 +126,21 @@ router.post('/core-js', async (req, res) => {
 
   const zoneData = await zoneResponse.json();
   const coreName = `arf-${zoneId}.min.js`;
-  const coreFile = `/home/nginx/domains/static.manhhailua.com/public/corejs/${coreName}`;
+  const coreFile = path.join(corePath, coreName);
+  const builtCoreFile = path.join(builtCorePath, coreName);
 
   coreContent = coreContent.replace('"{{zoneDataObject}}"', JSON.stringify(zoneData));
   coreContent = coreContent.replace('{{zoneId}}', zoneId);
 
   fs.writeFileSync(coreFile, coreContent); // Write content to file
   fs.chmodSync(coreFile, 0o644); // Chmod to 644
+  fs.writeFileSync(builtCoreFile, coreContent); // Copy to build/public folder
+  fs.chmodSync(builtCoreFile, 0o644); // Chmod to 644
 
   res.send(`
     <!-- Ads Zone -->
     <zone id="${zoneId}"></zone>
-    <script src="//static.manhhailua.com/corejs/arf-${zoneId}.min.js"></script>
+    <script src="//${host}/corejs/arf-${zoneId}.min.js"></script>
     <!-- / Ads Zone -->
   `);
 });
