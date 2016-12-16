@@ -118,10 +118,8 @@ router.post('/core-js', async(req, res) => {
   coreContent = coreContent.replace('"{{zoneDataObject}}"', JSON.stringify(zoneData));
   coreContent = coreContent.replace('{{zoneId}}', zoneId);
 
-  fs.writeFileSync(coreFile, coreContent, {
-    mode: '0644',
-    flag: 'w',
-  }); // Write content to file
+  fs.writeFileSync(coreFile, coreContent); // Write content to fileư
+  fs.chmodSync(coreFile, 0o644); // Chmod to 644
 
   res.send(`
     <!-- Ads Zone -->
