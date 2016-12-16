@@ -29,12 +29,23 @@ class CreateShareForm extends Component {
     const name = $('#inputCreateShareName').val();
     const css = $('#inputCreateShareCSS').val();
     const html = $('#inputCreateShareHTML').val();
+    const width = $('#inputCreateShareWidth').val();
+    const height = $('#inputCreateShareHeight').val();
+    const weight = $('#inputCreateShareWeight').val();
     const description = $('#inputCreateShareDescription').val();
     if (name) {
       const zoneId = this.props.zoneId;
-      this.props.createShareZone({ name, html, css, description, zoneId }).then(() => {
-        this.props.getZone(this.props.zoneId);
-      });
+      this.props.createShareZone({
+        name,
+        html,
+        css,
+        width,
+        height,
+        weight,
+        description,
+        zoneId }).then(() => {
+          this.props.getZone(this.props.zoneId);
+        });
     }
     this.props.setStatusShareFormCreate(false);
     this.props.setPageZoneActiveTab('shareZone');
@@ -106,6 +117,51 @@ class CreateShareForm extends Component {
                   rows="3" placeholder="More info..."
                   ref={c => {
                     this.inputCreateShareCSS = c;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputCreateShareWidth" className="col-sm-2 control-label"
+              >Width(px)</label>
+              <div className="col-sm-10">
+                <input
+                  type="number" className="form-control" id="inputCreateShareWidth"
+                  placeholder="300"
+                  ref={c => {
+                    this.inputCreateShareWidth = c;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputCreateShareHeight" className="col-sm-2 control-label"
+              >Height(px)</label>
+              <div className="col-sm-10">
+                <input
+                  type="number" className="form-control" id="inputCreateShareHeight"
+                  placeholder="Height"
+                  ref={c => {
+                    this.inputCreateShareHeight = c;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputCreateShareWeight" className="col-sm-2 control-label"
+              >Weight</label>
+              <div className="col-sm-10">
+                <input
+                  type="number" className="form-control" id="inputCreateShareWeight"
+                  placeholder="Name"
+                  ref={c => {
+                    this.inputCreateShareWeight = c;
                   }}
                 />
               </div>
