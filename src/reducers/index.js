@@ -17,7 +17,7 @@ import users from './users';
 import zones from './zones';
 import channels from './channels';
 import optionChannels from './optionChannels';
-import clickImpressions from './clickImpressions';
+import tracks from './tracks';
 import shares from './shares';
 import sharePlacements from './sharePlacements';
 
@@ -42,7 +42,7 @@ export default combineReducers({
   zones,
   channels,
   optionChannels,
-  clickImpressions,
+  tracks,
   shares,
   sharePlacements,
   page,

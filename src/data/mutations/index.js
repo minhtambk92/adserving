@@ -15,7 +15,7 @@ import zones from './zones';
 import banners from './banners';
 import channels from './channels';
 import optionChannels from './optionChannels';
-import clickImpressions from './clickImpressions';
+import tracks from './tracks';
 import shares from './shares';
 import sharePlacements from './sharePlacements';
 
@@ -34,7 +34,7 @@ const mutations = new ObjectType({
     ...zones,
     ...channels,
     ...optionChannels,
-    ...clickImpressions,
+    ...tracks,
     ...shares,
     ...sharePlacements,
   },

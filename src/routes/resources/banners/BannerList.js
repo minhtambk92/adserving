@@ -13,9 +13,9 @@ class BannerList extends Component {
     banners: PropTypes.object,
     placementBanners: PropTypes.object,
     createPlacementBanner: PropTypes.func,
-    clickImpressions: PropTypes.object,
-    getClickImpressionByBannerId: PropTypes.func,
-    createClickImpression: PropTypes.func,
+    tracks: PropTypes.object,
+    getTrackByBannerId: PropTypes.func,
+    createTrack: PropTypes.func,
   };
 
   onTabClickBanner(event) {
@@ -95,14 +95,14 @@ class BannerList extends Component {
         expirationDate,
         channelId,
       }).then(() => {
-        this.props.getClickImpressionByBannerId(data.id).then(() => {
+        this.props.getTrackByBannerId(data.id).then(() => {
           const bannerId = this.props.banners.list[0].id;
-          if (this.props.clickImpressions) {
-            const arrClickImpressions = this.props.clickImpressions.list;
-            for (let j = 0; j < arrClickImpressions.length; j += 1) {
-              const clickUrl = arrClickImpressions[j].clickUrl;
-              const impressionUrl = arrClickImpressions[j].impressionUrl;
-              this.props.createClickImpression({ clickUrl, impressionUrl, bannerId });
+          if (this.props.tracks) {
+            const arrTracks = this.props.tracks.list;
+            for (let j = 0; j < arrTracks.length; j += 1) {
+              const clickUrl = arrTracks[j].clickUrl;
+              const impressionUrl = arrTracks[j].impressionUrl;
+              this.props.createTrack({ clickUrl, impressionUrl, bannerId });
             }
           }
         });

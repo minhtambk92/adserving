@@ -10,7 +10,7 @@
 import DataType from 'sequelize';
 import Model from '../sequelize';
 
-const ClickImpression = Model.define('ClickImpression', {
+const Track = Model.define('Track', {
 
   id: {
     type: DataType.UUID,
@@ -32,4 +32,4 @@ const ClickImpression = Model.define('ClickImpression', {
 
 });
 
-export default ClickImpression;
+export default Track;

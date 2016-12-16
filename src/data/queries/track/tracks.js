@@ -2,15 +2,15 @@ import {
   GraphQLList as List,
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import ClickImpressionType from '../../types/clickImpression/ClickImpressionType';
-import { ClickImpression } from '../../models';
+import TrackType from '../../types/track/TrackType';
+import { Track } from '../../models';
 
-const clickImpressions = {
-  type: new List(ClickImpressionType),
+const tracks = {
+  type: new List(TrackType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
   }),
-  resolve: resolver(ClickImpression, {
+  resolve: resolver(Track, {
     before(options) {
       const opts = options;
       opts.order = options.order || [];
@@ -20,4 +20,4 @@ const clickImpressions = {
   }),
 };
 
-export default clickImpressions;
+export default tracks;

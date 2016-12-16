@@ -75,7 +75,7 @@ export function getBanner(id) {
               createdAt
               updatedAt
             }
-         clickImpression {
+         tracks {
             id
             clickUrl
             impressionUrl

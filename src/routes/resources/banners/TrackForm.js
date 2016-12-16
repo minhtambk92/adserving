@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 
-class ClickImpressionForm extends Component {
+class TrackForm extends Component {
 
   static propTypes = {
     id: PropTypes.string,
@@ -13,7 +12,7 @@ class ClickImpressionForm extends Component {
 
   render() {
     // Open the portal
-    const className = `clickImpression-${this.props.index}`;
+    const className = `track clickImpression-${this.props.index}`;
     return (
       <div
         className={className}
@@ -56,4 +55,4 @@ class ClickImpressionForm extends Component {
   }
 }
 
-export default ClickImpressionForm;
+export default TrackForm;

@@ -29,7 +29,7 @@ import {
   Zone,
   Banner,
   PlacementBanner,
-  ClickImpression,
+  Track,
   Share,
   SharePlacement,
 } from '../../data/models';
@@ -404,7 +404,7 @@ async function advertiserFiction() {
       email: 'contact@admicro.vn',
       name: 'Admicro',
       status: STATUS_ACTIVE,
-      contact: '0988333777',
+      contact: '0988333888',
       description: 'Đơn vị quảng cáo admicro',
       isEmailReport: false,
       isEmailStatus: false,
@@ -430,7 +430,7 @@ async function campaignFiction() {
     const campaign = await Campaign.create({
       name: 'Campaign',
       startTime: new Date(moment().format('YYYY-MM-DD 00:00:00')),
-      endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 00:00:00')),
+      endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 23:59:59')),
       views: 200000,
       viewPerSession: 20,
       timeResetViewCount: 24,
@@ -512,36 +512,36 @@ async function optionChannelFiction() {
       status: STATUS_ACTIVE,
       channelId: channel.id,
     });
-    // // Create an OptionChannel
-    // await OptionChannel.create({
-    //   logical: 'and',
-    //   name: 'Site - pageUrl',
-    //   type: 'pageUrl',
-    //   comparison: '==',
-    //   value: 'http://www.bongdaso.com',
-    //   status: STATUS_ACTIVE,
-    //   channelId: channel.id,
-    // });
-    // // Create an OptionChannel
-    // await OptionChannel.create({
-    //   logical: 'and',
-    //   name: 'Site - referingPage',
-    //   type: 'referingPage',
-    //   comparison: '!=',
-    //   value: 'http://www.dantri.com.vn',
-    //   status: STATUS_ACTIVE,
-    //   channelId: channel.id,
-    // });
-    // // Create an OptionChannel
-    // const optionChannel = await OptionChannel.create({
-    //   logical: 'or',
-    //   type: 'variable',
-    //   comparison: '==',
-    //   value: 'http://www.bongdaso.com',
-    //   name: 'bongda',
-    //   status: STATUS_ACTIVE,
-    //   channelId: channel.id,
-    // });
+    // Create an OptionChannel
+    await OptionChannel.create({
+      logical: 'and',
+      name: 'Site - pageUrl',
+      type: 'pageUrl',
+      comparison: '==',
+      value: 'http://www.bongdaso.com',
+      status: STATUS_ACTIVE,
+      channelId: channel.id,
+    });
+    // Create an OptionChannel
+    await OptionChannel.create({
+      logical: 'and',
+      name: 'Site - referingPage',
+      type: 'referingPage',
+      comparison: '!=',
+      value: 'http://www.dantri.com.vn',
+      status: STATUS_ACTIVE,
+      channelId: channel.id,
+    });
+    // Create an OptionChannel
+    await OptionChannel.create({
+      logical: 'or',
+      type: 'variable',
+      comparison: '==',
+      value: 'http://www.bongdaso.com',
+      name: 'bongda',
+      status: STATUS_ACTIVE,
+      channelId: channel.id,
+    });
     console.log(chalk.green(`${optionChannel.name} is created. Passed!`));
   } else {
     console.log(chalk.green(`${optionChannelsQuantity} optionChannel(s) found. Passed!`));
@@ -561,7 +561,7 @@ async function placementFiction() {
     const placement = await Placement.create({
       name: 'Placement',
       startTime: new Date(moment().format('YYYY-MM-DD 00:00:00')),
-      endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 00:00:00')),
+      endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 23:59:59')),
       width: 300,
       height: 300,
       status: STATUS_ACTIVE,
@@ -782,25 +782,25 @@ async function placementBannerFiction() {
   }
 }
 
-// ClickImpression Fiction
-async function clickImpressionFiction() {
-  console.log(chalk.grey('Check current number of clickImpressions...'));
-  const clickImpressionsQuantity = await ClickImpression.count();
+// track Fiction
+async function trackFiction() {
+  console.log(chalk.grey('Check current number of tracks...'));
+  const tracksQuantity = await Track.count();
 
-  if (clickImpressionsQuantity === 0) {
-    console.log(chalk.red('No ClickImpression found! Do a fiction...'));
+  if (tracksQuantity === 0) {
+    console.log(chalk.red('No track found! Do a fiction...'));
     // Get id of Banner
     const banner = await Banner.findOne({ where: { name: 'Banner Top' } });
-    // Create an ClickImpression
-    await ClickImpression.create({
+    // Create an track
+    await Track.create({
       clickUrl: 'https://github.com/sequelize/sequelize/issues/4423',
       impressionUrl: 'http://rsk.quynd.com/resource/banner/40e285a8-2b38-491e-a032-011e117b4d22',
       bannerId: banner.id,
     });
 
-    console.log(chalk.green('ClickImpression is created. Passed!'));
+    console.log(chalk.green('track is created. Passed!'));
   } else {
-    console.log(chalk.green(`${clickImpressionsQuantity} clickImpression(s) found. Passed!`));
+    console.log(chalk.green(`${tracksQuantity} track(s) found. Passed!`));
   }
 }
 
@@ -821,7 +821,7 @@ async function fiction() {
   await bannerFiction();
   await sharedPlacementFiction();
   await placementBannerFiction();
-  await clickImpressionFiction();
+  await trackFiction();
   console.log(chalk.magenta(`Your application is now ready at http://${host}/`));
 }
 

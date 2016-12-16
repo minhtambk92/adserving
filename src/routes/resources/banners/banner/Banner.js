@@ -24,10 +24,10 @@ import {
   removeBannerInPlacementBanner,
 } from '../../../../actions/placementBanners';
 import {
-  createClickImpression,
-  deleteClickImpression,
-  updateClickImpression,
-} from '../../../../actions/clickImpressions';
+  createTrack,
+  deleteTrack,
+  updateTrack,
+} from '../../../../actions/tracks';
 import Layout from '../../../../components/Layout';
 import ListPlacementNotBelongBanner from '../ListPlacementNotBelongBanner';
 import ListPlacementOfBanner from '../ListPlacementOfBanner';
@@ -59,9 +59,9 @@ class Banner extends Component {
     getChannels: PropTypes.func,
     channels: PropTypes.object,
     removeBannerInPlacementBanner: PropTypes.func,
-    createClickImpression: PropTypes.func,
-    deleteClickImpression: PropTypes.func,
-    updateClickImpression: PropTypes.func,
+    createTrack: PropTypes.func,
+    deleteTrack: PropTypes.func,
+    updateTrack: PropTypes.func,
 
   };
 
@@ -180,9 +180,9 @@ class Banner extends Component {
                       bannerId={this.props.bannerId}
                       getBanner={this.props.getBanner}
                       channels={this.props.channels.list}
-                      createClickImpression={this.props.createClickImpression}
-                      deleteClickImpression={this.props.deleteClickImpression}
-                      updateClickImpression={this.props.updateClickImpression}
+                      createTrack={this.props.createTrack}
+                      deleteTrack={this.props.deleteTrack}
+                      updateTrack={this.props.updateTrack}
                     />
                   </div>
 
@@ -301,7 +301,7 @@ const mapState = (state) => ({
   campaigns: state.campaigns,
   placements: state.placements,
   channels: state.channels,
-  clickImpressions: state.clickImpressions,
+  tracks: state.tracks,
   placementBanners: state.placementBanners,
 });
 
@@ -316,9 +316,9 @@ const mapDispatch = {
   removeBanner,
   removeBannerInPlacementBanner,
   getChannels,
-  createClickImpression,
-  deleteClickImpression,
-  updateClickImpression,
+  createTrack,
+  deleteTrack,
+  updateTrack,
 };
 
 export default withStyles(s, style, dropZoneStyle)(connect(mapState, mapDispatch)(Banner));
