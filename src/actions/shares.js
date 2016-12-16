@@ -18,6 +18,9 @@ export function getShareByZoneId(id) {
           name
           html
           css
+          width
+          height
+          weight
           description
           zoneId
           createdAt
@@ -51,6 +54,9 @@ export function getShares(args = {
           name
           html
           css
+          width
+          height
+          weight
           description
           zoneId
           createdAt
@@ -81,7 +87,9 @@ export function getShares(args = {
   };
 }
 
-export function createShare({ name, html, css, description, zoneId }) {
+export function createShare({ name, html, css, width,
+  height,
+  weight, description, zoneId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($share: ShareInputTypeWithoutId!) {
@@ -90,6 +98,9 @@ export function createShare({ name, html, css, description, zoneId }) {
           name
           html
           css
+          width
+          height
+          weight
           description
           zoneId
           createdAt
@@ -102,6 +113,9 @@ export function createShare({ name, html, css, description, zoneId }) {
         name,
         html,
         css,
+        width,
+        height,
+        weight,
         description,
         zoneId,
       },
@@ -116,7 +130,9 @@ export function createShare({ name, html, css, description, zoneId }) {
   };
 }
 
-export function updateShare({ id, name, html, css, description, zoneId }) {
+export function updateShare({ id, name, html, css, width,
+  height,
+  weight, description, zoneId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($share: ShareInputType!) {
@@ -125,6 +141,9 @@ export function updateShare({ id, name, html, css, description, zoneId }) {
           name
           html
           css
+          width
+          height
+          weight
           description
           zoneId
           createdAt
@@ -138,6 +157,9 @@ export function updateShare({ id, name, html, css, description, zoneId }) {
         name,
         html,
         css,
+        width,
+        height,
+        weight,
         description,
         zoneId,
       },
@@ -161,6 +183,9 @@ export function deleteShare(id) {
           name
           html
           css
+          width
+          height
+          weight
           description
           zoneId
           createdAt

@@ -562,8 +562,8 @@ async function placementFiction() {
       name: 'Placement',
       startTime: new Date(moment().format('YYYY-MM-DD 00:00:00')),
       endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 23:59:59')),
-      width: 300,
-      height: 300,
+      width: 980,
+      height: 250,
       status: STATUS_ACTIVE,
       weight: 1,
       description: 'placement of Bong Da So',
@@ -588,8 +588,8 @@ async function zoneFiction() {
     // Create an Zone
     const zone = await Zone.create({
       name: 'Zone Top',
-      width: 300,
-      height: 600,
+      width: 980,
+      height: 250,
       sizeText: 'Customer (300 x 600)',
       sizeValue: 'custom',
       slot: 3,
@@ -631,6 +631,9 @@ async function sharedFiction() {
       name: 'Share 1',
       html: '<div class="hello"></div>',
       css: 'css',
+      width: 980,
+      height: 250,
+      weight: 100,
       description: 'Zone 300x300',
       zoneId: zone.id,
     });
@@ -639,6 +642,9 @@ async function sharedFiction() {
       name: 'Share 2',
       html: '<div class="hello"></div>',
       css: 'css',
+      width: 980,
+      height: 250,
+      weight: 100,
       description: 'Zone 300x600',
       zoneId: zone.id,
     });
@@ -647,6 +653,9 @@ async function sharedFiction() {
       name: 'Share 3',
       html: '<div class="hello"></div>',
       css: 'css',
+      width: 980,
+      height: 250,
+      weight: 100,
       description: 'Zone 300x250',
       zoneId: zone.id,
     });

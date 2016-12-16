@@ -7,7 +7,7 @@ import { Share } from '../../models';
 const ShareInputTypeWithoutId = new InputObjectType({
   name: 'ShareInputTypeWithoutId',
   fields: () => Object.assign(attributeFields(Share, {
-    only: ['name', 'html', 'css', 'description', 'zoneId'],
+    only: ['name', 'html', 'css', 'width', 'height', 'weight', 'description', 'zoneId'],
   }), {
     // Additional fields
   }),

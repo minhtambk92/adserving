@@ -53,7 +53,7 @@ router.post('/core-js', async(req, res) => {
     const coreResponse = await fetch('http://corejs.manhhailua.com/build/Library.min.js');
     let coreContent = await coreResponse.text();
 
-    const zoneResponse = await fetch(`http://adserving.manhhailua.com/graphql?query={
+    const zoneResponse = await fetch(`http://rsk.quynd.com/graphql?query={
       zones(where: {id: "${zoneId}"}, limit: 1) {
         id
         name
@@ -76,8 +76,8 @@ router.post('/core-js', async(req, res) => {
             id
             name
             description
-            sizeWidth
-            sizeHeight
+            width
+            height
             weight
             startTime
             endTime
@@ -101,7 +101,7 @@ router.post('/core-js', async(req, res) => {
               isCountView
               isFixIE
               isDefault
-              clickImpression {
+              tracks {
                 id
                 clickUrl
                 impressionUrl
@@ -118,8 +118,7 @@ router.post('/core-js', async(req, res) => {
 
     coreContent = coreContent.replace('"{{zoneDataObject}}"', JSON.stringify(zoneData));
     coreContent = coreContent.replace('{{zoneId}}', zoneId);
-
-    fs.truncateSync(coreFile, 0); // Overwrite
+    // fs.truncateSync(coreFile, 0); // Overwrite
     fs.writeFileSync(coreFile, coreContent); // Write content to file
     fs.chmodSync(coreFile, 644); // For read
 
