@@ -25,10 +25,8 @@ class AdsCode extends Component {
       }),
       credentials: 'include',
     });
-    console.log(resp);
-    const coreUrl = await resp.text();
 
-    this.outputAdsCode.value = coreUrl;
+    this.outputAdsCode.value = await resp.text();
   }
 
   render() {
