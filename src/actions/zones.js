@@ -64,6 +64,9 @@ export function getZone(id) {
             name
             html
             css
+            width
+            height
+            weight
             description
             placements {
               id
@@ -134,6 +137,9 @@ export function getZones(args = {
             name
             html
             css
+            width
+            height
+            weight
             description
             placements {
               id

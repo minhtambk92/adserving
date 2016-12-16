@@ -33,6 +33,9 @@ class EditShareForm extends Component {
       this.inputEditShareCSS.value = nextProps.childZone.css;
       this.inputEditShareDescription.value = nextProps.childZone.description;
       this.inputEditShareHTML.value = nextProps.childZone.html;
+      this.inputEditShareHeight.value = nextProps.childZone.height;
+      this.inputEditShareWeight.value = nextProps.childZone.weight;
+      this.inputEditShareWidth.value = nextProps.childZone.width;
     }
   }
 
@@ -42,10 +45,22 @@ class EditShareForm extends Component {
     const name = $('#inputEditShareName').val();
     const css = $('#inputEditShareCSS').val();
     const html = $('#inputEditShareHTML').val();
+    const width = $('#inputEditShareWidth').val();
+    const height = $('#inputEditShareHeight').val();
+    const weight = $('#inputEditShareWeight').val();
     const description = $('#inputEditShareDescription').val();
     if (id) {
       if (name) {
-        this.props.updateShareZone({ id, name, html, css, description }).then(() => {
+        this.props.updateShareZone({
+          id,
+          name,
+          html,
+          css,
+          width,
+          height,
+          weight,
+          description,
+        }).then(() => {
           this.props.getZone(this.props.zoneId).then(() => {
             this.props.setPageZoneActiveTab('shareZone');
             this.props.setStatusShareFormEdit(false);
@@ -122,6 +137,51 @@ class EditShareForm extends Component {
                   rows="3" placeholder="More info..."
                   ref={c => {
                     this.inputEditShareCSS = c;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputEditShareWidth" className="col-sm-2 control-label"
+              >Width(px)</label>
+              <div className="col-sm-10">
+                <input
+                  type="number" className="form-control" id="inputEditShareWidth"
+                  placeholder="300"
+                  ref={c => {
+                    this.inputEditShareWidth = c;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputEditShareHeight" className="col-sm-2 control-label"
+              >Height(px)</label>
+              <div className="col-sm-10">
+                <input
+                  type="number" className="form-control" id="inputEditShareHeight"
+                  placeholder="Height"
+                  ref={c => {
+                    this.inputEditShareHeight = c;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputEditShareWeight" className="col-sm-2 control-label"
+              >Weight</label>
+              <div className="col-sm-10">
+                <input
+                  type="number" className="form-control" id="inputEditShareWeight"
+                  placeholder="Name"
+                  ref={c => {
+                    this.inputEditShareWeight = c;
                   }}
                 />
               </div>
