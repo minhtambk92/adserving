@@ -21,7 +21,7 @@ import { getPlacements } from '../../../actions/placements';
 import { getChannels } from '../../../actions/channels';
 import { setPageBannerActiveTab } from '../../../actions/pages/banners';
 import { getPlacementsByBannerId, createPlacementBanner } from '../../../actions/placementBanners';
-import { getClickImpressionByBannerId, createClickImpression } from '../../../actions/clickImpressions';
+import { getTrackByBannerId, createTrack } from '../../../actions/tracks';
 import Layout from '../../../components/Layout';
 import BannerList from './BannerList';
 import CreateBannerForm from './CreateBannerForm';
@@ -47,9 +47,9 @@ class Banners extends Component {
     placementBanners: PropTypes.object,
     getPlacementsByBannerId: PropTypes.func,
     createPlacementBanner: PropTypes.func,
-    getClickImpressionByBannerId: PropTypes.func,
-    clickImpressions: PropTypes.object,
-    createClickImpression: PropTypes.func,
+    getTrackByBannerId: PropTypes.func,
+    tracks: PropTypes.object,
+    createTrack: PropTypes.func,
   };
 
   componentWillMount() {
@@ -109,7 +109,7 @@ class Banners extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: FORM OF CREATE NEW WEB BANNER */}
+              {/* BOX: FORM OF ADD NEW WEB BANNER */}
               <div className="box collapsed-box">
                 <div className="box-header with-border">
                   <h3 className="box-title">Create a new Banner</h3>
@@ -148,9 +148,9 @@ class Banners extends Component {
                     placementBanners={this.props.placementBanners}
                     getPlacementsByBannerId={this.props.getPlacementsByBannerId}
                     createPlacementBanner={this.props.createPlacementBanner}
-                    getClickImpressionByBannerId={this.props.getClickImpressionByBannerId}
-                    clickImpressions={this.props.clickImpressions}
-                    createClickImpression={this.props.createClickImpression}
+                    getTrackByBannerId={this.props.getTrackByBannerId}
+                    tracks={this.props.tracks}
+                    createTrack={this.props.createTrack}
                   />
                 </div>
                 {/* /.box-body */}
@@ -172,7 +172,7 @@ const mapState = (state) => ({
   placements: state.placements,
   channels: state.channels,
   placementBanners: state.placementBanners,
-  clickImpressions: state.clickImpressions,
+  tracks: state.tracks,
 });
 
 const mapDispatch = {
@@ -185,8 +185,8 @@ const mapDispatch = {
   setPageBannerActiveTab,
   getPlacementsByBannerId,
   createPlacementBanner,
-  getClickImpressionByBannerId,
-  createClickImpression,
+  getTrackByBannerId,
+  createTrack,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banners));

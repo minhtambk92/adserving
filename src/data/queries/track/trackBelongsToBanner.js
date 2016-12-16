@@ -1,13 +1,13 @@
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import { ClickImpression } from '../../models';
+import { Track } from '../../models';
 import BannerType from '../../types/banner/BannerType';
 
-const clickImpressionBelongsToBanner = () => ({
+const trackBelongsToBanner = () => ({
   type: BannerType,
   args: Object.assign(defaultListArgs(), {
     // Additional params
   }),
-  resolve: resolver(ClickImpression.banner, {
+  resolve: resolver(Track.banner, {
     before(options) {
       const opts = options;
       opts.order = options.order || [];
@@ -17,4 +17,4 @@ const clickImpressionBelongsToBanner = () => ({
   }),
 });
 
-export default clickImpressionBelongsToBanner;
+export default trackBelongsToBanner;

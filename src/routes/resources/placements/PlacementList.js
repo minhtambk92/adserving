@@ -30,19 +30,19 @@ class PlacementList extends Component {
     const name = `Copy of ${data.name}`;
     const startTime = data.startTime;
     const endTime = data.endTime;
-    const sizeWidth = data.sizeWidth;
-    const sizeHeight = data.sizeHeight;
+    const width = data.width;
+    const height = data.height;
     const weight = data.weight;
     const description = data.description;
     const campaignId = data.campaignId;
     const status = data.status;
-    if (name && startTime && endTime && sizeHeight && sizeWidth && weight && description) {
+    if (name && startTime && endTime && height && width && weight && description) {
       this.props.createPlacement({
         name,
         startTime,
         endTime,
-        sizeWidth,
-        sizeHeight,
+        width,
+        height,
         weight,
         description,
         campaignId,
@@ -80,7 +80,7 @@ class PlacementList extends Component {
       },
     }, {
       data: null,
-      render: (data, type, row) => `${row.sizeWidth} x ${row.sizeHeight}`,
+      render: (data, type, row) => `${row.width} x ${row.height}`,
     }, {
       data: 'startTime',
       render: data => (data ? moment(new Date(data)).format('L') : ''),

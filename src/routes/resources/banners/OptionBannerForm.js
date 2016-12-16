@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import { DatePicker, ICheck } from '../../../components/UI';
-import ClickImpressionForm from './ClickImpressionForm';
+import TrackForm from './TrackForm';
 import Link from '../../../components/Link';
 
 class OptionBannerForm extends Component {
@@ -12,9 +12,9 @@ class OptionBannerForm extends Component {
     banner: PropTypes.object,
     getBanner: PropTypes.func,
     channels: PropTypes.array,
-    createClickImpression: PropTypes.func,
-    deleteClickImpression: PropTypes.func,
-    updateClickImpression: PropTypes.func,
+    createTrack: PropTypes.func,
+    deleteTrack: PropTypes.func,
+    updateTrack: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -25,9 +25,9 @@ class OptionBannerForm extends Component {
       showExpirationDate: false,
       showImpressionsBooked: false,
       showClicksBooked: false,
-      countLinkClickImpression: 0,
+      countLinkTrack: 0,
       string: '',
-      arrClickImpression: [],
+      arrTrack: [],
       isCountView: false,
       isFixIE: false,
       isDefault: false,
@@ -52,22 +52,22 @@ class OptionBannerForm extends Component {
     const self = this;
     // Add New
     $('#addNewLink').click(() => {
-      const length = this.state.countLinkClickImpression;
+      const length = this.state.countLinkTrack;
       const count = length + 1;
-      self.setState({ countLinkClickImpression: count });
-      self.setState({ arrClickImpression: self.state.arrClickImpression.concat([count]) });
+      self.setState({ countLinkTrack: count });
+      self.setState({ arrTrack: self.state.arrTrack.concat([count]) });
     });
 
     // Delete
     $('#optionBanner').on('click', '.closeClickImpression', function () {
-      const id = $(this).parent().attr('id');
+      const id = $(this).parents('.track').attr('id');
       if (id) {
-        self.props.deleteClickImpression(id).then(() => {
+        self.props.deleteTrack(id).then(() => {
           self.props.getBanner(self.props.bannerId);
-          $(this).parent().css('display', 'none');
+          $(this).parents('.track').css('display', 'none');
         });
       } else {
-        $(this).parent().css('display', 'none');
+        $(this).parents('.track').css('display', 'none');
       }
       // self.props.getBanner(self.props.bannerId);
     });
@@ -176,9 +176,9 @@ class OptionBannerForm extends Component {
     } = nextProps.banner && (nextProps.banner || {});
     this.inputBannerAdStore.value = adStore;
     this.inputIsImpressionsBooked.value = isImpressionsBooked;
-    if (nextProps.banner.clickImpression) {
-      const length = nextProps.banner.clickImpression.length;
-      this.setState({ countLinkClickImpression: length });
+    if (nextProps.banner.tracks) {
+      const length = nextProps.banner.tracks.length;
+      this.setState({ countLinkTrack: length });
     }
     if (this.state.isImpressionsBooked === true) {
       this.setState({ showImpressionsBooked: false });
@@ -346,14 +346,18 @@ class OptionBannerForm extends Component {
     if (isActivationDate === false) {
       activationDate = new Date(moment(new Date(document.getElementById('inputBannerActivationDate').value)).format('YYYY-MM-DD 00:00:00'));
     } else if (isActivationDate === true) {
-      activationDate = new Date();
+      if (this.props.banner.isActivationDate === true) {
+        activationDate = this.props.banner.activationDate;
+      } else {
+        activationDate = new Date();
+      }
     }
     const isExpirationDate = document.getElementById('inputIsExpirationDate').checked;
     let expirationDate = new Date();
     if (isExpirationDate === false) {
-      expirationDate = new Date(moment(new Date(document.getElementById('inputBannerExpirationDate').value)).format('YYYY-MM-DD 00:00:00'));
+      expirationDate = new Date(moment(new Date(document.getElementById('inputBannerExpirationDate').value)).format('YYYY-MM-DD 23:59:59'));
     } else if (isExpirationDate === true) {
-      expirationDate = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00'));
+      expirationDate = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 23:59:59'));
     }
     const banner = { id: this.props.bannerId };
     banner.isCountView = isCountView;
@@ -381,14 +385,14 @@ class OptionBannerForm extends Component {
   addLinkClickAndImpression() { // eslint-disable-line no-unused-vars, class-methods-use-this
     /* eslint-disable no-undef */
     /* eslint-disable no-loop-func */
-    const length = this.state.countLinkClickImpression;
+    const length = this.state.countLinkTrack;
     for (let i = 1; i <= length; i += 1) {
       const id = $('#link-click-impression').find(`.clickImpression-${i}`).attr('id');
       if (id) {
         const impressionUrl = $(`#${id} #inputLinkImpression-${i}`).val();
         const clickUrl = $(`#${id} #inputLinkClick-${i}`).val();
         if (impressionUrl && clickUrl) {
-          this.props.updateClickImpression({ id, clickUrl, impressionUrl }).then(() => {
+          this.props.updateTrack({ id, clickUrl, impressionUrl }).then(() => {
             this.props.getBanner(this.props.bannerId);
           });
         }
@@ -397,7 +401,7 @@ class OptionBannerForm extends Component {
         const clickUrl = $(`#link-click-impression .clickImpression-${i} #inputLinkClick-${i}`).val();
         if (impressionUrl && clickUrl) {
           const bannerId = this.props.bannerId;
-          this.props.createClickImpression({ clickUrl, impressionUrl, bannerId }).then(() => {
+          this.props.createTrack({ clickUrl, impressionUrl, bannerId }).then(() => {
             this.props.getBanner(this.props.bannerId);
           });
           $(`#link-click-impression .clickImpression-${i}`).remove();
@@ -680,18 +684,18 @@ class OptionBannerForm extends Component {
               ) : ('')}
 
               <div className="col-sm-12" id="link-click-impression">
-                {this.props.banner && this.props.banner.clickImpression &&
-                this.props.banner.clickImpression.map((clickImpression, index) => (
-                  <ClickImpressionForm
-                    key={clickImpression.id}
-                    id={clickImpression.id}
+                {this.props.banner && this.props.banner.tracks &&
+                this.props.banner.tracks.map((track, index) => (
+                  <TrackForm
+                    key={track.id}
+                    id={track.id}
                     index={index + 1}
-                    clickUrl={clickImpression.clickUrl}
-                    impressionUrl={clickImpression.impressionUrl}
+                    clickUrl={track.clickUrl}
+                    impressionUrl={track.impressionUrl}
                   />
                 ))}
-                {this.state.arrClickImpression && this.state.arrClickImpression.map((count) => (
-                  <ClickImpressionForm
+                {this.state.arrTrack && this.state.arrTrack.map((count) => (
+                  <TrackForm
                     key={count}
                     index={count}
                   />

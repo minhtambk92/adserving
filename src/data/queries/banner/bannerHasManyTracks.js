@@ -1,14 +1,14 @@
 import { GraphQLList as List } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
 import { Banner } from '../../models';
-import ClickImpressionType from '../../types/clickImpression/ClickImpressionType';
+import TrackType from '../../types/track/TrackType';
 
-const bannerHasManyClickImpressions = () => ({
-  type: new List(ClickImpressionType),
+const bannerHasManyTracks = () => ({
+  type: new List(TrackType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
   }),
-  resolve: resolver(Banner.clickImpressions, {
+  resolve: resolver(Banner.tracks, {
     before(options) {
       const opts = options;
       opts.order = options.order || [];
@@ -18,4 +18,4 @@ const bannerHasManyClickImpressions = () => ({
   }),
 });
 
-export default bannerHasManyClickImpressions;
+export default bannerHasManyTracks;

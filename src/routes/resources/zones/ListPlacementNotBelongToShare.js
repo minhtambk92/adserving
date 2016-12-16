@@ -42,7 +42,7 @@ class ListPlacementNotBelongToZone extends Component {
       },
     }, {
       data: null,
-      render: (data, type, row) => `${row.sizeWidth} x ${row.sizeHeight}`,
+      render: (data, type, row) => `${row.width} x ${row.height}`,
     }, {
       data: null,
       orderable: false,
@@ -67,7 +67,7 @@ class ListPlacementNotBelongToZone extends Component {
       this.props.setCurrentShare(shareId);
       this.props.setPageZoneActiveTab('addPlacement');
       const newP = _.filter(this.props.list, { id: placementId });
-      if (newP[0].sizeWidth <= this.props.zone.width && newP[0].sizeHeight <= this.props.zone.height) {
+      if (newP[0].width <= this.props.zone.width && newP[0].height <= this.props.zone.height) {
         this.props.createSharePlacement({ placementId, shareId }).then(() => {
           this.props.getZone(this.props.zoneId).then(() => {
             this.props.getPlacements();

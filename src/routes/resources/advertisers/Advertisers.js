@@ -41,7 +41,7 @@ class Advertisers extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: FORM OF CREATE NEW WEB ADVERTISER */}
+              {/* BOX: FORM OF ADD NEW WEB ADVERTISER */}
               <div className="box collapsed-box">
                 <div className="box-header with-border">
                   <h3 className="box-title">Add new advertiser</h3>

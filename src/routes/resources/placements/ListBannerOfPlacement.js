@@ -16,8 +16,8 @@ class ListBannerOfPlacement extends Component {
     createBanner: PropTypes.func,
     banners: PropTypes.object,
     createPlacementBanner: PropTypes.func,
-    clickImpressions: PropTypes.object,
-    createClickImpression: PropTypes.func,
+    tracks: PropTypes.object,
+    createTrack: PropTypes.func,
   };
 
   duplicateBannerOfPlacement(data) {
@@ -95,12 +95,12 @@ class ListBannerOfPlacement extends Component {
           }
         }
 
-        if (data.clickImpression.length > 0) {
-          const arrClickImpressions = data.clickImpression;
-          for (let j = 0; j < arrClickImpressions.length; j += 1) {
-            const clickUrl = arrClickImpressions[j].clickUrl;
-            const impressionUrl = arrClickImpressions[j].impressionUrl;
-            this.props.createClickImpression({ clickUrl, impressionUrl, bannerId }).then(() => {
+        if (data.tracks.length > 0) {
+          const arrTracks = data.tracks;
+          for (let j = 0; j < arrTracks.length; j += 1) {
+            const clickUrl = arrTracks[j].clickUrl;
+            const impressionUrl = arrTracks[j].impressionUrl;
+            this.props.createTrack({ clickUrl, impressionUrl, bannerId }).then(() => {
               this.props.getPlacement(this.props.placementId);
             });
           }

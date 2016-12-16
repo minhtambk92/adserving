@@ -36,7 +36,7 @@ class ListPlacementOfBanner extends Component {
       },
     }, {
       data: null,
-      render: (data, type, row) => `${row.sizeWidth} x ${row.sizeHeight}`,
+      render: (data, type, row) => `${row.width} x ${row.height}`,
     }, {
       data: null,
       orderable: false,

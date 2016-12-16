@@ -25,7 +25,7 @@ import channels from './channel/channels';
 import filters from './filters';
 import placementBanners from './placementBanner/placementBanners';
 import optionChannels from './optionChannel/optionChannels';
-import clickImpressions from './clickImpression/clickImpressions';
+import tracks from './track/tracks';
 import shares from './share/shares';
 import sharePlacements from './sharePlacement/sharePlacements';
 
@@ -54,7 +54,7 @@ const queries = new ObjectType({
     filters,
     placementBanners,
     optionChannels,
-    clickImpressions,
+    tracks,
     shares,
     sharePlacements,
   },

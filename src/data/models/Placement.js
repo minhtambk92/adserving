@@ -29,12 +29,12 @@ const Placement = Model.define('Placement', {
     type: DataType.TEXT,
     defaultValue: '',
   },
-  sizeWidth: {
+  width: {
     type: DataType.INTEGER,
     allowNull: false,
     defaultValue: 0,
   },
-  sizeHeight: {
+  height: {
     type: DataType.INTEGER,
     allowNull: false,
     defaultValue: 0,

@@ -2,7 +2,7 @@ import { GraphQLObjectType as ObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Banner } from '../../models';
 import bannerBelongsToChannel from '../../queries/banner/bannerBelongsToChannel';
-import bannerHasManyClickImpressions from '../../queries/banner/bannerHasManyClickImpressions';
+import bannerHasManyTracks from '../../queries/banner/bannerHasManyTracks';
 import bannerHasManyPlacements from '../../queries/banner/bannerHasManyPlacements';
 
 const BannerType = new ObjectType({
@@ -12,7 +12,7 @@ const BannerType = new ObjectType({
   }), {
     // Additional fields
     channel: bannerBelongsToChannel(),
-    clickImpression: bannerHasManyClickImpressions(),
+    tracks: bannerHasManyTracks(),
     placements: bannerHasManyPlacements(),
   }),
 });

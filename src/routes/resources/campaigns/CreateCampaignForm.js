@@ -48,7 +48,7 @@ class CreateCampaignForm extends Component {
       advertiserId = this.inputAdvertiser.value;
     }
     const startTime = new Date(moment(new Date(document.getElementById('inputCampaignStartTime').value)).format('YYYY-MM-DD 00:00:00'));
-    const endTime = new Date(moment(new Date(document.getElementById('inputCampaignEndTime').value)).format('YYYY-MM-DD 00:00:00'));
+    const endTime = new Date(moment(new Date(document.getElementById('inputCampaignEndTime').value)).format('YYYY-MM-DD 23:59:59'));
     const views = this.inputCampaignViews.value;
     const viewPerSession = this.inputCampaignViewPerSession.value;
     const timeResetViewCount = this.inputCampaignTimeResetViewCount.value;

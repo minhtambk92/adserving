@@ -90,7 +90,7 @@ class Campaigns extends Component {
               {/* BOX: FORM OF CREATE NEW CAMPAIGNS */}
               <div className="box collapsed-box">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Create New campaigns</h3>
+                  <h3 className="box-title">Add New campaigns</h3>
                   <div className="box-tools pull-right">
                     <button type="button" className="btn btn-box-tool" data-widget="collapse">
                       <i className="fa fa-plus" />

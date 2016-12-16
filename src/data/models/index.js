@@ -34,7 +34,7 @@ import Channel from './Channel';
 import Filter from './Filter';
 import PlacementBanner from './PlacementBanner';
 import OptionChannel from './OptionChannel';
-import ClickImpression from './ClickImpression';
+import Track from './Track';
 import Share from './Share';
 import SharePlacement from './SharePlacement';
 
@@ -211,16 +211,16 @@ Zone.site = Zone.belongsTo(Site, {
   foreignKey: 'siteId',
 });
 
-// Each banner has many clickImpression
-Banner.clickImpressions = Banner.hasMany(ClickImpression, {
+// Each banner has many Track
+Banner.tracks = Banner.hasMany(Track, {
   foreignKey: {
     name: 'bannerId',
     allowNull: false,
   },
 });
 
-// Each clickImpression can only belong to one Banner
-ClickImpression.banner = ClickImpression.belongsTo(Banner, {
+// Each Track can only belong to one Banner
+Track.banner = Track.belongsTo(Banner, {
   foreignKey: 'bannerId',
 });
 
@@ -332,7 +332,7 @@ export {
   Filter,
   PlacementBanner,
   OptionChannel,
-  ClickImpression,
+  Track,
   Share,
   SharePlacement,
 };

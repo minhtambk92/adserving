@@ -1,17 +1,17 @@
 import {
-  GET_CLICK_IMPRESSIONS,
-  CREATE_CLICK_IMPRESSION,
-  GET_CLICK_IMPRESSION_BY_BANNER_ID,
-  UPDATE_CLICK_IMPRESSION,
-  DELETE_CLICK_IMPRESSION,
+  GET_TRACKS,
+  CREATE_TRACK,
+  GET_TRACK_BY_BANNER_ID,
+  UPDATE_TRACK,
+  DELETE_TRACK,
 } from '../constants/';
 
 
-export function getClickImpressionByBannerId(id) {
+export function getTrackByBannerId(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        clickImpressions(where: {bannerId: "${id}"}) {
+        tracks(where: {bannerId: "${id}"}) {
          id
          clickUrl
          impressionUrl
@@ -24,15 +24,15 @@ export function getClickImpressionByBannerId(id) {
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_CLICK_IMPRESSION_BY_BANNER_ID,
+      type: GET_TRACK_BY_BANNER_ID,
       payload: {
-        clickImpressions: data.clickImpressions,
+        tracks: data.tracks,
       },
     });
   };
 }
 
-export function getClickImpressions(args = {
+export function getTracks(args = {
   where: {},
   limit: 0,
   order: '',
@@ -42,7 +42,7 @@ export function getClickImpressions(args = {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query($where: JSON, $order: String, $limit: Int) {
-        clickImpressions(where: $where, order: $order, limit: $limit) {
+        tracks(where: $where, order: $order, limit: $limit) {
          id
          clickUrl
          impressionUrl
@@ -52,7 +52,7 @@ export function getClickImpressions(args = {
           }
       }`;
     const variables = Object.assign({}, args);
-    const filters = await getState().clickImpressions.filters;
+    const filters = await getState().tracks.filters;
 
     if (
       options.globalFilters &&
@@ -65,23 +65,23 @@ export function getClickImpressions(args = {
     const { data } = await graphqlRequest(query, variables);
 
     dispatch({
-      type: GET_CLICK_IMPRESSIONS,
+      type: GET_TRACKS,
       payload: {
-        clickImpressions: data.clickImpressions,
+        tracks: data.tracks,
       },
     });
   };
 }
 
-export function createClickImpression({
+export function createTrack({
   clickUrl,
   impressionUrl,
   bannerId,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($clickImpression: ClickImpressionInputTypeWithoutId!) {
-        createdClickImpression(clickImpression: $clickImpression) {
+      mutation ($track: TrackInputTypeWithoutId!) {
+        createdTrack(track: $track) {
          id
          clickUrl
          impressionUrl
@@ -92,7 +92,7 @@ export function createClickImpression({
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      clickImpression: {
+      track: {
         clickUrl,
         impressionUrl,
         bannerId,
@@ -100,15 +100,15 @@ export function createClickImpression({
     });
 
     dispatch({
-      type: CREATE_CLICK_IMPRESSION,
+      type: CREATE_TRACK,
       payload: {
-        clickImpression: data.createdClickImpression,
+        track: data.createdTrack,
       },
     });
   };
 }
 
-export function updateClickImpression({
+export function updateTrack({
   id,
   clickUrl,
   impressionUrl,
@@ -116,8 +116,8 @@ export function updateClickImpression({
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($clickImpression: ClickImpressionInputType!) {
-        updatedClickImpression(clickImpression: $clickImpression) {
+      mutation ($track: TrackInputType!) {
+        updatedTrack(track: $track) {
           id
           clickUrl
           impressionUrl
@@ -128,7 +128,7 @@ export function updateClickImpression({
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      clickImpression: {
+      track: {
         id,
         clickUrl,
         impressionUrl,
@@ -137,19 +137,19 @@ export function updateClickImpression({
     });
 
     dispatch({
-      type: UPDATE_CLICK_IMPRESSION,
+      type: UPDATE_TRACK,
       payload: {
-        clickImpression: data.updatedClickImpression,
+        track: data.updatedTrack,
       },
     });
   };
 }
 
-export function deleteClickImpression(id) {
+export function deleteTrack(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
-        deletedClickImpression(id: "${id}") {
+        deletedTrack(id: "${id}") {
           id
           clickUrl
           impressionUrl
@@ -163,9 +163,9 @@ export function deleteClickImpression(id) {
     const { data } = await graphqlRequest(mutation);
 
     dispatch({
-      type: DELETE_CLICK_IMPRESSION,
+      type: DELETE_TRACK,
       payload: {
-        clickImpression: data.deletedClickImpression,
+        track: data.deletedTrack,
       },
     });
   };

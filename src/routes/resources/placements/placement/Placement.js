@@ -23,7 +23,7 @@ import {
   removeBannerInPlacementBanner,
 } from '../../../../actions/placementBanners';
 import { removePlacementInSharePlacement } from '../../../../actions/sharePlacements';
-import { createClickImpression } from '../../../../actions/clickImpressions';
+import { createTrack } from '../../../../actions/tracks';
 import Layout from '../../../../components/Layout';
 import ListBannerNotBelongPlacement from '../ListBannerNotBelongPlacement';
 import ListBannerOfPlacement from '../ListBannerOfPlacement';
@@ -55,7 +55,7 @@ class Placement extends Component {
     channels: PropTypes.object,
     createZone: PropTypes.func,
     removePlacementInSharePlacement: PropTypes.func,
-    createClickImpression: PropTypes.func,
+    createTrack: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -216,7 +216,7 @@ class Placement extends Component {
                               channels={this.props.channels && this.props.channels.list}
                               createPlacementBanner={this.props.createPlacementBanner}
                               banners={this.props.banners}
-                              createClickImpression={this.props.createClickImpression}
+                              createTrack={this.props.createTrack}
                             />
                           </div>
                           {/* /.box-body */}
@@ -241,7 +241,7 @@ class Placement extends Component {
                         <div className="col-lg-12">
                           <div className="box">
                             <div className="box-header with-border">
-                              <h3 className="box-title">Create new banner</h3>
+                              <h3 className="box-title">Add new banner</h3>
                               <div className="box-tools pull-right">
                                 <button
                                   type="button"
@@ -305,7 +305,7 @@ const mapDispatch = {
   createBanner,
   getChannels,
   removePlacementInSharePlacement,
-  createClickImpression,
+  createTrack,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placement));
