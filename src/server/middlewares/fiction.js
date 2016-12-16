@@ -637,29 +637,6 @@ async function sharedFiction() {
       description: 'Zone 300x300',
       zoneId: zone.id,
     });
-
-    await Share.create({
-      name: 'Share 2',
-      html: '<div class="hello"></div>',
-      css: 'css',
-      width: 980,
-      height: 250,
-      weight: 100,
-      description: 'Zone 300x600',
-      zoneId: zone.id,
-    });
-
-    await Share.create({
-      name: 'Share 3',
-      html: '<div class="hello"></div>',
-      css: 'css',
-      width: 980,
-      height: 250,
-      weight: 100,
-      description: 'Zone 300x250',
-      zoneId: zone.id,
-    });
-
     console.log(chalk.green(`Super ${share.name} is created. Passed!`));
   } else {
     console.log(chalk.green(`${shareQuantity} share Zone(s) found. Passed!`));
