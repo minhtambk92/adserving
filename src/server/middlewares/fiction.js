@@ -615,7 +615,7 @@ async function zoneFiction() {
     const zone = await Zone.create({
       name: 'Zone Top',
       width: 980,
-      height: 250,
+      height: 90,
       sizeText: 'Customer (300 x 600)',
       sizeValue: 'custom',
       slot: 3,

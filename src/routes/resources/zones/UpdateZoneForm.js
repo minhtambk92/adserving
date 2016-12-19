@@ -53,7 +53,7 @@ class UpdateZoneForm extends Component {
         this.inputZoneWidth.value = width;
       }
       if (height) {
-        this.inputZoneWidth.value = width;
+        this.inputZoneHeight.value = height;
       }
       this.inputZoneSize.value = sizeValue;
     } else if (type === 'type-3') {
