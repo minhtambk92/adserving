@@ -657,9 +657,9 @@ async function sharedFiction() {
       name: 'Share 1',
       html: '<div class="hello"></div>',
       css: 'css',
-      width: 980,
-      height: 250,
-      weight: 30,
+      width: 468,
+      height: 90,
+      weight: 50,
       description: 'Share 980x250',
       zoneId: zone.id,
     });
@@ -671,7 +671,7 @@ async function sharedFiction() {
       css: 'css',
       width: 468,
       height: 90,
-      weight: 70,
+      weight: 50,
       description: 'share 468x90',
       zoneId: zone.id,
     });
@@ -703,13 +703,13 @@ async function sharedPlacementFiction() {
     // Create an Share
     const sharePlacement = await SharePlacement.create({
       shareId: share1.id,
-      placementId: placement1.id,
-    });
-
-    await SharePlacement.create({
-      shareId: share2.id,
       placementId: placement2.id,
     });
+
+    // await SharePlacement.create({
+    //   shareId: share2.id,
+    //   placementId: placement2.id,
+    // });
 
     await SharePlacement.create({
       shareId: share2.id,

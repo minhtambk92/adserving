@@ -33,7 +33,7 @@ class UpdatePlacementForm extends Component {
     document.getElementById('inputPlacementStartTime').value = moment(new Date(startTime)).format('L');
     document.getElementById('inputPlacementEndTime').value = moment(new Date(endTime)).format('L');
     if (width) {
-      this.inputPlacementWidth.value = height;
+      this.inputPlacementWidth.value = width;
     }
     if (height) {
       this.inputPlacementHeight.value = height;
