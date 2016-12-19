@@ -585,11 +585,11 @@ async function placementFiction() {
     });
 
     await Placement.create({
-      name: 'Placement 980x250',
+      name: 'Placement 1160x90',
       startTime: new Date(moment().format('YYYY-MM-DD 00:00:00')),
       endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 23:59:59')),
-      width: 980,
-      height: 250,
+      width: 1160,
+      height: 90,
       status: STATUS_ACTIVE,
       weight: 20,
       description: 'placement of Bong Da So',
@@ -614,9 +614,9 @@ async function zoneFiction() {
     // Create an Zone
     const zone = await Zone.create({
       name: 'Zone Top',
-      width: 980,
-      height: 250,
-      sizeText: 'Customer (300 x 600)',
+      width: 1160,
+      height: 90,
+      sizeText: 'Customer (1160 x 90)',
       sizeValue: 'custom',
       slot: 3,
       type: 'type-1',
@@ -657,10 +657,10 @@ async function sharedFiction() {
       name: 'Share 1',
       html: '<div class="hello"></div>',
       css: 'css',
-      width: 980,
-      height: 250,
+      width: 1160,
+      height: 90,
       weight: 30,
-      description: 'Share 980x250',
+      description: 'Share 1160x90',
       zoneId: zone.id,
     });
 
@@ -669,10 +669,10 @@ async function sharedFiction() {
       name: 'Share 2',
       html: '<div class="hello"></div>',
       css: 'css',
-      width: 468,
+      width: 1160,
       height: 90,
       weight: 70,
-      description: 'share 468x90',
+      description: 'share2 1160x90',
       zoneId: zone.id,
     });
 
@@ -694,7 +694,7 @@ async function sharedPlacementFiction() {
 
     const share2 = await Share.findOne({ where: { name: 'Share 2' } });
     // Get id of Share
-    const placement1 = await Placement.findOne({ where: { name: 'Placement 980x250' } });
+    const placement1 = await Placement.findOne({ where: { name: 'Placement 1160x90' } });
 
     const placement2 = await Placement.findOne({ where: { name: 'Placement 468x90' } });
 
@@ -907,14 +907,14 @@ async function placementBannerFiction() {
   if (placementBannersQuantity === 0) {
     console.log(chalk.red('No placementBanner found! Do a fiction...'));
     // Get id of Placement
-    const placement1 = await Placement.findOne({ where: { name: 'Placement 980x250' } });
+    const placement1 = await Placement.findOne({ where: { name: 'Placement 1160x90' } });
 
     const placement2 = await Placement.findOne({ where: { name: 'Placement 468x90' } });
 
     const placement3 = await Placement.findOne({ where: { name: 'Placement2 468x90' } });
 
     // Get Id of Banner
-    const banner1 = await Banner.findOne({ where: { name: 'Banner Top' } });
+    const banner1 = await Banner.findOne({ where: { name: 'Banner 1160x90' } });
 
     const banner2 = await Banner.findOne({ where: { name: 'Banner 468x90' } });
 
