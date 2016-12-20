@@ -74,6 +74,7 @@ class ListShare extends Component {
     const width = data.width;
     const height = data.height;
     const weight = data.weight;
+    const type = data.type;
     const description = data.description;
     if (name) {
       const zoneId = this.props.zoneId;
@@ -84,6 +85,7 @@ class ListShare extends Component {
         width,
         height,
         weight,
+        type,
         description,
         zoneId,
       }).then(() => {
