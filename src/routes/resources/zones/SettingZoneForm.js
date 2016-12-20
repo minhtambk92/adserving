@@ -11,6 +11,7 @@ class SettingZoneForm extends Component {
     updateZone: PropTypes.func,
     zone: PropTypes.object,
     getZone: PropTypes.func,
+    setPageZoneActiveTab: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -71,6 +72,7 @@ class SettingZoneForm extends Component {
 
     this.props.updateZone(zone).then(() => {
       this.props.getZone(this.props.zoneId);
+      this.props.setPageZoneActiveTab('settingZone')
     });
   }
 

@@ -228,6 +228,7 @@ class Zone extends Component {
                       sites={this.props.sites.list}
                       zoneId={this.props.zoneId}
                       getZone={this.props.getZone}
+                      setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                     />
                   </div>
 
@@ -237,6 +238,7 @@ class Zone extends Component {
                       updateZone={this.props.updateZone}
                       zoneId={this.props.zoneId}
                       getZone={this.props.getZone}
+                      setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                     />
                   </div>
 

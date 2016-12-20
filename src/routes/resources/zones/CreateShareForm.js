@@ -146,7 +146,7 @@ class CreateShareForm extends Component {
               <div className="col-sm-10">
                 <input
                   type="number" className="form-control" id="inputCreateShareHeight"
-                  placeholder="Height"
+                  placeholder="300"
                   ref={c => {
                     this.inputCreateShareHeight = c;
                   }}
@@ -161,7 +161,7 @@ class CreateShareForm extends Component {
               <div className="col-sm-10">
                 <input
                   type="number" className="form-control" id="inputCreateShareWeight"
-                  placeholder="Name"
+                  placeholder="100"
                   ref={c => {
                     this.inputCreateShareWeight = c;
                   }}
