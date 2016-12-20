@@ -32,6 +32,7 @@ class CreateShareForm extends Component {
     const width = $('#inputCreateShareWidth').val();
     const height = $('#inputCreateShareHeight').val();
     const weight = $('#inputCreateShareWeight').val();
+    const type = $('#inputCreateShareType').val();
     const description = $('#inputCreateShareDescription').val();
     if (name) {
       const zoneId = this.props.zoneId;
@@ -42,6 +43,7 @@ class CreateShareForm extends Component {
         width,
         height,
         weight,
+        type,
         description,
         zoneId }).then(() => {
           this.props.getZone(this.props.zoneId);
@@ -169,7 +171,25 @@ class CreateShareForm extends Component {
 
             <div className="form-group">
               <label
-                htmlFor={`inputShareDescription-${this.props.index}`}
+                htmlFor="inputCreateShareType"
+                className="col-sm-2 control-label"
+              >Status</label>
+              <div className="col-sm-10">
+                <select
+                  id="inputCreateShareType" className="form-control"
+                  ref={c => {
+                  this.inputCreateShareType = c;
+                }}
+                >
+                  <option value="single">Single</option>
+                  <option value="multiple">Multiple</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputCreateShareDescription"
                 className="col-sm-2 control-label"
               >Description</label>
               <div className="col-sm-10">

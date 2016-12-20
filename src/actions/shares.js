@@ -21,6 +21,7 @@ export function getShareByZoneId(id) {
           width
           height
           weight
+          type
           description
           zoneId
           createdAt
@@ -57,6 +58,7 @@ export function getShares(args = {
           width
           height
           weight
+          type
           description
           zoneId
           createdAt
@@ -89,7 +91,7 @@ export function getShares(args = {
 
 export function createShare({ name, html, css, width,
   height,
-  weight, description, zoneId }) {
+  weight, type, description, zoneId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($share: ShareInputTypeWithoutId!) {
@@ -101,6 +103,7 @@ export function createShare({ name, html, css, width,
           width
           height
           weight
+          type
           description
           zoneId
           createdAt
@@ -116,6 +119,7 @@ export function createShare({ name, html, css, width,
         width,
         height,
         weight,
+        type,
         description,
         zoneId,
       },
@@ -132,7 +136,7 @@ export function createShare({ name, html, css, width,
 
 export function updateShare({ id, name, html, css, width,
   height,
-  weight, description, zoneId }) {
+  weight, type, description, zoneId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($share: ShareInputType!) {
@@ -144,6 +148,7 @@ export function updateShare({ id, name, html, css, width,
           width
           height
           weight
+          type
           description
           zoneId
           createdAt
@@ -160,6 +165,7 @@ export function updateShare({ id, name, html, css, width,
         width,
         height,
         weight,
+        type,
         description,
         zoneId,
       },
@@ -186,6 +192,7 @@ export function deleteShare(id) {
           width
           height
           weight
+          type
           description
           zoneId
           createdAt

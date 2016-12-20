@@ -661,6 +661,7 @@ async function sharedFiction() {
       height: 90,
       weight: 30,
       description: 'Share 1160x90',
+      type: 'single',
       zoneId: zone.id,
     });
 
@@ -671,6 +672,7 @@ async function sharedFiction() {
       css: 'css',
       width: 1160,
       height: 90,
+      type: 'multiple',
       weight: 70,
       description: 'share2 1160x90',
       zoneId: zone.id,

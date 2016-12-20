@@ -1,6 +1,7 @@
 import {
   GraphQLInputObjectType as InputObjectType,
   GraphQLInt as IntType,
+  GraphQLString as StringType,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Share } from '../../models';
@@ -13,6 +14,7 @@ const ShareInputType = new InputObjectType({
     // Additional fields
     width: { type: IntType },
     height: { type: IntType },
+    type: { type: StringType },
   }),
 });
 

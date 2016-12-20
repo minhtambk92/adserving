@@ -36,6 +36,7 @@ class EditShareForm extends Component {
       this.inputEditShareHeight.value = nextProps.childZone.height;
       this.inputEditShareWeight.value = nextProps.childZone.weight;
       this.inputEditShareWidth.value = nextProps.childZone.width;
+      this.inputEditShareType.value = nextProps.childZone.type;
     }
   }
 
@@ -48,6 +49,7 @@ class EditShareForm extends Component {
     const width = $('#inputEditShareWidth').val();
     const height = $('#inputEditShareHeight').val();
     const weight = $('#inputEditShareWeight').val();
+    const type = $('#inputEditShareType').val();
     const description = $('#inputEditShareDescription').val();
     if (id) {
       if (name) {
@@ -59,6 +61,7 @@ class EditShareForm extends Component {
           width,
           height,
           weight,
+          type,
           description,
         }).then(() => {
           this.props.getZone(this.props.zoneId).then(() => {
@@ -189,7 +192,25 @@ class EditShareForm extends Component {
 
             <div className="form-group">
               <label
-                htmlFor={`inputShareDescription-${this.props.index}`}
+                htmlFor="inputEditShareType"
+                className="col-sm-2 control-label"
+              >Status</label>
+              <div className="col-sm-10">
+                <select
+                  id="inputEditShareType" className="form-control"
+                  ref={c => {
+                  this.inputEditShareType = c;
+                }}
+                >
+                  <option value="single">Single</option>
+                  <option value="multiple">Multiple</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputEditShareDescription"
                 className="col-sm-2 control-label"
               >Description</label>
               <div className="col-sm-10">

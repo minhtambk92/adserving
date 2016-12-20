@@ -67,6 +67,7 @@ export function getZone(id) {
             width
             height
             weight
+            type
             description
             placements {
               id

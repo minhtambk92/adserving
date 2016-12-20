@@ -43,6 +43,14 @@ const Share = Model.define('Share', {
     type: DataType.INTEGER,
     defaultValue: 0,
   },
+  type: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: 'single',
+    validate: {
+      isIn: [['single', 'multiple']],
+    },
+  },
   description: {
     type: DataType.STRING,
     defaultValue: '',
