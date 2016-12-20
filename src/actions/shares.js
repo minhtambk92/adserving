@@ -21,6 +21,7 @@ export function getShareByZoneId(id) {
           width
           height
           weight
+          classes
           type
           description
           zoneId
@@ -58,6 +59,7 @@ export function getShares(args = {
           width
           height
           weight
+          classes
           type
           description
           zoneId
@@ -91,7 +93,7 @@ export function getShares(args = {
 
 export function createShare({ name, html, css, width,
   height,
-  weight, type, description, zoneId }) {
+  weight, classes, type, description, zoneId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($share: ShareInputTypeWithoutId!) {
@@ -103,6 +105,7 @@ export function createShare({ name, html, css, width,
           width
           height
           weight
+          classes
           type
           description
           zoneId
@@ -119,6 +122,7 @@ export function createShare({ name, html, css, width,
         width,
         height,
         weight,
+        classes,
         type,
         description,
         zoneId,
@@ -136,7 +140,7 @@ export function createShare({ name, html, css, width,
 
 export function updateShare({ id, name, html, css, width,
   height,
-  weight, type, description, zoneId }) {
+  weight, classes, type, description, zoneId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($share: ShareInputType!) {
@@ -148,6 +152,7 @@ export function updateShare({ id, name, html, css, width,
           width
           height
           weight
+          classes
           type
           description
           zoneId
@@ -165,6 +170,7 @@ export function updateShare({ id, name, html, css, width,
         width,
         height,
         weight,
+        classes,
         type,
         description,
         zoneId,
@@ -192,6 +198,7 @@ export function deleteShare(id) {
           width
           height
           weight
+          classes
           type
           description
           zoneId

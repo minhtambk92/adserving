@@ -660,6 +660,7 @@ async function sharedFiction() {
       width: 1160,
       height: 90,
       weight: 30,
+      classes: '',
       description: 'Share 1160x90',
       type: 'single',
       zoneId: zone.id,
@@ -669,11 +670,12 @@ async function sharedFiction() {
     await Share.create({
       name: 'Share 2',
       html: '<div class="hello"></div>',
-      css: 'css',
+      css: '.arf-placement { display: inline-block;	margin-left: 50px;}',
       width: 1160,
       height: 90,
       type: 'multiple',
       weight: 70,
+      classes: '',
       description: 'share2 1160x90',
       zoneId: zone.id,
     });

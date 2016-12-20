@@ -72,18 +72,32 @@ class ListZoneOfSite extends Component {
         description,
       }).then(() => {
         const zoneId = this.props.zones.list[0].id;
-        if (data.shares.length > 0) {
-          const arrShares = data.shares;
-          for (let i = 0; i < arrShares.length; i += 1) {
-            /* eslint-disable no-shadow */
-            const name = arrShares[i].name;
-            const css = arrShares[i].css;
-            const html = arrShares[i].html;
-            const description = arrShares[i].description;
-            /* eslint-enable no-shadow */
-            if (name && css && html) {
-              this.props.createShare({ name, html, css, description, zoneId });
-            }
+        const arrShares = data.shares;
+        for (let i = 0; i < arrShares.length; i += 1) {
+          /* eslint-disable no-shadow */
+          const name = arrShares[i].name;
+          const css = arrShares[i].css;
+          const html = arrShares[i].html;
+          const width = arrShares[i].width;
+          const height = arrShares[i].height;
+          const weight = arrShares[i].weight;
+          const classes = arrShares[i].classes;
+          const type = arrShares[i].type;
+          const description = arrShares[i].description;
+          /* eslint-enable no-shadow */
+          if (name && css && html) {
+            this.props.createShare({
+              name,
+              html,
+              css,
+              width,
+              height,
+              weight,
+              classes,
+              type,
+              description,
+              zoneId
+            });
           }
         }
         this.props.getSite(this.props.siteId);

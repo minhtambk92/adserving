@@ -85,6 +85,7 @@ router.post('/core-js', async (req, res) => {
         width
         height
         weight
+        classes
         type
         placements {
           id

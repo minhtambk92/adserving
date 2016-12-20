@@ -37,6 +37,7 @@ class EditShareForm extends Component {
       this.inputEditShareWeight.value = nextProps.childZone.weight;
       this.inputEditShareWidth.value = nextProps.childZone.width;
       this.inputEditShareType.value = nextProps.childZone.type;
+      this.inputCreateShareClasses.value = nextProps.childZone.classes;
     }
   }
 
@@ -49,6 +50,7 @@ class EditShareForm extends Component {
     const width = $('#inputEditShareWidth').val();
     const height = $('#inputEditShareHeight').val();
     const weight = $('#inputEditShareWeight').val();
+    const classes = $('#inputEditShareClasses').val();
     const type = $('#inputEditShareType').val();
     const description = $('#inputEditShareDescription').val();
     if (id) {
@@ -61,6 +63,7 @@ class EditShareForm extends Component {
           width,
           height,
           weight,
+          classes,
           type,
           description,
         }).then(() => {
@@ -185,6 +188,22 @@ class EditShareForm extends Component {
                   placeholder="Name"
                   ref={c => {
                     this.inputEditShareWeight = c;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputCreateShareClasses"
+                className="col-sm-2 control-label"
+              >Customer Class</label>
+              <div className="col-sm-10">
+                <textarea
+                  className="form-control" id="inputCreateShareClasses"
+                  rows="3" placeholder="demo"
+                  ref={c => {
+                    this.inputCreateShareClasses = c;
                   }}
                 />
               </div>

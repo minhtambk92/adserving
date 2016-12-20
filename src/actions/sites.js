@@ -52,6 +52,11 @@ export function getSite(id) {
               name
               html
               css
+              width
+              height
+              weight
+              classes
+              type
               description
             }
             createdAt

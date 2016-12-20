@@ -67,6 +67,7 @@ export function getZone(id) {
             width
             height
             weight
+            classes
             type
             description
             placements {
@@ -141,6 +142,8 @@ export function getZones(args = {
             width
             height
             weight
+            classes
+            type
             description
             placements {
               id

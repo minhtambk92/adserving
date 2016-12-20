@@ -39,6 +39,10 @@ const Share = Model.define('Share', {
     allowNull: false,
     defaultValue: 0,
   },
+  classes: {
+    type: DataType.STRING,
+    defaultValue: '',
+  },
   weight: {
     type: DataType.INTEGER,
     defaultValue: 0,

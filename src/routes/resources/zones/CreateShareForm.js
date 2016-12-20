@@ -32,6 +32,7 @@ class CreateShareForm extends Component {
     const width = $('#inputCreateShareWidth').val();
     const height = $('#inputCreateShareHeight').val();
     const weight = $('#inputCreateShareWeight').val();
+    const classes = $('#inputCreateShareClasses').val();
     const type = $('#inputCreateShareType').val();
     const description = $('#inputCreateShareDescription').val();
     if (name) {
@@ -43,6 +44,7 @@ class CreateShareForm extends Component {
         width,
         height,
         weight,
+        classes,
         type,
         description,
         zoneId }).then(() => {
@@ -164,6 +166,22 @@ class CreateShareForm extends Component {
                   placeholder="100"
                   ref={c => {
                     this.inputCreateShareWeight = c;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputCreateShareClasses"
+                className="col-sm-2 control-label"
+              >Customer Class</label>
+              <div className="col-sm-10">
+                <textarea
+                  className="form-control" id="inputCreateShareClasses"
+                  rows="3" placeholder="demo"
+                  ref={c => {
+                    this.inputCreateShareClasses = c;
                   }}
                 />
               </div>
