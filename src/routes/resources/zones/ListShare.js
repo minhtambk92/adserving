@@ -74,6 +74,7 @@ class ListShare extends Component {
     const width = data.width;
     const height = data.height;
     const weight = data.weight;
+    const classes = data.classes;
     const type = data.type;
     const description = data.description;
     if (name) {
@@ -85,6 +86,7 @@ class ListShare extends Component {
         width,
         height,
         weight,
+        classes,
         type,
         description,
         zoneId,
@@ -94,12 +96,12 @@ class ListShare extends Component {
           const arrPlacement = data.placements;
           for (let i = 0; i < arrPlacement.length; i += 1) {
             const placementId = arrPlacement[i].id;
-            this.props.createSharePlacement({ placementId, shareId }).then(() => {
-              this.props.setPageZoneActiveTab('shareZone');
-              this.props.getZone(this.props.zoneId);
-            });
+            this.props.createSharePlacement({ placementId, shareId });
           }
         }
+        this.props.getZone(this.props.zoneId).then(() => {
+          this.props.setPageZoneActiveTab('shareZone');
+        })
       });
     }
   }

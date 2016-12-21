@@ -24,7 +24,7 @@ import {
 import { getSites } from '../../../../actions/sites';
 import { getPlacements, createPlacement, getPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
-import { createShare, updateShare, deleteShare } from '../../../../actions/shares';
+import { createShare, updateShare, deleteShare, removeShareByZoneId } from '../../../../actions/shares';
 import {
   createSharePlacement,
   removeShareInSharePlacement,
@@ -70,6 +70,7 @@ class Zone extends Component {
     shares: PropTypes.object,
     setStatusShareFormEdit: PropTypes.func,
     setStatusShareFormCreate: PropTypes.func,
+    removeShareByZoneId: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -227,6 +228,8 @@ class Zone extends Component {
                       deleteZone={this.props.deleteZone}
                       sites={this.props.sites.list}
                       zoneId={this.props.zoneId}
+                      removeShareByZoneId={this.props.removeShareByZoneId}
+                      shares={this.props.shares}
                       getZone={this.props.getZone}
                       setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                     />
@@ -403,6 +406,7 @@ const mapDispatch = {
   setCurrentShare,
   setStatusShareFormEdit,
   setStatusShareFormCreate,
+  removeShareByZoneId,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zone));

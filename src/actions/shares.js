@@ -218,3 +218,47 @@ export function deleteShare(id) {
     });
   };
 }
+
+export function removeShareByZoneId(zoneId) {
+  return async (dispatch, getState, { graphqlRequest }) => {
+    if (zoneId !== null) {
+      const query = `
+      query {
+        shares(where: {zoneId: "${zoneId}"}) {
+          id
+          placementId
+          bannerId
+          createdAt
+          updatedAt
+        }
+      }`;
+      const { data } = await graphqlRequest(query);
+      if (data.shares.length > 0) {
+        const id = data.shares[0].id;
+        const mutation = `
+          mutation {
+            deletedShare(id: "${id}") {
+            id
+            name
+            html
+            css
+            width
+            height
+            weight
+            classes
+            type
+            description
+            zoneId
+            }
+          }`;
+        await graphqlRequest(mutation);
+        dispatch({
+          type: DELETE_SHARE,
+          payload: {
+            share: data.deletedShare,
+          },
+        });
+      }
+    }
+  };
+}

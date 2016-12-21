@@ -11,6 +11,7 @@ class UpdateZoneForm extends Component {
     sites: PropTypes.array,
     getZone: PropTypes.func,
     removeZone: PropTypes.func,
+    removeShareByZoneId: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
   };
 
@@ -194,13 +195,12 @@ class UpdateZoneForm extends Component {
 
     this.props.updateZone(zone).then(() => {
       this.props.getZone(this.props.zoneId);
-      this.props.setPageZoneActiveTab('editZone')
+      this.props.setPageZoneActiveTab('editZone');
     });
   }
 
   deleteZone() {
     this.props.deleteZone(this.props.zoneId);
-    this.props.removeZone(this.props.zoneId);
   }
 
   render() {
