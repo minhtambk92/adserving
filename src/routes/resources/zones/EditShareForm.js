@@ -1,6 +1,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
+import { InputTags } from '../../../components/UI';
 import Link from '../../../components/Link';
 
 class EditShareForm extends Component {
@@ -24,6 +25,7 @@ class EditShareForm extends Component {
     super(props, context);
     this.state = {
       index: 1,
+      keyWord: '',
     };
   }
 
@@ -37,7 +39,7 @@ class EditShareForm extends Component {
       this.inputEditShareWeight.value = nextProps.childZone.weight;
       this.inputEditShareWidth.value = nextProps.childZone.width;
       this.inputEditShareType.value = nextProps.childZone.type;
-      this.inputCreateShareClasses.value = nextProps.childZone.classes;
+      this.state.keyWord = nextProps.childZone.classes;
     }
   }
 
@@ -50,7 +52,7 @@ class EditShareForm extends Component {
     const width = $('#inputEditShareWidth').val();
     const height = $('#inputEditShareHeight').val();
     const weight = $('#inputEditShareWeight').val();
-    const classes = $('#inputEditShareClasses').val();
+    const classes = document.getElementById('inputCreateShareClasses').value;
     const type = $('#inputEditShareType').val();
     const description = $('#inputEditShareDescription').val();
     if (id) {
@@ -153,12 +155,13 @@ class EditShareForm extends Component {
                 className="col-sm-2 control-label"
               >Custom Class</label>
               <div className="col-sm-10">
-                <input
-                  type="number" className="form-control" id="inputCreateShareClasses"
-                  placeholder="demo"
-                  ref={c => {
-                    this.inputCreateShareClasses = c;
-                  }}
+                {/* /.InputTas */}
+                <InputTags
+                  type="text"
+                  id="inputCreateShareClasses"
+                  className="form-control"
+                  placeholder="dantri"
+                  data={this.state.keyWord}
                 />
               </div>
             </div>
@@ -217,8 +220,8 @@ class EditShareForm extends Component {
                 <select
                   id="inputEditShareType" className="form-control"
                   ref={c => {
-                  this.inputEditShareType = c;
-                }}
+                    this.inputEditShareType = c;
+                  }}
                 >
                   <option value="single">Single</option>
                   <option value="multiple">Multiple</option>

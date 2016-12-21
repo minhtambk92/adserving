@@ -1,6 +1,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
+import { InputTags } from '../../../components/UI';
 import Link from '../../../components/Link';
 
 class CreateShareForm extends Component {
@@ -17,7 +18,6 @@ class CreateShareForm extends Component {
     page: PropTypes.object,
   };
 
-
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
     $('#inputCreateShareName').val('');
     $('#inputCreateShareCSS').val('');
@@ -32,7 +32,7 @@ class CreateShareForm extends Component {
     const width = $('#inputCreateShareWidth').val();
     const height = $('#inputCreateShareHeight').val();
     const weight = $('#inputCreateShareWeight').val();
-    const classes = $('#inputCreateShareClasses').val();
+    const classes = document.getElementById('inputCreateShareClasses').value;
     const type = $('#inputCreateShareType').val();
     const description = $('#inputCreateShareDescription').val();
     if (name) {
@@ -47,9 +47,10 @@ class CreateShareForm extends Component {
         classes,
         type,
         description,
-        zoneId }).then(() => {
-          this.props.getZone(this.props.zoneId);
-        });
+        zoneId,
+      }).then(() => {
+        this.props.getZone(this.props.zoneId);
+      });
     }
     this.props.setStatusShareFormCreate(false);
     this.props.setPageZoneActiveTab('shareZone');
@@ -132,12 +133,12 @@ class CreateShareForm extends Component {
                 className="col-sm-2 control-label"
               >Custom Class</label>
               <div className="col-sm-10">
-                <input
-                  type="number" className="form-control" id="inputCreateShareClasses"
-                  placeholder="demo"
-                  ref={c => {
-                    this.inputCreateShareClasses = c;
-                  }}
+                {/* /.InputTas */}
+                <InputTags
+                  type="text"
+                  id="inputCreateShareClasses"
+                  className="form-control"
+                  placeholder="dantri"
                 />
               </div>
             </div>
@@ -196,8 +197,8 @@ class CreateShareForm extends Component {
                 <select
                   id="inputCreateShareType" className="form-control"
                   ref={c => {
-                  this.inputCreateShareType = c;
-                }}
+                    this.inputCreateShareType = c;
+                  }}
                 >
                   <option value="single">Single</option>
                   <option value="multiple">Multiple</option>
