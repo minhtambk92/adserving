@@ -53,7 +53,7 @@ router.post('/core-js', async (req, res) => {
   const corePath = path.join(rootPath, `public/${coreJsFolderName}`);
   const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
   const zoneId = req.body.zoneId;
-  const coreResponse = await fetch('http://corejs.manhhailua.com/build/Library.js');
+  const coreResponse = await fetch(req.body.templateFileUrl);
   let coreContent = await coreResponse.text();
 
   // Create {rootPath}/public/corejs folder if it is not existed

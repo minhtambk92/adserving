@@ -21,6 +21,7 @@ class AdsCode extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        templateFileUrl: this.inputCoreJsTemplate.value,
         zoneId: this.props.zone.id,
       }),
       credentials: 'include',
@@ -33,8 +34,20 @@ class AdsCode extends Component {
     return (
       <div className="row">
         <div className="col-md-12">
-          <p>Click [Generate code] button to archive the ads display code.</p>
           <div className="form-group">
+            <label htmlFor="inputCoreJsTemplate">Template file url</label>
+            <input
+              type="text" id="inputCoreJsTemplate"
+              className="form-control" placeholder="http://..."
+              defaultValue="http://corejs.manhhailua.com/build/Library.js"
+              ref={c => {
+                this.inputCoreJsTemplate = c;
+              }}
+            />
+          </div>
+
+          <div className="form-group">
+            <p>Click [Generate code] button to archive the ads display code.</p>
             <button
               type="button"
               className="btn btn-primary"
@@ -43,9 +56,7 @@ class AdsCode extends Component {
               Generate code
             </button>
           </div>
-        </div>
 
-        <div className="col-md-12">
           <div className="form-group">
             <label htmlFor="outputAdsCode">Your core here:</label>
             <textarea
