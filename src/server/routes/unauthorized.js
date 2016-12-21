@@ -132,7 +132,12 @@ router.post('/core-js', async (req, res) => {
   const coreFile = path.join(corePath, coreName);
   const builtCoreFile = path.join(builtCorePath, coreName);
 
-  coreContent = coreContent.replace('\'{{zoneDataObject}}\'', JSON.stringify(zoneData));
+  if (coreContent.indexOf('"{{zoneDataObject}}"') > -1) {
+    coreContent = coreContent.replace('"{{zoneDataObject}}"', JSON.stringify(zoneData));
+  } else {
+    coreContent = coreContent.replace('\'{{zoneDataObject}}\'', JSON.stringify(zoneData));
+  }
+
   coreContent = coreContent.replace('{{zoneId}}', zoneId);
 
   fs.writeFileSync(coreFile, coreContent); // Write content to file
