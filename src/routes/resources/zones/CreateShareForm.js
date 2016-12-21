@@ -128,6 +128,22 @@ class CreateShareForm extends Component {
 
             <div className="form-group">
               <label
+                htmlFor="inputCreateShareClasses"
+                className="col-sm-2 control-label"
+              >Custom Class</label>
+              <div className="col-sm-10">
+                <input
+                  type="number" className="form-control" id="inputCreateShareClasses"
+                  placeholder="demo"
+                  ref={c => {
+                    this.inputCreateShareClasses = c;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
                 htmlFor="inputCreateShareWidth" className="col-sm-2 control-label"
               >Width(px)</label>
               <div className="col-sm-10">
@@ -166,22 +182,6 @@ class CreateShareForm extends Component {
                   placeholder="100"
                   ref={c => {
                     this.inputCreateShareWeight = c;
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label
-                htmlFor="inputCreateShareClasses"
-                className="col-sm-2 control-label"
-              >Customer Class</label>
-              <div className="col-sm-10">
-                <textarea
-                  className="form-control" id="inputCreateShareClasses"
-                  rows="3" placeholder="demo"
-                  ref={c => {
-                    this.inputCreateShareClasses = c;
                   }}
                 />
               </div>

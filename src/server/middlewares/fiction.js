@@ -596,6 +596,54 @@ async function placementFiction() {
       campaignId: campaign.id,
     });
 
+    //Create Placement in Zone Right Share 1
+    await Placement.create({
+      name: 'Placement RS1 336x140',
+      startTime: new Date(moment().format('YYYY-MM-DD 00:00:00')),
+      endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 23:59:59')),
+      width: 336,
+      height: 140,
+      status: STATUS_ACTIVE,
+      weight: 25,
+      description: 'placement of Bong Da So',
+      campaignId: campaign.id,
+    });
+    await Placement.create({
+      name: 'Placement RS2 336x140',
+      startTime: new Date(moment().format('YYYY-MM-DD 00:00:00')),
+      endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 23:59:59')),
+      width: 336,
+      height: 140,
+      status: STATUS_ACTIVE,
+      weight: 25,
+      description: 'placement of Bong Da So',
+      campaignId: campaign.id,
+    });
+    await Placement.create({
+      name: 'Placement RS3 336x140',
+      startTime: new Date(moment().format('YYYY-MM-DD 00:00:00')),
+      endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 23:59:59')),
+      width: 336,
+      height: 140,
+      status: STATUS_ACTIVE,
+      weight: 25,
+      description: 'placement of Bong Da So',
+      campaignId: campaign.id,
+    });
+    await Placement.create({
+      name: 'Placement RS4 336x140',
+      startTime: new Date(moment().format('YYYY-MM-DD 00:00:00')),
+      endTime: new Date(moment(new Date('12-12-2017')).format('YYYY-MM-DD 23:59:59')),
+      width: 336,
+      height: 140,
+      status: STATUS_ACTIVE,
+      weight: 25,
+      description: 'placement of Bong Da So',
+      campaignId: campaign.id,
+    });
+
+
+
     console.log(chalk.green(`${placement.name} is created. Passed!`));
   } else {
     console.log(chalk.green(`${placementsQuantity} placement(s) found. Passed!`));
@@ -637,6 +685,31 @@ async function zoneFiction() {
       siteId: site.id,
     });
 
+    await Zone.create({
+      name: 'Zone Right',
+      width: 336,
+      height: 560,
+      sizeText: 'Customer (336 x 560)',
+      sizeValue: 'custom',
+      slot: 3,
+      type: 'type-1',
+      html: 'html',
+      css: 'css',
+      status: STATUS_ACTIVE,
+      weight: 100,
+      delivery: 3,
+      targetIFrame: '0',
+      isShowBannerAgain: true,
+      source: '',
+      isShowCampaignAgain: true,
+      isShowTextBanner: false,
+      characterSet: 'autoDetect',
+      supportThirdParty: '0',
+      isIncludeDescription: true,
+      description: 'Zone Top of Bong Da So',
+      siteId: site.id,
+    });
+
     console.log(chalk.green(`${zone.name} is created. Passed!`));
   } else {
     console.log(chalk.green(`${zonesQuantity} zone(s) found. Passed!`));
@@ -652,7 +725,8 @@ async function sharedFiction() {
     console.log(chalk.red('No share zone found! Do a fiction...'));
     // Get id of Zone
     const zone = await Zone.findOne({ where: { name: 'Zone Top' } });
-    // Create an Share
+    const zoneRight = await Zone.findOne({ where: { name: 'Zone Right' } });
+    // Create an Share Zone Top
     const share = await Share.create({
       name: 'Share 1',
       html: '<div class="hello"></div>',
@@ -666,7 +740,6 @@ async function sharedFiction() {
       zoneId: zone.id,
     });
 
-    // Create an Share
     await Share.create({
       name: 'Share 2',
       html: '<div class="hello"></div>',
@@ -679,6 +752,70 @@ async function sharedFiction() {
       description: 'share2 1160x90',
       zoneId: zone.id,
     });
+
+    // Create an Share Zone Right
+
+    await Share.create({
+      name: 'Share R 1',
+      html: '<div class="hello"></div>',
+      css: 'css',
+      width: 336,
+      height: 560,
+      weight: 100,
+      classes: '',
+      description: 'Share 336x560',
+      type: 'multiple',
+      zoneId: zoneRight.id,
+    });
+    await Share.create({
+      name: 'Share R 2',
+      html: '<div class="hello"></div>',
+      css: 'css',
+      width: 336,
+      height: 560,
+      weight: 20,
+      classes: '',
+      description: 'Share 336x560',
+      type: 'multiple',
+      zoneId: zoneRight.id,
+    });
+    await Share.create({
+      name: 'Share R 3',
+      html: '<div class="hello"></div>',
+      css: 'css',
+      width: 336,
+      height: 560,
+      weight: 20,
+      classes: '',
+      description: 'Share 336x560',
+      type: 'multiple',
+      zoneId: zoneRight.id,
+    });
+    await Share.create({
+      name: 'Share R 4',
+      html: '<div class="hello"></div>',
+      css: 'css',
+      width: 336,
+      height: 560,
+      weight: 20,
+      classes: '',
+      description: 'Share 336x560',
+      type: 'multiple',
+      zoneId: zoneRight.id,
+    });
+    await Share.create({
+      name: 'Share R 5',
+      html: '<div class="hello"></div>',
+      css: 'css',
+      width: 336,
+      height: 560,
+      weight: 20,
+      classes: '',
+      description: 'Share 336x560',
+      type: 'multiple',
+      zoneId: zoneRight.id,
+    });
+
 
     console.log(chalk.green(`Super ${share.name} is created. Passed!`));
   } else {
@@ -719,6 +856,30 @@ async function sharedPlacementFiction() {
       shareId: share2.id,
       placementId: placement3.id,
     });
+
+    //Create Share Placement Share Right 1
+    const shareR1 = await Share.findOne({ where: { name: 'Share R 1' } });
+    const placementRS1 = await Placement.findOne({ where: { name: 'Placement RS1 336x140' } });
+    const placementRS2 = await Placement.findOne({ where: { name: 'Placement RS2 336x140' } });
+    const placementRS3 = await Placement.findOne({ where: { name: 'Placement RS3 336x140' } });
+    const placementRS4 = await Placement.findOne({ where: { name: 'Placement RS4 336x140' } });
+    await SharePlacement.create({
+      shareId: shareR1.id,
+      placementId: placementRS1.id,
+    });
+    await SharePlacement.create({
+      shareId: shareR1.id,
+      placementId: placementRS2.id,
+    });
+    await SharePlacement.create({
+      shareId: shareR1.id,
+      placementId: placementRS3.id,
+    });
+    await SharePlacement.create({
+      shareId: shareR1.id,
+      placementId: placementRS4.id,
+    });
+
 
     console.log(chalk.green(`Super ${sharePlacement.id} is created. Passed!`));
   } else {
@@ -996,9 +1157,9 @@ async function bannerFiction() {
       channelId: channel.id,
     });
 
-    // Create Banner HTML 8
+    // Create Banner RS 1
     await Banner.create({
-      name: 'Banner 8 336x140',
+      name: 'Banner RS1 336x140',
       html: `<script>(function(){admid='abc',__admLink='http://dantri.com.vn';function admGetUrlCk(){return '';}var doc=document,url=admGetUrlCk()+encodeURIComponent(__admLink),ua=navigator.userAgent+'';var videourl='http://adi.admicro.vn/adt/banners/nam2015/4043/min_html5/2016_12_14/1481717928989/ngocdiep336x140/ngocdiep336x140_336_140_left.html';var imageurl='http://adi.admicro.vn/adt/banners/nam2015/4043/min_html5/2016_12_14/1481717928989/ngocdiep336x140/Images/ngocdiep336x140.jpg';var imgwidth=336;var imgheight=140;var html='<div style="position:relative;">'; if(ua.indexOf('Android')!=-1 || ua.indexOf('iPad')!=-1 || ua.indexOf('iPhone')!=-1){html+=('<img src="' + imageurl + '" border="0" /><a href="' + url + '" target="_blank" style="position:absolute; top:0; left:0; width:' + imgwidth + 'px; height:' + imgheight + 'px; display:block;z-index:9999;"><span></span></a>')}else{html+=('<iframe src="' + videourl + '?url=' + (encodeURIComponent(url)) + '&admid=' + admid + '" width="' + imgwidth + '" frameborder="0" scrolling="no" height="' + imgheight + '" ></iframe>')}html+='</div>';doc.write(html);})();</script>`,
       width: 336,
       height: 140,
@@ -1028,9 +1189,9 @@ async function bannerFiction() {
       channelId: channel.id,
     });
 
-    // Create Banner HTML 9
+    // Create Banner RS2
     await Banner.create({
-      name: 'Banner 9 336x140',
+      name: 'Banner RS2 336x140',
       html: `<script>(function(){admid='abc',__admLink='http://dantri.com.vn';function admGetUrlCk(){return '';}var doc=document,url=admGetUrlCk()+encodeURIComponent(__admLink),ua=navigator.userAgent+'';var videourl='http://adi.admicro.vn/adt/banners/nam2015/4043/min_html5/2016_12_12/1481508004338/riverside336x140/riverside336x140_336_140_left.html';var imageurl='http://adi.admicro.vn/adt/banners/nam2015/4043/min_html5/2016_12_12/1481508004338/riverside336x140/Images/riverside336x140.jpg';var imgwidth=336;var imgheight=140;var html='<div style="position:relative;">'; if(ua.indexOf('Android')!=-1 || ua.indexOf('iPad')!=-1 || ua.indexOf('iPhone')!=-1){html+=('<img src="' + imageurl + '" border="0" /><a href="' + url + '" target="_blank" style="position:absolute; top:0; left:0; width:' + imgwidth + 'px; height:' + imgheight + 'px; display:block;z-index:9999;"><span></span></a>')}else{html+=('<iframe src="' + videourl + '?url=' + (encodeURIComponent(url)) + '&admid=' + admid + '" width="' + imgwidth + '" frameborder="0" scrolling="no" height="' + imgheight + '" ></iframe>')}html+='</div>';doc.write(html);})();</script>`,
       width: 336,
       height: 140,
@@ -1059,6 +1220,71 @@ async function bannerFiction() {
       expirationDate: new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00')),
       channelId: channel.id,
     });
+
+    // Create Banner RS3
+    await Banner.create({
+      name: 'Banner RS3 336x140',
+      html: `<script>(function(){admid='abc',__admLink='http://dantri.com.vn';function admGetUrlCk(){return '';}var doc=document,url=admGetUrlCk()+encodeURIComponent(__admLink),ua=navigator.userAgent+'';var videourl='http://adi.admicro.vn/adt/banners/nam2015/4043/min_html5/2016_12_12/1481508004338/riverside336x140/riverside336x140_336_140_left.html';var imageurl='http://adi.admicro.vn/adt/banners/nam2015/4043/min_html5/2016_12_12/1481508004338/riverside336x140/Images/riverside336x140.jpg';var imgwidth=336;var imgheight=140;var html='<div style="position:relative;">'; if(ua.indexOf('Android')!=-1 || ua.indexOf('iPad')!=-1 || ua.indexOf('iPhone')!=-1){html+=('<img src="' + imageurl + '" border="0" /><a href="' + url + '" target="_blank" style="position:absolute; top:0; left:0; width:' + imgwidth + 'px; height:' + imgheight + 'px; display:block;z-index:9999;"><span></span></a>')}else{html+=('<iframe src="' + videourl + '?url=' + (encodeURIComponent(url)) + '&admid=' + admid + '" width="' + imgwidth + '" frameborder="0" scrolling="no" height="' + imgheight + '" ></iframe>')}html+='</div>';doc.write(html);})();</script>`,
+      width: 336,
+      height: 140,
+      keyword: 'iPhone, Android, iPad',
+      imageUrl: '',
+      url: '',
+      target: '_blank',
+      adServer: 'adtech',
+      bannerHTMLType: '9',
+      isIFrame: true,
+      type: 'html',
+      weight: 100,
+      description: 'Banner Top 336x140',
+      isCountView: false,
+      isFixIE: false,
+      isDefault: false,
+      isRelative: false,
+      isImpressionsBooked: true,
+      isClicksBooked: true,
+      isActivationDate: true,
+      isExpirationDate: true,
+      adStore: '',
+      impressionsBooked: -1,
+      clicksBooked: -1,
+      activationDate: new Date(moment().format('YYYY-MM-DD 00:00:00')),
+      expirationDate: new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00')),
+      channelId: channel.id,
+    });
+
+    // Create Banner RS 4
+    await Banner.create({
+      name: 'Banner RS4 336x140',
+      html: `<script>(function(){admid='abc',__admLink='http://dantri.com.vn';function admGetUrlCk(){return '';}var doc=document,url=admGetUrlCk()+encodeURIComponent(__admLink),ua=navigator.userAgent+'';var videourl='http://adi.admicro.vn/adt/banners/nam2015/4043/min_html5/2016_12_14/1481717928989/ngocdiep336x140/ngocdiep336x140_336_140_left.html';var imageurl='http://adi.admicro.vn/adt/banners/nam2015/4043/min_html5/2016_12_14/1481717928989/ngocdiep336x140/Images/ngocdiep336x140.jpg';var imgwidth=336;var imgheight=140;var html='<div style="position:relative;">'; if(ua.indexOf('Android')!=-1 || ua.indexOf('iPad')!=-1 || ua.indexOf('iPhone')!=-1){html+=('<img src="' + imageurl + '" border="0" /><a href="' + url + '" target="_blank" style="position:absolute; top:0; left:0; width:' + imgwidth + 'px; height:' + imgheight + 'px; display:block;z-index:9999;"><span></span></a>')}else{html+=('<iframe src="' + videourl + '?url=' + (encodeURIComponent(url)) + '&admid=' + admid + '" width="' + imgwidth + '" frameborder="0" scrolling="no" height="' + imgheight + '" ></iframe>')}html+='</div>';doc.write(html);})();</script>`,
+      width: 336,
+      height: 140,
+      keyword: 'iPhone, Android, iPad',
+      imageUrl: '',
+      url: '',
+      target: '_blank',
+      adServer: 'adtech',
+      bannerHTMLType: '9',
+      isIFrame: true,
+      type: 'html',
+      weight: 100,
+      description: 'Banner Top 336x140',
+      isCountView: false,
+      isFixIE: false,
+      isDefault: false,
+      isRelative: false,
+      isImpressionsBooked: true,
+      isClicksBooked: true,
+      isActivationDate: true,
+      isExpirationDate: true,
+      adStore: '',
+      impressionsBooked: -1,
+      clicksBooked: -1,
+      activationDate: new Date(moment().format('YYYY-MM-DD 00:00:00')),
+      expirationDate: new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00')),
+      channelId: channel.id,
+    });
+
     console.log(chalk.green(`${banner.name} is created. Passed!`));
   } else {
     console.log(chalk.green(`${bannersQuantity} zone(s) found. Passed!`));
@@ -1100,6 +1326,35 @@ async function placementBannerFiction() {
       placementId: placement3.id,
       bannerId: banner3.id,
     });
+
+    //Create Placement Banner Right Share 1
+    const placementRS1 = await Placement.findOne({ where: { name: 'Placement RS1 336x140' } });
+    const placementRS2 = await Placement.findOne({ where: { name: 'Placement RS2 336x140' } });
+    const placementRS3 = await Placement.findOne({ where: { name: 'Placement RS3 336x140' } });
+    const placementRS4 = await Placement.findOne({ where: { name: 'Placement RS4 336x140' } });
+
+    const bannerRS1 = await Banner.findOne({ where: { name: 'Banner RS1 336x140' } });
+    const bannerRS2 = await Banner.findOne({ where: { name: 'Banner RS2 336x140' } });
+    const bannerRS3 = await Banner.findOne({ where: { name: 'Banner RS3 336x140' } });
+    const bannerRS4 = await Banner.findOne({ where: { name: 'Banner RS4 336x140' } });
+
+    await PlacementBanner.create({
+      placementId: placementRS1.id,
+      bannerId: bannerRS1.id,
+    });
+    await PlacementBanner.create({
+      placementId: placementRS2.id,
+      bannerId: bannerRS2.id,
+    });
+    await PlacementBanner.create({
+      placementId: placementRS3.id,
+      bannerId: bannerRS3.id,
+    });
+    await PlacementBanner.create({
+      placementId: placementRS4.id,
+      bannerId: bannerRS4.id,
+    });
+
 
     console.log(chalk.green('placementBanner is created. Passed!'));
   } else {
