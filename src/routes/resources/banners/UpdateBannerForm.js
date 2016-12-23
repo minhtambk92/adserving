@@ -106,7 +106,6 @@ class UpdateBannerForm extends Component {
     const description = this.inputBannerDescription.value;
     const channelId = this.inputChannelId.value;
     const isIFrame = document.getElementById('inputBannerIsIFrame').checked;
-    // this.inputBannerIsIFrame.value;
     let html = '';
     let target = '';
     let imageUrl = '';
