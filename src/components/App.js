@@ -8,7 +8,7 @@
  */
 
 import React, { Children, PropTypes } from 'react';
-import { IntlProvider } from 'react-intl';
+import Provide from './Provide';
 
 const ContextType = {
   // Enables critical path CSS rendering
@@ -86,17 +86,10 @@ class App extends React.PureComponent {
     const store = this.props.context && this.props.context.store;
     const state = store && store.getState();
     this.intl = (state && state.intl) || {};
-    const { initialNow, locale, messages } = this.intl;
-    const localeMessages = (messages && messages[locale]) || {};
     return (
-      <IntlProvider
-        initialNow={initialNow}
-        locale={locale}
-        messages={localeMessages}
-        defaultLocale="en-US"
-      >
+      <Provide store={store}>
         {Children.only(this.props.children)}
-      </IntlProvider>
+      </Provide>
     );
   }
 

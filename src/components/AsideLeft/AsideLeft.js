@@ -6,10 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import history from '../../core/history';
-import {
-  getAsideLeftMenu,
-  setActiveItems,
-} from '../../actions/menus';
+import { setActiveItems } from '../../actions/menus';
 import MenuItem from './MenuItem';
 import s from './AsideLeft.css';
 
@@ -17,7 +14,6 @@ class AsideLeft extends Component {
 
   static propTypes = {
     menus: PropTypes.object,
-    getAsideLeftMenu: PropTypes.func,
     setActiveItems: PropTypes.func,
   };
 
@@ -27,10 +23,6 @@ class AsideLeft extends Component {
     this.state = {
       activeItems: [],
     };
-  }
-
-  componentDidMount() {
-    this.props.getAsideLeftMenu('main-menu');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -105,7 +97,6 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = {
-  getAsideLeftMenu,
   setActiveItems,
 };
 

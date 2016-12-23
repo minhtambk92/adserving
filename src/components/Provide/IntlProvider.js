@@ -1,23 +1,40 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl';
+import { getAsideLeftMenu } from '../../actions/menus';
 
-function ProvideIntl({ intl, children }) {
-  return (
-    <IntlProvider
-      {...intl}
-      messages={intl.messages[intl.locale]}
-    >
-      {children}
-    </IntlProvider>
-  );
+class ProvideIntl extends Component {
+
+  static propTypes = {
+    ...IntlProvider.propTypes,
+    getAsideLeftMenu: PropTypes.func,
+    children: PropTypes.element.isRequired,
+  };
+
+  componentDidMount() {
+    this.props.getAsideLeftMenu('main-menu');
+  }
+
+  render() {
+    const { intl, children } = this.props;
+
+    return (
+      <IntlProvider
+        {...intl}
+        messages={intl.messages[intl.locale]}
+      >
+        {children}
+      </IntlProvider>
+    );
+  }
 }
 
-ProvideIntl.propTypes = {
-  ...IntlProvider.propTypes,
-  children: PropTypes.element.isRequired,
+const mapState = (state) => ({
+  intl: state.intl,
+});
+
+const mapDispatch = {
+  getAsideLeftMenu,
 };
 
-export default connect(state => ({
-  intl: state.intl,
-}))(ProvideIntl);
+export default connect(mapState, mapDispatch)(ProvideIntl);
