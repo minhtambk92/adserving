@@ -36,7 +36,7 @@ import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './actions/runtime';
 import { setLocale } from './actions/intl';
 import { port, auth, locales } from './config';
-import fiction from './server/middlewares/fiction';
+import fiction from './server/fictions';
 
 const app = express();
 

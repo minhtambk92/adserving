@@ -1,5 +1,5 @@
 /**
- * Created by Manhhailua on 11/7/16.
+ * Created by manhhailua on 12/24/16.
  */
 
 /* eslint-disable quotes */
@@ -36,6 +36,7 @@ import {
   SharePlacement,
 } from '../../data/models';
 import { host } from '../../config';
+import { data as resourceList } from './data/resources.json';
 
 /* eslint-disable no-console */
 
@@ -47,64 +48,8 @@ async function resourcesFiction() {
   if (resourcesQuantity === 0) {
     console.log(chalk.red('No resource found! Do a fiction...'));
 
-    // Create basic roles
-    const results = await Resource.bulkCreate([{
-      uniqueName: 'option',
-      modelName: 'Option',
-      name: 'Options',
-      hasMeta: false,
-      description: 'Global application\'s options',
-      status: 'active',
-    }, {
-      uniqueName: 'resource',
-      modelName: 'Resource',
-      name: 'Resource types',
-      hasMeta: false,
-      description: 'Application\'s resources types',
-      status: 'active',
-    }, {
-      uniqueName: 'role',
-      modelName: 'Role',
-      name: 'User roles',
-      hasMeta: false,
-      description: 'Name for group of user privileges',
-      status: 'active',
-    }, {
-      uniqueName: 'user',
-      modelName: 'User',
-      name: 'User',
-      hasMeta: true,
-      description: 'User account',
-      status: 'active',
-    }, {
-      uniqueName: 'claims',
-      modelName: 'UserClaim',
-      name: 'User\'s claims',
-      hasMeta: true,
-      description: 'User\'s claims list',
-      status: 'active',
-    }, {
-      uniqueName: 'logins',
-      modelName: 'UserLogin',
-      name: 'User\'s login information',
-      hasMeta: true,
-      description: 'User\'s login information',
-      status: 'active',
-    }, {
-      uniqueName: 'profile',
-      modelName: 'UserProfile',
-      name: 'User\'s profile',
-      hasMeta: true,
-      description: 'User\'s profile information',
-      status: 'active',
-    }, {
-      uniqueName: 'permission',
-      modelName: 'Permission',
-      name: 'Resources permissions',
-      hasMeta: false,
-      description: 'User privileges',
-      status: 'active',
-    }]);
+    // Create resources
+    const results = await Resource.bulkCreate(resourceList);
 
     console.log(chalk.green(`${results.length} resources created. Passed!`));
   } else {
@@ -596,7 +541,7 @@ async function placementFiction() {
       campaignId: campaign.id,
     });
 
-    //Create Placement in Zone Right Share 1
+    // Create Placement in Zone Right Share 1
     await Placement.create({
       name: 'Placement RS1 336x140',
       startTime: new Date(moment().format('YYYY-MM-DD 00:00:00')),
@@ -641,8 +586,6 @@ async function placementFiction() {
       description: 'placement of Bong Da So',
       campaignId: campaign.id,
     });
-
-
 
     console.log(chalk.green(`${placement.name} is created. Passed!`));
   } else {
@@ -743,7 +686,7 @@ async function sharedFiction() {
     await Share.create({
       name: 'Share 2',
       html: '<div class="hello"></div>',
-      css: '.arf-placement { display: inline-block;	margin-left: 50px;}',
+      css: '.arf-placement{display:inline-block;margin-left:50px;}',
       width: 1160,
       height: 90,
       type: 'multiple',
@@ -816,7 +759,6 @@ async function sharedFiction() {
       zoneId: zoneRight.id,
     });
 
-
     console.log(chalk.green(`Super ${share.name} is created. Passed!`));
   } else {
     console.log(chalk.green(`${shareQuantity} share Zone(s) found. Passed!`));
@@ -857,7 +799,7 @@ async function sharedPlacementFiction() {
       placementId: placement3.id,
     });
 
-    //Create Share Placement Share Right 1
+    // Create Share Placement Share Right 1
     const shareR1 = await Share.findOne({ where: { name: 'Share R 1' } });
     const placementRS1 = await Placement.findOne({ where: { name: 'Placement RS1 336x140' } });
     const placementRS2 = await Placement.findOne({ where: { name: 'Placement RS2 336x140' } });
@@ -879,7 +821,6 @@ async function sharedPlacementFiction() {
       shareId: shareR1.id,
       placementId: placementRS4.id,
     });
-
 
     console.log(chalk.green(`Super ${sharePlacement.id} is created. Passed!`));
   } else {
@@ -1096,7 +1037,8 @@ async function bannerFiction() {
     // Create Banner HTML 5
     await Banner.create({
       name: 'Banner 5 468x90',
-      html: `<script>(function(){admid='abc',__admLink='http://dantri.com.vn';function admGetUrlCk(){return '';}var doc=document,url=encodeURIComponent(__admLink),ua=navigator.userAgent+'';var videourl='http://adi.admicro.vn/adt/banners/nam2015/22/VietnamAirlines/2350416/091216/468x90.html';var imageurl='http://adi.admicro.vn/adt/banners/nam2015/22/VietnamAirlines/2350416/091216/vnethang12.jpg';var imgwidth=468;var imgheight=90;var html='<div style="position:relative;">'; if(ua.indexOf('Android')!=-1 || ua.indexOf('iPad')!=-1 || ua.indexOf('iPhone')!=-1){html+=('<img src="'+imageurl+'" border="0" /><a href="'+url+'" target="_blank" style="position:absolute; top:0; left:0; width:'+imgwidth+'px; height:'+imgheight+'px; display:block;z-index:9999;"><span></span></a>')}else{html+=('<iframe src="'+videourl+'?url='+(encodeURIComponent(url))+'&admid='+admid+'" width="'+imgwidth+'" frameborder="0" scrolling="no" height="'+imgheight+'" ></iframe>')}html+='</div>';doc.write(html);})();</script>`, status: STATUS_ACTIVE,
+      html: `<script>(function(){admid='abc',__admLink='http://dantri.com.vn';function admGetUrlCk(){return '';}var doc=document,url=encodeURIComponent(__admLink),ua=navigator.userAgent+'';var videourl='http://adi.admicro.vn/adt/banners/nam2015/22/VietnamAirlines/2350416/091216/468x90.html';var imageurl='http://adi.admicro.vn/adt/banners/nam2015/22/VietnamAirlines/2350416/091216/vnethang12.jpg';var imgwidth=468;var imgheight=90;var html='<div style="position:relative;">'; if(ua.indexOf('Android')!=-1 || ua.indexOf('iPad')!=-1 || ua.indexOf('iPhone')!=-1){html+=('<img src="'+imageurl+'" border="0" /><a href="'+url+'" target="_blank" style="position:absolute; top:0; left:0; width:'+imgwidth+'px; height:'+imgheight+'px; display:block;z-index:9999;"><span></span></a>')}else{html+=('<iframe src="'+videourl+'?url='+(encodeURIComponent(url))+'&admid='+admid+'" width="'+imgwidth+'" frameborder="0" scrolling="no" height="'+imgheight+'" ></iframe>')}html+='</div>';doc.write(html);})();</script>`,
+      status: STATUS_ACTIVE,
       width: 468,
       height: 90,
       keyword: 'iPhone, Android, iPad',
@@ -1327,7 +1269,7 @@ async function placementBannerFiction() {
       bannerId: banner3.id,
     });
 
-    //Create Placement Banner Right Share 1
+    // Create Placement Banner Right Share 1
     const placementRS1 = await Placement.findOne({ where: { name: 'Placement RS1 336x140' } });
     const placementRS2 = await Placement.findOne({ where: { name: 'Placement RS2 336x140' } });
     const placementRS3 = await Placement.findOne({ where: { name: 'Placement RS3 336x140' } });
@@ -1354,7 +1296,6 @@ async function placementBannerFiction() {
       placementId: placementRS4.id,
       bannerId: bannerRS4.id,
     });
-
 
     console.log(chalk.green('placementBanner is created. Passed!'));
   } else {

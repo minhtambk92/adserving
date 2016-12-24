@@ -1,0 +1,68 @@
+{
+  "data": [
+    {
+      "uniqueName": "option",
+      "modelName": "Option",
+      "name": "Options",
+      "hasMeta": false,
+      "description": "Global application's options",
+      "status": "active"
+    },
+    {
+      "uniqueName": "resource",
+      "modelName": "Resource",
+      "name": "Resource types",
+      "hasMeta": false,
+      "description": "Application's resources types",
+      "status": "active"
+    },
+    {
+      "uniqueName": "role",
+      "modelName": "Role",
+      "name": "User roles",
+      "hasMeta": false,
+      "description": "Name for group of user privileges",
+      "status": "active"
+    },
+    {
+      "uniqueName": "user",
+      "modelName": "User",
+      "name": "User",
+      "hasMeta": true,
+      "description": "User account",
+      "status": "active"
+    },
+    {
+      "uniqueName": "claims",
+      "modelName": "UserClaim",
+      "name": "User's claims",
+      "hasMeta": true,
+      "description": "User's claims list",
+      "status": "active"
+    },
+    {
+      "uniqueName": "logins",
+      "modelName": "UserLogin",
+      "name": "User's login information",
+      "hasMeta": true,
+      "description": "User's login information",
+      "status": "active"
+    },
+    {
+      "uniqueName": "profile",
+      "modelName": "UserProfile",
+      "name": "User's profile",
+      "hasMeta": true,
+      "description": "User's profile information",
+      "status": "active"
+    },
+    {
+      "uniqueName": "permission",
+      "modelName": "Permission",
+      "name": "Resources permissions",
+      "hasMeta": false,
+      "description": "User privileges",
+      "status": "active"
+    }
+  ]
+}
