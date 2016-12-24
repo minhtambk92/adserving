@@ -7,6 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+import { host } from '../config';
+
 /* eslint-disable global-require */
 
 // The top-level (parent) route
@@ -31,7 +33,7 @@ export default {
     const route = await next();
 
     // Provide default values for title, description etc.
-    route.title = `${route.title || 'Untitled Page'} - www.reactstarterkit.com`;
+    route.title = `${route.title || 'Untitled Page'} - ${host}`;
     route.description = route.description || '';
 
     return route;
