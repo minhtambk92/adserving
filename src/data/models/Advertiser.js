@@ -14,7 +14,7 @@ import {
   STATUS_INACTIVE,
 } from '../../constants';
 
-const Advertisers = Model.define('Advertisers', {
+const Advertiser = Model.define('Advertiser', {
 
   id: {
     type: DataType.UUID,
@@ -66,4 +66,4 @@ const Advertisers = Model.define('Advertisers', {
 
 });
 
-export default Advertisers;
+export default Advertiser;
