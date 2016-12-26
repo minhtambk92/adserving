@@ -28,6 +28,7 @@ import optionChannels from './optionChannel/optionChannels';
 import tracks from './track/tracks';
 import shares from './share/shares';
 import sharePlacements from './sharePlacement/sharePlacements';
+import channelOptionBrowsers from './channelOptionBrowser/channelOptionBrowsers';
 
 const queries = new ObjectType({
   name: 'Query',
@@ -57,6 +58,7 @@ const queries = new ObjectType({
     tracks,
     shares,
     sharePlacements,
+    channelOptionBrowsers,
   },
 });
 

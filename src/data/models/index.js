@@ -31,6 +31,7 @@ import Advertiser from './Advertiser';
 import Site from './Site';
 import Zone from './Zone';
 import Channel from './Channel';
+import ChannelOptionBrowser from './ChannelOptionBrowser'
 import Filter from './Filter';
 import PlacementBanner from './PlacementBanner';
 import OptionChannel from './OptionChannel';
@@ -329,6 +330,7 @@ export {
   Site,
   Zone,
   Channel,
+  ChannelOptionBrowser,
   Filter,
   PlacementBanner,
   OptionChannel,

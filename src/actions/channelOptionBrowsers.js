@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 
 import {
-  GET_CHANNEL_OPTION_BROWSER,
   GET_CHANNEL_OPTION_BROWSERS,
+  GET_CHANNEL_OPTION_BROWSER,
   CREATE_CHANNEL_OPTION_BROWSER,
   UPDATE_CHANNEL_OPTION_BROWSER,
   DELETE_CHANNEL_OPTION_BROWSER,
@@ -76,16 +76,15 @@ export function getChannelOptionBrowsers(args = {
   };
 }
 
-export function createChannelOptionBrowser({ name, value, status, siteId }) {
+export function createChannelOptionBrowser({ name, value, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($channel: ChannelInputTypeWithoutId!) {
-        createdChannelOptionBrowser(channel: $channel) {
+      mutation ($channelOptionBrowser: ChannelOptionBrowserInputTypeWithoutId!) {
+        createdChannelOptionBrowser(channelOptionBrowser: $channelOptionBrowser) {
           id
           name
           value
           status
-          siteId
           createdAt
           updatedAt
         }
@@ -96,7 +95,6 @@ export function createChannelOptionBrowser({ name, value, status, siteId }) {
         name,
         value,
         status,
-        siteId,
       },
     });
 
@@ -109,11 +107,11 @@ export function createChannelOptionBrowser({ name, value, status, siteId }) {
   };
 }
 
-export function updateChannelOptionBrowser({ id, name, value, status}) {
+export function updateChannelOptionBrowser({ id, name, value, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($channel: ChannelInputType!) {
-        updatedChannelOptionBrowser(channel: $channel) {
+      mutation ($channelOptionBrowser: ChannelOptionBrowserInputType!) {
+        updatedChannelOptionBrowser(channelOptionBrowser: $channelOptionBrowser) {
           id
           name
           value
