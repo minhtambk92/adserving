@@ -9,7 +9,7 @@ import {
   UPDATE_MENU,
   DELETE_MENU,
   GET_ASIDE_LEFT_MENU,
-  SET_ACTIVE_ITEMS,
+  SET_ASIDE_LEFT_ACTIVE_ITEMS,
 } from '../constants';
 
 export function getMenu(uniqueName, actionType) {
@@ -68,10 +68,10 @@ export function getAsideLeftMenu(uniqueName) {
   return getMenu(uniqueName, GET_ASIDE_LEFT_MENU);
 }
 
-export function setActiveItems(activeItems) {
+export function setAsideLeftActiveItems(activeItems) {
   return async (dispatch) => {
     dispatch({
-      type: SET_ACTIVE_ITEMS,
+      type: SET_ASIDE_LEFT_ACTIVE_ITEMS,
       payload: {
         items: activeItems,
       },

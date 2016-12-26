@@ -5,8 +5,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import history from '../../core/history';
-import { setActiveItems } from '../../actions/menus';
 import MenuItem from './MenuItem';
 import s from './AsideLeft.css';
 
@@ -14,43 +12,7 @@ class AsideLeft extends Component {
 
   static propTypes = {
     menus: PropTypes.object,
-    setActiveItems: PropTypes.func,
   };
-
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      activeItems: [],
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.menus.asideLeft.items) {
-      nextProps.menus.asideLeft.items.map(item => this.checkActiveItem(item));
-    }
-  }
-
-  checkActiveItem(item, activeItems = []) {
-    if (item) {
-      const array = activeItems;
-      array.unshift(item);
-
-      if (item.url === history.location.pathname) {
-        this.setState({ activeItems: Object.assign([], array) });
-      }
-
-      if (item.childItems && item.childItems.length > 0) {
-        item.childItems.map(childItem => {
-          if (childItem.parentId !== array[0].id) {
-            array.shift();
-          }
-
-          return this.checkActiveItem(childItem, array);
-        });
-      }
-    }
-  }
 
   render() {
     const { menus } = this.props;
@@ -80,7 +42,7 @@ class AsideLeft extends Component {
               return (
                 <MenuItem
                   key={item.id} item={item}
-                  activeIds={this.state.activeItems.map(activeItem => activeItem.id)}
+                  activeIds={this.props.menus.asideLeftActiveItems.map(activeItem => activeItem.id)}
                 />
               );
             })}
@@ -96,8 +58,4 @@ const mapState = (state) => ({
   menus: state.menus,
 });
 
-const mapDispatch = {
-  setActiveItems,
-};
-
-export default withStyles(s)(connect(mapState, mapDispatch)(AsideLeft));
+export default withStyles(s)(connect(mapState)(AsideLeft));
