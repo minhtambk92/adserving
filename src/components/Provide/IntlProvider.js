@@ -33,7 +33,7 @@ class ProvideIntl extends Component {
       array.unshift(item);
 
       if (item.url === history.location.pathname) {
-        this.setAsideLeftActiveItems(array);
+        this.props.setAsideLeftActiveItems(array);
       }
 
       if (item.childItems && item.childItems.length > 0) {
