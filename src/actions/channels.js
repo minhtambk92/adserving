@@ -1,22 +1,51 @@
 /* eslint-disable import/prefer-default-export */
 
 import {
-  GET_CHANNEL_OPTION_BROWSER,
-  GET_CHANNEL_OPTION_BROWSERS,
-  CREATE_CHANNEL_OPTION_BROWSER,
-  UPDATE_CHANNEL_OPTION_BROWSER,
-  DELETE_CHANNEL_OPTION_BROWSER,
+  GET_CHANNEL,
+  GET_CHANNELS,
+  CREATE_CHANNEL,
+  UPDATE_CHANNEL,
+  DELETE_CHANNEL,
+  GET_CHANNELS_FILTERS,
+  SET_CHANNELS_FILTERS,
 } from '../constants';
 
-export function getChannelOptionBrowser(id) {
+export function getChannelsFilters() {
+  return async (dispatch) => {
+    dispatch({
+      type: GET_CHANNELS_FILTERS,
+      payload: {},
+    });
+  };
+}
+
+export function setChannelsFilters(filter) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_CHANNELS_FILTERS,
+      payload: filter,
+    });
+  };
+}
+
+export function getChannel(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        channelOptionBrowsers(where: {id: "${id}"}, limit: 1) {
+        channels(where: {id: "${id}"}, limit: 1) {
           id
           name
-          value
+          description
           status
+          siteId
+          options {
+            id
+            name
+            type
+            logical
+            comparison
+            value
+          }
           createdAt
           updatedAt
         }
@@ -25,15 +54,15 @@ export function getChannelOptionBrowser(id) {
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_CHANNEL_OPTION_BROWSER,
+      type: GET_CHANNEL,
       payload: {
-        channelOptionBrowser: data.channelOptionBrowsers.shift(),
+        channel: data.channels.shift(),
       },
     });
   };
 }
 
-export function getChannelOptionBrowsers(args = {
+export function getChannels(args = {
   where: {},
   limit: 0,
   order: '',
@@ -43,18 +72,19 @@ export function getChannelOptionBrowsers(args = {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query ($where: JSON, $order: String, $limit: Int) {
-        channelOptionBrowsers(where: $where, order: $order, limit: $limit) {
+        channels(where: $where, order: $order, limit: $limit) {
           id
           name
-          value
+          description
           status
+          siteId
           createdAt
           updatedAt
         }
       }`;
 
     const variables = Object.assign({}, args);
-    const filters = await getState().channelOptionBrowsers.filters;
+    const filters = await getState().channels.filters;
 
     if (
       options.globalFilters &&
@@ -68,22 +98,22 @@ export function getChannelOptionBrowsers(args = {
     const { data } = await graphqlRequest(query, variables);
 
     dispatch({
-      type: GET_CHANNEL_OPTION_BROWSERS,
+      type: GET_CHANNELS,
       payload: {
-        channelOptionBrowsers: data.channelOptionBrowsers,
+        channels: data.channels,
       },
     });
   };
 }
 
-export function createChannelOptionBrowser({ name, value, status, siteId }) {
+export function createChannel({ name, description, status, siteId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($channel: ChannelInputTypeWithoutId!) {
-        createdChannelOptionBrowser(channel: $channel) {
+        createdChannel(channel: $channel) {
           id
           name
-          value
+          description
           status
           siteId
           createdAt
@@ -92,31 +122,31 @@ export function createChannelOptionBrowser({ name, value, status, siteId }) {
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      channelOptionBrowser: {
+      channel: {
         name,
-        value,
+        description,
         status,
         siteId,
       },
     });
 
     dispatch({
-      type: CREATE_CHANNEL_OPTION_BROWSER,
+      type: CREATE_CHANNEL,
       payload: {
-        channelOptionBrowser: data.createdChannelOptionBrowser,
+        channel: data.createdChannel,
       },
     });
   };
 }
 
-export function updateChannelOptionBrowser({ id, name, value, status}) {
+export function updateChannel({ id, name, description, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($channel: ChannelInputType!) {
-        updatedChannelOptionBrowser(channel: $channel) {
+        updatedChannel(channel: $channel) {
           id
           name
-          value
+          description
           status
           createdAt
           updatedAt
@@ -124,32 +154,32 @@ export function updateChannelOptionBrowser({ id, name, value, status}) {
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      channelOptionBrowser: {
+      channel: {
         id,
         name,
-        value,
+        description,
         status,
       },
     });
 
     dispatch({
-      type: UPDATE_CHANNEL_OPTION_BROWSER,
+      type: UPDATE_CHANNEL,
       payload: {
-        channelOptionBrowser: data.updatedChannelOptionBrowser,
+        channel: data.updatedChannel,
       },
     });
   };
 }
 
-export function deleteChannelOptionBrowser(id) {
+export function deleteChannel(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
-        deletedChannelOptionBrowser(id: "${id}") {
+        deletedChannel(id: "${id}") {
           id
           name
-          value
-          status
+          description
+          siteId
           createdAt
           updatedAt
           deletedAt
@@ -159,9 +189,9 @@ export function deleteChannelOptionBrowser(id) {
     const { data } = await graphqlRequest(mutation);
 
     dispatch({
-      type: DELETE_CHANNEL_OPTION_BROWSER,
+      type: DELETE_CHANNEL,
       payload: {
-        channelOptionBrowser: data.deletedChannelOptionBrowser,
+        channel: data.deletedChannel,
       },
     });
   };

@@ -6,6 +6,8 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { DataTables, ICheck } from '../../../components/UI/';
 import CreateChannelOptionBrowserForm from './CreateChannelOptionBrowserForm';
+import EditChannelOptionBrowserForm from './EditChannelOptionBrowserForm';
+import Link from '../../../components/Link';
 
 class ChannelOptionBrowserList extends Component {
 
@@ -52,10 +54,30 @@ class ChannelOptionBrowserList extends Component {
       data: 'name',
     }, {
       data: 'value',
-      render: data => (data ? 'yes' : 'no'),
     }, {
       data: 'status',
+    }, {
+      data: null,
+      orderable: false,
+      createdCell: (cell, cellData, rowData) => {
+        ReactDOM.render(<Link
+          to="#"
+          onClick={() => this.editBrowser(rowData)}
+        >Edit</Link>, cell);
+      },
     }];
+  }
+
+  editBrowser(data) {
+    this.props.statusBrowserEdit(true).then(() => {
+      if (this.props.page.browserEdit === true) {
+        const length = this.state.number;
+        const count = length + 1;
+        this.setState({ countBrowser: count });
+        this.setState({ arrBrowser: [].concat(count) });
+        this.setState({ browser: data });
+      }
+    });
   }
 
   addBrowser() {
@@ -105,6 +127,7 @@ class ChannelOptionBrowserList extends Component {
                       <th>Name</th>
                       <th>Value</th>
                       <th>Status</th>
+                      <th>&nbsp;</th>
                     </tr>
                   )}
                   tfoot={(
@@ -115,6 +138,7 @@ class ChannelOptionBrowserList extends Component {
                       <th>Name</th>
                       <th>Value</th>
                       <th>Status</th>
+                      <th>&nbsp;</th>
                     </tr>
                   )}
                 />
@@ -124,16 +148,32 @@ class ChannelOptionBrowserList extends Component {
           </div>
         </div>
         <div className="col-sm-12" id="ChannelOption">
+          {this.props.page.browserEdit === true &&
+          this.state.arrBrowser && this.state.arrBrowser.map((count) => (
+            <div className="box" key={count}>
+              <div className="editChannelOptionBrowserForm">
+                <EditChannelOptionBrowserForm
+                  id={this.state.browser.id}
+                  browser={this.state.browser}
+                  index={1}
+                  updateChannelOptionBrowser={this.props.updateChannelOptionBrowser}
+                  statusBrowserEdit={this.props.statusBrowserEdit}
+                  getChannelOptionBrowsers={this.props.getChannelOptionBrowsers}
+                  page={this.props.page}
+                />
+              </div>
+            </div>
+          ))}
           {this.props.page &&
           this.props.page.browserCreate === true && this.state.arrCreateBrowser
           && this.state.arrCreateBrowser.map((count) => (
             <div className="box" key={count}>
-              <div className="CreateChannelOptionBrowserForm">
+              <div className="createChannelOptionBrowserForm">
                 <CreateChannelOptionBrowserForm
                   id={this.state.browser.id}
                   index={1}
                   createChannelOptionBrowser={this.props.createChannelOptionBrowser}
-                  getZone={this.props.getChannelOptionBrowsers}
+                  getChannelOptionBrowsers={this.props.getChannelOptionBrowsers}
                   statusBrowserCreate={this.props.statusBrowserCreate}
                   page={this.props.page}
                 />

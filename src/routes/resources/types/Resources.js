@@ -18,6 +18,7 @@ import {
   getResourcesFilters,
   setResourcesFilters,
 } from '../../../actions/resources';
+import { setCurrentPageResource } from '../../../actions/pages/resources';
 import Layout from '../../../components/Layout';
 import FilterResourcesForm from './FilterResourcesForm';
 import CreateResourceForm from './CreateResourceForm';
@@ -35,6 +36,7 @@ class Resources extends Component {
     createResource: PropTypes.func,
     getResourcesFilters: PropTypes.func,
     setResourcesFilters: PropTypes.func,
+    setCurrentPageResource: PropTypes.func,
   };
 
   componentWillMount() {
@@ -115,7 +117,10 @@ class Resources extends Component {
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
-                  <ResourceList list={this.getFilteredResources()} />
+                  <ResourceList
+                    list={this.getFilteredResources()}
+                    setCurrentPageResource={this.props.setCurrentPageResource}
+                  />
                 </div>
               </div>
               {/* /.box */}
@@ -132,6 +137,7 @@ class Resources extends Component {
 
 const mapState = (state) => ({
   resources: state.resources,
+  page: state.page.resources,
 });
 
 const mapDispatch = {
@@ -139,6 +145,7 @@ const mapDispatch = {
   setResourcesFilters,
   getResources,
   createResource,
+  setCurrentPageResource,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Resources));

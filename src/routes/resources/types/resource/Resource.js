@@ -26,6 +26,7 @@ import {
 import {
   setStatusChannelOptionBrowserCreate,
   setStatusChannelOptionBrowserEdit,
+  setCurrentPageResource,
 } from '../../../../actions/pages/resources';
 import UpdateResourceForm from '../UpdateResourceForm';
 import ChannelOptionBrowserList from '../ChannelOptionBrowserList';
@@ -49,11 +50,13 @@ class Resource extends Component {
     createChannelOptionBrowser: PropTypes.func,
     deleteChannelOptionBrowser: PropTypes.func,
     updateChannelOptionBrowser: PropTypes.func,
+    setCurrentPageResource: PropTypes.func,
   };
 
   componentWillMount() {
     this.props.getResource(this.props.resourceId);
     this.props.getChannelOptionBrowsers();
+    this.props.setCurrentPageResource(this.props.resourceId);
   }
 
   render() {
@@ -76,11 +79,13 @@ class Resource extends Component {
                       Edit Resource
                     </a>
                   </li>
-                  <li>
-                    <a href="#addOptionResource" data-toggle="tab">
-                      Add New Option
-                    </a>
-                  </li>
+                  { this.props.page && this.props.page.currentPage === 'eba545d8-2eee-4565-ab95-fe732c968e48' ? (
+                    <li>
+                      <a href="#addOptionResource" data-toggle="tab">
+                        Add New Option
+                      </a>
+                    </li>
+                    ) : ('') }
                 </ul>
                 <div className="tab-content">
                   <div className="active tab-pane" id="editResource">
@@ -98,23 +103,25 @@ class Resource extends Component {
                       </section>
                     </div>
                   </div>
-                  <div className="tab-pane" id="addOptionResource">
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <ChannelOptionBrowserList
-                          list={this.props.channelOptionBrowsers.list}
-                          statusBrowserCreate={this.props.setStatusChannelOptionBrowserCreate}
-                          statusBrowserEdit={this.props.setStatusChannelOptionBrowserEdit}
-                          getChannelOptionBrowsers={this.props.getChannelOptionBrowsers}
-                          channelOptionBrowsers={this.props.channelOptionBrowsers}
-                          createChannelOptionBrowser={this.props.createChannelOptionBrowser}
-                          deleteChannelOptionBrowser={this.props.deleteChannelOptionBrowser}
-                          updateChannelOptionBrowser={this.props.updateChannelOptionBrowser}
-                          page={this.props.page}
-                        />
+                  { this.props.page && this.props.page.currentPage === 'eba545d8-2eee-4565-ab95-fe732c968e48' ? (
+                    <div className="tab-pane" id="addOptionResource">
+                      <div className="row">
+                        <div className="col-lg-12">
+                          <ChannelOptionBrowserList
+                            list={this.props.channelOptionBrowsers.list}
+                            statusBrowserCreate={this.props.setStatusChannelOptionBrowserCreate}
+                            statusBrowserEdit={this.props.setStatusChannelOptionBrowserEdit}
+                            getChannelOptionBrowsers={this.props.getChannelOptionBrowsers}
+                            channelOptionBrowsers={this.props.channelOptionBrowsers}
+                            createChannelOptionBrowser={this.props.createChannelOptionBrowser}
+                            deleteChannelOptionBrowser={this.props.deleteChannelOptionBrowser}
+                            updateChannelOptionBrowser={this.props.updateChannelOptionBrowser}
+                            page={this.props.page}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
+                    ) : ('')}
                 </div>
               </div>
             </section>
@@ -142,6 +149,7 @@ const mapDispatch = {
   createChannelOptionBrowser,
   deleteChannelOptionBrowser,
   updateChannelOptionBrowser,
+  setCurrentPageResource,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Resource));

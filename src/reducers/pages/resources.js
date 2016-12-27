@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import {
   SET_STATUS_CREATE_CHANNEL_OPTION_BROWSER,
-  SET_STATUS_EDIT_CHANNEL_OPTION_BROWSER
+  SET_STATUS_EDIT_CHANNEL_OPTION_BROWSER,
+  SET_CURRENT_PAGE_RESOURCE,
 } from '../../constants';
 
 
@@ -29,7 +30,21 @@ function browserCreate(state = false, action) {
   }
 }
 
+
+function currentPage(state = '', action) {
+  switch (action.type) {
+    case SET_CURRENT_PAGE_RESOURCE: {
+      return action.payload.currentPage;
+    }
+    default: {
+      return state;
+    }
+
+  }
+}
+
 export default combineReducers({
   browserCreate,
   browserEdit,
+  currentPage,
 });

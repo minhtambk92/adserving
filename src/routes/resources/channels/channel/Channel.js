@@ -23,6 +23,7 @@ import {
   deleteOptionChannel,
   updateOptionChannel,
 } from '../../../../actions/optionChannels';
+import { getChannelOptionBrowsers } from '../../../../actions/channelOptionBrowsers';
 import { getSites } from '../../../../actions/sites';
 import Layout from '../../../../components/Layout';
 import UpdateChannelForm from '../UpdateChannelForm';
@@ -49,6 +50,8 @@ class Channel extends Component {
     sites: PropTypes.object,
     getSites: PropTypes.func,
     updateOptionChannel: PropTypes.func,
+    getChannelOptionBrowsers: PropTypes.func,
+    channelOptionBrowsers: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -60,21 +63,10 @@ class Channel extends Component {
         name: 'VĂN HÓA',
         value: 'van-hoa',
       }, { id: 'category-3', name: 'GIA ĐÌNH', value: 'gia-dinh' }],
-      browser: [{ id: 'browser-1', name: 'Firefox', value: 'Firefox' }, {
-        id: 'browser-2', name: 'Chrome', value: 'Chrome',
-      }, {
-        id: 'browser-3', name: 'Safari', value: 'Safari',
-      }, {
-        id: 'browser-4', name: 'Opera', value: 'Opera',
-      }, {
-        id: 'browser-5', name: 'IE', value: 'IE',
-      }, {
-        id: 'browser-6', name: 'Netscape', value: 'Netscape',
-      }],
       options: [
         { id: 'option-1', name: 'Site - PageURL', value: 'pageUrl', type: 'inputLink' },
         { id: 'option-2', name: 'Site - Referring Page', value: 'referingPage', type: 'inputLink' },
-        { id: 'option-3', name: 'Category', value: 'category', type: 'checkbox'},
+        { id: 'option-3', name: 'Category', value: 'category', type: 'checkbox' },
         { id: 'option-4', name: 'Browser', value: 'browser', type: 'checkbox' },
         { id: 'option-5', name: 'Variable', value: 'variable', type: 'variable' },
       ],
@@ -89,6 +81,7 @@ class Channel extends Component {
   componentWillMount() {
     this.props.getChannel(this.props.channelId);
     this.props.getSites();
+    this.props.getChannelOptionBrowsers();
   }
 
   componentDidMount() {
@@ -310,7 +303,7 @@ class Channel extends Component {
       if (value === 'category') {
         this.addCheckBoxSite(this.state.category, value);
       } else if (value === 'browser') {
-        this.addCheckBoxSite(this.state.browser, value);
+        this.addCheckBoxSite(this.props.channelOptionBrowsers.list, value);
       }
     } else if (value === 'variable') {
       this.addVariable(value);
@@ -448,7 +441,7 @@ class Channel extends Component {
                             index={index + 1}
                             value={option.value}
                             comparison={option.comparison}
-                            data={this.state.browser}
+                            data={this.props.channelOptionBrowsers.list}
                             logical={option.logical}
                             optionChannelId={option.id}
                             deleteOptionChannel={this.props.deleteOptionChannel}
@@ -537,6 +530,7 @@ const mapState = (state) => ({
   channels: state.channels,
   optionChannels: state.optionChannels,
   sites: state.sites,
+  channelOptionBrowsers: state.channelOptionBrowsers,
 });
 
 const mapDispatch = {
@@ -547,6 +541,7 @@ const mapDispatch = {
   deleteOptionChannel,
   getSites,
   updateOptionChannel,
+  getChannelOptionBrowsers,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Channel));

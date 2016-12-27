@@ -12,7 +12,13 @@ class ResourceList extends Component {
 
   static propTypes = {
     list: PropTypes.array.isRequired,
+    setCurrentPageResource: PropTypes.func,
+    getCurrentPageResource: PropTypes.func,
   };
+
+  setCurrentPage(data) {
+    this.props.setCurrentPageResource(data.id);
+  }
 
   dataTableOptions() { // eslint-disable-line class-methods-use-this
     return [{
@@ -35,6 +41,7 @@ class ResourceList extends Component {
         ReactDOM.render(
           <Link
             to={`/resource/type/${rowData.id}`}
+            onClick={() => this.setCurrentPage(rowData)}
           >{cellData}</Link>,
           cell,
         );
