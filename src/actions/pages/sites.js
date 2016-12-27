@@ -5,7 +5,7 @@ import {
 } from '../../constants';
 
 export function setPageSiteActiveTab(tabName) {
-  return async(dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: SET_PAGE_SITE_ACTIVE_TAB,
       payload: {

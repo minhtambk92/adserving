@@ -108,7 +108,6 @@ export function getMenu(uniqueName, actionType, callback) {
 
 export function setAsideLeftActiveItems(url, items) {
   return async (dispatch, getState) => {
-    
     const currentPathname = url || history.location.pathname;
     const menuItems = items || getState().menus.asideLeft.items;
     const activeItems = menuItems

@@ -72,7 +72,7 @@ class SettingZoneForm extends Component {
 
     this.props.updateZone(zone).then(() => {
       this.props.getZone(this.props.zoneId);
-      this.props.setPageZoneActiveTab('settingZone')
+      this.props.setPageZoneActiveTab('settingZone');
     });
   }
 

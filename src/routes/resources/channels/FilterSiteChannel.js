@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 
 class FilterSiteChannel extends Component {
 
@@ -28,11 +27,14 @@ class FilterSiteChannel extends Component {
       >
         <div className="box box-solid box-primary">
           <div className="box-header">
-            {this.props.type === 'variable' ? (
-              <h3 className="box-title">{this.props.type}</h3>
-            ) : (
-              <h3 className="box-title">{this.props.name}</h3>
-            )}
+            {
+              this.props.type === 'variable' ?
+                (
+                  <h3 className="box-title">{this.props.type}</h3>
+                ) : (
+                  <h3 className="box-title">{this.props.name}</h3>
+                )
+            }
             <div className="box-tools pull-right">
               <button
                 className="btn btn-box-tool remove-option"
@@ -53,8 +55,8 @@ class FilterSiteChannel extends Component {
                     <select
                       className="form-control inputTypeFilter"
                       ref={c => {
-                      this.inputTypeFilter = c;
-                    }}
+                        this.inputTypeFilter = c;
+                      }}
                     >
                       <option value="and">AND</option>
                       <option value="or">OR</option>
@@ -68,14 +70,16 @@ class FilterSiteChannel extends Component {
                 <div className="row">
                   <form className="form-horizontal">
                     <div className="form-group">
-                      <label htmlFor="inputChannelOption"
-                             className="col-sm-3 control-label">&nbsp;</label>
+                      <label
+                        htmlFor="inputChannelOption"
+                        className="col-sm-3 control-label"
+                      >&nbsp;</label>
                       <div className="col-sm-9">
                         <select
                           className="form-control inputSiteFilter"
                           ref={c => {
-                          this.inputSiteFilter = c;
-                        }}
+                            this.inputSiteFilter = c;
+                          }}
                         >
                           <option value="==">is equal to</option>
                           <option value="!=">is different from</option>
@@ -86,47 +90,50 @@ class FilterSiteChannel extends Component {
                         </select>
                       </div>
                     </div>
-                    {this.props.type === 'variable' ? (
-                      <div className="optionVariable" id={id}>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputChannelOptionURL" className="col-sm-3 control-label"
-                          >Name</label>
-                          <div className="col-sm-9">
-                            <input
-                              type="text" className="form-control inputChannelVariableName"
-                              placeholder="http://www.google.com"
-                              defaultValue={this.props.name}
-                            />
+                    {
+                      this.props.type === 'variable' ?
+                        (
+                          <div className="optionVariable" id={id}>
+                            <div className="form-group">
+                              <label
+                                htmlFor="inputChannelOptionURL" className="col-sm-3 control-label"
+                              >Name</label>
+                              <div className="col-sm-9">
+                                <input
+                                  type="text" className="form-control inputChannelVariableName"
+                                  placeholder="http://www.google.com"
+                                  defaultValue={this.props.name}
+                                />
+                              </div>
+                            </div>
+                            <div className="form-group">
+                              <label
+                                htmlFor="inputChannelOptionURL" className="col-sm-3 control-label"
+                              >Value</label>
+                              <div className="col-sm-9">
+                                <input
+                                  type="text" className="form-control inputChannelVariableValue"
+                                  placeholder="http://www.google.com"
+                                  defaultValue={this.props.value}
+                                />
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div className="form-group">
-                          <label
-                            htmlFor="inputChannelOptionURL" className="col-sm-3 control-label"
-                          >Value</label>
-                          <div className="col-sm-9">
-                            <input
-                              type="text" className="form-control inputChannelVariableValue"
-                              placeholder="http://www.google.com"
-                              defaultValue={this.props.value}
-                            />
+                        ) : (
+                          <div className="form-group">
+                            <label
+                              htmlFor="inputChannelOptionURL" className="col-sm-3 control-label"
+                            >URL</label>
+                            <div className="col-sm-9">
+                              <input
+                                type="text" className="form-control inputChannelOptionURL"
+                                placeholder="http://www.google.com"
+                                defaultValue={this.props.value}
+                              />
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="form-group">
-                        <label
-                          htmlFor="inputChannelOptionURL" className="col-sm-3 control-label"
-                        >URL</label>
-                        <div className="col-sm-9">
-                          <input
-                            type="text" className="form-control inputChannelOptionURL"
-                            placeholder="http://www.google.com"
-                            defaultValue={this.props.value}
-                          />
-                        </div>
-                      </div>
-                    )}
+                        )
+                    }
                   </form>
                 </div>
               </div>

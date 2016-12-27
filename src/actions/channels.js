@@ -139,7 +139,7 @@ export function createChannel({ name, description, status, siteId }) {
   };
 }
 
-export function updateChannel({ id, name, description, status}) {
+export function updateChannel({ id, name, description, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($channel: ChannelInputType!) {

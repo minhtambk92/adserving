@@ -34,7 +34,7 @@ import ListPlacementOfBanner from '../ListPlacementOfBanner';
 import UpdateBannerForm from '../UpdateBannerForm';
 import CreatePlacementInBanner from '../../placements/CreatePlacementForm';
 import OptionBannerForm from '../OptionBannerForm';
-import s from './Banner.css';
+import s from './Banner.css'; // eslint-disable-line css-modules/no-unused-or-extra-class
 // import { defineMessages, FormattedRelative } from 'react-intl';
 
 const pageTitle = 'Banner';

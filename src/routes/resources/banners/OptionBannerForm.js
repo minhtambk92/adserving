@@ -59,7 +59,7 @@ class OptionBannerForm extends Component {
     });
 
     // Delete
-    $('#optionBanner').on('click', '.closeClickImpression', function () {
+    $('#optionBanner').on('click', '.closeClickImpression', function handleClick() {
       const id = $(this).parents('.track').attr('id');
       if (id) {
         self.props.deleteTrack(id).then(() => {
