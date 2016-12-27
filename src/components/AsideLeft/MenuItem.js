@@ -19,7 +19,9 @@ class MenuItem extends Component {
   }
 
   clickMenuItem(event, url) { // eslint-disable-line no-unused-vars
-    this.props.setAsideLeftActiveItems(url);
+    if (url && url !== '#') {
+      this.props.setAsideLeftActiveItems(url);
+    }
   }
 
   renderChildItemIcon(childItem) { // eslint-disable-line class-methods-use-this
