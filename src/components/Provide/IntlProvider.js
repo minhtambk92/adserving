@@ -31,7 +31,7 @@ class ProvideIntl extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.menus.asideLeft.items && !this.state.setAsideLeftActiveItems) {
       this.setState({ setAsideLeftActiveItems: true });
-      this.props.setAsideLeftActiveItems(nextProps.menus.asideLeft.items);
+      this.props.setAsideLeftActiveItems();
     }
   }
 

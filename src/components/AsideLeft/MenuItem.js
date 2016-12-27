@@ -11,10 +11,15 @@ class MenuItem extends Component {
   static propTypes = {
     item: PropTypes.object.isRequired,
     activeIds: PropTypes.array.isRequired,
+    setAsideLeftActiveItems: PropTypes.func,
   };
 
   isActive(id) {
     return this.props.activeIds.indexOf(id) > -1;
+  }
+
+  clickMenuItem(event, url) { // eslint-disable-line no-unused-vars
+    this.props.setAsideLeftActiveItems(url);
   }
 
   renderChildItemIcon(childItem) { // eslint-disable-line class-methods-use-this
@@ -28,7 +33,10 @@ class MenuItem extends Component {
   renderChildItem(childItem, className = 'treeview') {
     return (
       <li className={cx(className, this.isActive(childItem.id) && 'active')} key={childItem.id}>
-        <Link to={childItem.url}>
+        <Link
+          to={childItem.url}
+          onClick={event => this.clickMenuItem(event, childItem.url)}
+        >
           {this.renderChildItemIcon(childItem)}&nbsp;<span>{childItem.name}</span>
           {childItem.childItems && childItem.childItems.length > 0 && (
             <span className="pull-right-container">

@@ -6,12 +6,14 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import MenuItem from './MenuItem';
+import { setAsideLeftActiveItems } from '../../actions/menus';
 import s from './AsideLeft.css';
 
 class AsideLeft extends Component {
 
   static propTypes = {
     menus: PropTypes.object,
+    setAsideLeftActiveItems: PropTypes.func,
   };
 
   render() {
@@ -42,6 +44,7 @@ class AsideLeft extends Component {
               return (
                 <MenuItem
                   key={item.id} item={item}
+                  setAsideLeftActiveItems={this.props.setAsideLeftActiveItems}
                   activeIds={this.props.menus.asideLeftActiveItems.map(activeItem => activeItem.id)}
                 />
               );
@@ -58,4 +61,8 @@ const mapState = (state) => ({
   menus: state.menus,
 });
 
-export default withStyles(s)(connect(mapState)(AsideLeft));
+const mapDispatch = {
+  setAsideLeftActiveItems,
+};
+
+export default withStyles(s)(connect(mapState, mapDispatch)(AsideLeft));

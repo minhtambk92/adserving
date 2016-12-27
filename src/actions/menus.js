@@ -15,19 +15,20 @@ import history from '../core/history';
 
 /**
  * Check current active menu items by current location
+ * @param url
  * @param item
  * @param activeArray
  * @param isLast
  * @returns {Array}
  */
-function checkActiveItem(item, activeArray = [], isLast) {
+function checkActiveItem(url, item, activeArray = [], isLast) {
   // Get last item before push
   const lastItem = (activeArray.length > 0) ? activeArray[activeArray.length - 1] : {};
 
   // Check if same level item
   if (
     activeArray.length > 1 &&
-    history.location.pathname.indexOf(lastItem.url) === -1 &&
+    url.indexOf(lastItem.url) === -1 &&
     item.parentId === lastItem.parentId
   ) {
     activeArray.pop();
@@ -37,14 +38,14 @@ function checkActiveItem(item, activeArray = [], isLast) {
   activeArray.push(item);
 
   // If current item is the last item of same level and not active
-  if (isLast && history.location.pathname.indexOf(item.url) === -1) {
+  if (isLast && url.indexOf(item.url) === -1) {
     activeArray.pop();
   }
 
   // If item has children
   if (item.childItems && item.childItems.length > 0) {
     item.childItems.forEach((childItem, index, array) => {
-      checkActiveItem(childItem, activeArray, index === array.length - 1);
+      checkActiveItem(url, childItem, activeArray, index === array.length - 1);
     });
   }
 
@@ -105,10 +106,13 @@ export function getMenu(uniqueName, actionType, callback) {
   };
 }
 
-export function setAsideLeftActiveItems(items) {
-  return async (dispatch) => {
-    const activeItems = items
-      .map(item => checkActiveItem(item))
+export function setAsideLeftActiveItems(url, items) {
+  return async (dispatch, getState) => {
+    
+    const currentPathname = url || history.location.pathname;
+    const menuItems = items || getState().menus.asideLeft.items;
+    const activeItems = menuItems
+      .map(item => checkActiveItem(currentPathname, item))
       .filter(array => array.length > 1)
       .pop();
 
