@@ -31,7 +31,7 @@ import UpdateChannelForm from '../UpdateChannelForm';
 import SelectOptionChannel from '../OptionSelectChannel';
 import FilterSiteChannel from '../FilterSiteChannel';
 import Link from '../../../../components/Link';
-import s from './Channel.css';
+import s from './Channel.css'; // eslint-disable-line css-modules/no-unused-or-extra-class
 
 const pageTitle = 'Channel';
 
@@ -106,7 +106,7 @@ class Channel extends Component {
       radioClass: 'iradio_minimal-blue',
     });
     const self = this;
-    $('.remove-option').click(function () {
+    $('.remove-option').click(function handleClick() {
       const id = $(this).parents('.row').attr('id');
       if (id) {
         self.props.deleteOptionChannel(id).then(() => {
@@ -153,7 +153,7 @@ class Channel extends Component {
           // Update Checkbox Option Channel
           const arrCategory = [];
           /* eslint-disable no-loop-func */
-          $(`#${id} input[type=checkbox]`).each(function () {
+          $(`#${id} input[type=checkbox]`).each(function handle() {
             /* eslint-enable no-loop-func */
             const val = (this.checked ? $(this).val() : '');
             if (val !== 'on' && val.trim() !== '') {
@@ -236,7 +236,7 @@ class Channel extends Component {
           // Create Checkbox Option Channel
           const arrCategory = [];
           /* eslint-disable no-loop-func */
-          $(`.optionChannel-${i} input[type=checkbox]`).each(function () {
+          $(`.optionChannel-${i} input[type=checkbox]`).each(function handle() {
             /* eslint-enable no-loop-func */
             const val = (this.checked ? $(this).val() : '');
             if (val !== 'on' && val.trim() !== '') {

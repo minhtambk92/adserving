@@ -96,7 +96,7 @@ class ListZoneOfSite extends Component {
               classes,
               type,
               description,
-              zoneId
+              zoneId,
             });
           }
         }

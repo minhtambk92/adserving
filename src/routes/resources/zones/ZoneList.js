@@ -102,7 +102,7 @@ class ZoneList extends Component {
               classes,
               type,
               description,
-              zoneId
+              zoneId,
             });
           }
         }
