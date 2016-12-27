@@ -17,7 +17,28 @@ import {
   deleteResource,
 } from '../../../../actions/resources';
 import Layout from '../../../../components/Layout';
-import Link from '../../../../components/Link';
+import {
+  getChannelOptionBrowsers,
+  createChannelOptionBrowser,
+  deleteChannelOptionBrowser,
+  updateChannelOptionBrowser,
+} from '../../../../actions/channelOptionBrowsers';
+import {
+  getChannelOptionCategories,
+  updateChannelOptionCategory,
+  deleteChannelOptionCategory,
+  createChannelOptionCategory,
+} from '../../../../actions/channelOptionCategories';
+import {
+  setStatusChannelOptionBrowserCreate,
+  setStatusChannelOptionBrowserEdit,
+  setStatusChannelOptionCategoryCreate,
+  setStatusChannelOptionCategoryEdit,
+  setCurrentPageResource,
+} from '../../../../actions/pages/resources';
+import UpdateResourceForm from '../UpdateResourceForm';
+import ChannelOptionBrowserList from '../ChannelOptionBrowserList';
+import ChannelOptionCategoryList from '../ChannelOptionCategoryList';
 import s from './Resource.css';
 
 const pageTitle = 'Resource';
@@ -26,78 +47,33 @@ class Resource extends Component {
 
   static propTypes = {
     resourceId: PropTypes.string.isRequired,
+    page: PropTypes.object,
     resources: PropTypes.object,
     getResource: PropTypes.func,
     updateResource: PropTypes.func,
     deleteResource: PropTypes.func,
+    getChannelOptionBrowsers: PropTypes.func,
+    channelOptionBrowsers: PropTypes.object,
+    setStatusChannelOptionBrowserCreate: PropTypes.func,
+    setStatusChannelOptionBrowserEdit: PropTypes.func,
+    createChannelOptionBrowser: PropTypes.func,
+    deleteChannelOptionBrowser: PropTypes.func,
+    updateChannelOptionBrowser: PropTypes.func,
+    getChannelOptionCategories: PropTypes.func,
+    channelOptionCategories: PropTypes.object,
+    setStatusChannelOptionCategoryCreate: PropTypes.func,
+    setStatusChannelOptionCategoryEdit: PropTypes.func,
+    createChannelOptionCategory: PropTypes.func,
+    deleteChannelOptionCategory: PropTypes.func,
+    updateChannelOptionCategory: PropTypes.func,
+    setCurrentPageResource: PropTypes.func,
   };
 
   componentWillMount() {
     this.props.getResource(this.props.resourceId);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const {
-      uniqueName,
-      modelName,
-      name,
-      hasMeta,
-      description,
-      status,
-    } = nextProps.resources.editing;
-
-    this.inputResourceUniqueName.value = uniqueName;
-    this.inputResourceModelName.value = modelName;
-    this.inputResourceName.value = name;
-    this.inputResourceHasMeta.value = hasMeta;
-    this.inputResourceDescription.value = description;
-    this.inputResourceStatus.value = status;
-  }
-
-  clearInput() {
-    this.inputResourceUniqueName.value = null;
-    this.inputResourceName.value = null;
-  }
-
-  updateResource() {
-    const uniqueName = this.inputResourceUniqueName.value;
-    const modelName = this.inputResourceModelName.value;
-    const name = this.inputResourceName.value;
-    const hasMeta = this.inputResourceHasMeta.value;
-    const description = this.inputResourceDescription.value;
-    const status = this.inputResourceStatus.value;
-
-    const resource = { id: this.props.resourceId };
-
-    if (modelName && modelName !== this.props.resources.editing.modelName) {
-      resource.modelName = modelName;
-    }
-
-    if (uniqueName && uniqueName !== this.props.resources.editing.uniqueName) {
-      resource.uniqueName = uniqueName;
-    }
-
-    if (name && name !== this.props.resources.editing.name) {
-      resource.name = name;
-    }
-
-    if (hasMeta && hasMeta !== this.props.resources.editing.hasMeta) {
-      resource.hasMeta = hasMeta;
-    }
-
-    if (description && description !== this.props.resources.editing.description) {
-      resource.description = description;
-    }
-
-    if (status && status !== this.props.resources.editing.status) {
-      resource.status = status;
-    }
-
-    this.props.updateResource(resource);
-  }
-
-  deleteResource() {
-    this.props.deleteResource(this.props.resourceId);
+    this.props.getChannelOptionBrowsers();
+    this.props.getChannelOptionCategories();
+    this.props.setCurrentPageResource(this.props.resourceId);
   }
 
   render() {
@@ -108,148 +84,72 @@ class Resource extends Component {
             .concat(': ')
             .concat(this.props.resources.editing ? this.props.resources.editing.name : '...')
         }
-        pageSubTitle={this.props.resources.editing ? this.props.resources.editing.uniqueName : ''}
+        pageSubTitle=""
       >
         <div>
-
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: UPDATE */}
-              <div className="box">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Change resource information</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-minus" />
-                    </button>
+              <div className="nav-tabs-custom resource-edit-box">
+                <ul className="nav nav-tabs">
+                  <li className="active">
+                    <a href="#editResource" data-toggle="tab">
+                      Edit Resource
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#addOptionResource" data-toggle="tab">
+                      Add New Option
+                    </a>
+                  </li>
+                </ul>
+                <div className="tab-content">
+                  <div className="active tab-pane" id="editResource">
+                    <div className="row">
+                      <section className="col-lg-12">
+                        {/* BOX: FORM OF UPDATE RESOURCE */}
+                        <UpdateResourceForm
+                          updateResource={this.props.updateResource}
+                          resourceId={this.props.resourceId}
+                          getResource={this.props.getResource}
+                          deleteResource={this.props.deleteResource}
+                          resource={this.props.resources.editing}
+                        />
+                        {/* /.col */}
+                      </section>
+                    </div>
+                  </div>
+                  <div className="tab-pane" id="addOptionResource">
+                    { (this.props.page && this.props.page.currentPage === 'eba545d8-2eee-4565-ab95-fe732c968e48') ? (
+                      <ChannelOptionBrowserList
+                        list={this.props.channelOptionBrowsers.list}
+                        statusBrowserCreate={this.props.setStatusChannelOptionBrowserCreate}
+                        statusBrowserEdit={this.props.setStatusChannelOptionBrowserEdit}
+                        getChannelOptionBrowsers={this.props.getChannelOptionBrowsers}
+                        channelOptionBrowsers={this.props.channelOptionBrowsers}
+                        createChannelOptionBrowser={this.props.createChannelOptionBrowser}
+                        deleteChannelOptionBrowser={this.props.deleteChannelOptionBrowser}
+                        updateChannelOptionBrowser={this.props.updateChannelOptionBrowser}
+                        page={this.props.page}
+                      />
+                        ) : ('')}
+                    {(this.props.page && this.props.page.currentPage === '7d242780-4048-4f73-9ba4-8b39e27584d4' ? (
+                      <ChannelOptionCategoryList
+                        list={this.props.channelOptionCategories.list}
+                        statusCategoryCreate={this.props.setStatusChannelOptionCategoryCreate}
+                        statusCategoryEdit={this.props.setStatusChannelOptionCategoryEdit}
+                        getChannelOptionCategories={this.props.getChannelOptionCategories}
+                        channelOptionCategories={this.props.channelOptionCategories}
+                        createChannelOptionCategory={this.props.createChannelOptionCategory}
+                        deleteChannelOptionCategory={this.props.deleteChannelOptionCategory}
+                        updateChannelOptionCategory={this.props.updateChannelOptionCategory}
+                        page={this.props.page}
+                      />
+                        ) : (''))}
                   </div>
                 </div>
-                {/* /.box-header */}
-                <form className="form-horizontal">
-                  <div className="box-body">
-                    {/* uniqueName */}
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputResourceUniqueName" className="col-sm-2 control-label"
-                      >Unique name</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="text" className="form-control" id="inputResourceUniqueName"
-                          placeholder="admin"
-                          ref={c => {
-                            this.inputResourceUniqueName = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    {/* modelName */}
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputResourceModelName" className="col-sm-2 control-label"
-                      >Model name</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="text" className="form-control" id="inputResourceModelName"
-                          placeholder="admin"
-                          ref={c => {
-                            this.inputResourceModelName = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    {/* name */}
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputResourceName" className="col-sm-2 control-label"
-                      >Name</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="text" className="form-control" id="inputResourceName"
-                          placeholder="Administrator"
-                          ref={c => {
-                            this.inputResourceName = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    {/* hasMeta */}
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputResourceHasMeta"
-                        className="col-sm-2 control-label"
-                      >Has meta value</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputResourceHasMeta"
-                          className="form-control"
-                          ref={c => {
-                            this.inputResourceHasMeta = c;
-                          }}
-                        >
-                          <option value="true">Yes</option>
-                          <option value="false">No</option>
-                        </select>
-                      </div>
-                    </div>
-                    {/* description */}
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputResourceDescription" className="col-sm-2 control-label"
-                      >Description</label>
-                      <div className="col-sm-10">
-                        <textarea
-                          className="form-control" id="inputResourceDescription"
-                          placeholder="Resource description..."
-                          ref={c => {
-                            this.inputResourceDescription = c;
-                          }}
-                        />
-                      </div>
-                    </div>
-                    {/* status */}
-                    <div className="form-group">
-                      <label
-                        htmlFor="inputResourceStatus"
-                        className="col-sm-2 control-label"
-                      >Status</label>
-                      <div className="col-sm-10">
-                        <select
-                          id="inputResourceStatus"
-                          className="form-control"
-                          ref={c => {
-                            this.inputResourceStatus = c;
-                          }}
-                        >
-                          <option value="active">Active</option>
-                          <option value="inactive">Inactive</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  {/* /.box-body */}
-                  <div className="box-footer">
-                    <Link
-                      to="/resource/type"
-                      className="btn btn-app pull-right"
-                    ><i className="fa fa-undo" /> Cancel</Link>
-                    <Link
-                      to="/resource/type"
-                      className="btn btn-app pull-right"
-                      onClick={event => this.deleteResource(event)}
-                    ><i className="fa fa-trash-o" /> Delete</Link>
-                    <Link
-                      to="#"
-                      className="btn btn-app pull-right"
-                      onClick={event => this.updateResource(event)}
-                    ><i className="fa fa-floppy-o" /> Save</Link>
-                  </div>
-                  {/* /.box-footer */}
-                </form>
               </div>
-              {/* /.col */}
             </section>
           </div>
-
         </div>
       </Layout>
     );
@@ -259,12 +159,28 @@ class Resource extends Component {
 
 const mapState = (state) => ({
   resources: state.resources,
+  channelOptionBrowsers: state.channelOptionBrowsers,
+  channelOptionCategories: state.channelOptionCategories,
+  page: state.page.resources,
 });
 
 const mapDispatch = {
   getResource,
   updateResource,
   deleteResource,
+  getChannelOptionBrowsers,
+  setStatusChannelOptionBrowserCreate,
+  setStatusChannelOptionBrowserEdit,
+  createChannelOptionBrowser,
+  deleteChannelOptionBrowser,
+  updateChannelOptionBrowser,
+  getChannelOptionCategories,
+  setStatusChannelOptionCategoryCreate,
+  setStatusChannelOptionCategoryEdit,
+  createChannelOptionCategory,
+  deleteChannelOptionCategory,
+  updateChannelOptionCategory,
+  setCurrentPageResource,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Resource));

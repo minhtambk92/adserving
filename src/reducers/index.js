@@ -16,6 +16,8 @@ import roles from './roles';
 import users from './users';
 import zones from './zones';
 import channels from './channels';
+import channelOptionBrowsers from './channelOptionBrowsers';
+import channelOptionCategories from './channelOptionCategories';
 import optionChannels from './optionChannels';
 import tracks from './tracks';
 import shares from './shares';
@@ -42,8 +44,10 @@ export default combineReducers({
   zones,
   channels,
   optionChannels,
+  channelOptionBrowsers,
   tracks,
   shares,
   sharePlacements,
   page,
+  channelOptionCategories,
 });

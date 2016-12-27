@@ -18,6 +18,8 @@ import optionChannels from './optionChannels';
 import tracks from './tracks';
 import shares from './shares';
 import sharePlacements from './sharePlacements';
+import channelOptionBrowser from './channelOptionBrowsers';
+import channelOptionCategories from './channelOptionCategories';
 
 const mutations = new ObjectType({
   name: 'Mutation',
@@ -37,6 +39,8 @@ const mutations = new ObjectType({
     ...tracks,
     ...shares,
     ...sharePlacements,
+    ...channelOptionBrowser,
+    ...channelOptionCategories,
   },
 });
 

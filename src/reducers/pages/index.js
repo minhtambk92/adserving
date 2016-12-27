@@ -6,6 +6,7 @@ import { combineReducers } from 'redux';
 import advertisers from './advertisers';
 import campaigns from './campaigns';
 import placements from './placements';
+import resources from './resources';
 import banners from './banners';
 import zones from './zones';
 import channels from './channels';
@@ -19,4 +20,5 @@ export default combineReducers({
   banners,
   zones,
   sites,
+  resources,
 });
