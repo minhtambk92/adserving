@@ -11,8 +11,48 @@ import {
   GET_ASIDE_LEFT_MENU,
   SET_ASIDE_LEFT_ACTIVE_ITEMS,
 } from '../constants';
+import history from '../core/history';
 
-export function getMenu(uniqueName, actionType) {
+/**
+ * Check current active menu items by current location
+ * @param item
+ * @param activeArray
+ * @param isLast
+ * @returns {Array}
+ */
+function checkActiveItem(item, activeArray = [], isLast) {
+  // Get last item before push
+  const lastItem = (activeArray.length > 0) ? activeArray[activeArray.length - 1] : {};
+
+  // Check if same level item
+  if (
+    activeArray.length > 1 &&
+    history.location.pathname.indexOf(lastItem.url) === -1 &&
+    item.parentId === lastItem.parentId
+  ) {
+    activeArray.pop();
+  }
+
+  // Push current item to array
+  activeArray.push(item);
+
+  // If current item is the last item of same level and not active
+  if (isLast && history.location.pathname.indexOf(item.url) === -1) {
+    activeArray.pop();
+  }
+
+  // If item has children
+  if (item.childItems && item.childItems.length > 0) {
+    item.childItems.forEach((childItem, index, array) => {
+      checkActiveItem(childItem, activeArray, index === array.length - 1);
+    });
+  }
+
+  // Return array
+  return activeArray;
+}
+
+export function getMenu(uniqueName, actionType, callback) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
@@ -50,11 +90,32 @@ export function getMenu(uniqueName, actionType) {
       }`;
 
     const { data } = await graphqlRequest(query);
+    const menu = data.menus.shift();
 
     dispatch({
       type: actionType,
       payload: {
-        menu: data.menus.shift(),
+        menu,
+      },
+    });
+
+    if (callback) {
+      callback(menu);
+    }
+  };
+}
+
+export function setAsideLeftActiveItems(items) {
+  return async (dispatch) => {
+    const activeItems = items
+      .map(item => checkActiveItem(item))
+      .filter(array => array.length > 1)
+      .pop();
+
+    dispatch({
+      type: SET_ASIDE_LEFT_ACTIVE_ITEMS,
+      payload: {
+        items: activeItems,
       },
     });
   };
@@ -66,17 +127,6 @@ export function getEditingMenu(uniqueName) {
 
 export function getAsideLeftMenu(uniqueName) {
   return getMenu(uniqueName, GET_ASIDE_LEFT_MENU);
-}
-
-export function setAsideLeftActiveItems(activeItems) {
-  return async (dispatch) => {
-    dispatch({
-      type: SET_ASIDE_LEFT_ACTIVE_ITEMS,
-      payload: {
-        items: activeItems,
-      },
-    });
-  };
 }
 
 export function getMenus(args = {
