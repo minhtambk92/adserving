@@ -23,6 +23,25 @@ class EditChannelOptionBrowserForm extends Component {
     }
   }
 
+  convertToSlug(Text) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    let str;
+    str = Text.replace(/^\s+|\s+$/g, ''); // trim
+    str = str.toLowerCase();
+
+    // remove accents, swap ñ for n, etc
+    const from = 'ăắãàáäâẽèéëêếềìịíïîõòóöôộùúüûñç·/_,:;';
+    const to = 'aaaaaaaeeeeeeeiiiiioooooouuuunc------';
+    for (let i = 0, l = from.length; i < l; i += 1) {
+      str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+    }
+
+    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+      .replace(/\s+/g, '-') // collapse whitespace and replace by -
+      .replace(/-+/g, '-'); // collapse dashes
+
+    return str;
+  }
+
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
     $('#inputEditChannelOptionBrowserName').val('');
   }
@@ -30,7 +49,7 @@ class EditChannelOptionBrowserForm extends Component {
   save() {
     const id = this.props.id;
     const name = $('#inputEditChannelOptionBrowserName').val();
-    const value = encodeURIComponent(name);
+    const value = this.convertToSlug(name);
     const status = $('#inputEditChannelOptionBrowserStatus').val();
     if (name) {
       this.props.updateChannelOptionBrowser({

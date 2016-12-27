@@ -24,6 +24,8 @@ import {
   Track,
   Share,
   SharePlacement,
+  ChannelOptionCategory,
+  ChannelOptionBrowser,
 } from '../../data/models';
 import { host } from '../../config';
 import resourcesList from './data/resources.json';
@@ -44,6 +46,8 @@ import placementsList from './data/placements.json';
 import placementsBannersList from './data/placement-banner.json';
 import bannersList from './data/banners.json';
 import tracksList from './data/tracks.json';
+import channelOptionCategoryList from './data/channel-option-category.json';
+import channelOptionBrowserList from './data/channel-option-browser.json';
 
 /* eslint-disable no-console */
 
@@ -235,6 +239,34 @@ async function trackFiction() {
   }
 }
 
+// Channel Option Browser Fiction
+async function channelOptionBrowserFiction() {
+  console.log(chalk.grey('Check current number of channelOptionBrowsers...'));
+  const channelOptionBrowsersQuantity = await ChannelOptionBrowser.count();
+
+  if (channelOptionBrowsersQuantity === 0) {
+    console.log(chalk.red('No track found! Do a fiction...'));
+    const results = await ChannelOptionBrowser.bulkCreate(channelOptionBrowserList);
+    console.log(chalk.green(`CREATED: ${results.length} channelOptionBrowsers(s). => PASSED!`));
+  } else {
+    console.log(chalk.green(`FOUND: ${channelOptionBrowsersQuantity} channelOptionBrowsers(s). => PASSED!`));
+  }
+}
+
+// Channel Option Category Fiction
+async function channelOptionCategoryFiction() {
+  console.log(chalk.grey('Check current number of channelOptionCategories...'));
+  const channelOptionCategoriesQuantity = await ChannelOptionCategory.count();
+
+  if (channelOptionCategoriesQuantity === 0) {
+    console.log(chalk.red('No track found! Do a fiction...'));
+    const results = await ChannelOptionCategory.bulkCreate(channelOptionCategoryList);
+    console.log(chalk.green(`CREATED: ${results.length} channelOptionCategory(s). => PASSED!`));
+  } else {
+    console.log(chalk.green(`FOUND: ${channelOptionCategoriesQuantity} channelOptionCategory(s). => PASSED!`));
+  }
+}
+
 async function fiction() {
   console.log(chalk.grey.dim('Start data fictions!'));
   await resourcesFiction();
@@ -250,6 +282,8 @@ async function fiction() {
   await sharedFiction();
   await bannerFiction();
   await trackFiction();
+  await channelOptionBrowserFiction();
+  await channelOptionCategoryFiction();
   console.log(chalk.magenta(`Your application is now ready at http://${host}/`));
 }
 

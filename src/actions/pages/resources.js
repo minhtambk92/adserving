@@ -3,6 +3,8 @@
 import {
   SET_STATUS_CREATE_CHANNEL_OPTION_BROWSER,
   SET_STATUS_EDIT_CHANNEL_OPTION_BROWSER,
+  SET_STATUS_CREATE_CHANNEL_OPTION_CATEGORY,
+  SET_STATUS_EDIT_CHANNEL_OPTION_CATEGORY,
   SET_CURRENT_PAGE_RESOURCE,
 } from '../../constants';
 
@@ -23,6 +25,28 @@ export function setStatusChannelOptionBrowserCreate(browserCreate) {
       type: SET_STATUS_CREATE_CHANNEL_OPTION_BROWSER,
       payload: {
         browserCreate,
+      },
+    });
+  };
+}
+
+export function setStatusChannelOptionCategoryEdit(categoryEdit) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_EDIT_CHANNEL_OPTION_CATEGORY,
+      payload: {
+        categoryEdit,
+      },
+    });
+  };
+}
+
+export function setStatusChannelOptionCategoryCreate(categoryCreate) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_CREATE_CHANNEL_OPTION_CATEGORY,
+      payload: {
+        categoryCreate,
       },
     });
   };

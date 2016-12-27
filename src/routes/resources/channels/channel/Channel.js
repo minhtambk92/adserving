@@ -24,6 +24,7 @@ import {
   updateOptionChannel,
 } from '../../../../actions/optionChannels';
 import { getChannelOptionBrowsers } from '../../../../actions/channelOptionBrowsers';
+import { getChannelOptionCategories } from '../../../../actions/channelOptionCategories';
 import { getSites } from '../../../../actions/sites';
 import Layout from '../../../../components/Layout';
 import UpdateChannelForm from '../UpdateChannelForm';
@@ -52,17 +53,14 @@ class Channel extends Component {
     updateOptionChannel: PropTypes.func,
     getChannelOptionBrowsers: PropTypes.func,
     channelOptionBrowsers: PropTypes.object,
+    getChannelOptionCategories: PropTypes.func,
+    channelOptionCategories: PropTypes.object,
   };
 
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      category: [{ id: 'category-1', name: 'KINH TẾ', value: 'kinh-te' }, {
-        id: 'category-2',
-        name: 'VĂN HÓA',
-        value: 'van-hoa',
-      }, { id: 'category-3', name: 'GIA ĐÌNH', value: 'gia-dinh' }],
       options: [
         { id: 'option-1', name: 'Site - PageURL', value: 'pageUrl', type: 'inputLink' },
         { id: 'option-2', name: 'Site - Referring Page', value: 'referingPage', type: 'inputLink' },
@@ -82,6 +80,7 @@ class Channel extends Component {
     this.props.getChannel(this.props.channelId);
     this.props.getSites();
     this.props.getChannelOptionBrowsers();
+    this.props.getChannelOptionCategories();
   }
 
   componentDidMount() {
@@ -301,7 +300,7 @@ class Channel extends Component {
       const count = this.state.countOptionChannel + 1;
       this.setState({ countOptionChannel: count });
       if (value === 'category') {
-        this.addCheckBoxSite(this.state.category, value);
+        this.addCheckBoxSite(this.props.channelOptionCategories.list, value);
       } else if (value === 'browser') {
         this.addCheckBoxSite(this.props.channelOptionBrowsers.list, value);
       }
@@ -428,7 +427,8 @@ class Channel extends Component {
                             index={index + 1}
                             value={option.value}
                             comparison={option.comparison}
-                            data={this.state.category}
+                            data={this.props.channelOptionCategories
+                            && this.props.channelOptionCategories.list}
                             logical={option.logical}
                             deleteOptionChannel={this.props.deleteOptionChannel}
                             optionChannelId={option.id}
@@ -441,7 +441,8 @@ class Channel extends Component {
                             index={index + 1}
                             value={option.value}
                             comparison={option.comparison}
-                            data={this.props.channelOptionBrowsers.list}
+                            data={this.props.channelOptionBrowsers
+                            && this.props.channelOptionBrowsers.list}
                             logical={option.logical}
                             optionChannelId={option.id}
                             deleteOptionChannel={this.props.deleteOptionChannel}
@@ -531,6 +532,7 @@ const mapState = (state) => ({
   optionChannels: state.optionChannels,
   sites: state.sites,
   channelOptionBrowsers: state.channelOptionBrowsers,
+  channelOptionCategories: state.channelOptionCategories,
 });
 
 const mapDispatch = {
@@ -542,6 +544,7 @@ const mapDispatch = {
   getSites,
   updateOptionChannel,
   getChannelOptionBrowsers,
+  getChannelOptionCategories,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Channel));

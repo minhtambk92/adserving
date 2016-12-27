@@ -84,6 +84,18 @@
     "deletedAt": null
   },
   {
+    "id": "7d242780-4048-4f73-9ba4-8b39e27584d4",
+    "uniqueName": "channelOptionCategory",
+    "modelName": "Channel Option Category",
+    "name": "OptionCategory",
+    "hasMeta": "0",
+    "description": "Channel's option category  information",
+    "status": "active",
+    "createdAt": "2016-12-26 06:34:35",
+    "updatedAt": "2016-12-26 06:34:35",
+    "deletedAt": null
+  },
+  {
     "id": "f0a0290d-ca38-47bb-bc17-993836a396b5",
     "uniqueName": "profile",
     "modelName": "UserProfile",

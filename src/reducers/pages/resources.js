@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 import {
   SET_STATUS_CREATE_CHANNEL_OPTION_BROWSER,
   SET_STATUS_EDIT_CHANNEL_OPTION_BROWSER,
+  SET_STATUS_EDIT_CHANNEL_OPTION_CATEGORY,
+  SET_STATUS_CREATE_CHANNEL_OPTION_CATEGORY,
   SET_CURRENT_PAGE_RESOURCE,
 } from '../../constants';
 
@@ -30,6 +32,29 @@ function browserCreate(state = false, action) {
   }
 }
 
+function categoryEdit(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_EDIT_CHANNEL_OPTION_CATEGORY: {
+      return action.payload.categoryEdit;
+    }
+    default: {
+      return state;
+    }
+
+  }
+}
+
+function categoryCreate(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_CHANNEL_OPTION_CATEGORY: {
+      return action.payload.categoryCreate;
+    }
+    default: {
+      return state;
+    }
+
+  }
+}
 
 function currentPage(state = '', action) {
   switch (action.type) {
@@ -46,5 +71,7 @@ function currentPage(state = '', action) {
 export default combineReducers({
   browserCreate,
   browserEdit,
+  categoryEdit,
+  categoryCreate,
   currentPage,
 });
