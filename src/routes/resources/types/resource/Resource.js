@@ -47,6 +47,7 @@ class Resource extends Component {
 
   static propTypes = {
     resourceId: PropTypes.string.isRequired,
+    setCurrentPageResource: PropTypes.func,
     page: PropTypes.object,
     resources: PropTypes.object,
     getResource: PropTypes.func,
@@ -66,17 +67,43 @@ class Resource extends Component {
     createChannelOptionCategory: PropTypes.func,
     deleteChannelOptionCategory: PropTypes.func,
     updateChannelOptionCategory: PropTypes.func,
-    setCurrentPageResource: PropTypes.func,
   };
 
   componentWillMount() {
     this.props.getResource(this.props.resourceId);
     this.props.getChannelOptionBrowsers();
     this.props.getChannelOptionCategories();
-    this.props.setCurrentPageResource(this.props.resourceId);
   }
 
   render() {
+    let resource = null;
+    if (this.props.resourceId === 'eba545d8-2eee-4565-ab95-fe732c968e48') {
+      resource = (<ChannelOptionBrowserList
+        list={this.props.channelOptionBrowsers.list}
+        statusBrowserCreate={this.props.setStatusChannelOptionBrowserCreate}
+        statusBrowserEdit={this.props.setStatusChannelOptionBrowserEdit}
+        getChannelOptionBrowsers={this.props.getChannelOptionBrowsers}
+        channelOptionBrowsers={this.props.channelOptionBrowsers}
+        createChannelOptionBrowser={this.props.createChannelOptionBrowser}
+        deleteChannelOptionBrowser={this.props.deleteChannelOptionBrowser}
+        updateChannelOptionBrowser={this.props.updateChannelOptionBrowser}
+        page={this.props.page}
+      />);
+    } else if (this.props.resourceId === '7d242780-4048-4f73-9ba4-8b39e27584d4') {
+      resource = (<ChannelOptionCategoryList
+        list={this.props.channelOptionCategories.list}
+        statusCategoryCreate={this.props.setStatusChannelOptionCategoryCreate}
+        statusCategoryEdit={this.props.setStatusChannelOptionCategoryEdit}
+        getChannelOptionCategories={this.props.getChannelOptionCategories}
+        channelOptionCategories={this.props.channelOptionCategories}
+        createChannelOptionCategory={this.props.createChannelOptionCategory}
+        deleteChannelOptionCategory={this.props.deleteChannelOptionCategory}
+        updateChannelOptionCategory={this.props.updateChannelOptionCategory}
+        page={this.props.page}
+      />);
+    } else {
+      resource = null;
+    }
     return (
       <Layout
         pageTitle={
@@ -119,32 +146,7 @@ class Resource extends Component {
                     </div>
                   </div>
                   <div className="tab-pane" id="addOptionResource">
-                    { (this.props.page && this.props.page.currentPage === 'eba545d8-2eee-4565-ab95-fe732c968e48') ? (
-                      <ChannelOptionBrowserList
-                        list={this.props.channelOptionBrowsers.list}
-                        statusBrowserCreate={this.props.setStatusChannelOptionBrowserCreate}
-                        statusBrowserEdit={this.props.setStatusChannelOptionBrowserEdit}
-                        getChannelOptionBrowsers={this.props.getChannelOptionBrowsers}
-                        channelOptionBrowsers={this.props.channelOptionBrowsers}
-                        createChannelOptionBrowser={this.props.createChannelOptionBrowser}
-                        deleteChannelOptionBrowser={this.props.deleteChannelOptionBrowser}
-                        updateChannelOptionBrowser={this.props.updateChannelOptionBrowser}
-                        page={this.props.page}
-                      />
-                        ) : ('')}
-                    {(this.props.page && this.props.page.currentPage === '7d242780-4048-4f73-9ba4-8b39e27584d4' ? (
-                      <ChannelOptionCategoryList
-                        list={this.props.channelOptionCategories.list}
-                        statusCategoryCreate={this.props.setStatusChannelOptionCategoryCreate}
-                        statusCategoryEdit={this.props.setStatusChannelOptionCategoryEdit}
-                        getChannelOptionCategories={this.props.getChannelOptionCategories}
-                        channelOptionCategories={this.props.channelOptionCategories}
-                        createChannelOptionCategory={this.props.createChannelOptionCategory}
-                        deleteChannelOptionCategory={this.props.deleteChannelOptionCategory}
-                        updateChannelOptionCategory={this.props.updateChannelOptionCategory}
-                        page={this.props.page}
-                      />
-                        ) : (''))}
+                    {resource}
                   </div>
                 </div>
               </div>
