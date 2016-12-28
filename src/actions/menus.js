@@ -118,7 +118,7 @@ export function setAsideLeftActiveItems(url, items) {
     dispatch({
       type: SET_ASIDE_LEFT_ACTIVE_ITEMS,
       payload: {
-        items: activeItems,
+        items: activeItems || [],
       },
     });
   };
