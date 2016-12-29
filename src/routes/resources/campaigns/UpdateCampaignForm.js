@@ -58,8 +58,7 @@ class UpdateCampaignForm extends Component {
     this.inputCampaignRevenueType.value = revenueType;
     if (revenueType === 'cpm') {
       this.setState({ showCPM: true });
-      if (this.inputCampaignExpireValueCPM !== undefined &&
-        this.inputCampaignMaxCPMPerDay !== undefined) {
+      if (this.state.showCPM === true) {
         this.inputCampaignExpireValueCPM.value = expireValueCPM;
         this.inputCampaignMaxCPMPerDay.value = maxCPMPerDay;
       }
@@ -252,6 +251,7 @@ class UpdateCampaignForm extends Component {
               <div className="col-sm-6">
                 <input
                   type="number" className="form-control" id="inputCampaignExpireValueCPM"
+                  defaultValue={this.props.campaign.expireValueCPM}
                   placeholder="1000"
                   ref={c => {
                     this.inputCampaignExpireValueCPM = c;
@@ -265,6 +265,7 @@ class UpdateCampaignForm extends Component {
               <div className="col-sm-6">
                 <input
                   type="number" className="form-control" id="inputCampaignMaxCPMPerDay"
+                  defaultValue={this.props.campaign.maxCPMPerDay}
                   placeholder="1000"
                   ref={c => {
                     this.inputCampaignMaxCPMPerDay = c;
