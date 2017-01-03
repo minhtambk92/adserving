@@ -24,7 +24,6 @@ class EditShareForm extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      index: 1,
       keyWord: '',
     };
   }
@@ -45,11 +44,9 @@ class EditShareForm extends Component {
   }
 
   save() {
-    const i = this.state.index;
-    const id = $(`.list-zone-share-edit-${i}`).attr('id');
+    const id = $('.list-zone-share-edit').attr('id');
     const name = $('#inputEditShareName').val();
     const css = $('#inputEditShareCSS').val();
-    const outputCss = $('#inputEditShareOutPutCSS').val();
     const html = $('#inputEditShareHTML').val();
     const width = $('#inputEditShareWidth').val();
     const height = $('#inputEditShareHeight').val();
@@ -57,27 +54,25 @@ class EditShareForm extends Component {
     const classes = document.getElementById('inputCreateShareClasses').value;
     const type = $('#inputEditShareType').val();
     const description = $('#inputEditShareDescription').val();
-    if (id) {
-      if (name) {
-        this.props.updateShareZone({
-          id,
-          name,
-          html,
-          css,
-          outputCss,
-          width,
-          height,
-          weight,
-          classes,
-          type,
-          description,
-        }).then(() => {
-          this.props.getZone(this.props.zoneId).then(() => {
-            this.props.setPageZoneActiveTab('shareZone');
-            this.props.setStatusShareFormEdit(false);
-          });
+
+    if (id && name) {
+      this.props.updateShareZone({
+        id,
+        name,
+        html,
+        css,
+        width,
+        height,
+        weight,
+        classes,
+        type,
+        description,
+      }).then(() => {
+        this.props.getZone(this.props.zoneId).then(() => {
+          this.props.setPageZoneActiveTab('shareZone');
+          this.props.setStatusShareFormEdit(false);
         });
-      }
+      });
     }
   }
 
@@ -88,7 +83,7 @@ class EditShareForm extends Component {
   render() {
     return (
       <div
-        className={`list-zone-shared list-zone-share-edit-${this.props.index}`}
+        className="list-zone-shared list-zone-share-edit"
         id={this.props.id}
       >
         <div className="box-header with-border">
