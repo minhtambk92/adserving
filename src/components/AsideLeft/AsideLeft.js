@@ -23,18 +23,6 @@ class AsideLeft extends Component {
       <aside className="main-sidebar">
         {/* sidebar: style can be found in sidebar.less */}
         <section className="sidebar" style={{ height: 'auto' }}>
-          {/* search form */}
-          <form action="#" method="get" className="sidebar-form">
-            <div className="input-group">
-              <input type="text" name="q" className="form-control" placeholder="Search..." />
-              <div className="input-group-btn">
-                <button type="submit" name="search" id="search-btn" className="btn btn-flat">
-                  <i className="fa fa-search" />
-                </button>
-              </div>
-            </div>
-          </form>
-          {/* /.search form */}
           {/* sidebar menu: : style can be found in sidebar.less */}
           <ul className="sidebar-menu">
             {menus.asideLeft.items && menus.asideLeft.items.map(item => {
