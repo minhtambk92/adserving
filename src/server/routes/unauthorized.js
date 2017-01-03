@@ -48,7 +48,7 @@ router.post('/logout', (req, res) => {
   return res.sendStatus(202);
 });
 
-router.post('/core-js', async (req, res) => {
+router.post('/core-js', async(req, res) => {
   const coreJsFolderName = 'corejs';
   const corePath = path.join(rootPath, `public/${coreJsFolderName}`);
   const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
@@ -145,12 +145,14 @@ router.post('/core-js', async (req, res) => {
   fs.writeFileSync(builtCoreFile, coreContent); // Copy to build/public folder
   fs.chmodSync(builtCoreFile, 0o644); // Chmod to 644
 
-  res.send(`
+  const outputCode = `
     <!-- Ads Zone -->
     <zone id="${zoneId}"></zone>
     <script src="//${host}/${coreJsFolderName}/arf-${zoneId}.min.js"></script>
     <!-- / Ads Zone -->
-  `);
+  `;
+
+  res.send(outputCode.trim());
 });
 
 export default router;
