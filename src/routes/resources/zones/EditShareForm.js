@@ -1,7 +1,6 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
-import less from 'less';
 import { InputTags } from '../../../components/UI';
 import Link from '../../../components/Link';
 
