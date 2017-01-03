@@ -93,7 +93,7 @@ export function getShares(args = {
   };
 }
 
-export function createShare({ name, html, css, outputCss, width,
+export function createShare({ name, html, css, width,
   height,
   weight, classes, type, description, zoneId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -104,7 +104,6 @@ export function createShare({ name, html, css, outputCss, width,
           name
           html
           css
-          outputCss
           width
           height
           weight
@@ -122,7 +121,6 @@ export function createShare({ name, html, css, outputCss, width,
         name,
         html,
         css,
-        outputCss,
         width,
         height,
         weight,
@@ -142,7 +140,7 @@ export function createShare({ name, html, css, outputCss, width,
   };
 }
 
-export function updateShare({ id, name, html, css, outputCss, width,
+export function updateShare({ id, name, html, css, width,
   height,
   weight, classes, type, description, zoneId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -153,7 +151,6 @@ export function updateShare({ id, name, html, css, outputCss, width,
           name
           html
           css
-          outputCss
           width
           height
           weight
@@ -172,7 +169,6 @@ export function updateShare({ id, name, html, css, outputCss, width,
         name,
         html,
         css,
-        outputCss,
         width,
         height,
         weight,
