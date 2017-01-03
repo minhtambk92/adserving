@@ -22,11 +22,11 @@ const Share = Model.define('Share', {
     defaultValue: '',
   },
   html: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
     defaultValue: '',
   },
   css: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
     defaultValue: '',
   },
   outputCss: {
@@ -60,7 +60,7 @@ const Share = Model.define('Share', {
     },
   },
   description: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
     defaultValue: '',
   },
 
