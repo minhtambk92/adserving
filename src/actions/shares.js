@@ -18,6 +18,7 @@ export function getShareByZoneId(id) {
           name
           html
           css
+          outputCss
           width
           height
           weight
@@ -56,6 +57,7 @@ export function getShares(args = {
           name
           html
           css
+          outputCss
           width
           height
           weight
@@ -91,7 +93,7 @@ export function getShares(args = {
   };
 }
 
-export function createShare({ name, html, css, width,
+export function createShare({ name, html, css, outputCss, width,
   height,
   weight, classes, type, description, zoneId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -102,6 +104,7 @@ export function createShare({ name, html, css, width,
           name
           html
           css
+          outputCss
           width
           height
           weight
@@ -119,6 +122,7 @@ export function createShare({ name, html, css, width,
         name,
         html,
         css,
+        outputCss,
         width,
         height,
         weight,
@@ -138,7 +142,7 @@ export function createShare({ name, html, css, width,
   };
 }
 
-export function updateShare({ id, name, html, css, width,
+export function updateShare({ id, name, html, css, outputCss, width,
   height,
   weight, classes, type, description, zoneId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -149,6 +153,7 @@ export function updateShare({ id, name, html, css, width,
           name
           html
           css
+          outputCss
           width
           height
           weight
@@ -167,6 +172,7 @@ export function updateShare({ id, name, html, css, width,
         name,
         html,
         css,
+        outputCss,
         width,
         height,
         weight,
@@ -195,6 +201,7 @@ export function deleteShare(id) {
           name
           html
           css
+          outputCss
           width
           height
           weight
@@ -242,6 +249,7 @@ export function removeShareByZoneId(zoneId) {
             name
             html
             css
+            outputCss
             width
             height
             weight

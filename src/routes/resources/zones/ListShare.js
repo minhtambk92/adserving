@@ -70,6 +70,7 @@ class ListShare extends Component {
   duplicateShareZone(data) {
     const name = `Copy of ${data.name}`;
     const css = data.css;
+    const outputCss = data.outputCss;
     const html = data.html;
     const width = data.width;
     const height = data.height;
@@ -83,6 +84,7 @@ class ListShare extends Component {
         name,
         html,
         css,
+        outputCss,
         width,
         height,
         weight,

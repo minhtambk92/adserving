@@ -29,6 +29,10 @@ const Share = Model.define('Share', {
     type: DataType.STRING,
     defaultValue: '',
   },
+  outputCss: {
+    type: DataType.TEXT,
+    defaultValue: '',
+  },
   width: {
     type: DataType.INTEGER,
     allowNull: false,

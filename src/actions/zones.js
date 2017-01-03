@@ -64,6 +64,7 @@ export function getZone(id) {
             name
             html
             css
+            outputCss
             width
             height
             weight
@@ -139,6 +140,7 @@ export function getZones(args = {
             name
             html
             css
+            outputCss
             width
             height
             weight

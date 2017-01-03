@@ -9,7 +9,7 @@ import { Share } from '../../models';
 const ShareInputType = new InputObjectType({
   name: 'ShareInputType',
   fields: () => Object.assign(attributeFields(Share, {
-    only: ['id', 'name', 'html', 'css', 'weight', 'classes', 'description'],
+    only: ['id', 'name', 'html', 'css', 'outputCss', 'weight', 'classes', 'description'],
   }), {
     // Additional fields
     width: { type: IntType },

@@ -21,6 +21,7 @@ class CreateShareForm extends Component {
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
     $('#inputCreateShareName').val('');
     $('#inputCreateShareCSS').val('');
+    $('#inputCreateShareOutPutCSS').val('');
     $('#inputCreateShareHTML').val('');
     $('#inputCreateShareDescription').val('');
   }
@@ -28,6 +29,7 @@ class CreateShareForm extends Component {
   createShare() {
     const name = $('#inputCreateShareName').val();
     const css = $('#inputCreateShareCSS').val();
+    const outputCss = $('#inputCreateShareOutPutCSS').val();
     const html = $('#inputCreateShareHTML').val();
     const width = $('#inputCreateShareWidth').val();
     const height = $('#inputCreateShareHeight').val();
@@ -41,6 +43,7 @@ class CreateShareForm extends Component {
         name,
         html,
         css,
+        outputCss,
         width,
         height,
         weight,
@@ -122,6 +125,21 @@ class CreateShareForm extends Component {
                   rows="3" placeholder="More info..."
                   ref={c => {
                     this.inputCreateShareCSS = c;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputCreateShareOutPutCSS" className="col-sm-2 control-label"
+              >Output CSS</label>
+              <div className="col-sm-10">
+                <textarea
+                  className="form-control" id="inputCreateShareOutPutCSS"
+                  rows="3" placeholder="More info..."
+                  ref={c => {
+                    this.inputCreateShareOutPutCSS = c;
                   }}
                 />
               </div>

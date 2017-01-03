@@ -35,6 +35,7 @@ class EditShareForm extends Component {
       this.inputEditShareCSS.value = nextProps.childZone.css;
       this.inputEditShareDescription.value = nextProps.childZone.description;
       this.inputEditShareHTML.value = nextProps.childZone.html;
+      this.inputEditShareOutPutCSS.value = nextProps.childZone.outputCss;
       this.inputEditShareHeight.value = nextProps.childZone.height;
       this.inputEditShareWeight.value = nextProps.childZone.weight;
       this.inputEditShareWidth.value = nextProps.childZone.width;
@@ -48,6 +49,7 @@ class EditShareForm extends Component {
     const id = $(`.list-zone-share-edit-${i}`).attr('id');
     const name = $('#inputEditShareName').val();
     const css = $('#inputEditShareCSS').val();
+    const outputCss = $('#inputEditShareOutPutCSS').val();
     const html = $('#inputEditShareHTML').val();
     const width = $('#inputEditShareWidth').val();
     const height = $('#inputEditShareHeight').val();
@@ -62,6 +64,7 @@ class EditShareForm extends Component {
           name,
           html,
           css,
+          outputCss,
           width,
           height,
           weight,
@@ -145,6 +148,20 @@ class EditShareForm extends Component {
                   rows="3" placeholder="More info..."
                   ref={c => {
                     this.inputEditShareCSS = c;
+                  }}
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <label
+                htmlFor="inputEditShareOutPutCSS" className="col-sm-2 control-label"
+              >Output CSS</label>
+              <div className="col-sm-10">
+                <textarea
+                  className="form-control" id="inputEditShareOutPutCSS"
+                  rows="3" placeholder="More info..."
+                  ref={c => {
+                    this.inputEditShareOutPutCSS = c;
                   }}
                 />
               </div>
