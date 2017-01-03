@@ -6,6 +6,10 @@ import {
   SET_STATUS_CREATE_CHANNEL_OPTION_CATEGORY,
   SET_STATUS_EDIT_CHANNEL_OPTION_CATEGORY,
   SET_CURRENT_PAGE_RESOURCE,
+  SET_STATUS_UPDATE_ROLE,
+  SET_STATUS_CREATE_ROLE,
+  SET_STATUS_UPDATE_USER,
+  SET_STATUS_CREATE_USER,
 } from '../../constants';
 
 export function setStatusChannelOptionBrowserEdit(browserEdit) {
@@ -58,6 +62,50 @@ export function setCurrentPageResource(currentPage) {
       type: SET_CURRENT_PAGE_RESOURCE,
       payload: {
         currentPage,
+      },
+    });
+  };
+}
+
+export function setStatusUpdateRole(statusUpdateRole) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_UPDATE_ROLE,
+      payload: {
+        statusUpdateRole,
+      },
+    });
+  };
+}
+
+export function setStatusCreateRole(statusCreateRole) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_CREATE_ROLE,
+      payload: {
+        statusCreateRole,
+      },
+    });
+  };
+}
+
+export function setStatusUpdateUser(statusUpdateUser) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_UPDATE_USER,
+      payload: {
+        statusUpdateUser,
+      },
+    });
+  };
+}
+
+export function setStatusCreateUser(statusCreateUser) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_CREATE_USER,
+      payload: {
+        statusCreateUser,
       },
     });
   };

@@ -1,17 +1,18 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
-import Link from '../../../components/Link';
+import Link from '../../../../components/Link';
 
-class CreateChannelOptionCategoryForm extends Component {
+class CreateChannelOptionBrowserForm extends Component {
 
   static propTypes = {
     index: PropTypes.number,
     id: PropTypes.string,
-    channelOptionCategories: PropTypes.object,
-    statusCategoryCreate: PropTypes.func,
+    channelOptionBrowsers: PropTypes.object,
+    statusBrowserCreate: PropTypes.func,
+    statusBrowserEdit: PropTypes.func,
     page: PropTypes.object,
-    createChannelOptionCategory: PropTypes.func,
+    createChannelOptionBrowser: PropTypes.func,
   };
 
   convertToSlug(Text) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -34,32 +35,32 @@ class CreateChannelOptionCategoryForm extends Component {
   }
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    $('#inputCreateChannelOptionCategoryName').val('');
+    this.inputChannelOptionBrowserName.value = null;
   }
 
-  createChannelOptionCategory() {
-    const name = $('#inputCreateChannelOptionCategoryName').val();
+  createChannelOptionBrowser() {
+    const name = this.inputChannelOptionBrowserName.value;
     const value = this.convertToSlug(name);
-    const status = $('#inputCreateChannelOptionCategoryStatus').val();
+    const status = this.inputChannelOptionBrowserStatus.value;
     if (name) {
-      this.props.createChannelOptionCategory({
+      this.props.createChannelOptionBrowser({
         name,
         value,
         status,
       });
     }
-    this.props.statusCategoryCreate(false);
-    // this.props.setPageZoneActiveTab('ChannelOptionCategoryZone');
+    this.props.statusBrowserCreate(false);
+    // this.props.setPageZoneActiveTab('ChannelOptionBrowserZone');
   }
 
   removeCreateForm() {
-    this.props.statusCategoryCreate(false);
+    this.props.statusBrowserCreate(false);
   }
 
   render() {
     return (
       <div
-        className={`list-zone-ChannelOptionCategory list-zone-ChannelOptionCategory-${this.props.index}`}
+        className={`list-zone-ChannelOptionBrowser list-zone-ChannelOptionBrowser-${this.props.index}`}
       >
         <div className="box-header with-border">
           <h3
@@ -68,7 +69,7 @@ class CreateChannelOptionCategoryForm extends Component {
             Add New</h3>
           <div className="box-tools pull-right">
             <button
-              className="btn btn-box-tool remove-ChannelOptionCategory-zone"
+              className="btn btn-box-tool remove-ChannelOptionBrowser-zone"
               onClick={event => this.removeCreateForm(event)}
             >
               <i className="fa fa-times" />
@@ -76,31 +77,31 @@ class CreateChannelOptionCategoryForm extends Component {
           </div>
         </div>
         <div className="box-body">
-          <div className={`form-horizontal ListChannelOptionCategory-${this.props.index}`}>
+          <div className={`form-horizontal ListChannelOptionBrowser-${this.props.index}`}>
             <div className="form-group">
               <label
-                htmlFor="inputCreateChannelOptionCategoryName" className="col-sm-2 control-label"
+                htmlFor="inputChannelOptionBrowserName" className="col-sm-2 control-label"
               >Name</label>
               <div className="col-sm-10">
                 <input
-                  type="text" className="form-control" id="inputCreateChannelOptionCategoryName"
+                  type="text" className="form-control" id="inputChannelOptionBrowserName"
                   placeholder="Name"
                   ref={c => {
-                    this.inputCreateChannelOptionCategoryName = c;
+                    this.inputChannelOptionBrowserName = c;
                   }}
                 />
               </div>
             </div>
             <div className="form-group">
               <label
-                htmlFor="inputCreateChannelOptionCategoryStatus"
+                htmlFor="inputChannelOptionBrowserStatus"
                 className="col-sm-2 control-label"
               >Status</label>
               <div className="col-sm-10">
                 <select
-                  id="inputCreateChannelOptionCategoryStatus" className="form-control"
+                  id="inputChannelOptionBrowserStatus" className="form-control"
                   ref={c => {
-                    this.inputCreateChannelOptionCategoryStatus = c;
+                    this.inputChannelOptionBrowserStatus = c;
                   }}
                 >
                   <option value="active">Active</option>
@@ -122,7 +123,7 @@ class CreateChannelOptionCategoryForm extends Component {
           <Link
             to="#"
             className="btn btn-app pull-right"
-            onClick={event => this.createChannelOptionCategory(event)}
+            onClick={event => this.createChannelOptionBrowser(event)}
           ><i className="fa fa-floppy-o" /> Save</Link>
         </div>
       </div>
@@ -130,4 +131,4 @@ class CreateChannelOptionCategoryForm extends Component {
   }
 }
 
-export default CreateChannelOptionCategoryForm;
+export default CreateChannelOptionBrowserForm;

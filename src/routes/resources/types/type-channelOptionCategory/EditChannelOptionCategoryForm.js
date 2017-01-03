@@ -1,7 +1,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
-import Link from '../../../components/Link';
+import Link from '../../../../components/Link';
 
 class EditChannelOptionCategoryForm extends Component {
 
@@ -19,8 +19,8 @@ class EditChannelOptionCategoryForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.category) {
-      this.inputEditChannelOptionCategoryName.value = nextProps.category.name;
-      this.inputEditChannelOptionCategoryStatus.value = nextProps.category.status;
+      this.inputChannelOptionCategoryName.value = nextProps.category.name;
+      this.inputChannelOptionCategoryStatus.value = nextProps.category.status;
     }
   }
 
@@ -44,14 +44,14 @@ class EditChannelOptionCategoryForm extends Component {
   }
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    $('#inputEditChannelOptionCategoryName').val('');
+    this.inputChannelOptionCategoryName.value = null;
   }
 
   save() {
     const id = this.props.id;
-    const name = this.inputEditChannelOptionCategoryName.value;
+    const name = this.inputChannelOptionCategoryName.value;
     const value = this.convertToSlug(name);
-    const status = this.inputEditChannelOptionCategoryStatus.value;
+    const status = this.inputChannelOptionCategoryStatus.value;
     if (name) {
       this.props.updateChannelOptionCategory({
         id,
@@ -93,14 +93,14 @@ class EditChannelOptionCategoryForm extends Component {
           <div className={`form-horizontal ListChannelOptionCategory-${this.props.index}`}>
             <div className="form-group">
               <label
-                htmlFor="inputEditChannelOptionCategoryName" className="col-sm-2 control-label"
+                htmlFor="inputChannelOptionCategoryName" className="col-sm-2 control-label"
               >Name</label>
               <div className="col-sm-10">
                 <input
-                  type="text" className="form-control" id="inputEditChannelOptionCategoryName"
+                  type="text" className="form-control" id="inputChannelOptionCategoryName"
                   placeholder="Name"
                   ref={c => {
-                    this.inputEditChannelOptionCategoryName = c;
+                    this.inputChannelOptionCategoryName = c;
                   }}
                 />
               </div>
@@ -112,9 +112,9 @@ class EditChannelOptionCategoryForm extends Component {
               >Status</label>
               <div className="col-sm-10">
                 <select
-                  id="inputEditChannelOptionCategoryStatus" className="form-control"
+                  id="inputChannelOptionCategoryStatus" className="form-control"
                   ref={c => {
-                    this.inputEditChannelOptionCategoryStatus = c;
+                    this.inputChannelOptionCategoryStatus = c;
                   }}
                 >
                   <option value="active">Active</option>

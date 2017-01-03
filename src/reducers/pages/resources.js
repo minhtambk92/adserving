@@ -5,6 +5,10 @@ import {
   SET_STATUS_EDIT_CHANNEL_OPTION_CATEGORY,
   SET_STATUS_CREATE_CHANNEL_OPTION_CATEGORY,
   SET_CURRENT_PAGE_RESOURCE,
+  SET_STATUS_UPDATE_ROLE,
+  SET_STATUS_CREATE_ROLE,
+  SET_STATUS_UPDATE_USER,
+  SET_STATUS_CREATE_USER,
 } from '../../constants';
 
 
@@ -68,10 +72,58 @@ function currentPage(state = '', action) {
   }
 }
 
+function statusUpdateRole(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_ROLE: {
+      return action.payload.statusUpdateRole;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusCreateRole(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_ROLE: {
+      return action.payload.statusCreateRole;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdateUser(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_USER: {
+      return action.payload.statusUpdateUser;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusCreateUser(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_USER: {
+      return action.payload.statusCreateUser;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 export default combineReducers({
   browserCreate,
   browserEdit,
   categoryEdit,
   categoryCreate,
   currentPage,
+  statusCreateRole,
+  statusUpdateRole,
+  statusCreateUser,
+  statusUpdateUser,
 });
