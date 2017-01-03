@@ -57,8 +57,8 @@ class ChannelOptionCategory extends Component {
             list={this.props.channelOptionCategories.list}
             statusCategoryCreate={this.props.setStatusChannelOptionCategoryCreate}
             statusCategoryEdit={this.props.setStatusChannelOptionCategoryEdit}
-            getChannelOptionCategorys={this.props.getChannelOptionCategories}
-            channelOptionCategorys={this.props.channelOptionCategories}
+            getChannelOptionCategories={this.props.getChannelOptionCategories}
+            channelOptionCategories={this.props.channelOptionCategories}
             createChannelOptionCategory={this.props.createChannelOptionCategory}
             deleteChannelOptionCategory={this.props.deleteChannelOptionCategory}
             updateChannelOptionCategory={this.props.updateChannelOptionCategory}

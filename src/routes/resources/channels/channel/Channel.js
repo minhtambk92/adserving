@@ -28,7 +28,7 @@ import { getChannelOptionCategories } from '../../../../actions/channelOptionCat
 import { getSites } from '../../../../actions/sites';
 import Layout from '../../../../components/Layout';
 import UpdateChannelForm from '../UpdateChannelForm';
-import SelectOptionChannel from '../OptionSelectChannel';
+import OptionSelectChannel from '../OptionSelectChannel';
 import FilterSiteChannel from '../FilterSiteChannel';
 import Link from '../../../../components/Link';
 import s from './Channel.css'; // eslint-disable-line css-modules/no-unused-or-extra-class
@@ -420,7 +420,7 @@ class Channel extends Component {
                       this.props.channels.editing.options &&
                       this.props.channels.editing.options.map((option, index) => {
                         if (option.type === 'category') {
-                          return (<SelectOptionChannel
+                          return (<OptionSelectChannel
                             key={option.id}
                             id={option.id}
                             name={option.type}
@@ -434,7 +434,7 @@ class Channel extends Component {
                             optionChannelId={option.id}
                           />);
                         } else if (option.type === 'browser') {
-                          return (<SelectOptionChannel
+                          return (<OptionSelectChannel
                             id={option.id}
                             key={option.id}
                             name={option.type}
@@ -491,7 +491,7 @@ class Channel extends Component {
                         />
                       ))}
                       {this.state.arrCheckBox && this.state.arrCheckBox.map((ob) => (
-                        <SelectOptionChannel
+                        <OptionSelectChannel
                           key={ob.count}
                           index={ob.count}
                           name={ob.name}

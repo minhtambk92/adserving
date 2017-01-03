@@ -1,6 +1,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
+import { Select2 } from '../../../../components/UI';
 import Link from '../../../../components/Link';
 
 class EditUserForm extends Component {
@@ -33,6 +34,7 @@ class EditUserForm extends Component {
       this.inputUserDisplayName.value = nextProps.user.profile.displayName;
       const roles = nextProps.user.roles;
       this.setState({ currentRoles: roles.map(role => role.uniqueName).sort() });
+      console.log(this.state.currentRoles);
       this.inputUserPassword.value = nextProps.user.password;
       this.inputUserPasswordConfirmation.value = nextProps.user.password;
       this.inputUserEmailConfirmed.value = nextProps.user.emailConfirmed;
@@ -147,12 +149,12 @@ class EditUserForm extends Component {
                 className="col-sm-2 control-label"
               >Role</label>
               <div className="col-sm-10">
-                <select
+                <Select2
                   id="inputUserRoles"
                   className="form-control"
                   style={{ width: '100%' }}
                   data-placeholder="Select roles"
-                  defaultValue={['user']}
+                  defaultValue={this.state.currentRoles}
                   multiple
                   ref={c => {
                     this.inputUserRoles = c;
@@ -165,7 +167,7 @@ class EditUserForm extends Component {
                       >{role.name}</option>
                     ))}
                   </optgroup>
-                </select>
+                </Select2>
               </div>
             </div>
             {/* password */}
