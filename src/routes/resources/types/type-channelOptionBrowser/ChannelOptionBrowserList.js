@@ -4,34 +4,34 @@
 
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { DataTables, ICheck } from '../../../components/UI/';
-import CreateChannelOptionCategoryForm from './CreateChannelOptionCategoryForm';
-import EditChannelOptionCategoryForm from './EditChannelOptionCategoryForm';
-import Link from '../../../components/Link';
+import { DataTables, ICheck } from '../../../../components/UI/';
+import CreateChannelOptionBrowserForm from './CreateChannelOptionBrowserForm';
+import EditChannelOptionBrowserForm from './EditChannelOptionBrowserForm';
+import Link from '../../../../components/Link';
 
-class ChannelOptionCategoryList extends Component {
+class ChannelOptionBrowserList extends Component {
 
   static propTypes = {
     list: PropTypes.array.isRequired,
     page: PropTypes.object,
-    getChannelOptionCategories: PropTypes.func,
-    channelOptionCategories: PropTypes.object,
-    statusCategoryCreate: PropTypes.func,
-    statusCategoryEdit: PropTypes.func,
-    createChannelOptionCategory: PropTypes.func,
-    deleteChannelOptionCategory: PropTypes.func,
-    updateChannelOptionCategory: PropTypes.func,
+    getChannelOptionBrowsers: PropTypes.func,
+    channelOptionBrowsers: PropTypes.object,
+    statusBrowserCreate: PropTypes.func,
+    statusBrowserEdit: PropTypes.func,
+    createChannelOptionBrowser: PropTypes.func,
+    deleteChannelOptionBrowser: PropTypes.func,
+    updateChannelOptionBrowser: PropTypes.func,
   };
 
   constructor(props, context) {
     super(props, context);
     this.state = {
-      category: {},
+      browser: {},
       index: 1,
-      arrCategory: [],
+      arrBrowser: [],
       number: 1,
-      countCategory: 0,
-      arrCreateCategory: [],
+      countBrowser: 0,
+      arrCreateBrowser: [],
     };
   }
 
@@ -43,8 +43,8 @@ class ChannelOptionCategoryList extends Component {
         ReactDOM.render(
           <ICheck
             type="checkbox"
-            className="inputChooseChannelOptionCategory"
-            name="inputChooseChannelOptionCategory[]"
+            className="inputChooseChannelOptionBrowser"
+            name="inputChooseChannelOptionBrowser[]"
             value={cellData}
           />,
           cell,
@@ -62,7 +62,7 @@ class ChannelOptionCategoryList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"
-          onClick={() => this.editCategory(rowData)}
+          onClick={() => this.editBrowser(rowData)}
         >Edit</Link>, cell);
       },
     }, {
@@ -71,37 +71,37 @@ class ChannelOptionCategoryList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"
-          onClick={() => this.deleteCategory(rowData)}
+          onClick={() => this.deleteBrowser(rowData)}
         >Delete</Link>, cell);
       },
     }];
   }
 
-  deleteCategory(data) {
-    this.props.deleteChannelOptionCategory(data.id).then(() => {
-      this.props.getChannelOptionCategories();
+  deleteBrowser(data) {
+    this.props.deleteChannelOptionBrowser(data.id).then(() => {
+      this.props.getChannelOptionBrowsers();
     });
   }
 
-  editCategory(data) {
-    this.props.statusCategoryEdit(true).then(() => {
-      if (this.props.page.categoryEdit === true) {
+  editBrowser(data) {
+    this.props.statusBrowserEdit(true).then(() => {
+      if (this.props.page.browserEdit === true) {
         const length = this.state.number;
         const count = length + 1;
-        this.setState({ countCategory: count });
-        this.setState({ arrCategory: [].concat(count) });
-        this.setState({ category: data });
+        this.setState({ countBrowser: count });
+        this.setState({ arrBrowser: [].concat(count) });
+        this.setState({ browser: data });
       }
     });
   }
 
-  addCategory() {
-    this.props.statusCategoryCreate(true).then(() => {
-      if (this.props.page.categoryCreate === true) {
+  addBrowser() {
+    this.props.statusBrowserCreate(true).then(() => {
+      if (this.props.page.browserCreate === true) {
         const length = this.state.number;
         const count = length + 1;
-        this.setState({ countCategory: count });
-        this.setState({ arrCreateCategory: [].concat(count) });
+        this.setState({ countBrowser: count });
+        this.setState({ arrCreateBrowser: [].concat(count) });
       }
     });
   }
@@ -121,11 +121,11 @@ class ChannelOptionCategoryList extends Component {
         <div className="col-sm-12">
           <div className="box">
             <div className="box-header">
-              <h3 className="box-title">List Category</h3>
+              <h3 className="box-title">List Browser</h3>
             </div>
             {/* /.box-header */}
             <div className="box-body">
-              <div className="listCategory">
+              <div className="listBrowser">
                 <DataTables
                   className="table table-bordered table-striped"
                   data={data}
@@ -137,7 +137,7 @@ class ChannelOptionCategoryList extends Component {
                   thead={(
                     <tr>
                       <th>
-                        <ICheck type="checkbox" className="inputChooseAllChannelOptionCategory" />
+                        <ICheck type="checkbox" className="inputChooseAllChannelOptionBrowsers" />
                       </th>
                       <th>Name</th>
                       <th>Value</th>
@@ -149,7 +149,7 @@ class ChannelOptionCategoryList extends Component {
                   tfoot={(
                     <tr>
                       <th>
-                        <ICheck type="checkbox" className="inputChooseAllChannelOptionCategory" />
+                        <ICheck type="checkbox" className="inputChooseAllChannelOptionBrowsers" />
                       </th>
                       <th>Name</th>
                       <th>Value</th>
@@ -165,49 +165,49 @@ class ChannelOptionCategoryList extends Component {
           </div>
         </div>
         <div className="col-sm-12" id="ChannelOption">
-          {this.props.page.categoryEdit === true &&
-          this.state.arrCategory && this.state.arrCategory.map((count) => (
+          {this.props.page.browserEdit === true &&
+          this.state.arrBrowser && this.state.arrBrowser.map((count) => (
             <div className="box" key={count}>
-              <div className="editChannelOptionCategoryForm">
-                <EditChannelOptionCategoryForm
-                  id={this.state.category.id}
-                  category={this.state.category}
+              <div className="editChannelOptionBrowserForm">
+                <EditChannelOptionBrowserForm
+                  id={this.state.browser.id}
+                  browser={this.state.browser}
                   index={1}
-                  updateChannelOptionCategory={this.props.updateChannelOptionCategory}
-                  statusCategoryEdit={this.props.statusCategoryEdit}
-                  getChannelOptionCategories={this.props.getChannelOptionCategories}
+                  updateChannelOptionBrowser={this.props.updateChannelOptionBrowser}
+                  statusBrowserEdit={this.props.statusBrowserEdit}
+                  getChannelOptionBrowsers={this.props.getChannelOptionBrowsers}
                   page={this.props.page}
                 />
               </div>
             </div>
           ))}
           {this.props.page &&
-          this.props.page.categoryCreate === true && this.state.arrCreateCategory
-          && this.state.arrCreateCategory.map((count) => (
+          this.props.page.browserCreate === true && this.state.arrCreateBrowser
+          && this.state.arrCreateBrowser.map((count) => (
             <div className="box" key={count}>
-              <div className="createChannelOptionCategoryForm">
-                <CreateChannelOptionCategoryForm
-                  id={this.state.category.id}
+              <div className="createChannelOptionBrowserForm">
+                <CreateChannelOptionBrowserForm
+                  id={this.state.browser.id}
                   index={1}
-                  createChannelOptionCategory={this.props.createChannelOptionCategory}
-                  getChannelOptionCategories={this.props.getChannelOptionCategories}
-                  statusCategoryCreate={this.props.statusCategoryCreate}
+                  createChannelOptionBrowser={this.props.createChannelOptionBrowser}
+                  getChannelOptionBrowsers={this.props.getChannelOptionBrowsers}
+                  statusBrowserCreate={this.props.statusBrowserCreate}
                   page={this.props.page}
                 />
               </div>
             </div>
           ))
           }
-          {((this.props.page.categoryCreate === false && this.props.page.categoryEdit === false) ||
-          (this.state.arrCreateCategory && this.state.arrCreateCategory.length === 0
-          && this.props.page.categoryEdit === false)) ? (
+          {((this.props.page.browserCreate === false && this.props.page.browserEdit === false) ||
+          (this.state.arrCreateBrowser && this.state.arrCreateBrowser.length === 0
+          && this.props.page.browserEdit === false)) ? (
             <button
               type="button"
               id="create"
-              onClick={(event) => this.addCategory(event)}
+              onClick={(event) => this.addBrowser(event)}
               className="btn btn-primary"
             >
-                Create Category
+                Create Browser
               </button>
             ) : ('')}
         </div>
@@ -216,4 +216,4 @@ class ChannelOptionCategoryList extends Component {
   }
 }
 
-export default ChannelOptionCategoryList;
+export default ChannelOptionBrowserList;

@@ -16,21 +16,20 @@ class OptionSelectChannel extends Component {
     index: PropTypes.number,
   };
 
-  async componentDidMount() {
-    if (this.props.value && this.props.name && this.props.comparison) {
-      this.inputSiteFilter.value = this.props.comparison;
-      this.inputTypeFilter.value = this.props.logical;
-      const value = this.props.value;
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value && nextProps.name && nextProps.comparison) {
+      this.inputSiteFilter.value = nextProps.comparison;
+      this.inputTypeFilter.value = nextProps.logical;
+      const value = nextProps.value;
       const arr = value.split(',');
       /* eslint-disable no-undef */
       for (let i = 0; i < arr.length; i += 1) {
-        const id = `${this.props.name}${arr[i]}${this.props.index}`;
+        const id = `${nextProps.name}${arr[i]}${nextProps.index}`;
         $(`#${id}`).iCheck('check');
       }
       /* eslint-enable no-undef */
     }
   }
-
 
   deleteOption() { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (this.props.value && this.props.name && this.props.comparison) {

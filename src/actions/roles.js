@@ -96,7 +96,7 @@ export function getRoles(args = {
 export function createRole({ uniqueName, name }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($role: RoleInputWithoutId!) {
+      mutation ($role: RoleInputTypeWithoutId!) {
         createdRole(role: $role) {
           id
           uniqueName
@@ -120,7 +120,7 @@ export function createRole({ uniqueName, name }) {
 export function updateRole({ id, uniqueName, name }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($role: RoleInput!) {
+      mutation ($role: RoleInputType!) {
         updatedRole(role: $role) {
           id
           uniqueName
