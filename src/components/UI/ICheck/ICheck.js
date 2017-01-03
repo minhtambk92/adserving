@@ -1,6 +1,7 @@
 /**
  * Created by Manhhailua on 11/2/16.
  */
+/* global $ */
 
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
@@ -15,14 +16,12 @@ class ICheck extends Component {
     // Wrapping DOM Libs
     await ReactDOM.render(this.renderDOMLibs(), this.portal);
 
-    /* eslint-disable no-undef */
     // iCheck for checkbox and radio inputs
     $(this.input).iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue',
       ...this.props.options,
     });
-    /* eslint-enable no-undef */
   }
 
   componentWillUnmount() {

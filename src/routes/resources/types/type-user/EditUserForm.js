@@ -1,6 +1,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import { Select2 } from '../../../../components/UI';
 import Link from '../../../../components/Link';
 
@@ -34,7 +35,6 @@ class EditUserForm extends Component {
       this.inputUserDisplayName.value = nextProps.user.profile.displayName;
       const roles = nextProps.user.roles;
       this.setState({ currentRoles: roles.map(role => role.uniqueName).sort() });
-      console.log(this.state.currentRoles);
       this.inputUserPassword.value = nextProps.user.password;
       this.inputUserPasswordConfirmation.value = nextProps.user.password;
       this.inputUserEmailConfirmed.value = nextProps.user.emailConfirmed;
@@ -49,39 +49,44 @@ class EditUserForm extends Component {
   }
 
   save() {
-    const id = this.props.id;
+    const roleList = this.props.roleList;
     const email = this.inputUserEmail.value;
-    const displayName = this.inputUserDisplayName.value;
     const roles = $('#inputUserRoles').val(); // eslint-disable-line no-undef
     const password = this.inputUserPassword.value;
     const passwordConfirmation = this.inputUserPasswordConfirmation.value;
     const emailConfirmed = this.inputUserEmailConfirmed.value;
     const status = this.inputUserStatus.value;
 
-    if (
-      email &&
-      displayName &&
-      roles &&
-      password &&
-      passwordConfirmation &&
-      password === passwordConfirmation &&
-      emailConfirmed &&
-      status
-    ) {
-      this.props.updateUser({
-        id,
-        email,
-        profile: {
-          displayName,
-        },
-        roles,
-        password,
-        emailConfirmed: emailConfirmed === 'true', // Convert to boolean
-        status,
-      });
+    const user = { id: this.props.id };
 
-      this.clearInput();
+    if (email && email !== this.props.user.email) {
+      user.email = email;
     }
+
+    if (roles && !_.isEqual(roles.sort(), this.state.currentRoles)) {
+      user.roles = JSON.stringify(roleList.map(role => ({
+        id: role.id,
+        isGranted: roles.indexOf(role.uniqueName) !== -1,
+      })));
+    }
+
+    if (password && passwordConfirmation && password === passwordConfirmation) {
+      user.password = password;
+    }
+
+    if (emailConfirmed && emailConfirmed !== this.props.user.emailConfirmed.toString()) {
+      user.emailConfirmed = emailConfirmed === 'true'; // Convert to boolean
+    }
+
+    if (status && status !== this.props.user.status) {
+      user.status = status;
+    }
+
+    this.props.updateUser(user).then(() => {
+      this.props.getUsers();
+    });
+
+    this.clearInput();
     this.props.setStatusUpdateUser(false);
   }
 
@@ -92,7 +97,7 @@ class EditUserForm extends Component {
   render() {
     return (
       <div
-        className={`list-zone-User list-zone-User-${this.props.index}`}
+        className={`list-user list-user-${this.props.index}`}
       >
         <div className="box-header with-border">
           <h3
@@ -122,22 +127,6 @@ class EditUserForm extends Component {
                   placeholder="contact@dantri.com.vn"
                   ref={c => {
                     this.inputUserEmail = c;
-                  }}
-                />
-              </div>
-            </div>
-            {/* displayName */}
-            <div className="form-group">
-              <label
-                htmlFor="inputUserDisplayName"
-                className="col-sm-2 control-label"
-              >Name</label>
-              <div className="col-sm-10">
-                <input
-                  type="text" className="form-control" id="inputUserDisplayName"
-                  placeholder="John Doe"
-                  ref={c => {
-                    this.inputUserDisplayName = c;
                   }}
                 />
               </div>
