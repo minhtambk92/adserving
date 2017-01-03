@@ -32,7 +32,6 @@ class EditUserForm extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.user) {
       this.inputUserEmail.value = nextProps.user.email;
-      this.inputUserDisplayName.value = nextProps.user.profile.displayName;
       const roles = nextProps.user.roles;
       this.setState({ currentRoles: roles.map(role => role.uniqueName).sort() });
       this.inputUserPassword.value = nextProps.user.password;
