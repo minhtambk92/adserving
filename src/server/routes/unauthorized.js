@@ -48,7 +48,7 @@ router.post('/logout', (req, res) => {
   return res.sendStatus(202);
 });
 
-router.post('/core-js', async(req, res) => {
+router.post('/core-js', async (req, res) => {
   const coreJsFolderName = 'corejs';
   const corePath = path.join(rootPath, `public/${coreJsFolderName}`);
   const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
@@ -152,7 +152,7 @@ router.post('/core-js', async(req, res) => {
     <!-- / Ads Zone -->
   `;
 
-  res.send(outputCode.trim());
+  res.send(outputCode);
 });
 
 export default router;
