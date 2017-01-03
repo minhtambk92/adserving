@@ -82,6 +82,7 @@ router.post('/core-js', async (req, res) => {
         name
         html
         css
+        outputCss
         width
         height
         weight

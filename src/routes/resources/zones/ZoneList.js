@@ -83,6 +83,7 @@ class ZoneList extends Component {
           /* eslint-disable no-shadow */
           const name = arrShares[i].name;
           const css = arrShares[i].css;
+          const outputCss = arrShares[i].outputCss;
           const html = arrShares[i].html;
           const width = arrShares[i].width;
           const height = arrShares[i].height;
@@ -91,11 +92,12 @@ class ZoneList extends Component {
           const type = arrShares[i].type;
           const description = arrShares[i].description;
           /* eslint-enable no-shadow */
-          if (name && css && html) {
+          if (name) {
             this.props.createShare({
               name,
               html,
               css,
+              outputCss,
               width,
               height,
               weight,
