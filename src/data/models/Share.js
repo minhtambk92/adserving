@@ -8,6 +8,7 @@
  */
 
 import DataType from 'sequelize';
+import less from 'less';
 import Model from '../sequelize';
 
 const Share = Model.define('Share', {
@@ -67,6 +68,15 @@ const Share = Model.define('Share', {
 }, {
 
   // Additional options
+  hooks: {
+    async beforeBulkUpdate(options) {
+      const inputLess = `#share-${options.where.id}{${options.attributes.css}}`;
+      const { css } = await less.render(inputLess);
+
+      // Assign compiled css to outputCss
+      Object.assign(options.attributes, { outputCss: css });
+    },
+  },
 
 });
 
