@@ -23,7 +23,6 @@ class RoleList extends Component {
     super(props, context);
     this.state = {
       role: {},
-      index: 1,
       arrRole: [],
       number: 1,
       countRole: 0,
@@ -172,7 +171,6 @@ class RoleList extends Component {
                 <EditRoleForm
                   id={this.state.role.id}
                   role={this.state.role}
-                  index={1}
                   updateRole={this.props.updateRole}
                   setStatusUpdateRole={this.props.setStatusUpdateRole}
                   getRoles={this.props.getRoles}
@@ -188,7 +186,6 @@ class RoleList extends Component {
               <div className="createRole">
                 <CreateRoleForm
                   id={this.state.role.id}
-                  index={1}
                   createRole={this.props.createRole}
                   getRoles={this.props.getRoles}
                   setStatusCreateRole={this.props.setStatusCreateRole}

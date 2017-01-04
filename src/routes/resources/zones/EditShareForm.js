@@ -47,6 +47,7 @@ class EditShareForm extends Component {
     const id = $('.list-zone-share-edit').attr('id');
     const name = $('#inputEditShareName').val();
     const css = $('#inputEditShareCSS').val();
+    const outputCss = '';
     const html = $('#inputEditShareHTML').val();
     const width = $('#inputEditShareWidth').val();
     const height = $('#inputEditShareHeight').val();
@@ -61,6 +62,7 @@ class EditShareForm extends Component {
         name,
         html,
         css,
+        outputCss,
         width,
         height,
         weight,

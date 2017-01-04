@@ -77,6 +77,7 @@ class ListZoneOfSite extends Component {
           /* eslint-disable no-shadow */
           const name = arrShares[i].name;
           const css = arrShares[i].css;
+          const outputCss = arrShares[i].outputCss;
           const html = arrShares[i].html;
           const width = arrShares[i].width;
           const height = arrShares[i].height;
@@ -90,6 +91,7 @@ class ListZoneOfSite extends Component {
               name,
               html,
               css,
+              outputCss,
               width,
               height,
               weight,

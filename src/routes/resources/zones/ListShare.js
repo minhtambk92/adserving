@@ -31,7 +31,6 @@ class ListShare extends Component {
     super(props, context);
     this.state = {
       share: {},
-      index: 1,
       numberShare: 1,
       arrShare: [],
       countShare: 0,
@@ -185,6 +184,7 @@ class ListShare extends Component {
         this.setState({ share: data });
       }
     });
+    this.props.setStatusShareFormCreate(false);
   }
 
   addShare() {
@@ -196,6 +196,7 @@ class ListShare extends Component {
         this.setState({ arrCreateShare: [].concat(count) });
       }
     });
+    this.props.setStatusShareFormEdit(false);
   }
 
   render() {
@@ -263,7 +264,6 @@ class ListShare extends Component {
                   <EditShareForm
                     id={this.state.share.id}
                     childZone={this.state.share}
-                    index={1}
                     updateShareZone={this.props.updateShareZone}
                     getZone={this.props.getZone}
                     zoneId={this.props.zoneId}
@@ -282,7 +282,6 @@ class ListShare extends Component {
                 <div className="shareZoneForm">
                   <CreateShareForm
                     id={this.state.share.id}
-                    index={1}
                     createShareZone={this.props.createShareZone}
                     getZone={this.props.getZone}
                     zoneId={this.props.zoneId}

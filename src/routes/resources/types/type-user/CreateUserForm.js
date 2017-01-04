@@ -6,7 +6,6 @@ import Link from '../../../../components/Link';
 class CreateUserForm extends Component {
 
   static propTypes = {
-    index: PropTypes.number,
     roleList: PropTypes.array.isRequired,
     id: PropTypes.string,
     users: PropTypes.object,
@@ -68,7 +67,7 @@ class CreateUserForm extends Component {
   render() {
     return (
       <div
-        className={`list-zone-User list-zone-User-${this.props.index}`}
+        className="create-user"
       >
         <div className="box-header with-border">
           <h3
@@ -85,7 +84,7 @@ class CreateUserForm extends Component {
           </div>
         </div>
         <div className="box-body">
-          <div className={`form-horizontal ListRole-${this.props.index}`}>
+          <div className="form-horizontal">
             {/* email */}
             <div className="form-group">
               <label

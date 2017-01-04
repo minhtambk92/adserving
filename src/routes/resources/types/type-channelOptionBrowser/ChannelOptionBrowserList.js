@@ -27,7 +27,6 @@ class ChannelOptionBrowserList extends Component {
     super(props, context);
     this.state = {
       browser: {},
-      index: 1,
       arrBrowser: [],
       number: 1,
       countBrowser: 0,
@@ -172,7 +171,6 @@ class ChannelOptionBrowserList extends Component {
                 <EditChannelOptionBrowserForm
                   id={this.state.browser.id}
                   browser={this.state.browser}
-                  index={1}
                   updateChannelOptionBrowser={this.props.updateChannelOptionBrowser}
                   statusBrowserEdit={this.props.statusBrowserEdit}
                   getChannelOptionBrowsers={this.props.getChannelOptionBrowsers}
@@ -188,7 +186,6 @@ class ChannelOptionBrowserList extends Component {
               <div className="createChannelOptionBrowserForm">
                 <CreateChannelOptionBrowserForm
                   id={this.state.browser.id}
-                  index={1}
                   createChannelOptionBrowser={this.props.createChannelOptionBrowser}
                   getChannelOptionBrowsers={this.props.getChannelOptionBrowsers}
                   statusBrowserCreate={this.props.statusBrowserCreate}

@@ -69,10 +69,15 @@ const Share = Model.define('Share', {
 
   // Additional options
   hooks: {
+    async beforeCreate(instances) {
+      const inputLess = `#share-${instances.dataValues.id}{${instances.dataValues.css}}`;
+      const { css } = await less.render(inputLess);
+      // Assign compiled css to outputCss
+      Object.assign(instances.dataValues, { outputCss: css });
+    },
     async beforeBulkUpdate(options) {
       const inputLess = `#share-${options.where.id}{${options.attributes.css}}`;
       const { css } = await less.render(inputLess);
-
       // Assign compiled css to outputCss
       Object.assign(options.attributes, { outputCss: css });
     },

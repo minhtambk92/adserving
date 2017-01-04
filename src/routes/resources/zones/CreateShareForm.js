@@ -29,6 +29,7 @@ class CreateShareForm extends Component {
   createShare() {
     const name = $('#inputCreateShareName').val();
     const css = $('#inputCreateShareCSS').val();
+    const outputCss = '';
     const html = $('#inputCreateShareHTML').val();
     const width = $('#inputCreateShareWidth').val();
     const height = $('#inputCreateShareHeight').val();
@@ -42,6 +43,7 @@ class CreateShareForm extends Component {
         name,
         html,
         css,
+        outputCss,
         width,
         height,
         weight,

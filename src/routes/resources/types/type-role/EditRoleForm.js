@@ -6,7 +6,6 @@ import Link from '../../../../components/Link';
 class EditRoleForm extends Component {
 
   static propTypes = {
-    index: PropTypes.number,
     id: PropTypes.string,
     role: PropTypes.object,
     setStatusUpdateRole: PropTypes.func,
@@ -50,7 +49,7 @@ class EditRoleForm extends Component {
   render() {
     return (
       <div
-        className={`list-zone-Role list-zone-Role-${this.props.index}`}
+        className="edit-role"
       >
         <div className="box-header with-border">
           <h3
@@ -67,7 +66,7 @@ class EditRoleForm extends Component {
           </div>
         </div>
         <div className="box-body">
-          <div className={`form-horizontal ListRole-${this.props.index}`}>
+          <div className="form-horizontal">
             <div className="form-group">
               <label
                 htmlFor="inputRoleName" className="col-sm-2 control-label"
