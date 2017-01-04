@@ -2,6 +2,7 @@ import {
   GraphQLInputObjectType as InputObjectType,
   GraphQLString as StringType,
   GraphQLInt as IntType,
+  GraphQLNonNull as NonNull,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Placement } from '../../models';
@@ -14,16 +15,16 @@ const PlacementInputType = new InputObjectType({
       'id',
       'startTime',
       'endTime',
-      'weight',
       'description',
       'campaignId',
     ],
   }), {
     // Additional fields
-    name: { type: StringType },
-    width: { type: IntType },
-    height: { type: IntType },
-    status: { type: StringType },
+    name: { type: new NonNull(StringType) },
+    width: { type: new NonNull(IntType) },
+    weight: { type: new NonNull(IntType) },
+    height: { type: new NonNull(IntType) },
+    status: { type: new NonNull(StringType) },
   }),
 });
 

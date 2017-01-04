@@ -6,10 +6,9 @@ const ChannelOptionBrowserInputType = new InputObjectType({
   name: 'ChannelOptionBrowserInputType',
   fields: () => Object.assign(attributeFields(ChannelOptionBrowser, {
     // Additional options
-    only: ['id', 'name', 'value'],
+    only: ['id', 'name', 'value', 'status'],
   }), {
     // Additional fields
-    status: { type: StringType },
   }),
 });
 
