@@ -6,7 +6,6 @@ import Link from '../../../../components/Link';
 class CreateChannelOptionCategoryForm extends Component {
 
   static propTypes = {
-    index: PropTypes.number,
     id: PropTypes.string,
     channelOptionCategories: PropTypes.object,
     statusCategoryCreate: PropTypes.func,
@@ -20,8 +19,8 @@ class CreateChannelOptionCategoryForm extends Component {
     str = str.toLowerCase();
 
     // remove accents, swap ñ for n, etc
-    const from = 'ăắãàáäâẽèéëêếềìịíïîõòóöôộùúüûñç·/_,:;';
-    const to = 'aaaaaaaeeeeeeeiiiiioooooouuuunc------';
+    const from = 'ăắãàáäâẽèéëêếềìịíïîõòóöôộùụúüûñç·/_,:;';
+    const to = 'aaaaaaaeeeeeeeiiiiioooooouuuuunc------';
     for (let i = 0, l = from.length; i < l; i += 1) {
       str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
     }
@@ -59,7 +58,7 @@ class CreateChannelOptionCategoryForm extends Component {
   render() {
     return (
       <div
-        className={`list-zone-ChannelOptionCategory list-zone-ChannelOptionCategory-${this.props.index}`}
+        className="create-ChannelOptionCategory"
       >
         <div className="box-header with-border">
           <h3
@@ -76,7 +75,7 @@ class CreateChannelOptionCategoryForm extends Component {
           </div>
         </div>
         <div className="box-body">
-          <div className={`form-horizontal ListChannelOptionCategory-${this.props.index}`}>
+          <div className="form-horizontal">
             <div className="form-group">
               <label
                 htmlFor="inputChannelOptionCategoryName" className="col-sm-2 control-label"

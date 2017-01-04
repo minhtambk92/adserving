@@ -96,7 +96,7 @@ class EditUserForm extends Component {
   render() {
     return (
       <div
-        className={`list-user list-user-${this.props.index}`}
+        className="edit-user"
       >
         <div className="box-header with-border">
           <h3
@@ -113,7 +113,7 @@ class EditUserForm extends Component {
           </div>
         </div>
         <div className="box-body">
-          <div className={`form-horizontal ListRole-${this.props.index}`}>
+          <div className="form-horizontal">
             {/* email */}
             <div className="form-group">
               <label

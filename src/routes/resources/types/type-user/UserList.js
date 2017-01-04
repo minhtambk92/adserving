@@ -25,7 +25,6 @@ class UserList extends Component {
     super(props, context);
     this.state = {
       user: {},
-      index: 1,
       arrUser: [],
       number: 1,
       countUser: 0,
@@ -183,7 +182,6 @@ class UserList extends Component {
                 <EditUserForm
                   id={this.state.user.id}
                   user={this.state.user}
-                  index={1}
                   updateUser={this.props.updateUser}
                   setStatusUpdateUser={this.props.setStatusUpdateUser}
                   getUsers={this.props.getUsers}
@@ -200,7 +198,6 @@ class UserList extends Component {
               <div className="createUser">
                 <CreateUserForm
                   id={this.state.user.id}
-                  index={1}
                   createUser={this.props.createUser}
                   getUsers={this.props.getUsers}
                   setStatusCreateUser={this.props.setStatusCreateUser}

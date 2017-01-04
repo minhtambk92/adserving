@@ -27,7 +27,6 @@ class ChannelOptionCategoryList extends Component {
     super(props, context);
     this.state = {
       category: {},
-      index: 1,
       arrCategory: [],
       number: 1,
       countCategory: 0,
@@ -172,7 +171,6 @@ class ChannelOptionCategoryList extends Component {
                 <EditChannelOptionCategoryForm
                   id={this.state.category.id}
                   category={this.state.category}
-                  index={1}
                   updateChannelOptionCategory={this.props.updateChannelOptionCategory}
                   statusCategoryEdit={this.props.statusCategoryEdit}
                   getChannelOptionCategories={this.props.getChannelOptionCategories}
@@ -188,7 +186,6 @@ class ChannelOptionCategoryList extends Component {
               <div className="createChannelOptionCategoryForm">
                 <CreateChannelOptionCategoryForm
                   id={this.state.category.id}
-                  index={1}
                   createChannelOptionCategory={this.props.createChannelOptionCategory}
                   getChannelOptionCategories={this.props.getChannelOptionCategories}
                   statusCategoryCreate={this.props.statusCategoryCreate}
