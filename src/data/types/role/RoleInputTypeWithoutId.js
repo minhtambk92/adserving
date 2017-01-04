@@ -11,10 +11,7 @@ import { Role } from '../../models';
 const RoleInputTypeWithoutId = new InputObjectType({
   name: 'RoleInputTypeWithoutId',
   fields: () => Object.assign(attributeFields(Role, {
-    only: [
-      'uniqueName',
-      'name',
-    ],
+    only: ['uniqueName', 'name'],
   }), {
     // Additional fields
   }),

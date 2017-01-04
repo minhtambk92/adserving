@@ -14,10 +14,7 @@ const RoleInputType = new InputObjectType({
   name: 'RoleInputType',
   fields: () => Object.assign(attributeFields(Role, {
     // Additional options
-    only: [
-      'uniqueName',
-      'name',
-    ],
+    only: ['uniqueName', 'name'],
     allowNull: true,
   }), {
     // Additional fields
