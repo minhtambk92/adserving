@@ -150,7 +150,22 @@ class CreateZoneForm extends Component {
       }).then(() => {
         this.clearInput();
         const zoneId = this.props.zones[0].id;
-        this.props.createShare({ name, html, css, description, zoneId });
+        const outputCss = '';
+        const weight = 100;
+        const classes = '';
+        this.props.createShare({
+          name,
+          html,
+          css,
+          outputCss,
+          width,
+          height,
+          weight,
+          classes,
+          type,
+          description,
+          zoneId,
+        });
         if (this.props.siteId) {
           this.props.getSite(this.props.siteId);
         }
