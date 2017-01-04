@@ -1,4 +1,8 @@
-import { GraphQLInputObjectType as InputObjectType, GraphQLString as StringType } from 'graphql';
+import {
+  GraphQLInputObjectType as InputObjectType,
+  GraphQLString as StringType,
+  GraphQLNonNull as NonNull,
+} from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Channel } from '../../models';
 
@@ -9,7 +13,7 @@ const ChannelInputType = new InputObjectType({
     only: ['id', 'name', 'description'],
   }), {
     // Additional fields
-    status: { type: StringType },
+    status: { type: new NonNull(StringType) },
   }),
 });
 

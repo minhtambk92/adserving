@@ -1,4 +1,8 @@
-import { GraphQLInputObjectType as InputObjectType, GraphQLString as StringType } from 'graphql';
+import {
+  GraphQLInputObjectType as InputObjectType,
+  GraphQLString as StringType,
+  GraphQLNonNull as NonNull,
+} from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Advertiser } from '../../models';
 
@@ -9,7 +13,7 @@ const AdvertiserInputType = new InputObjectType({
     only: ['id', 'email', 'name', 'isEmailReport', 'isEmailStatus', 'reportInterval', 'contact', 'description'],
   }), {
     // Additional fields
-    status: { type: StringType },
+    status: { type: new NonNull(StringType) },
   }),
 });
 
