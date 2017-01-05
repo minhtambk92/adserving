@@ -30,7 +30,7 @@ class UserList extends Component {
       countUser: 0,
       arrCreateUser: [],
     };
-  }
+  }z
 
   dataTableOptions() { // eslint-disable-line class-methods-use-this
     return [{

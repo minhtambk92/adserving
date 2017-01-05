@@ -9,6 +9,7 @@ import {
   SET_STATUS_CREATE_ROLE,
   SET_STATUS_UPDATE_USER,
   SET_STATUS_CREATE_USER,
+  SET_STATUS_UPDATE_PROFILE,
 } from '../../constants';
 
 
@@ -116,6 +117,17 @@ function statusCreateUser(state = false, action) {
   }
 }
 
+function statusUpdateProfile(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_PROFILE: {
+      return action.payload.statusUpdateProfile;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 export default combineReducers({
   browserCreate,
   browserEdit,
@@ -126,4 +138,5 @@ export default combineReducers({
   statusUpdateRole,
   statusCreateUser,
   statusUpdateUser,
+  statusUpdateProfile,
 });

@@ -10,6 +10,7 @@ import {
   SET_STATUS_CREATE_ROLE,
   SET_STATUS_UPDATE_USER,
   SET_STATUS_CREATE_USER,
+  SET_STATUS_UPDATE_PROFILE,
 } from '../../constants';
 
 export function setStatusChannelOptionBrowserEdit(browserEdit) {
@@ -106,6 +107,17 @@ export function setStatusCreateUser(statusCreateUser) {
       type: SET_STATUS_CREATE_USER,
       payload: {
         statusCreateUser,
+      },
+    });
+  };
+}
+
+export function setStatusUpdateProfile(statusUpdateProfile) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_UPDATE_PROFILE,
+      payload: {
+        statusUpdateProfile,
       },
     });
   };

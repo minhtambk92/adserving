@@ -60,6 +60,7 @@ export const GET_USER = 'GET_USER';
 export const GET_USERS = 'GET_USERS';
 export const CREATE_USER = 'CREATE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const DELETE_USER = 'DELETE_USER';
 export const GET_USERS_FILTERS = 'GET_USERS_FILTERS';
 export const SET_USERS_FILTERS = 'SET_USERS_FILTERS';
@@ -68,6 +69,7 @@ export const LOG_USER_IN = 'LOG_USER_IN';
 export const LOG_USER_OUT = 'LOG_USER_OUT';
 export const SET_STATUS_UPDATE_USER = 'SET_STATUS_UPDATE_USER';
 export const SET_STATUS_CREATE_USER = 'SET_STATUS_CREATE_USER';
+export const SET_STATUS_UPDATE_PROFILE = 'SET_STATUS_UPDATE_PROFILE';
 
 export const GET_ROLE = 'GET_ROLE';
 export const GET_ROLES = 'GET_ROLES';
