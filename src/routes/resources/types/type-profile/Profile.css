@@ -8,4 +8,9 @@
   margin: 0 auto;
   max-width: 100%;
   display: block;
+  cursor: pointer;
+}
+
+#uploadImage {
+  display: none;
 }

@@ -24,7 +24,8 @@ class EditProfileForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile) {
-      this.state.imageUrl = nextProps.profile.picture;
+      const picture = nextProps.profile.picture;
+      this.setState({ imageUrl: picture });
       this.inputProfileName.value = nextProps.profile.displayName;
       this.inputProfileGender.value = nextProps.profile.gender;
       this.inputProfileLocation.value = nextProps.profile.location;
@@ -78,21 +79,30 @@ class EditProfileForm extends Component {
     this.props.setStatusUpdateProfile(false);
   }
 
+  changeImage() { // eslint-disable-line no-unused-vars, class-methods-use-this
+    // const image = '/default_avatar.png';
+    // this.setState({ imageUrl: image });
+    $('.dropzone').click();
+  }
+
+  removeAvatar() { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const image = '/default_avatar.png';
+    this.setState({ imageUrl: image });
+  }
+
   render() {
     const img = this.state.imageUrl;
     /* eslint-disable */
     this.djsConfig = {
       acceptedFiles: 'image/jpeg,image/png,image/gif',
       addRemoveLinks: true,
-      maxFiles: 1,
       init: function () {
-        const mockFile = { name: 'image', size: 125, type: 'image/jpeg' };
+        const mockFile = { name: 'avatar', type: 'image/jpeg' };
         this.options.addedfile.call(this, mockFile);
         this.options.thumbnail.call(this, mockFile, img);
         mockFile.previewElement.classList.add('dz-success');
         mockFile.previewElement.classList.add('dz-complete');
         mockFile.previewElement.classList.add('dz-processing');
-        mockFile.previewElement.classList.add('dz-success');
       },
     };
     /* eslint-enable */
@@ -103,7 +113,8 @@ class EditProfileForm extends Component {
     // Simple callbacks work too, of course
     this.callback = (e) => {
       if (e.xhr.response) {
-        this.state.imageUrl = e.xhr.response;
+        const image = e.xhr.response;
+        this.setState({ imageUrl: image });
       }
     };
     this.eventHandlers = {
@@ -131,27 +142,39 @@ class EditProfileForm extends Component {
         </div>
         <div className="box-body">
           <div className="form-horizontal">
-            <div className="col-sm-4">
+            <div className="col-sm-3">
               {/* picture */}
               <div className="form-group">
                 <div className="col-sm-12">
                   <div className="row">
                     <div className="col-sm-12">
+                      <div className="box-tools pull-right">
+                        <button
+                          className="btn btn-box-tool remove-avatar"
+                          onClick={event => this.removeAvatar(event)}
+                        >
+                          <i className="fa fa-times" />
+                        </button>
+                      </div>
                       <div
                         id="inputProfilePicture"
-                        ref={c => {
-                          this.inputProfilePicture = c;
-                        }}
                       >
                         <img
-                          src={this.props.profile ?
-                            this.props.profile.picture : '/default_avatar.png'
+                          src={(this.props.profile && this.props.profile.picture !== '') ?
+                            this.state.imageUrl : '/default_avatar.png'
                           }
                           alt="avatar"
                         />
                       </div>
+                      <button
+                        type="button"
+                        className="btn btn-default col-sm-12"
+                        onClick={() => this.changeImage()}
+                      >
+                        Change Avatar
+                      </button>
                     </div>
-                    <div className="col-sm-12">
+                    <div className="col-sm-12" id="uploadImage">
                       <DropzoneComponent
                         config={this.componentConfig}
                         eventHandlers={this.eventHandlers}
@@ -162,7 +185,7 @@ class EditProfileForm extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-sm-8">
+            <div className="col-sm-9">
               {/* name */}
               <div className="form-group">
                 <label
