@@ -26,8 +26,6 @@ class UserList extends Component {
     this.state = {
       user: {},
       arrUser: [],
-      number: 1,
-      countUser: 0,
       arrCreateUser: [],
     };
   }
@@ -88,9 +86,7 @@ class UserList extends Component {
   addUser() {
     this.props.setStatusCreateUser(true).then(() => {
       if (this.props.page.statusCreateUser === true) {
-        const length = this.state.number;
-        const count = length + 1;
-        this.setState({ countUser: count });
+        const count = 1;
         this.setState({ arrCreateUser: [].concat(count) });
       }
       this.props.setStatusUpdateUser(false);
@@ -106,9 +102,7 @@ class UserList extends Component {
   editUser(data) {
     this.props.setStatusUpdateUser(true).then(() => {
       if (this.props.page.statusUpdateUser === true) {
-        const length = this.state.number;
-        const count = length + 1;
-        this.setState({ countUser: count });
+        const count = 1;
         this.setState({ arrUser: [].concat(count) });
         this.setState({ user: data });
       }
