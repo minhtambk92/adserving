@@ -80,8 +80,6 @@ class EditProfileForm extends Component {
   }
 
   changeImage() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    // const image = '/default_avatar.png';
-    // this.setState({ imageUrl: image });
     $('.dropzone').click();
   }
 
