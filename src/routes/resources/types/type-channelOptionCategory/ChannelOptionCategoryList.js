@@ -91,6 +91,7 @@ class ChannelOptionCategoryList extends Component {
         this.setState({ arrCategory: [].concat(count) });
         this.setState({ category: data });
       }
+      this.props.statusCategoryCreate(false);
     });
   }
 
@@ -102,6 +103,7 @@ class ChannelOptionCategoryList extends Component {
         this.setState({ countCategory: count });
         this.setState({ arrCreateCategory: [].concat(count) });
       }
+      this.props.statusCategoryEdit(false);
     });
   }
 

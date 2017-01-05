@@ -30,7 +30,7 @@ class UserList extends Component {
       countUser: 0,
       arrCreateUser: [],
     };
-  }z
+  }
 
   dataTableOptions() { // eslint-disable-line class-methods-use-this
     return [{
@@ -93,6 +93,7 @@ class UserList extends Component {
         this.setState({ countUser: count });
         this.setState({ arrCreateUser: [].concat(count) });
       }
+      this.props.setStatusUpdateUser(false);
     });
   }
 
@@ -111,6 +112,7 @@ class UserList extends Component {
         this.setState({ arrUser: [].concat(count) });
         this.setState({ user: data });
       }
+      this.props.setStatusCreateUser(false);
     });
   }
 

@@ -93,6 +93,7 @@ class RoleList extends Component {
         this.setState({ arrRole: [].concat(count) });
         this.setState({ role: data });
       }
+      this.props.setStatusCreateRole(false);
     });
   }
 
@@ -104,6 +105,7 @@ class RoleList extends Component {
         this.setState({ countRole: count });
         this.setState({ arrCreateRole: [].concat(count) });
       }
+      this.props.setStatusUpdateRole(false);
     });
   }
 
