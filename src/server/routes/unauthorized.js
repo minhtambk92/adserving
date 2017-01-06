@@ -139,7 +139,7 @@ router.post('/core-js', async (req, res) => {
     coreContent = coreContent.replace('\'{{zoneDataObject}}\'', JSON.stringify(zoneData));
   }
 
-  coreContent = coreContent.replace('{{zoneId}}', zoneId);
+  coreContent = coreContent.replace(/\{\{zoneId}}/g, zoneId);
 
   fs.writeFileSync(coreFile, coreContent); // Write content to file
   fs.chmodSync(coreFile, 0o644); // Chmod to 644
