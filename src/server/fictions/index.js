@@ -28,26 +28,26 @@ import {
   ChannelOptionBrowser,
 } from '../../data/models';
 import { host } from '../../config';
-import resourcesList from './data/resources.json';
-import menusList from './data/menus.json';
-import rolesList from './data/roles.json';
-import usersList from './data/users.json';
-import userProfilesList from './data/user-profile.json';
-import userRolesList from './data/user-role.json';
-import advertisersList from './data/advertisers.json';
-import campaignsList from './data/campaigns.json';
-import sitesList from './data/sites.json';
-import channelsList from './data/channels.json';
-import optionsChannelsList from './data/option-channel.json';
-import zonesList from './data/zones.json';
-import sharesList from './data/shares.json';
-import sharesPlacementsList from './data/share-placement.json';
-import placementsList from './data/placements.json';
-import placementsBannersList from './data/placement-banner.json';
-import bannersList from './data/banners.json';
-import tracksList from './data/tracks.json';
-import channelOptionCategoryList from './data/channel-option-category.json';
-import channelOptionBrowserList from './data/channel-option-browser.json';
+import resourcesList from './data/Resource.json';
+import menusList from './data/Menu.json';
+import rolesList from './data/Role.json';
+import usersList from './data/User.json';
+import userProfilesList from './data/UserProfile.json';
+import userRolesList from './data/UserRole.json';
+import advertisersList from './data/Advertiser.json';
+import campaignsList from './data/Campaign.json';
+import sitesList from './data/Site.json';
+import channelsList from './data/Channel.json';
+import optionsChannelsList from './data/OptionChannel.json';
+import zonesList from './data/Zone.json';
+import sharesList from './data/Share.json';
+import sharesPlacementsList from './data/SharePlacement.json';
+import placementsList from './data/Placement.json';
+import placementsBannersList from './data/PlacementBanner.json';
+import bannersList from './data/Banner.json';
+import tracksList from './data/Track.json';
+import channelOptionCategoryList from './data/ChannelOptionCategory.json';
+import channelOptionBrowserList from './data/ChannelOptionBrowser.json';
 
 /* eslint-disable no-console */
 
