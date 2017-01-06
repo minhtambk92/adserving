@@ -29,7 +29,6 @@ class CreateRoleForm extends Component {
       });
     }
     this.props.setStatusCreateRole(false);
-    // this.props.setPageZoneActiveTab('RoleZone');
   }
 
   removeCreateForm() {

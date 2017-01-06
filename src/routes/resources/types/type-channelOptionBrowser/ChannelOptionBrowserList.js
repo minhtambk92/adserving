@@ -91,6 +91,7 @@ class ChannelOptionBrowserList extends Component {
         this.setState({ arrBrowser: [].concat(count) });
         this.setState({ browser: data });
       }
+      this.props.statusBrowserCreate(false);
     });
   }
 
@@ -102,6 +103,7 @@ class ChannelOptionBrowserList extends Component {
         this.setState({ countBrowser: count });
         this.setState({ arrCreateBrowser: [].concat(count) });
       }
+      this.props.statusBrowserEdit(false);
     });
   }
 

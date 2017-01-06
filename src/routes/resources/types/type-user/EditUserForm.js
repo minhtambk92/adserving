@@ -102,7 +102,7 @@ class EditUserForm extends Component {
           <h3
             className="box-title"
           >
-            Add New</h3>
+            {`Edit: ${this.props.user.profile ? this.props.user.profile.displayName : ''}`}</h3>
           <div className="box-tools pull-right">
             <button
               className="btn btn-box-tool remove-User-zone"

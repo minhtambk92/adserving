@@ -1,0 +1,16 @@
+@import '../../../../components/variables.css';
+
+.dropzone .dz-preview .dz-image img {
+  width: 100%;
+}
+
+#inputProfilePicture img {
+  margin: 0 auto;
+  max-width: 100%;
+  display: block;
+  cursor: pointer;
+}
+
+#uploadImage {
+  display: none;
+}

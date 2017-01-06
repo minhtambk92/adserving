@@ -111,6 +111,14 @@ const users = {
           });
         }
 
+        if (newUser.profile) {
+          await UserProfile.update(newUser.profile, {
+            where: {
+              userId: args.user.id,
+            },
+          });
+        }
+
         await User.update(newUser, {
           where: {
             id: args.user.id,

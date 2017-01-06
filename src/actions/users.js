@@ -12,6 +12,7 @@ import {
   SIGN_USER_UP,
   LOG_USER_IN,
   LOG_USER_OUT,
+  UPDATE_PROFILE,
 } from '../constants';
 
 export function getUsersFilters() {
@@ -84,6 +85,10 @@ export function getUsers(args = {
           status
           profile {
             displayName
+            picture
+            gender
+            website
+            location
           }
           roles {
             id
@@ -208,6 +213,45 @@ export function updateUser({ id, email, profile, roles, password, emailConfirmed
     });
   };
 }
+
+export function updateProfile({ id, emailConfirmed, profile }) {
+  return async (dispatch, getState, { graphqlRequest }) => {
+    const mutation = `
+      mutation ($user: UserInputType!) {
+        updatedUser(user: $user) {
+          id
+          email
+          emailConfirmed
+          status
+          profile {
+            displayName
+            picture
+            website
+            location
+            gender
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+
+    const { data } = await graphqlRequest(mutation, {
+      user: {
+        id,
+        emailConfirmed,
+        profile,
+      },
+    });
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: {
+        user: data.updatedUser,
+      },
+    });
+  };
+}
+
 
 export function deleteUser(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
