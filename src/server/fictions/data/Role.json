@@ -1,4 +1,1 @@
-
-// adserving_graph.Role
-
 [{"id":"348d685f-cd69-42a8-a40e-eb7c7c282df2","uniqueName":"admin","name":"Administrator","createdAt":"2016-12-24 04:58:25","updatedAt":"2016-12-24 04:58:25","deletedAt":null}, {"id":"40134677-61b3-4627-8b1d-d9363e6fe9bc","uniqueName":"publisher","name":"Publisher","createdAt":"2016-12-24 04:58:25","updatedAt":"2016-12-24 04:58:25","deletedAt":null}, {"id":"af0c7982-0f5d-4cfe-ac15-f2c7f8fc4581","uniqueName":"user","name":"User","createdAt":"2016-12-24 04:58:25","updatedAt":"2016-12-24 04:58:25","deletedAt":null}]

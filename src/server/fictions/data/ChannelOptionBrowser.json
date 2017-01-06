@@ -1,4 +1,1 @@
-
-// adserving_graph.ChannelOptionBrowser
-
 [{"id":"07781b89-6015-4df8-81c2-9f61a697b8e8","name":"Firefox","value":"firefox","status":"active","createdAt":"2016-12-27 00:38:17","updatedAt":"2016-12-27 00:38:17","deletedAt":null}, {"id":"5d52f033-0322-49ad-8af4-afccfbbd1899","name":"Chrome","value":"chrome","status":"active","createdAt":"2016-12-27 00:37:49","updatedAt":"2016-12-27 00:37:49","deletedAt":null}, {"id":"8049cc78-12b8-431d-9fe6-6c477168bb92","name":"Safari","value":"safari","status":"active","createdAt":"2016-12-27 00:38:01","updatedAt":"2016-12-27 00:38:01","deletedAt":null}, {"id":"bcce3789-e4c1-4d50-a937-6f346f6c239a","name":"IE","value":"ie","status":"active","createdAt":"2016-12-27 00:37:39","updatedAt":"2016-12-27 00:37:39","deletedAt":null}]
