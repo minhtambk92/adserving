@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
 import path from 'path';
 import fs from 'fs';
+import jsBeautify from 'js-beautify';
 import { auth, host, rootPath } from '../../config';
 import passport from '../authentications/local';
 
@@ -153,7 +154,7 @@ router.post('/core-js', async (req, res) => {
     <!-- / Ads Zone -->
   `;
 
-  res.send(outputCode);
+  res.send(jsBeautify.html(outputCode));
 });
 
 export default router;
