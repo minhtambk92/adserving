@@ -233,6 +233,7 @@ class CreatePlacementForm extends Component {
           <Link
             to="#"
             className="btn btn-app pull-right"
+            onClick={() => this.clearInput()}
           ><i className="fa fa-eraser" /> Clear</Link>
           <Link
             to="#"

@@ -19,24 +19,27 @@ class CreateShareForm extends Component {
   };
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    $('#inputCreateShareName').val('');
-    $('#inputCreateShareCSS').val('');
-    $('#inputCreateShareOutPutCSS').val('');
-    $('#inputCreateShareHTML').val('');
-    $('#inputCreateShareDescription').val('');
+    this.inputCreateShareName.value = null;
+    this.inputCreateShareCSS.value = null;
+    this.inputCreateShareHTML.value = null;
+    this.inputCreateShareHeight.value = null;
+    this.inputCreateShareOutPutCSS.value = null;
+    this.inputCreateShareDescription.value = null;
+    this.inputCreateShareWeight.value = null;
+    this.inputCreateShareWidth.value = null;
   }
 
   createShare() {
-    const name = $('#inputCreateShareName').val();
-    const css = $('#inputCreateShareCSS').val();
+    const name = this.inputCreateShareName.value;
+    const css = this.inputCreateShareCSS.value;
     const outputCss = '';
-    const html = $('#inputCreateShareHTML').val();
-    const width = $('#inputCreateShareWidth').val();
-    const height = $('#inputCreateShareHeight').val();
-    const weight = $('#inputCreateShareWeight').val();
+    const html = this.inputCreateShareHTML.value;
+    const width = this.inputCreateShareWidth.value;
+    const height = this.inputCreateShareHeight.value;
+    const weight = this.inputCreateShareWeight.value;
     const classes = document.getElementById('inputCreateShareClasses').value;
-    const type = $('#inputCreateShareType').val();
-    const description = $('#inputCreateShareDescription').val();
+    const type = this.inputCreateShareType.value;
+    const description = this.inputCreateShareDescription.value;
     if (name) {
       const zoneId = this.props.zoneId;
       this.props.createShareZone({
