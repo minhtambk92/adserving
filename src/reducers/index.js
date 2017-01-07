@@ -22,6 +22,7 @@ import optionChannels from './optionChannels';
 import tracks from './tracks';
 import shares from './shares';
 import sharePlacements from './sharePlacements';
+import options from './options';
 
 import page from './pages';
 
@@ -50,4 +51,5 @@ export default combineReducers({
   sharePlacements,
   page,
   channelOptionCategories,
+  options,
 });

@@ -10,6 +10,8 @@ import {
   SET_STATUS_UPDATE_USER,
   SET_STATUS_CREATE_USER,
   SET_STATUS_UPDATE_PROFILE,
+  SET_STATUS_UPDATE_OPTION,
+  SET_STATUS_CREATE_OPTION,
 } from '../../constants';
 
 
@@ -128,6 +130,28 @@ function statusUpdateProfile(state = false, action) {
   }
 }
 
+function statusCreateOption(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_OPTION: {
+      return action.payload.statusCreateOption;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdateOption(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_OPTION: {
+      return action.payload.statusUpdateOption;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 export default combineReducers({
   browserCreate,
   browserEdit,
@@ -139,4 +163,6 @@ export default combineReducers({
   statusCreateUser,
   statusUpdateUser,
   statusUpdateProfile,
+  statusCreateOption,
+  statusUpdateOption,
 });

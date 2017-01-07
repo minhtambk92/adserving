@@ -20,6 +20,7 @@ import shares from './shares';
 import sharePlacements from './sharePlacements';
 import channelOptionBrowser from './channelOptionBrowsers';
 import channelOptionCategories from './channelOptionCategories';
+import options from './options';
 
 const mutations = new ObjectType({
   name: 'Mutation',
@@ -41,6 +42,7 @@ const mutations = new ObjectType({
     ...sharePlacements,
     ...channelOptionBrowser,
     ...channelOptionCategories,
+    ...options,
   },
 });
 
