@@ -17,6 +17,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanner, updateBanner, deleteBanner } from '../../../../actions/banners';
 import { getCampaigns } from '../../../../actions/campaigns';
 import { createPlacement, getPlacements } from '../../../../actions/placements';
+import { getAllTypeBannerHtml } from '../../../../actions/allTypeBannerHtml';
 import { getChannels } from '../../../../actions/channels';
 import {
   createPlacementBanner,
@@ -62,7 +63,8 @@ class Banner extends Component {
     createTrack: PropTypes.func,
     deleteTrack: PropTypes.func,
     updateTrack: PropTypes.func,
-
+    getAllTypeBannerHtml: PropTypes.func,
+    allTypeBannerHtml: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -78,6 +80,7 @@ class Banner extends Component {
     this.props.getCampaigns();
     this.props.getPlacements();
     this.props.getChannels();
+    this.props.getAllTypeBannerHtml();
   }
 
   componentDidMount() {
@@ -166,6 +169,8 @@ class Banner extends Component {
                       updateBanner={this.props.updateBanner}
                       deleteBanner={this.props.deleteBanner}
                       bannerId={this.props.bannerId}
+                      listTypeBannerHtml={this.props.allTypeBannerHtml &&
+                      this.props.allTypeBannerHtml.list}
                       getBanner={this.props.getBanner}
                       removeBanner={this.props.removeBanner}
                       channels={this.props.channels.list}
@@ -303,6 +308,7 @@ const mapState = (state) => ({
   channels: state.channels,
   tracks: state.tracks,
   placementBanners: state.placementBanners,
+  allTypeBannerHtml: state.allTypeBannerHtml,
 });
 
 const mapDispatch = {
@@ -319,6 +325,7 @@ const mapDispatch = {
   createTrack,
   deleteTrack,
   updateTrack,
+  getAllTypeBannerHtml,
 };
 
 export default withStyles(s, style, dropZoneStyle)(connect(mapState, mapDispatch)(Banner));

@@ -375,8 +375,13 @@ class OptionBannerForm extends Component {
     banner.activationDate = activationDate;
     banner.isExpirationDate = isExpirationDate;
     banner.expirationDate = expirationDate;
+    banner.status = this.props.banner.status;
+    banner.isIFrame = this.props.banner.isIFrame;
+    banner.weight = this.props.banner.weight;
+    banner.type = this.props.banner.type;
     if (moment(new Date(activationDate)).format('x') < moment(new Date(expirationDate)).format('x')) {
       this.props.updateBanner(banner).then(() => {
+        this.props.getBanner(this.props.bannerId);
       });
       this.addLinkClickAndImpression();
     }

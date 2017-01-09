@@ -14,6 +14,7 @@ class CreateBannerForm extends Component {
     createBanner: PropTypes.func,
     channels: PropTypes.array,
     placementId: PropTypes.string,
+    listTypeBannerHtml: PropTypes.array,
     createPlacementBanner: PropTypes.func,
     getPlacement: PropTypes.func,
     banners: PropTypes.array,
@@ -277,27 +278,14 @@ class CreateBannerForm extends Component {
                           this.inputBannerHTMLType = c;
                         }}
                       >
-                        <option value="0">Generic HTML</option>
-                        <option value="18">ADN Code</option>
-                        <option value="13">Balloon Classic Code</option>
-                        <option value="9">Balloon Plus Code</option>
-                        <option value="7">Box-App CPD Code</option>
-                        <option value="4">Box-App CPM Booking 300x600</option>
-                        <option value="12">Box-App CPM 300x250 Code</option>
-                        <option value="6">Box-App CPM 300x385 Code</option>
-                        <option value="5">CPC Admarket Code</option>
-                        <option value="10">CPC PLUS Code</option>
-                        <option value="11">CPM Admarket Code</option>
-                        <option value="8">CPM 7K Code hoặc Banner CPM Bám biên phải</option>
-                        <option value="14">Google Adsense Code</option>
-                        <option value="15">Sponsor Code</option>
-                        <option value="16">Retargeting Banner</option>
-                        <option value="17">Banner TVC Sticky</option>
-                        <option value="30">Banner CPM Kingsize</option>
-                        <option value="33">Banner popup CPC</option>
-                        <option value="35">Banner King size chạy merge</option>
-                        <option value="36">Banner chạy kèm kingsize 300x600 vị trí dưới</option>
-                        <option value="99">PR Tracking</option>
+                        {this.props.listTypeBannerHtml
+                        && this.props.listTypeBannerHtml.map(typeBannerHtml => (
+                          <option
+                            key={typeBannerHtml.id} value={typeBannerHtml.id}
+                          >
+                            {typeBannerHtml.name}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>

@@ -1,0 +1,222 @@
+[
+  {
+    "id": "0832fd2a-0e9d-4ec2-9e28-3c0853062a57",
+    "name": "Box-App CPM Booking 300x600",
+    "value": "box-app-cpm-booking-300x600",
+    "weight": "4",
+    "status": "active",
+    "createdAt": "2017-01-09 00:16:58",
+    "updatedAt": "2017-01-09 08:53:49",
+    "deletedAt": null
+  },
+  {
+    "id": "1c2abd40-ffd4-4dc5-96d0-a97d3d50dee4",
+    "name": "Balloon Classic Code",
+    "value": "balloon-classic-code",
+    "weight": "13",
+    "status": "active",
+    "createdAt": "2017-01-09 00:16:12",
+    "updatedAt": "2017-01-09 00:16:12",
+    "deletedAt": null
+  },
+  {
+    "id": "3ad4a8c6-bdfb-4f04-a418-147b76a986f2",
+    "name": "Banner ch\u1ea1y k\u00e8m kingsize 300x600 v\u1ecb tr\u00ed d\u01b0\u1edbi",
+    "value": "banner-chy-kem-kingsize-300x600-vi-tri-di",
+    "weight": "36",
+    "status": "active",
+    "createdAt": "2017-01-09 00:20:34",
+    "updatedAt": "2017-01-09 00:20:34",
+    "deletedAt": null
+  },
+  {
+    "id": "4302b11f-41b7-4c71-a0b7-b3b547801e3b",
+    "name": "Banner TVC Sticky",
+    "value": "banner-tvc-sticky",
+    "weight": "17",
+    "status": "active",
+    "createdAt": "2017-01-09 00:19:41",
+    "updatedAt": "2017-01-09 00:19:41",
+    "deletedAt": null
+  },
+  {
+    "id": "5b6182d9-b6e6-4e87-bd70-e151d9fb7794",
+    "name": "Banner CPM Kingsize",
+    "value": "banner-cpm-kingsize",
+    "weight": "30",
+    "status": "active",
+    "createdAt": "2017-01-09 00:19:54",
+    "updatedAt": "2017-01-09 00:19:54",
+    "deletedAt": null
+  },
+  {
+    "id": "5e6b2b8c-e9d6-4b12-8989-18be7cbb986c",
+    "name": "Box-App CPD Code",
+    "value": "box-app-cpd-code",
+    "weight": "7",
+    "status": "active",
+    "createdAt": "2017-01-09 00:16:43",
+    "updatedAt": "2017-01-09 00:16:43",
+    "deletedAt": null
+  },
+  {
+    "id": "5f4f7e9d-bdce-4989-8379-9dc451ad3c62",
+    "name": "CPM Admarket Code",
+    "value": "cpm-admarket-code",
+    "weight": "11",
+    "status": "active",
+    "createdAt": "2017-01-09 00:18:23",
+    "updatedAt": "2017-01-09 08:52:23",
+    "deletedAt": null
+  },
+  {
+    "id": "727fa59f-e673-4638-ad56-698b340b1f1c",
+    "name": "PR Tracking",
+    "value": "pr-tracking",
+    "weight": "99",
+    "status": "active",
+    "createdAt": "2017-01-09 00:20:46",
+    "updatedAt": "2017-01-09 08:51:45",
+    "deletedAt": null
+  },
+  {
+    "id": "76f252fc-7cfc-4e40-90ed-a36eb87686b5",
+    "name": "CPC Admarket Code",
+    "value": "cpc-admarket-code",
+    "weight": "5",
+    "status": "active",
+    "createdAt": "2017-01-09 00:17:52",
+    "updatedAt": "2017-01-09 08:53:30",
+    "deletedAt": null
+  },
+  {
+    "id": "a0f87bc3-f847-4b22-866c-0c6064dde782",
+    "name": "CPC PLUS Code",
+    "value": "cpc-plus-code",
+    "weight": "10",
+    "status": "active",
+    "createdAt": "2017-01-09 00:18:06",
+    "updatedAt": "2017-01-09 08:52:53",
+    "deletedAt": null
+  },
+  {
+    "id": "a6f5d1fe-a18d-4d50-80bc-133d8fc64c8d",
+    "name": "Google Adsense Code",
+    "value": "google-adsense-code",
+    "weight": "14",
+    "status": "active",
+    "createdAt": "2017-01-09 00:19:03",
+    "updatedAt": "2017-01-09 08:51:33",
+    "deletedAt": null
+  },
+  {
+    "id": "b445d82f-948e-45cb-8397-8b5f1992932c",
+    "name": "Retargeting Banner",
+    "value": "retargeting-banner",
+    "weight": "16",
+    "status": "active",
+    "createdAt": "2017-01-09 00:19:30",
+    "updatedAt": "2017-01-09 08:52:08",
+    "deletedAt": null
+  },
+  {
+    "id": "b95965b2-1dff-4492-b469-b3b4b1ccccf2",
+    "name": "Box-App CPM 300x385 Code",
+    "value": "box-app-cpm-300x385-code",
+    "weight": "6",
+    "status": "active",
+    "createdAt": "2017-01-09 00:17:33",
+    "updatedAt": "2017-01-09 00:17:33",
+    "deletedAt": null
+  },
+  {
+    "id": "d2ac74ae-e9e4-4518-b68a-d5e45e19c2dd",
+    "name": "CPM 7K Code ho\u1eb7c Banner CPM B\u00e1m bi\u00ean ph\u1ea3i",
+    "value": "cpm-7k-code-hoac-banner-cpm-bam-bien-phai",
+    "weight": "8",
+    "status": "active",
+    "createdAt": "2017-01-09 08:48:59",
+    "updatedAt": "2017-01-09 08:52:36",
+    "deletedAt": null
+  },
+  {
+    "id": "d3ab45a7-54b0-49a5-a12a-6f13abc11039",
+    "name": "ADN Code",
+    "value": "adn-code",
+    "weight": "18",
+    "status": "active",
+    "createdAt": "2017-01-09 00:15:59",
+    "updatedAt": "2017-01-09 00:15:59",
+    "deletedAt": null
+  },
+  {
+    "id": "ddcfc735-18a4-49c1-ac1c-547c05c262b7",
+    "name": "Banner King size ch\u1ea1y merge",
+    "value": "banner-king-size-chy-merge",
+    "weight": "35",
+    "status": "active",
+    "createdAt": "2017-01-09 00:20:19",
+    "updatedAt": "2017-01-09 00:20:19",
+    "deletedAt": null
+  },
+  {
+    "id": "ee4aa03b-be5a-404a-a5ef-fb5f750c4507",
+    "name": "Box-App CPM 300x250 Code",
+    "value": "box-app-cpm-300x250-code",
+    "weight": "12",
+    "status": "active",
+    "createdAt": "2017-01-09 00:17:14",
+    "updatedAt": "2017-01-09 00:17:14",
+    "deletedAt": null
+  },
+  {
+    "id": "f00bc96b-cfeb-42b4-aeab-8a6a3a5887da",
+    "name": "CPM 7K Code ho\u1eb7c Banner CPM B\u00e1m bi\u00ean ph\u1ea3i",
+    "value": "cpm-7k-code-hoac-banner-cpm-bam-bien-phai",
+    "weight": "8",
+    "status": "active",
+    "createdAt": "2017-01-09 00:18:40",
+    "updatedAt": "2017-01-09 00:46:48",
+    "deletedAt": "2017-01-09 08:48:41"
+  },
+  {
+    "id": "f7aace90-c849-45b2-8d8c-cb23e0f6f051",
+    "name": "Generic HTML",
+    "value": "generic-html",
+    "weight": "0",
+    "status": "active",
+    "createdAt": "2017-01-09 00:15:40",
+    "updatedAt": "2017-01-09 00:15:40",
+    "deletedAt": null
+  },
+  {
+    "id": "f9be5a14-2b2b-4b9f-9c65-d8e077ddabb5",
+    "name": "Banner popup CPC",
+    "value": "banner-popup-cpc",
+    "weight": "33",
+    "status": "active",
+    "createdAt": "2017-01-09 00:20:07",
+    "updatedAt": "2017-01-09 00:20:07",
+    "deletedAt": null
+  },
+  {
+    "id": "fa71ff16-f2e1-4800-b242-77fe0276502a",
+    "name": "Sponsor Code",
+    "value": "sponsor-code",
+    "weight": "15",
+    "status": "active",
+    "createdAt": "2017-01-09 00:19:16",
+    "updatedAt": "2017-01-09 08:51:00",
+    "deletedAt": null
+  },
+  {
+    "id": "fbba7959-b0ec-497f-8550-fa63687da5c5",
+    "name": "Balloon Plus Code",
+    "value": "balloon-plus-code",
+    "weight": "10",
+    "status": "active",
+    "createdAt": "2017-01-09 00:16:28",
+    "updatedAt": "2017-01-09 00:16:28",
+    "deletedAt": null
+  }
+]

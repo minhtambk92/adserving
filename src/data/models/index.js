@@ -39,6 +39,7 @@ import OptionChannel from './OptionChannel';
 import Track from './Track';
 import Share from './Share';
 import SharePlacement from './SharePlacement';
+import TypeBannerHtml from './TypeBannerHtml';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -339,4 +340,5 @@ export {
   Track,
   Share,
   SharePlacement,
+  TypeBannerHtml,
 };

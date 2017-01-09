@@ -12,6 +12,7 @@ class UpdateBannerForm extends Component {
     deleteBanner: PropTypes.func,
     getBanner: PropTypes.func,
     removeBanner: PropTypes.func,
+    listTypeBannerHtml: PropTypes.array,
     channels: PropTypes.array,
   };
 
@@ -127,21 +128,11 @@ class UpdateBannerForm extends Component {
     if (name && name !== this.props.banner.name) {
       banner.name = name;
     }
+    banner.width = width;
+    banner.height = height;
+    banner.keyword = keyword;
+    banner.weight = weight;
 
-    if (width && width !== this.props.banner.width) {
-      banner.width = width;
-    }
-
-    if (height && height !== this.props.banner.height) {
-      banner.height = height;
-    }
-
-    if (keyword && keyword !== this.props.banner.keyword) {
-      banner.keyword = keyword;
-    }
-    if (weight && weight !== this.props.banner.weight) {
-      banner.weight = weight;
-    }
     if (description && description !== this.props.banner.description) {
       banner.description = description;
     }
@@ -153,9 +144,7 @@ class UpdateBannerForm extends Component {
       if (adServer && adServer !== this.props.banner.adServer) {
         banner.adServer = adServer;
       }
-      if (bannerHTMLType && bannerHTMLType !== this.props.banner.bannerHTMLType) {
-        banner.bannerHTMLType = bannerHTMLType;
-      }
+      banner.bannerHTMLType = bannerHTMLType;
     } else if (type === 'img') {
       if (target && target !== this.props.banner.target) {
         banner.target = target;
@@ -166,12 +155,18 @@ class UpdateBannerForm extends Component {
       banner.imageUrl = imageUrl;
     }
     banner.isIFrame = isIFrame;
-    if (status && status !== this.props.banner.status) {
-      banner.status = status;
-    }
+    banner.status = status;
     if (channelId && channelId !== this.props.banner.channelId) {
       banner.channelId = channelId;
     }
+    banner.isCountView = this.props.banner.isCountView;
+    banner.isFixIE = this.props.banner.isFixIE;
+    banner.isDefault = this.props.banner.isDefault;
+    banner.isRelative = this.props.banner.isRelative;
+    banner.isImpressionsBooked = this.props.banner.isImpressionsBooked;
+    banner.isClicksBooked = this.props.banner.isClicksBooked;
+    banner.isActivationDate = this.props.banner.isActivationDate;
+    banner.isExpirationDate = this.props.banner.isExpirationDate;
     this.props.updateBanner(banner).then(() => {
       this.props.getBanner(this.props.bannerId);
     });
@@ -361,27 +356,14 @@ class UpdateBannerForm extends Component {
                       this.inputBannerHTMLType = c;
                     }}
                   >
-                    <option value="0">Generic HTML</option>
-                    <option value="18">ADN Code</option>
-                    <option value="13">Balloon Classic Code</option>
-                    <option value="9">Balloon Plus Code</option>
-                    <option value="7">Box-App CPD Code</option>
-                    <option value="4">Box-App CPM Booking 300x600</option>
-                    <option value="12">Box-App CPM 300x250 Code</option>
-                    <option value="6">Box-App CPM 300x385 Code</option>
-                    <option value="5">CPC Admarket Code</option>
-                    <option value="10">CPC PLUS Code</option>
-                    <option value="11">CPM Admarket Code</option>
-                    <option value="8">CPM 7K Code hoặc Banner CPM Bám biên phải</option>
-                    <option value="14">Google Adsense Code</option>
-                    <option value="15">Sponsor Code</option>
-                    <option value="16">Retargeting Banner</option>
-                    <option value="17">Banner TVC Sticky</option>
-                    <option value="30">Banner CPM Kingsize</option>
-                    <option value="33">Banner popup CPC</option>
-                    <option value="35">Banner King size chạy merge</option>
-                    <option value="36">Banner chạy kèm kingsize 300x600 vị trí dưới</option>
-                    <option value="99">PR Tracking</option>
+                    {this.props.listTypeBannerHtml &&
+                    this.props.listTypeBannerHtml.map((typeBannerHtml) => (
+                      <option
+                        key={typeBannerHtml.id} value={typeBannerHtml.id}
+                      >
+                        {typeBannerHtml.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
