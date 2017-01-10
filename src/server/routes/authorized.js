@@ -13,12 +13,11 @@ import { host, rootPath } from '../../config';
 
 const router = express.Router(); // eslint-disable-line new-cap
 const uploadsFolderName = 'uploads';
-const now = moment();
 
 // Init multer storage
 const storage = multer.diskStorage({
   destination: path.join(
-    rootPath, 'build/public', uploadsFolderName, now.format('YYYY'), now.format('MM'),
+    rootPath, 'build/public', uploadsFolderName, moment().format('YYYY'), moment().format('MM'),
   ),
   filename(req, file, cb) {
     const link = `${file.originalname.slice(0, 4).toString()}-${Date.now()}.jpeg`;
@@ -31,7 +30,7 @@ const upload = multer({ storage });
 router.post('/upload-banner', upload.single('file'), (req, res) => {
   if (req.file && req.file.originalname) {
     fs.chownSync(req.file.path, 1002, 1002);
-    const imageUrl = `http://${host}/${uploadsFolderName}/${now.format('YYYY')}/${now.format('MM')}/${req.file.filename}`;
+    const imageUrl = `http://${host}/${uploadsFolderName}/${moment().format('YYYY')}/${moment().format('MM')}/${req.file.filename}`;
     res.send(imageUrl);
   }
 });
