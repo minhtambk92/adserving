@@ -37,6 +37,7 @@ import { setRuntimeVariable } from './actions/runtime';
 import { setLocale } from './actions/intl';
 import { port, auth, locales } from './config';
 import fiction from './server/fictions';
+import startup from './server/startup';
 
 const app = express();
 
@@ -219,6 +220,7 @@ models.sync().catch(err => console.error(err.stack)).then(() => {
   app.listen(port, () => {
     console.log(`The server is running at http://localhost:${port}/`);
     fiction();
+    startup();
   });
 });
 /* eslint-enable no-console */

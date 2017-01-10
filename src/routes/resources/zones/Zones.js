@@ -25,6 +25,7 @@ import Layout from '../../../components/Layout';
 import CreateZoneForm from './CreateZoneForm';
 import FilterZonesForm from './FilterZonesForm';
 import ZoneList from './ZoneList';
+import BulkActions from './BulkActions';
 import s from './Zones.css';
 
 const pageTitle = 'Zone Management';
@@ -128,26 +129,35 @@ class Zones extends Component {
 
           <div className="row">
             <section className="col-lg-12">
-              {/* BOX: LIST OF ZONES */}
-              <div className="box box-info">
-                <div className="box-header with-border">
-                  <h3 className="box-title">List of zones</h3>
+              <div className="nav-tabs-custom">
+                <ul className="nav nav-tabs">
+                  <li className="active">
+                    <a href="#zonesList" data-toggle="tab" aria-expanded="true">List</a>
+                  </li>
+                  <li className>
+                    <a href="#zonesBulkActions" data-toggle="tab" aria-expanded="false">Bulk</a>
+                  </li>
+                </ul>
+                <div className="tab-content">
+                  <div className="tab-pane active" id="zonesList">
+                    <ZoneList
+                      list={this.getFilteredZones()}
+                      setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                      createZone={this.props.createZone}
+                      createShare={this.props.createShare}
+                      zones={this.props.zones}
+                      shares={this.props.shares}
+                      getShareByZoneId={this.props.getShareByZoneId}
+                    />
+                  </div>
+                  {/* /.tab-pane */}
+                  <div className="tab-pane" id="zonesBulkActions">
+                    <BulkActions />
+                  </div>
+                  {/* /.tab-pane */}
                 </div>
-                {/* /.box-header */}
-                <div className="box-body">
-                  <ZoneList
-                    list={this.getFilteredZones()}
-                    setPageZoneActiveTab={this.props.setPageZoneActiveTab}
-                    createZone={this.props.createZone}
-                    createShare={this.props.createShare}
-                    zones={this.props.zones}
-                    shares={this.props.shares}
-                    getShareByZoneId={this.props.getShareByZoneId}
-                  />
-                </div>
-                {/* /.box-body */}
+                {/* /.tab-content */}
               </div>
-              {/* /.box */}
             </section>
             {/* /.col */}
           </div>

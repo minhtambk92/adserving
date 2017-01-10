@@ -9,6 +9,7 @@ import fetch from 'node-fetch';
 import path from 'path';
 import jsBeautify from 'js-beautify';
 import { host, rootPath } from '../../config';
+import { copyFile } from '../../../tools/lib/fs';
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -29,7 +30,6 @@ router.post('/upload-banner', upload.single('file'), (req, res) => {
   }
 });
 
-
 router.post('/core-js', async (req, res) => {
   const coreJsFolderName = 'corejs';
   const corePath = path.join(rootPath, `public/${coreJsFolderName}`);
@@ -37,16 +37,6 @@ router.post('/core-js', async (req, res) => {
   const zoneId = encodeURI(req.body.zoneId);
   const coreResponse = await fetch(encodeURI(req.body.templateFileUrl));
   let coreContent = await coreResponse.text();
-
-  // Create {rootPath}/public/corejs folder if it is not existed
-  if (!fs.existsSync(corePath)) {
-    fs.mkdirSync(corePath, 0o755);
-  }
-
-  // Create {rootPath}/build/public/corejs folder if it is not existed
-  if (!fs.existsSync(builtCorePath)) {
-    fs.mkdirSync(builtCorePath, 0o755);
-  }
 
   const zoneResponse = await fetch(`http://${host}/graphql?query={
     zones(where: {id: "${zoneId}"}, limit: 1) {
@@ -110,22 +100,24 @@ router.post('/core-js', async (req, res) => {
     }
   }`);
 
+  // Create file path
   const zoneData = await zoneResponse.json();
   const coreName = `arf-${zoneId}.min.js`;
-  const coreFile = path.join(corePath, coreName);
   const builtCoreFile = path.join(builtCorePath, coreName);
+  const coreFile = path.join(corePath, coreName);
 
+  // Replace template holder zone object by real zone object
   if (coreContent.indexOf('"{{zoneDataObject}}"') > -1) {
     coreContent = coreContent.replace('"{{zoneDataObject}}"', JSON.stringify(zoneData));
   } else {
     coreContent = coreContent.replace('\'{{zoneDataObject}}\'', JSON.stringify(zoneData));
   }
 
+  // Replace template holder zone id by real zone id
   coreContent = coreContent.replace(/\{\{zoneId}}/g, zoneId);
 
-  fs.writeFileSync(coreFile, coreContent); // Write content to file
-  fs.chmodSync(coreFile, 0o644); // Chmod to 644
-  fs.writeFileSync(builtCoreFile, coreContent); // Copy to build/public folder
+  // Write file
+  fs.writeFileSync(builtCoreFile, coreContent); // Write content to file
   fs.chmodSync(builtCoreFile, 0o644); // Chmod to 644
 
   const outputCode = `
@@ -136,6 +128,38 @@ router.post('/core-js', async (req, res) => {
   `;
 
   res.send(jsBeautify.html(outputCode));
+
+  // Copy file to {root}/public
+  await copyFile(builtCoreFile, coreFile);
+});
+
+router.post('/bulk-core-js', async (req, res) => {
+  const coreJsFolderName = 'corejs';
+  const corePath = path.join(rootPath, `public/${coreJsFolderName}`);
+  const coreResponse = await fetch(encodeURI(req.body.templateFileUrl));
+  const coreContent = await coreResponse.text();
+
+  // Create {rootPath}/public/corejs folder if it is not existed
+  if (!fs.existsSync(corePath)) {
+    fs.mkdirSync(corePath, 0o755);
+  }
+
+  const coreName = `arf-${'test'}.min.js`;
+  const coreFile = path.join(corePath, coreName);
+
+  // Core file
+  const writableStream = fs.createWriteStream(coreFile);
+
+  writableStream.write(coreContent);
+  writableStream.end();
+
+  writableStream.on('finish', () => {
+    res.send('DONE BULK WRITE!');
+  });
+
+  writableStream.on('error', (error) => {
+    res.send(error.stack);
+  });
 });
 
 export default router;

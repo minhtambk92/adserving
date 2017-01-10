@@ -27,7 +27,6 @@ import {
   ChannelOptionCategory,
   ChannelOptionBrowser,
 } from '../../data/models';
-import { host } from '../../config';
 import resourcesList from './data/Resource.json';
 import menusList from './data/Menu.json';
 import rolesList from './data/Role.json';
@@ -268,7 +267,7 @@ async function channelOptionCategoryFiction() {
 }
 
 async function fiction() {
-  console.log(chalk.grey.dim('Start data fictions!'));
+  console.log(chalk.grey.dim('START: data fictions.'));
   await resourcesFiction();
   await menusFiction();
   await rolesFiction();
@@ -284,7 +283,7 @@ async function fiction() {
   await trackFiction();
   await channelOptionBrowserFiction();
   await channelOptionCategoryFiction();
-  console.log(chalk.magenta(`Your application is now ready at http://${host}/`));
+  console.log(chalk.magenta(`DONE: data fictions.`));
 }
 
 export default fiction;
