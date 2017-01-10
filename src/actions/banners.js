@@ -39,7 +39,12 @@ export function getBanner(id) {
           keyword
           weight
           description
-          type
+          bannerType {
+            id
+            name
+            value
+            weight
+          }
           imageUrl
           url
           target
@@ -115,7 +120,12 @@ export function getBanners(args = {
           keyword
           weight
           description
-          type
+          bannerType {
+            id
+            name
+            value
+            weight
+          }
           imageUrl
           url
           target
@@ -185,7 +195,7 @@ export function createBanner({
   keyword,
   weight,
   description,
-  type,
+  bannerTypeId,
   url,
   target,
   imageUrl,
@@ -220,7 +230,7 @@ export function createBanner({
           keyword
           weight
           description
-          type
+          bannerTypeId
           url
           target
           imageUrl
@@ -256,7 +266,7 @@ export function createBanner({
         keyword,
         weight,
         description,
-        type,
+        bannerTypeId,
         url,
         target,
         imageUrl,
@@ -299,7 +309,7 @@ export function updateBanner({
   keyword,
   weight,
   description,
-  type,
+  bannerTypeId,
   url,
   target,
   imageUrl,
@@ -334,7 +344,7 @@ export function updateBanner({
           keyword
           weight
           description
-          type
+          bannerTypeId
           imageUrl
           url
           target
@@ -371,7 +381,7 @@ export function updateBanner({
         keyword,
         weight,
         description,
-        type,
+        bannerTypeId,
         url,
         target,
         imageUrl,
@@ -418,7 +428,7 @@ export function deleteBanner(id) {
           keyword
           weight
           description
-          type
+          bannerTypeId
           imageUrl
           url
           target

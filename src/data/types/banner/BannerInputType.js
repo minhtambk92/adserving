@@ -15,7 +15,7 @@ const BannerInputType = new InputObjectType({
   }), {
     // Additional fields
     status: { type: new NonNull(StringType) },
-    type: { type: new NonNull(StringType) },
+    bannerTypeId: { type: new NonNull(StringType) },
     isIFrame: { type: new NonNull(BooleanType) },
     weight: { type: new NonNull(IntType) },
     isCountView: { type: new NonNull(BooleanType) },

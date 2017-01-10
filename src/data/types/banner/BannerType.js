@@ -3,6 +3,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { Banner } from '../../models';
 import bannerBelongsToChannel from '../../queries/banner/bannerBelongsToChannel';
 import bannerBelongsToBannerHtmlType from '../../queries/banner/bannerBelongsToBannerHtmlType';
+import bannerBelongsToBannerType from '../../queries/banner/bannerBelongsToBannerType';
 import bannerHasManyTracks from '../../queries/banner/bannerHasManyTracks';
 import bannerHasManyPlacements from '../../queries/banner/bannerHasManyPlacements';
 
@@ -16,6 +17,7 @@ const BannerType = new ObjectType({
     tracks: bannerHasManyTracks(),
     placements: bannerHasManyPlacements(),
     bannerHtmlType: bannerBelongsToBannerHtmlType(),
+    bannerType: bannerBelongsToBannerType(),
   }),
 });
 

@@ -23,6 +23,7 @@ import { setPageBannerActiveTab } from '../../../actions/pages/banners';
 import { getPlacementsByBannerId, createPlacementBanner } from '../../../actions/placementBanners';
 import { getTrackByBannerId, createTrack } from '../../../actions/tracks';
 import { getBannerHtmlTypes } from '../../../actions/bannerHtmlTypes';
+import { getBannerTypes } from '../../../actions/bannerTypes';
 import Layout from '../../../components/Layout';
 import BannerList from './BannerList';
 import CreateBannerForm from './CreateBannerForm';
@@ -53,6 +54,8 @@ class Banners extends Component {
     createTrack: PropTypes.func,
     getBannerHtmlTypes: PropTypes.func,
     bannerHtmlTypes: PropTypes.object,
+    getBannerTypes: PropTypes.func,
+    bannerTypes: PropTypes.object,
   };
 
   componentWillMount() {
@@ -61,6 +64,7 @@ class Banners extends Component {
     this.props.getPlacements();
     this.props.getChannels();
     this.props.getBannerHtmlTypes();
+    this.props.getBannerTypes();
   }
 
   getFilteredBanners() {
@@ -130,6 +134,9 @@ class Banners extends Component {
                   bannerHtmlTypeList={this.props.bannerHtmlTypes.list}
                   createBanner={this.props.createBanner}
                   channels={this.props.channels.list}
+                  bannerTypes={this.props.bannerTypes}
+                  bannerTypeList={this.props.bannerTypes && this.props.bannerTypes.list}
+                  getBannerTypes={this.props.getBannerTypes}
                 />
               </div>
               {/* /.col */}
@@ -179,6 +186,7 @@ const mapState = (state) => ({
   placementBanners: state.placementBanners,
   tracks: state.tracks,
   bannerHtmlTypes: state.bannerHtmlTypes,
+  bannerTypes: state.bannerTypes,
 });
 
 const mapDispatch = {
@@ -194,6 +202,7 @@ const mapDispatch = {
   getTrackByBannerId,
   createTrack,
   getBannerHtmlTypes,
+  getBannerTypes,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banners));

@@ -15,6 +15,7 @@ import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanner, updateBanner, deleteBanner } from '../../../../actions/banners';
+import { getBannerTypes } from '../../../../actions/bannerTypes';
 import { getCampaigns } from '../../../../actions/campaigns';
 import { createPlacement, getPlacements } from '../../../../actions/placements';
 import { getBannerHtmlTypes } from '../../../../actions/bannerHtmlTypes';
@@ -65,6 +66,8 @@ class Banner extends Component {
     updateTrack: PropTypes.func,
     getBannerHtmlTypes: PropTypes.func,
     bannerHtmlTypes: PropTypes.object,
+    getBannerTypes: PropTypes.func,
+    bannerTypes: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -81,6 +84,7 @@ class Banner extends Component {
     this.props.getPlacements();
     this.props.getChannels();
     this.props.getBannerHtmlTypes();
+    this.props.getBannerTypes();
   }
 
   componentDidMount() {
@@ -171,6 +175,8 @@ class Banner extends Component {
                       bannerId={this.props.bannerId}
                       bannerHtmlTypeList={this.props.bannerHtmlTypes &&
                       this.props.bannerHtmlTypes.list}
+                      bannerTypes={this.props.bannerTypes}
+                      bannerTypeList={this.props.bannerTypes && this.props.bannerTypes.list}
                       getBanner={this.props.getBanner}
                       removeBanner={this.props.removeBanner}
                       channels={this.props.channels.list}
@@ -185,6 +191,9 @@ class Banner extends Component {
                       bannerId={this.props.bannerId}
                       getBanner={this.props.getBanner}
                       channels={this.props.channels.list}
+                      bannerTypes={this.props.bannerTypes}
+                      bannerTypeList={this.props.bannerTypes && this.props.bannerTypes.list}
+                      getBannerTypes={this.props.getBannerTypes}
                       createTrack={this.props.createTrack}
                       deleteTrack={this.props.deleteTrack}
                       updateTrack={this.props.updateTrack}
@@ -309,6 +318,7 @@ const mapState = (state) => ({
   tracks: state.tracks,
   placementBanners: state.placementBanners,
   bannerHtmlTypes: state.bannerHtmlTypes,
+  bannerTypes: state.bannerTypes,
 });
 
 const mapDispatch = {
@@ -326,6 +336,7 @@ const mapDispatch = {
   deleteTrack,
   updateTrack,
   getBannerHtmlTypes,
+  getBannerTypes,
 };
 
 export default withStyles(s, style, dropZoneStyle)(connect(mapState, mapDispatch)(Banner));

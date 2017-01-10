@@ -40,7 +40,7 @@ class BannerList extends Component {
     const weight = data.weight;
     const description = data.description;
     const channelId = data.channelId;
-    const type = data.type;
+    const bannerTypeId = data.bannerTypeId;
     const isIFrame = data.isIFrame;
     const target = data.target;
     const url = data.url;
@@ -63,7 +63,7 @@ class BannerList extends Component {
     const clicksBooked = data.clicksBooked;
     const activationDate = data.activationDate;
     const expirationDate = data.expirationDate;
-    if (name && keyword && width && description && type && channelId) {
+    if (name && keyword && width && description && bannerTypeId && channelId) {
       this.props.createBanner({
         name,
         html,
@@ -72,7 +72,7 @@ class BannerList extends Component {
         keyword,
         weight,
         description,
-        type,
+        bannerTypeId,
         url,
         target,
         imageUrl,

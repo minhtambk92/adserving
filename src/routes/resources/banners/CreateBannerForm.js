@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import moment from 'moment';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import style from 'react-dropzone-component/styles/filepicker.css';
@@ -18,6 +19,8 @@ class CreateBannerForm extends Component {
     createPlacementBanner: PropTypes.func,
     getPlacement: PropTypes.func,
     banners: PropTypes.array,
+    bannerTypeList: PropTypes.array,
+    getBannerTypes: PropTypes.func,
     getBanners: PropTypes.func,
   };
 
@@ -101,6 +104,8 @@ class CreateBannerForm extends Component {
     let html = '';
     let bannerHtmlTypeId = null;
     let adServer = '';
+    const bannerType = _.filter(this.props.bannerTypeList, { value: type });
+    const bannerTypeId = bannerType[0].id;
     if (type === 'html') {
       html = this.inputBannerHTML.value;
       target = '';
@@ -130,8 +135,8 @@ class CreateBannerForm extends Component {
     const impressionsBooked = -1;
     const clicksBooked = -1;
     const activationDate = new Date();
-    const expirationDate = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 00:00:00'));
-    if (name && keyword && width && description && type && channelId) {
+    const expirationDate = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 23:59:59'));
+    if (name && keyword && width && description && bannerTypeId && channelId) {
       this.props.createBanner({
         name,
         html,
@@ -140,7 +145,7 @@ class CreateBannerForm extends Component {
         keyword,
         weight,
         description,
-        type,
+        bannerTypeId,
         url,
         target,
         imageUrl,
@@ -196,8 +201,14 @@ class CreateBannerForm extends Component {
                 }}
                 onChange={event => this.onInputChange(event)}
               >
-                <option value="html">Banner HTML</option>
-                <option value="img">Banner Upload</option>
+                {this.props.bannerTypeList
+                && this.props.bannerTypeList.map(bannerType => (
+                  <option
+                    key={bannerType.id} value={bannerType.value}
+                  >
+                    Banner {bannerType.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -279,11 +290,11 @@ class CreateBannerForm extends Component {
                         }}
                       >
                         {this.props.bannerHtmlTypeList
-                        && this.props.bannerHtmlTypeList.map(typeBannerHtml => (
+                        && this.props.bannerHtmlTypeList.map(bannerHtmlType => (
                           <option
-                            key={typeBannerHtml.id} value={typeBannerHtml.id}
+                            key={bannerHtmlType.id} value={bannerHtmlType.id}
                           >
-                            {typeBannerHtml.name}
+                            {bannerHtmlType.name}
                           </option>
                         ))}
                       </select>

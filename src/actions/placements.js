@@ -50,7 +50,7 @@ export function getPlacement(id) {
             keyword
             weight
             description
-            type
+            bannerTypeId
             imageUrl
             url
             target

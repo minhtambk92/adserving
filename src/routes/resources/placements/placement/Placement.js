@@ -25,6 +25,7 @@ import {
 import { removePlacementInSharePlacement } from '../../../../actions/sharePlacements';
 import { createTrack } from '../../../../actions/tracks';
 import { getBannerHtmlTypes } from '../../../../actions/bannerHtmlTypes';
+import { getBannerTypes } from '../../../../actions/bannerTypes';
 import Layout from '../../../../components/Layout';
 import ListBannerNotBelongPlacement from '../ListBannerNotBelongPlacement';
 import ListBannerOfPlacement from '../ListBannerOfPlacement';
@@ -59,6 +60,8 @@ class Placement extends Component {
     createTrack: PropTypes.func,
     getBannerHtmlTypes: PropTypes.func,
     bannerHtmlTypes: PropTypes.object,
+    getBannerTypes: PropTypes.func,
+    bannerTypes: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -75,6 +78,7 @@ class Placement extends Component {
     this.props.getBanners();
     this.props.getChannels();
     this.props.getBannerHtmlTypes();
+    this.props.getBannerTypes();
   }
 
   componentDidMount() {
@@ -267,6 +271,9 @@ class Placement extends Component {
                                 getBanners={this.props.getBanners}
                                 bannerHtmlTypeList={this.props.bannerHtmlTypes.list}
                                 createPlacementBanner={this.props.createPlacementBanner}
+                                bannerTypeList={this.props.bannerTypes &&
+                                this.props.bannerTypes.list}
+                                getBannerTypes={this.props.getBannerTypes}
                               />
                             </div>
                             {/* /.box-body */}
@@ -297,6 +304,7 @@ const mapState = (state) => ({
   sites: state.sites,
   sharePlacements: state.sharePlacements,
   bannerHtmlTypes: state.bannerHtmlTypes,
+  bannerTypes: state.bannerTypes,
 });
 
 const mapDispatch = {
@@ -313,6 +321,7 @@ const mapDispatch = {
   removePlacementInSharePlacement,
   createTrack,
   getBannerHtmlTypes,
+  getBannerTypes,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placement));

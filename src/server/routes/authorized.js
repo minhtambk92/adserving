@@ -85,7 +85,12 @@ router.post('/core-js', async (req, res) => {
             keyword
             weight
             description
-            type
+            bannerType {
+              id
+              name
+              value
+              weight
+            }
             imageUrl
             url
             target

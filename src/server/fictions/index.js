@@ -27,6 +27,7 @@ import {
   ChannelOptionCategory,
   ChannelOptionBrowser,
   BannerHtmlType,
+  BannerType,
 } from '../../data/models';
 import resourcesList from './data/Resource.json';
 import menusList from './data/Menu.json';
@@ -49,6 +50,7 @@ import tracksList from './data/Track.json';
 import channelOptionCategoryList from './data/ChannelOptionCategory.json';
 import channelOptionBrowserList from './data/ChannelOptionBrowser.json';
 import bannerHtmlTypeList from './data/BannerHtmlType.json';
+import bannerTypeList from './data/BannerType.json';
 
 /* eslint-disable no-console */
 
@@ -122,6 +124,20 @@ async function bannerHtmlTypeFiction() {
     console.log(chalk.green(`CREATED: ${results.length} all Type Banner html => PASSED!`));
   } else {
     console.log(chalk.green(`FOUND: ${allBannerHtmlTypeQuantity} all Type Banner html. => PASSED!`));
+  }
+}
+
+// BannerType fiction
+async function bannerTypeFiction() {
+  console.log(chalk.grey('Check current number of Banner Type...'));
+  const bannerTypeQuantity = await BannerType.count();
+
+  if (bannerTypeQuantity === 0) {
+    console.log(chalk.red('No user found! Do a fiction...'));
+    const results = await BannerType.bulkCreate(bannerTypeList);
+    console.log(chalk.green(`CREATED: ${results.length} all Type Banner => PASSED!`));
+  } else {
+    console.log(chalk.green(`FOUND: ${bannerTypeQuantity} all Type Banner => PASSED!`));
   }
 }
 
@@ -289,6 +305,7 @@ async function fiction() {
   await rolesFiction();
   await userFiction();
   await bannerHtmlTypeFiction();
+  await bannerTypeFiction();
   await advertiserFiction();
   await campaignFiction();
   await siteFiction();
