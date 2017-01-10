@@ -31,7 +31,6 @@ router.post('/upload-banner', upload.single('file'), (req, res) => {
 
 router.post('/core-js', async (req, res) => {
   const coreJsFolderName = 'corejs';
-  const corePath = path.join(rootPath, `public/${coreJsFolderName}`);
   const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
   const zoneId = encodeURI(req.body.zoneId);
   const coreResponse = await fetch(encodeURI(req.body.templateFileUrl));
@@ -103,7 +102,6 @@ router.post('/core-js', async (req, res) => {
   const zoneData = await zoneResponse.json();
   const coreName = `arf-${zoneId}.min.js`;
   const builtCoreFile = path.join(builtCorePath, coreName);
-  const coreFile = path.join(corePath, coreName);
 
   // Replace template holder zone object by real zone object
   if (coreContent.indexOf('"{{zoneDataObject}}"') > -1) {
@@ -118,9 +116,6 @@ router.post('/core-js', async (req, res) => {
   // Write file
   fs.writeFileSync(builtCoreFile, coreContent); // Write content to file
   fs.chmodSync(builtCoreFile, 0o644); // Chmod to 644
-
-  // Copy file to {root}/public/corejs
-  fs.writeFileSync(coreFile, fs.readFileSync(builtCoreFile));
 
   const outputCode = `
     <!-- Ads Zone -->
