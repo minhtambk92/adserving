@@ -137,12 +137,6 @@ router.post('/bulk-core-js', async (req, res) => {
   const corePath = path.join(rootPath, `public/${coreJsFolderName}`);
   const coreResponse = await fetch(encodeURI(req.body.templateFileUrl));
   const coreContent = await coreResponse.text();
-
-  // Create {rootPath}/public/corejs folder if it is not existed
-  if (!fs.existsSync(corePath)) {
-    fs.mkdirSync(corePath, 0o755);
-  }
-
   const coreName = `arf-${'test'}.min.js`;
   const coreFile = path.join(corePath, coreName);
 
