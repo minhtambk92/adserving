@@ -30,7 +30,7 @@ import shares from './share/shares';
 import sharePlacements from './sharePlacement/sharePlacements';
 import channelOptionBrowsers from './channelOptionBrowser/channelOptionBrowsers';
 import channelOptionCategories from './channelOptionCategory/channelOptionCategories';
-import allTypeBannerHtml from './typeBannerHtml/allTypeBannerHtml';
+import bannerHtmlTypes from './bannerHtmlType/bannerHtmlTypes';
 
 const queries = new ObjectType({
   name: 'Query',
@@ -62,7 +62,7 @@ const queries = new ObjectType({
     sharePlacements,
     channelOptionBrowsers,
     channelOptionCategories,
-    allTypeBannerHtml,
+    bannerHtmlTypes,
   },
 });
 

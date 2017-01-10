@@ -75,10 +75,6 @@ const Banner = Model.define('Banner', {
     type: DataType.STRING,
     defaultValue: '',
   },
-  bannerHTMLType: {
-    type: DataType.STRING,
-    defaultValue: '',
-  },
   isIFrame: {
     type: DataType.BOOLEAN,
     defaultValue: true,

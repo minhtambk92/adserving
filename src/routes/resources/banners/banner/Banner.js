@@ -17,7 +17,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getBanner, updateBanner, deleteBanner } from '../../../../actions/banners';
 import { getCampaigns } from '../../../../actions/campaigns';
 import { createPlacement, getPlacements } from '../../../../actions/placements';
-import { getAllTypeBannerHtml } from '../../../../actions/allTypeBannerHtml';
+import { getBannerHtmlTypes } from '../../../../actions/bannerHtmlTypes';
 import { getChannels } from '../../../../actions/channels';
 import {
   createPlacementBanner,
@@ -63,8 +63,8 @@ class Banner extends Component {
     createTrack: PropTypes.func,
     deleteTrack: PropTypes.func,
     updateTrack: PropTypes.func,
-    getAllTypeBannerHtml: PropTypes.func,
-    allTypeBannerHtml: PropTypes.object,
+    getBannerHtmlTypes: PropTypes.func,
+    bannerHtmlTypes: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -80,7 +80,7 @@ class Banner extends Component {
     this.props.getCampaigns();
     this.props.getPlacements();
     this.props.getChannels();
-    this.props.getAllTypeBannerHtml();
+    this.props.getBannerHtmlTypes();
   }
 
   componentDidMount() {
@@ -169,8 +169,8 @@ class Banner extends Component {
                       updateBanner={this.props.updateBanner}
                       deleteBanner={this.props.deleteBanner}
                       bannerId={this.props.bannerId}
-                      listTypeBannerHtml={this.props.allTypeBannerHtml &&
-                      this.props.allTypeBannerHtml.list}
+                      bannerHtmlTypeList={this.props.bannerHtmlTypes &&
+                      this.props.bannerHtmlTypes.list}
                       getBanner={this.props.getBanner}
                       removeBanner={this.props.removeBanner}
                       channels={this.props.channels.list}
@@ -308,7 +308,7 @@ const mapState = (state) => ({
   channels: state.channels,
   tracks: state.tracks,
   placementBanners: state.placementBanners,
-  allTypeBannerHtml: state.allTypeBannerHtml,
+  bannerHtmlTypes: state.bannerHtmlTypes,
 });
 
 const mapDispatch = {
@@ -325,7 +325,7 @@ const mapDispatch = {
   createTrack,
   deleteTrack,
   updateTrack,
-  getAllTypeBannerHtml,
+  getBannerHtmlTypes,
 };
 
 export default withStyles(s, style, dropZoneStyle)(connect(mapState, mapDispatch)(Banner));

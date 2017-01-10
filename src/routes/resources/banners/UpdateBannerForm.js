@@ -12,7 +12,7 @@ class UpdateBannerForm extends Component {
     deleteBanner: PropTypes.func,
     getBanner: PropTypes.func,
     removeBanner: PropTypes.func,
-    listTypeBannerHtml: PropTypes.array,
+    bannerHtmlTypeList: PropTypes.array,
     channels: PropTypes.array,
   };
 
@@ -41,7 +41,7 @@ class UpdateBannerForm extends Component {
       isIFrame,
       status,
       adServer,
-      bannerHTMLType,
+      bannerHtmlTypeId,
       channelId,
     } = nextProps.banner && (nextProps.banner || {});
     this.state.keyWord = keyword;
@@ -66,13 +66,13 @@ class UpdateBannerForm extends Component {
       } else {
         document.getElementById('banner').innerHTML = '';
       }
-      if (this.inputBannerHTML !== undefined && this.inputBannerHTMLType.value !== undefined &&
-        this.inputBannerHTMLType.value !== undefined) {
+      if (this.inputBannerHTML !== undefined && this.inputBannerHtmlType.value !== undefined &&
+        this.inputBannerHtmlType.value !== undefined) {
         this.state.checkTypeBanner = 'html';
         this.state.imageUrl = '';
         this.inputBannerHTML.value = html;
         this.inputBannerAdServer.value = adServer;
-        this.inputBannerHTMLType.value = bannerHTMLType;
+        this.inputBannerHtmlType.value = bannerHtmlTypeId;
       }
     } else if (type === 'img') {
       this.state.imageUrl = imageUrl;
@@ -111,13 +111,13 @@ class UpdateBannerForm extends Component {
     let target = '';
     let imageUrl = '';
     let url = '';
-    let bannerHTMLType = '';
+    let bannerHtmlTypeId = null;
     let adServer = '';
     const type = this.props.banner.type;
     if (type === 'html') {
       html = this.inputBannerHTML.value;
       adServer = this.inputBannerAdServer.value;
-      bannerHTMLType = this.inputBannerHTMLType.value;
+      bannerHtmlTypeId = this.inputBannerHtmlType.value;
     } else if (type === 'img') {
       target = this.inputBannerTarget.value;
       url = this.inputBannerUrl.value;
@@ -144,7 +144,7 @@ class UpdateBannerForm extends Component {
       if (adServer && adServer !== this.props.banner.adServer) {
         banner.adServer = adServer;
       }
-      banner.bannerHTMLType = bannerHTMLType;
+      banner.bannerHtmlTypeId = bannerHtmlTypeId;
     } else if (type === 'img') {
       if (target && target !== this.props.banner.target) {
         banner.target = target;
@@ -153,6 +153,7 @@ class UpdateBannerForm extends Component {
         banner.url = url;
       }
       banner.imageUrl = imageUrl;
+      banner.bannerHtmlTypeId = null;
     }
     banner.isIFrame = isIFrame;
     banner.status = status;
@@ -346,22 +347,22 @@ class UpdateBannerForm extends Component {
               </div>
               <div className="form-group">
                 <label
-                  htmlFor="inputBannerHTMLType"
+                  htmlFor="inputBannerHtmlType"
                   className="col-sm-2 control-label"
                 >Type Banner HTML</label>
                 <div className="col-sm-10">
                   <select
-                    id="inputBannerHTMLType" className="form-control"
+                    id="inputBannerHtmlType" className="form-control"
                     ref={c => {
-                      this.inputBannerHTMLType = c;
+                      this.inputBannerHtmlType = c;
                     }}
                   >
-                    {this.props.listTypeBannerHtml &&
-                    this.props.listTypeBannerHtml.map((typeBannerHtml) => (
+                    {this.props.bannerHtmlTypeList &&
+                    this.props.bannerHtmlTypeList.map((bannerHtmlType) => (
                       <option
-                        key={typeBannerHtml.id} value={typeBannerHtml.id}
+                        key={bannerHtmlType.id} value={bannerHtmlType.id}
                       >
-                        {typeBannerHtml.name}
+                        {bannerHtmlType.name}
                       </option>
                     ))}
                   </select>

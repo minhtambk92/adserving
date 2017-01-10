@@ -90,7 +90,12 @@ router.post('/core-js', async (req, res) => {
             url
             target
             adServer
-            bannerHTMLType
+            bannerHtmlType {
+              id
+              name
+              value
+              weight
+            }
             isIFrame
             isCountView
             isFixIE

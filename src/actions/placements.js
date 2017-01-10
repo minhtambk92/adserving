@@ -57,7 +57,7 @@ export function getPlacement(id) {
             isIFrame
             status
             adServer
-            bannerHTMLType
+            bannerHtmlTypeId
             isCountView
             isFixIE
             isDefault 

@@ -26,7 +26,7 @@ import {
   SharePlacement,
   ChannelOptionCategory,
   ChannelOptionBrowser,
-  TypeBannerHtml,
+  BannerHtmlType,
 } from '../../data/models';
 import resourcesList from './data/Resource.json';
 import menusList from './data/Menu.json';
@@ -48,7 +48,7 @@ import bannersList from './data/Banner.json';
 import tracksList from './data/Track.json';
 import channelOptionCategoryList from './data/ChannelOptionCategory.json';
 import channelOptionBrowserList from './data/ChannelOptionBrowser.json';
-import typeBannerHtmlList from './data/TypeBannerHtml.json';
+import bannerHtmlTypeList from './data/BannerHtmlType.json';
 
 /* eslint-disable no-console */
 
@@ -111,17 +111,17 @@ async function userFiction() {
   }
 }
 
-// TypeBannerHtml fiction
-async function typeBannerHtmlFiction() {
+// BannerHtmlType fiction
+async function bannerHtmlTypeFiction() {
   console.log(chalk.grey('Check current number of all Type Banner html...'));
-  const allTypeBannerHtmlQuantity = await TypeBannerHtml.count();
+  const allBannerHtmlTypeQuantity = await BannerHtmlType.count();
 
-  if (allTypeBannerHtmlQuantity === 0) {
+  if (allBannerHtmlTypeQuantity === 0) {
     console.log(chalk.red('No user found! Do a fiction...'));
-    const results = await TypeBannerHtml.bulkCreate(typeBannerHtmlList);
+    const results = await BannerHtmlType.bulkCreate(bannerHtmlTypeList);
     console.log(chalk.green(`CREATED: ${results.length} all Type Banner html => PASSED!`));
   } else {
-    console.log(chalk.green(`FOUND: ${allTypeBannerHtmlQuantity} all Type Banner html. => PASSED!`));
+    console.log(chalk.green(`FOUND: ${allBannerHtmlTypeQuantity} all Type Banner html. => PASSED!`));
   }
 }
 
@@ -288,7 +288,7 @@ async function fiction() {
   await menusFiction();
   await rolesFiction();
   await userFiction();
-  await typeBannerHtmlFiction();
+  await bannerHtmlTypeFiction();
   await advertiserFiction();
   await campaignFiction();
   await siteFiction();

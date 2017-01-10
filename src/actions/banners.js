@@ -46,7 +46,7 @@ export function getBanner(id) {
           isIFrame
           status
           adServer
-          bannerHTMLType
+          bannerHtmlTypeId
           isCountView
           isFixIE
           isDefault 
@@ -122,7 +122,7 @@ export function getBanners(args = {
           isIFrame
           status
           adServer
-          bannerHTMLType
+          bannerHtmlTypeId
           isCountView
           isFixIE
           isDefault 
@@ -192,7 +192,7 @@ export function createBanner({
   isIFrame,
   status,
   adServer,
-  bannerHTMLType,
+  bannerHtmlTypeId,
   isCountView,
   isFixIE,
   isDefault,
@@ -227,7 +227,7 @@ export function createBanner({
           isIFrame
           status
           adServer
-          bannerHTMLType
+          bannerHtmlTypeId
           isCountView
           isFixIE
           isDefault 
@@ -263,7 +263,7 @@ export function createBanner({
         isIFrame,
         status,
         adServer,
-        bannerHTMLType,
+        bannerHtmlTypeId,
         isCountView,
         isFixIE,
         isDefault,
@@ -306,7 +306,7 @@ export function updateBanner({
   isIFrame,
   status,
   adServer,
-  bannerHTMLType,
+  bannerHtmlTypeId,
   isCountView,
   isFixIE,
   isDefault,
@@ -341,7 +341,7 @@ export function updateBanner({
           isIFrame
           status
           adServer
-          bannerHTMLType
+          bannerHtmlTypeId
           isCountView
           isFixIE
           isDefault 
@@ -378,7 +378,7 @@ export function updateBanner({
         isIFrame,
         status,
         adServer,
-        bannerHTMLType,
+        bannerHtmlTypeId,
         isCountView,
         isFixIE,
         isDefault,
@@ -425,7 +425,7 @@ export function deleteBanner(id) {
           isIFrame
           status
           adServer
-          bannerHTMLType
+          bannerHtmlTypeId
           isCountView
           isFixIE
           isDefault 

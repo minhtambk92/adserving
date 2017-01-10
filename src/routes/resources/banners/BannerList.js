@@ -46,7 +46,7 @@ class BannerList extends Component {
     const url = data.url;
     const imageUrl = data.imageUrl;
     const html = data.html;
-    const bannerHTMLType = data.bannerHTMLType;
+    const bannerHtmlTypeId = data.bannerHtmlTypeId;
     const adServer = data.adServer;
     const status = data.status;
     const keyword = data.keyword;
@@ -79,7 +79,7 @@ class BannerList extends Component {
         isIFrame,
         status,
         adServer,
-        bannerHTMLType,
+        bannerHtmlTypeId,
         isCountView,
         isFixIE,
         isDefault,

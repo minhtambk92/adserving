@@ -24,7 +24,7 @@ import shares from './shares';
 import sharePlacements from './sharePlacements';
 import options from './options';
 import permissions from './permissions';
-import allTypeBannerHtml from './allTypeBannerHtml';
+import bannerHtmlTypes from './bannerHtmlTypes';
 
 import page from './pages';
 
@@ -55,5 +55,5 @@ export default combineReducers({
   channelOptionCategories,
   options,
   permissions,
-  allTypeBannerHtml,
+  bannerHtmlTypes,
 });
