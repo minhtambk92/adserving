@@ -10,3 +10,4 @@ npm-debug.log
 .idea/
 process.json
 public/corejs
+public/uploads
