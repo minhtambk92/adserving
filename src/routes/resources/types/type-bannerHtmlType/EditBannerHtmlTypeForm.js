@@ -3,23 +3,23 @@
 import React, { Component, PropTypes } from 'react';
 import Link from '../../../../components/Link';
 
-class EditTypeBannerHtmlForm extends Component {
+class EditBannerHtmlTypeForm extends Component {
 
   static propTypes = {
     id: PropTypes.string,
-    allTypeBannerHtml: PropTypes.object,
-    statusUpdateTypeBannerHtml: PropTypes.func,
+    bannerHtmlTypes: PropTypes.object,
+    statusUpdateBannerHtmlType: PropTypes.func,
     page: PropTypes.object,
-    typeBannerHtml: PropTypes.object,
-    updateTypeBannerHtml: PropTypes.func,
-    getAllTypeBannerHtml: PropTypes.func,
+    bannerHtmlType: PropTypes.object,
+    updateBannerHtmlType: PropTypes.func,
+    getBannerHtmlTypes: PropTypes.func,
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.typeBannerHtml) {
-      this.inputTypeBannerHtmlName.value = nextProps.typeBannerHtml.name;
-      this.inputTypeBannerHtmlStatus.value = nextProps.typeBannerHtml.status;
-      this.inputTypeBannerHtmlWeight.value = nextProps.typeBannerHtml.weight;
+    if (nextProps.bannerHtmlType) {
+      this.inputBannerHtmlTypeName.value = nextProps.bannerHtmlType.name;
+      this.inputBannerHtmlTypeStatus.value = nextProps.bannerHtmlType.status;
+      this.inputBannerHtmlTypeWeight.value = nextProps.bannerHtmlType.weight;
     }
   }
 
@@ -43,48 +43,48 @@ class EditTypeBannerHtmlForm extends Component {
   }
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    this.inputTypeBannerHtmlName.value = null;
-    this.inputTypeBannerHtmlWeight.value = null;
+    this.inputBannerHtmlTypeName.value = null;
+    this.inputBannerHtmlTypeWeight.value = null;
   }
 
   save() {
     const id = this.props.id;
-    const name = this.inputTypeBannerHtmlName.value;
+    const name = this.inputBannerHtmlTypeName.value;
     const value = this.convertToSlug(name);
-    const weight = this.inputTypeBannerHtmlWeight.value;
-    const status = this.inputTypeBannerHtmlStatus.value;
+    const weight = this.inputBannerHtmlTypeWeight.value;
+    const status = this.inputBannerHtmlTypeStatus.value;
     if (name) {
-      this.props.updateTypeBannerHtml({
+      this.props.updateBannerHtmlType({
         id,
         name,
         weight,
         value,
         status,
       }).then(() => {
-        this.props.getAllTypeBannerHtml();
+        this.props.getBannerHtmlTypes();
       });
     }
-    this.props.statusUpdateTypeBannerHtml(false);
-    // this.props.setPageZoneActiveTab('TypeBannerHtmlZone');
+    this.props.statusUpdateBannerHtmlType(false);
+    // this.props.setPageZoneActiveTab('bannerHtmlTypeZone');
   }
 
   removeEditForm() {
-    this.props.statusUpdateTypeBannerHtml(false);
+    this.props.statusUpdateBannerHtmlType(false);
   }
 
   render() {
     return (
       <div
-        className="edit-TypeBannerHtml"
+        className="edit-bannerHtmlType"
       >
         <div className="box-header with-border">
           <h3
             className="box-title"
           >
-            {`Edit: ${this.props.typeBannerHtml.name}`}</h3>
+            {`Edit: ${this.props.bannerHtmlType.name}`}</h3>
           <div className="box-tools pull-right">
             <button
-              className="btn btn-box-tool remove-TypeBannerHtml-zone"
+              className="btn btn-box-tool remove-bannerHtmlType-zone"
               onClick={event => this.removeEditForm(event)}
             >
               <i className="fa fa-times" />
@@ -95,14 +95,14 @@ class EditTypeBannerHtmlForm extends Component {
           <div className="form-horizontal">
             <div className="form-group">
               <label
-                htmlFor="inputTypeBannerHtmlName" className="col-sm-2 control-label"
+                htmlFor="inputBannerHtmlTypeName" className="col-sm-2 control-label"
               >Name</label>
               <div className="col-sm-10">
                 <input
-                  type="text" className="form-control" id="inputTypeBannerHtmlName"
+                  type="text" className="form-control" id="inputBannerHtmlTypeName"
                   placeholder="Name"
                   ref={c => {
-                    this.inputTypeBannerHtmlName = c;
+                    this.inputBannerHtmlTypeName = c;
                   }}
                 />
               </div>
@@ -110,14 +110,14 @@ class EditTypeBannerHtmlForm extends Component {
 
             <div className="form-group">
               <label
-                htmlFor="inputTypeBannerHtmlWeight" className="col-sm-2 control-label"
+                htmlFor="inputBannerHtmlTypeWeight" className="col-sm-2 control-label"
               >Weight</label>
               <div className="col-sm-10">
                 <input
-                  type="text" className="form-control" id="inputTypeBannerHtmlWeight"
+                  type="text" className="form-control" id="inputBannerHtmlTypeWeight"
                   placeholder="0"
                   ref={c => {
-                    this.inputTypeBannerHtmlWeight = c;
+                    this.inputBannerHtmlTypeWeight = c;
                   }}
                 />
               </div>
@@ -125,14 +125,14 @@ class EditTypeBannerHtmlForm extends Component {
 
             <div className="form-group">
               <label
-                htmlFor="inputEditTypeBannerHtmlStatus"
+                htmlFor="inputEditbannerHtmlTypeStatus"
                 className="col-sm-2 control-label"
               >Status</label>
               <div className="col-sm-10">
                 <select
-                  id="inputTypeBannerHtmlStatus" className="form-control"
+                  id="inputBannerHtmlTypeStatus" className="form-control"
                   ref={c => {
-                    this.inputTypeBannerHtmlStatus = c;
+                    this.inputBannerHtmlTypeStatus = c;
                   }}
                 >
                   <option value="active">Active</option>
@@ -162,4 +162,4 @@ class EditTypeBannerHtmlForm extends Component {
   }
 }
 
-export default EditTypeBannerHtmlForm;
+export default EditBannerHtmlTypeForm;

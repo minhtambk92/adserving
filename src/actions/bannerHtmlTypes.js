@@ -1,18 +1,18 @@
 /* eslint-disable import/prefer-default-export */
 
 import {
-  GET_ALL_TYPE_BANNER_HTML,
-  GET_TYPE_BANNER_HTML,
-  CREATE_TYPE_BANNER_HTML,
-  UPDATE_TYPE_BANNER_HTML,
-  DELETE_TYPE_BANNER_HTML,
+  GET_BANNER_HTML_TYPES,
+  GET_BANNER_HTML_TYPE,
+  CREATE_BANNER_HTML_TYPE,
+  UPDATE_BANNER_HTML_TYPE,
+  DELETE_BANNER_HTML_TYPE,
 } from '../constants';
 
-export function getTypeBannerHtml(id) {
+export function getBannerHtmlType(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        allTypeBannerHtml(where: {id: "${id}"}, limit: 1) {
+        bannerHtmlTypes(where: {id: "${id}"}, limit: 1) {
           id
           name
           value
@@ -26,15 +26,15 @@ export function getTypeBannerHtml(id) {
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_TYPE_BANNER_HTML,
+      type: GET_BANNER_HTML_TYPE,
       payload: {
-        typeBannerHtml: data.allTypeBannerHtml.shift(),
+        bannerHtmlType: data.bannerHtmlTypes.shift(),
       },
     });
   };
 }
 
-export function getAllTypeBannerHtml(args = {
+export function getBannerHtmlTypes(args = {
   where: {},
   limit: 0,
   order: '',
@@ -44,7 +44,7 @@ export function getAllTypeBannerHtml(args = {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query ($where: JSON, $order: String, $limit: Int) {
-        allTypeBannerHtml(where: $where, order: $order, limit: $limit) {
+        bannerHtmlTypes(where: $where, order: $order, limit: $limit) {
           id
           name
           value
@@ -56,7 +56,7 @@ export function getAllTypeBannerHtml(args = {
       }`;
 
     const variables = Object.assign({}, args);
-    const filters = await getState().allTypeBannerHtml.filters;
+    const filters = await getState().bannerHtmlTypes.filters;
 
     if (
       options.globalFilters &&
@@ -70,19 +70,19 @@ export function getAllTypeBannerHtml(args = {
     const { data } = await graphqlRequest(query, variables);
 
     dispatch({
-      type: GET_ALL_TYPE_BANNER_HTML,
+      type: GET_BANNER_HTML_TYPES,
       payload: {
-        allTypeBannerHtml: data.allTypeBannerHtml,
+        bannerHtmlTypes: data.bannerHtmlTypes,
       },
     });
   };
 }
 
-export function createTypeBannerHtml({ name, value, weight, status }) {
+export function createBannerHtmlType({ name, value, weight, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($typeBannerHtml: TypeBannerHtmlInputTypeWithoutId!) {
-        createdTypeBannerHtml(typeBannerHtml: $typeBannerHtml) {
+      mutation ($bannerHtmlType: BannerHtmlTypeInputTypeWithoutId!) {
+        createdBannerHtmlType(bannerHtmlType: $bannerHtmlType) {
           id
           name
           value
@@ -94,7 +94,7 @@ export function createTypeBannerHtml({ name, value, weight, status }) {
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      typeBannerHtml: {
+      bannerHtmlType: {
         name,
         value,
         weight,
@@ -103,19 +103,19 @@ export function createTypeBannerHtml({ name, value, weight, status }) {
     });
 
     dispatch({
-      type: CREATE_TYPE_BANNER_HTML,
+      type: CREATE_BANNER_HTML_TYPE,
       payload: {
-        typeBannerHtml: data.createdTypeBannerHtml,
+        bannerHtmlType: data.createdBannerHtmlType,
       },
     });
   };
 }
 
-export function updateTypeBannerHtml({ id, name, value, weight, status }) {
+export function updateBannerHtmlType({ id, name, value, weight, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
-      mutation ($typeBannerHtml: TypeBannerHtmlInputType!) {
-        updatedTypeBannerHtml(typeBannerHtml: $typeBannerHtml) {
+      mutation ($bannerHtmlType: BannerHtmlTypeInputType!) {
+        updatedBannerHtmlType(bannerHtmlType: $bannerHtmlType) {
           id
           name
           value
@@ -127,7 +127,7 @@ export function updateTypeBannerHtml({ id, name, value, weight, status }) {
       }`;
 
     const { data } = await graphqlRequest(mutation, {
-      typeBannerHtml: {
+      bannerHtmlType: {
         id,
         name,
         value,
@@ -137,19 +137,19 @@ export function updateTypeBannerHtml({ id, name, value, weight, status }) {
     });
 
     dispatch({
-      type: UPDATE_TYPE_BANNER_HTML,
+      type: UPDATE_BANNER_HTML_TYPE,
       payload: {
-        typeBannerHtml: data.updatedTypeBannerHtml,
+        bannerHtmlType: data.updatedBannerHtmlType,
       },
     });
   };
 }
 
-export function deleteTypeBannerHtml(id) {
+export function deleteBannerHtmlType(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation {
-        deletedTypeBannerHtml(id: "${id}") {
+        deletedBannerHtmlType(id: "${id}") {
           id
           name
           value
@@ -164,9 +164,9 @@ export function deleteTypeBannerHtml(id) {
     const { data } = await graphqlRequest(mutation);
 
     dispatch({
-      type: DELETE_TYPE_BANNER_HTML,
+      type: DELETE_BANNER_HTML_TYPE,
       payload: {
-        typeBannerHtml: data.deletedTypeBannerHtml,
+        bannerHtmlType: data.deletedBannerHtmlType,
       },
     });
   };

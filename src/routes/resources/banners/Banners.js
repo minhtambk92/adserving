@@ -22,7 +22,7 @@ import { getChannels } from '../../../actions/channels';
 import { setPageBannerActiveTab } from '../../../actions/pages/banners';
 import { getPlacementsByBannerId, createPlacementBanner } from '../../../actions/placementBanners';
 import { getTrackByBannerId, createTrack } from '../../../actions/tracks';
-import { getAllTypeBannerHtml } from '../../../actions/allTypeBannerHtml';
+import { getBannerHtmlTypes } from '../../../actions/bannerHtmlTypes';
 import Layout from '../../../components/Layout';
 import BannerList from './BannerList';
 import CreateBannerForm from './CreateBannerForm';
@@ -51,8 +51,8 @@ class Banners extends Component {
     getTrackByBannerId: PropTypes.func,
     tracks: PropTypes.object,
     createTrack: PropTypes.func,
-    getAllTypeBannerHtml: PropTypes.func,
-    allTypeBannerHtml: PropTypes.object,
+    getBannerHtmlTypes: PropTypes.func,
+    bannerHtmlTypes: PropTypes.object,
   };
 
   componentWillMount() {
@@ -60,7 +60,7 @@ class Banners extends Component {
     this.props.getBanners();
     this.props.getPlacements();
     this.props.getChannels();
-    this.props.getAllTypeBannerHtml();
+    this.props.getBannerHtmlTypes();
   }
 
   getFilteredBanners() {
@@ -127,7 +127,7 @@ class Banners extends Component {
                 {/* form start */}
                 <CreateBannerForm
                   filters={this.props.banners.filters}
-                  listTypeBannerHtml={this.props.allTypeBannerHtml.list}
+                  bannerHtmlTypeList={this.props.bannerHtmlTypes.list}
                   createBanner={this.props.createBanner}
                   channels={this.props.channels.list}
                 />
@@ -178,7 +178,7 @@ const mapState = (state) => ({
   channels: state.channels,
   placementBanners: state.placementBanners,
   tracks: state.tracks,
-  allTypeBannerHtml: state.allTypeBannerHtml,
+  bannerHtmlTypes: state.bannerHtmlTypes,
 });
 
 const mapDispatch = {
@@ -193,7 +193,7 @@ const mapDispatch = {
   createPlacementBanner,
   getTrackByBannerId,
   createTrack,
-  getAllTypeBannerHtml,
+  getBannerHtmlTypes,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banners));

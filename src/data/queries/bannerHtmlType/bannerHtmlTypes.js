@@ -6,15 +6,15 @@ import {
   GraphQLList as List,
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import TypeBannerHtmlType from '../../types/typeBannerHtml/TypeBannerHtmlType';
-import { TypeBannerHtml } from '../../models';
+import BannerHtmlTypeType from '../../types/bannerHtmlType/BannerHtmlTypeType';
+import { BannerHtmlType } from '../../models';
 
-const allTypeBannerHtml = {
-  type: new List(TypeBannerHtmlType),
+const bannerHtmlTypes = {
+  type: new List(BannerHtmlTypeType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
   }),
-  resolve: resolver(TypeBannerHtml, {
+  resolve: resolver(BannerHtmlType, {
     before(options) {
       const opts = options;
       opts.order = options.order || [];
@@ -24,4 +24,4 @@ const allTypeBannerHtml = {
   }),
 };
 
-export default allTypeBannerHtml;
+export default bannerHtmlTypes;

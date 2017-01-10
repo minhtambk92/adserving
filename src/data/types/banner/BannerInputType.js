@@ -11,7 +11,7 @@ import { Banner } from '../../models';
 const BannerInputType = new InputObjectType({
   name: 'BannerInputType',
   fields: () => Object.assign(attributeFields(Banner, {
-    only: ['id', 'name', 'html', 'width', 'height', 'keyword', 'description', 'imageUrl', 'url', 'target', 'adServer', 'bannerHTMLType', 'adStore', 'impressionsBooked', 'clicksBooked', 'activationDate', 'expirationDate'],
+    only: ['id', 'name', 'html', 'width', 'height', 'keyword', 'description', 'imageUrl', 'url', 'bannerHtmlTypeId', 'target', 'adServer', 'adStore', 'impressionsBooked', 'clicksBooked', 'activationDate', 'expirationDate'],
   }), {
     // Additional fields
     status: { type: new NonNull(StringType) },

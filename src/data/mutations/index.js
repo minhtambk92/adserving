@@ -22,7 +22,7 @@ import channelOptionBrowser from './channelOptionBrowsers';
 import channelOptionCategories from './channelOptionCategories';
 import options from './options';
 import permissions from './permissions';
-import allTypeBannerHtml from './allTypeBannerHtml';
+import bannerHtmlTypes from './bannerHtmlTypes';
 
 const mutations = new ObjectType({
   name: 'Mutation',
@@ -46,7 +46,7 @@ const mutations = new ObjectType({
     ...channelOptionCategories,
     ...options,
     ...permissions,
-    ...allTypeBannerHtml,
+    ...bannerHtmlTypes,
   },
 });
 

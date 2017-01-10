@@ -97,9 +97,9 @@
   },
   {
     "id": "eed997c3-6e8d-4179-9c45-a147acaf002a",
-    "uniqueName": "typeBannerHtml",
-    "modelName": "Type Banner Html",
-    "name": "Type Banner HTML",
+    "uniqueName": "bannerHtmlType",
+    "modelName": "Banner Html Type",
+    "name": "Banner Html Type",
     "hasMeta": "0",
     "description": "Banner's Type HTML information",
     "status": "active",

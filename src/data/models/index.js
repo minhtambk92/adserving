@@ -39,7 +39,7 @@ import OptionChannel from './OptionChannel';
 import Track from './Track';
 import Share from './Share';
 import SharePlacement from './SharePlacement';
-import TypeBannerHtml from './TypeBannerHtml';
+import BannerHtmlType from './BannerHtmlType';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -228,6 +228,16 @@ Track.banner = Track.belongsTo(Banner, {
 });
 
 // Each Channel can make many banners
+BannerHtmlType.banners = BannerHtmlType.hasMany(Banner, {
+  foreignKey: {
+    name: 'bannerHtmlTypeId',
+  },
+});
+Banner.bannerHtmlType = Banner.belongsTo(BannerHtmlType, {
+  foreignKey: 'bannerHtmlTypeId',
+});
+
+// Each Channel can make many banners
 Channel.banners = Channel.hasMany(Banner, {
   foreignKey: {
     name: 'channelId',
@@ -340,5 +350,5 @@ export {
   Track,
   Share,
   SharePlacement,
-  TypeBannerHtml,
+  BannerHtmlType,
 };

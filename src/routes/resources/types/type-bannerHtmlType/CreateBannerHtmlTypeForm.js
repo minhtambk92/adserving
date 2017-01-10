@@ -3,14 +3,14 @@
 import React, { Component, PropTypes } from 'react';
 import Link from '../../../../components/Link';
 
-class CreateTypeBannerHtmlForm extends Component {
+class CreateBannerHtmlTypeForm extends Component {
 
   static propTypes = {
     id: PropTypes.string,
-    allTypeBannerHtml: PropTypes.object,
-    statusCreateTypeBannerHtml: PropTypes.func,
+    bannerHtmlTypes: PropTypes.object,
+    statusCreateBannerHtmlType: PropTypes.func,
     page: PropTypes.object,
-    createTypeBannerHtml: PropTypes.func,
+    createBannerHtmlType: PropTypes.func,
   };
 
   convertToSlug(Text) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -33,35 +33,35 @@ class CreateTypeBannerHtmlForm extends Component {
   }
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    this.inputTypeBannerHtmlName.value = null;
-    this.inputTypeBannerHtmlWeight.value = null;
+    this.inputBannerHtmlTypeName.value = null;
+    this.inputBannerHtmlTypeWeight.value = null;
   }
 
-  createTypeBannerHtml() {
-    const name = this.inputTypeBannerHtmlName.value;
+  createBannerHtmlType() {
+    const name = this.inputBannerHtmlTypeName.value;
     const value = this.convertToSlug(name);
-    const weight = this.inputTypeBannerHtmlWeight.value;
-    const status = this.inputTypeBannerHtmlStatus.value;
+    const weight = this.inputBannerHtmlTypeWeight.value;
+    const status = this.inputBannerHtmlTypeStatus.value;
     if (name) {
-      this.props.createTypeBannerHtml({
+      this.props.createBannerHtmlType({
         name,
         value,
         weight,
         status,
       });
     }
-    this.props.statusCreateTypeBannerHtml(false);
+    this.props.statusCreateBannerHtmlType(false);
     // this.props.setPageZoneActiveTab('TypeBannerHtmlZone');
   }
 
   removeCreateForm() {
-    this.props.statusCreateTypeBannerHtml(false);
+    this.props.statusCreateBannerHtmlType(false);
   }
 
   render() {
     return (
       <div
-        className="createTypeBannerHtml"
+        className="CreateBannerHtmlType"
       >
         <div className="box-header with-border">
           <h3
@@ -81,14 +81,14 @@ class CreateTypeBannerHtmlForm extends Component {
           <div className="form-horizontal">
             <div className="form-group">
               <label
-                htmlFor="inputTypeBannerHtmlName" className="col-sm-2 control-label"
+                htmlFor="inputBannerHtmlTypeName" className="col-sm-2 control-label"
               >Name</label>
               <div className="col-sm-10">
                 <input
-                  type="text" className="form-control" id="inputTypeBannerHtmlName"
+                  type="text" className="form-control" id="inputBannerHtmlTypeName"
                   placeholder="Name"
                   ref={c => {
-                    this.inputTypeBannerHtmlName = c;
+                    this.inputBannerHtmlTypeName = c;
                   }}
                 />
               </div>
@@ -96,14 +96,14 @@ class CreateTypeBannerHtmlForm extends Component {
 
             <div className="form-group">
               <label
-                htmlFor="inputTypeBannerHtmlWeight" className="col-sm-2 control-label"
+                htmlFor="inputBannerHtmlTypeWeight" className="col-sm-2 control-label"
               >Weight</label>
               <div className="col-sm-10">
                 <input
-                  type="number" className="form-control" id="inputTypeBannerHtmlWeight"
+                  type="number" className="form-control" id="inputBannerHtmlTypeWeight"
                   placeholder="0"
                   ref={c => {
-                    this.inputTypeBannerHtmlWeight = c;
+                    this.inputBannerHtmlTypeWeight = c;
                   }}
                 />
               </div>
@@ -111,14 +111,14 @@ class CreateTypeBannerHtmlForm extends Component {
 
             <div className="form-group">
               <label
-                htmlFor="inputTypeBannerHtmlStatus"
+                htmlFor="inputBannerHtmlTypeStatus"
                 className="col-sm-2 control-label"
               >Status</label>
               <div className="col-sm-10">
                 <select
-                  id="inputTypeBannerHtmlStatus" className="form-control"
+                  id="inputBannerHtmlTypeStatus" className="form-control"
                   ref={c => {
-                    this.inputTypeBannerHtmlStatus = c;
+                    this.inputBannerHtmlTypeStatus = c;
                   }}
                 >
                   <option value="active">Active</option>
@@ -140,7 +140,7 @@ class CreateTypeBannerHtmlForm extends Component {
           <Link
             to="#"
             className="btn btn-app pull-right"
-            onClick={event => this.createTypeBannerHtml(event)}
+            onClick={event => this.createBannerHtmlType(event)}
           ><i className="fa fa-floppy-o" /> Save</Link>
         </div>
       </div>
@@ -148,4 +148,4 @@ class CreateTypeBannerHtmlForm extends Component {
   }
 }
 
-export default CreateTypeBannerHtmlForm;
+export default CreateBannerHtmlTypeForm;

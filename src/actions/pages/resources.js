@@ -15,8 +15,8 @@ import {
   SET_STATUS_CREATE_OPTION,
   SET_STATUS_UPDATE_PERMISSION,
   SET_STATUS_CREATE_PERMISSION,
-  SET_STATUS_CREATE_TYPE_BANNER_HTML,
-  SET_STATUS_UPDATE_TYPE_BANNER_HTML,
+  SET_STATUS_CREATE_BANNER_HTML_TYPE,
+  SET_STATUS_UPDATE_BANNER_HTML_TYPE,
 } from '../../constants';
 
 export function setStatusChannelOptionBrowserEdit(browserEdit) {
@@ -173,23 +173,23 @@ export function setStatusUpdateProfile(statusUpdateProfile) {
   };
 }
 
-export function setStatusUpdateTypeBannerHtml(statusUpdateTypeBannerHtml) {
+export function setStatusUpdateBannerHtmlType(statusUpdateBannerHtmlType) {
   return async (dispatch) => {
     dispatch({
-      type: SET_STATUS_UPDATE_TYPE_BANNER_HTML,
+      type: SET_STATUS_UPDATE_BANNER_HTML_TYPE,
       payload: {
-        statusUpdateTypeBannerHtml,
+        statusUpdateBannerHtmlType,
       },
     });
   };
 }
 
-export function setStatusCreateTypeBannerHtml(statusCreateTypeBannerHtml) {
+export function setStatusCreateBannerHtmlType(statusCreateBannerHtmlType) {
   return async (dispatch) => {
     dispatch({
-      type: SET_STATUS_CREATE_TYPE_BANNER_HTML,
+      type: SET_STATUS_CREATE_BANNER_HTML_TYPE,
       payload: {
-        statusCreateTypeBannerHtml,
+        statusCreateBannerHtmlType,
       },
     });
   };

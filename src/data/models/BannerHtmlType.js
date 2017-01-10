@@ -14,7 +14,7 @@ import {
   STATUS_INACTIVE,
 } from '../../constants';
 
-const TypeBannerHtml = Model.define('TypeBannerHtml', {
+const BannerHtmlType = Model.define('BannerHtmlType', {
 
   id: {
     type: DataType.UUID,
@@ -48,4 +48,4 @@ const TypeBannerHtml = Model.define('TypeBannerHtml', {
 
 });
 
-export default TypeBannerHtml;
+export default BannerHtmlType;

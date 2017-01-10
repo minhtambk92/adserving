@@ -1,10 +1,10 @@
 import { GraphQLInputObjectType as InputObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
-import { TypeBannerHtml } from '../../models';
+import { BannerHtmlType } from '../../models';
 
-const TypeBannerHtmlInputType = new InputObjectType({
-  name: 'TypeBannerHtmlInputType',
-  fields: () => Object.assign(attributeFields(TypeBannerHtml, {
+const BannerHtmlTypeInputType = new InputObjectType({
+  name: 'BannerHtmlTypeInputType',
+  fields: () => Object.assign(attributeFields(BannerHtmlType, {
     // Additional options
     only: ['id', 'name', 'value', 'weight', 'status'],
   }), {
@@ -12,4 +12,4 @@ const TypeBannerHtmlInputType = new InputObjectType({
   }),
 });
 
-export default TypeBannerHtmlInputType;
+export default BannerHtmlTypeInputType;

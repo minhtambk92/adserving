@@ -14,7 +14,7 @@ class CreateBannerForm extends Component {
     createBanner: PropTypes.func,
     channels: PropTypes.array,
     placementId: PropTypes.string,
-    listTypeBannerHtml: PropTypes.array,
+    bannerHtmlTypeList: PropTypes.array,
     createPlacementBanner: PropTypes.func,
     getPlacement: PropTypes.func,
     banners: PropTypes.array,
@@ -99,21 +99,21 @@ class CreateBannerForm extends Component {
     let url = '';
     let imageUrl = '';
     let html = '';
-    let bannerHTMLType = '';
+    let bannerHtmlTypeId = null;
     let adServer = '';
     if (type === 'html') {
       html = this.inputBannerHTML.value;
       target = '';
       url = '';
       imageUrl = '';
-      bannerHTMLType = this.inputBannerHTMLType.value;
+      bannerHtmlTypeId = this.inputBannerHtmlType.value;
       adServer = this.inputBannerAdServer.value;
     } else if (type === 'img') {
       target = this.inputBannerTarget.value;
       html = '';
       url = this.inputBannerUrl.value;
       imageUrl = this.state.imageUrl;
-      bannerHTMLType = '';
+      bannerHtmlTypeId = null;
       adServer = '';
     }
     const status = this.inputBannerStatus.value;
@@ -147,7 +147,7 @@ class CreateBannerForm extends Component {
         isIFrame,
         status,
         adServer,
-        bannerHTMLType,
+        bannerHtmlTypeId,
         isCountView,
         isFixIE,
         isDefault,
@@ -268,18 +268,18 @@ class CreateBannerForm extends Component {
                   </div>
                   <div className="form-group">
                     <label
-                      htmlFor="inputBannerHTMLType"
+                      htmlFor="inputBannerHtmlType"
                       className="col-sm-2 control-label"
                     >Type Banner HTML</label>
                     <div className="col-sm-10">
                       <select
-                        id="inputBannerHTMLType" className="form-control"
+                        id="inputBannerHtmlType" className="form-control"
                         ref={c => {
-                          this.inputBannerHTMLType = c;
+                          this.inputBannerHtmlType = c;
                         }}
                       >
-                        {this.props.listTypeBannerHtml
-                        && this.props.listTypeBannerHtml.map(typeBannerHtml => (
+                        {this.props.bannerHtmlTypeList
+                        && this.props.bannerHtmlTypeList.map(typeBannerHtml => (
                           <option
                             key={typeBannerHtml.id} value={typeBannerHtml.id}
                           >
