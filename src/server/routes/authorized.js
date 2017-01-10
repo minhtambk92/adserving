@@ -7,28 +7,36 @@ import multer from 'multer';
 import fs from 'fs';
 import fetch from 'node-fetch';
 import path from 'path';
+import moment from 'moment';
 import jsBeautify from 'js-beautify';
 import { host, rootPath } from '../../config';
 
 const router = express.Router(); // eslint-disable-line new-cap
+const uploadsFolderName = 'uploads';
+const now = moment();
 
+// Init multer storage
 const storage = multer.diskStorage({
-  destination: '/home/nginx/domains/static.manhhailua.com/public/uploads/',
+  destination: path.join(
+    rootPath, 'build/public', uploadsFolderName, now.format('YYYY'), now.format('MM'),
+  ),
   filename(req, file, cb) {
     const link = `${file.originalname.slice(0, 4).toString()}-${Date.now()}.jpeg`;
     cb(null, link);
   },
 });
-
 const upload = multer({ storage });
+
+// Handle upload request
 router.post('/upload-banner', upload.single('file'), (req, res) => {
   if (req.file && req.file.originalname) {
     fs.chownSync(req.file.path, 1002, 1002);
-    const imageUrl = `http://static.manhhailua.com/uploads/${req.file.filename}`;
+    const imageUrl = `http://${host}/${uploadsFolderName}/${now.format('YYYY')}/${now.format('MM')}/${req.file.filename}`;
     res.send(imageUrl);
   }
 });
 
+// Handle zone data rendering
 router.post('/core-js', async (req, res) => {
   const coreJsFolderName = 'corejs';
   const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
@@ -127,16 +135,17 @@ router.post('/core-js', async (req, res) => {
   res.send(jsBeautify.html(outputCode));
 });
 
+// Handle multiple zone data rendering
 router.post('/bulk-core-js', async (req, res) => {
   const coreJsFolderName = 'corejs';
-  const corePath = path.join(rootPath, `public/${coreJsFolderName}`);
+  const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
   const coreResponse = await fetch(encodeURI(req.body.templateFileUrl));
   const coreContent = await coreResponse.text();
   const coreName = `arf-${'test'}.min.js`;
-  const coreFile = path.join(corePath, coreName);
+  const builtCoreFile = path.join(builtCorePath, coreName);
 
   // Core file
-  const writableStream = fs.createWriteStream(coreFile);
+  const writableStream = fs.createWriteStream(builtCoreFile);
 
   writableStream.write(coreContent);
   writableStream.end();
