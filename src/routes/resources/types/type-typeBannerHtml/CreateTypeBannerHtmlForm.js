@@ -3,14 +3,14 @@
 import React, { Component, PropTypes } from 'react';
 import Link from '../../../../components/Link';
 
-class CreateChannelOptionCategoryForm extends Component {
+class CreateTypeBannerHtmlForm extends Component {
 
   static propTypes = {
     id: PropTypes.string,
-    channelOptionCategories: PropTypes.object,
-    statusCategoryCreate: PropTypes.func,
+    allTypeBannerHtml: PropTypes.object,
+    statusCreateTypeBannerHtml: PropTypes.func,
     page: PropTypes.object,
-    createChannelOptionCategory: PropTypes.func,
+    createTypeBannerHtml: PropTypes.func,
   };
 
   convertToSlug(Text) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -33,32 +33,35 @@ class CreateChannelOptionCategoryForm extends Component {
   }
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    this.inputChannelOptionCategoryName.value = null;
+    this.inputTypeBannerHtmlName.value = null;
+    this.inputTypeBannerHtmlWeight.value = null;
   }
 
-  createChannelOptionCategory() {
-    const name = this.inputChannelOptionCategoryName.value;
+  createTypeBannerHtml() {
+    const name = this.inputTypeBannerHtmlName.value;
     const value = this.convertToSlug(name);
-    const status = this.inputChannelOptionCategoryStatus.value;
+    const weight = this.inputTypeBannerHtmlWeight.value;
+    const status = this.inputTypeBannerHtmlStatus.value;
     if (name) {
-      this.props.createChannelOptionCategory({
+      this.props.createTypeBannerHtml({
         name,
         value,
+        weight,
         status,
       });
     }
-    this.props.statusCategoryCreate(false);
-    // this.props.setPageZoneActiveTab('ChannelOptionCategoryZone');
+    this.props.statusCreateTypeBannerHtml(false);
+    // this.props.setPageZoneActiveTab('TypeBannerHtmlZone');
   }
 
   removeCreateForm() {
-    this.props.statusCategoryCreate(false);
+    this.props.statusCreateTypeBannerHtml(false);
   }
 
   render() {
     return (
       <div
-        className="create-ChannelOptionCategory"
+        className="createTypeBannerHtml"
       >
         <div className="box-header with-border">
           <h3
@@ -67,7 +70,7 @@ class CreateChannelOptionCategoryForm extends Component {
             Add New</h3>
           <div className="box-tools pull-right">
             <button
-              className="btn btn-box-tool remove-ChannelOptionCategory-zone"
+              className="btn btn-box-tool removeTypeBannerHtml"
               onClick={event => this.removeCreateForm(event)}
             >
               <i className="fa fa-times" />
@@ -78,28 +81,44 @@ class CreateChannelOptionCategoryForm extends Component {
           <div className="form-horizontal">
             <div className="form-group">
               <label
-                htmlFor="inputChannelOptionCategoryName" className="col-sm-2 control-label"
+                htmlFor="inputTypeBannerHtmlName" className="col-sm-2 control-label"
               >Name</label>
               <div className="col-sm-10">
                 <input
-                  type="text" className="form-control" id="inputChannelOptionCategoryName"
+                  type="text" className="form-control" id="inputTypeBannerHtmlName"
                   placeholder="Name"
                   ref={c => {
-                    this.inputChannelOptionCategoryName = c;
+                    this.inputTypeBannerHtmlName = c;
                   }}
                 />
               </div>
             </div>
+
             <div className="form-group">
               <label
-                htmlFor="inputChannelOptionCategoryStatus"
+                htmlFor="inputTypeBannerHtmlWeight" className="col-sm-2 control-label"
+              >Weight</label>
+              <div className="col-sm-10">
+                <input
+                  type="number" className="form-control" id="inputTypeBannerHtmlWeight"
+                  placeholder="0"
+                  ref={c => {
+                    this.inputTypeBannerHtmlWeight = c;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputTypeBannerHtmlStatus"
                 className="col-sm-2 control-label"
               >Status</label>
               <div className="col-sm-10">
                 <select
-                  id="inputChannelOptionCategoryStatus" className="form-control"
+                  id="inputTypeBannerHtmlStatus" className="form-control"
                   ref={c => {
-                    this.inputChannelOptionCategoryStatus = c;
+                    this.inputTypeBannerHtmlStatus = c;
                   }}
                 >
                   <option value="active">Active</option>
@@ -121,7 +140,7 @@ class CreateChannelOptionCategoryForm extends Component {
           <Link
             to="#"
             className="btn btn-app pull-right"
-            onClick={event => this.createChannelOptionCategory(event)}
+            onClick={event => this.createTypeBannerHtml(event)}
           ><i className="fa fa-floppy-o" /> Save</Link>
         </div>
       </div>
@@ -129,4 +148,4 @@ class CreateChannelOptionCategoryForm extends Component {
   }
 }
 
-export default CreateChannelOptionCategoryForm;
+export default CreateTypeBannerHtmlForm;

@@ -9,6 +9,7 @@ class UpdateResourceForm extends Component {
     resources: PropTypes.object,
     getResource: PropTypes.func,
     deleteResource: PropTypes.func,
+    resource: PropTypes.object,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -77,106 +78,108 @@ class UpdateResourceForm extends Component {
 
   render() {
     return (
-      <form className="form-horizontal">
+      <div className="box">
         <div className="box-body">
-          {/* uniqueName */}
-          <div className="form-group">
-            <label
-              htmlFor="inputResourceUniqueName" className="col-sm-2 control-label"
-            >Unique name</label>
-            <div className="col-sm-10">
-              <input
-                type="text" className="form-control" id="inputResourceUniqueName"
-                placeholder="admin"
-                ref={c => {
-                  this.inputResourceUniqueName = c;
-                }}
-              />
+          <form className="form-horizontal">
+            {/* uniqueName */}
+            <div className="form-group">
+              <label
+                htmlFor="inputResourceUniqueName" className="col-sm-2 control-label"
+              >Unique name</label>
+              <div className="col-sm-10">
+                <input
+                  type="text" className="form-control" id="inputResourceUniqueName"
+                  placeholder="admin"
+                  ref={c => {
+                    this.inputResourceUniqueName = c;
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          {/* modelName */}
-          <div className="form-group">
-            <label
-              htmlFor="inputResourceModelName" className="col-sm-2 control-label"
-            >Model name</label>
-            <div className="col-sm-10">
-              <input
-                type="text" className="form-control" id="inputResourceModelName"
-                placeholder="admin"
-                ref={c => {
-                  this.inputResourceModelName = c;
-                }}
-              />
+            {/* modelName */}
+            <div className="form-group">
+              <label
+                htmlFor="inputResourceModelName" className="col-sm-2 control-label"
+              >Model name</label>
+              <div className="col-sm-10">
+                <input
+                  type="text" className="form-control" id="inputResourceModelName"
+                  placeholder="admin"
+                  ref={c => {
+                    this.inputResourceModelName = c;
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          {/* name */}
-          <div className="form-group">
-            <label
-              htmlFor="inputResourceName" className="col-sm-2 control-label"
-            >Name</label>
-            <div className="col-sm-10">
-              <input
-                type="text" className="form-control" id="inputResourceName"
-                placeholder="Administrator"
-                ref={c => {
-                  this.inputResourceName = c;
-                }}
-              />
+            {/* name */}
+            <div className="form-group">
+              <label
+                htmlFor="inputResourceName" className="col-sm-2 control-label"
+              >Name</label>
+              <div className="col-sm-10">
+                <input
+                  type="text" className="form-control" id="inputResourceName"
+                  placeholder="Administrator"
+                  ref={c => {
+                    this.inputResourceName = c;
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          {/* hasMeta */}
-          <div className="form-group">
-            <label
-              htmlFor="inputResourceHasMeta"
-              className="col-sm-2 control-label"
-            >Has meta value</label>
-            <div className="col-sm-10">
-              <select
-                id="inputResourceHasMeta"
-                className="form-control"
-                ref={c => {
-                  this.inputResourceHasMeta = c;
-                }}
-              >
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
+            {/* hasMeta */}
+            <div className="form-group">
+              <label
+                htmlFor="inputResourceHasMeta"
+                className="col-sm-2 control-label"
+              >Has meta value</label>
+              <div className="col-sm-10">
+                <select
+                  id="inputResourceHasMeta"
+                  className="form-control"
+                  ref={c => {
+                    this.inputResourceHasMeta = c;
+                  }}
+                >
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
             </div>
-          </div>
-          {/* description */}
-          <div className="form-group">
-            <label
-              htmlFor="inputResourceDescription" className="col-sm-2 control-label"
-            >Description</label>
-            <div className="col-sm-10">
-              <textarea
-                className="form-control" id="inputResourceDescription"
-                placeholder="Resource description..."
-                ref={c => {
-                  this.inputResourceDescription = c;
-                }}
-              />
+            {/* description */}
+            <div className="form-group">
+              <label
+                htmlFor="inputResourceDescription" className="col-sm-2 control-label"
+              >Description</label>
+              <div className="col-sm-10">
+                <textarea
+                  className="form-control" id="inputResourceDescription"
+                  placeholder="Resource description..."
+                  ref={c => {
+                    this.inputResourceDescription = c;
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          {/* status */}
-          <div className="form-group">
-            <label
-              htmlFor="inputResourceStatus"
-              className="col-sm-2 control-label"
-            >Status</label>
-            <div className="col-sm-10">
-              <select
-                id="inputResourceStatus"
-                className="form-control"
-                ref={c => {
-                  this.inputResourceStatus = c;
-                }}
-              >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
+            {/* status */}
+            <div className="form-group">
+              <label
+                htmlFor="inputResourceStatus"
+                className="col-sm-2 control-label"
+              >Status</label>
+              <div className="col-sm-10">
+                <select
+                  id="inputResourceStatus"
+                  className="form-control"
+                  ref={c => {
+                    this.inputResourceStatus = c;
+                  }}
+                >
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
         {/* /.box-body */}
         <div className="box-footer">
@@ -196,7 +199,8 @@ class UpdateResourceForm extends Component {
           ><i className="fa fa-floppy-o" /> Save</Link>
         </div>
         {/* /.box-footer */}
-      </form>
+      </div>
+
     );
   }
 }

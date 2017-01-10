@@ -47,14 +47,6 @@ class RoleList extends Component {
       },
     }, {
       data: 'uniqueName',
-      createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(
-          <Link
-            to={`/resource/type/${rowData.id}`}
-          >{cellData}</Link>,
-          cell,
-        );
-      },
     }, {
       data: 'name',
     }, {

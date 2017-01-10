@@ -24,6 +24,7 @@ import {
 } from '../../../../actions/placementBanners';
 import { removePlacementInSharePlacement } from '../../../../actions/sharePlacements';
 import { createTrack } from '../../../../actions/tracks';
+import { getAllTypeBannerHtml } from '../../../../actions/allTypeBannerHtml';
 import Layout from '../../../../components/Layout';
 import ListBannerNotBelongPlacement from '../ListBannerNotBelongPlacement';
 import ListBannerOfPlacement from '../ListBannerOfPlacement';
@@ -56,6 +57,8 @@ class Placement extends Component {
     createZone: PropTypes.func,
     removePlacementInSharePlacement: PropTypes.func,
     createTrack: PropTypes.func,
+    getAllTypeBannerHtml: PropTypes.func,
+    allTypeBannerHtml: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -71,6 +74,7 @@ class Placement extends Component {
     this.props.getCampaigns();
     this.props.getBanners();
     this.props.getChannels();
+    this.props.getAllTypeBannerHtml();
   }
 
   componentDidMount() {
@@ -261,6 +265,7 @@ class Placement extends Component {
                                 getPlacement={this.props.getPlacement}
                                 banners={this.props.banners.list}
                                 getBanners={this.props.getBanners}
+                                listTypeBannerHtml={this.props.allTypeBannerHtml.list}
                                 createPlacementBanner={this.props.createPlacementBanner}
                               />
                             </div>
@@ -291,6 +296,7 @@ const mapState = (state) => ({
   channels: state.channels,
   sites: state.sites,
   sharePlacements: state.sharePlacements,
+  allTypeBannerHtml: state.allTypeBannerHtml,
 });
 
 const mapDispatch = {
@@ -306,6 +312,7 @@ const mapDispatch = {
   getChannels,
   removePlacementInSharePlacement,
   createTrack,
+  getAllTypeBannerHtml,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placement));

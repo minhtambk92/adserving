@@ -12,6 +12,10 @@ import {
   SET_STATUS_UPDATE_PROFILE,
   SET_STATUS_UPDATE_OPTION,
   SET_STATUS_CREATE_OPTION,
+  SET_STATUS_UPDATE_PERMISSION,
+  SET_STATUS_CREATE_PERMISSION,
+  SET_STATUS_CREATE_TYPE_BANNER_HTML,
+  SET_STATUS_UPDATE_TYPE_BANNER_HTML,
 } from '../../constants';
 
 
@@ -152,6 +156,50 @@ function statusUpdateOption(state = false, action) {
   }
 }
 
+function statusCreatePermission(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_PERMISSION: {
+      return action.payload.statusCreatePermission;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdatePermission(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_PERMISSION: {
+      return action.payload.statusUpdatePermission;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusCreateTypeBannerHtml(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_TYPE_BANNER_HTML: {
+      return action.payload.statusCreateTypeBannerHtml;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdateTypeBannerHtml(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_TYPE_BANNER_HTML: {
+      return action.payload.statusUpdateTypeBannerHtml;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 export default combineReducers({
   browserCreate,
   browserEdit,
@@ -165,4 +213,8 @@ export default combineReducers({
   statusUpdateProfile,
   statusCreateOption,
   statusUpdateOption,
+  statusCreatePermission,
+  statusUpdatePermission,
+  statusCreateTypeBannerHtml,
+  statusUpdateTypeBannerHtml,
 });

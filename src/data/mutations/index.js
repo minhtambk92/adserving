@@ -21,6 +21,8 @@ import sharePlacements from './sharePlacements';
 import channelOptionBrowser from './channelOptionBrowsers';
 import channelOptionCategories from './channelOptionCategories';
 import options from './options';
+import permissions from './permissions';
+import allTypeBannerHtml from './allTypeBannerHtml';
 
 const mutations = new ObjectType({
   name: 'Mutation',
@@ -43,6 +45,8 @@ const mutations = new ObjectType({
     ...channelOptionBrowser,
     ...channelOptionCategories,
     ...options,
+    ...permissions,
+    ...allTypeBannerHtml,
   },
 });
 
