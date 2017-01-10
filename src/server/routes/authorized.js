@@ -9,7 +9,6 @@ import fetch from 'node-fetch';
 import path from 'path';
 import jsBeautify from 'js-beautify';
 import { host, rootPath } from '../../config';
-import { copyFile } from '../../../tools/lib/fs';
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -120,6 +119,9 @@ router.post('/core-js', async (req, res) => {
   fs.writeFileSync(builtCoreFile, coreContent); // Write content to file
   fs.chmodSync(builtCoreFile, 0o644); // Chmod to 644
 
+  // Copy file to {root}/public/corejs
+  fs.writeFileSync(coreFile, fs.readFileSync(builtCoreFile));
+
   const outputCode = `
     <!-- Ads Zone -->
     <zone id="${zoneId}"></zone>
@@ -128,9 +130,6 @@ router.post('/core-js', async (req, res) => {
   `;
 
   res.send(jsBeautify.html(outputCode));
-
-  // Copy file to {root}/public
-  await copyFile(builtCoreFile, coreFile);
 });
 
 router.post('/bulk-core-js', async (req, res) => {

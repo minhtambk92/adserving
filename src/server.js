@@ -21,7 +21,6 @@ import ReactDOM from 'react-dom/server';
 import UniversalRouter from 'universal-router';
 import PrettyError from 'pretty-error';
 import { IntlProvider } from 'react-intl';
-
 import './serverIntlPolyfill';
 import App from './components/App';
 import Html from './components/Html';
@@ -35,7 +34,7 @@ import assets from './assets'; // eslint-disable-line import/no-unresolved
 import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './actions/runtime';
 import { setLocale } from './actions/intl';
-import { port, auth, locales } from './config';
+import { port, auth, host, locales } from './config';
 import fiction from './server/fictions';
 import startup from './server/startup';
 
@@ -217,10 +216,10 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 // -----------------------------------------------------------------------------
 /* eslint-disable no-console */
 models.sync().catch(err => console.error(err.stack)).then(() => {
-  app.listen(port, () => {
-    console.log(`The server is running at http://localhost:${port}/`);
-    fiction();
-    startup();
+  app.listen(port, async () => {
+    await fiction();
+    await startup();
+    console.log(`Your app is now ready at http://${host}`);
   });
 });
 /* eslint-enable no-console */
