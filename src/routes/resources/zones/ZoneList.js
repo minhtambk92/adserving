@@ -1,8 +1,11 @@
+/**
+ * Created by manhhailua on 1/9/17.
+ */
+
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
 import { DataTables, ICheck } from '../../../components/UI/';
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 class ZoneList extends Component {
 
@@ -53,6 +56,7 @@ class ZoneList extends Component {
     const isIncludeDescription = data.isIncludeDescription;
     const status = data.status;
     const description = data.description;
+
     if (name && siteId && type && description && slot) {
       this.props.createZone({
         name,
@@ -144,7 +148,7 @@ class ZoneList extends Component {
         ReactDOM.render(<Link
           to={`/resource/zone/${rowData.id}`}
           onClick={(event) => this.onTabClickShareZone(event)}
-        >Share Zone</Link>, cell);
+        >Shares</Link>, cell);
       },
     }, {
       data: null,
@@ -153,7 +157,7 @@ class ZoneList extends Component {
         ReactDOM.render(<Link
           to={`/resource/zone/${rowData.id}`}
           onClick={(event) => this.onTabClickSettingZone(event)}
-        >Setting</Link>, cell);
+        >Settings</Link>, cell);
       },
     }, {
       data: null,
@@ -170,6 +174,7 @@ class ZoneList extends Component {
   render() {
     // Open the portal
     let data = [];
+
     if (this.props.list) {
       if (this.props.list.length === 0) {
         data = [];
@@ -177,6 +182,7 @@ class ZoneList extends Component {
         data = this.props.list;
       }
     }
+
     return (
       <DataTables
         className="table table-bordered table-striped"

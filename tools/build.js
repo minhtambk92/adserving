@@ -8,6 +8,7 @@
  */
 
 import run from './run';
+import backup from './backup';
 import clean from './clean';
 import extractMessages from './extractMessages';
 import copy from './copy';
@@ -19,6 +20,7 @@ import render from './render';
  * format and copies it to the output (build) folder.
  */
 async function build() {
+  await run(backup);
   await run(clean);
   await run(extractMessages);
   await run(copy);
