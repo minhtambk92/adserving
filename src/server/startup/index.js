@@ -30,7 +30,7 @@ async function createCoreJsFolder() {
 }
 
 async function startup() {
-  console.log(chalk.grey.dim('START: startup functions.'));
+  console.log(chalk.grey.dim('START: startup jobs.'));
   await createCoreJsFolder();
   console.log(chalk.magenta('DONE: startup jobs.'));
 }
