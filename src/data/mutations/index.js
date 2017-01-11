@@ -25,6 +25,7 @@ import permissions from './permissions';
 import bannerHtmlTypes from './bannerHtmlTypes';
 import bannerTypes from './bannerTypes';
 import adsServers from './adsServers';
+import zoneTypes from './zoneTypes';
 
 const mutations = new ObjectType({
   name: 'Mutation',
@@ -51,6 +52,7 @@ const mutations = new ObjectType({
     ...bannerHtmlTypes,
     ...bannerTypes,
     ...adsServers,
+    ...zoneTypes,
   },
 });
 

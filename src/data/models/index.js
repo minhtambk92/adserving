@@ -42,6 +42,7 @@ import SharePlacement from './SharePlacement';
 import BannerHtmlType from './BannerHtmlType';
 import BannerType from './BannerType';
 import AdsServer from './AdsServer';
+import ZoneType from './ZoneType';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -375,4 +376,5 @@ export {
   BannerHtmlType,
   BannerType,
   AdsServer,
+  ZoneType,
 };
