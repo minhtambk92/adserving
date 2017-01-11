@@ -32,6 +32,7 @@ import channelOptionBrowsers from './channelOptionBrowser/channelOptionBrowsers'
 import channelOptionCategories from './channelOptionCategory/channelOptionCategories';
 import bannerHtmlTypes from './bannerHtmlType/bannerHtmlTypes';
 import bannerTypes from './bannerType/bannerTypes';
+import adsServers from './adsServer/adsServers';
 
 const queries = new ObjectType({
   name: 'Query',
@@ -65,6 +66,7 @@ const queries = new ObjectType({
     channelOptionCategories,
     bannerHtmlTypes,
     bannerTypes,
+    adsServers,
   },
 });
 

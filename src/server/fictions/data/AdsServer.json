@@ -1,0 +1,146 @@
+[
+  {
+    "id": "059c463c-bd7c-4160-a5f2-f3a8f220fafb",
+    "name": "Bluestreak",
+    "value": "bluestreak",
+    "status": "active",
+    "createdAt": "2017-01-11 03:41:23",
+    "updatedAt": "2017-01-11 03:41:23",
+    "deletedAt": null
+  },
+  {
+    "id": "0f920e16-d797-4c3f-bf65-b95d05ac1771",
+    "name": "Tango Zebra",
+    "value": "tango-zebra",
+    "status": "active",
+    "createdAt": "2017-01-11 03:43:14",
+    "updatedAt": "2017-01-11 03:43:14",
+    "deletedAt": null
+  },
+  {
+    "id": "130ffdfa-22d2-4a2f-a676-49bcf1e2cbb1",
+    "name": "Falk",
+    "value": "falk",
+    "status": "active",
+    "createdAt": "2017-01-11 03:42:18",
+    "updatedAt": "2017-01-11 03:42:18",
+    "deletedAt": null
+  },
+  {
+    "id": "2ffcda70-df29-4853-abba-179153dd86b5",
+    "name": "Atlas",
+    "value": "atlas",
+    "status": "active",
+    "createdAt": "2017-01-11 03:40:21",
+    "updatedAt": "2017-01-11 03:40:21",
+    "deletedAt": null
+  },
+  {
+    "id": "4d77771f-0f7b-42bb-8707-d4afee437316",
+    "name": "CPX",
+    "value": "cpx",
+    "status": "active",
+    "createdAt": "2017-01-11 03:41:45",
+    "updatedAt": "2017-01-11 03:41:45",
+    "deletedAt": null
+  },
+  {
+    "id": "5051cdd8-b0af-494e-a8ba-8c609ce25551",
+    "name": "Adtech",
+    "value": "adtech",
+    "status": "active",
+    "createdAt": "2017-01-11 03:40:10",
+    "updatedAt": "2017-01-11 03:40:10",
+    "deletedAt": null
+  },
+  {
+    "id": "51e51425-3275-46c4-8306-565712f09f7a",
+    "name": "Eyeblaster",
+    "value": "eyeblaster",
+    "status": "active",
+    "createdAt": "2017-01-11 03:42:06",
+    "updatedAt": "2017-01-11 03:42:06",
+    "deletedAt": null
+  },
+  {
+    "id": "7255ce4b-5a89-4162-a060-6863ab624488",
+    "name": "Mediaplex",
+    "value": "mediaplex",
+    "status": "active",
+    "createdAt": "2017-01-11 03:43:05",
+    "updatedAt": "2017-01-11 03:43:05",
+    "deletedAt": null
+  },
+  {
+    "id": "7ea50950-eae3-4434-b4b1-902e222f3d75",
+    "name": "Google AdSense",
+    "value": "google-adsense",
+    "status": "active",
+    "createdAt": "2017-01-11 03:42:27",
+    "updatedAt": "2017-01-11 03:42:27",
+    "deletedAt": null
+  },
+  {
+    "id": "8c154646-8327-47e9-aeac-2efc32862536",
+    "name": "Yahoo! Publisher Network",
+    "value": "yahoo-publisher-network",
+    "status": "active",
+    "createdAt": "2017-01-11 03:43:43",
+    "updatedAt": "2017-01-11 03:53:57",
+    "deletedAt": null
+  },
+  {
+    "id": "b3aa9592-092c-49fe-94f0-a93fa5cd6f69",
+    "name": "Trade Doubler",
+    "value": "trade-doubler",
+    "status": "active",
+    "createdAt": "2017-01-11 03:43:29",
+    "updatedAt": "2017-01-11 03:43:29",
+    "deletedAt": null
+  },
+  {
+    "id": "ba5bc2ae-82e6-4e6b-ae24-9b998e194c15",
+    "name": "Atlas",
+    "value": "atlas",
+    "status": "active",
+    "createdAt": "2017-01-11 03:40:35",
+    "updatedAt": "2017-01-11 03:40:35",
+    "deletedAt": "2017-01-11 03:41:02"
+  },
+  {
+    "id": "dd0d6307-6a07-4cc3-bcb2-795744c764c7",
+    "name": "Doubleclick",
+    "value": "doubleclick",
+    "status": "active",
+    "createdAt": "2017-01-11 03:41:56",
+    "updatedAt": "2017-01-11 03:41:56",
+    "deletedAt": null
+  },
+  {
+    "id": "e0e772ea-d26e-4238-ada6-68c505053999",
+    "name": "OpenX",
+    "value": "openx",
+    "status": "active",
+    "createdAt": "2017-01-11 03:42:54",
+    "updatedAt": "2017-01-11 03:42:54",
+    "deletedAt": null
+  },
+  {
+    "id": "e5912d7d-3bcb-45a6-8013-531a00f2f552",
+    "name": "Kontera",
+    "value": "kontera",
+    "status": "active",
+    "createdAt": "2017-01-11 03:42:36",
+    "updatedAt": "2017-01-11 03:42:36",
+    "deletedAt": null
+  },
+  {
+    "id": "f24ee8c3-835a-47db-8117-0a72771fef0f",
+    "name": "Generic HTML Banner",
+    "value": "generic-html-banner",
+    "status": "active",
+    "createdAt": "2017-01-11 03:39:21",
+    "updatedAt": "2017-01-11 03:39:21",
+    "deletedAt": null
+  }
+]

@@ -26,6 +26,7 @@ import options from './options';
 import permissions from './permissions';
 import bannerHtmlTypes from './bannerHtmlTypes';
 import bannerTypes from './bannerTypes';
+import adsServers from './adsServers';
 
 import page from './pages';
 
@@ -58,4 +59,5 @@ export default combineReducers({
   permissions,
   bannerHtmlTypes,
   bannerTypes,
+  adsServers,
 });

@@ -19,6 +19,8 @@ import {
   SET_STATUS_UPDATE_BANNER_HTML_TYPE,
   SET_STATUS_CREATE_BANNER_TYPE,
   SET_STATUS_UPDATE_BANNER_TYPE,
+  SET_STATUS_UPDATE_ADS_SERVER,
+  SET_STATUS_CREATE_ADS_SERVER,
 } from '../../constants';
 
 export function setStatusChannelOptionBrowserEdit(browserEdit) {
@@ -214,6 +216,28 @@ export function setStatusCreateBannerType(statusCreateBannerType) {
       type: SET_STATUS_CREATE_BANNER_TYPE,
       payload: {
         statusCreateBannerType,
+      },
+    });
+  };
+}
+
+export function setStatusUpdateAdsServer(statusUpdateAdsServer) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_UPDATE_ADS_SERVER,
+      payload: {
+        statusUpdateAdsServer,
+      },
+    });
+  };
+}
+
+export function setStatusCreateAdsServer(statusCreateAdsServer) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_CREATE_ADS_SERVER,
+      payload: {
+        statusCreateAdsServer,
       },
     });
   };

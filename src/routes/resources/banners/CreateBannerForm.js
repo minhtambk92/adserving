@@ -262,7 +262,7 @@ class CreateBannerForm extends Component {
                         <option value="">Generic HTML Banner</option>
                         <option value="adtech">Rich Media - adtech</option>
                         <option value="atlas">Rich Media - Atlas</option>
-                        <option value="bluestreak">Rich Media - Bluestreak</option>
+                        <option value="bluestreak">Rich Media - Atlas</option>
                         <option value="cpx">Rich Media - CPX</option>
                         <option value="doubleclick">Rich Media - Doubleclick</option>
                         <option value="eyeblaster">Rich Media - Eyeblaster</option>

@@ -41,6 +41,7 @@ import Share from './Share';
 import SharePlacement from './SharePlacement';
 import BannerHtmlType from './BannerHtmlType';
 import BannerType from './BannerType';
+import AdsServer from './AdsServer';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -363,4 +364,5 @@ export {
   SharePlacement,
   BannerHtmlType,
   BannerType,
+  AdsServer,
 };

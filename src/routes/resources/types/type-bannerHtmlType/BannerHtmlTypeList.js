@@ -6,7 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { DataTables, ICheck } from '../../../../components/UI/';
 import CreateBannerHtmlTypeForm from './CreateBannerHtmlTypeForm';
-import EditTypeBannerHtmlForm from './EditBannerHtmlTypeForm';
+import EditBannerHtmlTypeForm from './EditBannerHtmlTypeForm';
 import Link from '../../../../components/Link';
 
 class BannerHtmlTypeList extends Component {
@@ -164,7 +164,7 @@ class BannerHtmlTypeList extends Component {
           this.state.arrBannerHtmlType && this.state.arrBannerHtmlType.map((count) => (
             <div className="box" key={count}>
               <div className="editTypeBannerHtmlForm">
-                <EditTypeBannerHtmlForm
+                <EditBannerHtmlTypeForm
                   id={this.state.bannerHtmlType.id}
                   bannerHtmlType={this.state.bannerHtmlType}
                   updateBannerHtmlType={this.props.updateBannerHtmlType}

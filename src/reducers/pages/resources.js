@@ -18,6 +18,8 @@ import {
   SET_STATUS_UPDATE_BANNER_HTML_TYPE,
   SET_STATUS_CREATE_BANNER_TYPE,
   SET_STATUS_UPDATE_BANNER_TYPE,
+  SET_STATUS_CREATE_ADS_SERVER,
+  SET_STATUS_UPDATE_ADS_SERVER,
 } from '../../constants';
 
 
@@ -224,6 +226,28 @@ function statusUpdateBannerType(state = false, action) {
   }
 }
 
+function statusCreateAdsServer(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_ADS_SERVER: {
+      return action.payload.statusCreateAdsServer;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdateAdsServer(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_ADS_SERVER: {
+      return action.payload.statusUpdateAdsServer;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 export default combineReducers({
   browserCreate,
   browserEdit,
@@ -243,4 +267,6 @@ export default combineReducers({
   statusUpdateBannerHtmlType,
   statusUpdateBannerType,
   statusCreateBannerType,
+  statusCreateAdsServer,
+  statusUpdateAdsServer,
 });
