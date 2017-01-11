@@ -41,6 +41,7 @@ const Placement = Model.define('Placement', {
   },
   weight: {
     type: DataType.INTEGER,
+    allowNull: false,
     defaultValue: 0,
   },
   startTime: {

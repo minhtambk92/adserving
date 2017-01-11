@@ -58,9 +58,11 @@ class UpdatePlacementForm extends Component {
     const status = this.inputPlacementStatus.value;
     const placement = { id: this.props.placementId };
 
-    if (name && name !== this.props.placement.name) {
-      placement.name = name;
-    }
+    placement.name = name;
+    placement.weight = weight;
+    placement.width = width;
+    placement.height = height;
+    placement.status = status;
 
     if (startTime && startTime !== this.props.placement.startTime) {
       placement.startTime = startTime;
@@ -70,28 +72,12 @@ class UpdatePlacementForm extends Component {
       placement.endTime = endTime;
     }
 
-    if (weight && weight !== this.props.placement.weight) {
-      placement.weight = weight;
-    }
-
     if (description && description !== this.props.placement.description) {
       placement.description = description;
     }
 
-    if (width && width !== this.props.placement.width) {
-      placement.width = width;
-    }
-
-    if (height && height !== this.props.placement.height) {
-      placement.height = height;
-    }
-
     if (campaignId && campaignId !== this.props.placement.campaignId) {
       placement.campaignId = campaignId;
-    }
-
-    if (status && status !== this.props.placement.status) {
-      placement.status = status;
     }
 
     if (moment(new Date(startTime)).format('x') < moment(new Date(endTime)).format('x')) {

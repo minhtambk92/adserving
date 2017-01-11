@@ -138,9 +138,9 @@ class UpdateCampaignForm extends Component {
       description !== this.props.campaign.description) {
       campaign.description = description;
     }
-    if (status && status !== this.props.campaign.status) {
-      campaign.status = status;
-    }
+
+    campaign.status = status;
+
     if (moment(new Date(startTime)).format('x') < moment(new Date(endTime)).format('x')) {
       this.props.updateCampaign(campaign).then(() => {
         this.props.getCampaign(this.props.campaignId);

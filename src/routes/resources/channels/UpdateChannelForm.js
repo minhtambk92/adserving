@@ -30,18 +30,12 @@ class UpdateChannelForm extends Component {
 
     const channel = { id: this.props.channelId };
 
-    if (name && name !== this.props.channel.name) {
-      channel.name = name;
-    }
+    channel.name = name;
+    channel.status = status;
 
     if (description && description !== this.props.channel.description) {
       channel.description = description;
     }
-
-    if (status && status !== this.props.channel.status) {
-      channel.status = status;
-    }
-
 
     this.props.updateChannel(channel).then(() => {
       this.props.getChannel(this.props.channelId);

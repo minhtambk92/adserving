@@ -45,16 +45,16 @@ class EditShareForm extends Component {
 
   save() {
     const id = $('.list-zone-share-edit').attr('id');
-    const name = $('#inputEditShareName').val();
-    const css = $('#inputEditShareCSS').val();
+    const name = this.inputEditShareName.value;
+    const css = this.inputEditShareCSS.value;
     const outputCss = '';
-    const html = $('#inputEditShareHTML').val();
-    const width = $('#inputEditShareWidth').val();
-    const height = $('#inputEditShareHeight').val();
-    const weight = $('#inputEditShareWeight').val();
+    const html = this.inputEditShareHTML.value;
+    const width = this.inputEditShareWidth.value;
+    const height = this.inputEditShareHeight.value;
+    const weight = this.inputEditShareWeight.value;
     const classes = document.getElementById('inputCreateShareClasses').value;
-    const type = $('#inputEditShareType').val();
-    const description = $('#inputEditShareDescription').val();
+    const type = this.inputEditShareType.value;
+    const description = this.inputEditShareDescription.value;
 
     if (id && name) {
       this.props.updateShareZone({
@@ -157,6 +157,7 @@ class EditShareForm extends Component {
                 <textarea
                   className="form-control" id="inputEditShareOutPutCSS"
                   rows="3" placeholder="More info..."
+                  readOnly
                   ref={c => {
                     this.inputEditShareOutPutCSS = c;
                   }}
