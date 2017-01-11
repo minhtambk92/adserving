@@ -24,6 +24,7 @@ import { getPlacementsByBannerId, createPlacementBanner } from '../../../actions
 import { getTrackByBannerId, createTrack } from '../../../actions/tracks';
 import { getBannerHtmlTypes } from '../../../actions/bannerHtmlTypes';
 import { getBannerTypes } from '../../../actions/bannerTypes';
+import { getAdsServers } from '../../../actions/adsServers';
 import Layout from '../../../components/Layout';
 import BannerList from './BannerList';
 import CreateBannerForm from './CreateBannerForm';
@@ -56,6 +57,8 @@ class Banners extends Component {
     bannerHtmlTypes: PropTypes.object,
     getBannerTypes: PropTypes.func,
     bannerTypes: PropTypes.object,
+    getAdsServers: PropTypes.func,
+    adsServers: PropTypes.object,
   };
 
   componentWillMount() {
@@ -65,6 +68,7 @@ class Banners extends Component {
     this.props.getChannels();
     this.props.getBannerHtmlTypes();
     this.props.getBannerTypes();
+    this.props.getAdsServers();
   }
 
   getFilteredBanners() {
@@ -137,6 +141,7 @@ class Banners extends Component {
                   bannerTypes={this.props.bannerTypes}
                   bannerTypeList={this.props.bannerTypes && this.props.bannerTypes.list}
                   getBannerTypes={this.props.getBannerTypes}
+                  adsServerList={this.props.adsServers && this.props.adsServers.list}
                 />
               </div>
               {/* /.col */}
@@ -187,6 +192,7 @@ const mapState = (state) => ({
   tracks: state.tracks,
   bannerHtmlTypes: state.bannerHtmlTypes,
   bannerTypes: state.bannerTypes,
+  adsServers: state.adsServers,
 });
 
 const mapDispatch = {
@@ -203,6 +209,7 @@ const mapDispatch = {
   createTrack,
   getBannerHtmlTypes,
   getBannerTypes,
+  getAdsServers,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banners));

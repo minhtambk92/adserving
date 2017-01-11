@@ -19,6 +19,7 @@ import { getBannerTypes } from '../../../../actions/bannerTypes';
 import { getCampaigns } from '../../../../actions/campaigns';
 import { createPlacement, getPlacements } from '../../../../actions/placements';
 import { getBannerHtmlTypes } from '../../../../actions/bannerHtmlTypes';
+import { getAdsServers } from '../../../../actions/adsServers';
 import { getChannels } from '../../../../actions/channels';
 import {
   createPlacementBanner,
@@ -68,6 +69,8 @@ class Banner extends Component {
     bannerHtmlTypes: PropTypes.object,
     getBannerTypes: PropTypes.func,
     bannerTypes: PropTypes.object,
+    getAdsServers: PropTypes.func,
+    adsServers: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -85,6 +88,7 @@ class Banner extends Component {
     this.props.getChannels();
     this.props.getBannerHtmlTypes();
     this.props.getBannerTypes();
+    this.props.getAdsServers();
   }
 
   componentDidMount() {
@@ -180,6 +184,7 @@ class Banner extends Component {
                       getBanner={this.props.getBanner}
                       removeBanner={this.props.removeBanner}
                       channels={this.props.channels.list}
+                      adsServerList={this.props.adsServers && this.props.adsServers.list}
                     />
                   </div>
 
@@ -319,6 +324,7 @@ const mapState = (state) => ({
   placementBanners: state.placementBanners,
   bannerHtmlTypes: state.bannerHtmlTypes,
   bannerTypes: state.bannerTypes,
+  adsServers: state.adsServers,
 });
 
 const mapDispatch = {
@@ -337,6 +343,7 @@ const mapDispatch = {
   updateTrack,
   getBannerHtmlTypes,
   getBannerTypes,
+  getAdsServers,
 };
 
 export default withStyles(s, style, dropZoneStyle)(connect(mapState, mapDispatch)(Banner));

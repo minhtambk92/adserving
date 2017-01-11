@@ -7,6 +7,7 @@ import {
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { AdsServer } from '../../models';
+import adsServerHasManyBanners from '../../queries/adsServer/adsServerHasManyBanners';
 
 const AdsServerType = new ObjectType({
   name: 'AdsServerType',
@@ -14,6 +15,7 @@ const AdsServerType = new ObjectType({
     // Additional options
   }), {
     // Additional fields
+    banners: adsServerHasManyBanners(),
   }),
 });
 

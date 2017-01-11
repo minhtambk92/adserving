@@ -94,7 +94,12 @@ router.post('/core-js', async (req, res) => {
             imageUrl
             url
             target
-            adServer
+            adsServer {
+              id
+              name
+              value
+              status
+            }
             bannerHtmlType {
               id
               name

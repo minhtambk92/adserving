@@ -376,6 +376,7 @@ class OptionBannerForm extends Component {
     banner.isExpirationDate = isExpirationDate;
     banner.expirationDate = expirationDate;
     banner.status = this.props.banner.status;
+    banner.adsServerId = this.props.banner.adsServerId;
     banner.isIFrame = this.props.banner.isIFrame;
     banner.weight = this.props.banner.weight;
     banner.type = this.props.banner.type;

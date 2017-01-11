@@ -63,10 +63,6 @@ const Banner = Model.define('Banner', {
       isIn: [['_blank', '_self', '_parent', '_top', '']],
     },
   },
-  adServer: {
-    type: DataType.STRING,
-    defaultValue: '',
-  },
   isIFrame: {
     type: DataType.BOOLEAN,
     defaultValue: true,

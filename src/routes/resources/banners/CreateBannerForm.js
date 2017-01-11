@@ -22,6 +22,7 @@ class CreateBannerForm extends Component {
     bannerTypeList: PropTypes.array,
     getBannerTypes: PropTypes.func,
     getBanners: PropTypes.func,
+    adsServerList: PropTypes.array,
   };
 
   constructor(props, context) {
@@ -103,7 +104,7 @@ class CreateBannerForm extends Component {
     let imageUrl = '';
     let html = '';
     let bannerHtmlTypeId = null;
-    let adServer = '';
+    let adsServerId = null;
     const bannerType = _.filter(this.props.bannerTypeList, { value: type });
     const bannerTypeId = bannerType[0].id;
     if (type === 'html') {
@@ -112,14 +113,14 @@ class CreateBannerForm extends Component {
       url = '';
       imageUrl = '';
       bannerHtmlTypeId = this.inputBannerHtmlType.value;
-      adServer = this.inputBannerAdServer.value;
+      adsServerId = this.inputBannerAdsServer.value;
     } else if (type === 'img') {
       target = this.inputBannerTarget.value;
       html = '';
       url = this.inputBannerUrl.value;
       imageUrl = this.state.imageUrl;
       bannerHtmlTypeId = null;
-      adServer = '';
+      adsServerId = null;
     }
     const status = this.inputBannerStatus.value;
     const keyword = document.getElementById('inputBannerKeyWord').value;
@@ -151,7 +152,7 @@ class CreateBannerForm extends Component {
         imageUrl,
         isIFrame,
         status,
-        adServer,
+        adsServerId,
         bannerHtmlTypeId,
         isCountView,
         isFixIE,
@@ -249,31 +250,24 @@ class CreateBannerForm extends Component {
                   </div>
                   <div className="form-group">
                     <label
-                      htmlFor="inputBannerAdServer"
+                      htmlFor="inputBannerAdsServer"
                       className="col-sm-2 control-label"
                     >Alter HTML to enable click tracking for</label>
                     <div className="col-sm-10">
                       <select
-                        id="inputBannerAdServer" className="form-control"
+                        id="inputBannerAdsServer" className="form-control"
                         ref={c => {
-                          this.inputBannerAdServer = c;
+                          this.inputBannerAdsServer = c;
                         }}
                       >
-                        <option value="">Generic HTML Banner</option>
-                        <option value="adtech">Rich Media - adtech</option>
-                        <option value="atlas">Rich Media - Atlas</option>
-                        <option value="bluestreak">Rich Media - Atlas</option>
-                        <option value="cpx">Rich Media - CPX</option>
-                        <option value="doubleclick">Rich Media - Doubleclick</option>
-                        <option value="eyeblaster">Rich Media - Eyeblaster</option>
-                        <option value="falk">Rich Media - Falk</option>
-                        <option value="google">Rich Media - Google AdSense</option>
-                        <option value="kontera">Rich Media - Kontera</option>
-                        <option value="max">Rich Media - OpenX</option>
-                        <option value="mediaplex">Rich Media - Mediaplex</option>
-                        <option value="tangozebra">Rich Media - Tango Zebra</option>
-                        <option value="tradedoubler">Rich Media - Trade Doubler</option>
-                        <option value="ypn">Rich Media - Yahoo! Publisher Network</option>
+                        {this.props.adsServerList
+                        && this.props.adsServerList.map(adsServer => (
+                          <option
+                            key={adsServer.id} value={adsServer.id}
+                          >
+                            Rich Media - {adsServer.name}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>

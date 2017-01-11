@@ -249,6 +249,16 @@ Banner.bannerType = Banner.belongsTo(BannerType, {
   foreignKey: 'bannerTypeId',
 });
 
+// Each Ads Server can make many banners
+AdsServer.banners = AdsServer.hasMany(Banner, {
+  foreignKey: {
+    name: 'adsServerId',
+  },
+});
+Banner.adsServer = Banner.belongsTo(AdsServer, {
+  foreignKey: 'adsServerId',
+});
+
 // Each Channel can make many banners
 Channel.banners = Channel.hasMany(Banner, {
   foreignKey: {
