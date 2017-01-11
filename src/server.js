@@ -41,6 +41,15 @@ import startup from './server/startup';
 const app = express();
 
 //
+// Create socket from current express instance
+// -----------------------------------------------------------------------------
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+// Make "io" global
+app.set('io', io);
+
+//
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
 // user agent is not known.
 // -----------------------------------------------------------------------------
@@ -59,7 +68,7 @@ app.use(requestLanguage({
     name: 'lang',
     options: {
       path: '/',
-      maxAge: 3650 * 24 * 3600 * 1000, // 10 years in miliseconds
+      maxAge: 365 * 24 * 3600 * 1000, // 1 years in milliseconds
     },
     url: '/lang/{language}',
   },
@@ -216,7 +225,7 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 // -----------------------------------------------------------------------------
 /* eslint-disable no-console */
 models.sync().catch(err => console.error(err.stack)).then(() => {
-  app.listen(port, async () => {
+  server.listen(port, async () => {
     await fiction();
     await startup();
     console.log(`Your app is now ready at http://${host}`);

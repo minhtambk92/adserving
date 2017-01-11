@@ -2,10 +2,35 @@
  * Created by manhhailua on 1/9/17.
  */
 
+/* global io */
+
 import React, { Component } from 'react';
 import fetch from '../../../core/fetch';
 
 class BulkActions extends Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      isNowExporting: false,
+      zoneQuantity: 0,
+    };
+  }
+
+  componentDidMount() {
+    const socket = io('http://adserving.manhhailua.com');
+
+    socket.on('start-bulk-export-zone-data', (data) => {
+      this.setState({ isNowExporting: true });
+      this.setState({ zoneQuantity: data.zoneQuantity });
+    });
+
+    socket.on('start-bulk-export-zone-data', () => {
+      this.setState({ isNowExporting: false });
+      this.setState({ zoneQuantity: 0 });
+    });
+  }
 
   async regenerateAdsCode(event) {
     event.persist();
@@ -59,17 +84,19 @@ class BulkActions extends Component {
         </div>
 
         {/* Progress bar of streaming writing all zone display ads code */}
-        <div className="form-group">
-          <div className="progress active">
-            <div
-              className="progress-bar progress-bar-success progress-bar-striped"
-              role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"
-              style={{ width: '20%' }}
-            >
-              <span className="sr-only">20% Complete</span>
+        {this.state.isNowExporting && (
+          <div className="form-group">
+            <div className="progress active">
+              <div
+                className="progress-bar progress-bar-success progress-bar-striped"
+                role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"
+                style={{ width: '20%' }}
+              >
+                <span className="sr-only">20% Complete</span>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
       </div>
     );

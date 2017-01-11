@@ -10,6 +10,7 @@ import path from 'path';
 import moment from 'moment';
 import jsBeautify from 'js-beautify';
 import { host, rootPath } from '../../config';
+import { Zone } from '../../data/models';
 
 const router = express.Router(); // eslint-disable-line new-cap
 const uploadsFolderName = 'uploads';
@@ -36,7 +37,7 @@ router.post('/upload-banner', upload.single('file'), (req, res) => {
 });
 
 // Handle zone data rendering
-router.post('/core-js', async (req, res) => {
+router.post('/core-js', async(req, res) => {
   const coreJsFolderName = 'corejs';
   const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
   const zoneId = encodeURI(req.body.zoneId);
@@ -140,7 +141,13 @@ router.post('/core-js', async (req, res) => {
 });
 
 // Handle multiple zone data rendering
-router.post('/bulk-core-js', async (req, res) => {
+router.post('/bulk-core-js', async(req, res) => {
+  const io = req.app.get('io');
+  const zoneQuantity = await Zone.count();
+
+  // Emit start point
+  io.sockets.emit('start-bulk-export-zone-data', { zoneQuantity });
+
   const coreJsFolderName = 'corejs';
   const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
   const coreResponse = await fetch(encodeURI(req.body.templateFileUrl));
@@ -154,7 +161,13 @@ router.post('/bulk-core-js', async (req, res) => {
   writableStream.write(coreContent);
   writableStream.end();
 
+  writableStream.on('pipe', (src) => {
+    console.log('something is piping to the stream!');
+    console.log(src);
+  });
+
   writableStream.on('finish', () => {
+    io.sockets.emit('done-bulk-export-zone-data');
     res.send('DONE BULK WRITE!');
   });
 

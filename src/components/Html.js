@@ -92,6 +92,7 @@ class Html extends React.Component {
           <script src="/AdminLTE/plugins/fullcalendar/fullcalendar.min.js" />
           <script src="/AdminLTE/plugins/iCheck/icheck.min.js" />
           {/* <script src="/AdminLTE/plugins/ckeditor/ckeditor.js" /> */}
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js" />
           {state && (
             <script
               dangerouslySetInnerHTML={{ __html:
