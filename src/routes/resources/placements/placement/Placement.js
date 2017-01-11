@@ -25,6 +25,8 @@ import {
 import { removePlacementInSharePlacement } from '../../../../actions/sharePlacements';
 import { createTrack } from '../../../../actions/tracks';
 import { getBannerHtmlTypes } from '../../../../actions/bannerHtmlTypes';
+import { getBannerTypes } from '../../../../actions/bannerTypes';
+import { getAdsServers } from '../../../../actions/adsServers';
 import Layout from '../../../../components/Layout';
 import ListBannerNotBelongPlacement from '../ListBannerNotBelongPlacement';
 import ListBannerOfPlacement from '../ListBannerOfPlacement';
@@ -59,6 +61,10 @@ class Placement extends Component {
     createTrack: PropTypes.func,
     getBannerHtmlTypes: PropTypes.func,
     bannerHtmlTypes: PropTypes.object,
+    getBannerTypes: PropTypes.func,
+    bannerTypes: PropTypes.object,
+    getAdsServers: PropTypes.func,
+    adsServers: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -75,6 +81,8 @@ class Placement extends Component {
     this.props.getBanners();
     this.props.getChannels();
     this.props.getBannerHtmlTypes();
+    this.props.getBannerTypes();
+    this.props.getAdsServers();
   }
 
   componentDidMount() {
@@ -267,6 +275,10 @@ class Placement extends Component {
                                 getBanners={this.props.getBanners}
                                 bannerHtmlTypeList={this.props.bannerHtmlTypes.list}
                                 createPlacementBanner={this.props.createPlacementBanner}
+                                bannerTypeList={this.props.bannerTypes &&
+                                this.props.bannerTypes.list}
+                                getBannerTypes={this.props.getBannerTypes}
+                                adsServerList={this.props.adsServers && this.props.adsServers.list}
                               />
                             </div>
                             {/* /.box-body */}
@@ -297,6 +309,8 @@ const mapState = (state) => ({
   sites: state.sites,
   sharePlacements: state.sharePlacements,
   bannerHtmlTypes: state.bannerHtmlTypes,
+  bannerTypes: state.bannerTypes,
+  adsServers: state.adsServers,
 });
 
 const mapDispatch = {
@@ -313,6 +327,8 @@ const mapDispatch = {
   removePlacementInSharePlacement,
   createTrack,
   getBannerHtmlTypes,
+  getBannerTypes,
+  getAdsServers,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placement));

@@ -37,7 +37,7 @@ class ZoneList extends Component {
   duplicateZoneAndShare(data) {
     const name = `Copy Of ${data.name}`;
     const siteId = data.siteId;
-    const type = data.type;
+    const zoneTypeId = data.zoneTypeId;
     const html = data.html;
     const css = data.css;
     const slot = data.slot;
@@ -45,7 +45,6 @@ class ZoneList extends Component {
     const height = data.height;
     const sizeText = data.sizeText;
     const sizeValue = data.sizeValue;
-    const delivery = data.delivery;
     const targetIFrame = data.targetIFrame;
     const isShowBannerAgain = data.isShowBannerAgain;
     const source = data.source;
@@ -57,11 +56,11 @@ class ZoneList extends Component {
     const status = data.status;
     const description = data.description;
 
-    if (name && siteId && type && description && slot) {
+    if (name && siteId && zoneTypeId && description && slot) {
       this.props.createZone({
         name,
         siteId,
-        type,
+        zoneTypeId,
         html,
         css,
         slot,
@@ -69,7 +68,6 @@ class ZoneList extends Component {
         height,
         sizeText,
         sizeValue,
-        delivery,
         targetIFrame,
         isShowBannerAgain,
         source,

@@ -25,6 +25,9 @@ import sharePlacements from './sharePlacements';
 import options from './options';
 import permissions from './permissions';
 import bannerHtmlTypes from './bannerHtmlTypes';
+import bannerTypes from './bannerTypes';
+import adsServers from './adsServers';
+import zoneTypes from './zoneTypes';
 
 import page from './pages';
 
@@ -56,4 +59,7 @@ export default combineReducers({
   options,
   permissions,
   bannerHtmlTypes,
+  bannerTypes,
+  adsServers,
+  zoneTypes,
 });

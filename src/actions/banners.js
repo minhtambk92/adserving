@@ -39,13 +39,18 @@ export function getBanner(id) {
           keyword
           weight
           description
-          type
+          bannerType {
+            id
+            name
+            value
+            weight
+          }
           imageUrl
           url
           target
           isIFrame
           status
-          adServer
+          adsServerId
           bannerHtmlTypeId
           isCountView
           isFixIE
@@ -115,13 +120,18 @@ export function getBanners(args = {
           keyword
           weight
           description
-          type
+          bannerType {
+            id
+            name
+            value
+            weight
+          }
           imageUrl
           url
           target
           isIFrame
           status
-          adServer
+          adsServerId
           bannerHtmlTypeId
           isCountView
           isFixIE
@@ -185,13 +195,13 @@ export function createBanner({
   keyword,
   weight,
   description,
-  type,
+  bannerTypeId,
   url,
   target,
   imageUrl,
   isIFrame,
   status,
-  adServer,
+  adsServerId,
   bannerHtmlTypeId,
   isCountView,
   isFixIE,
@@ -220,13 +230,13 @@ export function createBanner({
           keyword
           weight
           description
-          type
+          bannerTypeId
           url
           target
           imageUrl
           isIFrame
           status
-          adServer
+          adsServerId
           bannerHtmlTypeId
           isCountView
           isFixIE
@@ -256,13 +266,13 @@ export function createBanner({
         keyword,
         weight,
         description,
-        type,
+        bannerTypeId,
         url,
         target,
         imageUrl,
         isIFrame,
         status,
-        adServer,
+        adsServerId,
         bannerHtmlTypeId,
         isCountView,
         isFixIE,
@@ -299,13 +309,13 @@ export function updateBanner({
   keyword,
   weight,
   description,
-  type,
+  bannerTypeId,
   url,
   target,
   imageUrl,
   isIFrame,
   status,
-  adServer,
+  adsServerId,
   bannerHtmlTypeId,
   isCountView,
   isFixIE,
@@ -334,13 +344,13 @@ export function updateBanner({
           keyword
           weight
           description
-          type
+          bannerTypeId
           imageUrl
           url
           target
           isIFrame
           status
-          adServer
+          adsServerId
           bannerHtmlTypeId
           isCountView
           isFixIE
@@ -371,13 +381,13 @@ export function updateBanner({
         keyword,
         weight,
         description,
-        type,
+        bannerTypeId,
         url,
         target,
         imageUrl,
         isIFrame,
         status,
-        adServer,
+        adsServerId,
         bannerHtmlTypeId,
         isCountView,
         isFixIE,
@@ -418,13 +428,13 @@ export function deleteBanner(id) {
           keyword
           weight
           description
-          type
+          bannerTypeId
           imageUrl
           url
           target
           isIFrame
           status
-          adServer
+          adsServerId
           bannerHtmlTypeId
           isCountView
           isFixIE

@@ -1,0 +1,14 @@
+import { GraphQLInputObjectType as InputObjectType } from 'graphql';
+import { attributeFields } from 'graphql-sequelize';
+import { BannerType } from '../../models';
+
+const BannerTypeInputTypeWithoutId = new InputObjectType({
+  name: 'BannerTypeInputTypeWithoutId',
+  fields: () => Object.assign(attributeFields(BannerType, {
+    only: ['name', 'value', 'weight', 'status'],
+  }), {
+    // Additional fields
+  }),
+});
+
+export default BannerTypeInputTypeWithoutId;

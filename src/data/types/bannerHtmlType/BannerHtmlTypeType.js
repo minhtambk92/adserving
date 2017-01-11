@@ -15,7 +15,7 @@ const BannerHtmlTypeType = new ObjectType({
     // Additional options
   }), {
     // Additional fields
-    banner: bannerHtmlTypeHasManyBanners(),
+    banners: bannerHtmlTypeHasManyBanners(),
   }),
 });
 

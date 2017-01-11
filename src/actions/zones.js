@@ -41,7 +41,13 @@ export function getZone(id) {
           siteId
           name
           description
-          type
+          zoneType {
+            id
+            name
+            value
+            isSize
+            status
+          }
           html
           css
           slot
@@ -49,7 +55,6 @@ export function getZone(id) {
           height
           sizeText
           sizeValue
-          delivery
           targetIFrame
           isShowBannerAgain
           source
@@ -117,7 +122,7 @@ export function getZones(args = {
           siteId
           name
           description
-          type
+          zoneTypeId
           html
           css
           slot
@@ -125,7 +130,6 @@ export function getZones(args = {
           height
           sizeText
           sizeValue
-          delivery
           targetIFrame
           isShowBannerAgain
           source
@@ -191,9 +195,8 @@ export function getZones(args = {
 }
 
 export function createZone({
-  siteId, name, type, html, css,
+  siteId, name, zoneTypeId, html, css,
   slot, width, height, sizeText, sizeValue,
-  delivery,
   targetIFrame,
   isShowBannerAgain,
   source,
@@ -212,7 +215,7 @@ export function createZone({
           id
           siteId
           name
-          type
+          zoneTypeId
           html
           css
           slot
@@ -220,7 +223,6 @@ export function createZone({
           height
           sizeText
           sizeValue
-          delivery
           targetIFrame
           isShowBannerAgain
           source
@@ -240,7 +242,7 @@ export function createZone({
       zone: {
         siteId,
         name,
-        type,
+        zoneTypeId,
         html,
         css,
         width,
@@ -248,7 +250,6 @@ export function createZone({
         slot,
         sizeText,
         sizeValue,
-        delivery,
         targetIFrame,
         isShowBannerAgain,
         source,
@@ -271,9 +272,8 @@ export function createZone({
   };
 }
 export function updateZone({
-  id, siteId, name, type,
+  id, siteId, name, zoneTypeId,
   html, css, slot, width, height, sizeText, sizeValue,
-  delivery,
   targetIFrame,
   isShowBannerAgain,
   source,
@@ -292,7 +292,7 @@ export function updateZone({
           siteId
           name
           description
-          type
+          zoneTypeId
           html
           css
           slot
@@ -300,7 +300,6 @@ export function updateZone({
           height
           sizeText
           sizeValue
-          delivery
           targetIFrame
           isShowBannerAgain
           source
@@ -320,7 +319,7 @@ export function updateZone({
         id,
         siteId,
         name,
-        type,
+        zoneTypeId,
         html,
         css,
         slot,
@@ -328,7 +327,6 @@ export function updateZone({
         height,
         sizeText,
         sizeValue,
-        delivery,
         targetIFrame,
         isShowBannerAgain,
         source,
@@ -360,7 +358,7 @@ export function deleteZone(id) {
           siteId
           name
           description
-          type
+          zoneTypeId
           html
           css
           slot
@@ -368,7 +366,6 @@ export function deleteZone(id) {
           height
           sizeText
           sizeValue
-          delivery
           targetIFrame
           isShowBannerAgain
           source

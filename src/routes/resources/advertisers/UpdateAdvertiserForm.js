@@ -80,10 +80,7 @@ class UpdateAdvertiserForm extends Component {
     if (description && description !== this.props.advertiser.description) {
       advertiser.description = description;
     }
-
-    if (status && status !== this.props.advertiser.status) {
-      advertiser.status = status;
-    }
+    advertiser.status = status;
 
     this.props.updateAdvertiser(advertiser).then(() => {
       this.props.getAdvertiser(this.props.advertiserId);

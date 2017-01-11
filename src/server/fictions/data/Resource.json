@@ -7,8 +7,8 @@
     "hasMeta": "0",
     "description": "Global application's options",
     "status": "active",
-    "createdAt": "2016-12-23 21:58:24",
-    "updatedAt": "2016-12-23 21:58:24",
+    "createdAt": "2016-12-23 00:58:24",
+    "updatedAt": "2016-12-23 00:58:24",
     "deletedAt": null
   },
   {
@@ -19,8 +19,32 @@
     "hasMeta": "0",
     "description": "User privileges",
     "status": "active",
-    "createdAt": "2016-12-23 21:58:24",
-    "updatedAt": "2016-12-23 21:58:24",
+    "createdAt": "2016-12-23 00:58:24",
+    "updatedAt": "2016-12-23 00:58:24",
+    "deletedAt": null
+  },
+  {
+    "id": "4a177b8b-8d33-41fc-bc4f-d98ae785690a",
+    "uniqueName": "adsServer",
+    "modelName": "Ads Server",
+    "name": "Ads Server",
+    "hasMeta": "0",
+    "description": "Banner's ads server information",
+    "status": "active",
+    "createdAt": "2017-01-10 20:30:01",
+    "updatedAt": "2017-01-10 20:30:01",
+    "deletedAt": null
+  },
+  {
+    "id": "56280d69-40f4-4a3a-affc-09fc66ccfc7a",
+    "uniqueName": "zoneType",
+    "modelName": "Zone Type",
+    "name": "Zone Type",
+    "hasMeta": "0",
+    "description": "Zone's Type information",
+    "status": "active",
+    "createdAt": "2017-01-11 07:36:40",
+    "updatedAt": "2017-01-11 07:36:40",
     "deletedAt": null
   },
   {
@@ -31,8 +55,8 @@
     "hasMeta": "1",
     "description": "User's login information",
     "status": "active",
-    "createdAt": "2016-12-23 21:58:24",
-    "updatedAt": "2016-12-23 21:58:24",
+    "createdAt": "2016-12-23 00:58:24",
+    "updatedAt": "2016-12-23 00:58:24",
     "deletedAt": null
   },
   {
@@ -43,8 +67,8 @@
     "hasMeta": "0",
     "description": "Channel's option category  information",
     "status": "active",
-    "createdAt": "2016-12-25 23:34:35",
-    "updatedAt": "2016-12-25 23:34:35",
+    "createdAt": "2016-12-25 02:34:35",
+    "updatedAt": "2016-12-25 02:34:35",
     "deletedAt": null
   },
   {
@@ -55,8 +79,8 @@
     "hasMeta": "0",
     "description": "Application's resources types",
     "status": "active",
-    "createdAt": "2016-12-23 21:58:24",
-    "updatedAt": "2016-12-23 21:58:24",
+    "createdAt": "2016-12-23 00:58:24",
+    "updatedAt": "2016-12-23 00:58:24",
     "deletedAt": null
   },
   {
@@ -67,8 +91,20 @@
     "hasMeta": "1",
     "description": "User account",
     "status": "active",
-    "createdAt": "2016-12-23 21:58:24",
-    "updatedAt": "2016-12-23 21:58:24",
+    "createdAt": "2016-12-23 00:58:24",
+    "updatedAt": "2016-12-23 00:58:24",
+    "deletedAt": null
+  },
+  {
+    "id": "b55f9a3c-322a-498f-8f38-8300fb6f24a4",
+    "uniqueName": "bannerType",
+    "modelName": "Banner Type",
+    "name": "Banner Type",
+    "hasMeta": "0",
+    "description": "Banner's Type information",
+    "status": "active",
+    "createdAt": "2017-01-09 18:01:45",
+    "updatedAt": "2017-01-09 18:01:45",
     "deletedAt": null
   },
   {
@@ -79,8 +115,8 @@
     "hasMeta": "0",
     "description": "Name for group of user privileges",
     "status": "active",
-    "createdAt": "2016-12-23 21:58:24",
-    "updatedAt": "2016-12-23 21:58:24",
+    "createdAt": "2016-12-23 00:58:24",
+    "updatedAt": "2016-12-23 00:58:24",
     "deletedAt": null
   },
   {
@@ -91,8 +127,8 @@
     "hasMeta": "0",
     "description": "Channel's option browser  information",
     "status": "active",
-    "createdAt": "2016-12-25 23:34:35",
-    "updatedAt": "2016-12-25 23:34:35",
+    "createdAt": "2016-12-25 02:34:35",
+    "updatedAt": "2016-12-25 02:34:35",
     "deletedAt": null
   },
   {
@@ -103,8 +139,8 @@
     "hasMeta": "0",
     "description": "Banner's Type HTML information",
     "status": "active",
-    "createdAt": "2017-01-09 03:39:26",
-    "updatedAt": "2017-01-09 03:39:26",
+    "createdAt": "2017-01-08 06:39:26",
+    "updatedAt": "2017-01-08 06:39:26",
     "deletedAt": null
   },
   {
@@ -115,8 +151,8 @@
     "hasMeta": "1",
     "description": "User's profile information",
     "status": "active",
-    "createdAt": "2016-12-23 21:58:24",
-    "updatedAt": "2016-12-23 21:58:24",
+    "createdAt": "2016-12-23 00:58:24",
+    "updatedAt": "2016-12-23 00:58:24",
     "deletedAt": null
   },
   {
@@ -127,8 +163,8 @@
     "hasMeta": "1",
     "description": "User's claims list",
     "status": "active",
-    "createdAt": "2016-12-23 21:58:24",
-    "updatedAt": "2016-12-23 21:58:24",
+    "createdAt": "2016-12-23 00:58:24",
+    "updatedAt": "2016-12-23 00:58:24",
     "deletedAt": null
   }
 ]

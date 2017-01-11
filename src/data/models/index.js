@@ -40,6 +40,9 @@ import Track from './Track';
 import Share from './Share';
 import SharePlacement from './SharePlacement';
 import BannerHtmlType from './BannerHtmlType';
+import BannerType from './BannerType';
+import AdsServer from './AdsServer';
+import ZoneType from './ZoneType';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -227,7 +230,7 @@ Track.banner = Track.belongsTo(Banner, {
   foreignKey: 'bannerId',
 });
 
-// Each Channel can make many banners
+// Each BannerHtmlType can make many banners
 BannerHtmlType.banners = BannerHtmlType.hasMany(Banner, {
   foreignKey: {
     name: 'bannerHtmlTypeId',
@@ -235,6 +238,26 @@ BannerHtmlType.banners = BannerHtmlType.hasMany(Banner, {
 });
 Banner.bannerHtmlType = Banner.belongsTo(BannerHtmlType, {
   foreignKey: 'bannerHtmlTypeId',
+});
+
+// Each Banner Type can make many banners
+BannerType.banners = BannerType.hasMany(Banner, {
+  foreignKey: {
+    name: 'bannerTypeId',
+  },
+});
+Banner.bannerType = Banner.belongsTo(BannerType, {
+  foreignKey: 'bannerTypeId',
+});
+
+// Each Ads Server can make many banners
+AdsServer.banners = AdsServer.hasMany(Banner, {
+  foreignKey: {
+    name: 'adsServerId',
+  },
+});
+Banner.adsServer = Banner.belongsTo(AdsServer, {
+  foreignKey: 'adsServerId',
 });
 
 // Each Channel can make many banners
@@ -300,6 +323,13 @@ Share.zone = Share.belongsTo(Zone, {
   foreignKey: 'zoneId',
 });
 
+ZoneType.zones = ZoneType.hasMany(Zone, {
+  foreignKey: 'zoneTypeId',
+});
+Zone.zoneType = Zone.belongsTo(ZoneType, {
+  foreignKey: 'zoneTypeId',
+});
+
 SharePlacement.placement = SharePlacement.belongsTo(Placement, {
   foreignKey: 'placementId',
 });
@@ -351,4 +381,7 @@ export {
   Share,
   SharePlacement,
   BannerHtmlType,
+  BannerType,
+  AdsServer,
+  ZoneType,
 };

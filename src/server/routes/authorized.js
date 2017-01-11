@@ -49,7 +49,12 @@ router.post('/core-js', async(req, res) => {
       id
       name
       description
-      type
+      zoneType {
+        id
+        name
+        isSize
+        value
+      }
       html
       css
       slot
@@ -85,11 +90,21 @@ router.post('/core-js', async(req, res) => {
             keyword
             weight
             description
-            type
+            bannerType {
+              id
+              name
+              value
+              weight
+            }
             imageUrl
             url
             target
-            adServer
+            adsServer {
+              id
+              name
+              value
+              status
+            }
             bannerHtmlType {
               id
               name

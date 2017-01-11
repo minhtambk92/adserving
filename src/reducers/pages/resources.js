@@ -16,6 +16,12 @@ import {
   SET_STATUS_CREATE_PERMISSION,
   SET_STATUS_CREATE_BANNER_HTML_TYPE,
   SET_STATUS_UPDATE_BANNER_HTML_TYPE,
+  SET_STATUS_CREATE_BANNER_TYPE,
+  SET_STATUS_UPDATE_BANNER_TYPE,
+  SET_STATUS_CREATE_ADS_SERVER,
+  SET_STATUS_UPDATE_ADS_SERVER,
+  SET_STATUS_CREATE_ZONE_TYPE,
+  SET_STATUS_UPDATE_ZONE_TYPE,
 } from '../../constants';
 
 
@@ -200,6 +206,72 @@ function statusUpdateBannerHtmlType(state = false, action) {
   }
 }
 
+function statusCreateBannerType(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_BANNER_TYPE: {
+      return action.payload.statusCreateBannerType;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdateBannerType(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_BANNER_TYPE: {
+      return action.payload.statusUpdateBannerType;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusCreateAdsServer(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_ADS_SERVER: {
+      return action.payload.statusCreateAdsServer;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdateAdsServer(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_ADS_SERVER: {
+      return action.payload.statusUpdateAdsServer;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusCreateZoneType(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_ZONE_TYPE: {
+      return action.payload.statusCreateZoneType;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdateZoneType(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_ZONE_TYPE: {
+      return action.payload.statusUpdateZoneType;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 export default combineReducers({
   browserCreate,
   browserEdit,
@@ -217,4 +289,10 @@ export default combineReducers({
   statusUpdatePermission,
   statusCreateBannerHtmlType,
   statusUpdateBannerHtmlType,
+  statusUpdateBannerType,
+  statusCreateBannerType,
+  statusCreateAdsServer,
+  statusUpdateAdsServer,
+  statusCreateZoneType,
+  statusUpdateZoneType
 });

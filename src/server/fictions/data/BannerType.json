@@ -1,0 +1,22 @@
+[
+  {
+    "id": "374da180-02c6-4558-8985-90cad792f14f",
+    "name": "Html",
+    "value": "html",
+    "weight": "100",
+    "status": "active",
+    "createdAt": "2017-01-10 08:33:57",
+    "updatedAt": "2017-01-10 08:33:57",
+    "deletedAt": null
+  },
+  {
+    "id": "56c53393-914e-4182-9d7c-54bbbd4b304e",
+    "name": "Img",
+    "value": "img",
+    "weight": "100",
+    "status": "active",
+    "createdAt": "2017-01-10 08:33:39",
+    "updatedAt": "2017-01-10 08:33:39",
+    "deletedAt": null
+  }
+]

@@ -23,6 +23,9 @@ import channelOptionCategories from './channelOptionCategories';
 import options from './options';
 import permissions from './permissions';
 import bannerHtmlTypes from './bannerHtmlTypes';
+import bannerTypes from './bannerTypes';
+import adsServers from './adsServers';
+import zoneTypes from './zoneTypes';
 
 const mutations = new ObjectType({
   name: 'Mutation',
@@ -47,6 +50,9 @@ const mutations = new ObjectType({
     ...options,
     ...permissions,
     ...bannerHtmlTypes,
+    ...bannerTypes,
+    ...adsServers,
+    ...zoneTypes,
   },
 });
 

@@ -23,6 +23,7 @@ const Channel = Model.define('Channel', {
   },
   name: {
     type: DataType.STRING,
+    allowNull: false,
     defaultValue: '',
   },
   description: {

@@ -141,6 +141,7 @@ class CreateShareForm extends Component {
                 <textarea
                   className="form-control" id="inputCreateShareOutPutCSS"
                   rows="3" placeholder="More info..."
+                  readOnly
                   ref={c => {
                     this.inputCreateShareOutPutCSS = c;
                   }}

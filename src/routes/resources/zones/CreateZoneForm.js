@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import Link from '../../../components/Link';
 
 class CreateZoneForm extends Component {
@@ -14,6 +15,7 @@ class CreateZoneForm extends Component {
     zones: PropTypes.array,
     getZones: PropTypes.func,
     createShare: PropTypes.func,
+    zoneTypeList: PropTypes.array,
   };
 
   constructor(props, context) {
@@ -22,6 +24,19 @@ class CreateZoneForm extends Component {
     this.state = {
       checkTypeZone: true,
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.zoneTypeList) {
+      if (nextProps.zoneTypeList.length > 0) {
+        this.inputZoneType.value = nextProps.zoneTypeList[0].id;
+        if (nextProps.zoneTypeList[0].isSize === true) {
+          this.setState({ checkTypeZone: true });
+        } else {
+          this.setState({ checkTypeZone: false });
+        }
+      }
+    }
   }
 
   onKeyDown(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -39,14 +54,16 @@ class CreateZoneForm extends Component {
   }
 
   onSelectZoneType(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const zoneType = this.inputZoneType.value;
-    if (zoneType !== 'type-3') {
+    const zoneTypeId = this.inputZoneType.value;
+    const arrZone = _.filter(this.props.zoneTypeList, { id: zoneTypeId });
+    const isSize = arrZone[0].isSize;
+    if (isSize === true) {
       event.persist();
       this.setState((previousState) => ({
         ...previousState,
         checkTypeZone: true,
       }));
-    } else if (zoneType === 'type-3') {
+    } else if (isSize === false) {
       event.persist();
       this.setState((previousState) => ({
         ...previousState,
@@ -82,7 +99,7 @@ class CreateZoneForm extends Component {
     } else {
       siteId = this.inputZoneSite.value;
     }
-    const type = this.inputZoneType.value;
+    const zoneTypeId = this.inputZoneType.value;
     const html = this.inputZoneHTML.value;
     const css = this.inputZoneCSS.value;
     const slot = this.inputZoneSlot.value;
@@ -90,7 +107,10 @@ class CreateZoneForm extends Component {
     let height = 0;
     let sizeText = '';
     let sizeValue = '';
-    if (this.state.checkTypeZone === true && type !== 'type-3') {
+    const arrZone = _.filter(this.props.zoneTypeList, { id: zoneTypeId });
+    const isSize = arrZone[0].isSize;
+
+    if (this.state.checkTypeZone === true && isSize === true) {
       sizeValue = this.inputZoneSize.value;
       if (this.inputZoneSize.value === 'custom') {
         if (this.inputZoneWidth.value.trim() !== '' && this.inputZoneHeight.value.trim() !== '') {
@@ -107,13 +127,12 @@ class CreateZoneForm extends Component {
         height = this.inputZoneHeight.value;
         sizeText = this.inputZoneSize.options[this.inputZoneSize.selectedIndex].text;
       }
-    } else if (this.state.checkTypeZone === false && type === 'type-3') {
+    } else if (this.state.checkTypeZone === false && isSize === false) {
       width = 0;
       height = 0;
-      sizeText = 'Custom (Text ad)';
+      sizeText = arrZone[0].name;
       sizeValue = '';
     }
-    const delivery = this.inputZoneDelivery.value;
     const targetIFrame = '0';
     const isShowBannerAgain = true;
     const source = '';
@@ -124,11 +143,11 @@ class CreateZoneForm extends Component {
     const isIncludeDescription = true;
     const status = this.inputZoneStatus.value;
     const description = this.inputZoneDescription.value;
-    if (name && siteId && type && description && slot) {
+    if (name && siteId && description && slot) {
       this.props.createZone({
         name,
         siteId,
-        type,
+        zoneTypeId,
         html,
         css,
         slot,
@@ -136,7 +155,6 @@ class CreateZoneForm extends Component {
         height,
         sizeText,
         sizeValue,
-        delivery,
         targetIFrame,
         isShowBannerAgain,
         source,
@@ -153,6 +171,7 @@ class CreateZoneForm extends Component {
         const outputCss = '';
         const weight = 100;
         const classes = '';
+        const type = 'single';
         this.props.createShare({
           name,
           html,
@@ -230,10 +249,11 @@ class CreateZoneForm extends Component {
                   this.inputZoneType = c;
                 }}
               >
-                <option value="type-1">Banner, Button or Rectangle</option>
-                <option value="type-2">Interstitial or Floating DHTML</option>
-                <option value="type-3">Text ad</option>
-                <option value="type-4">Email/Newsletter zone</option>
+                {this.props.zoneTypeList && this.props.zoneTypeList.map(zoneType => (
+                  <option
+                    key={zoneType.id} value={zoneType.id}
+                  >{zoneType.name}</option>
+                ))}
               </select>
             </div>
           </div>
@@ -386,22 +406,6 @@ class CreateZoneForm extends Component {
                 <option value="18">18</option>
                 <option value="19">19</option>
               </select>
-            </div>
-          </div>
-          <div className="form-group">
-            <label
-              htmlFor="inputZoneDelivery"
-              className="col-sm-2 control-label"
-            >Delivery</label>
-            <div className="col-sm-10">
-              <input
-                type="number"
-                className="form-control" id="inputZoneDelivery"
-                placeholder="3"
-                ref={c => {
-                  this.inputZoneDelivery = c;
-                }}
-              />
             </div>
           </div>
           <div className="form-group">

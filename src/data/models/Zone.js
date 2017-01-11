@@ -29,10 +29,6 @@ const Zone = Model.define('Zone', {
     type: DataType.TEXT,
     defaultValue: '',
   },
-  type: {
-    type: DataType.STRING,
-    allowNull: false,
-  },
   html: {
     type: DataType.TEXT,
     defaultValue: '',
@@ -60,10 +56,6 @@ const Zone = Model.define('Zone', {
   sizeValue: {
     type: DataType.STRING,
     defaultValue: '',
-  },
-  delivery: {
-    type: DataType.INTEGER,
-    defaultValue: 3,
   },
   targetIFrame: {
     type: DataType.STRING,

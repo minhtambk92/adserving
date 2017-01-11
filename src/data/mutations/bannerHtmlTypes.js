@@ -8,7 +8,7 @@ import BannerHtmlTypeInputType from '../types/bannerHtmlType/BannerHtmlTypeInput
 import BannerHtmlTypeInputTypeWithoutId from '../types/bannerHtmlType/BannerHtmlTypeInputTypeWithoutId';
 import { BannerHtmlType } from '../models';
 
-const typeAllBannerHtml = {
+const bannerHtmlTypes = {
   createdBannerHtmlType: {
     type: BannerHtmlTypeType,
     args: {
@@ -72,4 +72,4 @@ const typeAllBannerHtml = {
   },
 };
 
-export default typeAllBannerHtml;
+export default bannerHtmlTypes;

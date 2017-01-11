@@ -35,25 +35,15 @@ class UpdateSiteForm extends Component {
     const description = this.inputSiteDescription.value;
     const status = this.inputSiteStatus.value;
     const site = { id: this.props.siteId };
-
-    if (domain && domain !== this.props.site.domain) {
-      site.domain = domain;
-    }
-
-    if (name && name !== this.props.site.name) {
-      site.name = name;
-    }
-
-    if (email && email !== this.props.site.email) {
-      site.email = email;
-    }
+    site.domain = domain;
+    site.name = name;
+    site.email = email;
 
     if (description && description !== this.props.site.description) {
       site.description = description;
     }
-    if (status && status !== this.props.site.status) {
-      site.status = status;
-    }
+    site.status = status;
+
     // site.status = document.getElementById('inputSiteStatus').value;
     this.props.updateSite(site).then(() => {
       this.props.getSite(this.props.siteId);

@@ -31,6 +31,9 @@ import sharePlacements from './sharePlacement/sharePlacements';
 import channelOptionBrowsers from './channelOptionBrowser/channelOptionBrowsers';
 import channelOptionCategories from './channelOptionCategory/channelOptionCategories';
 import bannerHtmlTypes from './bannerHtmlType/bannerHtmlTypes';
+import bannerTypes from './bannerType/bannerTypes';
+import adsServers from './adsServer/adsServers';
+import zoneTypes from './zoneType/zoneTypes';
 
 const queries = new ObjectType({
   name: 'Query',
@@ -63,6 +66,9 @@ const queries = new ObjectType({
     channelOptionBrowsers,
     channelOptionCategories,
     bannerHtmlTypes,
+    bannerTypes,
+    adsServers,
+    zoneTypes,
   },
 });
 

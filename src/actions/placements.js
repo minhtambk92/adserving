@@ -50,13 +50,13 @@ export function getPlacement(id) {
             keyword
             weight
             description
-            type
+            bannerTypeId
             imageUrl
             url
             target
             isIFrame
             status
-            adServer
+            adsServerId
             bannerHtmlTypeId
             isCountView
             isFixIE

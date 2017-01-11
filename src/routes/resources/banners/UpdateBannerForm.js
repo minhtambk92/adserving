@@ -14,6 +14,9 @@ class UpdateBannerForm extends Component {
     removeBanner: PropTypes.func,
     bannerHtmlTypeList: PropTypes.array,
     channels: PropTypes.array,
+    bannerTypeList: PropTypes.array,
+    bannerTypes: PropTypes.object,
+    adsServerList: PropTypes.array,
   };
 
   constructor(props, context) {
@@ -36,11 +39,11 @@ class UpdateBannerForm extends Component {
       description,
       url,
       target,
-      type,
+      bannerType,
       imageUrl,
       isIFrame,
       status,
-      adServer,
+      adsServerId,
       bannerHtmlTypeId,
       channelId,
     } = nextProps.banner && (nextProps.banner || {});
@@ -59,29 +62,31 @@ class UpdateBannerForm extends Component {
     this.inputBannerStatus.value = status;
     this.inputChannelId.value = channelId;
     this.inputBannerIsIFrame.value = isIFrame;
-
-    if (type === 'html') {
-      if (isIFrame === true) {
-        this.insertBannerHtml(html, width, height);
-      } else {
-        document.getElementById('banner').innerHTML = '';
-      }
-      if (this.inputBannerHTML !== undefined && this.inputBannerHtmlType.value !== undefined &&
-        this.inputBannerHtmlType.value !== undefined) {
-        this.state.checkTypeBanner = 'html';
-        this.state.imageUrl = '';
-        this.inputBannerHTML.value = html;
-        this.inputBannerAdServer.value = adServer;
-        this.inputBannerHtmlType.value = bannerHtmlTypeId;
-      }
-    } else if (type === 'img') {
-      this.state.imageUrl = imageUrl;
-      this.state.checkTypeBanner = 'img';
-      if (this.inputBannerImageUrl !== undefined && this.inputBannerTarget !== undefined
-        && this.inputBannerUrl !== undefined) {
-        this.inputBannerTarget.value = target;
-        this.inputBannerUrl.value = url;
-        this.inputBannerImageUrl.value = imageUrl;
+    if (bannerType) {
+      const type = bannerType.value;
+      if (type === 'html') {
+        if (isIFrame === true) {
+          this.insertBannerHtml(html, width, height);
+        } else {
+          document.getElementById('banner').innerHTML = '';
+        }
+        if (this.inputBannerHTML !== undefined && this.inputBannerHtmlType.value !== undefined &&
+          this.inputBannerHtmlType.value !== undefined) {
+          this.state.checkTypeBanner = 'html';
+          this.state.imageUrl = '';
+          this.inputBannerHTML.value = html;
+          this.inputBannerAdsServer.value = adsServerId;
+          this.inputBannerHtmlType.value = bannerHtmlTypeId;
+        }
+      } else if (type === 'img') {
+        this.state.imageUrl = imageUrl;
+        this.state.checkTypeBanner = 'img';
+        if (this.inputBannerImageUrl !== undefined && this.inputBannerTarget !== undefined
+          && this.inputBannerUrl !== undefined) {
+          this.inputBannerTarget.value = target;
+          this.inputBannerUrl.value = url;
+          this.inputBannerImageUrl.value = imageUrl;
+        }
       }
     }
   }
@@ -112,16 +117,17 @@ class UpdateBannerForm extends Component {
     let imageUrl = '';
     let url = '';
     let bannerHtmlTypeId = null;
-    let adServer = '';
-    const type = this.props.banner.type;
+    let adsServerId = null;
+    const type = this.props.banner.bannerType.value;
     if (type === 'html') {
       html = this.inputBannerHTML.value;
-      adServer = this.inputBannerAdServer.value;
+      adsServerId = this.inputBannerAdsServer.value;
       bannerHtmlTypeId = this.inputBannerHtmlType.value;
     } else if (type === 'img') {
       target = this.inputBannerTarget.value;
       url = this.inputBannerUrl.value;
       imageUrl = this.state.imageUrl;
+      adsServerId = null;
     }
     const status = this.inputBannerStatus.value;
     const banner = { id: this.props.bannerId };
@@ -132,6 +138,7 @@ class UpdateBannerForm extends Component {
     banner.height = height;
     banner.keyword = keyword;
     banner.weight = weight;
+    banner.bannerTypeId = this.props.banner.bannerType.id;
 
     if (description && description !== this.props.banner.description) {
       banner.description = description;
@@ -141,9 +148,7 @@ class UpdateBannerForm extends Component {
       if (html && html !== this.props.banner.html) {
         banner.html = html;
       }
-      if (adServer && adServer !== this.props.banner.adServer) {
-        banner.adServer = adServer;
-      }
+      banner.adsServerId = adsServerId;
       banner.bannerHtmlTypeId = bannerHtmlTypeId;
     } else if (type === 'img') {
       if (target && target !== this.props.banner.target) {
@@ -227,8 +232,8 @@ class UpdateBannerForm extends Component {
     return (
       <form className="form-horizontal">
         {
-          this.props.banner &&
-          (this.props.banner.type === 'img' && this.state.checkTypeBanner === 'img') ? (
+          this.props.banner && this.props.banner.bannerType &&
+          (this.props.banner.bannerType.value === 'img' && this.state.checkTypeBanner === 'img') ? (
             <div className="bannerImage">
               <div className="form-group">
                 <div className="col-sm-12">
@@ -317,31 +322,24 @@ class UpdateBannerForm extends Component {
               </div>
               <div className="form-group">
                 <label
-                  htmlFor="inputBannerAdServer"
+                  htmlFor="inputBannerAdsServer"
                   className="col-sm-2 control-label"
                 >Alter HTML to enable click tracking for</label>
                 <div className="col-sm-10">
                   <select
-                    id="inputBannerAdServer" className="form-control"
+                    id="inputBannerAdsServer" className="form-control"
                     ref={c => {
-                      this.inputBannerAdServer = c;
+                      this.inputBannerAdsServer = c;
                     }}
                   >
-                    <option value="">Generic HTML Banner</option>
-                    <option value="adtech">Rich Media - adtech</option>
-                    <option value="atlas">Rich Media - Atlas</option>
-                    <option value="bluestreak">Rich Media - Bluestreak</option>
-                    <option value="cpx">Rich Media - CPX</option>
-                    <option value="doubleclick">Rich Media - Doubleclick</option>
-                    <option value="eyeblaster">Rich Media - Eyeblaster</option>
-                    <option value="falk">Rich Media - Falk</option>
-                    <option value="google">Rich Media - Google AdSense</option>
-                    <option value="kontera">Rich Media - Kontera</option>
-                    <option value="max">Rich Media - OpenX</option>
-                    <option value="mediaplex">Rich Media - Mediaplex</option>
-                    <option value="tangozebra">Rich Media - Tango Zebra</option>
-                    <option value="tradedoubler">Rich Media - Trade Doubler</option>
-                    <option value="ypn">Rich Media - Yahoo! Publisher Network</option>
+                    {this.props.adsServerList
+                    && this.props.adsServerList.map(adsServer => (
+                      <option
+                        key={adsServer.id} value={adsServer.id}
+                      >
+                        Rich Media - {adsServer.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>

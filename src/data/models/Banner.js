@@ -49,14 +49,6 @@ const Banner = Model.define('Banner', {
     type: DataType.TEXT,
     defaultValue: '',
   },
-  type: {
-    type: DataType.STRING,
-    allowNull: false,
-    defaultValue: 'html',
-    validate: {
-      isIn: [['html', 'img']],
-    },
-  },
   imageUrl: {
     type: DataType.TEXT,
     defaultValue: '',
@@ -70,10 +62,6 @@ const Banner = Model.define('Banner', {
     validate: {
       isIn: [['_blank', '_self', '_parent', '_top', '']],
     },
-  },
-  adServer: {
-    type: DataType.STRING,
-    defaultValue: '',
   },
   isIFrame: {
     type: DataType.BOOLEAN,

@@ -17,6 +17,12 @@ import {
   SET_STATUS_CREATE_PERMISSION,
   SET_STATUS_CREATE_BANNER_HTML_TYPE,
   SET_STATUS_UPDATE_BANNER_HTML_TYPE,
+  SET_STATUS_CREATE_BANNER_TYPE,
+  SET_STATUS_UPDATE_BANNER_TYPE,
+  SET_STATUS_UPDATE_ADS_SERVER,
+  SET_STATUS_CREATE_ADS_SERVER,
+  SET_STATUS_UPDATE_ZONE_TYPE,
+  SET_STATUS_CREATE_ZONE_TYPE,
 } from '../../constants';
 
 export function setStatusChannelOptionBrowserEdit(browserEdit) {
@@ -195,3 +201,68 @@ export function setStatusCreateBannerHtmlType(statusCreateBannerHtmlType) {
   };
 }
 
+export function setStatusUpdateBannerType(statusUpdateBannerType) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_UPDATE_BANNER_TYPE,
+      payload: {
+        statusUpdateBannerType,
+      },
+    });
+  };
+}
+
+export function setStatusCreateBannerType(statusCreateBannerType) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_CREATE_BANNER_TYPE,
+      payload: {
+        statusCreateBannerType,
+      },
+    });
+  };
+}
+
+export function setStatusUpdateAdsServer(statusUpdateAdsServer) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_UPDATE_ADS_SERVER,
+      payload: {
+        statusUpdateAdsServer,
+      },
+    });
+  };
+}
+
+export function setStatusCreateAdsServer(statusCreateAdsServer) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_CREATE_ADS_SERVER,
+      payload: {
+        statusCreateAdsServer,
+      },
+    });
+  };
+}
+
+export function setStatusUpdateZoneType(statusUpdateZoneType) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_UPDATE_ZONE_TYPE,
+      payload: {
+        statusUpdateZoneType,
+      },
+    });
+  };
+}
+
+export function setStatusCreateZoneType(statusCreateZoneType) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_CREATE_ZONE_TYPE,
+      payload: {
+        statusCreateZoneType,
+      },
+    });
+  };
+}

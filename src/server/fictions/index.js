@@ -27,6 +27,9 @@ import {
   ChannelOptionCategory,
   ChannelOptionBrowser,
   BannerHtmlType,
+  BannerType,
+  AdsServer,
+  ZoneType,
 } from '../../data/models';
 import resourcesList from './data/Resource.json';
 import menusList from './data/Menu.json';
@@ -49,6 +52,9 @@ import tracksList from './data/Track.json';
 import channelOptionCategoryList from './data/ChannelOptionCategory.json';
 import channelOptionBrowserList from './data/ChannelOptionBrowser.json';
 import bannerHtmlTypeList from './data/BannerHtmlType.json';
+import bannerTypeList from './data/BannerType.json';
+import adsServerList from './data/AdsServer.json';
+import zoneTypeList from './data/ZoneType.json';
 
 /* eslint-disable no-console */
 
@@ -122,6 +128,48 @@ async function bannerHtmlTypeFiction() {
     console.log(chalk.green(`CREATED: ${results.length} all Type Banner html => PASSED!`));
   } else {
     console.log(chalk.green(`FOUND: ${allBannerHtmlTypeQuantity} all Type Banner html. => PASSED!`));
+  }
+}
+
+// BannerType fiction
+async function bannerTypeFiction() {
+  console.log(chalk.grey('Check current number of Banner Type...'));
+  const bannerTypeQuantity = await BannerType.count();
+
+  if (bannerTypeQuantity === 0) {
+    console.log(chalk.red('No user found! Do a fiction...'));
+    const results = await BannerType.bulkCreate(bannerTypeList);
+    console.log(chalk.green(`CREATED: ${results.length} all Type Banner => PASSED!`));
+  } else {
+    console.log(chalk.green(`FOUND: ${bannerTypeQuantity} all Type Banner => PASSED!`));
+  }
+}
+
+// AdsServer fiction
+async function adsServerFiction() {
+  console.log(chalk.grey('Check current number of adsServer...'));
+  const adsServerQuantity = await AdsServer.count();
+
+  if (adsServerQuantity === 0) {
+    console.log(chalk.red('No user found! Do a fiction...'));
+    const results = await AdsServer.bulkCreate(adsServerList);
+    console.log(chalk.green(`CREATED: ${results.length} all adsServer => PASSED!`));
+  } else {
+    console.log(chalk.green(`FOUND: ${adsServerQuantity} all adsServer => PASSED!`));
+  }
+}
+
+// zoneType fiction
+async function zoneTypeFiction() {
+  console.log(chalk.grey('Check current number of zone type...'));
+  const zoneTypeQuantity = await ZoneType.count();
+
+  if (zoneTypeQuantity === 0) {
+    console.log(chalk.red('No user found! Do a fiction...'));
+    const results = await ZoneType.bulkCreate(zoneTypeList);
+    console.log(chalk.green(`CREATED: ${results.length} all zoneType => PASSED!`));
+  } else {
+    console.log(chalk.green(`FOUND: ${zoneTypeQuantity} all zoneType => PASSED!`));
   }
 }
 
@@ -289,6 +337,9 @@ async function fiction() {
   await rolesFiction();
   await userFiction();
   await bannerHtmlTypeFiction();
+  await bannerTypeFiction();
+  await adsServerFiction();
+  await zoneTypeFiction();
   await advertiserFiction();
   await campaignFiction();
   await siteFiction();
