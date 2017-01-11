@@ -36,7 +36,6 @@ class ListZoneOfSite extends Component {
     const height = data.height;
     const sizeText = data.sizeText;
     const sizeValue = data.sizeValue;
-    const delivery = data.delivery;
     const targetIFrame = data.targetIFrame;
     const isShowBannerAgain = data.isShowBannerAgain;
     const source = data.source;
@@ -59,7 +58,6 @@ class ListZoneOfSite extends Component {
         height,
         sizeText,
         sizeValue,
-        delivery,
         targetIFrame,
         isShowBannerAgain,
         source,

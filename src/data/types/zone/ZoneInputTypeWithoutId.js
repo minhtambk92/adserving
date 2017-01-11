@@ -14,7 +14,7 @@ const ZoneInputTypeWithoutId = new InputObjectType({
     only: [
       'siteId',
       'name',
-      'type',
+      'zoneTypeId',
       'html',
       'css',
       'slot',
@@ -22,7 +22,6 @@ const ZoneInputTypeWithoutId = new InputObjectType({
       'height',
       'sizeText',
       'sizeValue',
-      'delivery',
       'targetIFrame',
       'isShowBannerAgain',
       'source',

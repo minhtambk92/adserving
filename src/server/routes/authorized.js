@@ -49,7 +49,12 @@ router.post('/core-js', async (req, res) => {
       id
       name
       description
-      type
+      zoneType {
+        id
+        name
+        isSize
+        value
+      }
       html
       css
       slot

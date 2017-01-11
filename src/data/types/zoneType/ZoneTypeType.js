@@ -7,6 +7,7 @@ import {
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { ZoneType } from '../../models';
+import zoneTypeHasManyZones from '../../queries/zoneType/zoneTypeHasManyZones';
 
 const ZoneTypeType = new ObjectType({
   name: 'ZoneTypeType',
@@ -14,6 +15,7 @@ const ZoneTypeType = new ObjectType({
     // Additional options
   }), {
     // Additional fields
+    zones: zoneTypeHasManyZones(),
   }),
 });
 

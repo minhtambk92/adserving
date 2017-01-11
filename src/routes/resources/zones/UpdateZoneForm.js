@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import Link from '../../../components/Link';
 
 class UpdateZoneForm extends Component {
@@ -13,6 +14,7 @@ class UpdateZoneForm extends Component {
     removeZone: PropTypes.func,
     removeShareByZoneId: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
+    zoneTypeList: PropTypes.array,
   };
 
   constructor(props, context) {
@@ -27,39 +29,39 @@ class UpdateZoneForm extends Component {
       siteId,
       name,
       description,
-      type,
+      zoneType,
       html,
       css,
       slot,
       width,
       height,
       sizeValue,
-      delivery,
       status,
     } = nextProps.zone && (nextProps.zone || {});
 
     this.inputZoneSite.value = siteId;
     this.inputZoneName.value = name;
-    this.inputZoneType.value = type;
+    if (zoneType) {
+      this.inputZoneType.value = zoneType.id;
+    }
     this.inputZoneHtml.value = html;
     this.inputZoneCss.value = css;
     this.inputZoneSlot.value = slot;
     this.inputZoneStatus.value = status;
-    if (delivery) {
-      this.inputZoneDelivery.value = delivery;
-    }
     this.inputZoneDescription.value = description;
-    if (type !== 'type-3') {
-      this.state.checkTypeZone = true;
-      if (width) {
-        this.inputZoneWidth.value = width;
+    if (zoneType) {
+      if (zoneType.isSize === true) {
+        this.setState({ checkTypeZone: true });
+        if (width) {
+          this.inputZoneWidth.value = width;
+        }
+        if (height) {
+          this.inputZoneHeight.value = height;
+        }
+        this.inputZoneSize.value = sizeValue;
+      } else if (zoneType.isSize === false) {
+        this.setState({ checkTypeZone: false });
       }
-      if (height) {
-        this.inputZoneHeight.value = height;
-      }
-      this.inputZoneSize.value = sizeValue;
-    } else if (type === 'type-3') {
-      this.state.checkTypeZone = false;
     }
   }
 
@@ -78,14 +80,16 @@ class UpdateZoneForm extends Component {
   }
 
   onSelectZoneType(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const zoneType = this.inputZoneType.value;
-    if (zoneType !== 'type-3') {
+    const zoneTypeId = this.inputZoneType.value;
+    const arrZone = _.filter(this.props.zoneTypeList, { id: zoneTypeId });
+    const isSize = arrZone[0].isSize;
+    if (isSize === true) {
       event.persist();
       this.setState((previousState) => ({
         ...previousState,
         checkTypeZone: true,
       }));
-    } else if (zoneType === 'type-3') {
+    } else if (isSize === false) {
       event.persist();
       this.setState((previousState) => ({
         ...previousState,
@@ -108,13 +112,12 @@ class UpdateZoneForm extends Component {
   updateZone() {
     const siteId = this.inputZoneSite.value;
     const name = this.inputZoneName.value;
-    const type = this.inputZoneType.value;
+    const zoneTypeId = this.inputZoneType.value;
     const html = this.inputZoneHtml.value;
     const css = this.inputZoneCss.value;
     const slot = this.inputZoneSlot.value;
     const status = this.inputZoneStatus.value;
     const description = this.inputZoneDescription.value;
-    const delivery = this.inputZoneDelivery.value;
     let sizeText = '';
     let sizeValue = '';
     let height = 0;
@@ -130,8 +133,8 @@ class UpdateZoneForm extends Component {
       zone.name = name;
     }
 
-    if (type && type !== this.props.zone.type) {
-      zone.type = type;
+    if (zoneTypeId && zoneTypeId !== this.props.zone.zoneType.id) {
+      zone.zoneTypeId = zoneTypeId;
     }
 
     if (html && html !== this.props.zone.html) {
@@ -145,7 +148,11 @@ class UpdateZoneForm extends Component {
     if (slot && slot !== this.props.zone.slot) {
       zone.slot = slot;
     }
-    if (this.state.checkTypeZone === true && type !== 'type-3') {
+
+    const arrZone = _.filter(this.props.zoneTypeList, { id: zoneTypeId });
+    const isSize = arrZone[0].isSize;
+
+    if (this.state.checkTypeZone === true && isSize === true) {
       sizeValue = this.inputZoneSize.value;
       if (this.inputZoneSize.value === 'custom') {
         if (this.inputZoneWidth.value.trim() !== '' && this.inputZoneHeight.value.trim() !== '') {
@@ -162,10 +169,10 @@ class UpdateZoneForm extends Component {
         height = this.inputZoneHeight.value;
         sizeText = this.inputZoneSize.options[this.inputZoneSize.selectedIndex].text;
       }
-    } else if (this.state.checkTypeZone === false && type === 'type-3') {
+    } else if (this.state.checkTypeZone === false && isSize === false) {
       width = 0;
       height = 0;
-      sizeText = 'Custom (Text ad)';
+      sizeText = arrZone[0].name;
       sizeValue = '';
     }
     if (width && width !== this.props.zone.width) {
@@ -179,10 +186,6 @@ class UpdateZoneForm extends Component {
     }
     if (sizeValue && sizeValue !== this.props.zone.sizeValue) {
       zone.sizeValue = sizeValue;
-    }
-
-    if (delivery && delivery !== this.props.zone.delivery) {
-      zone.delivery = delivery;
     }
 
     if (status && status !== this.props.zone.status) {
@@ -257,10 +260,11 @@ class UpdateZoneForm extends Component {
                 this.inputZoneType = c;
               }}
             >
-              <option value="type-1">Banner, Button or Rectangle</option>
-              <option value="type-2">Interstitial or Floating DHTML</option>
-              <option value="type-3">Text ad</option>
-              <option value="type-4">Email/Newsletter zone</option>
+              {this.props.zoneTypeList && this.props.zoneTypeList.map(zoneType => (
+                <option
+                  key={zoneType.id} value={zoneType.id}
+                >{zoneType.name}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -413,22 +417,6 @@ class UpdateZoneForm extends Component {
               <option value="18">18</option>
               <option value="19">19</option>
             </select>
-          </div>
-        </div>
-        <div className="form-group">
-          <label
-            htmlFor="inputZoneDelivery"
-            className="col-sm-2 control-label"
-          >Delivery</label>
-          <div className="col-sm-10">
-            <input
-              type="number"
-              className="form-control" id="inputZoneDelivery"
-              placeholder="3"
-              ref={c => {
-                this.inputZoneDelivery = c;
-              }}
-            />
           </div>
         </div>
         <div className="form-group">

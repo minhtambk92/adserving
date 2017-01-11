@@ -3,6 +3,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { Zone } from '../../models';
 import zoneBelongsToSite from '../../queries/zone/zoneBelongsToSite';
 import zoneHasManyShares from '../../queries/zone/zoneHasManyShares';
+import zoneBelongsToZoneType from '../../queries/zone/zoneBelongsToZoneType';
 
 const ZoneType = new ObjectType({
   name: 'ZoneType',
@@ -12,6 +13,7 @@ const ZoneType = new ObjectType({
     // Additional fields
     site: zoneBelongsToSite(),
     shares: zoneHasManyShares(),
+    zoneType: zoneBelongsToZoneType(),
   }),
 });
 

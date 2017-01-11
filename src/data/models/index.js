@@ -323,6 +323,13 @@ Share.zone = Share.belongsTo(Zone, {
   foreignKey: 'zoneId',
 });
 
+ZoneType.zones = ZoneType.hasMany(Zone, {
+  foreignKey: 'zoneTypeId',
+});
+Zone.zoneType = Zone.belongsTo(ZoneType, {
+  foreignKey: 'zoneTypeId',
+});
+
 SharePlacement.placement = SharePlacement.belongsTo(Placement, {
   foreignKey: 'placementId',
 });

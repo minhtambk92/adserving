@@ -37,7 +37,6 @@ export function getSite(id) {
             height
             sizeText
             sizeValue
-            delivery
             targetIFrame
             isShowBannerAgain
             source

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "8f5867f4-d972-4118-ba25-40741be51ff8",
+    "name": "Interstitial or Floating DHTML",
+    "value": "interstitial-or-floating-dhtml",
+    "isSize": "1",
+    "status": "active",
+    "createdAt": "2017-01-11 08:17:08",
+    "updatedAt": "2017-01-11 08:17:08",
+    "deletedAt": null
+  },
+  {
+    "id": "bbdafc59-1c45-4145-b39e-f9760627d954",
+    "name": "Email\/Newsletter zone",
+    "value": "email-newsletter-zone",
+    "isSize": "1",
+    "status": "active",
+    "createdAt": "2017-01-11 08:17:54",
+    "updatedAt": "2017-01-11 08:17:54",
+    "deletedAt": null
+  },
+  {
+    "id": "cfb6e8da-41cb-4269-9087-bccbbbf2d216",
+    "name": "Banner, Button or Rectangle",
+    "value": "banner-button-or-rectangle",
+    "isSize": "1",
+    "status": "active",
+    "createdAt": "2017-01-11 08:16:12",
+    "updatedAt": "2017-01-11 08:27:54",
+    "deletedAt": null
+  },
+  {
+    "id": "fb9424ce-7406-45f7-b9b4-0ba2e88068b3",
+    "name": "Text ad",
+    "value": "text-ad",
+    "isSize": "0",
+    "status": "active",
+    "createdAt": "2017-01-11 08:17:26",
+    "updatedAt": "2017-01-11 08:17:26",
+    "deletedAt": null
+  }
+]
