@@ -30,6 +30,7 @@ import {
   BannerType,
   AdsServer,
   ZoneType,
+  ZoneSizeType,
 } from '../../data/models';
 import resourcesList from './data/Resource.json';
 import menusList from './data/Menu.json';
@@ -55,6 +56,7 @@ import bannerHtmlTypeList from './data/BannerHtmlType.json';
 import bannerTypeList from './data/BannerType.json';
 import adsServerList from './data/AdsServer.json';
 import zoneTypeList from './data/ZoneType.json';
+import zoneSizeTypeList from './data/ZoneSizeType.json';
 
 /* eslint-disable no-console */
 
@@ -170,6 +172,20 @@ async function zoneTypeFiction() {
     console.log(chalk.green(`CREATED: ${results.length} all zoneType => PASSED!`));
   } else {
     console.log(chalk.green(`FOUND: ${zoneTypeQuantity} all zoneType => PASSED!`));
+  }
+}
+
+// zoneType fiction
+async function zoneSizeTypeFiction() {
+  console.log(chalk.grey('Check current number of zone size type...'));
+  const zoneSizeTypeQuantity = await ZoneSizeType.count();
+
+  if (zoneSizeTypeQuantity === 0) {
+    console.log(chalk.red('No user found! Do a fiction...'));
+    const results = await ZoneSizeType.bulkCreate(zoneSizeTypeList);
+    console.log(chalk.green(`CREATED: ${results.length} all zoneSizeType => PASSED!`));
+  } else {
+    console.log(chalk.green(`FOUND: ${zoneSizeTypeQuantity} all zoneSizeType => PASSED!`));
   }
 }
 
@@ -340,6 +356,7 @@ async function fiction() {
   await bannerTypeFiction();
   await adsServerFiction();
   await zoneTypeFiction();
+  await zoneSizeTypeFiction();
   await advertiserFiction();
   await campaignFiction();
   await siteFiction();
