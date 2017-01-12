@@ -318,11 +318,13 @@ Placement.campaign = Placement.belongsTo(Campaign, {
 // Each zone can use many share of ads
 Zone.shares = Zone.hasMany(Share, {
   foreignKey: 'zoneId',
+  as: 'shares',
 });
 
 // Each share zone can only belong to one zone
 Share.zone = Share.belongsTo(Zone, {
   foreignKey: 'zoneId',
+  as: 'zone',
 });
 
 ZoneType.zones = ZoneType.hasMany(Zone, {
