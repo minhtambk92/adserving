@@ -10,7 +10,7 @@ import path from 'path';
 import moment from 'moment';
 import jsBeautify from 'js-beautify';
 import { host, rootPath } from '../../config';
-import { Zone } from '../../data/models';
+import { Zone, Share, Placement, Banner } from '../../data/models';
 
 const router = express.Router(); // eslint-disable-line new-cap
 const uploadsFolderName = 'uploads';
@@ -166,29 +166,57 @@ router.post('/bulk-core-js', async(req, res) => {
   const coreJsFolderName = 'corejs';
   const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
   const coreResponse = await fetch(encodeURI(req.body.templateFileUrl));
-  const coreContent = await coreResponse.text();
-  const coreName = `arf-${'test'}.min.js`;
-  const builtCoreFile = path.join(builtCorePath, coreName);
+  const templateZoneCode = await coreResponse.text();
 
-  // Core file
-  const writableStream = fs.createWriteStream(builtCoreFile);
-
-  writableStream.write(coreContent);
-  writableStream.end();
-
-  writableStream.on('pipe', (src) => {
-    console.log('something is piping to the stream!');
-    console.log(src);
+  const allZones = await Zone.findAll({
+    include: [{
+      model: Share,
+      as: 'shares',
+    }],
   });
 
-  writableStream.on('finish', () => {
-    io.sockets.emit('done-bulk-export-zone-data');
-    res.send('DONE BULK WRITE!');
+  let writableStream = null;
+
+  allZones.forEach((zone, index) => {
+    const coreName = `arf-${zone.id}.min.js`;
+    const builtCoreFile = path.join(builtCorePath, coreName);
+    let currentZoneCode = templateZoneCode;
+
+    writableStream = fs.createWriteStream(builtCoreFile);
+
+    // Replace template holder zone object by real zone object
+    if (currentZoneCode.indexOf('"{{zoneDataObject}}"') > -1) {
+      currentZoneCode = currentZoneCode.replace('"{{zoneDataObject}}"', JSON.stringify(zone));
+    } else {
+      currentZoneCode = currentZoneCode.replace('\'{{zoneDataObject}}\'', JSON.stringify(zone));
+    }
+
+    // Replace template holder zone id by real zone id
+    currentZoneCode = currentZoneCode.replace(/\{\{zoneId}}/g, zone.id);
+
+    writableStream.write(currentZoneCode);
+    writableStream.end();
+
+    writableStream.on('finish', () => {
+      // Emit progress
+      io.sockets.emit('run-bulk-export-zone-data', {
+        index: index + 1, // Prevent index 0
+        zone,
+      });
+
+      if (index === allZones.length - 1) {
+        // Emit end point
+        io.sockets.emit('done-bulk-export-zone-data');
+      }
+    });
+
+    writableStream.on('error', (error) => {
+      // Emit error point
+      io.sockets.emit('error-bulk-export-zone-data', { error });
+    });
   });
 
-  writableStream.on('error', (error) => {
-    res.send(error.stack);
-  });
+  res.sendStatus(200);
 });
 
 export default router;

@@ -14,6 +14,7 @@ class BulkActions extends Component {
 
     this.state = {
       isNowExporting: false,
+      completePercentage: 0,
       zoneQuantity: 0,
     };
   }
@@ -26,16 +27,24 @@ class BulkActions extends Component {
       this.setState({ zoneQuantity: data.zoneQuantity });
     });
 
-    socket.on('start-bulk-export-zone-data', () => {
-      this.setState({ isNowExporting: false });
-      this.setState({ zoneQuantity: 0 });
+    socket.on('run-bulk-export-zone-data', (data) => {
+      this.setState({ completePercentage: (data.index * 100) / this.state.zoneQuantity });
+    });
+
+    socket.on('done-bulk-export-zone-data', () => {
+      const timeout = setTimeout(() => {
+        this.setState({ isNowExporting: false });
+        this.setState({ completePercentage: 0 });
+        this.setState({ zoneQuantity: 0 });
+        clearTimeout(timeout);
+      }, 2000);
     });
   }
 
-  async regenerateAdsCode(event) {
+  regenerateAdsCode(event) {
     event.persist();
 
-    const resp = await fetch('/bulk-core-js', {
+    fetch('/bulk-core-js', {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -46,9 +55,6 @@ class BulkActions extends Component {
       }),
       credentials: 'include',
     });
-
-    const data = await resp.text();
-    console.log(data);
   }
 
   render() {
@@ -89,10 +95,11 @@ class BulkActions extends Component {
             <div className="progress active">
               <div
                 className="progress-bar progress-bar-success progress-bar-striped"
-                role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"
-                style={{ width: '20%' }}
+                role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                aria-valuenow={this.state.completePercentage}
+                style={{ width: `${this.state.completePercentage}%` }}
               >
-                <span className="sr-only">20% Complete</span>
+                {this.state.completePercentage}%
               </div>
             </div>
           </div>
