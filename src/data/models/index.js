@@ -43,6 +43,7 @@ import BannerHtmlType from './BannerHtmlType';
 import BannerType from './BannerType';
 import AdsServer from './AdsServer';
 import ZoneType from './ZoneType';
+import ZoneSizeType from './ZoneSizeType';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -236,6 +237,7 @@ BannerHtmlType.banners = BannerHtmlType.hasMany(Banner, {
     name: 'bannerHtmlTypeId',
   },
 });
+
 Banner.bannerHtmlType = Banner.belongsTo(BannerHtmlType, {
   foreignKey: 'bannerHtmlTypeId',
 });
@@ -384,4 +386,5 @@ export {
   BannerType,
   AdsServer,
   ZoneType,
+  ZoneSizeType,
 };

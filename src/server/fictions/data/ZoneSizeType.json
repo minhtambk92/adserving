@@ -1,0 +1,172 @@
+[
+  {
+    "id": "0f378d69-e266-4082-80d2-9b03440d84f4",
+    "name": "IAB Leaderboard",
+    "width": "728",
+    "height": "90",
+    "status": "active",
+    "createdAt": "2017-01-12 02:45:37",
+    "updatedAt": "2017-01-12 02:45:37",
+    "deletedAt": null
+  },
+  {
+    "id": "262911ca-6f96-416e-a90b-8e24b2bb90b7",
+    "name": "IAB Large Rectangle",
+    "width": "336",
+    "height": "280",
+    "status": "active",
+    "createdAt": "2017-01-12 02:56:41",
+    "updatedAt": "2017-01-12 02:56:41",
+    "deletedAt": null
+  },
+  {
+    "id": "30f30e80-cdbb-4f7c-b2bc-4dd82c7eb7a8",
+    "name": "IAB 3:1 Rectangle",
+    "width": "300",
+    "height": "100",
+    "status": "active",
+    "createdAt": "2017-01-12 02:58:56",
+    "updatedAt": "2017-01-12 02:58:56",
+    "deletedAt": null
+  },
+  {
+    "id": "57baf080-8287-475b-b71c-d4eb682ff812",
+    "name": "IAB Skyscraper",
+    "width": "120",
+    "height": "600",
+    "status": "active",
+    "createdAt": "2017-01-12 02:45:16",
+    "updatedAt": "2017-01-12 02:45:44",
+    "deletedAt": null
+  },
+  {
+    "id": "5e3dc224-6f19-4635-8006-6da1251fa193",
+    "name": "IAB Half Banner",
+    "width": "234",
+    "height": "60",
+    "status": "active",
+    "createdAt": "2017-01-12 02:54:05",
+    "updatedAt": "2017-01-12 02:54:05",
+    "deletedAt": null
+  },
+  {
+    "id": "7c5a902d-ae25-4993-bd4a-e8db3603861b",
+    "name": "IAB Rectangle",
+    "width": "180",
+    "height": "150",
+    "status": "active",
+    "createdAt": "2017-01-12 02:56:03",
+    "updatedAt": "2017-01-12 02:56:03",
+    "deletedAt": null
+  },
+  {
+    "id": "85d6c6a9-330f-4dfb-9a50-1450d5d444a6",
+    "name": "IAB Square Pop-up",
+    "width": "250",
+    "height": "250",
+    "status": "active",
+    "createdAt": "2017-01-12 02:57:38",
+    "updatedAt": "2017-01-12 02:57:38",
+    "deletedAt": null
+  },
+  {
+    "id": "8ccf688f-f6c8-482f-ae21-b06d9636eb16",
+    "name": "IAB Wide Skyscraper",
+    "width": "160",
+    "height": "600",
+    "status": "active",
+    "createdAt": "2017-01-12 02:58:09",
+    "updatedAt": "2017-01-12 02:59:14",
+    "deletedAt": null
+  },
+  {
+    "id": "8e87c9c2-2df8-459b-8e54-205ba9ede658",
+    "name": "IAB Vertical Banner",
+    "width": "120",
+    "height": "240",
+    "status": "active",
+    "createdAt": "2017-01-12 02:55:42",
+    "updatedAt": "2017-01-12 02:55:42",
+    "deletedAt": null
+  },
+  {
+    "id": "8f05f2ce-0024-4569-b067-40394e5cb6be",
+    "name": "IAB Button 1",
+    "width": "120",
+    "height": "90",
+    "status": "active",
+    "createdAt": "2017-01-12 02:53:19",
+    "updatedAt": "2017-01-12 02:53:19",
+    "deletedAt": null
+  },
+  {
+    "id": "94de290b-e3c0-4ee4-975c-a58cd08296ef",
+    "name": "IAB Vertical Rectangle",
+    "width": "240",
+    "height": "400",
+    "status": "active",
+    "createdAt": "2017-01-12 02:57:02",
+    "updatedAt": "2017-01-12 02:57:02",
+    "deletedAt": null
+  },
+  {
+    "id": "995eaf4a-274b-44b9-b75d-78818adea512",
+    "name": "IAB Full Banner",
+    "width": "468",
+    "height": "60",
+    "status": "active",
+    "createdAt": "2017-01-12 02:44:51",
+    "updatedAt": "2017-01-12 02:44:51",
+    "deletedAt": null
+  },
+  {
+    "id": "b04e713b-dd89-4329-9f83-35c566e15ea0",
+    "name": "IAB Medium Rectangle",
+    "width": "300",
+    "height": "250",
+    "status": "active",
+    "createdAt": "2017-01-12 02:56:21",
+    "updatedAt": "2017-01-12 02:56:21",
+    "deletedAt": null
+  },
+  {
+    "id": "b390b325-70fb-425d-992f-836662435b7c",
+    "name": "AB Button 2",
+    "width": "120",
+    "height": "60",
+    "status": "active",
+    "createdAt": "2017-01-12 02:53:41",
+    "updatedAt": "2017-01-12 02:53:41",
+    "deletedAt": null
+  },
+  {
+    "id": "cb17e17a-5916-452b-a168-2a41638e4e72",
+    "name": "IAB Pop-Under",
+    "width": "720",
+    "height": "300",
+    "status": "active",
+    "createdAt": "2017-01-12 02:58:31",
+    "updatedAt": "2017-01-12 02:58:31",
+    "deletedAt": null
+  },
+  {
+    "id": "e4b23108-d273-49e7-8ac6-5193168fd107",
+    "name": "IAB Micro Bar",
+    "width": "88",
+    "height": "31",
+    "status": "active",
+    "createdAt": "2017-01-12 02:54:37",
+    "updatedAt": "2017-01-12 02:54:37",
+    "deletedAt": null
+  },
+  {
+    "id": "efc6f113-b61d-4f79-abd4-e12b41f53c39",
+    "name": "IAB Square Button",
+    "width": "125",
+    "height": "125",
+    "status": "active",
+    "createdAt": "2017-01-12 02:55:15",
+    "updatedAt": "2017-01-12 02:55:15",
+    "deletedAt": null
+  }
+]

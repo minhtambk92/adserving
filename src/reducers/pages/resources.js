@@ -22,6 +22,8 @@ import {
   SET_STATUS_UPDATE_ADS_SERVER,
   SET_STATUS_CREATE_ZONE_TYPE,
   SET_STATUS_UPDATE_ZONE_TYPE,
+  SET_STATUS_CREATE_ZONE_SIZE_TYPE,
+  SET_STATUS_UPDATE_ZONE_SIZE_TYPE,
 } from '../../constants';
 
 
@@ -272,6 +274,28 @@ function statusUpdateZoneType(state = false, action) {
   }
 }
 
+function statusCreateZoneSizeType(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_ZONE_SIZE_TYPE: {
+      return action.payload.statusCreateZoneSizeType;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdateZoneSizeType(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_ZONE_SIZE_TYPE: {
+      return action.payload.statusUpdateZoneSizeType;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 export default combineReducers({
   browserCreate,
   browserEdit,
@@ -294,5 +318,7 @@ export default combineReducers({
   statusCreateAdsServer,
   statusUpdateAdsServer,
   statusCreateZoneType,
-  statusUpdateZoneType
+  statusUpdateZoneType,
+  statusCreateZoneSizeType,
+  statusUpdateZoneSizeType,
 });

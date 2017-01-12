@@ -1,4 +1,3 @@
-
 import {
   GraphQLID as IDType,
 } from 'graphql';

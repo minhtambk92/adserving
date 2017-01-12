@@ -28,6 +28,7 @@ import bannerHtmlTypes from './bannerHtmlTypes';
 import bannerTypes from './bannerTypes';
 import adsServers from './adsServers';
 import zoneTypes from './zoneTypes';
+import zoneSizeTypes from './zoneSizeTypes';
 
 import page from './pages';
 
@@ -62,4 +63,5 @@ export default combineReducers({
   bannerTypes,
   adsServers,
   zoneTypes,
+  zoneSizeTypes,
 });
