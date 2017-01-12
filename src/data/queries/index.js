@@ -34,6 +34,7 @@ import bannerHtmlTypes from './bannerHtmlType/bannerHtmlTypes';
 import bannerTypes from './bannerType/bannerTypes';
 import adsServers from './adsServer/adsServers';
 import zoneTypes from './zoneType/zoneTypes';
+import zoneSizeTypes from './zoneSizeType/zoneSizeTypes';
 
 const queries = new ObjectType({
   name: 'Query',
@@ -69,6 +70,7 @@ const queries = new ObjectType({
     bannerTypes,
     adsServers,
     zoneTypes,
+    zoneSizeTypes,
   },
 });
 
