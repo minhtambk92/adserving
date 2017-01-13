@@ -9,10 +9,10 @@ class ListBannerNotBelongPlacement extends Component {
     placementId: PropTypes.string.isRequired,
     containerWidth: PropTypes.number,
     list: PropTypes.array,
-    pushBannerToPlacement: PropTypes.func,
     getPlacement: PropTypes.func,
-    createPlacementBanner: PropTypes.func,
+    updatePlacement: PropTypes.func,
     getBanners: PropTypes.func,
+    placement: PropTypes.object,
   };
 
   dataTableOptions() {
@@ -45,7 +45,7 @@ class ListBannerNotBelongPlacement extends Component {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link
           to="#"
-          onClick={() => this.pushBannerToPlacement(rowData.id)}
+          onClick={() => this.pushBannerToPlacement(rowData)}
         >
           Add To Placement
         </Link>, cell);
@@ -55,15 +55,19 @@ class ListBannerNotBelongPlacement extends Component {
   }
 
   /* eslint-disable max-len */
-  pushBannerToPlacement(bannerId) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const placementId = this.props.placementId;
-    if (placementId && bannerId) {
-      this.props.createPlacementBanner({ placementId, bannerId }).then(() => {
-        this.props.getPlacement(this.props.placementId).then(() => {
-          this.props.getBanners();
-        });
+  pushBannerToPlacement(rowData) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const banner = this.props.placement.banners;
+    banner.push(rowData);
+    const placement = this.props.placement;
+    placement.banners = JSON.stringify(banner.map(b => ({
+      id: b.id,
+      isDeleted: true,
+    })));
+    this.props.updatePlacement(placement).then(() => {
+      this.props.getPlacement(this.props.placementId).then(() => {
+        this.props.getBanners();
       });
-    }
+    });
   }
 
   /* eslint-enable max-len */

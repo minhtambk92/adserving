@@ -15,13 +15,8 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getPlacement, updatePlacement, deletePlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
-import { getBanners, createBanner } from '../../../../actions/banners';
+import { getBanners, updateBanner, createBanner } from '../../../../actions/banners';
 import { getChannels } from '../../../../actions/channels';
-import {
-  createPlacementBanner,
-  removePlacement,
-  removeBannerInPlacementBanner,
-} from '../../../../actions/placementBanners';
 import { removePlacementInSharePlacement } from '../../../../actions/sharePlacements';
 import { createTrack } from '../../../../actions/tracks';
 import { getBannerHtmlTypes } from '../../../../actions/bannerHtmlTypes';
@@ -49,10 +44,6 @@ class Placement extends Component {
     getCampaigns: PropTypes.func,
     banners: PropTypes.object,
     getBanners: PropTypes.func,
-    placementBanners: PropTypes.object,
-    createPlacementBanner: PropTypes.func,
-    removePlacement: PropTypes.func,
-    removeBannerInPlacementBanner: PropTypes.func,
     createBanner: PropTypes.func,
     getChannels: PropTypes.func,
     channels: PropTypes.object,
@@ -65,6 +56,7 @@ class Placement extends Component {
     bannerTypes: PropTypes.object,
     getAdsServers: PropTypes.func,
     adsServers: PropTypes.object,
+    updateBanner: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -168,7 +160,6 @@ class Placement extends Component {
                       placementId={this.props.placementId}
                       getPlacement={this.props.getPlacement}
                       campaigns={this.props.campaigns && this.props.campaigns.list}
-                      removePlacement={this.props.removePlacement}
                       /* eslint-disable max-len */
                       removePlacementInSharePlacement={this.props.removePlacementInSharePlacement}
                       /* eslint-enable max-len */
@@ -192,10 +183,11 @@ class Placement extends Component {
                               this.filterBanner(this.props.banners.list,
                                 this.props.placements.editing.banners,
                               )}
-                              createPlacementBanner={this.props.createPlacementBanner}
                               getPlacement={this.props.getPlacement}
                               getBanners={this.props.getBanners}
+                              updatePlacement={this.props.updatePlacement}
                               placementId={this.props.placementId}
+                              placement={this.props.placements && this.props.placements.editing}
                             />
                           </div>
                           {/* /.box-body */}
@@ -218,17 +210,16 @@ class Placement extends Component {
                             <ListBannerOfPlacement
                               list={this.props.placements && this.props.placements.editing &&
                               this.props.placements.editing.banners}
-                              /* eslint-disable max-len */
-                              removeBannerInPlacementBanner={this.props.removeBannerInPlacementBanner}
-                              /* eslint-enable max-len */
                               getPlacement={this.props.getPlacement}
                               getBanners={this.props.getBanners}
                               placementId={this.props.placementId}
                               createBanner={this.props.createBanner}
                               channels={this.props.channels && this.props.channels.list}
-                              createPlacementBanner={this.props.createPlacementBanner}
                               banners={this.props.banners}
                               createTrack={this.props.createTrack}
+                              updatePlacement={this.props.updatePlacement}
+                              placement={this.props.placements && this.props.placements.editing}
+                              updateBanner={this.props.updateBanner}
                             />
                           </div>
                           {/* /.box-body */}
@@ -274,7 +265,6 @@ class Placement extends Component {
                                 banners={this.props.banners.list}
                                 getBanners={this.props.getBanners}
                                 bannerHtmlTypeList={this.props.bannerHtmlTypes.list}
-                                createPlacementBanner={this.props.createPlacementBanner}
                                 bannerTypeList={this.props.bannerTypes &&
                                 this.props.bannerTypes.list}
                                 getBannerTypes={this.props.getBannerTypes}
@@ -303,7 +293,6 @@ const mapState = (state) => ({
   placements: state.placements,
   campaigns: state.campaigns,
   banners: state.banners,
-  placementBanners: state.placementBanners,
   zones: state.zones,
   channels: state.channels,
   sites: state.sites,
@@ -319,9 +308,6 @@ const mapDispatch = {
   deletePlacement,
   getCampaigns,
   getBanners,
-  createPlacementBanner,
-  removePlacement,
-  removeBannerInPlacementBanner,
   createBanner,
   getChannels,
   removePlacementInSharePlacement,
@@ -329,6 +315,7 @@ const mapDispatch = {
   getBannerHtmlTypes,
   getBannerTypes,
   getAdsServers,
+  updateBanner,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placement));

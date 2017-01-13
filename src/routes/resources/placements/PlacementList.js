@@ -39,10 +39,10 @@ class PlacementList extends Component {
     if (name && startTime && endTime && height && width && weight && description) {
       this.props.createPlacement({
         name,
-        startTime,
-        endTime,
         width,
         height,
+        startTime,
+        endTime,
         weight,
         description,
         campaignId,

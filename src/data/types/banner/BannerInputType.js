@@ -4,6 +4,7 @@ import {
   GraphQLBoolean as BooleanType,
   GraphQLInt as IntType,
   GraphQLNonNull as NonNull,
+  GraphQLList as List,
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { Banner } from '../../models';
@@ -11,7 +12,8 @@ import { Banner } from '../../models';
 const BannerInputType = new InputObjectType({
   name: 'BannerInputType',
   fields: () => Object.assign(attributeFields(Banner, {
-    only: ['id', 'name', 'html', 'width', 'height', 'keyword', 'description', 'imageUrl', 'url', 'bannerHtmlTypeId', 'target', 'adStore', 'impressionsBooked', 'clicksBooked', 'activationDate', 'expirationDate'],
+    only: ['id', 'name', 'html', 'width', 'height', 'keyword', 'description', 'imageUrl', 'url', 'channelId', 'bannerHtmlTypeId', 'target', 'adStore', 'impressionsBooked', 'clicksBooked', 'activationDate', 'expirationDate'],
+    allowNull: true,
   }), {
     // Additional fields
     status: { type: new NonNull(StringType) },
@@ -27,6 +29,7 @@ const BannerInputType = new InputObjectType({
     isClicksBooked: { type: new NonNull(BooleanType) },
     isActivationDate: { type: new NonNull(BooleanType) },
     isExpirationDate: { type: new NonNull(BooleanType) },
+    placements: { type: new List(StringType) },
   }),
 });
 

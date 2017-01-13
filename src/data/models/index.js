@@ -188,21 +188,40 @@ Role.users = Role.belongsToMany(User, {
   as: 'users',
 });
 
-PlacementBanner.placement = PlacementBanner.belongsTo(Placement, {
-  foreignKey: 'placementId',
-});
 
-PlacementBanner.banner = PlacementBanner.belongsTo(Banner, {
+// Each banner can be set to many placement
+Banner.placements = Banner.belongsToMany(Placement, {
+  through: {
+    model: PlacementBanner,
+  },
   foreignKey: 'bannerId',
+  as: 'placements',
 });
 
-Placement.placementBanners = Placement.hasMany(PlacementBanner, {
+// Each user can placement many banner
+Placement.banners = Placement.belongsToMany(Banner, {
+  through: {
+    model: PlacementBanner,
+  },
   foreignKey: 'placementId',
+  as: 'banners',
 });
 
-Banner.placementBanners = Banner.hasMany(PlacementBanner, {
-  foreignKey: 'bannerId',
-});
+// PlacementBanner.placement = PlacementBanner.belongsTo(Placement, {
+//   foreignKey: 'placementId',
+// });
+//
+// PlacementBanner.banner = PlacementBanner.belongsTo(Banner, {
+//   foreignKey: 'bannerId',
+// });
+//
+// Placement.placementBanners = Placement.hasMany(PlacementBanner, {
+//   foreignKey: 'placementId',
+// });
+//
+// Banner.placementBanners = Banner.hasMany(PlacementBanner, {
+//   foreignKey: 'bannerId',
+// });
 
 
 // Each site has many zones
@@ -266,7 +285,6 @@ Banner.adsServer = Banner.belongsTo(AdsServer, {
 Channel.banners = Channel.hasMany(Banner, {
   foreignKey: {
     name: 'channelId',
-    allowNull: false,
   },
 });
 Banner.channel = Banner.belongsTo(Channel, {

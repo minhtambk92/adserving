@@ -79,7 +79,7 @@ export function getBanner(id) {
               status
               createdAt
               updatedAt
-            }
+          }
          tracks {
             id
             clickUrl
@@ -331,6 +331,7 @@ export function updateBanner({
   activationDate,
   expirationDate,
   channelId,
+  placements,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -366,6 +367,20 @@ export function updateBanner({
           activationDate
           expirationDate
           channelId
+          placements {
+              id
+              name
+              width
+              height
+              startTime
+              endTime
+              weight
+              description
+              campaignId
+              status
+              createdAt
+              updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -403,6 +418,7 @@ export function updateBanner({
         activationDate,
         expirationDate,
         channelId,
+        placements,
       },
     });
 

@@ -379,7 +379,8 @@ class OptionBannerForm extends Component {
     banner.adsServerId = this.props.banner.adsServerId;
     banner.isIFrame = this.props.banner.isIFrame;
     banner.weight = this.props.banner.weight;
-    banner.type = this.props.banner.type;
+    banner.bannerTypeId = this.props.banner.bannerType.id;
+    banner.bannerHtmlTypeId = this.props.banner.bannerHtmlTypeId;
     if (moment(new Date(activationDate)).format('x') < moment(new Date(expirationDate)).format('x')) {
       this.props.updateBanner(banner).then(() => {
         this.props.getBanner(this.props.bannerId);

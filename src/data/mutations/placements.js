@@ -6,7 +6,7 @@ import { resolver } from 'graphql-sequelize';
 import PlacementType from '../types/placement/PlacementType';
 import PlacementInputType from '../types/placement/PlacementInputType';
 import PlacementInputTypeWithoutId from '../types/placement/PlacementInputTypeWithoutId';
-import { Placement } from '../models';
+import { Placement, PlacementBanner } from '../models';
 
 const placements = {
   createdPlacement: {
@@ -37,6 +37,32 @@ const placements = {
         opts.where.id = { $eq: args.placement.id };
         const newPlacement = Object.assign({}, args.placement);
         delete newPlacement.id; // Prevent update id
+
+        if (newPlacement.banners) {
+          const placementBanners = JSON.parse(newPlacement.banners);
+
+          placementBanners.forEach(async (banner) => {
+            const placementBanner = await PlacementBanner.findOne({
+              where: {
+                placementId: args.placement.id,
+                bannerId: banner.id,
+              },
+              paranoid: false,
+            });
+
+            if (!placementBanner && banner.isDeleted === true) {
+              await PlacementBanner.create({
+                placementId: args.placement.id,
+                bannerId: banner.id,
+                status: 'active',
+              });
+            } else if (placementBanner && placementBanner.getDataValue('deletedAt') !== null && banner.isDeleted === true) {
+              await placementBanner.restore();
+            } else if (placementBanner && banner.isDeleted === false) {
+              await placementBanner.destroy();
+            }
+          });
+        }
 
         await Placement.update(newPlacement, {
           where: {

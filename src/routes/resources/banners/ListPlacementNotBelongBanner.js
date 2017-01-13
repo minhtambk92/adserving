@@ -6,11 +6,10 @@ import { DataTables, ICheck } from '../../../components/UI/';
 class ListPlacementNotBelongToBanner extends Component {
   static propTypes = {
     bannerId: PropTypes.string.isRequired,
-    containerWidth: PropTypes.number,
     list: PropTypes.array,
-    pushBannerToPlacement: PropTypes.func,
+    updateBanner: PropTypes.func,
     getBanner: PropTypes.func,
-    createPlacementBanner: PropTypes.func,
+    banner: PropTypes.object,
     getPlacements: PropTypes.func,
   };
 
@@ -45,19 +44,24 @@ class ListPlacementNotBelongToBanner extends Component {
         ReactDOM.render(
           <Link
             to="#"
-            onClick={() => this.pushBannerToPlacement(rowData.id)}
+            onClick={() => this.pushBannerToPlacement(rowData)}
           >Add To Banner</Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },
     }];
   }
 
-  pushBannerToPlacement(id) {
-    const bannerId = this.props.bannerId;
-    const zoneId = null;
-    const placementId = id;
-    if (placementId && bannerId) {
-      this.props.createPlacementBanner({ placementId, bannerId, zoneId }).then(() => {
+  pushBannerToPlacement(rowData) {
+    if (this.props.banner) {
+      const banner = this.props.banner;
+      const placement = this.props.banner.placements;
+      placement.push(rowData);
+      banner.placements = JSON.stringify(placement.map(p => ({
+        id: p.id,
+        isDeleted: true,
+      })));
+      banner.bannerTypeId = this.props.banner.bannerType.id;
+      this.props.updateBanner(banner).then(() => {
         this.props.getBanner(this.props.bannerId).then(() => {
           this.props.getPlacements();
         });

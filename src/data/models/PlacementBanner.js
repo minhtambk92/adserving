@@ -4,18 +4,19 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const PlacementBanner = Model.define('PlacementBanner', {
-  id: {
-    type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
-    primaryKey: true,
-  },
-  placementId: {
-    type: DataType.UUID,
-  },
-  bannerId: {
-    type: DataType.UUID,
+  status: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: STATUS_INACTIVE,
+    validate: {
+      isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
+    },
   },
 
 }, {

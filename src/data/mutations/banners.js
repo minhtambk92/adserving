@@ -6,7 +6,7 @@ import { resolver } from 'graphql-sequelize';
 import BannerType from '../types/banner/BannerType';
 import BannerInputType from '../types/banner/BannerInputType';
 import BannerInputTypeWithoutId from '../types/banner/BannerInputTypeWithoutId';
-import { Banner } from '../models';
+import { Banner, PlacementBanner } from '../models';
 
 const banners = {
   createdBanner: {
@@ -35,8 +35,37 @@ const banners = {
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.banner.id };
+
         const newBanner = Object.assign({}, args.banner);
-        delete newBanner.id; // Prevent update id
+        delete newBanner.id; // Prevent update idz
+
+        if (newBanner.placements) {
+          const bannerPlacements = JSON.parse(newBanner.placements);
+
+          bannerPlacements.forEach(async (placement) => {
+            const bannerPlacement = await PlacementBanner.findOne({
+              where: {
+                bannerId: args.banner.id,
+                placementId: placement.id,
+              },
+              paranoid: false,
+            });
+
+            if (!bannerPlacement && placement.isDeleted === true) {
+              await PlacementBanner.create({
+                bannerId: args.banner.id,
+                placementId: placement.id,
+                status: 'active',
+              });
+            } else if (
+              bannerPlacement && bannerPlacement.getDataValue('deletedAt') !== null && placement.isDeleted === true
+            ) {
+              await bannerPlacement.restore();
+            } else if (bannerPlacement && placement.isDeleted === false) {
+              await bannerPlacement.destroy();
+            }
+          });
+        }
 
         await Banner.update(newBanner, {
           where: {

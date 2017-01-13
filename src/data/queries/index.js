@@ -23,7 +23,6 @@ import sites from './site/sites';
 import zones from './zone/zones';
 import channels from './channel/channels';
 import filters from './filters';
-import placementBanners from './placementBanner/placementBanners';
 import optionChannels from './optionChannel/optionChannels';
 import tracks from './track/tracks';
 import shares from './share/shares';
@@ -59,7 +58,6 @@ const queries = new ObjectType({
     zones,
     channels,
     filters,
-    placementBanners,
     optionChannels,
     tracks,
     shares,

@@ -7,11 +7,11 @@ class ListPlacementOfBanner extends Component {
 
   static propTypes = {
     bannerId: PropTypes.string.isRequired,
-    containerWidth: PropTypes.number,
     list: PropTypes.array,
     getPlacements: PropTypes.func,
-    removeBannerInPlacementBanner: PropTypes.func,
+    updateBanner: PropTypes.func,
     getBanner: PropTypes.func,
+    banner: PropTypes.object,
   };
 
   dataTableOptions() {
@@ -44,17 +44,23 @@ class ListPlacementOfBanner extends Component {
         ReactDOM.render(
           <Link
             to="#"
-            onClick={() => this.removePlacement(rowData.id)}
+            onClick={() => this.removePlacement(rowData)}
           >Remove</Link>, cell);
       },
     }];
   }
 
-  removePlacement(id) {
-    const bId = this.props.bannerId;
-    const placementId = id;
-    if (placementId && bId) {
-      this.props.removeBannerInPlacementBanner({ placementId, bId }).then(() => {
+  removePlacement(rowData) {
+    if (this.props.banner) {
+      const placements = this.props.banner.placements;
+      placements.push(rowData);
+      const banner = this.props.banner;
+      banner.placements = JSON.stringify(placements.map(p => ({
+        id: p.id,
+        isDeleted: [rowData.id].indexOf(p.id) === -1,
+      })));
+      banner.bannerTypeId = this.props.banner.bannerType.id;
+      this.props.updateBanner(banner).then(() => {
         this.props.getBanner(this.props.bannerId).then(() => {
           this.props.getPlacements();
         });
