@@ -20,7 +20,6 @@ class ListBannerOfPlacement extends Component {
   };
 
   duplicateBannerOfPlacement(data) {
-    console.log(data);
     const name = `Copy of ${data.name}`;
     const width = data.width;
     const height = data.height;

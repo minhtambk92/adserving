@@ -9,7 +9,8 @@ class ListPlacementOfShare extends Component {
     zoneId: PropTypes.string.isRequired,
     list: PropTypes.array,
     getPlacements: PropTypes.func,
-    removeShareInSharePlacement: PropTypes.func,
+    updateShare: PropTypes.func,
+    share: PropTypes.object,
     getZone: PropTypes.func,
     shareId: PropTypes.string,
     setCurrentShare: PropTypes.func,
@@ -46,7 +47,7 @@ class ListPlacementOfShare extends Component {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link
           to="#"
-          onClick={() => this.removePlacementToShare(rowData.id)}
+          onClick={() => this.removePlacementToShare(rowData)}
         >
           Remove
         </Link>, cell);
@@ -55,13 +56,28 @@ class ListPlacementOfShare extends Component {
     }];
   }
 
-  removePlacementToShare(id) { // eslint-disable-line no-unused-vars, class-methods-use-this
+  removePlacementToShare(rowData) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const shareId = this.props.shareId;
-    const placementId = id;
-    if (placementId && shareId) {
-      this.props.setCurrentShare(shareId);
-      this.props.setPageZoneActiveTab('addPlacement');
-      this.props.removeShareInSharePlacement({ placementId, shareId }).then(() => {
+    this.props.setCurrentShare(shareId);
+    if (this.props.share) {
+      const placements = this.props.share.placements;
+      placements.push(rowData);
+      const share = this.props.share;
+      share.placements = JSON.stringify(placements.map(data => ({
+        id: data.id,
+        name: data.name,
+        startTime: data.startTime,
+        endTime: data.endTime,
+        width: data.width,
+        height: data.height,
+        weight: data.weight,
+        description: data.description,
+        campaignId: data.campaignId,
+        status: data.status,
+        isDeleted: [rowData.id].indexOf(data.id) === -1,
+      })));
+
+      this.props.updateShare(share).then(() => {
         this.props.getZone(this.props.zoneId).then(() => {
           this.props.getPlacements();
         });

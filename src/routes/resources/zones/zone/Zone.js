@@ -24,12 +24,7 @@ import {
 import { getSites } from '../../../../actions/sites';
 import { getPlacements, createPlacement, getPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
-import { createShare, updateShare, deleteShare, removeShareByZoneId } from '../../../../actions/shares';
-import {
-  createSharePlacement,
-  removeShareInSharePlacement,
-  removeShare,
-} from '../../../../actions/sharePlacements';
+import { createShare, updateShare, deleteShare, removeShareByZoneId, getShare } from '../../../../actions/shares';
 import { getZoneTypes } from '../../../../actions/zoneTypes';
 import Layout from '../../../../components/Layout';
 import UpdateZoneForm from '../UpdateZoneForm';
@@ -62,9 +57,6 @@ class Zone extends Component {
     updateShare: PropTypes.func,
     createShare: PropTypes.func,
     deleteShare: PropTypes.func,
-    removeShareInSharePlacement: PropTypes.func,
-    createSharePlacement: PropTypes.func,
-    removeShare: PropTypes.func,
     getPlacement: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
     setCurrentShare: PropTypes.func,
@@ -74,6 +66,7 @@ class Zone extends Component {
     removeShareByZoneId: PropTypes.func,
     getZoneTypes: PropTypes.func,
     zoneTypes: PropTypes.object,
+    getShare: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -84,11 +77,11 @@ class Zone extends Component {
   }
 
   componentWillMount() {
-    this.props.getZone(this.props.zoneId);
     this.props.getSites();
     this.props.getPlacements();
     this.props.getCampaigns();
     this.props.getZoneTypes();
+    this.props.getZone(this.props.zoneId);
   }
 
   componentDidMount() {
@@ -104,17 +97,27 @@ class Zone extends Component {
     if (shares) {
       if (this.props.page.currentShare) {
         this.inputSelectShare.value = this.props.page.currentShare;
-        for (let i = 0; i < shares.length; i += 1) {
-          if (this.props.page.currentShare === shares[i].id) {
-            const arr = [];
-            arr.push(shares[i]);
-            this.setState({ arrShare: shares[i] });
-          }
+        const shareId = this.props.page.currentShare;
+        const arr = _.filter(shares, { id: shareId });
+        if (arr[0].placements.length > 0 && arr[0].placements[0].id !== undefined) {
+          this.setState({ arrShare: arr[0] });
+        } else if (arr[0].placements.length > 0 && arr[0].placements[0].id === undefined) {
+          const arrShares = arr[0];
+          arrShares.placements = JSON.parse(arr[0].placements);
+          this.setState({ arrShare: arrShares });
+        } else if (arr[0].placements.length === 0) {
+          this.setState({ arrShare: shares[0] });
         }
-      } else {
-        const arr = [];
-        arr.push(shares[0]);
-        this.setState({ arrShare: shares[0] });
+      } else if (!this.props.page.currentShare) {
+        if (shares[0].placements.length > 0 && shares[0].placements[0].id !== undefined) {
+          this.setState({ arrShare: shares[0] });
+        } else if (shares[0].placements.length > 0 && shares[0].placements[0].id === undefined) {
+          const arrShares = shares[0];
+          arrShares.placements = JSON.parse(shares[0].placements);
+          this.setState({ arrShare: arrShares });
+        } else if (shares[0].placements.length === 0) {
+          this.setState({ arrShare: shares[0] });
+        }
       }
     }
   }
@@ -258,14 +261,14 @@ class Zone extends Component {
                       zoneId={this.props.zoneId}
                       updateShareZone={this.props.updateShare}
                       createShareZone={this.props.createShare}
-                      removeShare={this.props.removeShare}
                       setPageZoneActiveTab={this.props.setPageZoneActiveTab}
-                      createSharePlacement={this.props.createSharePlacement}
                       setCurrentShare={this.props.setCurrentShare}
                       page={this.props.page}
                       shares={this.props.shares}
                       setStatusShareFormEdit={this.props.setStatusShareFormEdit}
                       setStatusShareFormCreate={this.props.setStatusShareFormCreate}
+                      updateShare={this.props.updateShare}
+                      shareId={this.state.arrShare.id}
                     />
                   </div>
 
@@ -300,66 +303,65 @@ class Zone extends Component {
 
                     <div className="row">
                       <div className="col-lg-12">
-                        {this.state.arrShare && (
-                          <div className="row">
-                            <div className="col-lg-6">
-                              {/* BOX: LIST OF Placements */}
-                              <div className="box">
-                                <div className="box-header with-border">
-                                  <h3 className="box-title">
+                        <div className="row">
+                          <div className="col-lg-6">
+                            {/* BOX: LIST OF Placements */}
+                            <div className="box">
+                              <div className="box-header with-border">
+                                <h3 className="box-title">
                                     List Placement Not Belong To {share.name}</h3>
-                                </div>
-                                {/* /.box-header */}
-                                <div className="box-body">
-                                  <ListPlacementNotBelongToShare
-                                    list={this.props.placements.list && share.placements &&
+                              </div>
+                              {/* /.box-header */}
+                              <div className="box-body">
+                                <ListPlacementNotBelongToShare
+                                  list={this.props.placements.list && share.placements &&
                                     this.filterPlmNotIn(
                                       this.props.placements.list,
                                       share.placements,
                                     )}
-                                    createSharePlacement={this.props.createSharePlacement}
-                                    getZone={this.props.getZone}
-                                    getPlacements={this.props.getPlacements}
-                                    zoneId={this.props.zoneId}
-                                    shareId={share.id}
-                                    getPlacement={this.props.getPlacement}
-                                    zone={this.props.zones.editing}
-                                    setPageZoneActiveTab={this.props.setPageZoneActiveTab}
-                                    setCurrentShare={this.props.setCurrentShare}
-                                  />
-                                </div>
-                                {/* /.box-body */}
+                                  getZone={this.props.getZone}
+                                  getPlacements={this.props.getPlacements}
+                                  zoneId={this.props.zoneId}
+                                  shareId={share.id}
+                                  getPlacement={this.props.getPlacement}
+                                  shares={this.props.shares}
+                                  zone={this.props.zones.editing}
+                                  setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                                  setCurrentShare={this.props.setCurrentShare}
+                                  updateShare={this.props.updateShare}
+                                  share={share}
+                                />
                               </div>
-                              {/* /.box */}
+                              {/* /.box-body */}
                             </div>
-
-                            <div className="col-lg-6">
-                              {/* BOX: LIST OF Placements */}
-                              <div className="box">
-                                <div className="box-header with-border">
-                                  <h3 className="box-title">List placements of {share.name}</h3>
-                                </div>
-                                {/* /.box-header */}
-                                <div className="box-body">
-                                  <ListPlacementOfShare
-                                    list={share.placements}
-                                    removeShareInSharePlacement={
-                                      this.props.removeShareInSharePlacement
-                                    }
-                                    getPlacements={this.props.getPlacements}
-                                    getZone={this.props.getZone}
-                                    zoneId={this.props.zoneId}
-                                    shareId={share.id}
-                                    setPageZoneActiveTab={this.props.setPageZoneActiveTab}
-                                    setCurrentShare={this.props.setCurrentShare}
-                                  />
-                                </div>
-                                {/* /.box-body */}
-                              </div>
-                              {/* /.box */}
-                            </div>
+                            {/* /.box */}
                           </div>
-                        )}
+
+                          <div className="col-lg-6">
+                            {/* BOX: LIST OF Placements */}
+                            <div className="box">
+                              <div className="box-header with-border">
+                                <h3 className="box-title">List placements of {share.name}</h3>
+                              </div>
+                              {/* /.box-header */}
+                              <div className="box-body">
+                                <ListPlacementOfShare
+                                  list={share.placements}
+                                  getPlacements={this.props.getPlacements}
+                                  getZone={this.props.getZone}
+                                  zoneId={this.props.zoneId}
+                                  shareId={share.id}
+                                  share={share}
+                                  updateShare={this.props.updateShare}
+                                  setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                                  setCurrentShare={this.props.setCurrentShare}
+                                />
+                              </div>
+                              {/* /.box-body */}
+                            </div>
+                            {/* /.box */}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -389,7 +391,6 @@ const mapState = (state) => ({
   placements: state.placements,
   campaigns: state.campaigns,
   shares: state.shares,
-  sharePlacements: state.sharePlacements,
   zoneTypes: state.zoneTypes,
 });
 
@@ -404,9 +405,6 @@ const mapDispatch = {
   createShare,
   updateShare,
   deleteShare,
-  createSharePlacement,
-  removeShareInSharePlacement,
-  removeShare,
   getPlacement,
   setPageZoneActiveTab,
   setCurrentShare,
@@ -414,6 +412,7 @@ const mapDispatch = {
   setStatusShareFormCreate,
   removeShareByZoneId,
   getZoneTypes,
+  getShare,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zone));

@@ -16,7 +16,6 @@ import channels from './channels';
 import optionChannels from './optionChannels';
 import tracks from './tracks';
 import shares from './shares';
-import sharePlacements from './sharePlacements';
 import channelOptionBrowser from './channelOptionBrowsers';
 import channelOptionCategories from './channelOptionCategories';
 import options from './options';
@@ -43,7 +42,6 @@ const mutations = new ObjectType({
     ...optionChannels,
     ...tracks,
     ...shares,
-    ...sharePlacements,
     ...channelOptionBrowser,
     ...channelOptionCategories,
     ...options,

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'lodash';
 import ReactDOM from 'react-dom';
 import { DataTables, ICheck } from '../../../components/UI/';
 import Link from '../../../components/Link';
@@ -7,17 +6,16 @@ import Link from '../../../components/Link';
 class ListPlacementNotBelongToZone extends Component {
   static propTypes = {
     zoneId: PropTypes.string.isRequired,
-    containerWidth: PropTypes.number,
     list: PropTypes.array,
     getZone: PropTypes.func,
-    createSharePlacement: PropTypes.func,
+    updateShare: PropTypes.func,
     getPlacements: PropTypes.func,
     shareId: PropTypes.string,
+    share: PropTypes.object,
     getPlacement: PropTypes.func,
     placements: PropTypes.object,
     zone: PropTypes.object,
     setCurrentShare: PropTypes.func,
-    setPageZoneActiveTab: PropTypes.func,
   };
 
   dataTableOptions() {
@@ -50,7 +48,7 @@ class ListPlacementNotBelongToZone extends Component {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link
           to="#"
-          onClick={() => this.pushPlacementToShare(rowData.id)}
+          onClick={() => this.pushPlacementToShare(rowData)}
         >
           Add To Share
         </Link>, cell);
@@ -60,22 +58,33 @@ class ListPlacementNotBelongToZone extends Component {
   }
 
   /* eslint-disable max-len */
-  pushPlacementToShare(id) { // eslint-disable-line no-unused-vars, class-methods-use-this
+  pushPlacementToShare(rowData) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const shareId = this.props.shareId;
-    const placementId = id;
-    if (placementId && shareId) {
-      this.props.setCurrentShare(shareId);
-      this.props.setPageZoneActiveTab('addPlacement');
-      const newP = _.filter(this.props.list, { id: placementId });
-      if (newP[0].width <= this.props.zone.width && newP[0].height <= this.props.zone.height) {
-        this.props.createSharePlacement({ placementId, shareId }).then(() => {
-          this.props.getZone(this.props.zoneId).then(() => {
-            this.props.getPlacements();
-          });
+    this.props.setCurrentShare(shareId);
+
+    if (this.props.share) {
+      const share = this.props.share;
+      const placement = this.props.share.placements;
+      placement.push(rowData);
+      share.placements = JSON.stringify(placement.map(data => ({
+        id: data.id,
+        name: data.name,
+        startTime: data.startTime,
+        endTime: data.endTime,
+        width: data.width,
+        height: data.height,
+        weight: data.weight,
+        description: data.description,
+        campaignId: data.campaignId,
+        status: data.status,
+        isDeleted: true,
+      })));
+
+      this.props.updateShare(share).then(() => {
+        this.props.getZone(this.props.zoneId).then(() => {
+          this.props.getPlacements();
         });
-      } else {
-        console.log('khong them dc');
-      }
+      });
     }
   }
 

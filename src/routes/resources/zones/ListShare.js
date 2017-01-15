@@ -17,14 +17,13 @@ class ListShare extends Component {
     zoneId: PropTypes.string,
     updateShareZone: PropTypes.func,
     createShareZone: PropTypes.func,
-    removeShare: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
     setCurrentShare: PropTypes.func,
-    createSharePlacement: PropTypes.func,
     shares: PropTypes.object,
     page: PropTypes.object,
     setStatusShareFormEdit: PropTypes.func,
     setStatusShareFormCreate: PropTypes.func,
+    updateShare: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -67,9 +66,10 @@ class ListShare extends Component {
   }
 
   duplicateShareZone(data) {
+    console.log(data);
     const name = `Copy of ${data.name}`;
     const css = data.css;
-    const outputCss = data.outputCss;
+    const outputCss = '';
     const html = data.html;
     const width = data.width;
     const height = data.height;
@@ -92,17 +92,22 @@ class ListShare extends Component {
         description,
         zoneId,
       }).then(() => {
-        if (this.props.shares && this.props.shares.list) {
-          const shareId = this.props.shares.list[0].id;
-          const arrPlacement = data.placements;
-          for (let i = 0; i < arrPlacement.length; i += 1) {
-            const placementId = arrPlacement[i].id;
-            this.props.createSharePlacement({ placementId, shareId });
+        if (this.props.shares && this.props.shares.list[0]) {
+          const share = this.props.shares.list[0];
+          if (data.placements.length > 0) {
+            const placement = data.placements;
+            share.placements = JSON.stringify(placement.map(p => ({
+              id: p.id,
+              isDeleted: true,
+            })));
+            delete share.zoneId;
+            this.props.updateShare(share).then(() => {
+              this.props.getZone(this.props.zoneId).then(() => {
+                this.props.setPageZoneActiveTab('shareZone');
+              });
+            });
           }
         }
-        this.props.getZone(this.props.zoneId).then(() => {
-          this.props.setPageZoneActiveTab('shareZone');
-        });
       });
     }
   }
@@ -168,7 +173,6 @@ class ListShare extends Component {
   deleteShareZone(id) {
     if (id) {
       this.props.deleteShareZone(id).then(() => {
-        this.props.removeShare(id);
         this.props.getZone(this.props.zoneId);
       });
     }

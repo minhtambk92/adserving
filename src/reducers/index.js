@@ -20,7 +20,6 @@ import channelOptionCategories from './channelOptionCategories';
 import optionChannels from './optionChannels';
 import tracks from './tracks';
 import shares from './shares';
-import sharePlacements from './sharePlacements';
 import options from './options';
 import permissions from './permissions';
 import bannerHtmlTypes from './bannerHtmlTypes';
@@ -52,7 +51,6 @@ export default combineReducers({
   channelOptionBrowsers,
   tracks,
   shares,
-  sharePlacements,
   page,
   channelOptionCategories,
   options,
