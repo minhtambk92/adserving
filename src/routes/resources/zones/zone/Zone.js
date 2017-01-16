@@ -123,7 +123,7 @@ class Zone extends Component {
           this.setState({ arrShare: shares[0] });
         }
       }
-    } else if (shares.length === 0) {
+    } else if (shares && shares.length === 0) {
       this.setState({ arrShare: {} });
     }
   }
@@ -200,7 +200,6 @@ class Zone extends Component {
             .concat(': ')
             .concat(this.props.zones.editing ? this.props.zones.editing.name : '...')
         }
-        pageSubTitle={this.props.zones.editing ? this.props.zones.editing.sizeText : ''}
       >
         <div>
           <div className="row">
@@ -333,7 +332,6 @@ class Zone extends Component {
                                   getPlacement={this.props.getPlacement}
                                   shares={this.props.shares}
                                   zone={this.props.zones.editing}
-                                  setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                                   setCurrentShare={this.props.setCurrentShare}
                                   updateShare={this.props.updateShare}
                                   share={share}
