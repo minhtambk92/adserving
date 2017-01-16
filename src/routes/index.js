@@ -7,9 +7,9 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import { host } from '../config';
-
 /* eslint-disable global-require */
+
+import { host } from '../config';
 
 // The top-level (parent) route
 export default {
@@ -19,10 +19,12 @@ export default {
   // Keep in mind, routes are evaluated in order
   children: [
     require('./home').default,
-    require('./register').default,
+    require('./contact').default,
     require('./login').default,
-    require('./settings').default,
-    require('./resources').default,
+    require('./register').default,
+    require('./about').default,
+    require('./privacy').default,
+    require('./admin').default,
 
     // Wildcard routes, e.g. { path: '*', ... } (must go last)
     require('./notFound').default,
