@@ -98,7 +98,7 @@ class Zone extends Component {
     const {
       shares,
     } = nextProps.zones && (nextProps.zones.editing || {});
-    if (shares) {
+    if (shares && shares.length > 0) {
       if (this.props.page.currentShare) {
         this.inputSelectShare.value = this.props.page.currentShare;
         const shareId = this.props.page.currentShare;
@@ -123,6 +123,8 @@ class Zone extends Component {
           this.setState({ arrShare: shares[0] });
         }
       }
+    } else if (shares.length === 0) {
+      this.setState({ arrShare: {} });
     }
   }
 

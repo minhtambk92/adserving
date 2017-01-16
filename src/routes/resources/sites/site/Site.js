@@ -62,7 +62,7 @@ class Site extends Component {
     this.props.getSite(this.props.siteId);
     this.props.getChannels();
     this.props.getZoneTypes();
-    this.props.zoneSizeTypes();
+    this.props.getZoneSizeTypes();
   }
 
   componentDidMount() {

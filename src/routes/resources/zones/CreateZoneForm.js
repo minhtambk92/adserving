@@ -33,6 +33,14 @@ class CreateZoneForm extends Component {
         this.inputZoneType.value = nextProps.zoneTypeList[0].id;
         if (nextProps.zoneTypeList[0].isSize === true) {
           this.setState({ checkTypeZone: true });
+          if (nextProps.zoneSizeTypeList[0]) {
+            if (this.inputZoneSize !== null && this.inputZoneHeight !== null
+              && this.inputZoneWidth !== null) {
+              this.inputZoneSize.value = nextProps.zoneSizeTypeList[0].id;
+              this.inputZoneHeight.value = nextProps.zoneSizeTypeList[0].height;
+              this.inputZoneWidth.value = nextProps.zoneSizeTypeList[0].width;
+            }
+          }
         } else {
           this.setState({ checkTypeZone: false });
         }
