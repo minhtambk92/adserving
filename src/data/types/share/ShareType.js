@@ -4,7 +4,7 @@ import {
 import { attributeFields } from 'graphql-sequelize';
 import { Share } from '../../models';
 import shareBelongsToZone from '../../queries/share/shareBelongsToZone';
-import shareHasManyPlacement from '../../queries/share/shareHasManyPlacements';
+import shareBelongsToManyPlacement from '../../queries/share/shareBelongsToManyPlacements';
 
 const ShareType = new ObjectType({
   name: 'ShareType',
@@ -13,7 +13,7 @@ const ShareType = new ObjectType({
   }), {
     // Additional fields
     zone: shareBelongsToZone(),
-    placements: shareHasManyPlacement(),
+    placements: shareBelongsToManyPlacement(),
   }),
 });
 

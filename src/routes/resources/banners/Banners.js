@@ -20,7 +20,6 @@ import {
 import { getPlacements } from '../../../actions/placements';
 import { getChannels } from '../../../actions/channels';
 import { setPageBannerActiveTab } from '../../../actions/pages/banners';
-import { getPlacementsByBannerId, createPlacementBanner } from '../../../actions/placementBanners';
 import { getTrackByBannerId, createTrack } from '../../../actions/tracks';
 import { getBannerHtmlTypes } from '../../../actions/bannerHtmlTypes';
 import { getBannerTypes } from '../../../actions/bannerTypes';
@@ -47,9 +46,6 @@ class Banners extends Component {
     getChannels: PropTypes.func,
     channels: PropTypes.object,
     setPageBannerActiveTab: PropTypes.func,
-    placementBanners: PropTypes.object,
-    getPlacementsByBannerId: PropTypes.func,
-    createPlacementBanner: PropTypes.func,
     getTrackByBannerId: PropTypes.func,
     tracks: PropTypes.object,
     createTrack: PropTypes.func,
@@ -162,9 +158,6 @@ class Banners extends Component {
                     setPageBannerActiveTab={this.props.setPageBannerActiveTab}
                     createBanner={this.props.createBanner}
                     banners={this.props.banners}
-                    placementBanners={this.props.placementBanners}
-                    getPlacementsByBannerId={this.props.getPlacementsByBannerId}
-                    createPlacementBanner={this.props.createPlacementBanner}
                     getTrackByBannerId={this.props.getTrackByBannerId}
                     tracks={this.props.tracks}
                     createTrack={this.props.createTrack}
@@ -188,7 +181,6 @@ const mapState = (state) => ({
   banners: state.banners,
   placements: state.placements,
   channels: state.channels,
-  placementBanners: state.placementBanners,
   tracks: state.tracks,
   bannerHtmlTypes: state.bannerHtmlTypes,
   bannerTypes: state.bannerTypes,
@@ -203,8 +195,6 @@ const mapDispatch = {
   getPlacements,
   getChannels,
   setPageBannerActiveTab,
-  getPlacementsByBannerId,
-  createPlacementBanner,
   getTrackByBannerId,
   createTrack,
   getBannerHtmlTypes,

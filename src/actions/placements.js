@@ -210,6 +210,7 @@ export function updatePlacement({
   description,
   campaignId,
   status,
+  banners,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -225,6 +226,39 @@ export function updatePlacement({
           description
           campaignId
           status
+          banners {
+            id
+            name
+            html
+            width
+            height
+            keyword
+            weight
+            description
+            bannerTypeId
+            imageUrl
+            url
+            target
+            isIFrame
+            status
+            adsServerId
+            bannerHtmlTypeId
+            isCountView
+            isFixIE
+            isDefault 
+            isRelative
+            isImpressionsBooked
+            isClicksBooked
+            isActivationDate
+            isExpirationDate
+            adStore
+            impressionsBooked
+            clicksBooked
+            activationDate
+            expirationDate
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -242,6 +276,7 @@ export function updatePlacement({
         description,
         campaignId,
         status,
+        banners,
       },
     });
 

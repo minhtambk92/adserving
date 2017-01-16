@@ -9,7 +9,6 @@ import content from './content';
 import advertisers from './advertisers';
 import campaigns from './campaigns';
 import placements from './placements';
-import placementBanners from './placementBanners';
 import banners from './banners';
 import sites from './sites';
 import roles from './roles';
@@ -21,7 +20,6 @@ import channelOptionCategories from './channelOptionCategories';
 import optionChannels from './optionChannels';
 import tracks from './tracks';
 import shares from './shares';
-import sharePlacements from './sharePlacements';
 import options from './options';
 import permissions from './permissions';
 import bannerHtmlTypes from './bannerHtmlTypes';
@@ -42,7 +40,6 @@ export default combineReducers({
   content,
   advertisers,
   placements,
-  placementBanners,
   campaigns,
   banners,
   sites,
@@ -54,7 +51,6 @@ export default combineReducers({
   channelOptionBrowsers,
   tracks,
   shares,
-  sharePlacements,
   page,
   channelOptionCategories,
   options,

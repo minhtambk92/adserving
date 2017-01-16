@@ -7,6 +7,7 @@ import {
   CREATE_SHARE,
   UPDATE_SHARE,
   DELETE_SHARE,
+  GET_SHARE,
 } from '../constants';
 
 export function getShareByZoneId(id) {
@@ -37,6 +38,53 @@ export function getShareByZoneId(id) {
       type: GET_SHARE_BY_ZONE_ID,
       payload: {
         shares: data.shares,
+      },
+    });
+  };
+}
+
+export function getShare(id) {
+  return async (dispatch, getState, { graphqlRequest }) => {
+    const query = `
+      query {
+        shares(where: {id: "${id}"}, limit: 1) {
+          id
+          name
+          html
+          css
+          outputCss
+          width
+          height
+          weight
+          classes
+          type
+          description
+          zoneId
+          placements {
+            id
+            name
+            width
+            height
+            startTime
+            endTime
+            weight
+            description
+            campaignId
+            status
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+
+    const { data } = await graphqlRequest(query);
+
+    dispatch({
+      type: GET_SHARE,
+      payload: {
+        share: data.shares.shift(),
       },
     });
   };
@@ -144,7 +192,8 @@ export function createShare({ name, html, css, outputCss, width,
 
 export function updateShare({ id, name, html, css, outputCss, width,
   height,
-  weight, classes, type, description, zoneId }) {
+  weight, classes, type, description, zoneId, placements,
+}) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($share: ShareInputType!) {
@@ -161,6 +210,20 @@ export function updateShare({ id, name, html, css, outputCss, width,
           type
           description
           zoneId
+          placements {
+            id
+            name
+            width
+            height
+            startTime
+            endTime
+            weight
+            description
+            campaignId
+            status
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -180,9 +243,9 @@ export function updateShare({ id, name, html, css, outputCss, width,
         type,
         description,
         zoneId,
+        placements,
       },
     });
-
     dispatch({
       type: UPDATE_SHARE,
       payload: {

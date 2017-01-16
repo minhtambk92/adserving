@@ -9,7 +9,7 @@ import { resolver } from 'graphql-sequelize';
 import ShareType from '../types/share/ShareType';
 import ShareInputType from '../types/share/ShareInputType';
 import ShareInputTypeWithoutId from '../types/share/ShareInputTypeWithoutId';
-import { Share } from '../models';
+import { Share, SharePlacement } from '../models';
 
 const shares = {
   createdShare: {
@@ -42,12 +42,39 @@ const shares = {
         const newShare = Object.assign({}, args.share);
         delete newShare.id; // Prevent update id
 
+        if (newShare.placements) {
+          const sharePlacements = JSON.parse(newShare.placements);
+
+          sharePlacements.forEach(async (placement) => {
+            const sharePlacement = await SharePlacement.findOne({
+              where: {
+                shareId: args.share.id,
+                placementId: placement.id,
+              },
+              paranoid: false,
+            });
+
+            if (!sharePlacement && placement.isDeleted === true) {
+              await SharePlacement.create({
+                shareId: args.share.id,
+                placementId: placement.id,
+                status: 'active',
+              });
+            } else if (
+              sharePlacement && sharePlacement.getDataValue('deletedAt') !== null && placement.isDeleted === true
+            ) {
+              await sharePlacement.restore();
+            } else if (sharePlacement && placement.isDeleted === false) {
+              await sharePlacement.destroy();
+            }
+          });
+        }
+
         await Share.update(newShare, {
           where: {
             id: args.share.id,
           },
         });
-
         return opts;
       },
     }),

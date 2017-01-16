@@ -44,6 +44,7 @@ const Banner = Model.define('Banner', {
   weight: {
     type: DataType.INTEGER,
     defaultValue: 0,
+    allowNull: false,
   },
   description: {
     type: DataType.TEXT,
@@ -66,22 +67,27 @@ const Banner = Model.define('Banner', {
   isIFrame: {
     type: DataType.BOOLEAN,
     defaultValue: true,
+    allowNull: false,
   },
   isCountView: {
     type: DataType.BOOLEAN,
     defaultValue: true,
+    allowNull: false,
   },
   isFixIE: {
     type: DataType.BOOLEAN,
     defaultValue: false,
+    allowNull: false,
   },
   isDefault: {
     type: DataType.BOOLEAN,
     defaultValue: false,
+    allowNull: false,
   },
   isRelative: {
     type: DataType.BOOLEAN,
     defaultValue: false,
+    allowNull: false,
   },
   adStore: {
     type: DataType.STRING,
@@ -90,6 +96,7 @@ const Banner = Model.define('Banner', {
   isImpressionsBooked: {
     type: DataType.BOOLEAN,
     defaultValue: true,
+    allowNull: false,
   },
   impressionsBooked: {
     type: DataType.INTEGER,
@@ -98,6 +105,7 @@ const Banner = Model.define('Banner', {
   isClicksBooked: {
     type: DataType.BOOLEAN,
     defaultValue: true,
+    allowNull: false,
   },
   clicksBooked: {
     type: DataType.INTEGER,
@@ -106,6 +114,7 @@ const Banner = Model.define('Banner', {
   isActivationDate: {
     type: DataType.BOOLEAN,
     defaultValue: true,
+    allowNull: false,
   },
   activationDate: {
     type: DataType.DATE,
@@ -113,6 +122,7 @@ const Banner = Model.define('Banner', {
   isExpirationDate: {
     type: DataType.BOOLEAN,
     defaultValue: true,
+    allowNull: false,
   },
   expirationDate: {
     type: DataType.DATE,

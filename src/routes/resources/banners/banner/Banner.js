@@ -22,11 +22,6 @@ import { getBannerHtmlTypes } from '../../../../actions/bannerHtmlTypes';
 import { getAdsServers } from '../../../../actions/adsServers';
 import { getChannels } from '../../../../actions/channels';
 import {
-  createPlacementBanner,
-  removeBanner,
-  removeBannerInPlacementBanner,
-} from '../../../../actions/placementBanners';
-import {
   createTrack,
   deleteTrack,
   updateTrack,
@@ -55,13 +50,9 @@ class Banner extends Component {
     getCampaigns: PropTypes.func,
     createPlacement: PropTypes.func,
     placements: PropTypes.object,
-    createPlacementBanner: PropTypes.func,
     getPlacements: PropTypes.func,
-    placementBanners: PropTypes.object,
-    removeBanner: PropTypes.func,
     getChannels: PropTypes.func,
     channels: PropTypes.object,
-    removeBannerInPlacementBanner: PropTypes.func,
     createTrack: PropTypes.func,
     deleteTrack: PropTypes.func,
     updateTrack: PropTypes.func,
@@ -182,7 +173,6 @@ class Banner extends Component {
                       bannerTypes={this.props.bannerTypes}
                       bannerTypeList={this.props.bannerTypes && this.props.bannerTypes.list}
                       getBanner={this.props.getBanner}
-                      removeBanner={this.props.removeBanner}
                       channels={this.props.channels.list}
                       adsServerList={this.props.adsServers && this.props.adsServers.list}
                     />
@@ -196,9 +186,6 @@ class Banner extends Component {
                       bannerId={this.props.bannerId}
                       getBanner={this.props.getBanner}
                       channels={this.props.channels.list}
-                      bannerTypes={this.props.bannerTypes}
-                      bannerTypeList={this.props.bannerTypes && this.props.bannerTypes.list}
-                      getBannerTypes={this.props.getBannerTypes}
                       createTrack={this.props.createTrack}
                       deleteTrack={this.props.deleteTrack}
                       updateTrack={this.props.updateTrack}
@@ -224,7 +211,8 @@ class Banner extends Component {
                                 this.props.placements.list,
                                 this.props.banners.editing.placements,
                               )}
-                              createPlacementBanner={this.props.createPlacementBanner}
+                              banner={this.props.banners && this.props.banners.editing}
+                              updateBanner={this.props.updateBanner}
                               getBanner={this.props.getBanner}
                               getPlacements={this.props.getPlacements}
                               bannerId={this.props.bannerId}
@@ -249,12 +237,11 @@ class Banner extends Component {
                             <ListPlacementOfBanner
                               list={this.props.banners.editing &&
                               this.props.banners.editing.placements}
-                              /* eslint-disable max-len */
-                              removeBannerInPlacementBanner={this.props.removeBannerInPlacementBanner}
-                              /* eslint-enable max-len */
                               getPlacements={this.props.getPlacements}
                               getBanner={this.props.getBanner}
                               bannerId={this.props.bannerId}
+                              banner={this.props.banners && this.props.banners.editing}
+                              updateBanner={this.props.updateBanner}
                             />
                           </div>
                           {/* /.box-body */}
@@ -296,7 +283,6 @@ class Banner extends Component {
                             getPlacements={this.props.getPlacements}
                             placements={this.props.placements && this.props.placements.list}
                             getBanner={this.props.getBanner}
-                            createPlacementBanner={this.props.createPlacementBanner}
                           />
                         </div>
                         {/* /.col */}
@@ -321,7 +307,6 @@ const mapState = (state) => ({
   placements: state.placements,
   channels: state.channels,
   tracks: state.tracks,
-  placementBanners: state.placementBanners,
   bannerHtmlTypes: state.bannerHtmlTypes,
   bannerTypes: state.bannerTypes,
   adsServers: state.adsServers,
@@ -333,10 +318,7 @@ const mapDispatch = {
   deleteBanner,
   getCampaigns,
   createPlacement,
-  createPlacementBanner,
   getPlacements,
-  removeBanner,
-  removeBannerInPlacementBanner,
   getChannels,
   createTrack,
   deleteTrack,

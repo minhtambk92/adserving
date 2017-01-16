@@ -10,14 +10,12 @@ import sites from './sites';
 import advertisers from './advertisers';
 import campaigns from './campaigns';
 import placements from './placements';
-import placementBanners from './placementBanners';
 import zones from './zones';
 import banners from './banners';
 import channels from './channels';
 import optionChannels from './optionChannels';
 import tracks from './tracks';
 import shares from './shares';
-import sharePlacements from './sharePlacements';
 import channelOptionBrowser from './channelOptionBrowsers';
 import channelOptionCategories from './channelOptionCategories';
 import options from './options';
@@ -36,7 +34,6 @@ const mutations = new ObjectType({
     ...users,
     ...sites,
     ...advertisers,
-    ...placementBanners,
     ...campaigns,
     ...placements,
     ...banners,
@@ -45,7 +42,6 @@ const mutations = new ObjectType({
     ...optionChannels,
     ...tracks,
     ...shares,
-    ...sharePlacements,
     ...channelOptionBrowser,
     ...channelOptionCategories,
     ...options,

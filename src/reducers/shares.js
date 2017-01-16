@@ -5,6 +5,7 @@ import {
   CREATE_SHARE,
   UPDATE_SHARE,
   DELETE_SHARE,
+  GET_SHARE,
 } from '../constants';
 
 function list(state = [], action) {
@@ -29,6 +30,9 @@ function list(state = [], action) {
 
 function editing(state = {}, action) {
   switch (action.type) {
+    case GET_SHARE: {
+      return action.payload.share;
+    }
     case UPDATE_SHARE: {
       return action.payload.share;
     }

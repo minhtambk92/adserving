@@ -7,17 +7,16 @@ class ListBannerOfPlacement extends Component {
 
   static propTypes = {
     placementId: PropTypes.string.isRequired,
-    containerWidth: PropTypes.number,
     list: PropTypes.array,
-    removeBannerToPlacement: PropTypes.func,
     getPlacement: PropTypes.func,
-    removeBannerInPlacementBanner: PropTypes.func,
     getBanners: PropTypes.func,
     createBanner: PropTypes.func,
     banners: PropTypes.object,
-    createPlacementBanner: PropTypes.func,
     tracks: PropTypes.object,
     createTrack: PropTypes.func,
+    placement: PropTypes.object,
+    updatePlacement: PropTypes.func,
+    updateBanner: PropTypes.func,
   };
 
   duplicateBannerOfPlacement(data) {
@@ -33,8 +32,8 @@ class ListBannerOfPlacement extends Component {
     const url = data.url;
     const imageUrl = data.imageUrl;
     const html = data.html;
-    const bannerHTMLTypeId = data.bannerHTMLTypeId;
-    const adServer = data.adServer;
+    const bannerHtmlTypeId = data.bannerHtmlTypeId;
+    const adsServerId = data.adsServerId;
     const status = data.status;
     const keyword = data.keyword;
     const isCountView = data.isCountView;
@@ -66,8 +65,8 @@ class ListBannerOfPlacement extends Component {
         imageUrl,
         isIFrame,
         status,
-        adServer,
-        bannerHTMLTypeId,
+        adsServerId,
+        bannerHtmlTypeId,
         isCountView,
         isFixIE,
         isDefault,
@@ -83,26 +82,30 @@ class ListBannerOfPlacement extends Component {
         expirationDate,
         channelId,
       }).then(() => {
-        const bannerId = this.props.banners.list[0].id;
+        if (this.props.banners.list[0]) {
+          const bannerId = this.props.banners.list[0].id;
+          const banner = this.props.banners.list[0];
 
-        if (data.placements.length > 0) {
-          const arrPlacement = data.placements;
-          for (let i = 0; i < arrPlacement.length; i += 1) {
-            const placementId = arrPlacement[i].id;
-            this.props.createPlacementBanner({ placementId, bannerId }).then(() => {
+          if (data.placements.length > 0) {
+            const placements = data.placements;
+            banner.placements = JSON.stringify(placements.map(b => ({
+              id: b.id,
+              isDeleted: true,
+            })));
+            this.props.updateBanner(banner).then(() => {
               this.props.getPlacement(this.props.placementId);
             });
           }
-        }
 
-        if (data.tracks.length > 0) {
-          const arrTracks = data.tracks;
-          for (let j = 0; j < arrTracks.length; j += 1) {
-            const clickUrl = arrTracks[j].clickUrl;
-            const impressionUrl = arrTracks[j].impressionUrl;
-            this.props.createTrack({ clickUrl, impressionUrl, bannerId }).then(() => {
-              this.props.getPlacement(this.props.placementId);
-            });
+          if (data.tracks.length > 0) {
+            const arrTracks = data.tracks;
+            for (let j = 0; j < arrTracks.length; j += 1) {
+              const clickUrl = arrTracks[j].clickUrl;
+              const impressionUrl = arrTracks[j].impressionUrl;
+              this.props.createTrack({ clickUrl, impressionUrl, bannerId }).then(() => {
+                this.props.getPlacement(this.props.placementId);
+              });
+            }
           }
         }
       });
@@ -139,7 +142,7 @@ class ListBannerOfPlacement extends Component {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link
           to="#"
-          onClick={() => this.removeBannerToPlacement(rowData.id)}
+          onClick={() => this.removeBannerToPlacement(rowData)}
         >
           Remove
         </Link>, cell);
@@ -161,16 +164,19 @@ class ListBannerOfPlacement extends Component {
     }];
   }
 
-  removeBannerToPlacement(bannerId) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const placementId = this.props.placementId;
-    const bId = bannerId;
-    if (placementId && bId) {
-      this.props.removeBannerInPlacementBanner({ placementId, bId }).then(() => {
+  removeBannerToPlacement(rowData) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const banner = this.props.placement.banners;
+    banner.push(rowData);
+    const placement = this.props.placement;
+    placement.banners = JSON.stringify(banner.map(b => ({
+      id: b.id,
+      isDeleted: [rowData.id].indexOf(b.id) === -1,
+    })));
+    this.props.updatePlacement(placement).then(() => {
+      this.props.getPlacement(this.props.placementId).then(() => {
         this.props.getBanners();
-        this.props.getPlacement(placementId).then(() => {
-        });
       });
-    }
+    });
   }
 
   render() {

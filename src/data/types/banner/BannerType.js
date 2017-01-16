@@ -6,7 +6,7 @@ import bannerBelongsToBannerHtmlType from '../../queries/banner/bannerBelongsToB
 import bannerBelongsToBannerType from '../../queries/banner/bannerBelongsToBannerType';
 import bannerBelongsToAdsServer from '../../queries/banner/bannerBelongsToAdsServer';
 import bannerHasManyTracks from '../../queries/banner/bannerHasManyTracks';
-import bannerHasManyPlacements from '../../queries/banner/bannerHasManyPlacements';
+import bannerBelongsToManyPlacements from '../../queries/banner/bannerBelongsToManyPlacements';
 
 const BannerType = new ObjectType({
   name: 'BannerType',
@@ -14,9 +14,9 @@ const BannerType = new ObjectType({
     // Additional options
   }), {
     // Additional fields
+    placements: bannerBelongsToManyPlacements(),
     channel: bannerBelongsToChannel(),
     tracks: bannerHasManyTracks(),
-    placements: bannerHasManyPlacements(),
     bannerHtmlType: bannerBelongsToBannerHtmlType(),
     bannerType: bannerBelongsToBannerType(),
     adsServer: bannerBelongsToAdsServer(),

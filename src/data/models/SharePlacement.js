@@ -9,19 +9,20 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
+import {
+  STATUS_ACTIVE,
+  STATUS_INACTIVE,
+} from '../../constants';
 
 const SharePlacement = Model.define('SharePlacement', {
 
-  id: {
-    type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
-    primaryKey: true,
-  },
-  placementId: {
-    type: DataType.UUID,
-  },
-  shareId: {
-    type: DataType.UUID,
+  status: {
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: STATUS_INACTIVE,
+    validate: {
+      isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
+    },
   },
 
 }, {

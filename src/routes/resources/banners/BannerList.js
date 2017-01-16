@@ -40,7 +40,7 @@ class BannerList extends Component {
     const weight = data.weight;
     const description = data.description;
     const channelId = data.channelId;
-    const bannerTypeId = data.bannerTypeId;
+    const bannerTypeId = data.bannerType.id;
     const isIFrame = data.isIFrame;
     const target = data.target;
     const url = data.url;
