@@ -7,9 +7,9 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import path from 'path';
-
 /* eslint-disable max-len */
+
+import path from 'path';
 
 export const rootPath = process.env.ROOT_PATH || path.join(__dirname, '../');
 export const port = process.env.PORT || 3000;

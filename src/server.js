@@ -21,6 +21,7 @@ import ReactDOM from 'react-dom/server';
 import UniversalRouter from 'universal-router';
 import PrettyError from 'pretty-error';
 import { IntlProvider } from 'react-intl';
+
 import './serverIntlPolyfill';
 import App from './components/App';
 import Html from './components/Html';
@@ -68,7 +69,7 @@ app.use(requestLanguage({
     name: 'lang',
     options: {
       path: '/',
-      maxAge: 365 * 24 * 3600 * 1000, // 1 years in milliseconds
+      maxAge: 3650 * 24 * 3600 * 1000, // 10 years in miliseconds
     },
     url: '/lang/{language}',
   },
@@ -228,7 +229,7 @@ models.sync().catch(err => console.error(err.stack)).then(() => {
   server.listen(port, async () => {
     await fiction();
     await startup();
-    console.log(`Your app is now ready at http://${host}`);
+    console.log(`The server is running at http://${host}`);
   });
 });
 /* eslint-enable no-console */
