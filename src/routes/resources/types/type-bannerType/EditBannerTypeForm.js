@@ -1,6 +1,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
+import { ICheck } from '../../../../components/UI';
 import Link from '../../../../components/Link';
 
 class EditBannerTypeForm extends Component {
@@ -19,8 +20,19 @@ class EditBannerTypeForm extends Component {
     if (nextProps.bannerType) {
       this.inputBannerTypeName.value = nextProps.bannerType.name;
       this.inputBannerTypeStatus.value = nextProps.bannerType.status;
-      this.inputBannerTypeWeight.value = nextProps.bannerType.weight;
     }
+  }
+
+  componentDidUpdate() {
+    /* eslint-disable no-undef */
+    if (this.props.bannerType) {
+      if (this.props.bannerType.isUpload === true) {
+        $('#inputBannerTypeIsUpload').iCheck('check');
+      } else {
+        $('#inputBannerTypeIsUpload').iCheck('uncheck');
+      }
+    }
+    /* eslint-enable no-undef */
   }
 
   convertToSlug(Text) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -44,20 +56,20 @@ class EditBannerTypeForm extends Component {
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputBannerTypeName.value = null;
-    this.inputBannerTypeWeight.value = null;
+    document.getElementById('inputBannerTypeIsUpload').checked = false;
   }
 
   save() {
     const id = this.props.id;
     const name = this.inputBannerTypeName.value;
     const value = this.convertToSlug(name);
-    const weight = this.inputBannerTypeWeight.value;
+    const isUpload = document.getElementById('inputBannerTypeIsUpload').checked;
     const status = this.inputBannerTypeStatus.value;
     if (name) {
       this.props.updateBannerType({
         id,
         name,
-        weight,
+        isUpload,
         value,
         status,
       }).then(() => {
@@ -65,7 +77,6 @@ class EditBannerTypeForm extends Component {
       });
     }
     this.props.statusUpdateBannerType(false);
-    // this.props.setPageZoneActiveTab('bannerTypeZone');
   }
 
   removeEditForm() {
@@ -110,14 +121,13 @@ class EditBannerTypeForm extends Component {
 
             <div className="form-group">
               <label
-                htmlFor="inputBannerTypeWeight" className="col-sm-2 control-label"
-              >Weight</label>
-              <div className="col-sm-10">
-                <input
-                  type="text" className="form-control" id="inputBannerTypeWeight"
-                  placeholder="0"
+                htmlFor="inputBannerTypeIsUpload" className="col-sm-2 control-label"
+              >Upload</label>
+              <div className="col-sm-10 checkbox">
+                <ICheck
+                  type="checkbox" id="inputBannerTypeIsUpload" className="form-control"
                   ref={c => {
-                    this.inputBannerTypeWeight = c;
+                    this.inputBannerTypeIsUpload = c;
                   }}
                 />
               </div>

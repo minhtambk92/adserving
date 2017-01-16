@@ -50,8 +50,6 @@ class BannerTypeList extends Component {
     }, {
       data: 'name',
     }, {
-      data: 'weight',
-    }, {
       data: 'status',
     }, {
       data: null,
@@ -116,7 +114,7 @@ class BannerTypeList extends Component {
         <div className="col-sm-12">
           <div className="box">
             <div className="box-header">
-              <h3 className="box-title">List Banner HTML Type</h3>
+              <h3 className="box-title">List Banner Type</h3>
             </div>
             {/* /.box-header */}
             <div className="box-body">
@@ -135,7 +133,6 @@ class BannerTypeList extends Component {
                         <ICheck type="checkbox" className="inputChooseBannerType" />
                       </th>
                       <th>Name</th>
-                      <th>Weight</th>
                       <th>Status</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
@@ -147,7 +144,6 @@ class BannerTypeList extends Component {
                         <ICheck type="checkbox" className="inputChooseBannerType" />
                       </th>
                       <th>Name</th>
-                      <th>Weight</th>
                       <th>Status</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
@@ -201,7 +197,7 @@ class BannerTypeList extends Component {
               onClick={(event) => this.addBannerType(event)}
               className="btn btn-primary"
             >
-                Create Banner Html Type
+                Create Banner Type
               </button>
             ) : ('')}
         </div>

@@ -22,7 +22,7 @@ class UpdateBannerForm extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      checkTypeBanner: 'img',
+      checkIsUpload: true,
       imageUrl: '',
       keyWord: '',
     };
@@ -63,25 +63,24 @@ class UpdateBannerForm extends Component {
     this.inputChannelId.value = channelId;
     this.inputBannerIsIFrame.value = isIFrame;
     if (bannerType) {
-      const type = bannerType.value;
-      if (type === 'html') {
+      const isUpload = bannerType.isUpload;
+      if (isUpload === false) {
         if (isIFrame === true) {
           this.insertBannerHtml(html, width, height);
         } else {
           document.getElementById('banner').innerHTML = '';
         }
-        if (this.inputBannerHTML !== undefined && this.inputBannerHtmlType.value !== undefined &&
-          this.inputBannerHtmlType.value !== undefined) {
-          this.state.checkTypeBanner = 'html';
+        if (this.inputBannerHTML !== undefined && this.inputBannerHtmlType.value !== undefined) {
+          this.state.checkIsUpload = false;
           this.state.imageUrl = '';
           this.inputBannerHTML.value = html;
           this.inputBannerAdsServer.value = adsServerId;
           this.inputBannerHtmlType.value = bannerHtmlTypeId;
         }
-      } else if (type === 'img') {
+      } else if (isUpload === true) {
         this.state.imageUrl = imageUrl;
-        this.state.checkTypeBanner = 'img';
-        if (this.inputBannerImageUrl !== undefined && this.inputBannerTarget !== undefined
+        this.state.checkIsUpload = true;
+        if (this.inputBannerImageUrl !== undefined && this.inputBannerTarget !== null
           && this.inputBannerUrl !== undefined) {
           this.inputBannerTarget.value = target;
           this.inputBannerUrl.value = url;
@@ -118,12 +117,12 @@ class UpdateBannerForm extends Component {
     let url = '';
     let bannerHtmlTypeId = null;
     let adsServerId = null;
-    const type = this.props.banner.bannerType.value;
-    if (type === 'html') {
+    const isUpload = this.props.banner.bannerType.isUpload;
+    if (isUpload === false) {
       html = this.inputBannerHTML.value;
       adsServerId = this.inputBannerAdsServer.value;
       bannerHtmlTypeId = this.inputBannerHtmlType.value;
-    } else if (type === 'img') {
+    } else if (isUpload === true) {
       target = this.inputBannerTarget.value;
       url = this.inputBannerUrl.value;
       imageUrl = this.state.imageUrl;
@@ -143,14 +142,13 @@ class UpdateBannerForm extends Component {
     if (description && description !== this.props.banner.description) {
       banner.description = description;
     }
-    banner.type = type;
-    if (type === 'html') {
+    if (isUpload === false) {
       if (html && html !== this.props.banner.html) {
         banner.html = html;
       }
       banner.adsServerId = adsServerId;
       banner.bannerHtmlTypeId = bannerHtmlTypeId;
-    } else if (type === 'img') {
+    } else if (isUpload === true) {
       if (target && target !== this.props.banner.target) {
         banner.target = target;
       }
@@ -196,7 +194,7 @@ class UpdateBannerForm extends Component {
   }
 
   render() {
-    if (this.state.checkTypeBanner === 'img') {
+    if (this.state.checkIsUpload === true) {
       const img = this.state.imageUrl;
       /* eslint-disable */
       this.djsConfig = {
@@ -233,7 +231,7 @@ class UpdateBannerForm extends Component {
       <form className="form-horizontal">
         {
           this.props.banner && this.props.banner.bannerType &&
-          (this.props.banner.bannerType.value === 'img' && this.state.checkTypeBanner === 'img') ? (
+          (this.props.banner.bannerType.isUpload === true && this.state.checkIsUpload === true) ? (
             <div className="bannerImage">
               <div className="form-group">
                 <div className="col-sm-12">

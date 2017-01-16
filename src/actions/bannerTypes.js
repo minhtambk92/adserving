@@ -16,7 +16,7 @@ export function getBannerType(id) {
           id
           name
           value
-          weight
+          isUpload
           status
           createdAt
           updatedAt
@@ -48,7 +48,7 @@ export function getBannerTypes(args = {
           id
           name
           value
-          weight
+          isUpload
           status
           createdAt
           updatedAt
@@ -78,7 +78,7 @@ export function getBannerTypes(args = {
   };
 }
 
-export function createBannerType({ name, value, weight, status }) {
+export function createBannerType({ name, value, isUpload, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($bannerType: BannerTypeInputTypeWithoutId!) {
@@ -86,7 +86,7 @@ export function createBannerType({ name, value, weight, status }) {
           id
           name
           value
-          weight
+          isUpload
           status
           createdAt
           updatedAt
@@ -97,7 +97,7 @@ export function createBannerType({ name, value, weight, status }) {
       bannerType: {
         name,
         value,
-        weight,
+        isUpload,
         status,
       },
     });
@@ -111,7 +111,7 @@ export function createBannerType({ name, value, weight, status }) {
   };
 }
 
-export function updateBannerType({ id, name, value, weight, status }) {
+export function updateBannerType({ id, name, value, isUpload, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($bannerType: BannerTypeInputType!) {
@@ -119,7 +119,7 @@ export function updateBannerType({ id, name, value, weight, status }) {
           id
           name
           value
-          weight
+          isUpload
           status
           createdAt
           updatedAt
@@ -131,7 +131,7 @@ export function updateBannerType({ id, name, value, weight, status }) {
         id,
         name,
         value,
-        weight,
+        isUpload,
         status,
       },
     });
@@ -153,7 +153,7 @@ export function deleteBannerType(id) {
           id
           name
           value
-          weight
+          isUpload
           status
           createdAt
           updatedAt

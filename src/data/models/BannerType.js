@@ -29,9 +29,9 @@ const BannerType = Model.define('BannerType', {
     type: DataType.STRING,
     defaultValue: '',
   },
-  weight: {
-    type: DataType.INTEGER,
-    defaultValue: 0,
+  isUpload: {
+    type: DataType.BOOLEAN,
+    defaultValue: false,
   },
   status: {
     type: DataType.STRING,

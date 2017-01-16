@@ -29,7 +29,7 @@ class CreateBannerForm extends Component {
     super(props, context);
 
     this.state = {
-      checkTypeBanner: 'html',
+      checkIsUpload: false,
       imageUrl: '',
       tags: '',
     };
@@ -69,18 +69,20 @@ class CreateBannerForm extends Component {
   }
 
   onInputChange(event) {
-    event.persist();
+    const typeId = event.target.value.trim();
+    const type = _.filter(this.props.bannerTypeList, { id: typeId });
+    const isUpload = type[0].isUpload;
     this.setState((previousState) => ({
       ...previousState,
-      checkTypeBanner: event.target.value.trim(),
+      checkIsUpload: isUpload,
     }));
   }
 
   clearInput() {
     this.inputBannerName.value = null;
-    if (this.state.checkTypeBanner === 'html') {
+    if (this.state.checkIsUpload === false) {
       this.inputBannerHTML.value = null;
-    } else if (this.state.checkTypeBanner === 'img') {
+    } else if (this.state.checkIsUpload === true) {
       this.inputBannerUrl.value = null;
     }
     this.inputBannerWidth.value = null;
@@ -97,7 +99,6 @@ class CreateBannerForm extends Component {
     const weight = this.inputBannerWeight.value;
     const description = this.inputBannerDescription.value;
     const channelId = this.inputChannelId.value;
-    const type = this.inputBannerType.value;
     const isIFrame = document.getElementById('inputBannerIsIFrame').checked;
     let target = '';
     let url = '';
@@ -105,16 +106,17 @@ class CreateBannerForm extends Component {
     let html = '';
     let bannerHtmlTypeId = null;
     let adsServerId = null;
-    const bannerType = _.filter(this.props.bannerTypeList, { value: type });
-    const bannerTypeId = bannerType[0].id;
-    if (type === 'html') {
+    const bannerTypeId = this.inputBannerType.value;
+    const type = _.filter(this.props.bannerTypeList, { id: bannerTypeId });
+    const isUpload = type[0].isUpload;
+    if (isUpload === false) {
       html = this.inputBannerHTML.value;
       target = '';
       url = '';
       imageUrl = '';
       bannerHtmlTypeId = this.inputBannerHtmlType.value;
       adsServerId = this.inputBannerAdsServer.value;
-    } else if (type === 'img') {
+    } else if (isUpload === true) {
       target = this.inputBannerTarget.value;
       html = '';
       url = this.inputBannerUrl.value;
@@ -205,7 +207,7 @@ class CreateBannerForm extends Component {
                 {this.props.bannerTypeList
                 && this.props.bannerTypeList.map(bannerType => (
                   <option
-                    key={bannerType.id} value={bannerType.value}
+                    key={bannerType.id} value={bannerType.id}
                   >
                     Banner {bannerType.name}
                   </option>
@@ -230,7 +232,7 @@ class CreateBannerForm extends Component {
             </div>
           </div>
           {
-            this.state.checkTypeBanner === 'html' ?
+            this.state.checkIsUpload === false ?
               (
                 <div className="banneHtml">
                   <div className="form-group">
