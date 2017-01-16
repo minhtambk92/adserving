@@ -16,6 +16,7 @@ class CreateZoneForm extends Component {
     getZones: PropTypes.func,
     createShare: PropTypes.func,
     zoneTypeList: PropTypes.array,
+    zoneSizeTypeList: PropTypes.array,
   };
 
   constructor(props, context) {
@@ -75,8 +76,11 @@ class CreateZoneForm extends Component {
   onSelectSize(event) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const sizeType = this.inputZoneSize.value;
     if (sizeType !== 'custom') {
-      this.inputZoneHeight.value = sizeType.split('x')[1];
-      this.inputZoneWidth.value = sizeType.split('x')[0];
+      const arrSize = _.filter(this.props.zoneSizeTypeList, { id: sizeType });
+      if (arrSize.length > 0) {
+        this.inputZoneHeight.value = arrSize[0].height;
+        this.inputZoneWidth.value = arrSize[0].width;
+      }
     } else if (sizeType === 'custom') {
       this.inputZoneHeight.value = 0;
       this.inputZoneWidth.value = 0;
@@ -105,33 +109,33 @@ class CreateZoneForm extends Component {
     const slot = this.inputZoneSlot.value;
     let width = 0;
     let height = 0;
-    let sizeText = '';
-    let sizeValue = '';
+    let isCustomSize = false;
+    let zoneSizeTypeId = null;
     const arrZone = _.filter(this.props.zoneTypeList, { id: zoneTypeId });
     const isSize = arrZone[0].isSize;
 
     if (this.state.checkTypeZone === true && isSize === true) {
-      sizeValue = this.inputZoneSize.value;
       if (this.inputZoneSize.value === 'custom') {
         if (this.inputZoneWidth.value.trim() !== '' && this.inputZoneHeight.value.trim() !== '') {
           width = this.inputZoneWidth.value;
           height = this.inputZoneHeight.value;
-          sizeText = `Custom (${width} x ${height})`;
         } else {
           width = 0;
           height = 0;
-          sizeText = 'Custom (0 x 0)';
         }
+        isCustomSize = true;
+        zoneSizeTypeId = null;
       } else if (this.inputZoneSize.value !== 'custom') {
         width = this.inputZoneWidth.value;
         height = this.inputZoneHeight.value;
-        sizeText = this.inputZoneSize.options[this.inputZoneSize.selectedIndex].text;
+        isCustomSize = false;
+        zoneSizeTypeId = this.inputZoneSize.value;
       }
     } else if (this.state.checkTypeZone === false && isSize === false) {
       width = 0;
       height = 0;
-      sizeText = arrZone[0].name;
-      sizeValue = '';
+      isCustomSize = false;
+      zoneSizeTypeId = null;
     }
     const targetIFrame = '0';
     const isShowBannerAgain = true;
@@ -143,18 +147,17 @@ class CreateZoneForm extends Component {
     const isIncludeDescription = true;
     const status = this.inputZoneStatus.value;
     const description = this.inputZoneDescription.value;
-    if (name && siteId && description && slot) {
+    if (name && siteId) {
       this.props.createZone({
         name,
         siteId,
         zoneTypeId,
+        zoneSizeTypeId,
         html,
         css,
         slot,
         width,
         height,
-        sizeText,
-        sizeValue,
         targetIFrame,
         isShowBannerAgain,
         source,
@@ -163,6 +166,7 @@ class CreateZoneForm extends Component {
         characterSet,
         supportThirdParty,
         isIncludeDescription,
+        isCustomSize,
         status,
         description,
       }).then(() => {
@@ -273,23 +277,12 @@ class CreateZoneForm extends Component {
                       this.inputZoneSize = c;
                     }}
                   >
-                    <option value="468x60">IAB Full Banner (468 x 60)</option>
-                    <option value="120x600">IAB Skyscraper (120 x 600)</option>
-                    <option value="728x90">IAB Leaderboard (728 x 90)</option>
-                    <option value="120x90">IAB Button 1 (120 x 90)</option>
-                    <option value="120x60">IAB Button 2 (120 x 60)</option>
-                    <option value="234x60">IAB Half Banner (234 x 60)</option>
-                    <option value="88x31">IAB Micro Bar (88 x 31)</option>
-                    <option value="125x125">IAB Square Button (125 x 125)</option>
-                    <option value="120x240">IAB Vertical Banner (120 x 240)</option>
-                    <option value="180x150">IAB Rectangle (180 x 150)</option>
-                    <option value="300x250">IAB Medium Rectangle (300 x 250)</option>
-                    <option value="336x280">IAB Large Rectangle (336 x 280)</option>
-                    <option value="240x400">IAB Vertical Rectangle (240 x 400)</option>
-                    <option value="250x250">IAB Square Pop-up (250 x 250)</option>
-                    <option value="160x600">IAB Wide Skyscraper (160 x 600)</option>
-                    <option value="720x300">IAB Pop-Under (720 x 300)</option>
-                    <option value="300x100">IAB 3:1 Rectangle (300 x 100)</option>
+                    {this.props.zoneSizeTypeList &&
+                    this.props.zoneSizeTypeList.map(zoneSizeType => (
+                      <option
+                        key={zoneSizeType.id} value={zoneSizeType.id}
+                      >{zoneSizeType.name} ({zoneSizeType.width}x{zoneSizeType.height}) </option>
+                    ))}
                     <option value="custom">Custom</option>
                   </select>
                 </div>

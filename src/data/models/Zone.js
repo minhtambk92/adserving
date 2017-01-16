@@ -49,14 +49,6 @@ const Zone = Model.define('Zone', {
     type: DataType.INTEGER,
     defaultValue: 0,
   },
-  sizeText: {
-    type: DataType.TEXT,
-    defaultValue: '',
-  },
-  sizeValue: {
-    type: DataType.STRING,
-    defaultValue: '',
-  },
   targetIFrame: {
     type: DataType.STRING,
     validate: {
@@ -76,6 +68,10 @@ const Zone = Model.define('Zone', {
     defaultValue: true,
   },
   isShowTextBanner: {
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  },
+  isCustomSize: {
     type: DataType.BOOLEAN,
     defaultValue: false,
   },

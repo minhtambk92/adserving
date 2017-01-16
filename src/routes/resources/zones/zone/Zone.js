@@ -24,6 +24,7 @@ import {
 import { getSites } from '../../../../actions/sites';
 import { getPlacements, createPlacement, getPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
+import { getZoneSizeTypes } from '../../../../actions/zoneSizeTypes';
 import { createShare, updateShare, deleteShare, removeShareByZoneId, getShare } from '../../../../actions/shares';
 import { getZoneTypes } from '../../../../actions/zoneTypes';
 import Layout from '../../../../components/Layout';
@@ -67,6 +68,8 @@ class Zone extends Component {
     getZoneTypes: PropTypes.func,
     zoneTypes: PropTypes.object,
     getShare: PropTypes.func,
+    getZoneSizeTypes: PropTypes.func,
+    zoneSizeTypes: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -81,6 +84,7 @@ class Zone extends Component {
     this.props.getPlacements();
     this.props.getCampaigns();
     this.props.getZoneTypes();
+    this.props.getZoneSizeTypes();
     this.props.getZone(this.props.zoneId);
   }
 
@@ -240,6 +244,7 @@ class Zone extends Component {
                       getZone={this.props.getZone}
                       setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                       zoneTypeList={this.props.zoneTypes && this.props.zoneTypes.list}
+                      zoneSizeTypeList={this.props.zoneSizeTypes && this.props.zoneSizeTypes.list}
                     />
                   </div>
 
@@ -392,6 +397,7 @@ const mapState = (state) => ({
   campaigns: state.campaigns,
   shares: state.shares,
   zoneTypes: state.zoneTypes,
+  zoneSizeTypes: state.zoneSizeTypes,
 });
 
 const mapDispatch = {
@@ -413,6 +419,7 @@ const mapDispatch = {
   removeShareByZoneId,
   getZoneTypes,
   getShare,
+  getZoneSizeTypes,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zone));

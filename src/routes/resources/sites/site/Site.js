@@ -19,6 +19,7 @@ import { setPageZoneActiveTab } from '../../../../actions/pages/zones';
 import { setPageChannelActiveTab } from '../../../../actions/pages/channels';
 import { createShare } from '../../../../actions/shares';
 import { createOptionChannel } from '../../../../actions/optionChannels';
+import { getZoneSizeTypes } from '../../../../actions/zoneSizeTypes';
 import { getZoneTypes } from '../../../../actions/zoneTypes';
 import Layout from '../../../../components/Layout';
 import ListZoneOfSite from '../ListZoneOfSite';
@@ -53,12 +54,15 @@ class Site extends Component {
     createOptionChannel: PropTypes.func,
     getZoneTypes: PropTypes.func,
     zoneTypes: PropTypes.object,
+    getZoneSizeTypes: PropTypes.func,
+    zoneSizeTypes: PropTypes.object,
   };
 
   componentWillMount() {
     this.props.getSite(this.props.siteId);
     this.props.getChannels();
     this.props.getZoneTypes();
+    this.props.zoneSizeTypes();
   }
 
   componentDidMount() {
@@ -135,6 +139,8 @@ class Site extends Component {
                             getSite={this.props.getSite}
                             siteId={this.props.siteId}
                             zoneTypeList={this.props.zoneTypes && this.props.zoneTypes.list}
+                            zoneSizeTypeList={this.props.zoneSizeTypes &&
+                            this.props.zoneSizeTypes.list}
                           />
                         </div>
                         {/* /.col */}
@@ -240,6 +246,7 @@ const mapState = (state) => ({
   channels: state.channels,
   shares: state.shares,
   zoneTypes: state.zoneTypes,
+  zoneSizeTypes: state.zoneSizeTypes,
 });
 
 const mapDispatch = {
@@ -255,6 +262,7 @@ const mapDispatch = {
   createShare,
   createOptionChannel,
   getZoneTypes,
+  getZoneSizeTypes,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Site));
