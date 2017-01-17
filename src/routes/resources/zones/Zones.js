@@ -21,6 +21,7 @@ import {
 } from '../../../actions/zones';
 import { setPageZoneActiveTab } from '../../../actions/pages/zones';
 import { createShare, getShareByZoneId } from '../../../actions/shares';
+import { getZoneSizeTypes } from '../../../actions/zoneSizeTypes';
 import { getZoneTypes } from '../../../actions/zoneTypes';
 import Layout from '../../../components/Layout';
 import CreateZoneForm from './CreateZoneForm';
@@ -48,6 +49,8 @@ class Zones extends Component {
     shares: PropTypes.object,
     getZoneTypes: PropTypes.func,
     zoneTypes: PropTypes.object,
+    getZoneSizeTypes: PropTypes.func,
+    zoneSizeTypes: PropTypes.object,
   };
 
   componentWillMount() {
@@ -55,6 +58,7 @@ class Zones extends Component {
     this.props.getZonesFilters();
     this.props.getZones();
     this.props.getZoneTypes();
+    this.props.getZoneSizeTypes();
   }
 
   getFilteredZones() {
@@ -126,6 +130,7 @@ class Zones extends Component {
                   zones={this.props.zones && this.props.zones.list}
                   getZones={this.props.getZones}
                   zoneTypeList={this.props.zoneTypes && this.props.zoneTypes.list}
+                  zoneSizeTypeList={this.props.zoneSizeTypes && this.props.zoneSizeTypes.list}
                 />
               </div>
               {/* /.col */}
@@ -179,6 +184,7 @@ const mapState = (state) => ({
   zones: state.zones,
   shares: state.shares,
   zoneTypes: state.zoneTypes,
+  zoneSizeTypes: state.zoneSizeTypes,
 });
 
 const mapDispatch = {
@@ -191,6 +197,7 @@ const mapDispatch = {
   createShare,
   getShareByZoneId,
   getZoneTypes,
+  getZoneSizeTypes,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zones));

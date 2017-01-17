@@ -24,6 +24,7 @@ import {
 import { getSites } from '../../../../actions/sites';
 import { getPlacements, createPlacement, getPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
+import { getZoneSizeTypes } from '../../../../actions/zoneSizeTypes';
 import { createShare, updateShare, deleteShare, removeShareByZoneId, getShare } from '../../../../actions/shares';
 import { getZoneTypes } from '../../../../actions/zoneTypes';
 import Layout from '../../../../components/Layout';
@@ -67,6 +68,8 @@ class Zone extends Component {
     getZoneTypes: PropTypes.func,
     zoneTypes: PropTypes.object,
     getShare: PropTypes.func,
+    getZoneSizeTypes: PropTypes.func,
+    zoneSizeTypes: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -81,6 +84,7 @@ class Zone extends Component {
     this.props.getPlacements();
     this.props.getCampaigns();
     this.props.getZoneTypes();
+    this.props.getZoneSizeTypes();
     this.props.getZone(this.props.zoneId);
   }
 
@@ -94,7 +98,7 @@ class Zone extends Component {
     const {
       shares,
     } = nextProps.zones && (nextProps.zones.editing || {});
-    if (shares) {
+    if (shares && shares.length > 0) {
       if (this.props.page.currentShare) {
         this.inputSelectShare.value = this.props.page.currentShare;
         const shareId = this.props.page.currentShare;
@@ -119,6 +123,8 @@ class Zone extends Component {
           this.setState({ arrShare: shares[0] });
         }
       }
+    } else if (shares && shares.length === 0) {
+      this.setState({ arrShare: {} });
     }
   }
 
@@ -194,7 +200,6 @@ class Zone extends Component {
             .concat(': ')
             .concat(this.props.zones.editing ? this.props.zones.editing.name : '...')
         }
-        pageSubTitle={this.props.zones.editing ? this.props.zones.editing.sizeText : ''}
       >
         <div>
           <div className="row">
@@ -240,6 +245,7 @@ class Zone extends Component {
                       getZone={this.props.getZone}
                       setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                       zoneTypeList={this.props.zoneTypes && this.props.zoneTypes.list}
+                      zoneSizeTypeList={this.props.zoneSizeTypes && this.props.zoneSizeTypes.list}
                     />
                   </div>
 
@@ -324,9 +330,7 @@ class Zone extends Component {
                                   zoneId={this.props.zoneId}
                                   shareId={share.id}
                                   getPlacement={this.props.getPlacement}
-                                  shares={this.props.shares}
                                   zone={this.props.zones.editing}
-                                  setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                                   setCurrentShare={this.props.setCurrentShare}
                                   updateShare={this.props.updateShare}
                                   share={share}
@@ -353,7 +357,6 @@ class Zone extends Component {
                                   shareId={share.id}
                                   share={share}
                                   updateShare={this.props.updateShare}
-                                  setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                                   setCurrentShare={this.props.setCurrentShare}
                                 />
                               </div>
@@ -392,6 +395,7 @@ const mapState = (state) => ({
   campaigns: state.campaigns,
   shares: state.shares,
   zoneTypes: state.zoneTypes,
+  zoneSizeTypes: state.zoneSizeTypes,
 });
 
 const mapDispatch = {
@@ -413,6 +417,7 @@ const mapDispatch = {
   removeShareByZoneId,
   getZoneTypes,
   getShare,
+  getZoneSizeTypes,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zone));

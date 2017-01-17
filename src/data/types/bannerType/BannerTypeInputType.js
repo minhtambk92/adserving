@@ -6,7 +6,7 @@ const BannerTypeInputType = new InputObjectType({
   name: 'BannerTypeInputType',
   fields: () => Object.assign(attributeFields(BannerType, {
     // Additional options
-    only: ['id', 'name', 'value', 'weight', 'status'],
+    only: ['id', 'name', 'value', 'isUpload', 'status'],
   }), {
     // Additional fields
   }),

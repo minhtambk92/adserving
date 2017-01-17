@@ -37,14 +37,24 @@ class ZoneList extends Component {
   duplicateZoneAndShare(data) {
     const name = `Copy Of ${data.name}`;
     const siteId = data.siteId;
-    const zoneTypeId = data.zoneTypeId;
+    let zoneTypeId = null;
+    if (data.zoneType) {
+      zoneTypeId = data.zoneType.id;
+    } else {
+      zoneTypeId = null;
+    }
+
+    let zoneSizeTypeId = null;
+    if (data.zoneSizeType) {
+      zoneSizeTypeId = data.zoneSizeType.id;
+    } else {
+      zoneSizeTypeId = null;
+    }
     const html = data.html;
     const css = data.css;
     const slot = data.slot;
     const width = data.width;
     const height = data.height;
-    const sizeText = data.sizeText;
-    const sizeValue = data.sizeValue;
     const targetIFrame = data.targetIFrame;
     const isShowBannerAgain = data.isShowBannerAgain;
     const source = data.source;
@@ -53,6 +63,7 @@ class ZoneList extends Component {
     const characterSet = data.characterSet;
     const supportThirdParty = data.supportThirdParty;
     const isIncludeDescription = data.isIncludeDescription;
+    const isCustomSize = data.isCustomSize;
     const status = data.status;
     const description = data.description;
 
@@ -61,13 +72,12 @@ class ZoneList extends Component {
         name,
         siteId,
         zoneTypeId,
+        zoneSizeTypeId,
         html,
         css,
         slot,
         width,
         height,
-        sizeText,
-        sizeValue,
         targetIFrame,
         isShowBannerAgain,
         source,
@@ -76,6 +86,7 @@ class ZoneList extends Component {
         characterSet,
         supportThirdParty,
         isIncludeDescription,
+        isCustomSize,
         status,
         description,
       }).then(() => {
@@ -85,7 +96,7 @@ class ZoneList extends Component {
           /* eslint-disable no-shadow */
           const name = arrShares[i].name;
           const css = arrShares[i].css;
-          const outputCss = arrShares[i].outputCss;
+          const outputCss = '';
           const html = arrShares[i].html;
           const width = arrShares[i].width;
           const height = arrShares[i].height;
@@ -138,7 +149,22 @@ class ZoneList extends Component {
         >{cellData}</Link>, cell);
       },
     }, {
-      data: 'sizeText',
+      data: null,
+      render: (data, type, row) => {
+        let t = '';
+        if (row.zoneType) {
+          if (row.zoneType.isSize === true) {
+            if (row.isCustomSize === true) {
+              t = `Custom (${row.width} x ${row.height})`;
+            } else if (row.isCustomSize === false) {
+              t = row.zoneSizeType.name;
+            }
+          } else if (row.zoneType.isSize === false) {
+            t = `Custom (${row.zoneType.name})`;
+          }
+        }
+        return t;
+      },
     }, {
       data: null,
       orderable: false,

@@ -55,11 +55,19 @@ router.post('/core-js', async(req, res) => {
         isSize
         value
       }
+      zoneSizeType {
+        id
+        name
+        width
+        height
+        status
+      }
       html
       css
       slot
       width
       height
+      isCustomSize
       shares {
         id
         name

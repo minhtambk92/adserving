@@ -1,6 +1,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
+import { ICheck } from '../../../../components/UI';
 import Link from '../../../../components/Link';
 
 class CreateBannerTypeForm extends Component {
@@ -34,19 +35,19 @@ class CreateBannerTypeForm extends Component {
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputBannerTypeName.value = null;
-    this.inputBannerTypeWeight.value = null;
+    document.getElementById('inputBannerTypeIsUpload').checked = false;
   }
 
   createBannerType() {
     const name = this.inputBannerTypeName.value;
     const value = this.convertToSlug(name);
-    const weight = this.inputBannerTypeWeight.value;
+    const isUpload = document.getElementById('inputBannerTypeIsUpload').checked;
     const status = this.inputBannerTypeStatus.value;
     if (name) {
       this.props.createBannerType({
         name,
         value,
-        weight,
+        isUpload,
         status,
       });
     }
@@ -96,14 +97,13 @@ class CreateBannerTypeForm extends Component {
 
             <div className="form-group">
               <label
-                htmlFor="inputBannerTypeWeight" className="col-sm-2 control-label"
-              >Weight</label>
-              <div className="col-sm-10">
-                <input
-                  type="number" className="form-control" id="inputBannerTypeWeight"
-                  placeholder="0"
+                htmlFor="inputBannerTypeIsUpload" className="col-sm-2 control-label"
+              >Upload</label>
+              <div className="col-sm-10 checkbox">
+                <ICheck
+                  type="checkbox" id="inputBannerTypeIsUpload" className="form-control"
                   ref={c => {
-                    this.inputBannerTypeWeight = c;
+                    this.inputBannerTypeIsUpload = c;
                   }}
                 />
               </div>

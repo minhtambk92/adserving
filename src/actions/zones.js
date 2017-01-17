@@ -48,13 +48,17 @@ export function getZone(id) {
             isSize
             status
           }
+          zoneSizeType {
+            id
+            name
+            width
+            height
+          }
           html
           css
           slot
           width
           height
-          sizeText
-          sizeValue
           targetIFrame
           isShowBannerAgain
           source
@@ -62,6 +66,7 @@ export function getZone(id) {
           isShowTextBanner
           characterSet
           supportThirdParty
+          isCustomSize
           isIncludeDescription
           status
           shares {
@@ -122,14 +127,22 @@ export function getZones(args = {
           siteId
           name
           description
-          zoneTypeId
+          zoneType {
+            id
+            name
+            isSize
+          }
+          zoneSizeType {
+            id
+            name
+            width
+            height
+          }
           html
           css
           slot
           width
           height
-          sizeText
-          sizeValue
           targetIFrame
           isShowBannerAgain
           source
@@ -138,6 +151,7 @@ export function getZones(args = {
           characterSet
           supportThirdParty
           isIncludeDescription
+          isCustomSize
           status
           shares {
             id
@@ -195,8 +209,10 @@ export function getZones(args = {
 }
 
 export function createZone({
-  siteId, name, zoneTypeId, html, css,
-  slot, width, height, sizeText, sizeValue,
+  siteId, name, zoneTypeId,
+  zoneSizeTypeId,
+  html, css,
+  slot, width, height,
   targetIFrame,
   isShowBannerAgain,
   source,
@@ -205,6 +221,7 @@ export function createZone({
   characterSet,
   supportThirdParty,
   isIncludeDescription,
+  isCustomSize,
   status,
   description,
 }) {
@@ -216,13 +233,13 @@ export function createZone({
           siteId
           name
           zoneTypeId
+          zoneSizeTypeId
           html
           css
           slot
           width
           height
-          sizeText
-          sizeValue
+          isCustomSize
           targetIFrame
           isShowBannerAgain
           source
@@ -243,13 +260,12 @@ export function createZone({
         siteId,
         name,
         zoneTypeId,
+        zoneSizeTypeId,
         html,
         css,
         width,
         height,
         slot,
-        sizeText,
-        sizeValue,
         targetIFrame,
         isShowBannerAgain,
         source,
@@ -258,6 +274,7 @@ export function createZone({
         characterSet,
         supportThirdParty,
         isIncludeDescription,
+        isCustomSize,
         status,
         description,
       },
@@ -272,8 +289,8 @@ export function createZone({
   };
 }
 export function updateZone({
-  id, siteId, name, zoneTypeId,
-  html, css, slot, width, height, sizeText, sizeValue,
+  id, siteId, name, zoneTypeId, zoneSizeTypeId,
+  html, css, slot, width, height,
   targetIFrame,
   isShowBannerAgain,
   source,
@@ -282,7 +299,9 @@ export function updateZone({
   characterSet,
   supportThirdParty,
   isIncludeDescription,
-  status, description,
+  status,
+  isCustomSize,
+  description,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
@@ -293,13 +312,12 @@ export function updateZone({
           name
           description
           zoneTypeId
+          zoneSizeTypeId
           html
           css
           slot
           width
           height
-          sizeText
-          sizeValue
           targetIFrame
           isShowBannerAgain
           source
@@ -308,6 +326,7 @@ export function updateZone({
           characterSet
           supportThirdParty
           isIncludeDescription
+          isCustomSize
           status
           createdAt
           updatedAt
@@ -320,13 +339,12 @@ export function updateZone({
         siteId,
         name,
         zoneTypeId,
+        zoneSizeTypeId,
         html,
         css,
         slot,
         width,
         height,
-        sizeText,
-        sizeValue,
         targetIFrame,
         isShowBannerAgain,
         source,
@@ -335,6 +353,7 @@ export function updateZone({
         characterSet,
         supportThirdParty,
         isIncludeDescription,
+        isCustomSize,
         status,
         description,
       },
@@ -359,13 +378,12 @@ export function deleteZone(id) {
           name
           description
           zoneTypeId
+          zoneSizeTypeId
           html
           css
           slot
           width
           height
-          sizeText
-          sizeValue
           targetIFrame
           isShowBannerAgain
           source
@@ -374,6 +392,7 @@ export function deleteZone(id) {
           characterSet
           supportThirdParty
           isIncludeDescription
+          isCustomSize
           status
           createdAt
           updatedAt

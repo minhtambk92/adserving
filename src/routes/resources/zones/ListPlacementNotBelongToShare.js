@@ -15,6 +15,7 @@ class ListPlacementNotBelongToZone extends Component {
     getPlacement: PropTypes.func,
     placements: PropTypes.object,
     zone: PropTypes.object,
+    shares: PropTypes.object,
     setCurrentShare: PropTypes.func,
   };
 
@@ -80,11 +81,7 @@ class ListPlacementNotBelongToZone extends Component {
         isDeleted: true,
       })));
 
-      this.props.updateShare(share).then(() => {
-        this.props.getZone(this.props.zoneId).then(() => {
-          this.props.getPlacements();
-        });
-      });
+      this.props.updateShare(share);
     }
   }
 

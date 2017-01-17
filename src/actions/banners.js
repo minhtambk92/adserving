@@ -43,7 +43,7 @@ export function getBanner(id) {
             id
             name
             value
-            weight
+            isUpload
           }
           imageUrl
           url
@@ -124,7 +124,7 @@ export function getBanners(args = {
             id
             name
             value
-            weight
+            isUpload
           }
           imageUrl
           url

@@ -17,7 +17,6 @@ import { getPlacement, updatePlacement, deletePlacement } from '../../../../acti
 import { getCampaigns } from '../../../../actions/campaigns';
 import { getBanners, updateBanner, createBanner } from '../../../../actions/banners';
 import { getChannels } from '../../../../actions/channels';
-import { removePlacementInSharePlacement } from '../../../../actions/sharePlacements';
 import { createTrack } from '../../../../actions/tracks';
 import { getBannerHtmlTypes } from '../../../../actions/bannerHtmlTypes';
 import { getBannerTypes } from '../../../../actions/bannerTypes';
@@ -48,7 +47,6 @@ class Placement extends Component {
     getChannels: PropTypes.func,
     channels: PropTypes.object,
     createZone: PropTypes.func,
-    removePlacementInSharePlacement: PropTypes.func,
     createTrack: PropTypes.func,
     getBannerHtmlTypes: PropTypes.func,
     bannerHtmlTypes: PropTypes.object,
@@ -160,9 +158,6 @@ class Placement extends Component {
                       placementId={this.props.placementId}
                       getPlacement={this.props.getPlacement}
                       campaigns={this.props.campaigns && this.props.campaigns.list}
-                      /* eslint-disable max-len */
-                      removePlacementInSharePlacement={this.props.removePlacementInSharePlacement}
-                      /* eslint-enable max-len */
                     />
                   </div>
 
@@ -296,7 +291,6 @@ const mapState = (state) => ({
   zones: state.zones,
   channels: state.channels,
   sites: state.sites,
-  sharePlacements: state.sharePlacements,
   bannerHtmlTypes: state.bannerHtmlTypes,
   bannerTypes: state.bannerTypes,
   adsServers: state.adsServers,
@@ -310,7 +304,6 @@ const mapDispatch = {
   getBanners,
   createBanner,
   getChannels,
-  removePlacementInSharePlacement,
   createTrack,
   getBannerHtmlTypes,
   getBannerTypes,

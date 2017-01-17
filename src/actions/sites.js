@@ -29,14 +29,22 @@ export function getSite(id) {
             siteId
             name
             description
-            type
+            zoneType {
+              id
+              name
+              isSize
+            }
+            zoneSizeType {
+              id
+              name
+              width
+              height
+            }
             html
             css
             slot
             width
             height
-            sizeText
-            sizeValue
             targetIFrame
             isShowBannerAgain
             source
@@ -45,12 +53,14 @@ export function getSite(id) {
             characterSet
             supportThirdParty
             isIncludeDescription
+            isCustomSize
             status
             shares {
               id
               name
               html
               css
+              outputCss
               width
               height
               weight
