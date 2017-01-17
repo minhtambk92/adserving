@@ -330,7 +330,6 @@ class Zone extends Component {
                                   zoneId={this.props.zoneId}
                                   shareId={share.id}
                                   getPlacement={this.props.getPlacement}
-                                  shares={this.props.shares}
                                   zone={this.props.zones.editing}
                                   setCurrentShare={this.props.setCurrentShare}
                                   updateShare={this.props.updateShare}
@@ -358,7 +357,6 @@ class Zone extends Component {
                                   shareId={share.id}
                                   share={share}
                                   updateShare={this.props.updateShare}
-                                  setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                                   setCurrentShare={this.props.setCurrentShare}
                                 />
                               </div>
