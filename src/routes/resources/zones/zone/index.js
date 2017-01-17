@@ -16,7 +16,7 @@ export default {
 
   async action({ params }) {
     return {
-      title: 'Zone Management | Admin Dev Kit',
+      title: 'Zone Management',
       component: <Zone zoneId={params.id} />,
     };
   },

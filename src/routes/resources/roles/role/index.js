@@ -16,7 +16,7 @@ export default {
 
   async action({ params }) {
     return {
-      title: 'Roles Management | Admin Dev Kit',
+      title: 'Role Management',
       component: <Role roleId={params.id} />,
     };
   },

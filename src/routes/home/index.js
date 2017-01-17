@@ -12,7 +12,6 @@ import Layout from '../../components/Layout';
 import Home from './Home';
 
 const title = 'Home';
-const subTitle = 'Control panel';
 
 export default {
 
@@ -20,8 +19,8 @@ export default {
 
   action() {
     return {
-      title: `${title} | Admin Dev Kit`,
-      component: <Layout pageTitle={title} pageSubTitle={subTitle}><Home /></Layout>,
+      title,
+      component: <Layout pageTitle={title} pageSubTitle="Control panel"><Home /></Layout>,
     };
   },
 

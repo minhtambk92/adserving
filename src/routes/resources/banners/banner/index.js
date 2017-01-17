@@ -16,7 +16,7 @@ export default {
 
   async action({ params }) {
     return {
-      title: 'Banner Management | Admin Dev Kit',
+      title: 'Banner Management',
       component: <Banner bannerId={params.id} />,
     };
   },

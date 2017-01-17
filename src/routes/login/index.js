@@ -19,7 +19,7 @@ export default {
 
   action() {
     return {
-      title: `${title} | Admin Dev Kit`,
+      title,
       component: <Layout bodyClasses="login-page" isFullWidth><Login /></Layout>,
     };
   },

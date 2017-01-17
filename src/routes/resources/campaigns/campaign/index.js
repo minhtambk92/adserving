@@ -16,7 +16,7 @@ export default {
 
   async action({ params }) {
     return {
-      title: 'Campaign Management | Admin Dev Kit',
+      title: 'Campaign Management',
       component: <Campaign campaignId={params.id} />,
     };
   },

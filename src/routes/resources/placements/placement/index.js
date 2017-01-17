@@ -16,7 +16,7 @@ export default {
 
   async action({ params }) {
     return {
-      title: 'Placement Management | Admin Dev Kit',
+      title: 'Placement Management',
       component: <Placement placementId={params.id} />,
     };
   },

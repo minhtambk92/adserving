@@ -16,7 +16,7 @@ export default {
 
   async action({ params }) {
     return {
-      title: 'Sites Management | Admin Dev Kit',
+      title: 'Site Management',
       component: <Site siteId={params.id} />,
     };
   },

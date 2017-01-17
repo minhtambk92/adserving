@@ -16,7 +16,7 @@ export default {
 
   async action({ params }) {
     return {
-      title: 'Users Management | Admin Dev Kit',
+      title: 'User Management',
       component: <User userId={params.id} />,
     };
   },

@@ -16,7 +16,7 @@ export default {
 
   async action({ params }) {
     return {
-      title: 'Advertiser Management | Admin Dev Kit',
+      title: 'Advertiser Management',
       component: <Advertiser advertiserId={params.id} />,
     };
   },

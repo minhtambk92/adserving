@@ -16,7 +16,7 @@ export default {
 
   async action({ params }) {
     return {
-      title: 'Channel Management | Admin Dev Kit',
+      title: 'Channel Management',
       component: <Channel channelId={params.id} />,
     };
   },
