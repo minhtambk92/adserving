@@ -19,14 +19,10 @@ import {
   getUsersFilters,
   setUsersFilters,
 } from '../../../actions/users';
-import Layout from '../../../components/Layout';
 import FilterUsersForm from './FilterUsersForm';
 import CreateUserForm from './CreateUserForm';
 import UserList from './UserList';
 import s from './Users.css';
-
-const pageTitle = 'Users Management';
-const pageSubTitle = 'Control panel';
 
 class Users extends Component {
 
@@ -72,73 +68,71 @@ class Users extends Component {
 
   render() {
     return (
-      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
-        <div>
+      <div>
 
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: FILTER */}
-              <div className="box box-default">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Filter by:</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-minus" />
-                    </button>
-                  </div>
-                </div>
-                {/* /.box-header */}
-                <FilterUsersForm
-                  roles={this.props.roles.list}
-                  filters={this.props.users.filters}
-                  setUsersFilters={this.props.setUsersFilters}
-                />
-              </div>
-              {/* /.col */}
-            </section>
-          </div>
-
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: CREATE */}
-              <div className="box collapsed-box">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Create a new resource</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-plus" />
-                    </button>
-                  </div>
-                </div>
-                {/* /.box-header */}
-                <CreateUserForm
-                  userFilters={this.props.users.filters}
-                  roleList={this.props.roles.list}
-                  createUser={this.props.createUser}
-                />
-              </div>
-              {/* /.col */}
-            </section>
-          </div>
-
-          <div className="row">
-            <section className="col-lg-12">
-              <div className="box box-info">
-                <div className="box-header with-border">
-                  <h3 className="box-title">List of users</h3>
-                </div>
-                {/* /.box-header */}
-                <div className="box-body">
-                  <UserList list={this.getFilteredUsers()} />
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: FILTER */}
+            <div className="box box-default">
+              <div className="box-header with-border">
+                <h3 className="box-title">Filter by:</h3>
+                <div className="box-tools pull-right">
+                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                    <i className="fa fa-minus" />
+                  </button>
                 </div>
               </div>
-              {/* /.box */}
-            </section>
+              {/* /.box-header */}
+              <FilterUsersForm
+                roles={this.props.roles.list}
+                filters={this.props.users.filters}
+                setUsersFilters={this.props.setUsersFilters}
+              />
+            </div>
             {/* /.col */}
-          </div>
-
+          </section>
         </div>
-      </Layout>
+
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: CREATE */}
+            <div className="box collapsed-box">
+              <div className="box-header with-border">
+                <h3 className="box-title">Create a new resource</h3>
+                <div className="box-tools pull-right">
+                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                    <i className="fa fa-plus" />
+                  </button>
+                </div>
+              </div>
+              {/* /.box-header */}
+              <CreateUserForm
+                userFilters={this.props.users.filters}
+                roleList={this.props.roles.list}
+                createUser={this.props.createUser}
+              />
+            </div>
+            {/* /.col */}
+          </section>
+        </div>
+
+        <div className="row">
+          <section className="col-lg-12">
+            <div className="box box-info">
+              <div className="box-header with-border">
+                <h3 className="box-title">List of users</h3>
+              </div>
+              {/* /.box-header */}
+              <div className="box-body">
+                <UserList list={this.getFilteredUsers()} />
+              </div>
+            </div>
+            {/* /.box */}
+          </section>
+          {/* /.col */}
+        </div>
+
+      </div>
     );
   }
 

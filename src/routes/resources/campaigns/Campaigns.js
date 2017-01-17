@@ -11,17 +11,18 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getCampaigns, createCampaign, getCampaignsFilters, setCampaignsFilters } from '../../../actions/campaigns';
+import {
+  getCampaigns,
+  createCampaign,
+  getCampaignsFilters,
+  setCampaignsFilters,
+} from '../../../actions/campaigns';
 import { getAdvertisers } from '../../../actions/advertisers';
 import { setPageCampaignActiveTab } from '../../../actions/pages/campaigns';
-import Layout from '../../../components/Layout';
 import CreateCampaignForm from './CreateCampaignForm';
 import FilterCampaignsForm from './FilterCampaignsForm';
 import CampaignList from './CampaignList';
 import s from './Campaigns.css';
-
-const pageTitle = 'Campaigns';
-const pageSubTitle = 'Control panel';
 
 class Campaigns extends Component {
   static propTypes = {
@@ -34,6 +35,7 @@ class Campaigns extends Component {
     advertisers: PropTypes.object,
     setPageCampaignActiveTab: PropTypes.func,
   };
+
   componentWillMount() {
     this.props.getCampaigns();
     this.props.getCampaignsFilters();
@@ -43,6 +45,7 @@ class Campaigns extends Component {
   getFilteredCampaigns() {
     return _.filter(this.props.campaigns.list, campaign => this.isFiltered(campaign));
   }
+
   isFiltered(campaign) {
     const filters = this.props.campaigns.filters;
 
@@ -60,80 +63,79 @@ class Campaigns extends Component {
 
   render() {
     return (
-      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
-        <div>
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: FILTER */}
-              <div className="box box-default">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Filter by:</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-minus" />
-                    </button>
-                  </div>
+      <div>
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: FILTER */}
+            <div className="box box-default">
+              <div className="box-header with-border">
+                <h3 className="box-title">Filter by:</h3>
+                <div className="box-tools pull-right">
+                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                    <i className="fa fa-minus" />
+                  </button>
                 </div>
-                {/* /.box-header */}
-                {/* form start */}
-                <FilterCampaignsForm
-                  advertisers={this.props.advertisers.list}
-                  filters={this.props.campaigns.filters}
-                  setCampaignsFilters={this.props.setCampaignsFilters}
-                />
               </div>
-              {/* /.col */}
-            </section>
-          </div>
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: FORM OF CREATE NEW CAMPAIGNS */}
-              <div className="box collapsed-box">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Add New campaigns</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-plus" />
-                    </button>
-                  </div>
+              {/* /.box-header */}
+              {/* form start */}
+              <FilterCampaignsForm
+                advertisers={this.props.advertisers.list}
+                filters={this.props.campaigns.filters}
+                setCampaignsFilters={this.props.setCampaignsFilters}
+              />
+            </div>
+            {/* /.col */}
+          </section>
+        </div>
+
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: FORM OF CREATE NEW CAMPAIGNS */}
+            <div className="box collapsed-box">
+              <div className="box-header with-border">
+                <h3 className="box-title">Add New campaigns</h3>
+                <div className="box-tools pull-right">
+                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                    <i className="fa fa-plus" />
+                  </button>
                 </div>
-                {/* /.box-header */}
-                {/* form start */}
-                <CreateCampaignForm
-                  filters={this.props.campaigns.filters}
-                  advertisers={this.props.advertisers.list}
+              </div>
+              {/* /.box-header */}
+              {/* form start */}
+              <CreateCampaignForm
+                filters={this.props.campaigns.filters}
+                advertisers={this.props.advertisers.list}
+                createCampaign={this.props.createCampaign}
+              />
+            </div>
+            {/* /.col */}
+          </section>
+        </div>
+
+        {/* Main row */}
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: LIST OF campaigns */}
+            <div className="box">
+              <div className="box-header with-border">
+                <h3 className="box-title">List Campaign</h3>
+              </div>
+              {/* /.box-header */}
+              <div className="box-body">
+                <CampaignList
+                  list={this.getFilteredCampaigns()}
+                  setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
                   createCampaign={this.props.createCampaign}
                 />
               </div>
-              {/* /.col */}
-            </section>
-          </div>
-
-          {/* Main row */}
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: LIST OF campaigns */}
-              <div className="box">
-                <div className="box-header with-border">
-                  <h3 className="box-title">List Campaign</h3>
-                </div>
-                {/* /.box-header */}
-                <div className="box-body">
-                  <CampaignList
-                    list={this.getFilteredCampaigns()}
-                    setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
-                    createCampaign={this.props.createCampaign}
-                  />
-                </div>
-                {/* /.box-body */}
-              </div>
-              {/* /.box */}
-            </section>
-            {/* /.col */}
-          </div>
-          {/* /.row (main row) */}
+              {/* /.box-body */}
+            </div>
+            {/* /.box */}
+          </section>
+          {/* /.col */}
         </div>
-      </Layout>
+        {/* /.row (main row) */}
+      </div>
     );
   }
 

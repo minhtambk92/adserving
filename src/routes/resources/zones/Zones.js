@@ -23,15 +23,11 @@ import { setPageZoneActiveTab } from '../../../actions/pages/zones';
 import { createShare, getShareByZoneId } from '../../../actions/shares';
 import { getZoneSizeTypes } from '../../../actions/zoneSizeTypes';
 import { getZoneTypes } from '../../../actions/zoneTypes';
-import Layout from '../../../components/Layout';
 import CreateZoneForm from './CreateZoneForm';
 import FilterZonesForm from './FilterZonesForm';
 import ZoneList from './ZoneList';
 import BulkActions from './BulkActions';
 import s from './Zones.css';
-
-const pageTitle = 'Zone Management';
-const pageSubTitle = 'Control panel';
 
 class Zones extends Component {
 
@@ -83,97 +79,95 @@ class Zones extends Component {
 
   render() {
     return (
-      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
-        <div>
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: FILTER */}
-              <div className="box box-default">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Filter by:</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-minus" />
-                    </button>
-                  </div>
+      <div>
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: FILTER */}
+            <div className="box box-default">
+              <div className="box-header with-border">
+                <h3 className="box-title">Filter by:</h3>
+                <div className="box-tools pull-right">
+                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                    <i className="fa fa-minus" />
+                  </button>
                 </div>
-                {/* /.box-header */}
-                <FilterZonesForm
-                  sites={this.props.sites.list}
-                  filters={this.props.zones.filters}
-                  setZonesFilters={this.props.setZonesFilters}
-                />
               </div>
-              {/* /.col */}
-            </section>
-          </div>
-
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: FORM OF CREATE A NEW ZONE */}
-              <div className="box box-default collapsed-box">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Create a new zone</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-plus" />
-                    </button>
-                  </div>
-                </div>
-                {/* /.box-header */}
-                {/* form start */}
-                <CreateZoneForm
-                  filters={this.props.zones.filters}
-                  sites={this.props.sites.list}
-                  createShare={this.props.createShare}
-                  createZone={this.props.createZone}
-                  zones={this.props.zones && this.props.zones.list}
-                  getZones={this.props.getZones}
-                  zoneTypeList={this.props.zoneTypes && this.props.zoneTypes.list}
-                  zoneSizeTypeList={this.props.zoneSizeTypes && this.props.zoneSizeTypes.list}
-                />
-              </div>
-              {/* /.col */}
-            </section>
-          </div>
-
-          <div className="row">
-            <section className="col-lg-12">
-              <div className="nav-tabs-custom">
-                <ul className="nav nav-tabs">
-                  <li className="active">
-                    <a href="#zonesList" data-toggle="tab" aria-expanded="true">List</a>
-                  </li>
-                  <li className>
-                    <a href="#zonesBulkActions" data-toggle="tab" aria-expanded="false">Bulk</a>
-                  </li>
-                </ul>
-                <div className="tab-content">
-                  <div className="tab-pane active" id="zonesList">
-                    <ZoneList
-                      list={this.getFilteredZones()}
-                      setPageZoneActiveTab={this.props.setPageZoneActiveTab}
-                      createZone={this.props.createZone}
-                      createShare={this.props.createShare}
-                      zones={this.props.zones}
-                      shares={this.props.shares}
-                      getShareByZoneId={this.props.getShareByZoneId}
-                    />
-                  </div>
-                  {/* /.tab-pane */}
-                  <div className="tab-pane" id="zonesBulkActions">
-                    <BulkActions />
-                  </div>
-                  {/* /.tab-pane */}
-                </div>
-                {/* /.tab-content */}
-              </div>
-            </section>
+              {/* /.box-header */}
+              <FilterZonesForm
+                sites={this.props.sites.list}
+                filters={this.props.zones.filters}
+                setZonesFilters={this.props.setZonesFilters}
+              />
+            </div>
             {/* /.col */}
-          </div>
-
+          </section>
         </div>
-      </Layout>
+
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: FORM OF CREATE A NEW ZONE */}
+            <div className="box box-default collapsed-box">
+              <div className="box-header with-border">
+                <h3 className="box-title">Create a new zone</h3>
+                <div className="box-tools pull-right">
+                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                    <i className="fa fa-plus" />
+                  </button>
+                </div>
+              </div>
+              {/* /.box-header */}
+              {/* form start */}
+              <CreateZoneForm
+                filters={this.props.zones.filters}
+                sites={this.props.sites.list}
+                createShare={this.props.createShare}
+                createZone={this.props.createZone}
+                zones={this.props.zones && this.props.zones.list}
+                getZones={this.props.getZones}
+                zoneTypeList={this.props.zoneTypes && this.props.zoneTypes.list}
+                zoneSizeTypeList={this.props.zoneSizeTypes && this.props.zoneSizeTypes.list}
+              />
+            </div>
+            {/* /.col */}
+          </section>
+        </div>
+
+        <div className="row">
+          <section className="col-lg-12">
+            <div className="nav-tabs-custom">
+              <ul className="nav nav-tabs">
+                <li className="active">
+                  <a href="#zonesList" data-toggle="tab" aria-expanded="true">List</a>
+                </li>
+                <li className>
+                  <a href="#zonesBulkActions" data-toggle="tab" aria-expanded="false">Bulk</a>
+                </li>
+              </ul>
+              <div className="tab-content">
+                <div className="tab-pane active" id="zonesList">
+                  <ZoneList
+                    list={this.getFilteredZones()}
+                    setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                    createZone={this.props.createZone}
+                    createShare={this.props.createShare}
+                    zones={this.props.zones}
+                    shares={this.props.shares}
+                    getShareByZoneId={this.props.getShareByZoneId}
+                  />
+                </div>
+                {/* /.tab-pane */}
+                <div className="tab-pane" id="zonesBulkActions">
+                  <BulkActions />
+                </div>
+                {/* /.tab-pane */}
+              </div>
+              {/* /.tab-content */}
+            </div>
+          </section>
+          {/* /.col */}
+        </div>
+
+      </div>
     );
   }
 

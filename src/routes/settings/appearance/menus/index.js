@@ -2,10 +2,11 @@
  * Created by Manhhailua on 11/11/16.
  */
 
-/* eslint-disable global-require */
-
 import React from 'react';
+import Layout from '../../../../components/Layout';
 import Menus from './Menus';
+
+const title = 'Menus Management';
 
 export default {
 
@@ -15,12 +16,12 @@ export default {
     path: '/',
     async action() {
       return {
-        title: 'Menus Management | Admin Dev Kit',
-        component: <Menus />,
+        title,
+        component: (
+          <Layout pageTitle={title} pageSubTitle="Control panel"><Menus /></Layout>
+        ),
       };
     },
   }],
 
 };
-
-/* eslint-disable global-require */

@@ -8,7 +8,10 @@
  */
 
 import React from 'react';
+import Layout from '../../components/Layout';
 import Login from './Login';
+
+const title = 'Log In';
 
 export default {
 
@@ -16,8 +19,8 @@ export default {
 
   action() {
     return {
-      title: 'Login | Admin Dev Kit',
-      component: <Login />,
+      title: `${title} | Admin Dev Kit`,
+      component: <Layout bodyClasses="login-page" isFullWidth><Login /></Layout>,
     };
   },
 

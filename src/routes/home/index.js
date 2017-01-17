@@ -8,7 +8,11 @@
  */
 
 import React from 'react';
+import Layout from '../../components/Layout';
 import Home from './Home';
+
+const title = 'Home';
+const subTitle = 'Control panel';
 
 export default {
 
@@ -16,8 +20,8 @@ export default {
 
   action() {
     return {
-      title: 'Home | Admin Dev Kit',
-      component: <Home />,
+      title: `${title} | Admin Dev Kit`,
+      component: <Layout pageTitle={title} pageSubTitle={subTitle}><Home /></Layout>,
     };
   },
 

@@ -8,7 +8,10 @@
  */
 
 import React from 'react';
+import Layout from '../../components/Layout';
 import Register from './Register';
+
+const title = 'New User Registration';
 
 export default {
 
@@ -16,8 +19,10 @@ export default {
 
   action() {
     return {
-      title: 'Register | Admin Dev Kit',
-      component: <Register />,
+      title,
+      component: (
+        <Layout bodyClasses="register-page" isFullWidth><Register title={title} /></Layout>
+      ),
     };
   },
 

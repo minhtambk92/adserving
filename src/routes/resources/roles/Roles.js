@@ -14,13 +14,9 @@ import _ from 'lodash';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getRoles, createRole, getRolesFilters, setRolesFilters } from '../../../actions/roles';
 import { setUsersFilters } from '../../../actions/users';
-import Layout from '../../../components/Layout';
 import CreateRoleForm from './CreateRoleForm';
 import RoleList from './RoleList';
 import s from './Roles.css';
-
-const pageTitle = 'Roles Management';
-const pageSubTitle = 'Control panel';
 
 class Roles extends Component {
 
@@ -54,50 +50,48 @@ class Roles extends Component {
 
   render() {
     return (
-      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
-        <div>
+      <div>
 
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: CREATE */}
-              <div className="box collapsed-box">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Create a new resource</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-plus" />
-                    </button>
-                  </div>
-                </div>
-                {/* /.box-header */}
-                <CreateRoleForm createRole={this.props.createRole} />
-              </div>
-              {/* /.col */}
-            </section>
-          </div>
-
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: LIST */}
-              <div className="box box-info">
-                <div className="box-header with-border">
-                  <h3 className="box-title">List of resources</h3>
-                </div>
-                {/* /.box-header */}
-                <div className="box-body">
-                  <RoleList
-                    list={this.getFilteredRoles()}
-                    setUsersFilters={this.props.setUsersFilters}
-                  />
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: CREATE */}
+            <div className="box collapsed-box">
+              <div className="box-header with-border">
+                <h3 className="box-title">Create a new resource</h3>
+                <div className="box-tools pull-right">
+                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                    <i className="fa fa-plus" />
+                  </button>
                 </div>
               </div>
-              {/* /.box */}
-            </section>
+              {/* /.box-header */}
+              <CreateRoleForm createRole={this.props.createRole} />
+            </div>
             {/* /.col */}
-          </div>
-
+          </section>
         </div>
-      </Layout>
+
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: LIST */}
+            <div className="box box-info">
+              <div className="box-header with-border">
+                <h3 className="box-title">List of resources</h3>
+              </div>
+              {/* /.box-header */}
+              <div className="box-body">
+                <RoleList
+                  list={this.getFilteredRoles()}
+                  setUsersFilters={this.props.setUsersFilters}
+                />
+              </div>
+            </div>
+            {/* /.box */}
+          </section>
+          {/* /.col */}
+        </div>
+
+      </div>
     );
   }
 

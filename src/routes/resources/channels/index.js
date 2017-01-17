@@ -8,8 +8,12 @@
  */
 
 /* eslint-disable global-require */
+
 import React from 'react';
+import Layout from '../../../components/Layout';
 import Channels from './Channels';
+
+const title = 'Channels';
 
 export default {
 
@@ -20,8 +24,8 @@ export default {
       path: '/',
       async action() {
         return {
-          title: 'Sites Management | Admin Dev Kit',
-          component: <Channels />,
+          title,
+          component: <Layout pageTitle={title} pageSubTitle="Control panel"><Channels /></Layout>,
         };
       },
     },
@@ -29,4 +33,3 @@ export default {
   ],
 
 };
-/* eslint-disable global-require */

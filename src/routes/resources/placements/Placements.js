@@ -19,14 +19,10 @@ import {
 } from '../../../actions/placements';
 import { getCampaigns } from '../../../actions/campaigns';
 import { setPagePlacementActiveTab } from '../../../actions/pages/placements';
-import Layout from '../../../components/Layout';
 import PlacemenList from './PlacementList';
 import CreatePlacementForm from './CreatePlacementForm';
 import FilterPlacementForm from './FilterPlacementForm';
 import s from './Placements.css';
-
-const pageTitle = 'Placements';
-const pageSubTitle = 'Control panel';
 
 class Placements extends Component {
 
@@ -68,78 +64,76 @@ class Placements extends Component {
 
   render() {
     return (
-      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
-        <div>
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: FILTER */}
-              <div className="box box-default">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Filter by:</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-minus" />
-                    </button>
-                  </div>
+      <div>
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: FILTER */}
+            <div className="box box-default">
+              <div className="box-header with-border">
+                <h3 className="box-title">Filter by:</h3>
+                <div className="box-tools pull-right">
+                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                    <i className="fa fa-minus" />
+                  </button>
                 </div>
-                {/* /.box-header */}
-                <FilterPlacementForm
-                  campaigns={this.props.campaigns.list}
-                  filters={this.props.placements.filters}
-                  setPlacementsFilters={this.props.setPlacementsFilters}
-                />
               </div>
-              {/* /.col */}
-            </section>
-          </div>
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: FORM OF CREATE NEW PlacementS */}
-              <div className="box collapsed-box">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Add New Placements</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-plus" />
-                    </button>
-                  </div>
+              {/* /.box-header */}
+              <FilterPlacementForm
+                campaigns={this.props.campaigns.list}
+                filters={this.props.placements.filters}
+                setPlacementsFilters={this.props.setPlacementsFilters}
+              />
+            </div>
+            {/* /.col */}
+          </section>
+        </div>
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: FORM OF CREATE NEW PlacementS */}
+            <div className="box collapsed-box">
+              <div className="box-header with-border">
+                <h3 className="box-title">Add New Placements</h3>
+                <div className="box-tools pull-right">
+                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                    <i className="fa fa-plus" />
+                  </button>
                 </div>
-                {/* /.box-header */}
-                <CreatePlacementForm
-                  filters={this.props.placements.filters}
-                  campaigns={this.props.campaigns.list}
+              </div>
+              {/* /.box-header */}
+              <CreatePlacementForm
+                filters={this.props.placements.filters}
+                campaigns={this.props.campaigns.list}
+                createPlacement={this.props.createPlacement}
+              />
+            </div>
+            {/* /.col */}
+          </section>
+        </div>
+
+        {/* Main row */}
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: LIST OF Placements */}
+            <div className="box box-info">
+              <div className="box-header with-border">
+                <h3 className="box-title">List Placement</h3>
+              </div>
+              {/* /.box-header */}
+              <div className="box-body">
+                <PlacemenList
+                  list={this.getFilteredPlacements()}
+                  setPagePlacementActiveTab={this.props.setPagePlacementActiveTab}
                   createPlacement={this.props.createPlacement}
                 />
               </div>
-              {/* /.col */}
-            </section>
-          </div>
-
-          {/* Main row */}
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: LIST OF Placements */}
-              <div className="box box-info">
-                <div className="box-header with-border">
-                  <h3 className="box-title">List Placement</h3>
-                </div>
-                {/* /.box-header */}
-                <div className="box-body">
-                  <PlacemenList
-                    list={this.getFilteredPlacements()}
-                    setPagePlacementActiveTab={this.props.setPagePlacementActiveTab}
-                    createPlacement={this.props.createPlacement}
-                  />
-                </div>
-                {/* /.box-body */}
-              </div>
-              {/* /.box */}
-            </section>
-            {/* /.col */}
-          </div>
-          {/* /.row (main row) */}
+              {/* /.box-body */}
+            </div>
+            {/* /.box */}
+          </section>
+          {/* /.col */}
         </div>
-      </Layout>
+        {/* /.row (main row) */}
+      </div>
     );
   }
 

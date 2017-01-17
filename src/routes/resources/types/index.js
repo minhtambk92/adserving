@@ -10,8 +10,11 @@
 /* eslint-disable global-require */
 
 import React from 'react';
+import Layout from '../../../components/Layout';
 import Resources from './Resources';
 import fetch from '../../../core/fetch';
+
+const title = 'Resources Types';
 
 // Init parent component
 let TypeComponent = {};
@@ -48,8 +51,8 @@ export default {
       path: '/',
       async action() {
         return {
-          title: 'Resource Types Management | Admin Dev Kit',
-          component: <Resources />,
+          title,
+          component: <Layout pageTitle={title} pageSubTitle="Control panel"><Resources /></Layout>,
         };
       },
     },

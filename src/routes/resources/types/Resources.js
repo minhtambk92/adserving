@@ -19,14 +19,10 @@ import {
   setResourcesFilters,
 } from '../../../actions/resources';
 import { setCurrentPageResource } from '../../../actions/pages/resources';
-import Layout from '../../../components/Layout';
 import FilterResourcesForm from './FilterResourcesForm';
 import CreateResourceForm from './CreateResourceForm';
 import ResourceList from './ResourceList';
 import s from './Resources.css';
-
-const pageTitle = 'Resources Management';
-const pageSubTitle = 'Control panel';
 
 class Resources extends Component {
 
@@ -64,72 +60,70 @@ class Resources extends Component {
 
   render() {
     return (
-      <Layout pageTitle={pageTitle} pageSubTitle={pageSubTitle}>
-        <div>
+      <div>
 
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: FILTER */}
-              <div className="box box-default">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Filter by:</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-minus" />
-                    </button>
-                  </div>
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: FILTER */}
+            <div className="box box-default">
+              <div className="box-header with-border">
+                <h3 className="box-title">Filter by:</h3>
+                <div className="box-tools pull-right">
+                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                    <i className="fa fa-minus" />
+                  </button>
                 </div>
-                {/* /.box-header */}
-                <FilterResourcesForm
-                  filters={this.props.resources.filters}
-                  setResourcesFilters={this.props.setResourcesFilters}
+              </div>
+              {/* /.box-header */}
+              <FilterResourcesForm
+                filters={this.props.resources.filters}
+                setResourcesFilters={this.props.setResourcesFilters}
+              />
+            </div>
+            {/* /.col */}
+          </section>
+        </div>
+
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: CREATE */}
+            <div className="box collapsed-box">
+              <div className="box-header with-border">
+                <h3 className="box-title">Create a new resource</h3>
+                <div className="box-tools pull-right">
+                  <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                    <i className="fa fa-plus" />
+                  </button>
+                </div>
+              </div>
+              {/* /.box-header */}
+              <CreateResourceForm createResource={this.props.createResource} />
+            </div>
+            {/* /.col */}
+          </section>
+        </div>
+
+        <div className="row">
+          <section className="col-lg-12">
+            {/* BOX: LIST */}
+            <div className="box box-info">
+              <div className="box-header with-border">
+                <h3 className="box-title">List of resources</h3>
+              </div>
+              {/* /.box-header */}
+              <div className="box-body">
+                <ResourceList
+                  list={this.getFilteredResources()}
+                  setCurrentPageResource={this.props.setCurrentPageResource}
                 />
               </div>
-              {/* /.col */}
-            </section>
-          </div>
-
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: CREATE */}
-              <div className="box collapsed-box">
-                <div className="box-header with-border">
-                  <h3 className="box-title">Create a new resource</h3>
-                  <div className="box-tools pull-right">
-                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
-                      <i className="fa fa-plus" />
-                    </button>
-                  </div>
-                </div>
-                {/* /.box-header */}
-                <CreateResourceForm createResource={this.props.createResource} />
-              </div>
-              {/* /.col */}
-            </section>
-          </div>
-
-          <div className="row">
-            <section className="col-lg-12">
-              {/* BOX: LIST */}
-              <div className="box box-info">
-                <div className="box-header with-border">
-                  <h3 className="box-title">List of resources</h3>
-                </div>
-                {/* /.box-header */}
-                <div className="box-body">
-                  <ResourceList
-                    list={this.getFilteredResources()}
-                    setCurrentPageResource={this.props.setCurrentPageResource}
-                  />
-                </div>
-              </div>
-              {/* /.box */}
-            </section>
-            {/* /.col */}
-          </div>
-
+            </div>
+            {/* /.box */}
+          </section>
+          {/* /.col */}
         </div>
-      </Layout>
+
+      </div>
     );
   }
 

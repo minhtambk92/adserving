@@ -8,8 +8,12 @@
  */
 
 /* eslint-disable global-require */
+
 import React from 'react';
+import Layout from '../../../components/Layout';
 import Roles from './Roles';
+
+const title = 'Roles';
 
 export default {
 
@@ -20,8 +24,8 @@ export default {
       path: '/',
       async action() {
         return {
-          title: 'Roles Management | Admin Dev Kit',
-          component: <Roles />,
+          title,
+          component: <Layout pageTitle={title} pageSubTitle="Control panel"><Roles /></Layout>,
         };
       },
     },
@@ -29,4 +33,3 @@ export default {
   ],
 
 };
-/* eslint-disable global-require */

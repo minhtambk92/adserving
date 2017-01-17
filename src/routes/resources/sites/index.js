@@ -8,8 +8,12 @@
  */
 
 /* eslint-disable global-require */
+
 import React from 'react';
+import Layout from '../../../components/Layout';
 import Sites from './Sites';
+
+const title = 'Sites';
 
 export default {
 
@@ -20,8 +24,8 @@ export default {
       path: '/',
       async action() {
         return {
-          title: 'Sites Management | Admin Dev Kit',
-          component: <Sites />,
+          title,
+          component: <Layout pageTitle={title} pageSubTitle="Control panel"><Sites /></Layout>,
         };
       },
     },
@@ -29,4 +33,3 @@ export default {
   ],
 
 };
-/* eslint-disable global-require */

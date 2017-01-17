@@ -15,18 +15,10 @@ export default {
   ],
 
   async action({ next }) {
-    let route;
-
     // Execute each child route until one of them return the result
-    // TODO: move this logic to the `next` function
-    do {
-      route = await next();
-    } while (!route);
+    const route = await next();
 
     return route;
   },
 
 };
-
-/* eslint-enable global-require */
-
