@@ -9,7 +9,6 @@ import menuHeaders from './menu/menuHeaders';
 import menuItems from './menuItem/menuItems';
 import options from './option/options';
 import me from './me';
-import content from './content';
 import news from './news';
 import intl from './intl';
 import campaigns from './campaign/campaigns';
@@ -45,7 +44,6 @@ const queries = new ObjectType({
     me,
     roles,
     permissions,
-    content,
     news,
     intl,
     campaigns,

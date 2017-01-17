@@ -38,7 +38,7 @@ async function copy() {
     copyDir('node_modules/bootstrap-tagsinput', 'build/public/AdminLTE/plugins/bootstrap-tagsinput'),
     copyDir('node_modules/raphael', 'build/public/AdminLTE/plugins/raphael'),
     copyDir('node_modules/moment', 'build/public/AdminLTE/plugins/moment'),
-    copyDir('node_modules/ckeditor', 'build/public/AdminLTE/plugins/ckeditor'),
+    // copyDir('node_modules/ckeditor', 'build/public/AdminLTE/plugins/ckeditor'),
   ]);
 
   if (process.argv.includes('--watch')) {

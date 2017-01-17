@@ -5,7 +5,6 @@ import user from './user';
 import me from './me';
 import runtime from './runtime';
 import intl from './intl';
-import content from './content';
 import advertisers from './advertisers';
 import campaigns from './campaigns';
 import placements from './placements';
@@ -37,7 +36,6 @@ export default combineReducers({
   me,
   runtime,
   intl,
-  content,
   advertisers,
   placements,
   campaigns,
