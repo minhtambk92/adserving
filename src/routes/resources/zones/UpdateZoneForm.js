@@ -11,8 +11,6 @@ class UpdateZoneForm extends Component {
     deleteZone: PropTypes.func,
     sites: PropTypes.array,
     getZone: PropTypes.func,
-    removeZone: PropTypes.func,
-    removeShareByZoneId: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
     zoneTypeList: PropTypes.array,
     zoneSizeTypeList: PropTypes.array,

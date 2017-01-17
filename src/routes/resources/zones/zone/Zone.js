@@ -54,7 +54,6 @@ class Zone extends Component {
     getPlacements: PropTypes.func,
     campaigns: PropTypes.object,
     getCampaigns: PropTypes.func,
-    placementBanners: PropTypes.object,
     updateShare: PropTypes.func,
     createShare: PropTypes.func,
     deleteShare: PropTypes.func,
@@ -108,6 +107,9 @@ class Zone extends Component {
         } else if (arr[0].placements.length > 0 && arr[0].placements[0].id === undefined) {
           const arrShares = arr[0];
           arrShares.placements = JSON.parse(arr[0].placements);
+          _.remove(arrShares.placements, {
+            isDeleted: true,
+          });
           this.setState({ arrShare: arrShares });
         } else if (arr[0].placements.length === 0) {
           this.setState({ arrShare: shares[0] });
@@ -118,6 +120,9 @@ class Zone extends Component {
         } else if (shares[0].placements.length > 0 && shares[0].placements[0].id === undefined) {
           const arrShares = shares[0];
           arrShares.placements = JSON.parse(shares[0].placements);
+          _.remove(arrShares.placements, {
+            isDeleted: true,
+          });
           this.setState({ arrShare: arrShares });
         } else if (shares[0].placements.length === 0) {
           this.setState({ arrShare: shares[0] });
@@ -240,7 +245,6 @@ class Zone extends Component {
                       deleteZone={this.props.deleteZone}
                       sites={this.props.sites.list}
                       zoneId={this.props.zoneId}
-                      removeShareByZoneId={this.props.removeShareByZoneId}
                       shares={this.props.shares}
                       getZone={this.props.getZone}
                       setPageZoneActiveTab={this.props.setPageZoneActiveTab}

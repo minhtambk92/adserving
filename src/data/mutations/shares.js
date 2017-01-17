@@ -54,17 +54,17 @@ const shares = {
               paranoid: false,
             });
 
-            if (!sharePlacement && placement.isDeleted === true) {
+            if (!sharePlacement && placement.isDeleted === false) {
               await SharePlacement.create({
                 shareId: args.share.id,
                 placementId: placement.id,
                 status: 'active',
               });
             } else if (
-              sharePlacement && sharePlacement.getDataValue('deletedAt') !== null && placement.isDeleted === true
+              sharePlacement && sharePlacement.getDataValue('deletedAt') !== null && placement.isDeleted === false
             ) {
               await sharePlacement.restore();
-            } else if (sharePlacement && placement.isDeleted === false) {
+            } else if (sharePlacement && placement.isDeleted === true) {
               await sharePlacement.destroy();
             }
           });

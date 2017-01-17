@@ -37,7 +37,7 @@ router.post('/upload-banner', upload.single('file'), (req, res) => {
 });
 
 // Handle zone data rendering
-router.post('/core-js', async(req, res) => {
+router.post('/core-js', async (req, res) => {
   const coreJsFolderName = 'corejs';
   const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
   const zoneId = encodeURI(req.body.zoneId);
@@ -164,7 +164,7 @@ router.post('/core-js', async(req, res) => {
 });
 
 // Handle multiple zone data rendering
-router.post('/bulk-core-js', async(req, res) => {
+router.post('/bulk-core-js', async (req, res) => {
   const io = req.app.get('io');
   const zoneQuantity = await Zone.count();
 

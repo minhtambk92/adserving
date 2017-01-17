@@ -10,6 +10,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import style from 'react-dropzone-component/styles/filepicker.css';
 import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
 import { connect } from 'react-redux';
@@ -69,6 +70,7 @@ class Banner extends Component {
 
     this.state = {
       createPlacement: false,
+      arrPlacement: [],
     };
   }
 
@@ -86,6 +88,25 @@ class Banner extends Component {
     // Set latest active tab
     $('.banner-edit-box ul li').removeClass('active');
     $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      placements,
+    } = nextProps.banners && (nextProps.banners.editing || {});
+    if (placements && placements.length > 0) {
+      if (placements[0].id !== undefined) {
+        this.setState({ arrPlacement: placements });
+      } else if (placements[0].id === undefined) {
+        const arr = JSON.parse(placements);
+        _.remove(arr, {
+          isDeleted: true,
+        });
+        this.setState({ arrPlacement: arr });
+      }
+    } else if (placements && placements.length === 0) {
+      this.setState({ arrPlacement: [] });
+    }
   }
 
   filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -235,8 +256,7 @@ class Banner extends Component {
                           {/* /.box-header */}
                           <div className="box-body">
                             <ListPlacementOfBanner
-                              list={this.props.banners.editing &&
-                              this.props.banners.editing.placements}
+                              list={this.state.arrPlacement}
                               getPlacements={this.props.getPlacements}
                               getBanner={this.props.getBanner}
                               bannerId={this.props.bannerId}

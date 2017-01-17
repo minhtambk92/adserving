@@ -53,19 +53,30 @@ class ListPlacementNotBelongToBanner extends Component {
 
   pushBannerToPlacement(rowData) {
     if (this.props.banner) {
-      const banner = this.props.banner;
       const placement = this.props.banner.placements;
       placement.push(rowData);
+      const banner = this.props.banner;
       banner.placements = JSON.stringify(placement.map(p => ({
         id: p.id,
-        isDeleted: true,
+        name: p.name,
+        width: p.width,
+        height: p.height,
+        startTime: p.startTime,
+        endTime: p.endTime,
+        weight: p.weight,
+        description: p.description,
+        campaignId: p.campaignId,
+        status: p.status,
+        isDeleted: false,
       })));
-      banner.bannerTypeId = this.props.banner.bannerType.id;
-      this.props.updateBanner(banner).then(() => {
-        this.props.getBanner(this.props.bannerId).then(() => {
-          this.props.getPlacements();
-        });
-      });
+      let bannerTypeId = null;
+      if (this.props.banner.bannerType) {
+        bannerTypeId = this.props.banner.bannerType.id;
+      } else if (this.props.banner.bannerTypeId) {
+        bannerTypeId = this.props.banner.bannerTypeId;
+      }
+      banner.bannerTypeId = bannerTypeId;
+      this.props.updateBanner(banner);
     }
   }
 
