@@ -24,6 +24,8 @@ import {
   SET_STATUS_UPDATE_ZONE_TYPE,
   SET_STATUS_CREATE_ZONE_SIZE_TYPE,
   SET_STATUS_UPDATE_ZONE_SIZE_TYPE,
+  SET_STATUS_CREATE_CHARACTER_SET,
+  SET_STATUS_UPDATE_CHARACTER_SET,
 } from '../../constants';
 
 
@@ -296,6 +298,28 @@ function statusUpdateZoneSizeType(state = false, action) {
   }
 }
 
+function statusCreateCharacterSet(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_CHARACTER_SET: {
+      return action.payload.statusCreateCharacterSet;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdateCharacterSet(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_CHARACTER_SET: {
+      return action.payload.statusUpdateCharacterSet;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 export default combineReducers({
   browserCreate,
   browserEdit,
@@ -321,4 +345,6 @@ export default combineReducers({
   statusUpdateZoneType,
   statusCreateZoneSizeType,
   statusUpdateZoneSizeType,
+  statusCreateCharacterSet,
+  statusUpdateCharacterSet,
 });

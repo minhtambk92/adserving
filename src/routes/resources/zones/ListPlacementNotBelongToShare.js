@@ -7,13 +7,9 @@ class ListPlacementNotBelongToZone extends Component {
   static propTypes = {
     zoneId: PropTypes.string.isRequired,
     list: PropTypes.array,
-    getZone: PropTypes.func,
     updateShare: PropTypes.func,
-    getPlacements: PropTypes.func,
     shareId: PropTypes.string,
     share: PropTypes.object,
-    getPlacement: PropTypes.func,
-    placements: PropTypes.object,
     zone: PropTypes.object,
     shares: PropTypes.object,
     setCurrentShare: PropTypes.func,

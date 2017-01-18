@@ -333,8 +333,6 @@ class Zone extends Component {
                                   getPlacements={this.props.getPlacements}
                                   zoneId={this.props.zoneId}
                                   shareId={share.id}
-                                  getPlacement={this.props.getPlacement}
-                                  zone={this.props.zones.editing}
                                   setCurrentShare={this.props.setCurrentShare}
                                   updateShare={this.props.updateShare}
                                   share={share}

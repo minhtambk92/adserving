@@ -24,7 +24,9 @@ import {
   SET_STATUS_UPDATE_ZONE_TYPE,
   SET_STATUS_CREATE_ZONE_TYPE,
   SET_STATUS_CREATE_ZONE_SIZE_TYPE,
-  SET_STATUS_UPDATE_ZONE_SIZE_TYPE
+  SET_STATUS_UPDATE_ZONE_SIZE_TYPE,
+  SET_STATUS_CREATE_CHARACTER_SET,
+  SET_STATUS_UPDATE_CHARACTER_SET,
 } from '../../constants';
 
 export function setStatusChannelOptionBrowserEdit(browserEdit) {
@@ -286,6 +288,28 @@ export function setStatusCreateZoneSizeType(statusCreateZoneSizeType) {
       type: SET_STATUS_CREATE_ZONE_SIZE_TYPE,
       payload: {
         statusCreateZoneSizeType,
+      },
+    });
+  };
+}
+
+export function setStatusUpdateCharacterSet(statusUpdateCharacterSet) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_UPDATE_CHARACTER_SET,
+      payload: {
+        statusUpdateCharacterSet,
+      },
+    });
+  };
+}
+
+export function setStatusCreateCharacterSet(statusCreateCharacterSet) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_CREATE_CHARACTER_SET,
+      payload: {
+        statusCreateCharacterSet,
       },
     });
   };

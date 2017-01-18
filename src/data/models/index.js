@@ -44,6 +44,7 @@ import BannerType from './BannerType';
 import AdsServer from './AdsServer';
 import ZoneType from './ZoneType';
 import ZoneSizeType from './ZoneSizeType';
+import CharacterSet from './CharacterSet';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -398,4 +399,5 @@ export {
   AdsServer,
   ZoneType,
   ZoneSizeType,
+  CharacterSet,
 };
