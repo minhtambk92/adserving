@@ -37,7 +37,7 @@ class BulkActions extends Component {
         this.setState({ completePercentage: 0 });
         this.setState({ zoneQuantity: 0 });
         clearTimeout(timeout);
-      }, 2000);
+      }, 1000);
     });
   }
 
