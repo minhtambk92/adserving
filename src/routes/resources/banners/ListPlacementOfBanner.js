@@ -57,9 +57,24 @@ class ListPlacementOfBanner extends Component {
       const banner = this.props.banner;
       banner.placements = JSON.stringify(placements.map(p => ({
         id: p.id,
-        isDeleted: [rowData.id].indexOf(p.id) === -1,
+        name: p.name,
+        width: p.width,
+        height: p.height,
+        startTime: p.startTime,
+        endTime: p.endTime,
+        weight: p.weight,
+        description: p.description,
+        campaignId: p.campaignId,
+        status: p.status,
+        isDeleted: [rowData.id].indexOf(p.id) !== -1,
       })));
-      banner.bannerTypeId = this.props.banner.bannerType.id;
+      let bannerTypeId = null;
+      if (this.props.banner.bannerType) {
+        bannerTypeId = this.props.banner.bannerType.id;
+      } else if (this.props.banner.bannerTypeId) {
+        bannerTypeId = this.props.banner.bannerTypeId;
+      }
+      banner.bannerTypeId = bannerTypeId;
       this.props.updateBanner(banner).then(() => {
         this.props.getBanner(this.props.bannerId).then(() => {
           this.props.getPlacements();

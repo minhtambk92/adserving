@@ -14,7 +14,6 @@ class ListPlacementOfShare extends Component {
     getZone: PropTypes.func,
     shareId: PropTypes.string,
     setCurrentShare: PropTypes.func,
-    setPageZoneActiveTab: PropTypes.func,
   };
 
   dataTableOptions() {
@@ -74,7 +73,7 @@ class ListPlacementOfShare extends Component {
         description: data.description,
         campaignId: data.campaignId,
         status: data.status,
-        isDeleted: [rowData.id].indexOf(data.id) === -1,
+        isDeleted: [rowData.id].indexOf(data.id) !== -1,
       })));
 
       this.props.updateShare(share).then(() => {

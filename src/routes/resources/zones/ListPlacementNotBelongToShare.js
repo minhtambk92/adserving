@@ -37,7 +37,7 @@ class ListPlacementNotBelongToZone extends Component {
     }, {
       data: 'name',
       createdCell: (cell, cellData, rowData) => {
-        ReactDOM.render(<Link to={`/resource/zone/${rowData.id}`}>{cellData}</Link>, cell);
+        ReactDOM.render(<Link to={`/resource/placement/${rowData.id}`}>{cellData}</Link>, cell);
       },
     }, {
       data: null,
@@ -78,7 +78,7 @@ class ListPlacementNotBelongToZone extends Component {
         description: data.description,
         campaignId: data.campaignId,
         status: data.status,
-        isDeleted: true,
+        isDeleted: false,
       })));
 
       this.props.updateShare(share);

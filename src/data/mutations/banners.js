@@ -51,17 +51,17 @@ const banners = {
               paranoid: false,
             });
 
-            if (!bannerPlacement && placement.isDeleted === true) {
+            if (!bannerPlacement && placement.isDeleted === false) {
               await PlacementBanner.create({
                 bannerId: args.banner.id,
                 placementId: placement.id,
                 status: 'active',
               });
             } else if (
-              bannerPlacement && bannerPlacement.getDataValue('deletedAt') !== null && placement.isDeleted === true
+              bannerPlacement && bannerPlacement.getDataValue('deletedAt') !== null && placement.isDeleted === false
             ) {
               await bannerPlacement.restore();
-            } else if (bannerPlacement && placement.isDeleted === false) {
+            } else if (bannerPlacement && placement.isDeleted === true) {
               await bannerPlacement.destroy();
             }
           });

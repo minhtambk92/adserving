@@ -10,6 +10,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -62,6 +63,7 @@ class Placement extends Component {
 
     this.state = {
       createBanner: false,
+      arrBanner: [],
     };
   }
 
@@ -79,6 +81,25 @@ class Placement extends Component {
     // Set latest active tab
     $('.placement-edit-box ul li').removeClass('active');
     $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      banners,
+    } = nextProps.placements && (nextProps.placements.editing || {});
+    if (banners && banners.length > 0) {
+      if (banners[0].id !== undefined) {
+        this.setState({ arrBanner: banners });
+      } else if (banners[0].id === undefined) {
+        const arr = JSON.parse(banners);
+        _.remove(arr, {
+          isDeleted: true,
+        });
+        this.setState({ arrBanner: arr });
+      }
+    } else if (banners && banners.length === 0) {
+      this.setState({ arrBanner: [] });
+    }
   }
 
   filterBanner(allBanner, bof) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -203,8 +224,7 @@ class Placement extends Component {
                           {/* /.box-header */}
                           <div className="box-body">
                             <ListBannerOfPlacement
-                              list={this.props.placements && this.props.placements.editing &&
-                              this.props.placements.editing.banners}
+                              list={this.state.arrBanner}
                               getPlacement={this.props.getPlacement}
                               getBanners={this.props.getBanners}
                               placementId={this.props.placementId}
@@ -232,44 +252,45 @@ class Placement extends Component {
                             onClick={(event) => this.createBannerInPlacement(event)}
                             className="btn btn-primary"
                           >
-                            Create Banner
-                          </button>
+                              Create Banner
+                            </button>
                         </div>
-                      ) : (
-                        <div className="col-lg-12">
-                          <div className="box">
-                            <div className="box-header with-border">
-                              <h3 className="box-title">Add new banner</h3>
-                              <div className="box-tools pull-right">
-                                <button
-                                  type="button"
-                                  className="btn btn-box-tool"
-                                  onClick={event => this.hideCreateBanner(event)}
-                                >
-                                  <i className="fa fa-remove" />
-                                </button>
+                        ) : (
+                          <div className="col-lg-12">
+                            <div className="box">
+                              <div className="box-header with-border">
+                                <h3 className="box-title">Add new banner</h3>
+                                <div className="box-tools pull-right">
+                                  <button
+                                    type="button"
+                                    className="btn btn-box-tool"
+                                    onClick={event => this.hideCreateBanner(event)}
+                                  >
+                                    <i className="fa fa-remove" />
+                                  </button>
+                                </div>
                               </div>
+                              {/* /.box-header */}
+                              <div className="box-body">
+                                <CreateBannerForm
+                                  createBanner={this.props.createBanner}
+                                  channels={this.props.channels.list}
+                                  placementId={this.props.placementId}
+                                  getPlacement={this.props.getPlacement}
+                                  banners={this.props.banners.list}
+                                  getBanners={this.props.getBanners}
+                                  bannerHtmlTypeList={this.props.bannerHtmlTypes.list}
+                                  bannerTypeList={this.props.bannerTypes &&
+                                  this.props.bannerTypes.list}
+                                  getBannerTypes={this.props.getBannerTypes}
+                                  adsServerList={this.props.adsServers &&
+                                  this.props.adsServers.list}
+                                />
+                              </div>
+                              {/* /.box-body */}
                             </div>
-                            {/* /.box-header */}
-                            <div className="box-body">
-                              <CreateBannerForm
-                                createBanner={this.props.createBanner}
-                                channels={this.props.channels.list}
-                                placementId={this.props.placementId}
-                                getPlacement={this.props.getPlacement}
-                                banners={this.props.banners.list}
-                                getBanners={this.props.getBanners}
-                                bannerHtmlTypeList={this.props.bannerHtmlTypes.list}
-                                bannerTypeList={this.props.bannerTypes &&
-                                this.props.bannerTypes.list}
-                                getBannerTypes={this.props.getBannerTypes}
-                                adsServerList={this.props.adsServers && this.props.adsServers.list}
-                              />
-                            </div>
-                            {/* /.box-body */}
                           </div>
-                        </div>
-                      )}
+                        )}
                     </div>
                   </div>
                 </div>

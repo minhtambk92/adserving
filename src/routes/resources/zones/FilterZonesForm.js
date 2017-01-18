@@ -6,6 +6,7 @@ class FilterZonesForm extends Component {
     filters: PropTypes.object,
     sites: PropTypes.array.isRequired,
     setZonesFilters: PropTypes.func.isRequired,
+    zoneTypes: PropTypes.array,
   };
 
   onFilterChange(event, field) {
@@ -57,14 +58,15 @@ class FilterZonesForm extends Component {
                 ref={c => {
                   this.inputZonesFilterType = c;
                 }}
-                onChange={event => this.onFilterChange(event, 'type')}
-                defaultValue={this.props.filters && this.props.filters.type}
+                onChange={event => this.onFilterChange(event, 'zoneTypeId')}
+                defaultValue={this.props.filters && this.props.filters.zoneTypeId}
               >
                 <option value="null">All types</option>
-                <option value="type-1">Banner, Button or Rectangle </option>
-                <option value="type-2">Interstitial or Floating DHTML </option>
-                <option value="type-3">Text ad </option>
-                <option value="type-4">Email/Newsletter zone</option>
+                {this.props.zoneTypes && this.props.zoneTypes.map(zoneType => (
+                  <option
+                    key={zoneType.id} value={zoneType.id}
+                  >{zoneType.name}</option>
+                ))}
               </select>
             </div>
           </div>

@@ -23,7 +23,6 @@ class CreateShareForm extends Component {
     this.inputCreateShareCSS.value = null;
     this.inputCreateShareHTML.value = null;
     this.inputCreateShareHeight.value = null;
-    this.inputCreateShareOutPutCSS.value = null;
     this.inputCreateShareDescription.value = null;
     this.inputCreateShareWeight.value = null;
     this.inputCreateShareWidth.value = null;
@@ -128,22 +127,6 @@ class CreateShareForm extends Component {
                   rows="3" placeholder="More info..."
                   ref={c => {
                     this.inputCreateShareCSS = c;
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label
-                htmlFor="inputCreateShareOutPutCSS" className="col-sm-2 control-label"
-              >Output CSS</label>
-              <div className="col-sm-10">
-                <textarea
-                  className="form-control" id="inputCreateShareOutPutCSS"
-                  rows="3" placeholder="More info..."
-                  readOnly
-                  ref={c => {
-                    this.inputCreateShareOutPutCSS = c;
                   }}
                 />
               </div>

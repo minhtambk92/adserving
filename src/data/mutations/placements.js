@@ -50,15 +50,15 @@ const placements = {
               paranoid: false,
             });
 
-            if (!placementBanner && banner.isDeleted === true) {
+            if (!placementBanner && banner.isDeleted === false) {
               await PlacementBanner.create({
                 placementId: args.placement.id,
                 bannerId: banner.id,
                 status: 'active',
               });
-            } else if (placementBanner && placementBanner.getDataValue('deletedAt') !== null && banner.isDeleted === true) {
+            } else if (placementBanner && placementBanner.getDataValue('deletedAt') !== null && banner.isDeleted === false) {
               await placementBanner.restore();
-            } else if (placementBanner && banner.isDeleted === false) {
+            } else if (placementBanner && banner.isDeleted === true) {
               await placementBanner.destroy();
             }
           });

@@ -165,18 +165,24 @@ class ListBannerOfPlacement extends Component {
   }
 
   removeBannerToPlacement(rowData) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const banner = this.props.placement.banners;
-    banner.push(rowData);
-    const placement = this.props.placement;
-    placement.banners = JSON.stringify(banner.map(b => ({
-      id: b.id,
-      isDeleted: [rowData.id].indexOf(b.id) === -1,
-    })));
-    this.props.updatePlacement(placement).then(() => {
-      this.props.getPlacement(this.props.placementId).then(() => {
-        this.props.getBanners();
+    if (this.props.placement) {
+      const banner = this.props.placement.banners;
+      banner.push(rowData);
+      const placement = this.props.placement;
+      placement.banners = JSON.stringify(banner.map(b => ({
+        id: b.id,
+        name: b.name,
+        with: b.width,
+        height: b.height,
+        weight: b.weight,
+        isDeleted: [rowData.id].indexOf(b.id) !== -1,
+      })));
+      this.props.updatePlacement(placement).then(() => {
+        this.props.getPlacement(this.props.placementId).then(() => {
+          this.props.getBanners();
+        });
       });
-    });
+    }
   }
 
   render() {

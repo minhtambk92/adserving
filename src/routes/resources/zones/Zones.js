@@ -62,7 +62,7 @@ class Zones extends Component {
   }
 
   isFiltered(zone) {
-    const { status, siteId, type } = this.props.zones.filters;
+    const { status, siteId, zoneTypeId } = this.props.zones.filters;
 
     const notMatchStatus = (
       status !== undefined && status !== zone.status
@@ -71,7 +71,9 @@ class Zones extends Component {
       siteId !== undefined && siteId !== zone.siteId
     );
     const notMatchType = (
-      type !== undefined && type !== zone.type
+      zoneTypeId !== undefined &&
+      typeof zone.zoneType === 'object' &&
+      JSON.stringify(zone.zoneType).indexOf(zoneTypeId) === -1
     );
 
     return !(notMatchStatus || notMatchSite || notMatchType);
@@ -97,6 +99,7 @@ class Zones extends Component {
                 sites={this.props.sites.list}
                 filters={this.props.zones.filters}
                 setZonesFilters={this.props.setZonesFilters}
+                zoneTypes={this.props.zoneTypes && this.props.zoneTypes.list}
               />
             </div>
             {/* /.col */}
