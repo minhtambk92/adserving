@@ -37,113 +37,40 @@ router.post('/upload-banner', upload.single('file'), (req, res) => {
 });
 
 // Handle zone data rendering
-router.post('/core-js', async(req, res) => {
+router.post('/core-js', async (req, res) => {
   const coreJsFolderName = 'corejs';
   const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
   const zoneId = encodeURI(req.body.zoneId);
   const coreResponse = await fetch(encodeURI(req.body.templateFileUrl));
   let coreContent = await coreResponse.text();
 
-  const zoneResponse = await fetch(`http://${host}/graphql?query={
-    zones(where: {id: "${zoneId}"}, limit: 1) {
-      id
-      name
-      description
-      zoneType {
-        id
-        name
-        isSize
-        value
-      }
-      zoneSizeType {
-        id
-        name
-        width
-        height
-        status
-      }
-      html
-      css
-      slot
-      width
-      height
-      isCustomSize
-      shares {
-        id
-        name
-        html
-        css
-        outputCss
-        width
-        height
-        weight
-        classes
-        type
-        placements {
-          id
-          name
-          description
-          width
-          height
-          weight
-          startTime
-          endTime
-          status
-          banners {
-            id
-            name
-            html
-            width
-            height
-            keyword
-            weight
-            description
-            bannerType {
-              id
-              name
-              value
-              weight
-            }
-            imageUrl
-            url
-            target
-            adsServer {
-              id
-              name
-              value
-              status
-            }
-            bannerHtmlType {
-              id
-              name
-              value
-              weight
-            }
-            isIFrame
-            isCountView
-            isFixIE
-            isDefault
-            tracks {
-              id
-              clickUrl
-              impressionUrl
-            }
-          }
-        }
-      }
-    }
-  }`);
+  const zoneObject = await Zone.findOne({
+    where: {
+      id: zoneId,
+    },
+    include: [{
+      model: Share,
+      as: 'shares',
+      include: [{
+        model: Placement,
+        as: 'placements',
+        include: [{
+          model: Banner,
+          as: 'banners',
+        }],
+      }],
+    }],
+  });
 
   // Create file path
-  const zoneData = await zoneResponse.json();
   const coreName = `arf-${zoneId}.min.js`;
   const builtCoreFile = path.join(builtCorePath, coreName);
 
   // Replace template holder zone object by real zone object
   if (coreContent.indexOf('"{{zoneDataObject}}"') > -1) {
-    coreContent = coreContent.replace('"{{zoneDataObject}}"', JSON.stringify(zoneData));
+    coreContent = coreContent.replace('"{{zoneDataObject}}"', JSON.stringify(zoneObject));
   } else {
-    coreContent = coreContent.replace('\'{{zoneDataObject}}\'', JSON.stringify(zoneData));
+    coreContent = coreContent.replace('\'{{zoneDataObject}}\'', JSON.stringify(zoneObject));
   }
 
   // Replace template holder zone id by real zone id
@@ -164,7 +91,7 @@ router.post('/core-js', async(req, res) => {
 });
 
 // Handle multiple zone data rendering
-router.post('/bulk-core-js', async(req, res) => {
+router.post('/bulk-core-js', async (req, res) => {
   const io = req.app.get('io');
   const zoneQuantity = await Zone.count();
 
@@ -175,11 +102,18 @@ router.post('/bulk-core-js', async(req, res) => {
   const builtCorePath = path.join(rootPath, `build/public/${coreJsFolderName}`);
   const coreResponse = await fetch(encodeURI(req.body.templateFileUrl));
   const templateZoneCode = await coreResponse.text();
-
   const allZones = await Zone.findAll({
     include: [{
       model: Share,
       as: 'shares',
+      include: [{
+        model: Placement,
+        as: 'placements',
+        include: [{
+          model: Banner,
+          as: 'banners',
+        }],
+      }],
     }],
   });
 
