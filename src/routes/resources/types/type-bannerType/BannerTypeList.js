@@ -32,6 +32,11 @@ class BannerTypeList extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.statusCreateBannerType(true);
+    this.props.statusUpdateBannerType(false);
+  }
+
   dataTableOptions() { // eslint-disable-line class-methods-use-this
     return [{
       data: 'id',

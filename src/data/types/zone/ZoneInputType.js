@@ -31,7 +31,7 @@ const ZoneInputType = new InputObjectType({
       'isShowCampaignAgain',
       'isCustomSize',
       'isShowTextBanner',
-      'characterSet',
+      'characterSetId',
       'supportThirdParty',
       'isIncludeDescription',
       'status',

@@ -32,6 +32,11 @@ class AdsServerList extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.statusCreateAdsServer(true);
+    this.props.statusUpdateAdsServer(false);
+  }
+
   dataTableOptions() { // eslint-disable-line class-methods-use-this
     return [{
       data: 'id',

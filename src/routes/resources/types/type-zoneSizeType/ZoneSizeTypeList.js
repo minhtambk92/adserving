@@ -32,6 +32,11 @@ class ZoneSizeTypeList extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.statusCreateZoneSizeType(true);
+    this.props.statusUpdateZoneSizeType(false);
+  }
+
   dataTableOptions() { // eslint-disable-line class-methods-use-this
     return [{
       data: 'id',

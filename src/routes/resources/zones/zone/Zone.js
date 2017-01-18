@@ -25,8 +25,9 @@ import { getSites } from '../../../../actions/sites';
 import { getPlacements, createPlacement, getPlacement } from '../../../../actions/placements';
 import { getCampaigns } from '../../../../actions/campaigns';
 import { getZoneSizeTypes } from '../../../../actions/zoneSizeTypes';
-import { createShare, updateShare, deleteShare, removeShareByZoneId, getShare } from '../../../../actions/shares';
+import { createShare, updateShare, deleteShare } from '../../../../actions/shares';
 import { getZoneTypes } from '../../../../actions/zoneTypes';
+import { getCharacterSets } from '../../../../actions/characterSets';
 import Layout from '../../../../components/Layout';
 import UpdateZoneForm from '../UpdateZoneForm';
 import ListPlacementOfShare from '../ListPlacementOfShare';
@@ -63,12 +64,12 @@ class Zone extends Component {
     shares: PropTypes.object,
     setStatusShareFormEdit: PropTypes.func,
     setStatusShareFormCreate: PropTypes.func,
-    removeShareByZoneId: PropTypes.func,
     getZoneTypes: PropTypes.func,
     zoneTypes: PropTypes.object,
-    getShare: PropTypes.func,
     getZoneSizeTypes: PropTypes.func,
     zoneSizeTypes: PropTypes.object,
+    getCharacterSets: PropTypes.func,
+    characterSets: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -85,6 +86,7 @@ class Zone extends Component {
     this.props.getZoneTypes();
     this.props.getZoneSizeTypes();
     this.props.getZone(this.props.zoneId);
+    this.props.getCharacterSets();
   }
 
   componentDidMount() {
@@ -260,6 +262,7 @@ class Zone extends Component {
                       zoneId={this.props.zoneId}
                       getZone={this.props.getZone}
                       setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                      characterSetList={this.props.characterSets && this.props.characterSets.list}
                     />
                   </div>
 
@@ -330,7 +333,6 @@ class Zone extends Component {
                                       share.placements,
                                     )}
                                   getZone={this.props.getZone}
-                                  getPlacements={this.props.getPlacements}
                                   zoneId={this.props.zoneId}
                                   shareId={share.id}
                                   setCurrentShare={this.props.setCurrentShare}
@@ -398,6 +400,7 @@ const mapState = (state) => ({
   shares: state.shares,
   zoneTypes: state.zoneTypes,
   zoneSizeTypes: state.zoneSizeTypes,
+  characterSets: state.characterSets,
 });
 
 const mapDispatch = {
@@ -416,10 +419,9 @@ const mapDispatch = {
   setCurrentShare,
   setStatusShareFormEdit,
   setStatusShareFormCreate,
-  removeShareByZoneId,
   getZoneTypes,
-  getShare,
   getZoneSizeTypes,
+  getCharacterSets,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zone));

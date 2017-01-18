@@ -28,10 +28,13 @@ class ChannelOptionBrowserList extends Component {
     this.state = {
       browser: {},
       arrBrowser: [],
-      number: 1,
-      countBrowser: 0,
       arrCreateBrowser: [],
     };
+  }
+
+  componentWillMount() {
+    this.props.statusBrowserCreate(true);
+    this.props.statusBrowserEdit(false);
   }
 
   dataTableOptions() { // eslint-disable-line class-methods-use-this
@@ -85,9 +88,7 @@ class ChannelOptionBrowserList extends Component {
   editBrowser(data) {
     this.props.statusBrowserEdit(true).then(() => {
       if (this.props.page.browserEdit === true) {
-        const length = this.state.number;
-        const count = length + 1;
-        this.setState({ countBrowser: count });
+        const count = 1;
         this.setState({ arrBrowser: [].concat(count) });
         this.setState({ browser: data });
       }
@@ -98,9 +99,7 @@ class ChannelOptionBrowserList extends Component {
   addBrowser() {
     this.props.statusBrowserCreate(true).then(() => {
       if (this.props.page.browserCreate === true) {
-        const length = this.state.number;
-        const count = length + 1;
-        this.setState({ countBrowser: count });
+        const count = 1;
         this.setState({ arrCreateBrowser: [].concat(count) });
       }
       this.props.statusBrowserEdit(false);

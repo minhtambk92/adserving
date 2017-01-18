@@ -1,0 +1,281 @@
+[
+  {
+    "id": "05dd1eb0-5c3e-4375-aff5-cfff7c65efd7",
+    "name": "Estonian (ISO-8859-13)",
+    "value": "ISO-8859-13",
+    "status": "active",
+    "createdAt": "2017-01-18 04:42:01",
+    "updatedAt": "2017-01-18 04:42:01",
+    "deletedAt": null
+  },
+  {
+    "id": "07d8df5a-f05f-4521-9a7a-750be969d5ef",
+    "name": "Greek (Windows-1253)",
+    "value": "Windows-1253",
+    "status": "active",
+    "createdAt": "2017-01-18 04:44:54",
+    "updatedAt": "2017-01-18 04:44:54",
+    "deletedAt": null
+  },
+  {
+    "id": "11b43d88-48dc-4048-9cc3-d8d2763100fb",
+    "name": "Japanese (EUC-JP)",
+    "value": "EUC-JP",
+    "status": "active",
+    "createdAt": "2017-01-18 04:46:12",
+    "updatedAt": "2017-01-18 04:46:12",
+    "deletedAt": null
+  },
+  {
+    "id": "13fc7e9a-528e-4654-a02d-713be1072cc0",
+    "name": "Greek (ISO-8859-7)",
+    "value": "ISO-8859-7",
+    "status": "active",
+    "createdAt": "2017-01-18 04:42:23",
+    "updatedAt": "2017-01-18 04:42:23",
+    "deletedAt": null
+  },
+  {
+    "id": "15744da3-39c2-403c-a050-9e5d93ed7334",
+    "name": "Auto-detect",
+    "value": "autoDetect",
+    "status": "active",
+    "createdAt": "2017-01-18 04:35:12",
+    "updatedAt": "2017-01-18 04:35:12",
+    "deletedAt": null
+  },
+  {
+    "id": "1f48637a-489a-461c-aafe-e00d2a22dded",
+    "name": "Chinese Traditional (Big5)",
+    "value": "Big5",
+    "status": "active",
+    "createdAt": "2017-01-18 04:39:54",
+    "updatedAt": "2017-01-18 04:39:54",
+    "deletedAt": null
+  },
+  {
+    "id": "22a55549-16d0-4c63-9ee5-cc8be4fea94d",
+    "name": "Arabic (Windows-1256)",
+    "value": "Windows-1256",
+    "status": "active",
+    "createdAt": "2017-01-18 04:36:06",
+    "updatedAt": "2017-01-18 04:36:06",
+    "deletedAt": null
+  },
+  {
+    "id": "23483f8b-861b-4679-bc77-e152992fdba1",
+    "name": "Western European (Windows-1252)",
+    "value": "Windows-1252",
+    "status": "active",
+    "createdAt": "2017-01-18 04:49:56",
+    "updatedAt": "2017-01-18 04:49:56",
+    "deletedAt": null
+  },
+  {
+    "id": "2c35ed0a-4f22-40f0-bdc0-a997795259cf",
+    "name": "Cyrillic (KOI8-R)",
+    "value": "KOI8-R",
+    "status": "active",
+    "createdAt": "2017-01-18 04:41:15",
+    "updatedAt": "2017-01-18 04:41:15",
+    "deletedAt": null
+  },
+  {
+    "id": "344507da-dfee-405e-adab-62d22344476e",
+    "name": "Vietnamese (Windows-1258)",
+    "value": "Windows-1258",
+    "status": "active",
+    "createdAt": "2017-01-18 04:49:06",
+    "updatedAt": "2017-01-18 04:49:06",
+    "deletedAt": null
+  },
+  {
+    "id": "3966cb2e-ac37-4452-82a8-4b9bdfa3ea2a",
+    "name": "Hebrew (ISO:Visual: ISO-8859-8)",
+    "value": "ISO-8859-8",
+    "status": "active",
+    "createdAt": "2017-01-18 04:45:35",
+    "updatedAt": "2017-01-18 04:45:35",
+    "deletedAt": null
+  },
+  {
+    "id": "4dc38951-8502-41f7-b748-9c314942590a",
+    "name": "Chinese Simplified (HZ)",
+    "value": "HZ",
+    "status": "active",
+    "createdAt": "2017-01-18 04:39:33",
+    "updatedAt": "2017-01-18 04:39:33",
+    "deletedAt": null
+  },
+  {
+    "id": "54d28275-e8bb-4989-a823-79a7e74a6ab7",
+    "name": "Chinese Simplified (GB2312)",
+    "value": "GB2312",
+    "status": "active",
+    "createdAt": "2017-01-18 04:39:03",
+    "updatedAt": "2017-01-18 04:39:03",
+    "deletedAt": null
+  },
+  {
+    "id": "5f0ff829-3976-4885-b922-429eb7101a33",
+    "name": "Arabic (ISO-8859-6)",
+    "value": "ISO-8859-6",
+    "status": "active",
+    "createdAt": "2017-01-18 04:35:40",
+    "updatedAt": "2017-01-18 04:35:40",
+    "deletedAt": null
+  },
+  {
+    "id": "5f3177d7-e796-4a2a-94ea-41d9ca8ec2fd",
+    "name": "Turkish (ISO-8859-9)",
+    "value": "ISO-8859-9",
+    "status": "active",
+    "createdAt": "2017-01-18 04:48:11",
+    "updatedAt": "2017-01-18 04:48:11",
+    "deletedAt": null
+  },
+  {
+    "id": "7347c6b3-47ff-4ceb-b2f6-941642f61768",
+    "name": "Chinese Simplified (GB18030)",
+    "value": "GB18030",
+    "status": "active",
+    "createdAt": "2017-01-18 04:38:31",
+    "updatedAt": "2017-01-18 04:38:31",
+    "deletedAt": null
+  },
+  {
+    "id": "8adc6d42-0369-49cc-830d-4c60b3d2e8a2",
+    "name": "Western European (ISO-8859-1)",
+    "value": "ISO-8859-1",
+    "status": "active",
+    "createdAt": "2017-01-18 04:49:26",
+    "updatedAt": "2017-01-18 04:49:26",
+    "deletedAt": null
+  },
+  {
+    "id": "8eef87c1-1cbd-4ace-b582-88e17742ac15",
+    "name": "Unicode (UTF-8)",
+    "value": "UTF-8",
+    "status": "active",
+    "createdAt": "2017-01-18 04:48:48",
+    "updatedAt": "2017-01-18 04:48:48",
+    "deletedAt": null
+  },
+  {
+    "id": "94231190-be78-4792-b2ab-c63cfc896dae",
+    "name": "Japanese (Shift-JIS)",
+    "value": "Shift-JIS",
+    "status": "inactive",
+    "createdAt": "2017-01-18 04:46:55",
+    "updatedAt": "2017-01-18 04:53:20",
+    "deletedAt": null
+  },
+  {
+    "id": "962a86b1-e8bc-4f48-a013-15aae12303f0",
+    "name": "Hebrew (ISO Logical: ISO-8859-8-l)",
+    "value": "ISO-8859-8-l",
+    "status": "active",
+    "createdAt": "2017-01-18 04:45:15",
+    "updatedAt": "2017-01-18 04:45:15",
+    "deletedAt": null
+  },
+  {
+    "id": "9ce33ca5-1b41-4e8f-8499-514db1ba1978",
+    "name": "Turkish (Windows-1254)",
+    "value": "Windows-1254",
+    "status": "active",
+    "createdAt": "2017-01-18 04:48:29",
+    "updatedAt": "2017-01-18 04:48:29",
+    "deletedAt": null
+  },
+  {
+    "id": "a6732a43-6c2e-4559-8e3d-53934c02ee39",
+    "name": "Thai (TIS-620)",
+    "value": "TIS-620",
+    "status": "active",
+    "createdAt": "2017-01-18 04:47:51",
+    "updatedAt": "2017-01-18 04:47:51",
+    "deletedAt": null
+  },
+  {
+    "id": "ad88efcc-bd25-48b8-b8e8-4f358b3144ba",
+    "name": "Central European (ISO-8859-2)",
+    "value": "ISO-8859-2",
+    "status": "active",
+    "createdAt": "2017-01-18 04:37:39",
+    "updatedAt": "2017-01-18 04:37:39",
+    "deletedAt": null
+  },
+  {
+    "id": "c0a2d526-ff34-4a6a-b29d-72d47d8d30d4",
+    "name": "Cyrillic (Windows-1251)",
+    "value": "Windows-1251",
+    "status": "active",
+    "createdAt": "2017-01-18 04:41:38",
+    "updatedAt": "2017-01-18 04:41:38",
+    "deletedAt": null
+  },
+  {
+    "id": "cd68230c-6372-437f-bbd1-4f2a7058ee7a",
+    "name": "Baltic (ISO-8859-4)",
+    "value": "ISO-8859-4",
+    "status": "active",
+    "createdAt": "2017-01-18 04:36:48",
+    "updatedAt": "2017-01-18 04:36:48",
+    "deletedAt": null
+  },
+  {
+    "id": "e02ca0ad-906a-4460-b915-8c4dd1abeaa4",
+    "name": "Baltic (Windows-1257)",
+    "value": "Windows-1257",
+    "status": "active",
+    "createdAt": "2017-01-18 04:37:16",
+    "updatedAt": "2017-01-18 04:37:16",
+    "deletedAt": null
+  },
+  {
+    "id": "e83022b1-38d8-40dc-84e2-339e370601dc",
+    "name": "Hebrew (Windows-1255)",
+    "value": "Windows-1255",
+    "status": "active",
+    "createdAt": "2017-01-18 04:45:54",
+    "updatedAt": "2017-01-18 04:45:54",
+    "deletedAt": null
+  },
+  {
+    "id": "ea1c6b85-377b-4fd7-9f97-5d9b2f65635f",
+    "name": "Korean (EUC-KR)",
+    "value": "EUC-KR",
+    "status": "active",
+    "createdAt": "2017-01-18 04:47:13",
+    "updatedAt": "2017-01-18 04:47:13",
+    "deletedAt": null
+  },
+  {
+    "id": "f4f4a013-d06a-4c6b-9863-3cf662ec54d9",
+    "name": "Central European (Windows-1250)",
+    "value": "Windows-1250",
+    "status": "active",
+    "createdAt": "2017-01-18 04:38:06",
+    "updatedAt": "2017-01-18 04:38:06",
+    "deletedAt": null
+  },
+  {
+    "id": "f6661383-97ed-49d9-add8-1efba56c0c95",
+    "name": "Latin 9 (ISO-8859-15)",
+    "value": "ISO-8859-15",
+    "status": "active",
+    "createdAt": "2017-01-18 04:47:32",
+    "updatedAt": "2017-01-18 04:47:32",
+    "deletedAt": null
+  },
+  {
+    "id": "fd71744d-9b0c-41f4-acda-47e1f37b9a9a",
+    "name": "Cyrillic (ISO-8859-5)",
+    "value": "ISO-8859-5",
+    "status": "active",
+    "createdAt": "2017-01-18 04:40:55",
+    "updatedAt": "2017-01-18 04:40:55",
+    "deletedAt": null
+  }
+]

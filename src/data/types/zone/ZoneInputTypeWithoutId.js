@@ -29,7 +29,7 @@ const ZoneInputTypeWithoutId = new InputObjectType({
       'isShowCampaignAgain',
       'isShowTextBanner',
       'isCustomSize',
-      'characterSet',
+      'characterSetId',
       'supportThirdParty',
       'isIncludeDescription',
       'status',

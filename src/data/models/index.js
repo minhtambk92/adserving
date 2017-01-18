@@ -361,6 +361,14 @@ Zone.zoneSizeType = Zone.belongsTo(ZoneSizeType, {
   foreignKey: 'zoneSizeTypeId',
 });
 
+Zone.characterSet = Zone.belongsTo(CharacterSet, {
+  foreignKey: 'characterSetId',
+});
+
+CharacterSet.zones = CharacterSet.hasMany(Zone, {
+  foreignKey: 'characterSetId',
+});
+
 function sync(...args) {
   return sequelize.sync(...args);
 }

@@ -30,6 +30,11 @@ class UserList extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.setStatusCreateUser(true);
+    this.props.setStatusUpdateUser(false);
+  }
+
   dataTableOptions() { // eslint-disable-line class-methods-use-this
     return [{
       data: 'id',

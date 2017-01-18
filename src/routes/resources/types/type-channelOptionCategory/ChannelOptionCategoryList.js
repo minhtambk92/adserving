@@ -28,10 +28,13 @@ class ChannelOptionCategoryList extends Component {
     this.state = {
       category: {},
       arrCategory: [],
-      number: 1,
-      countCategory: 0,
       arrCreateCategory: [],
     };
+  }
+
+  componentWillMount() {
+    this.props.statusCategoryCreate(true);
+    this.props.statusCategoryEdit(false);
   }
 
   dataTableOptions() { // eslint-disable-line class-methods-use-this
@@ -85,9 +88,7 @@ class ChannelOptionCategoryList extends Component {
   editCategory(data) {
     this.props.statusCategoryEdit(true).then(() => {
       if (this.props.page.categoryEdit === true) {
-        const length = this.state.number;
-        const count = length + 1;
-        this.setState({ countCategory: count });
+        const count = 1;
         this.setState({ arrCategory: [].concat(count) });
         this.setState({ category: data });
       }
@@ -98,9 +99,7 @@ class ChannelOptionCategoryList extends Component {
   addCategory() {
     this.props.statusCategoryCreate(true).then(() => {
       if (this.props.page.categoryCreate === true) {
-        const length = this.state.number;
-        const count = length + 1;
-        this.setState({ countCategory: count });
+        const count = 1;
         this.setState({ arrCreateCategory: [].concat(count) });
       }
       this.props.statusCategoryEdit(false);

@@ -75,9 +75,6 @@ const Zone = Model.define('Zone', {
     type: DataType.BOOLEAN,
     defaultValue: false,
   },
-  characterSet: {
-    type: DataType.STRING,
-  },
   supportThirdParty: {
     type: DataType.STRING,
     defaultValue: '0',

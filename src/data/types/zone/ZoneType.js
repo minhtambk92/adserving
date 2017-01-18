@@ -5,6 +5,7 @@ import zoneBelongsToSite from '../../queries/zone/zoneBelongsToSite';
 import zoneHasManyShares from '../../queries/zone/zoneHasManyShares';
 import zoneBelongsToZoneType from '../../queries/zone/zoneBelongsToZoneType';
 import zoneBelongsToZoneSizeType from '../../queries/zone/zoneBelongsToZoneSizeType';
+import zoneBelongToCharacterSet from '../../queries/zone/zoneBelongsToCharacterSet';
 
 const ZoneType = new ObjectType({
   name: 'ZoneType',
@@ -16,6 +17,7 @@ const ZoneType = new ObjectType({
     shares: zoneHasManyShares(),
     zoneType: zoneBelongsToZoneType(),
     zoneSizeType: zoneBelongsToZoneSizeType(),
+    characterSet: zoneBelongToCharacterSet(),
   }),
 });
 

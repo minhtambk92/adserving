@@ -31,6 +31,7 @@ import {
   AdsServer,
   ZoneType,
   ZoneSizeType,
+  CharacterSet,
 } from '../../data/models';
 import resourcesList from './data/Resource.json';
 import menusList from './data/Menu.json';
@@ -57,6 +58,7 @@ import bannerTypeList from './data/BannerType.json';
 import adsServerList from './data/AdsServer.json';
 import zoneTypeList from './data/ZoneType.json';
 import zoneSizeTypeList from './data/ZoneSizeType.json';
+import characterSetList from './data/CharacterSet.json';
 
 /* eslint-disable no-console */
 
@@ -246,6 +248,20 @@ async function channelFiction() {
   }
 }
 
+// Character Set fiction
+async function characterSetFiction() {
+  console.log(chalk.grey('Check current number of character set...'));
+  const characterSetsQuantity = await CharacterSet.count();
+
+  if (characterSetsQuantity === 0) {
+    console.log(chalk.red('No channel found! Do a fiction...'));
+    const results = await CharacterSet.bulkCreate(characterSetList);
+    console.log(chalk.green(`CREATED: ${results.length} characterSet(s). => PASSED!`));
+  } else {
+    console.log(chalk.green(`FOUND: ${characterSetsQuantity} characterSet(s). => PASSED!`));
+  }
+}
+
 // Zones fiction
 async function zoneFiction() {
   console.log(chalk.grey('Check current number of zones...'));
@@ -362,6 +378,7 @@ async function fiction() {
   await siteFiction();
   await channelFiction();
   await placementFiction();
+  await characterSetFiction();
   await zoneFiction();
   await sharedFiction();
   await bannerFiction();

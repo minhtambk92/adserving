@@ -24,10 +24,13 @@ class RoleList extends Component {
     this.state = {
       role: {},
       arrRole: [],
-      number: 1,
-      countRole: 0,
       arrCreateRole: [],
     };
+  }
+
+  componentWillMount() {
+    this.props.setStatusCreateRole(true);
+    this.props.setStatusUpdateRole(false);
   }
 
   dataTableOptions() { // eslint-disable-line class-methods-use-this
@@ -79,9 +82,7 @@ class RoleList extends Component {
   editRole(data) {
     this.props.setStatusUpdateRole(true).then(() => {
       if (this.props.page.statusUpdateRole === true) {
-        const length = this.state.number;
-        const count = length + 1;
-        this.setState({ countRole: count });
+        const count = 1;
         this.setState({ arrRole: [].concat(count) });
         this.setState({ role: data });
       }
@@ -92,9 +93,7 @@ class RoleList extends Component {
   addRole() {
     this.props.setStatusCreateRole(true).then(() => {
       if (this.props.page.statusCreateRole === true) {
-        const length = this.state.number;
-        const count = length + 1;
-        this.setState({ countRole: count });
+        const count = 1;
         this.setState({ arrCreateRole: [].concat(count) });
       }
       this.props.setStatusUpdateRole(false);

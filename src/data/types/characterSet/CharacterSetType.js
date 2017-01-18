@@ -7,6 +7,7 @@ import {
 } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { CharacterSet } from '../../models';
+import characterSetHasManyZones from '../../queries/characterSet/characterSetHasManyZones';
 
 const CharacterSetType = new ObjectType({
   name: 'CharacterSetType',
@@ -14,6 +15,7 @@ const CharacterSetType = new ObjectType({
     // Additional options
   }), {
     // Additional fields
+    zones: characterSetHasManyZones(),
   }),
 });
 

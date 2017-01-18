@@ -28,6 +28,11 @@ class PermissionList extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.setStatusCreatePermission(true);
+    this.props.setStatusUpdatePermission(false);
+  }
+
   dataTablePermissions() { // eslint-disable-line class-methods-use-this
     return [{
       data: 'id',

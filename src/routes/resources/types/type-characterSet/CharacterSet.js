@@ -25,7 +25,7 @@ import {
 import CharacterSetList from './CharacterSetList';
 import s from './CharacterSet.css';
 
-const pageTitle = 'Banner Type';
+const pageTitle = 'CharacterSet';
 
 class CharacterSet extends Component {
 

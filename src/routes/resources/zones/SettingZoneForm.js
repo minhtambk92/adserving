@@ -12,6 +12,7 @@ class SettingZoneForm extends Component {
     zone: PropTypes.object,
     getZone: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
+    characterSetList: PropTypes.array,
   };
 
   constructor(props, context) {
@@ -25,11 +26,11 @@ class SettingZoneForm extends Component {
     const {
       targetIFrame,
       source,
-      characterSet,
+      characterSetId,
       supportThirdParty,
     } = nextProps.zone && (nextProps.zone || {});
     this.inputZoneThirdParty.value = supportThirdParty;
-    this.inputZoneCharacterSet.value = characterSet;
+    this.inputZoneCharacterSet.value = characterSetId;
     this.inputZoneSource.value = source;
     this.inputZoneTargetIFrame.value = targetIFrame;
   }
@@ -68,7 +69,7 @@ class SettingZoneForm extends Component {
     zone.isShowCampaignAgain = document.getElementById('inputZoneShowCampaignAgain').checked;
     zone.source = this.inputZoneSource.value;
     zone.supportThirdParty = this.inputZoneThirdParty.value;
-    zone.characterSet = this.inputZoneCharacterSet.value;
+    zone.characterSetId = this.inputZoneCharacterSet.value;
 
     this.props.updateZone(zone).then(() => {
       this.props.getZone(this.props.zoneId);
@@ -190,38 +191,12 @@ class SettingZoneForm extends Component {
                 this.inputZoneCharacterSet = c;
               }}
             >
-              <option value="0">None</option>
-              <option value="autoDetect">Auto-detect</option>
-              <option value="ISO-8859-6">Arabic (ISO-8859-6)</option>
-              <option value="Windows-1256">Arabic (Windows-1256)</option>
-              <option value="ISO-8859-4">Baltic (ISO-8859-4)</option>
-              <option value="Windows-1257">Baltic (Windows-1257)</option>
-              <option value="ISO-8859-2">Central European (ISO-8859-2)</option>
-              <option value="Windows-1250">Central European (Windows-1250)</option>
-              <option value="GB18030">Chinese Simplified (GB18030)</option>
-              <option value="GB2312">Chinese Simplified (GB2312)</option>
-              <option value="HZ">Chinese Simplified (HZ)</option>
-              <option value="Big5">Chinese Traditional (Big5)</option>
-              <option value="ISO-8859-5">Cyrillic (ISO-8859-5)</option>
-              <option value="KOI8-R">Cyrillic (KOI8-R)</option>
-              <option value="Windows-1251">Cyrillic (Windows-1251)</option>
-              <option value="ISO-8859-13">Estonian (ISO-8859-13)</option>
-              <option value="ISO-8859-7">Greek (ISO-8859-7)</option>
-              <option value="Windows-1253">Greek (Windows-1253)</option>
-              <option value="ISO-8859-8-l">Hebrew (ISO Logical: ISO-8859-8-l)</option>
-              <option value="ISO-8859-8">Hebrew (ISO:Visual: ISO-8859-8)</option>
-              <option value="Windows-1255">Hebrew (Windows-1255)</option>
-              <option value="EUC-JP">Japanese (EUC-JP)</option>
-              <option value="Shift-JIS">Japanese (Shift-JIS)</option>
-              <option value="EUC-KR">Korean (EUC-KR)</option>
-              <option value="ISO-8859-15">Latin 9 (ISO-8859-15)</option>
-              <option value="TIS-620">Thai (TIS-620)</option>
-              <option value="ISO-8859-9">Turkish (ISO-8859-9)</option>
-              <option value="Windows-1254">Turkish (Windows-1254)</option>
-              <option value="UTF-8">Unicode (UTF-8)</option>
-              <option value="Windows-1258">Vietnamese (Windows-1258)</option>
-              <option value="ISO-8859-1">Western European (ISO-8859-1)</option>
-              <option value="Windows-1252">Western European (Windows-1252)</option>
+              <option value="null">None</option>
+              {this.props.characterSetList && this.props.characterSetList.map(characterSet => (
+                <option
+                  key={characterSet.id} value={characterSet.id}
+                >{characterSet.name} </option>
+              ))}
             </select>
           </div>
         </div>

@@ -50,7 +50,7 @@ export function getSite(id) {
             source
             isShowCampaignAgain
             isShowTextBanner
-            characterSet
+            characterSetId
             supportThirdParty
             isIncludeDescription
             isCustomSize

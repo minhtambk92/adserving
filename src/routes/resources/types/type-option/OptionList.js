@@ -28,6 +28,11 @@ class OptionList extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.setStatusCreateOption(true);
+    this.props.setStatusUpdateOption(false);
+  }
+
   dataTableOptions() { // eslint-disable-line class-methods-use-this
     return [{
       data: 'id',

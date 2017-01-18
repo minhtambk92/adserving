@@ -32,6 +32,11 @@ class CharacterSetList extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.statusCreateCharacterSet(true);
+    this.props.statusUpdateCharacterSet(false);
+  }
+
   dataTableOptions() { // eslint-disable-line class-methods-use-this
     return [{
       data: 'id',
@@ -114,7 +119,7 @@ class CharacterSetList extends Component {
         <div className="col-sm-12">
           <div className="box">
             <div className="box-header">
-              <h3 className="box-title">List Banner Type</h3>
+              <h3 className="box-title">List CharacterSet</h3>
             </div>
             {/* /.box-header */}
             <div className="box-body">
@@ -189,8 +194,7 @@ class CharacterSetList extends Component {
           }
           {((this.props.page.statusCreateCharacterSet === false
           && this.props.page.statusUpdateCharacterSet === false) ||
-          (this.state.arrCreateCharacterSet && this.state.arrCreateCharacterSet.length === 0
-          && this.props.page.statusUpdateCharacterSet === false)) ? (
+          (this.state.arrCreateCharacterSet && this.state.arrCreateCharacterSet.length === 0) ? (
             <button
               type="button"
               id="create"
@@ -199,7 +203,7 @@ class CharacterSetList extends Component {
             >
                 Create CharacterSet
               </button>
-            ) : ('')}
+            ) : (''))}
         </div>
       </div>
     );

@@ -64,7 +64,7 @@ export function getZone(id) {
           source
           isShowCampaignAgain
           isShowTextBanner
-          characterSet
+          characterSetId
           supportThirdParty
           isCustomSize
           isIncludeDescription
@@ -148,7 +148,7 @@ export function getZones(args = {
           source
           isShowCampaignAgain
           isShowTextBanner
-          characterSet
+          characterSetId
           supportThirdParty
           isIncludeDescription
           isCustomSize
@@ -218,7 +218,7 @@ export function createZone({
   source,
   isShowCampaignAgain,
   isShowTextBanner,
-  characterSet,
+  characterSetId,
   supportThirdParty,
   isIncludeDescription,
   isCustomSize,
@@ -245,7 +245,7 @@ export function createZone({
           source
           isShowCampaignAgain
           isShowTextBanner
-          characterSet
+          characterSetId
           supportThirdParty
           isIncludeDescription
           status
@@ -271,7 +271,7 @@ export function createZone({
         source,
         isShowCampaignAgain,
         isShowTextBanner,
-        characterSet,
+        characterSetId,
         supportThirdParty,
         isIncludeDescription,
         isCustomSize,
@@ -296,7 +296,7 @@ export function updateZone({
   source,
   isShowCampaignAgain,
   isShowTextBanner,
-  characterSet,
+  characterSetId,
   supportThirdParty,
   isIncludeDescription,
   status,
@@ -323,7 +323,7 @@ export function updateZone({
           source
           isShowCampaignAgain
           isShowTextBanner
-          characterSet
+          characterSetId
           supportThirdParty
           isIncludeDescription
           isCustomSize
@@ -350,7 +350,7 @@ export function updateZone({
         source,
         isShowCampaignAgain,
         isShowTextBanner,
-        characterSet,
+        characterSetId,
         supportThirdParty,
         isIncludeDescription,
         isCustomSize,
@@ -389,7 +389,7 @@ export function deleteZone(id) {
           source
           isShowCampaignAgain
           isShowTextBanner
-          characterSet
+          characterSetId
           supportThirdParty
           isIncludeDescription
           isCustomSize

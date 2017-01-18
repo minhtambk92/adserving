@@ -51,7 +51,7 @@ class ListZoneOfSite extends Component {
     const source = data.source;
     const isShowCampaignAgain = data.isShowCampaignAgain;
     const isShowTextBanner = data.isShowTextBanner;
-    const characterSet = data.characterSet;
+    const characterSetId = data.characterSetId;
     const supportThirdParty = data.supportThirdParty;
     const isIncludeDescription = data.isIncludeDescription;
     const isCustomSize = data.isCustomSize;
@@ -73,7 +73,7 @@ class ListZoneOfSite extends Component {
         source,
         isShowCampaignAgain,
         isShowTextBanner,
-        characterSet,
+        characterSetId,
         supportThirdParty,
         isIncludeDescription,
         isCustomSize,

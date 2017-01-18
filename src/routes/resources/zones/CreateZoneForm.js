@@ -150,7 +150,7 @@ class CreateZoneForm extends Component {
     const source = '';
     const isShowCampaignAgain = true;
     const isShowTextBanner = false;
-    const characterSet = 'autoDetect';
+    const characterSetId = null;
     const supportThirdParty = '0';
     const isIncludeDescription = true;
     const status = this.inputZoneStatus.value;
@@ -171,7 +171,7 @@ class CreateZoneForm extends Component {
         source,
         isShowCampaignAgain,
         isShowTextBanner,
-        characterSet,
+        characterSetId,
         supportThirdParty,
         isIncludeDescription,
         isCustomSize,

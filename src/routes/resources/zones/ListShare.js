@@ -30,31 +30,13 @@ class ListShare extends Component {
     super(props, context);
     this.state = {
       share: {},
-      numberShare: 1,
       arrShare: [],
-      countShare: 0,
       arrCreateShare: [],
     };
   }
-
-  componentDidMount() {
-    /* eslint-disable no-undef */
-    const self = this;
-    // Add New
-    $('#createShareZone').click(() => {
-      const length = this.state.numberShare;
-      const count = length + 1;
-      self.setState({ showCreate: false });
-      self.setState({ numberShare: count });
-      self.setState({ arrShare: self.state.arrShare.concat([count]) });
-    });
-    // Delete
-    $('#shareForm').on('click', '.remove-share-zone', function () {
-      $(this).parents('.list-zone-shared').remove();
-      self.setState({ showCreate: false });
-      self.setState({ showEdit: false });
-      // self.props.getBanner(self.props.bannerId);
-    });
+  componentWillMount() {
+    this.props.setStatusShareFormCreate(true);
+    this.props.setStatusShareFormEdit(false);
   }
 
   onTabClickAddPlacement(event, id) {
@@ -66,7 +48,6 @@ class ListShare extends Component {
   }
 
   duplicateShareZone(data) {
-    console.log(data);
     const name = `Copy of ${data.name}`;
     const css = data.css;
     const outputCss = '';
@@ -98,7 +79,16 @@ class ListShare extends Component {
             const placement = data.placements;
             share.placements = JSON.stringify(placement.map(p => ({
               id: p.id,
-              isDeleted: true,
+              name: p.name,
+              startTime: p.startTime,
+              endTime: p.endTime,
+              width: p.width,
+              height: p.height,
+              weight: p.weight,
+              description: p.description,
+              campaignId: p.campaignId,
+              status: p.status,
+              isDeleted: false,
             })));
             delete share.zoneId;
             this.props.updateShare(share).then(() => {
@@ -181,9 +171,7 @@ class ListShare extends Component {
   editShareZone(data) {
     this.props.setStatusShareFormEdit(true).then(() => {
       if (this.props.page.statusEdit === true) {
-        const length = this.state.numberShare;
-        const count = length + 1;
-        this.setState({ countShare: count });
+        const count = 1;
         this.setState({ arrShare: [].concat(count) });
         this.setState({ share: data });
       }
@@ -194,9 +182,7 @@ class ListShare extends Component {
   addShare() {
     this.props.setStatusShareFormCreate(true).then(() => {
       if (this.props.page.statusCreate === true) {
-        const length = this.state.numberShare;
-        const count = length + 1;
-        this.setState({ countShare: count });
+        const count = 1;
         this.setState({ arrCreateShare: [].concat(count) });
       }
     });
