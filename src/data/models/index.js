@@ -371,6 +371,14 @@ CharacterSet.zones = CharacterSet.hasMany(Zone, {
   foreignKey: 'characterSetId',
 });
 
+OptionChannelType.optionChannelvalues = OptionChannelType.hasMany(OptionChannelValue, {
+  foreignKey: 'optionChannelTypeId',
+});
+
+OptionChannelValue.optionChannelType = OptionChannelValue.belongsTo(OptionChannelType, {
+  foreignKey: 'optionChannelTypeId',
+});
+
 function sync(...args) {
   return sequelize.sync(...args);
 }
