@@ -33,6 +33,8 @@ import adsServers from './adsServer/adsServers';
 import zoneTypes from './zoneType/zoneTypes';
 import zoneSizeTypes from './zoneSizeType/zoneSizeTypes';
 import characterSets from './characterSet/characterSets';
+import optionChannelTypes from './optionChannelType/optionChannelTypes';
+import optionChannelValues from './optionChannelValue/optionChannelValues';
 
 const queries = new ObjectType({
   name: 'Query',
@@ -67,6 +69,8 @@ const queries = new ObjectType({
     zoneTypes,
     zoneSizeTypes,
     characterSets,
+    optionChannelTypes,
+    optionChannelValues,
   },
 });
 

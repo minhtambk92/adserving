@@ -26,6 +26,10 @@ import {
   SET_STATUS_UPDATE_ZONE_SIZE_TYPE,
   SET_STATUS_CREATE_CHARACTER_SET,
   SET_STATUS_UPDATE_CHARACTER_SET,
+  SET_STATUS_CREATE_OPTION_CHANNEL_TYPE,
+  SET_STATUS_UPDATE_OPTION_CHANNEL_TYPE,
+  SET_STATUS_CREATE_OPTION_CHANNEL_VALUE,
+  SET_STATUS_UPDATE_OPTION_CHANNEL_VALUE,
 } from '../../constants';
 
 
@@ -320,6 +324,50 @@ function statusUpdateCharacterSet(state = false, action) {
   }
 }
 
+function statusCreateOptionChannelType(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_OPTION_CHANNEL_TYPE: {
+      return action.payload.statusCreateOptionChannelType;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdateOptionChannelType(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_OPTION_CHANNEL_TYPE: {
+      return action.payload.statusUpdateOptionChannelType;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusCreateOptionChannelValue(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_OPTION_CHANNEL_VALUE: {
+      return action.payload.statusCreateOptionChannelValue;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdateOptionChannelValue(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_OPTION_CHANNEL_VALUE: {
+      return action.payload.statusUpdateOptionChannelValue;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 export default combineReducers({
   browserCreate,
   browserEdit,
@@ -347,4 +395,8 @@ export default combineReducers({
   statusUpdateZoneSizeType,
   statusCreateCharacterSet,
   statusUpdateCharacterSet,
+  statusCreateOptionChannelType,
+  statusUpdateOptionChannelType,
+  statusCreateOptionChannelValue,
+  statusUpdateOptionChannelValue,
 });

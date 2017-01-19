@@ -27,6 +27,8 @@ import adsServers from './adsServers';
 import zoneTypes from './zoneTypes';
 import zoneSizeTypes from './zoneSizeTypes';
 import characterSets from './characterSets';
+import optionChannelTypes from './optionChannelTypes';
+import optionChannelValues from './optionChannelValues';
 
 import page from './pages';
 
@@ -60,4 +62,6 @@ export default combineReducers({
   zoneTypes,
   zoneSizeTypes,
   characterSets,
+  optionChannelTypes,
+  optionChannelValues,
 });

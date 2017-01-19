@@ -11,6 +11,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import {
@@ -26,6 +27,7 @@ import {
 import { getChannelOptionBrowsers } from '../../../../actions/channelOptionBrowsers';
 import { getChannelOptionCategories } from '../../../../actions/channelOptionCategories';
 import { getSites } from '../../../../actions/sites';
+import { getOptionChannelTypes } from '../../../../actions/optionChannelTypes';
 import Layout from '../../../../components/Layout';
 import UpdateChannelForm from '../UpdateChannelForm';
 import OptionSelectChannel from '../OptionSelectChannel';
@@ -55,19 +57,14 @@ class Channel extends Component {
     channelOptionBrowsers: PropTypes.object,
     getChannelOptionCategories: PropTypes.func,
     channelOptionCategories: PropTypes.object,
+    getOptionChannelTypes: PropTypes.func,
+    optionChannelTypes: PropTypes.object,
   };
 
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      options: [
-        { id: 'option-1', name: 'Site - PageURL', value: 'pageUrl', type: 'inputLink' },
-        { id: 'option-2', name: 'Site - Referring Page', value: 'referingPage', type: 'inputLink' },
-        { id: 'option-3', name: 'Category', value: 'category', type: 'checkbox' },
-        { id: 'option-4', name: 'Browser', value: 'browser', type: 'checkbox' },
-        { id: 'option-5', name: 'Variable', value: 'variable', type: 'variable' },
-      ],
       countOptionChannel: 0,
       newFilterSite: [],
       arrVariable: [],
@@ -81,6 +78,7 @@ class Channel extends Component {
     this.props.getSites();
     this.props.getChannelOptionBrowsers();
     this.props.getChannelOptionCategories();
+    this.props.getOptionChannelTypes();
   }
 
   componentDidMount() {
@@ -295,21 +293,24 @@ class Channel extends Component {
   newOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
     /* eslint-disable no-undef */
     const value = this.inputChannelOptions.value;
-    const html = $(`#inputChannelOptions option[value=${value}]`).text();
-    if (value === 'category' || value === 'browser') {
-      const count = this.state.countOptionChannel + 1;
-      this.setState({ countOptionChannel: count });
-      if (value === 'category') {
-        this.addCheckBoxSite(this.props.channelOptionCategories.list, value);
-      } else if (value === 'browser') {
-        this.addCheckBoxSite(this.props.channelOptionBrowsers.list, value);
+    if (this.props.optionChannelTypes && value) {
+      const item = _.filter(this.props.optionChannelTypes.list, { id: value });
+      const html = item[0].name;
+      if (item[0].isInputLink === true) {
+        const count = this.state.countOptionChannel + 1;
+        this.setState({ countOptionChannel: count });
+        this.addNewFilterSite(value, html);
+      } else if (item[0].isSelectOption === true) {
+        const count = this.state.countOptionChannel + 1;
+        this.setState({ countOptionChannel: count });
+        if (html === 'Category') {
+          this.addCheckBoxSite(this.props.channelOptionCategories.list, html);
+        } else if (html === 'Browser') {
+          this.addCheckBoxSite(this.props.channelOptionBrowsers.list, html);
+        }
+      } else if (item[0].isVariable === true) {
+        this.addVariable(html);
       }
-    } else if (value === 'variable') {
-      this.addVariable(value);
-    } else {
-      const count = this.state.countOptionChannel + 1;
-      this.setState({ countOptionChannel: count });
-      this.addNewFilterSite(value, html);
     }
     /* eslint-enable no-undef */
   }
@@ -388,10 +389,11 @@ class Channel extends Component {
                               this.inputChannelOptions = c;
                             }}
                           >
-                            {this.state.options.map((option) =>
+                            {this.props.optionChannelTypes &&
+                            this.props.optionChannelTypes.list.map((option) =>
                               <option
-                                key={option.value}
-                                value={option.value}
+                                key={option.id}
+                                value={option.id}
                               >
                                 {option.name}
                               </option>,
@@ -460,7 +462,7 @@ class Channel extends Component {
                               comparison={option.comparison}
                             />
                           );
-                        } else if (option.type !== 'browser' && option.type !== 'category' && option.type !== 'variable') {
+                        } else if (option.type !== 'Browser' && option.type !== 'Category' && option.type !== 'variable') {
                           return (
                             <FilterSiteChannel
                               key={option.id}
@@ -533,6 +535,7 @@ const mapState = (state) => ({
   sites: state.sites,
   channelOptionBrowsers: state.channelOptionBrowsers,
   channelOptionCategories: state.channelOptionCategories,
+  optionChannelTypes: state.optionChannelTypes,
 });
 
 const mapDispatch = {
@@ -545,6 +548,7 @@ const mapDispatch = {
   updateOptionChannel,
   getChannelOptionBrowsers,
   getChannelOptionCategories,
+  getOptionChannelTypes,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Channel));

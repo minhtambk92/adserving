@@ -32,6 +32,7 @@ import {
   ZoneType,
   ZoneSizeType,
   CharacterSet,
+  OptionChannelType,
 } from '../../data/models';
 import resourcesList from './data/Resource.json';
 import menusList from './data/Menu.json';
@@ -59,6 +60,7 @@ import adsServerList from './data/AdsServer.json';
 import zoneTypeList from './data/ZoneType.json';
 import zoneSizeTypeList from './data/ZoneSizeType.json';
 import characterSetList from './data/CharacterSet.json';
+import optionChannelTypeList from './data/OptionChannelType.json';
 
 /* eslint-disable no-console */
 
@@ -248,6 +250,20 @@ async function channelFiction() {
   }
 }
 
+// OptionChannelType fiction
+async function optionChannelTypeFiction() {
+  console.log(chalk.grey('Check current number of option Channel Type...'));
+  const optionChannelTypesQuantity = await OptionChannelType.count();
+
+  if (optionChannelTypesQuantity === 0) {
+    console.log(chalk.red('No channel found! Do a fiction...'));
+    const results = await OptionChannelType.bulkCreate(optionChannelTypeList);
+    console.log(chalk.green(`CREATED: ${results.length} option channel Type(s). => PASSED!`));
+  } else {
+    console.log(chalk.green(`FOUND: ${optionChannelTypesQuantity} option channel Type(s). => PASSED!`));
+  }
+}
+
 // Character Set fiction
 async function characterSetFiction() {
   console.log(chalk.grey('Check current number of character set...'));
@@ -372,6 +388,7 @@ async function fiction() {
   await bannerTypeFiction();
   await adsServerFiction();
   await zoneTypeFiction();
+  await optionChannelTypeFiction();
   await zoneSizeTypeFiction();
   await advertiserFiction();
   await campaignFiction();

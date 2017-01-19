@@ -27,6 +27,10 @@ import {
   SET_STATUS_UPDATE_ZONE_SIZE_TYPE,
   SET_STATUS_CREATE_CHARACTER_SET,
   SET_STATUS_UPDATE_CHARACTER_SET,
+  SET_STATUS_CREATE_OPTION_CHANNEL_TYPE,
+  SET_STATUS_UPDATE_OPTION_CHANNEL_TYPE,
+  SET_STATUS_UPDATE_OPTION_CHANNEL_VALUE,
+  SET_STATUS_CREATE_OPTION_CHANNEL_VALUE,
 } from '../../constants';
 
 export function setStatusChannelOptionBrowserEdit(browserEdit) {
@@ -314,3 +318,48 @@ export function setStatusCreateCharacterSet(statusCreateCharacterSet) {
     });
   };
 }
+
+export function setStatusUpdateOptionChannelType(statusUpdateOptionChannelType) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_UPDATE_OPTION_CHANNEL_TYPE,
+      payload: {
+        statusUpdateOptionChannelType,
+      },
+    });
+  };
+}
+
+export function setStatusCreateOptionChannelType(statusCreateOptionChannelType) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_CREATE_OPTION_CHANNEL_TYPE,
+      payload: {
+        statusCreateOptionChannelType,
+      },
+    });
+  };
+}
+
+export function setStatusUpdateOptionChannelValue(statusUpdateOptionChannelValue) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_UPDATE_OPTION_CHANNEL_VALUE,
+      payload: {
+        statusUpdateOptionChannelValue,
+      },
+    });
+  };
+}
+
+export function setStatusCreateOptionChannelValue(statusCreateOptionChannelValue) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_CREATE_OPTION_CHANNEL_VALUE,
+      payload: {
+        statusCreateOptionChannelValue,
+      },
+    });
+  };
+}
+

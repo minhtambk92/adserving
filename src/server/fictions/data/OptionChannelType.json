@@ -1,0 +1,57 @@
+[
+  {
+    "id": "06f41550-b299-4abf-8b52-4577cc49c009",
+    "name": "Category",
+    "isInputLink": "0",
+    "isSelectOption": "1",
+    "isVariable": "0",
+    "status": "active",
+    "createdAt": "2017-01-19 07:53:11",
+    "updatedAt": "2017-01-19 07:53:11",
+    "deletedAt": null
+  },
+  {
+    "id": "334288f0-8a58-4372-b262-2fba4fffabf9",
+    "name": "Variable",
+    "isInputLink": "0",
+    "isSelectOption": "0",
+    "isVariable": "1",
+    "status": "active",
+    "createdAt": "2017-01-19 07:53:31",
+    "updatedAt": "2017-01-19 07:53:31",
+    "deletedAt": null
+  },
+  {
+    "id": "3b8cc1bc-aff2-436f-9829-4e4088a6fc7e",
+    "name": "Site Page-URL",
+    "isInputLink": "1",
+    "isSelectOption": "0",
+    "isVariable": "0",
+    "status": "active",
+    "createdAt": "2017-01-19 07:49:59",
+    "updatedAt": "2017-01-19 07:49:59",
+    "deletedAt": null
+  },
+  {
+    "id": "850bd601-6a48-4e66-87e6-a6c1c1a18384",
+    "name": "Site - Referring Page",
+    "isInputLink": "1",
+    "isSelectOption": "0",
+    "isVariable": "0",
+    "status": "active",
+    "createdAt": "2017-01-19 07:52:57",
+    "updatedAt": "2017-01-19 07:52:57",
+    "deletedAt": null
+  },
+  {
+    "id": "e2fb2068-9430-4e69-950c-101c15a4caec",
+    "name": "Browser",
+    "isInputLink": "0",
+    "isSelectOption": "1",
+    "isVariable": "0",
+    "status": "active",
+    "createdAt": "2017-01-19 07:53:19",
+    "updatedAt": "2017-01-19 07:53:19",
+    "deletedAt": null
+  }
+]

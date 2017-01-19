@@ -45,6 +45,8 @@ import AdsServer from './AdsServer';
 import ZoneType from './ZoneType';
 import ZoneSizeType from './ZoneSizeType';
 import CharacterSet from './CharacterSet';
+import OptionChannelType from './OptionChannelType';
+import OptionChannelValue from './OptionChannelValue';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -408,4 +410,6 @@ export {
   ZoneType,
   ZoneSizeType,
   CharacterSet,
+  OptionChannelType,
+  OptionChannelValue,
 };

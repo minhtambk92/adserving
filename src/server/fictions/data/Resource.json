@@ -7,8 +7,20 @@
     "hasMeta": "0",
     "description": "Global application's options",
     "status": "active",
-    "createdAt": "2016-12-22 10:58:24",
-    "updatedAt": "2016-12-22 10:58:24",
+    "createdAt": "2016-12-21 20:58:24",
+    "updatedAt": "2016-12-21 20:58:24",
+    "deletedAt": null
+  },
+  {
+    "id": "40bdf1f8-648b-4e01-8559-1fed6bbd5b2d",
+    "uniqueName": "optionChannelType",
+    "modelName": "Option Channel Type",
+    "name": "Option Channel Type",
+    "hasMeta": "0",
+    "description": "Option Channel Type information",
+    "status": "active",
+    "createdAt": "2017-01-18 23:36:29",
+    "updatedAt": "2017-01-18 23:36:29",
     "deletedAt": null
   },
   {
@@ -19,8 +31,8 @@
     "hasMeta": "0",
     "description": "User privileges",
     "status": "active",
-    "createdAt": "2016-12-22 10:58:24",
-    "updatedAt": "2016-12-22 10:58:24",
+    "createdAt": "2016-12-21 20:58:24",
+    "updatedAt": "2016-12-21 20:58:24",
     "deletedAt": null
   },
   {
@@ -31,8 +43,8 @@
     "hasMeta": "0",
     "description": "Banner's ads server information",
     "status": "active",
-    "createdAt": "2017-01-10 06:30:01",
-    "updatedAt": "2017-01-10 06:30:01",
+    "createdAt": "2017-01-09 16:30:01",
+    "updatedAt": "2017-01-09 16:30:01",
     "deletedAt": null
   },
   {
@@ -43,8 +55,8 @@
     "hasMeta": "0",
     "description": "Zone's Type information",
     "status": "active",
-    "createdAt": "2017-01-10 17:36:40",
-    "updatedAt": "2017-01-10 17:36:40",
+    "createdAt": "2017-01-10 03:36:40",
+    "updatedAt": "2017-01-10 03:36:40",
     "deletedAt": null
   },
   {
@@ -55,8 +67,8 @@
     "hasMeta": "1",
     "description": "User's login information",
     "status": "active",
-    "createdAt": "2016-12-22 10:58:24",
-    "updatedAt": "2016-12-22 10:58:24",
+    "createdAt": "2016-12-21 20:58:24",
+    "updatedAt": "2016-12-21 20:58:24",
     "deletedAt": null
   },
   {
@@ -67,8 +79,20 @@
     "hasMeta": "0",
     "description": "Channel's option category  information",
     "status": "active",
-    "createdAt": "2016-12-24 12:34:35",
-    "updatedAt": "2016-12-24 12:34:35",
+    "createdAt": "2016-12-23 22:34:35",
+    "updatedAt": "2016-12-23 22:34:35",
+    "deletedAt": null
+  },
+  {
+    "id": "8ae8a702-5d18-4992-9518-3a44adca658c",
+    "uniqueName": "optionChannelValue",
+    "modelName": "Option Channel Value",
+    "name": "Option Channel Value",
+    "hasMeta": "0",
+    "description": "Option Channel Value information",
+    "status": "active",
+    "createdAt": "2017-01-19 09:55:01",
+    "updatedAt": "2017-01-19 09:55:01",
     "deletedAt": null
   },
   {
@@ -79,8 +103,8 @@
     "hasMeta": "0",
     "description": "Application's resources types",
     "status": "active",
-    "createdAt": "2016-12-22 10:58:24",
-    "updatedAt": "2016-12-22 10:58:24",
+    "createdAt": "2016-12-21 20:58:24",
+    "updatedAt": "2016-12-21 20:58:24",
     "deletedAt": null
   },
   {
@@ -91,8 +115,8 @@
     "hasMeta": "1",
     "description": "User account",
     "status": "active",
-    "createdAt": "2016-12-22 10:58:24",
-    "updatedAt": "2016-12-22 10:58:24",
+    "createdAt": "2016-12-21 20:58:24",
+    "updatedAt": "2016-12-21 20:58:24",
     "deletedAt": null
   },
   {
@@ -103,8 +127,8 @@
     "hasMeta": "0",
     "description": "Banner's Type information",
     "status": "active",
-    "createdAt": "2017-01-09 04:01:45",
-    "updatedAt": "2017-01-09 04:01:45",
+    "createdAt": "2017-01-08 14:01:45",
+    "updatedAt": "2017-01-08 14:01:45",
     "deletedAt": null
   },
   {
@@ -115,8 +139,8 @@
     "hasMeta": "0",
     "description": "CharacterSet information",
     "status": "active",
-    "createdAt": "2017-01-18 03:49:53",
-    "updatedAt": "2017-01-18 03:49:53",
+    "createdAt": "2017-01-17 13:49:53",
+    "updatedAt": "2017-01-17 13:49:53",
     "deletedAt": null
   },
   {
@@ -127,8 +151,8 @@
     "hasMeta": "0",
     "description": "Name for group of user privileges",
     "status": "active",
-    "createdAt": "2016-12-22 10:58:24",
-    "updatedAt": "2016-12-22 10:58:24",
+    "createdAt": "2016-12-21 20:58:24",
+    "updatedAt": "2016-12-21 20:58:24",
     "deletedAt": null
   },
   {
@@ -139,8 +163,8 @@
     "hasMeta": "0",
     "description": "Channel's option browser  information",
     "status": "active",
-    "createdAt": "2016-12-24 12:34:35",
-    "updatedAt": "2016-12-24 12:34:35",
+    "createdAt": "2016-12-23 22:34:35",
+    "updatedAt": "2016-12-23 22:34:35",
     "deletedAt": null
   },
   {
@@ -151,8 +175,8 @@
     "hasMeta": "0",
     "description": "Zone's Size Type information",
     "status": "active",
-    "createdAt": "2017-01-11 19:21:00",
-    "updatedAt": "2017-01-11 19:21:00",
+    "createdAt": "2017-01-11 05:21:00",
+    "updatedAt": "2017-01-11 05:21:00",
     "deletedAt": null
   },
   {
@@ -163,8 +187,8 @@
     "hasMeta": "0",
     "description": "Banner's Type HTML information",
     "status": "active",
-    "createdAt": "2017-01-07 16:39:26",
-    "updatedAt": "2017-01-07 16:39:26",
+    "createdAt": "2017-01-07 02:39:26",
+    "updatedAt": "2017-01-07 02:39:26",
     "deletedAt": null
   },
   {
@@ -175,8 +199,8 @@
     "hasMeta": "1",
     "description": "User's profile information",
     "status": "active",
-    "createdAt": "2016-12-22 10:58:24",
-    "updatedAt": "2016-12-22 10:58:24",
+    "createdAt": "2016-12-21 20:58:24",
+    "updatedAt": "2016-12-21 20:58:24",
     "deletedAt": null
   },
   {
@@ -187,8 +211,8 @@
     "hasMeta": "1",
     "description": "User's claims list",
     "status": "active",
-    "createdAt": "2016-12-22 10:58:24",
-    "updatedAt": "2016-12-22 10:58:24",
+    "createdAt": "2016-12-21 20:58:24",
+    "updatedAt": "2016-12-21 20:58:24",
     "deletedAt": null
   }
 ]
