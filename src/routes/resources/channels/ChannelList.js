@@ -36,32 +36,28 @@ class ChannelList extends Component {
       this.props.createChannel({ name, description, status, siteId }).then(() => {
         if (this.props.channels && this.props.channels.list) {
           const cId = this.props.channels.list[0].id;
-          this.props.getOptionChannelByChannelId(data.id).then(() => {
-            /* CREATE OPTION CHANNEL */
-            if (this.props.optionChannels) {
-              const arrOption = this.props.optionChannels.list;
-              for (let i = 0; i < arrOption.length; i += 1) {
-                const comparison = arrOption[i].comparison;
-                const type = arrOption[i].type;
-                // eslint-disable no-shadow
-                const nameOp = arrOption[i].name;
-                // eslint-enable no-shadow
-                const value = arrOption[i].value;
-                const logical = arrOption[i].logical;
-                const channelId = cId;
-                if (type && comparison && value) {
-                  this.props.createOptionChannel({
-                    nameOp,
-                    logical,
-                    type,
-                    comparison,
-                    value,
-                    channelId,
-                  });
-                }
-              }
+          /* CREATE OPTION CHANNEL */
+          const arrOption = data.options;
+          for (let i = 0; i < arrOption.length; i += 1) {
+            const comparison = arrOption[i].comparison;
+            const type = arrOption[i].type;
+            /* eslint-disable no-shadow */
+            const name = arrOption[i].name;
+            /* eslint-enable no-shadow */
+            const value = arrOption[i].value;
+            const logical = arrOption[i].logical;
+            const channelId = cId;
+            if (type && comparison && value) {
+              this.props.createOptionChannel({
+                name,
+                logical,
+                type,
+                comparison,
+                value,
+                channelId,
+              });
             }
-          });
+          }
         }
       });
     }
