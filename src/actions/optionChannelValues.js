@@ -17,6 +17,7 @@ export function getOptionChannelValue(id) {
           name
           value
           status
+          optionChannelTypeId
           createdAt
           updatedAt
         }
@@ -48,6 +49,11 @@ export function getOptionChannelValues(args = {
           name
           value
           status
+          optionChannelType {
+            id
+            name
+            status
+          }
           createdAt
           updatedAt
         }
@@ -76,7 +82,7 @@ export function getOptionChannelValues(args = {
   };
 }
 
-export function createOptionChannelValue({ name, value, status }) {
+export function createOptionChannelValue({ name, value, status, optionChannelTypeId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($optionChannelValue: OptionChannelValueInputTypeWithoutId!) {
@@ -85,6 +91,7 @@ export function createOptionChannelValue({ name, value, status }) {
           name
           value
           status
+          optionChannelTypeId
           createdAt
           updatedAt
         }
@@ -95,6 +102,7 @@ export function createOptionChannelValue({ name, value, status }) {
         name,
         value,
         status,
+        optionChannelTypeId,
       },
     });
 
@@ -107,7 +115,7 @@ export function createOptionChannelValue({ name, value, status }) {
   };
 }
 
-export function updateOptionChannelValue({ id, name, value, status }) {
+export function updateOptionChannelValue({ id, name, value, status, optionChannelTypeId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($optionChannelValue: OptionChannelValueInputType!) {
@@ -116,6 +124,7 @@ export function updateOptionChannelValue({ id, name, value, status }) {
           name
           value
           status
+          optionChannelTypeId
           createdAt
           updatedAt
         }
@@ -127,6 +136,7 @@ export function updateOptionChannelValue({ id, name, value, status }) {
         name,
         value,
         status,
+        optionChannelTypeId,
       },
     });
 
@@ -148,6 +158,7 @@ export function deleteOptionChannelValue(id) {
           name
           value
           status
+          optionChannelTypeId
           createdAt
           updatedAt
           deletedAt

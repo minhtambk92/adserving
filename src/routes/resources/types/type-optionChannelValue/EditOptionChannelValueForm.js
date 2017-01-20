@@ -13,12 +13,14 @@ class EditOptionChannelValueForm extends Component {
     optionChannelValue: PropTypes.object,
     updateOptionChannelValue: PropTypes.func,
     getOptionChannelValues: PropTypes.func,
+    optionChannelTypeList: PropTypes.array,
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.optionChannelValue) {
       this.inputOptionChannelValueName.value = nextProps.optionChannelValue.name;
       this.inputOptionChannelValueStatus.value = nextProps.optionChannelValue.status;
+      this.inputOptionChannelTypeId.value = nextProps.optionChannelValue.optionChannelTypeId;
     }
   }
 
@@ -48,11 +50,13 @@ class EditOptionChannelValueForm extends Component {
   save() {
     const name = this.inputOptionChannelValueName.value;
     const status = this.inputOptionChannelValueStatus.value;
+    const optionChannelTypeId = this.inputOptionChannelTypeId.value;
 
     const optionChannelValue = { id: this.props.id };
     optionChannelValue.name = name;
     optionChannelValue.status = status;
     optionChannelValue.value = this.convertToSlug(name);
+    optionChannelValue.optionChannelTypeId = optionChannelTypeId;
     this.props.updateOptionChannelValue(optionChannelValue).then(() => {
       this.props.getOptionChannelValues();
     });
@@ -96,6 +100,28 @@ class EditOptionChannelValueForm extends Component {
                     this.inputOptionChannelValueName = c;
                   }}
                 />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="inputOptionChannelTypeId"
+                className="col-sm-2 control-label"
+              >Channel Type</label>
+              <div className="col-sm-10">
+                <select
+                  id="inputOptionChannelTypeId" className="form-control"
+                  ref={c => {
+                    this.inputOptionChannelTypeId = c;
+                  }}
+                >
+                  {this.props.optionChannelTypeList &&
+                  this.props.optionChannelTypeList.map(option => (
+                    <option
+                      key={option.id} value={option.id}
+                    >{option.name}</option>
+                  ))}
+                </select>
               </div>
             </div>
 

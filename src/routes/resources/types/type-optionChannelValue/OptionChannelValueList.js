@@ -21,6 +21,7 @@ class OptionChannelValueList extends Component {
     createOptionChannelValue: PropTypes.func,
     deleteOptionChannelValue: PropTypes.func,
     updateOptionChannelValue: PropTypes.func,
+    optionChannelTypeList: PropTypes.array,
   };
 
   constructor(props, context) {
@@ -55,7 +56,7 @@ class OptionChannelValueList extends Component {
     }, {
       data: 'name',
     }, {
-      data: 'value',
+      data: 'optionChannelType.name',
     }, {
       data: 'status',
     }, {
@@ -140,7 +141,7 @@ class OptionChannelValueList extends Component {
                         <ICheck type="checkbox" className="inputChooseOptionChannelValue" />
                       </th>
                       <th>Name</th>
-                      <th>Value</th>
+                      <th>Type</th>
                       <th>Status</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
@@ -152,7 +153,7 @@ class OptionChannelValueList extends Component {
                         <ICheck type="checkbox" className="inputChooseOptionChannelValue" />
                       </th>
                       <th>Name</th>
-                      <th>Value</th>
+                      <th>Type</th>
                       <th>Status</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
@@ -175,6 +176,7 @@ class OptionChannelValueList extends Component {
                   updateOptionChannelValue={this.props.updateOptionChannelValue}
                   statusUpdateOptionChannelValue={this.props.statusUpdateOptionChannelValue}
                   getOptionChannelValues={this.props.getOptionChannelValues}
+                  optionChannelTypeList={this.props.optionChannelTypeList}
                   page={this.props.page}
                 />
               </div>
@@ -191,6 +193,7 @@ class OptionChannelValueList extends Component {
                   createOptionChannelValue={this.props.createOptionChannelValue}
                   getOptionChannelValues={this.props.getOptionChannelValues}
                   statusCreateOptionChannelValue={this.props.statusCreateOptionChannelValue}
+                  optionChannelTypeList={this.props.optionChannelTypeList}
                   page={this.props.page}
                 />
               </div>

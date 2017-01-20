@@ -22,6 +22,7 @@ import {
   setStatusCreateOptionChannelValue,
   setStatusUpdateOptionChannelValue,
 } from '../../../../actions/pages/resources';
+import { getOptionChannelTypeIsSelectOption } from '../../../../actions/optionChannelTypes';
 import OptionChannelValueList from './OptionChannelValueList';
 import s from './OptionChannelValue.css';
 
@@ -40,10 +41,13 @@ class OptionChannelValue extends Component {
     createOptionChannelValue: PropTypes.func,
     deleteOptionChannelValue: PropTypes.func,
     updateOptionChannelValue: PropTypes.func,
+    getOptionChannelTypeIsSelectOption: PropTypes.func,
+    optionChannelTypes: PropTypes.object,
   };
 
   componentWillMount() {
     this.props.getOptionChannelValues();
+    this.props.getOptionChannelTypeIsSelectOption();
   }
 
   render() {
@@ -62,6 +66,8 @@ class OptionChannelValue extends Component {
             createOptionChannelValue={this.props.createOptionChannelValue}
             deleteOptionChannelValue={this.props.deleteOptionChannelValue}
             updateOptionChannelValue={this.props.updateOptionChannelValue}
+            optionChannelTypeList={this.props.optionChannelTypes &&
+            this.props.optionChannelTypes.list}
             page={this.props.page}
           />
         </div>
@@ -75,6 +81,7 @@ const mapState = (state) => ({
   resources: state.resources,
   optionChannelValues: state.optionChannelValues,
   page: state.page.resources,
+  optionChannelTypes: state.optionChannelTypes,
 });
 
 const mapDispatch = {
@@ -84,6 +91,7 @@ const mapDispatch = {
   createOptionChannelValue,
   deleteOptionChannelValue,
   updateOptionChannelValue,
+  getOptionChannelTypeIsSelectOption,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(OptionChannelValue));

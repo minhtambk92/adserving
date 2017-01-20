@@ -11,6 +11,7 @@ class CreateOptionChannelValueForm extends Component {
     statusCreateOptionChannelValue: PropTypes.func,
     page: PropTypes.object,
     createOptionChannelValue: PropTypes.func,
+    optionChannelTypeList: PropTypes.array,
   };
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -40,11 +41,13 @@ class CreateOptionChannelValueForm extends Component {
     const name = this.inputOptionChannelValueName.value;
     const value = this.convertToSlug(name);
     const status = this.inputOptionChannelValueStatus.value;
+    const optionChannelTypeId = this.inputOptionChannelTypeId.value;
     if (name) {
       this.props.createOptionChannelValue({
         name,
         value,
         status,
+        optionChannelTypeId,
       });
     }
     this.props.statusCreateOptionChannelValue(false);
@@ -87,6 +90,27 @@ class CreateOptionChannelValueForm extends Component {
                     this.inputOptionChannelValueName = c;
                   }}
                 />
+              </div>
+            </div>
+            <div className="form-group">
+              <label
+                htmlFor="inputOptionChannelTypeId"
+                className="col-sm-2 control-label"
+              >Channel Type</label>
+              <div className="col-sm-10">
+                <select
+                  id="inputOptionChannelTypeId" className="form-control"
+                  ref={c => {
+                    this.inputOptionChannelTypeId = c;
+                  }}
+                >
+                  {this.props.optionChannelTypeList &&
+                  this.props.optionChannelTypeList.map(option => (
+                    <option
+                      key={option.id} value={option.id}
+                    >{option.name}</option>
+                  ))}
+                </select>
               </div>
             </div>
             <div className="form-group">

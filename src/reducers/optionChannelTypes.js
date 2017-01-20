@@ -4,6 +4,7 @@ import {
   CREATE_OPTION_CHANNEL_TYPE,
   UPDATE_OPTION_CHANNEL_TYPE,
   DELETE_OPTION_CHANNEL_TYPE,
+  GET_OPTION_CHANNEL_TYPE_IS_SELECT_OPTION,
 } from '../constants';
 
 function list(state = [], action) {
@@ -13,6 +14,9 @@ function list(state = [], action) {
     }
     case CREATE_OPTION_CHANNEL_TYPE: {
       return [action.payload.optionChannelType, ...state];
+    }
+    case GET_OPTION_CHANNEL_TYPE_IS_SELECT_OPTION: {
+      return action.payload.optionChannelTypes;
     }
     default: {
       return state;

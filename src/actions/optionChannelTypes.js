@@ -3,7 +3,35 @@ import {
   GET_OPTION_CHANNEL_TYPES,
   UPDATE_OPTION_CHANNEL_TYPE,
   DELETE_OPTION_CHANNEL_TYPE,
+  GET_OPTION_CHANNEL_TYPE_IS_SELECT_OPTION,
 } from '../constants';
+
+export function getOptionChannelTypeIsSelectOption() {
+  return async (dispatch, getState, { graphqlRequest }) => {
+    const query = `
+      query {
+        optionChannelTypes(where: {isSelectOption: true}) {
+          id
+          name
+          isInputLink
+          isSelectOption
+          isVariable
+          status
+          createdAt
+          updatedAt
+        }
+      }`;
+
+    const { data } = await graphqlRequest(query);
+
+    dispatch({
+      type: GET_OPTION_CHANNEL_TYPE_IS_SELECT_OPTION,
+      payload: {
+        optionChannelTypes: data.optionChannelTypes,
+      },
+    });
+  };
+}
 
 export function getOptionChannelTypes() {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -67,7 +95,8 @@ export function createOptionChannelType({ name, isInputLink, isSelectOption, isV
   };
 }
 
-export function updateOptionChannelType({ id, name, isInputLink, isSelectOption, isVariable, status }) {
+export function updateOptionChannelType({ id, name, isInputLink, isSelectOption,
+  isVariable, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($optionChannelType: OptionChannelTypeInputType!) {
