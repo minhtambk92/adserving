@@ -80,7 +80,7 @@ export function getSite(id) {
               id
               name
               logical
-              type
+              optionChannelTypeId
               comparison
               value
               createdAt

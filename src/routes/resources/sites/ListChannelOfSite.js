@@ -40,21 +40,23 @@ class ListChannelOfSite extends Component {
             const arrOption = data.options;
             for (let i = 0; i < arrOption.length; i += 1) {
               const comparison = arrOption[i].comparison;
-              const type = arrOption[i].type;
+              const optionChannelTypeId = arrOption[i].optionChannelTypeId;
               /* eslint-disable no-shadow */
               const name = arrOption[i].name;
               /* eslint-enable no-shadow */
               const value = arrOption[i].value;
               const logical = arrOption[i].logical;
               const channelId = cId;
-              if (type && comparison && value) {
+              if (comparison && value) {
                 this.props.createOptionChannel({
                   name,
                   logical,
-                  type,
+                  optionChannelTypeId,
                   comparison,
                   value,
                   channelId,
+                }).then(() => {
+                  this.props.getSite(this.props.siteId);
                 });
               }
             }
@@ -62,7 +64,6 @@ class ListChannelOfSite extends Component {
         }
       });
     }
-    this.props.getSite(this.props.siteId);
   }
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
