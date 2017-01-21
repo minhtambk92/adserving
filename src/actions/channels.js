@@ -41,7 +41,20 @@ export function getChannel(id) {
           options {
             id
             name
-            type
+            optionChannelType {
+              id
+              name
+              isInputLink
+              isSelectOption
+              isVariable
+              status
+              optionChannelValues {
+                id
+                name
+                value
+                status
+              }
+            }
             logical
             comparison
             value
@@ -81,7 +94,20 @@ export function getChannels(args = {
           options {
             id
             name
-            type
+            optionChannelType {
+              id
+              name
+              isInputLink
+              isSelectOption
+              isVariable
+              status
+              optionChannelValues {
+                id
+                name
+                value
+                status
+              }
+            }
             logical
             comparison
             value

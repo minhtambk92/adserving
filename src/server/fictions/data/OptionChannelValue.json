@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1546fa73-72c1-4f13-9789-2bdba043fef3",
+    "name": "IE",
+    "value": "ie",
+    "status": "active",
+    "createdAt": "2017-01-20 03:21:15",
+    "updatedAt": "2017-01-20 03:21:15",
+    "deletedAt": null,
+    "optionChannelTypeId": "e2fb2068-9430-4e69-950c-101c15a4caec"
+  },
+  {
+    "id": "3f65491a-507c-480e-aa0c-359e90722f4c",
+    "name": "Chrome",
+    "value": "chrome",
+    "status": "active",
+    "createdAt": "2017-01-20 03:21:31",
+    "updatedAt": "2017-01-20 03:21:31",
+    "deletedAt": null,
+    "optionChannelTypeId": "e2fb2068-9430-4e69-950c-101c15a4caec"
+  },
+  {
+    "id": "7202c8b1-65f9-4c87-a11f-a29a0d1a0f3a",
+    "name": "Firefox",
+    "value": "firefox",
+    "status": "active",
+    "createdAt": "2017-01-20 03:21:23",
+    "updatedAt": "2017-01-20 03:21:23",
+    "deletedAt": null,
+    "optionChannelTypeId": "e2fb2068-9430-4e69-950c-101c15a4caec"
+  },
+  {
+    "id": "8e856ba7-ef63-49ab-a78d-9f231bb18c24",
+    "name": "Safari",
+    "value": "safari",
+    "status": "active",
+    "createdAt": "2017-01-20 03:20:48",
+    "updatedAt": "2017-01-20 03:20:48",
+    "deletedAt": null,
+    "optionChannelTypeId": "e2fb2068-9430-4e69-950c-101c15a4caec"
+  },
+  {
+    "id": "c00913c6-120c-4c50-965a-d2a638ff8b82",
+    "name": "Kinh T\u1ebf",
+    "value": "kinh-te",
+    "status": "active",
+    "createdAt": "2017-01-20 03:21:57",
+    "updatedAt": "2017-01-20 03:21:57",
+    "deletedAt": null,
+    "optionChannelTypeId": "06f41550-b299-4abf-8b52-4577cc49c009"
+  },
+  {
+    "id": "e64e6f8e-5157-4c09-bc50-affc2a037f7b",
+    "name": "Ch\u00ednh Tr\u1ecb",
+    "value": "chinh-tri",
+    "status": "active",
+    "createdAt": "2017-01-20 03:22:07",
+    "updatedAt": "2017-01-20 03:22:07",
+    "deletedAt": null,
+    "optionChannelTypeId": "06f41550-b299-4abf-8b52-4577cc49c009"
+  },
+  {
+    "id": "fe0e3eee-e6da-403e-93eb-140d22483f73",
+    "name": "V\u0103n Ho\u00e1",
+    "value": "van-hoa",
+    "status": "active",
+    "createdAt": "2017-01-20 03:21:45",
+    "updatedAt": "2017-01-20 03:22:18",
+    "deletedAt": null,
+    "optionChannelTypeId": "06f41550-b299-4abf-8b52-4577cc49c009"
+  }
+]

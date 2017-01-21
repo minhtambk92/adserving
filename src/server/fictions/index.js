@@ -24,8 +24,6 @@ import {
   Track,
   Share,
   SharePlacement,
-  ChannelOptionCategory,
-  ChannelOptionBrowser,
   BannerHtmlType,
   BannerType,
   AdsServer,
@@ -33,6 +31,7 @@ import {
   ZoneSizeType,
   CharacterSet,
   OptionChannelType,
+  OptionChannelValue,
 } from '../../data/models';
 import resourcesList from './data/Resource.json';
 import menusList from './data/Menu.json';
@@ -52,8 +51,6 @@ import placementsList from './data/Placement.json';
 import placementsBannersList from './data/PlacementBanner.json';
 import bannersList from './data/Banner.json';
 import tracksList from './data/Track.json';
-import channelOptionCategoryList from './data/ChannelOptionCategory.json';
-import channelOptionBrowserList from './data/ChannelOptionBrowser.json';
 import bannerHtmlTypeList from './data/BannerHtmlType.json';
 import bannerTypeList from './data/BannerType.json';
 import adsServerList from './data/AdsServer.json';
@@ -61,6 +58,7 @@ import zoneTypeList from './data/ZoneType.json';
 import zoneSizeTypeList from './data/ZoneSizeType.json';
 import characterSetList from './data/CharacterSet.json';
 import optionChannelTypeList from './data/OptionChannelType.json';
+import optionChannelValueList from './data/OptionChannelValue.json';
 
 /* eslint-disable no-console */
 
@@ -264,6 +262,20 @@ async function optionChannelTypeFiction() {
   }
 }
 
+// Option Channel Value fiction
+async function optionChannelValueFiction() {
+  console.log(chalk.grey('Check current number of option Channel Type...'));
+  const optionChannelValuesQuantity = await OptionChannelValue.count();
+
+  if (optionChannelValuesQuantity === 0) {
+    console.log(chalk.red('No channel found! Do a fiction...'));
+    const results = await OptionChannelValue.bulkCreate(optionChannelValueList);
+    console.log(chalk.green(`CREATED: ${results.length} option channel value(s). => PASSED!`));
+  } else {
+    console.log(chalk.green(`FOUND: ${optionChannelValuesQuantity} option channel Value(s). => PASSED!`));
+  }
+}
+
 // Character Set fiction
 async function characterSetFiction() {
   console.log(chalk.grey('Check current number of character set...'));
@@ -350,33 +362,6 @@ async function trackFiction() {
   }
 }
 
-// Channel Option Browser Fiction
-async function channelOptionBrowserFiction() {
-  console.log(chalk.grey('Check current number of channelOptionBrowsers...'));
-  const channelOptionBrowsersQuantity = await ChannelOptionBrowser.count();
-
-  if (channelOptionBrowsersQuantity === 0) {
-    console.log(chalk.red('No track found! Do a fiction...'));
-    const results = await ChannelOptionBrowser.bulkCreate(channelOptionBrowserList);
-    console.log(chalk.green(`CREATED: ${results.length} channelOptionBrowsers(s). => PASSED!`));
-  } else {
-    console.log(chalk.green(`FOUND: ${channelOptionBrowsersQuantity} channelOptionBrowsers(s). => PASSED!`));
-  }
-}
-
-// Channel Option Category Fiction
-async function channelOptionCategoryFiction() {
-  console.log(chalk.grey('Check current number of channelOptionCategories...'));
-  const channelOptionCategoriesQuantity = await ChannelOptionCategory.count();
-
-  if (channelOptionCategoriesQuantity === 0) {
-    console.log(chalk.red('No track found! Do a fiction...'));
-    const results = await ChannelOptionCategory.bulkCreate(channelOptionCategoryList);
-    console.log(chalk.green(`CREATED: ${results.length} channelOptionCategory(s). => PASSED!`));
-  } else {
-    console.log(chalk.green(`FOUND: ${channelOptionCategoriesQuantity} channelOptionCategory(s). => PASSED!`));
-  }
-}
 
 async function fiction() {
   console.log(chalk.grey.dim('START: data fictions.'));
@@ -389,6 +374,7 @@ async function fiction() {
   await adsServerFiction();
   await zoneTypeFiction();
   await optionChannelTypeFiction();
+  await optionChannelValueFiction();
   await zoneSizeTypeFiction();
   await advertiserFiction();
   await campaignFiction();
@@ -400,8 +386,6 @@ async function fiction() {
   await sharedFiction();
   await bannerFiction();
   await trackFiction();
-  await channelOptionBrowserFiction();
-  await channelOptionCategoryFiction();
   console.log(chalk.magenta(`DONE: data fictions.`));
 }
 

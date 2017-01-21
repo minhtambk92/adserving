@@ -28,10 +28,6 @@ const OptionChannel = Model.define('OptionChannel', {
       isIn: [['and', 'or']],
     },
   },
-  type: {
-    type: DataType.STRING,
-    defaultValue: '',
-  },
   comparison: {
     type: DataType.STRING,
     defaultValue: '==',

@@ -1,3 +1,6 @@
+
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import { ICheck } from '../../../components/UI/';
 
@@ -14,14 +17,21 @@ class OptionSelectChannel extends Component {
     deleteOptionChannel: PropTypes.func,
     logical: PropTypes.string,
     index: PropTypes.number,
+    typeId: PropTypes.string,
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.value && nextProps.name && nextProps.comparison) {
+    if (nextProps.data && nextProps.value && nextProps.name && nextProps.comparison) {
       this.inputSiteFilter.value = nextProps.comparison;
       this.inputTypeFilter.value = nextProps.logical;
       const value = nextProps.value;
       const arr = value.split(',');
+      if (nextProps.data.length > 0) {
+        for (let i = 0; i < nextProps.data.length; i += 1) {
+          const id = `${nextProps.name}${nextProps.data[i].value}${nextProps.index}`;
+          $(`#${id}`).iCheck('uncheck');
+        }
+      }
       /* eslint-disable no-undef */
       for (let i = 0; i < arr.length; i += 1) {
         const id = `${nextProps.name}${arr[i]}${nextProps.index}`;
@@ -46,7 +56,7 @@ class OptionSelectChannel extends Component {
         className={`optionChannel-${this.props.index}`}
         id={this.props.id}
       >
-        <div className="box box-solid box-primary">
+        <div className="box box-solid box-primary" id={`${this.props.typeId}-${this.props.index}`}>
           <div className="box-header">
             <h3 className="box-title">{this.props.name}</h3>
             <div className="box-tools pull-right">

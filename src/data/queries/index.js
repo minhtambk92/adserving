@@ -25,8 +25,6 @@ import filters from './filters';
 import optionChannels from './optionChannel/optionChannels';
 import tracks from './track/tracks';
 import shares from './share/shares';
-import channelOptionBrowsers from './channelOptionBrowser/channelOptionBrowsers';
-import channelOptionCategories from './channelOptionCategory/channelOptionCategories';
 import bannerHtmlTypes from './bannerHtmlType/bannerHtmlTypes';
 import bannerTypes from './bannerType/bannerTypes';
 import adsServers from './adsServer/adsServers';
@@ -61,8 +59,6 @@ const queries = new ObjectType({
     optionChannels,
     tracks,
     shares,
-    channelOptionBrowsers,
-    channelOptionCategories,
     bannerHtmlTypes,
     bannerTypes,
     adsServers,

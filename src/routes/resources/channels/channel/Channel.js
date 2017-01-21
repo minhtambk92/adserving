@@ -24,8 +24,6 @@ import {
   deleteOptionChannel,
   updateOptionChannel,
 } from '../../../../actions/optionChannels';
-import { getChannelOptionBrowsers } from '../../../../actions/channelOptionBrowsers';
-import { getChannelOptionCategories } from '../../../../actions/channelOptionCategories';
 import { getSites } from '../../../../actions/sites';
 import { getOptionChannelTypes } from '../../../../actions/optionChannelTypes';
 import Layout from '../../../../components/Layout';
@@ -53,10 +51,6 @@ class Channel extends Component {
     sites: PropTypes.object,
     getSites: PropTypes.func,
     updateOptionChannel: PropTypes.func,
-    getChannelOptionBrowsers: PropTypes.func,
-    channelOptionBrowsers: PropTypes.object,
-    getChannelOptionCategories: PropTypes.func,
-    channelOptionCategories: PropTypes.object,
     getOptionChannelTypes: PropTypes.func,
     optionChannelTypes: PropTypes.object,
   };
@@ -69,6 +63,7 @@ class Channel extends Component {
       newFilterSite: [],
       arrVariable: [],
       arrCheckBox: [],
+      arrOption: [],
       string: '',
     };
   }
@@ -76,8 +71,6 @@ class Channel extends Component {
   componentWillMount() {
     this.props.getChannel(this.props.channelId);
     this.props.getSites();
-    this.props.getChannelOptionBrowsers();
-    this.props.getChannelOptionCategories();
     this.props.getOptionChannelTypes();
   }
 
@@ -94,6 +87,7 @@ class Channel extends Component {
     if (nextProps.channels.editing.options) {
       const length = options.length;
       this.setState({ countOptionChannel: length });
+      this.setState({ arrOption: options });
     }
   }
 
@@ -121,169 +115,103 @@ class Channel extends Component {
     for (let i = 1; i <= length; i += 1) {
       const id = $(`#optionChannel .optionChannel-${i}`).attr('id');
       if (id) {
-        const idVariable = $(`#${id} .optionVariable`).attr('id');
-        const idV = `variable-${i}`;
-        const idCheckBox = `optionChannelCheckBox-${i}`;
-        // Update Variable Option Channel
-        if (idVariable === idV) {
-          const comparison = $(`#${id} .inputSiteFilter`).val();
-          const type = $(`#${id} .box-title`).html();
-          const name = $(`#${id} .inputChannelVariableName`).val();
-          const value = $(`#${id} .inputChannelVariableValue`).val();
-          const logical = $(`#${id} .inputTypeFilter`).val();
+        let optionChannelTypeId = null;
+        /* eslint-disable object-shorthand */
+        const options = _.filter(this.state.arrOption, { id: id });
+        if (options[0].optionChannelType) {
+          optionChannelTypeId = options[0].optionChannelType.id;
           const channelId = this.props.channelId;
-          if (type && comparison && value) {
-            /* eslint-disable max-len */
-            this.props.updateOptionChannel({
-              id,
-              name,
-              logical,
-              type,
-              comparison,
-              value,
-              channelId,
-            }).then(() => {
-              /* eslint-enable max-len */
-              this.props.getChannel(this.props.channelId);
-            });
-          }
-        } else if (idCheckBox === idVariable) {
-          // Update Checkbox Option Channel
-          const arrCategory = [];
-          /* eslint-disable no-loop-func */
-          $(`#${id} input[type=checkbox]`).each(function handle() {
-            /* eslint-enable no-loop-func */
-            const val = (this.checked ? $(this).val() : '');
-            if (val !== 'on' && val.trim() !== '') {
-              arrCategory.push(val);
+          const optionChannelType = options[0].optionChannelType;
+          const logical = $(`#${id} .inputTypeFilter`).val();
+          const comparison = $(`#${id} .inputSiteFilter`).val();
+          let name = '';
+          let value = '';
+          if (optionChannelType) {
+            if (optionChannelType.isVariable === true) {
+              name = $(`#${id} .inputChannelVariableName`).val();
+              value = $(`#${id} .inputChannelVariableValue`).val();
+            } else if (optionChannelType.isSelectOption === true) {
+              // Update Checkbox Option Channel
+              const arrSelect = [];
+              /* eslint-disable no-loop-func */
+              $(`#${id} input[type=checkbox]`).each(function handle() {
+                /* eslint-enable no-loop-func */
+                const val = (this.checked ? $(this).val() : '');
+                if (val !== 'on' && val.trim() !== '') {
+                  arrSelect.push(val);
+                }
+              });
+              name = optionChannelType.name;
+              value = arrSelect.toString();
+            } else if (optionChannelType.isInputLink === true) {
+              // Update Site Option channel
+              name = optionChannelType.name;
+              value = $(`#${id} .inputChannelOptionURL`).val();
             }
-          });
-          const comparison = $(`#${id} .inputSiteFilter`).val();
-          const type = $(`#${id} .box-title`).html();
-          const name = `${type}`;
-          const value = arrCategory.toString();
-          const logical = $(`#${id} .inputTypeFilter`).val();
-          const channelId = this.props.channelId;
-          if (type && comparison && value) {
-            /* eslint-disable max-len */
-            this.props.updateOptionChannel({
-              id,
-              name,
-              logical,
-              type,
-              comparison,
-              value,
-              channelId,
-            }).then(() => {
-              /* eslint-enable max-len */
-              this.props.getChannel(this.props.channelId);
-            });
-          }
-        } else {
-          // Update Site Option channel
-          const comparison = $(`#${id} .inputSiteFilter`).val();
-          const type = $(`#${id} .box-title`).html();
-          const name = `${type}`;
-          const value = $(`#${id} .inputChannelOptionURL`).val();
-          const logical = $(`#${id} .inputTypeFilter`).val();
-          const channelId = this.props.channelId;
-          if (type && comparison && value) {
-            /* eslint-disable max-len */
-            this.props.updateOptionChannel({
-              id,
-              name,
-              logical,
-              type,
-              comparison,
-              value,
-              channelId,
-            }).then(() => {
-              /* eslint-enable max-len */
-              this.props.getChannel(this.props.channelId);
-            });
+            if (comparison && value) {
+              this.props.updateOptionChannel({
+                id,
+                name,
+                logical,
+                optionChannelTypeId,
+                comparison,
+                value,
+                channelId,
+              }).then(() => {
+                this.props.getChannel(this.props.channelId);
+              });
+            }
           }
         }
+        /* eslint-enable object-shorthand */
       } else {
-        const idVariable = $(`.optionChannel-${i} .optionVariable`).attr('id');
-        const idV = `variable-${i}`;
-        const idCheckBox = `optionChannelCheckBox-${i}`;
-        if (idVariable === idV) {
-          // Create Variable Option Channel
-          const comparison = $(`.optionChannel-${i} .inputSiteFilter`).val();
-          const type = $(`.optionChannel-${i} .box-title`).html();
-          const name = $(`.optionChannel-${i} .inputChannelVariableName`).val();
-          const value = $(`.optionChannel-${i} .inputChannelVariableValue`).val();
-          const logical = $(`.optionChannel-${i} .inputTypeFilter`).val();
-          const channelId = this.props.channelId;
-          if (type && comparison && value) {
-            $(`.optionChannel-${i}`).remove();
-            /* eslint-disable max-len */
-            this.props.createOptionChannel({
-              name,
-              logical,
-              type,
-              comparison,
-              value,
-              channelId,
-            }).then(() => {
-              /* eslint-enable max-len */
-              this.props.getChannel(this.props.channelId);
-            });
-          }
-        } else if (idCheckBox === idVariable) {
-          // Create Checkbox Option Channel
-          const arrCategory = [];
-          /* eslint-disable no-loop-func */
-          $(`.optionChannel-${i} input[type=checkbox]`).each(function handle() {
-            /* eslint-enable no-loop-func */
-            const val = (this.checked ? $(this).val() : '');
-            if (val !== 'on' && val.trim() !== '') {
-              arrCategory.push(val);
+        let typeId = $(`.optionChannel-${i} .box`).attr('id');
+        if (typeId && typeId !== undefined) {
+          typeId = typeId.slice(0, typeId.lastIndexOf('-'));
+          if (this.props.optionChannelTypes && this.props.optionChannelTypes.list) {
+            const options = _.filter(this.props.optionChannelTypes.list, { id: typeId });
+            if (options[0]) {
+              const channelId = this.props.channelId;
+              const logical = $(`.optionChannel-${i} .inputTypeFilter`).val();
+              const comparison = $(`.optionChannel-${i} .inputSiteFilter`).val();
+              const optionChannelTypeId = typeId;
+              let name = '';
+              let value = '';
+              if (options[0].isVariable === true) {
+                name = $(`.optionChannel-${i} .inputChannelVariableName`).val();
+                value = $(`.optionChannel-${i} .inputChannelVariableValue`).val();
+              } else if (options[0].isSelectOption === true) {
+                // Update Checkbox Option Channel
+                const arrSelect = [];
+                /* eslint-disable no-loop-func */
+                $(`.optionChannel-${i} input[type=checkbox]`).each(function handle() {
+                  /* eslint-enable no-loop-func */
+                  const val = (this.checked ? $(this).val() : '');
+                  if (val !== 'on' && val.trim() !== '') {
+                    arrSelect.push(val);
+                  }
+                });
+                name = options[0].name;
+                value = arrSelect.toString();
+              } else if (options[0].isInputLink === true) {
+                // Update Site Option channel
+                name = options[0].name;
+                value = $(`.optionChannel-${i} .inputChannelOptionURL`).val();
+              }
+              if (comparison && value) {
+                $(`.optionChannel-${i}`).remove();
+                this.props.createOptionChannel({
+                  name,
+                  logical,
+                  optionChannelTypeId,
+                  comparison,
+                  value,
+                  channelId,
+                }).then(() => {
+                  this.props.getChannel(this.props.channelId);
+                });
+              }
             }
-          });
-          const comparison = $(`.optionChannel-${i} .inputSiteFilter`).val();
-          const type = $(`.optionChannel-${i} .box-title`).html();
-          const name = `${type}`;
-          const value = arrCategory.toString();
-          const logical = $(`.optionChannel-${i} .inputTypeFilter`).val();
-          const channelId = this.props.channelId;
-          if (type && comparison && value) {
-            $(`.optionChannel-${i}`).remove();
-            /* eslint-disable max-len */
-            this.props.createOptionChannel({
-              name,
-              logical,
-              type,
-              comparison,
-              value,
-              channelId,
-            }).then(() => {
-              /* eslint-enable max-len */
-              this.props.getChannel(this.props.channelId);
-            });
-          }
-        } else {
-          // Create Site Option Channel
-          const comparison = $(`.optionChannel-${i} .inputSiteFilter`).val();
-          const type = $(`.optionChannel-${i} .box-title`).html();
-          const name = `${type}`;
-          const value = $(`.optionChannel-${i} .inputChannelOptionURL`).val();
-          const logical = $(`.optionChannel-${i} .inputTypeFilter`).val();
-          const channelId = this.props.channelId;
-          if (type && comparison && value) {
-            $(`.optionChannel-${i}`).remove();
-            /* eslint-disable max-len */
-            this.props.createOptionChannel({
-              name,
-              logical,
-              type,
-              comparison,
-              value,
-              channelId,
-            }).then(() => {
-              /* eslint-enable max-len */
-              this.props.getChannel(this.props.channelId);
-            });
           }
         }
       }
@@ -296,20 +224,17 @@ class Channel extends Component {
     if (this.props.optionChannelTypes && value) {
       const item = _.filter(this.props.optionChannelTypes.list, { id: value });
       const html = item[0].name;
+      const arrOptionChannelValue = item[0].optionChannelValues;
       if (item[0].isInputLink === true) {
         const count = this.state.countOptionChannel + 1;
         this.setState({ countOptionChannel: count });
-        this.addNewFilterSite(value, html);
+        this.addNewFilterSite(item[0], html);
       } else if (item[0].isSelectOption === true) {
         const count = this.state.countOptionChannel + 1;
         this.setState({ countOptionChannel: count });
-        if (html === 'Category') {
-          this.addCheckBoxSite(this.props.channelOptionCategories.list, html);
-        } else if (html === 'Browser') {
-          this.addCheckBoxSite(this.props.channelOptionBrowsers.list, html);
-        }
+        this.addCheckBoxSite(item[0], arrOptionChannelValue, html);
       } else if (item[0].isVariable === true) {
-        this.addVariable(html);
+        this.addVariable(item[0], html);
       }
     }
     /* eslint-enable no-undef */
@@ -325,22 +250,24 @@ class Channel extends Component {
     this.setState({ newFilterSite: this.state.newFilterSite.concat([ob]) });
   }
 
-  addVariable(name) { // eslint-disable-line no-unused-vars, class-methods-use-this
+  addVariable(type, name) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const count = this.state.countOptionChannel + 1;
     this.setState({ countOptionChannel: count });
     const ob = {};
     ob.name = name;
+    ob.type = type;
     ob.count = count;
     this.setState({ arrVariable: this.state.arrVariable.concat([ob]) });
   }
 
-  addCheckBoxSite(data, name) { // eslint-disable-line no-unused-vars, class-methods-use-this
+  addCheckBoxSite(type, data, name) { // eslint-disable-line no-unused-vars, class-methods-use-this
     const count = this.state.countOptionChannel + 1;
     this.setState({ countOptionChannel: count });
     const ob = {};
     ob.name = name;
     ob.count = count;
     ob.data = data;
+    ob.type = type;
     this.setState({ arrCheckBox: this.state.arrCheckBox.concat([ob]) });
   }
 
@@ -421,59 +348,34 @@ class Channel extends Component {
                       {this.props.channels && this.props.channels.editing &&
                       this.props.channels.editing.options &&
                       this.props.channels.editing.options.map((option, index) => {
-                        if (option.type === 'category') {
-                          return (<OptionSelectChannel
-                            key={option.id}
-                            id={option.id}
-                            name={option.type}
-                            index={index + 1}
-                            value={option.value}
-                            comparison={option.comparison}
-                            data={this.props.channelOptionCategories
-                            && this.props.channelOptionCategories.list}
-                            logical={option.logical}
-                            deleteOptionChannel={this.props.deleteOptionChannel}
-                            optionChannelId={option.id}
-                          />);
-                        } else if (option.type === 'browser') {
-                          return (<OptionSelectChannel
-                            id={option.id}
-                            key={option.id}
-                            name={option.type}
-                            index={index + 1}
-                            value={option.value}
-                            comparison={option.comparison}
-                            data={this.props.channelOptionBrowsers
-                            && this.props.channelOptionBrowsers.list}
-                            logical={option.logical}
-                            optionChannelId={option.id}
-                            deleteOptionChannel={this.props.deleteOptionChannel}
-                          />);
-                        } else if (option.type === 'variable') {
-                          return (
-                            <FilterSiteChannel
+                        if (option.optionChannelType) {
+                          if (option.optionChannelType.isSelectOption === true) {
+                            return (<OptionSelectChannel
                               key={option.id}
                               id={option.id}
+                              name={option.optionChannelType.name}
                               index={index + 1}
-                              type={option.type}
-                              logical={option.logical}
-                              name={option.name}
                               value={option.value}
                               comparison={option.comparison}
-                            />
-                          );
-                        } else if (option.type !== 'Browser' && option.type !== 'Category' && option.type !== 'variable') {
-                          return (
-                            <FilterSiteChannel
-                              key={option.id}
-                              id={option.id}
-                              index={index + 1}
+                              data={option.optionChannelType.optionChannelValues}
                               logical={option.logical}
-                              name={option.name}
-                              value={option.value}
-                              comparison={option.comparison}
-                            />
-                          );
+                              deleteOptionChannel={this.props.deleteOptionChannel}
+                              optionChannelId={option.id}
+                            />);
+                          } else if (option.optionChannelType.isSelectOption === false) {
+                            return (
+                              <FilterSiteChannel
+                                key={option.id}
+                                id={option.id}
+                                index={index + 1}
+                                type={option.optionChannelType}
+                                logical={option.logical}
+                                name={option.name}
+                                value={option.value}
+                                comparison={option.comparison}
+                              />
+                            );
+                          }
                         }
                         return false;
                       })}
@@ -483,13 +385,16 @@ class Channel extends Component {
                           key={ob.count}
                           index={ob.count}
                           name={ob.name}
+                          typeId={ob.type.id}
+                          type={ob.type}
                         />
                       ))}
                       {this.state.arrVariable && this.state.arrVariable.map((ob) => (
                         <FilterSiteChannel
                           key={ob.count}
                           index={ob.count}
-                          type="variable"
+                          typeId={ob.type.id}
+                          type={ob.type}
                         />
                       ))}
                       {this.state.arrCheckBox && this.state.arrCheckBox.map((ob) => (
@@ -498,6 +403,7 @@ class Channel extends Component {
                           index={ob.count}
                           name={ob.name}
                           data={ob.data}
+                          typeId={ob.type.id}
                         />
                       ))}
                       {this.state.string}
@@ -533,8 +439,6 @@ const mapState = (state) => ({
   channels: state.channels,
   optionChannels: state.optionChannels,
   sites: state.sites,
-  channelOptionBrowsers: state.channelOptionBrowsers,
-  channelOptionCategories: state.channelOptionCategories,
   optionChannelTypes: state.optionChannelTypes,
 });
 
@@ -546,8 +450,6 @@ const mapDispatch = {
   deleteOptionChannel,
   getSites,
   updateOptionChannel,
-  getChannelOptionBrowsers,
-  getChannelOptionCategories,
   getOptionChannelTypes,
 };
 

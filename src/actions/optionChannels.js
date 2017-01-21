@@ -14,7 +14,7 @@ export function getOptionChannelByChannelId(id) {
           id
           name
           logical
-          type
+          optionChannelTypeId
           comparison
           value
           channelId
@@ -61,7 +61,8 @@ export function getOptionChannels() {
   };
 }
 
-export function createOptionChannel({ name, logical, type, comparison, value, channelId }) {
+export function createOptionChannel({ name, logical, optionChannelTypeId,
+  comparison, value, channelId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($optionChannel: OptionChannelInputTypeWithoutId!) {
@@ -69,7 +70,7 @@ export function createOptionChannel({ name, logical, type, comparison, value, ch
           id
           name
           logical
-          type
+          optionChannelTypeId
           comparison
           value
           channelId
@@ -82,7 +83,7 @@ export function createOptionChannel({ name, logical, type, comparison, value, ch
       optionChannel: {
         name,
         logical,
-        type,
+        optionChannelTypeId,
         comparison,
         value,
         channelId,
@@ -98,7 +99,8 @@ export function createOptionChannel({ name, logical, type, comparison, value, ch
   };
 }
 
-export function updateOptionChannel({ id, name, logical, type, comparison, value, channelId }) {
+export function updateOptionChannel({ id, name, logical, optionChannelTypeId,
+  comparison, value, channelId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($optionChannel: OptionChannelInputType!) {
@@ -106,7 +108,7 @@ export function updateOptionChannel({ id, name, logical, type, comparison, value
           id
           name
           logical
-          type
+          optionChannelTypeId
           comparison
           value
           channelId
@@ -120,7 +122,7 @@ export function updateOptionChannel({ id, name, logical, type, comparison, value
         id,
         name,
         logical,
-        type,
+        optionChannelTypeId,
         comparison,
         value,
         channelId,
@@ -144,7 +146,7 @@ export function deleteOptionChannel(id) {
           id
           name
           logical
-          type
+          optionChannelTypeId
           comparison
           value
           createdAt

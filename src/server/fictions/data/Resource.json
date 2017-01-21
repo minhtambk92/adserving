@@ -72,18 +72,6 @@
     "deletedAt": null
   },
   {
-    "id": "7d242780-4048-4f73-9ba4-8b39e27584d4",
-    "uniqueName": "channelOptionCategory",
-    "modelName": "Channel Option Category",
-    "name": "OptionCategory",
-    "hasMeta": "0",
-    "description": "Channel's option category  information",
-    "status": "active",
-    "createdAt": "2016-12-23 22:34:35",
-    "updatedAt": "2016-12-23 22:34:35",
-    "deletedAt": null
-  },
-  {
     "id": "8ae8a702-5d18-4992-9518-3a44adca658c",
     "uniqueName": "optionChannelValue",
     "modelName": "Option Channel Value",
@@ -153,18 +141,6 @@
     "status": "active",
     "createdAt": "2016-12-21 20:58:24",
     "updatedAt": "2016-12-21 20:58:24",
-    "deletedAt": null
-  },
-  {
-    "id": "eba545d8-2eee-4565-ab95-fe732c968e48",
-    "uniqueName": "channelOptionBrowser",
-    "modelName": "Channel Option Browser",
-    "name": "OptionBrowser",
-    "hasMeta": "0",
-    "description": "Channel's option browser  information",
-    "status": "active",
-    "createdAt": "2016-12-23 22:34:35",
-    "updatedAt": "2016-12-23 22:34:35",
     "deletedAt": null
   },
   {

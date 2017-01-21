@@ -8,29 +8,31 @@ class FilterSiteChannel extends Component {
     comparison: PropTypes.string,
     value: PropTypes.string,
     logical: PropTypes.string,
-    type: PropTypes.string,
+    type: PropTypes.object,
     index: PropTypes.number,
+    typeId: PropTypes.string,
   };
 
   componentWillReceiveProps(nextProps) {
-    this.inputTypeFilter.value = nextProps.logical;
-    this.inputSiteFilter.value = nextProps.comparison;
+    if (nextProps.type && nextProps.logical && nextProps.comparison) {
+      this.inputTypeFilter.value = nextProps.logical;
+      this.inputSiteFilter.value = nextProps.comparison;
+    }
   }
 
   render() {
-    const id = `${this.props.type}-${this.props.index}`;
     // Open the portal
     return (
       <div
         className={`optionChannel-${this.props.index}`}
         id={this.props.id}
       >
-        <div className="box box-solid box-primary">
+        <div className="box box-solid box-primary" id={`${this.props.typeId}-${this.props.index}`}>
           <div className="box-header">
             {
-              this.props.type === 'variable' ?
+              this.props.type && this.props.type.isVariable === true ?
                 (
-                  <h3 className="box-title">{this.props.type}</h3>
+                  <h3 className="box-title">Variable</h3>
                 ) : (
                   <h3 className="box-title">{this.props.name}</h3>
                 )
@@ -91,9 +93,9 @@ class FilterSiteChannel extends Component {
                       </div>
                     </div>
                     {
-                      this.props.type === 'variable' ?
+                      this.props.type && this.props.type.isVariable === true ?
                         (
-                          <div className="optionVariable" id={id}>
+                          <div className="optionVariable" id={`variable-${this.props.index}`}>
                             <div className="form-group">
                               <label
                                 htmlFor="inputChannelOptionURL" className="col-sm-3 control-label"

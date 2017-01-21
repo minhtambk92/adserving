@@ -52,6 +52,9 @@ export function getOptionChannelValues(args = {
           optionChannelType {
             id
             name
+            isInputLink
+            isSelectOption
+            isVariable
             status
           }
           createdAt
@@ -91,7 +94,14 @@ export function createOptionChannelValue({ name, value, status, optionChannelTyp
           name
           value
           status
-          optionChannelTypeId
+          optionChannelType {
+            id
+            name
+            isInputLink
+            isSelectOption
+            isVariable
+            status
+          }
           createdAt
           updatedAt
         }
@@ -124,7 +134,14 @@ export function updateOptionChannelValue({ id, name, value, status, optionChanne
           name
           value
           status
-          optionChannelTypeId
+          optionChannelType {
+            id
+            name
+            isInputLink
+            isSelectOption
+            isVariable
+            status
+          }
           createdAt
           updatedAt
         }

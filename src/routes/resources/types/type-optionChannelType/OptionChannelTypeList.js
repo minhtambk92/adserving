@@ -87,6 +87,20 @@ class OptionChannelTypeList extends Component {
           onClick={() => this.deleteOptionChannelType(rowData)}
         >Delete</Link>, cell);
       },
+    }, {
+      data: null,
+      orderable: false,
+      createdCell: (cell, cellData, rowData) => {
+        if (rowData.isSelectOption === true) {
+          ReactDOM.render(<Link
+            to="/8ae8a702-5d18-4992-9518-3a44adca658c"
+          >Add Option</Link>, cell);
+        } else {
+          ReactDOM.render(<Link
+            to="#"
+          >&nbsp;</Link>, cell);
+        }
+      },
     }];
   }
 
@@ -155,6 +169,7 @@ class OptionChannelTypeList extends Component {
                       <th>Status</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
+                      <th>&nbsp;</th>
                     </tr>
                   )}
                   tfoot={(
@@ -165,6 +180,7 @@ class OptionChannelTypeList extends Component {
                       <th>Name</th>
                       <th>Type</th>
                       <th>Status</th>
+                      <th>&nbsp;</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
                     </tr>

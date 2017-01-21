@@ -44,6 +44,12 @@ export function getOptionChannelTypes() {
           isSelectOption
           isVariable
           status
+          optionChannelValues {
+            id
+            name
+            value
+            status
+          }
           createdAt
           updatedAt
         }

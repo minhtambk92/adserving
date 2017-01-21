@@ -31,8 +31,6 @@ import Advertiser from './Advertiser';
 import Site from './Site';
 import Zone from './Zone';
 import Channel from './Channel';
-import ChannelOptionBrowser from './ChannelOptionBrowser';
-import ChannelOptionCategory from './ChannelOptionCategory';
 import Filter from './Filter';
 import PlacementBanner from './PlacementBanner';
 import OptionChannel from './OptionChannel';
@@ -379,6 +377,15 @@ OptionChannelValue.optionChannelType = OptionChannelValue.belongsTo(OptionChanne
   foreignKey: 'optionChannelTypeId',
 });
 
+OptionChannelType.optionChannels = OptionChannelType.hasMany(OptionChannel, {
+  foreignKey: 'optionChannelTypeId',
+});
+
+OptionChannel.optionChannelType = OptionChannel.belongsTo(OptionChannelType, {
+  foreignKey: 'optionChannelTypeId',
+});
+
+
 function sync(...args) {
   return sequelize.sync(...args);
 }
@@ -404,8 +411,6 @@ export {
   Site,
   Zone,
   Channel,
-  ChannelOptionBrowser,
-  ChannelOptionCategory,
   Filter,
   PlacementBanner,
   OptionChannel,
