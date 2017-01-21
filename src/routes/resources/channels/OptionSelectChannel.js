@@ -20,6 +20,21 @@ class OptionSelectChannel extends Component {
     typeId: PropTypes.string,
   };
 
+  componentDidMount() {
+    if (this.props.index && this.props.name && this.props.value && this.props.data.length > 0) {
+      const value = this.props.value;
+      const arr = value.split(',');
+      for (let i = 0; i < this.props.data.length; i += 1) {
+        const id = `${this.props.name}${this.props.data[i].value}${this.props.index}`;
+        $(`#${id}`).iCheck('uncheck');
+      }
+
+      for (let i = 0; i < arr.length; i += 1) {
+        const id = `${this.props.name}${arr[i]}${this.props.index}`;
+        $(`#${id}`).iCheck('check');
+      }
+    }
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.data && nextProps.value && nextProps.name && nextProps.comparison) {
       this.inputSiteFilter.value = nextProps.comparison;
@@ -31,21 +46,18 @@ class OptionSelectChannel extends Component {
           const id = `${nextProps.name}${nextProps.data[i].value}${nextProps.index}`;
           $(`#${id}`).iCheck('uncheck');
         }
+
+        for (let i = 0; i < arr.length; i += 1) {
+          const id = `${nextProps.name}${arr[i]}${nextProps.index}`;
+          $(`#${id}`).iCheck('check');
+        }
       }
-      /* eslint-disable no-undef */
-      for (let i = 0; i < arr.length; i += 1) {
-        const id = `${nextProps.name}${arr[i]}${nextProps.index}`;
-        $(`#${id}`).iCheck('check');
-      }
-      /* eslint-enable no-undef */
     }
   }
 
   deleteOption() { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (this.props.value && this.props.name && this.props.comparison) {
-      this.props.deleteOptionChannel(this.props.optionChannelId).then(() => {
-        // this.props.getChannel(this.props.channelId);
-      });
+      this.props.deleteOptionChannel(this.props.optionChannelId);
     }
   }
 
@@ -111,7 +123,7 @@ class OptionSelectChannel extends Component {
                     <div className="form-group">
                       <div className="col-lg-3">&nbsp;</div>
                       <div className="col-lg-9 optionVariable" id={id}>
-                        {this.props.data.map((data) =>
+                        {this.props.data && this.props.data.map((data) =>
                           <div className="col-sm-3" key={data.id}>
                             <label
                               htmlFor="inputChannelOptions"

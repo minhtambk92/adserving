@@ -37,21 +37,20 @@ class ChannelList extends Component {
         if (this.props.channels && this.props.channels.list) {
           const cId = this.props.channels.list[0].id;
           /* CREATE OPTION CHANNEL */
-          const arrOption = data.options;
-          for (let i = 0; i < arrOption.length; i += 1) {
-            const comparison = arrOption[i].comparison;
-            const type = arrOption[i].type;
+          for (let i = 0; i < data.options.length; i += 1) {
+            const comparison = data.options[i].comparison;
+            const optionChannelTypeId = data.options[i].optionChannelType.id;
             /* eslint-disable no-shadow */
-            const name = arrOption[i].name;
+            const name = data.options[i].name;
             /* eslint-enable no-shadow */
-            const value = arrOption[i].value;
-            const logical = arrOption[i].logical;
+            const value = data.options[i].value;
+            const logical = data.options[i].logical;
             const channelId = cId;
-            if (type && comparison && value) {
+            if (comparison && value) {
               this.props.createOptionChannel({
                 name,
                 logical,
-                type,
+                optionChannelTypeId,
                 comparison,
                 value,
                 channelId,
