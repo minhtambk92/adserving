@@ -31,7 +31,7 @@ const Campaign = Model.define('Campaign', {
   },
   endTime: {
     type: DataType.DATE,
-    defaultValue: DataType.NOW,
+    defaultValue: null,
   },
   views: {
     type: DataType.INTEGER,

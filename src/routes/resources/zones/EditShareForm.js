@@ -13,9 +13,7 @@ class EditShareForm extends Component {
     getZone: PropTypes.func,
     zoneId: PropTypes.string,
     updateShareZone: PropTypes.func,
-    createShareZone: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
-    setCurrentShare: PropTypes.func,
     setStatusShareFormEdit: PropTypes.func,
     page: PropTypes.object,
   };

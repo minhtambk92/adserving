@@ -13,7 +13,6 @@ class CreateShareForm extends Component {
     zoneId: PropTypes.string,
     createShareZone: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
-    setCurrentShare: PropTypes.func,
     setStatusShareFormCreate: PropTypes.func,
     page: PropTypes.object,
   };

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import { DatePicker } from '../../../components/UI';
+import { DatePicker, ICheck } from '../../../components/UI';
 import Link from '../../../components/Link';
 
 class CreateCampaignForm extends Component {
@@ -139,11 +139,46 @@ class CreateCampaignForm extends Component {
               </div>
             </div>
           )}
+
+          <div className="form-group">
+            <label
+              htmlFor="inputIsCampaignStartNow"
+              className="col-sm-3 control-label"
+            >Start Time</label>
+            <div className="col-sm-1 checkbox">
+              <ICheck
+                type="checkbox" id="inputIsCampaignStartNow" className="form-control"
+                ref={c => {
+                  this.inputIsCampaignStartNow = c;
+                }}
+              />
+            </div>
+            <div className="col-sm-8 checkbox">
+              Start Immediately
+            </div>
+          </div>
+          <div className="form-group">
+            <label
+              htmlFor="inputIsCampaignStartNow"
+              className="col-sm-3 control-label"
+            >&nbsp;</label>
+            <div className="col-sm-1 checkbox">
+              <ICheck
+                type="checkbox" id="inputIsCampaignStartDate" className="form-control"
+                ref={c => {
+                  this.inputIsCampaignStartDate = c;
+                }}
+              />
+            </div>
+            <div className="col-sm-8 checkbox">
+              Set specific date
+            </div>
+          </div>
           <div className="form-group has-feedback">
             <label
               htmlFor="inputCampaignStartTime" className="col-sm-3 control-label"
             >
-              Start Time
+              &nbsp;
             </label>
             <div className=" col-sm-9 date">
               <span className="fa fa-calendar form-control-feedback" />
@@ -156,12 +191,46 @@ class CreateCampaignForm extends Component {
               />
             </div>
           </div>
+          <div className="form-group">
+            <label
+              htmlFor="inputIsCampaignStartNow"
+              className="col-sm-3 control-label"
+            >End Time</label>
+            <div className="col-sm-1 checkbox">
+              <ICheck
+                type="checkbox" id="inputIsCampaignEndNow" className="form-control"
+                ref={c => {
+                  this.inputIsCampaignEndNow = c;
+                }}
+              />
+            </div>
+            <div className="col-sm-8 checkbox">
+              Dont expire
+            </div>
+          </div>
+          <div className="form-group">
+            <label
+              htmlFor="inputIsCampaignEndDate"
+              className="col-sm-3 control-label"
+            >&nbsp;</label>
+            <div className="col-sm-1 checkbox">
+              <ICheck
+                type="checkbox" id="inputIsCampaignEnddate" className="form-control"
+                ref={c => {
+                  this.inputIsCampaignEndDate = c;
+                }}
+              />
+            </div>
+            <div className="col-sm-8 checkbox">
+              Set specific date
+            </div>
+          </div>
           <div className="form-group has-feedback">
             <label
               htmlFor="inputCampaignEndTime"
               className="col-sm-3 control-label"
             >
-              End Time
+              &nbsp;
             </label>
             <div className=" col-sm-9 date">
               <span className="fa fa-calendar form-control-feedback" />
