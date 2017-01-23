@@ -39,28 +39,26 @@ class CampaignList extends Component {
     const revenueType = data.revenueType;
     const expireValueCPM = data.expireValueCPM;
     const maxCPMPerDay = data.maxCPMPerDay;
-    if (name && advertiserId && startTime && endTime && views && viewPerSession
-      && timeResetViewCount && weight && description) {
-      this.props.createCampaign({
-        advertiserId,
-        name,
-        startTime,
-        endTime,
-        views,
-        viewPerSession,
-        timeResetViewCount,
-        weight,
-        revenueType,
-        expireValueCPM,
-        maxCPMPerDay,
-        description,
-        status,
-      }).then(() => {
-        if (this.props.advertiserId) {
-          this.props.getAdvertiser(this.props.advertiserId);
-        }
-      });
-    }
+
+    this.props.createCampaign({
+      advertiserId,
+      name,
+      startTime,
+      endTime,
+      views,
+      viewPerSession,
+      timeResetViewCount,
+      weight,
+      revenueType,
+      expireValueCPM,
+      maxCPMPerDay,
+      description,
+      status,
+    }).then(() => {
+      if (this.props.advertiserId) {
+        this.props.getAdvertiser(this.props.advertiserId);
+      }
+    });
   }
 
   dataTableOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -91,7 +89,7 @@ class CampaignList extends Component {
       render: data => (data ? moment(new Date(data)).format('L') : ''),
     }, {
       data: 'endTime',
-      render: data => (data ? moment(new Date(data)).format('L') : ''),
+      render: data => (data ? moment(new Date(data)).format('L') : 'Dont expire'),
     }, {
       data: null,
       orderable: false,

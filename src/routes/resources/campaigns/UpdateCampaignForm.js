@@ -21,6 +21,8 @@ class UpdateCampaignForm extends Component {
       showCPM: false,
       isStartNow: false,
       isEndNow: false,
+      isClickStartNow: false,
+      isClickEndNow: false,
     };
   }
 
@@ -29,6 +31,7 @@ class UpdateCampaignForm extends Component {
 
     $('#inputIsCampaignStartNow').on('ifClicked', () => {
       const isStartNow = document.getElementById('inputIsCampaignStartNow').checked;
+      self.setState({ isClickStartNow: true });
       if (isStartNow === true) {
         self.setState({ isStartNow: false });
       } else if (isStartNow === false) {
@@ -38,6 +41,7 @@ class UpdateCampaignForm extends Component {
 
     $('#inputIsCampaignEndNow').on('ifClicked', () => {
       const isEndNow = document.getElementById('inputIsCampaignEndNow').checked;
+      self.setState({ isClickEndNow: true });
       if (isEndNow === true) {
         self.setState({ isEndNow: false });
       } else if (isEndNow === false) {
@@ -105,12 +109,17 @@ class UpdateCampaignForm extends Component {
 
   componentDidUpdate() {
     /* eslint-disable no-undef */
-    $('#inputIsCampaignStartNow').iCheck('uncheck');
+    if (this.state.isClickStartNow === true && this.state.isStartNow === true) {
+      $('#inputIsCampaignStartNow').iCheck('check');
+    } else {
+      $('#inputIsCampaignStartNow').iCheck('uncheck');
+    }
+
     if (this.props.campaign) {
       if (this.state.isEndNow === true) {
         $('#inputIsCampaignEndNow').iCheck('check');
       } else if (this.state.isEndNow === false) {
-        if (this.props.campaign.endTime === null) {
+        if (this.props.campaign.endTime === null && this.state.isClickEndNow === false) {
           $('#inputIsCampaignEndNow').iCheck('check');
         } else if (this.props.campaign.endTime !== null) {
           $('#inputIsCampaignEndNow').iCheck('uncheck');
