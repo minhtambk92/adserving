@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import { DatePicker } from '../../../components/UI';
+import { DatePicker, ICheck } from '../../../components/UI';
 import Link from '../../../components/Link';
 
 class UpdateCampaignForm extends Component {
@@ -19,7 +19,31 @@ class UpdateCampaignForm extends Component {
 
     this.state = {
       showCPM: false,
+      isStartNow: false,
+      isEndNow: false,
     };
+  }
+
+  componentDidMount() {
+    const self = this;
+
+    $('#inputIsCampaignStartNow').on('ifClicked', () => {
+      const isStartNow = document.getElementById('inputIsCampaignStartNow').checked;
+      if (isStartNow === true) {
+        self.setState({ isStartNow: false });
+      } else if (isStartNow === false) {
+        self.setState({ isStartNow: true });
+      }
+    });
+
+    $('#inputIsCampaignEndNow').on('ifClicked', () => {
+      const isEndNow = document.getElementById('inputIsCampaignEndNow').checked;
+      if (isEndNow === true) {
+        self.setState({ isEndNow: false });
+      } else if (isEndNow === false) {
+        self.setState({ isEndNow: true });
+      }
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,8 +65,20 @@ class UpdateCampaignForm extends Component {
 
     this.inputCampaignName.value = name;
     this.inputAdvertiser.value = advertiserId;
-    document.getElementById('inputCampaignStartTime').value = moment(new Date(startTime)).format('L');
-    document.getElementById('inputCampaignEndTime').value = moment(new Date(endTime)).format('L');
+    this.setState({ isStartNow: false });
+    if (this.inputIsCampaignStartTime) {
+      document.getElementById('inputCampaignStartTime').value = moment(new Date(startTime)).format('L');
+    }
+
+    if (endTime === null) {
+      this.setState({ isEndNow: true })
+    } else if (endTime !== null) {
+      this.setState({ isEndNow: false });
+      if (this.inputIsCampaignEndTime !== null) {
+        document.getElementById('inputCampaignEndTime').value = moment(new Date(endTime)).format('L');
+      }
+    }
+
     if (views) {
       this.inputCampaignViews.value = views;
     }
@@ -67,6 +103,22 @@ class UpdateCampaignForm extends Component {
     this.inputCampaignStatus.value = status;
   }
 
+  componentDidUpdate() {
+    /* eslint-disable no-undef */
+    $('#inputIsCampaignStartNow').iCheck('uncheck');
+    if (this.props.campaign) {
+      if (this.state.isEndNow === true) {
+        $('#inputIsCampaignEndNow').iCheck('check');
+      } else if (this.state.isEndNow === false) {
+        if (this.props.campaign.endTime === null) {
+          $('#inputIsCampaignEndNow').iCheck('check');
+        } else if (this.props.campaign.endTime !== null) {
+          $('#inputIsCampaignEndNow').iCheck('uncheck');
+        }
+      }
+    }
+  }
+
   changeRevenueType() { // eslint-disable-line no-unused-vars, class-methods-use-this
     const revenueType = this.inputCampaignRevenueType.value;
     if (revenueType === 'cpm') {
@@ -79,8 +131,19 @@ class UpdateCampaignForm extends Component {
   updateCampaign() {
     const advertiserId = this.inputAdvertiser.value;
     const name = this.inputCampaignName.value;
-    const startTime = document.getElementById('inputCampaignStartTime').value;
-    const endTime = document.getElementById('inputCampaignEndTime').value;
+    let startTime = null;
+    if (this.state.isStartNow === false) {
+      startTime = new Date(moment(new Date(document.getElementById('inputCampaignStartTime').value)).format('YYYY-MM-DD 00:00:00'));
+    } else if (this.state.isStartNow === true) {
+      startTime = new Date(moment().format('YYYY-MM-DD 00:00:00'));
+    }
+
+    let endTime = null;
+    if (this.state.isEndNow === true) {
+      endTime = null;
+    } else if (this.state.isEndNow === false) {
+      endTime = new Date(moment(new Date(document.getElementById('inputCampaignEndTime').value)).format('YYYY-MM-DD 23:59:59'));
+    }
     const views = this.inputCampaignViews.value;
     const viewPerSession = this.inputCampaignViewPerSession.value;
     const timeResetViewCount = this.inputCampaignTimeResetViewCount.value;
@@ -106,13 +169,8 @@ class UpdateCampaignForm extends Component {
       advertiserId !== this.props.campaign.advertiserId) {
       campaign.advertiserId = advertiserId;
     }
-    if (startTime && startTime !== this.props.campaign.startTime) {
-      campaign.startTime = startTime;
-    }
-
-    if (endTime && endTime !== this.props.campaign.endTime) {
-      campaign.endTime = endTime;
-    }
+    campaign.startTime = startTime;
+    campaign.endTime = endTime;
     if (views && views !== this.props.campaign.views) {
       campaign.views = views;
     }
@@ -140,15 +198,9 @@ class UpdateCampaignForm extends Component {
     }
 
     campaign.status = status;
-
-    if (moment(new Date(startTime)).format('x') < moment(new Date(endTime)).format('x')) {
-      this.props.updateCampaign(campaign).then(() => {
-        this.props.getCampaign(this.props.campaignId);
-      });
-    } else {
-      document.getElementById('inputCampaignEndTime').value = null;
-      document.getElementById('inputCampaignEndTime').focus();
-    }
+    this.props.updateCampaign(campaign).then(() => {
+      this.props.getCampaign(this.props.campaignId);
+    });
   }
 
   deleteCampaign() {
@@ -191,36 +243,92 @@ class UpdateCampaignForm extends Component {
             </select>
           </div>
         </div>
-        <div className="form-group has-feedback">
+
+        {/* /Start Time */}
+        <div className="form-group">
           <label
-            htmlFor="inputCampaignStartTime" className="col-sm-3 control-label"
-          >Start Time:</label>
-          <div className=" col-sm-9 date">
-            <span className="fa fa-calendar form-control-feedback" />
-            {/* /.box-body */}
-            <DatePicker
-              id="inputCampaignStartTime"
-              type="text"
-              className="form-control pull-right"
-              name="start"
+            htmlFor="inputIsCampaignStartNow"
+            className="col-sm-3 control-label"
+          >Start Time</label>
+          <div className="col-sm-1 checkbox">
+            <ICheck
+              type="checkbox" id="inputIsCampaignStartNow" className="form-control"
+              ref={c => {
+                this.inputIsCampaignStartNow = c;
+              }}
             />
           </div>
-        </div>
-        <div className="form-group has-feedback">
-          <label
-            htmlFor="inputCampaignEndTime" className="col-sm-3 control-label"
-          >End Time:</label>
-          <div className=" col-sm-9 date">
-            <span className="fa fa-calendar form-control-feedback" />
-            {/* /.box-body */}
-            <DatePicker
-              id="inputCampaignEndTime"
-              type="text"
-              className="form-control pull-right"
-              name="end"
-            />
+          <div className="col-sm-8 checkbox">
+            Start Immediately
           </div>
         </div>
+        {this.state.isStartNow === false ? (
+          <div className="form-group has-feedback">
+            <label
+              htmlFor="inputCampaignStartTime" className="col-sm-3 control-label"
+            >
+              &nbsp;
+            </label>
+            <div className="col-sm-2">Set specific date</div>
+            <div className=" col-sm-7 date">
+              <span className="fa fa-calendar form-control-feedback" />
+              {/* /DatePicker */}
+              <DatePicker
+                id="inputCampaignStartTime"
+                type="text"
+                className="form-control pull-right"
+                name="start"
+                ref={c => {
+                  this.inputIsCampaignStartTime = c;
+                }}
+              />
+            </div>
+          </div>
+        ) : ('')}
+
+        {/* /End Time */}
+        <div className="form-group">
+          <label
+            htmlFor="inputIsCampaignStartNow"
+            className="col-sm-3 control-label"
+          >End Time</label>
+          <div className="col-sm-1 checkbox">
+            <ICheck
+              type="checkbox" id="inputIsCampaignEndNow" className="form-control"
+              ref={c => {
+                this.inputIsCampaignEndNow = c;
+              }}
+            />
+          </div>
+          <div className="col-sm-8 checkbox">
+            Dont expire
+          </div>
+        </div>
+        {this.state.isEndNow === false ? (
+          <div className="form-group has-feedback">
+            <label
+              htmlFor="inputCampaignEndTime"
+              className="col-sm-3 control-label"
+            >
+              &nbsp;
+            </label>
+            <div className="col-sm-2">Set specific date</div>
+            <div className=" col-sm-7 date">
+              <span className="fa fa-calendar form-control-feedback" />
+              {/* /DatePicker */}
+              <DatePicker
+                id="inputCampaignEndTime"
+                type="text"
+                className="form-control pull-right"
+                name="end"
+                ref={c => {
+                  this.inputIsCampaignEndTime = c;
+                }}
+              />
+            </div>
+          </div>
+        ) : ('')}
+
         <div className="form-group">
           <label
             htmlFor="inputCampaignRevenueType"
@@ -247,7 +355,8 @@ class UpdateCampaignForm extends Component {
           <div className="typeCPM">
             <div className="form-group">
               <div className="col-sm-3">&nbsp;</div>
-              <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Expire Value CPM</label>
+              <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Expire
+                Value CPM</label>
               <div className="col-sm-6">
                 <input
                   type="number" className="form-control" id="inputCampaignExpireValueCPM"
@@ -261,7 +370,8 @@ class UpdateCampaignForm extends Component {
             </div>
             <div className="form-group">
               <div className="col-sm-3">&nbsp;</div>
-              <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Max CPM per Day</label>
+              <label htmlFor="inputCampaignMaxCPMPerDay" className="col-sm-3 control-label">Max CPM
+                per Day</label>
               <div className="col-sm-6">
                 <input
                   type="number" className="form-control" id="inputCampaignMaxCPMPerDay"
