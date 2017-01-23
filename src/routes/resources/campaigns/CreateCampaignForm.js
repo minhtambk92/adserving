@@ -1,3 +1,6 @@
+
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import { DatePicker, ICheck } from '../../../components/UI';

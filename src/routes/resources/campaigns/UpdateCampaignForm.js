@@ -1,3 +1,6 @@
+
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import { DatePicker, ICheck } from '../../../components/UI';
@@ -75,7 +78,7 @@ class UpdateCampaignForm extends Component {
     }
 
     if (endTime === null) {
-      this.setState({ isEndNow: true })
+      this.setState({ isEndNow: true });
     } else if (endTime !== null) {
       this.setState({ isEndNow: false });
       if (this.inputIsCampaignEndTime !== null) {
