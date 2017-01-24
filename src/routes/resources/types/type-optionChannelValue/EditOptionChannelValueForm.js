@@ -20,7 +20,7 @@ class EditOptionChannelValueForm extends Component {
     if (nextProps.optionChannelValue) {
       this.inputOptionChannelValueName.value = nextProps.optionChannelValue.name;
       this.inputOptionChannelValueStatus.value = nextProps.optionChannelValue.status;
-      this.inputOptionChannelTypeId.value = nextProps.optionChannelValue.optionChannelTypeId;
+      this.inputOptionChannelTypeId.value = nextProps.optionChannelValue.optionChannelType.id;
     }
   }
 
