@@ -12,8 +12,6 @@ class UpdatePlacementForm extends Component {
     deletePlacement: PropTypes.func,
     getPlacement: PropTypes.func,
     campaigns: PropTypes.array,
-    removePlacement: PropTypes.func,
-    removePlacementInSharePlacement: PropTypes.func,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -92,8 +90,6 @@ class UpdatePlacementForm extends Component {
 
   deletePlacement() {
     this.props.deletePlacement(this.props.placementId);
-    this.props.removePlacement(this.props.placementId);
-    this.props.removePlacementInSharePlacement(this.props.placementId);
   }
 
   render() {

@@ -15,7 +15,6 @@ class ListShare extends Component {
     deleteShareZone: PropTypes.func,
     getZone: PropTypes.func,
     zoneId: PropTypes.string,
-    updateShareZone: PropTypes.func,
     createShareZone: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
     setCurrentShare: PropTypes.func,
@@ -254,7 +253,7 @@ class ListShare extends Component {
                   <EditShareForm
                     id={this.state.share.id}
                     childZone={this.state.share}
-                    updateShareZone={this.props.updateShareZone}
+                    updateShareZone={this.props.updateShare}
                     getZone={this.props.getZone}
                     zoneId={this.props.zoneId}
                     setPageZoneActiveTab={this.props.setPageZoneActiveTab}

@@ -272,7 +272,6 @@ class Zone extends Component {
                       deleteShareZone={this.props.deleteShare}
                       getZone={this.props.getZone}
                       zoneId={this.props.zoneId}
-                      updateShareZone={this.props.updateShare}
                       createShareZone={this.props.createShare}
                       setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                       setCurrentShare={this.props.setCurrentShare}

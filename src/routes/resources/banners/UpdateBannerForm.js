@@ -11,7 +11,6 @@ class UpdateBannerForm extends Component {
     banner: PropTypes.object,
     deleteBanner: PropTypes.func,
     getBanner: PropTypes.func,
-    removeBanner: PropTypes.func,
     bannerHtmlTypeList: PropTypes.array,
     channels: PropTypes.array,
     bannerTypeList: PropTypes.array,
@@ -190,7 +189,6 @@ class UpdateBannerForm extends Component {
 
   deleteBanner() {
     this.props.deleteBanner(this.props.bannerId);
-    this.props.removeBanner(this.props.bannerId);
   }
 
   render() {
