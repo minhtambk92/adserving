@@ -277,6 +277,8 @@ class Placement extends Component {
                                   channels={this.props.channels.list}
                                   placementId={this.props.placementId}
                                   getPlacement={this.props.getPlacement}
+                                  placement={this.props.placements && this.props.placements.editing}
+                                  updatePlacement={this.props.updatePlacement}
                                   banners={this.props.banners.list}
                                   getBanners={this.props.getBanners}
                                   bannerHtmlTypeList={this.props.bannerHtmlTypes.list}

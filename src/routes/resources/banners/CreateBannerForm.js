@@ -15,8 +15,9 @@ class CreateBannerForm extends Component {
     createBanner: PropTypes.func,
     channels: PropTypes.array,
     placementId: PropTypes.string,
+    updatePlacement: PropTypes.func,
+    placement: PropTypes.object,
     bannerHtmlTypeList: PropTypes.array,
-    createPlacementBanner: PropTypes.func,
     getPlacement: PropTypes.func,
     banners: PropTypes.array,
     bannerTypeList: PropTypes.array,
@@ -172,12 +173,20 @@ class CreateBannerForm extends Component {
         channelId,
       }).then(() => {
         this.clearInput();
-        if (this.props.placementId) {
-          const bannerId = this.props.banners[0].id;
-          const zoneId = null;
-          const placementId = this.props.placementId;
-          if (placementId && bannerId) {
-            this.props.createPlacementBanner({ placementId, bannerId, zoneId }).then(() => {
+        if (this.props.placementId && this.props.placement) {
+          if (this.props.banners) {
+            const banner = this.props.placement.banners;
+            banner.push(this.props.banners[0]);
+            const placement = this.props.placement;
+            placement.banners = JSON.stringify(banner.map(b => ({
+              id: b.id,
+              name: b.name,
+              with: b.width,
+              height: b.height,
+              weight: b.weight,
+              isDeleted: false,
+            })));
+            this.props.updatePlacement(placement).then(() => {
               this.props.getPlacement(this.props.placementId);
             });
           }

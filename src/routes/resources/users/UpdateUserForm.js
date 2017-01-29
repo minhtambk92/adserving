@@ -34,7 +34,9 @@ class UpdateUserForm extends Component {
     } = nextProps.userEditing;
 
     this.inputUserEmail.value = email;
-    this.setState({ currentRoles: roles.map(role => role.uniqueName).sort() });
+    if (roles) {
+      this.setState({ currentRoles: roles.map(role => role.uniqueName).sort() });
+    }
     this.inputUserEmailConfirmed.value = emailConfirmed;
     this.inputUserStatus.value = status;
   }

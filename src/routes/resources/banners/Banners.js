@@ -20,7 +20,7 @@ import {
 import { getPlacements } from '../../../actions/placements';
 import { getChannels } from '../../../actions/channels';
 import { setPageBannerActiveTab } from '../../../actions/pages/banners';
-import { getTrackByBannerId, createTrack } from '../../../actions/tracks';
+import { createTrack } from '../../../actions/tracks';
 import { getBannerHtmlTypes } from '../../../actions/bannerHtmlTypes';
 import { getBannerTypes } from '../../../actions/bannerTypes';
 import { getAdsServers } from '../../../actions/adsServers';
@@ -42,7 +42,6 @@ class Banners extends Component {
     getChannels: PropTypes.func,
     channels: PropTypes.object,
     setPageBannerActiveTab: PropTypes.func,
-    getTrackByBannerId: PropTypes.func,
     tracks: PropTypes.object,
     createTrack: PropTypes.func,
     getBannerHtmlTypes: PropTypes.func,
@@ -153,7 +152,6 @@ class Banners extends Component {
                   setPageBannerActiveTab={this.props.setPageBannerActiveTab}
                   createBanner={this.props.createBanner}
                   banners={this.props.banners}
-                  getTrackByBannerId={this.props.getTrackByBannerId}
                   tracks={this.props.tracks}
                   createTrack={this.props.createTrack}
                 />
@@ -189,7 +187,6 @@ const mapDispatch = {
   getPlacements,
   getChannels,
   setPageBannerActiveTab,
-  getTrackByBannerId,
   createTrack,
   getBannerHtmlTypes,
   getBannerTypes,

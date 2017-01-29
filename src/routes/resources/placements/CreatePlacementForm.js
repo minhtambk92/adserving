@@ -11,13 +11,12 @@ class CreatePlacementForm extends Component {
     campaigns: PropTypes.array,
     campaignId: PropTypes.string,
     getCampaign: PropTypes.func,
-    zoneId: PropTypes.string,
-    getZone: PropTypes.func,
     bannerId: PropTypes.string,
     getBanner: PropTypes.func,
     placements: PropTypes.array,
-    createPlacementBanner: PropTypes.func,
     getPlacements: PropTypes.func,
+    updateBanner: PropTypes.func,
+    banner: PropTypes.object,
   };
 
   clearInput(event) { // eslint-disable-line no-unused-vars
@@ -62,22 +61,35 @@ class CreatePlacementForm extends Component {
           this.clearInput();
           if (this.props.campaignId) {
             this.props.getCampaign(this.props.campaignId);
-          } else if (this.props.zoneId) {
-            const placementId = this.props.placements[0].id;
-            const zoneId = this.props.zoneId;
-            const bannerId = null;
-            this.props.createPlacementBanner({ placementId, bannerId, zoneId }).then(() => {
-              this.props.getZone(this.props.zoneId);
-              this.props.getPlacements();
-            });
-          } else if (this.props.bannerId) {
-            const placementId = this.props.placements[0].id;
-            const bannerId = this.props.bannerId;
-            const zoneId = null;
-            this.props.createPlacementBanner({ placementId, bannerId, zoneId }).then(() => {
-              this.props.getBanner(this.props.bannerId);
-              this.props.getPlacements();
-            });
+          } else if (this.props.bannerId && this.props.banner) {
+            if (this.props.placements) {
+              const placement = this.props.banner.placements;
+              placement.push(this.props.placements[0]);
+              const banner = this.props.banner;
+              banner.placements = JSON.stringify(placement.map(p => ({
+                id: p.id,
+                name: p.name,
+                width: p.width,
+                height: p.height,
+                startTime: p.startTime,
+                endTime: p.endTime,
+                weight: p.weight,
+                description: p.description,
+                campaignId: p.campaignId,
+                status: p.status,
+                isDeleted: false,
+              })));
+              let bannerTypeId = null;
+              if (this.props.banner.bannerType) {
+                bannerTypeId = this.props.banner.bannerType.id;
+              } else if (this.props.banner.bannerTypeId) {
+                bannerTypeId = this.props.banner.bannerTypeId;
+              }
+              banner.bannerTypeId = bannerTypeId;
+              this.props.updateBanner(banner).then(() => {
+                this.props.getBanner(this.props.bannerId);
+              });
+            }
           }
         });
       } else {

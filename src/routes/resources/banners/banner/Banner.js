@@ -301,7 +301,9 @@ class Banner extends Component {
                             bannerId={this.props.bannerId}
                             campaigns={this.props.campaigns && this.props.campaigns.list}
                             getPlacements={this.props.getPlacements}
+                            banner={this.props.banners && this.props.banners.editing}
                             placements={this.props.placements && this.props.placements.list}
+                            updateBanner={this.props.updateBanner}
                             getBanner={this.props.getBanner}
                           />
                         </div>

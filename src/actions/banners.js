@@ -161,6 +161,11 @@ export function getBanners(args = {
               createdAt
               updatedAt
             }
+          tracks {
+            id
+            clickUrl
+            impressionUrl
+         }
           createdAt
           updatedAt
           }

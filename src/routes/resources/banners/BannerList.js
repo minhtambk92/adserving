@@ -9,12 +9,8 @@ class BannerList extends Component {
     list: PropTypes.array,
     setPageBannerActiveTab: PropTypes.func,
     createBanner: PropTypes.func,
-    getPlacementsByBannerId: PropTypes.func,
     banners: PropTypes.object,
-    placementBanners: PropTypes.object,
-    createPlacementBanner: PropTypes.func,
     tracks: PropTypes.object,
-    getTrackByBannerId: PropTypes.func,
     createTrack: PropTypes.func,
   };
 
@@ -95,17 +91,15 @@ class BannerList extends Component {
         expirationDate,
         channelId,
       }).then(() => {
-        this.props.getTrackByBannerId(data.id).then(() => {
+        if (this.props.banners && this.props.banners.list && this.props.banners.list[0]) {
           const bannerId = this.props.banners.list[0].id;
-          if (this.props.tracks) {
-            const arrTracks = this.props.tracks.list;
-            for (let j = 0; j < arrTracks.length; j += 1) {
-              const clickUrl = arrTracks[j].clickUrl;
-              const impressionUrl = arrTracks[j].impressionUrl;
-              this.props.createTrack({ clickUrl, impressionUrl, bannerId });
-            }
+          const arrTracks = data.tracks;
+          for (let j = 0; j < arrTracks.length; j += 1) {
+            const clickUrl = arrTracks[j].clickUrl;
+            const impressionUrl = arrTracks[j].impressionUrl;
+            this.props.createTrack({ clickUrl, impressionUrl, bannerId });
           }
-        });
+        }
       });
     }
   }
