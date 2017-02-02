@@ -12,7 +12,7 @@ import Layout from '../../../../components/Layout';
 import { getUsers, updateProfile } from '../../../../actions/users';
 import { setStatusUpdateProfile } from '../../../../actions/pages/resources';
 import ProfileList from './ProfileList';
-import s from './Profile.css';
+import s from './Profile.css'; // eslint-disable-line css-modules/no-unused-class
 
 const pageTitle = 'Profile';
 class Profile extends Component {

@@ -41,18 +41,20 @@ const users = {
           ],
         });
 
-        const userRoles = [];
+        let userRoles = [];
 
         // Prepare mediate objects
         for (let i = 0; i < newUser.roles.length; i += 1) {
-          const role = await Role.findOne({ where: { uniqueName: newUser.roles[i] } });
-
-          userRoles.push({
-            status: 'active',
-            userId: createdUser.id,
-            roleId: role.id,
-          });
+          userRoles.push(Role.findOne({ where: { uniqueName: newUser.roles[i] } }));
         }
+
+        userRoles = await Promise.all(userRoles);
+
+        userRoles = await Promise.all(userRoles.map(role => ({
+          status: 'active',
+          userId: createdUser.id,
+          roleId: role.id,
+        })));
 
         // Set roles to user
         await UserRole.bulkCreate(userRoles);

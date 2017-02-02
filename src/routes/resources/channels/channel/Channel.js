@@ -31,7 +31,7 @@ import UpdateChannelForm from '../UpdateChannelForm';
 import OptionSelectChannel from '../OptionSelectChannel';
 import FilterSiteChannel from '../FilterSiteChannel';
 import Link from '../../../../components/Link';
-import s from './Channel.css'; // eslint-disable-line css-modules/no-unused-or-extra-class
+import s from './Channel.css'; // eslint-disable-line css-modules/no-unused-class
 
 const pageTitle = 'Channel';
 

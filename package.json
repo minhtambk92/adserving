@@ -103,7 +103,7 @@
     "eslint": "latest",
     "eslint-config-airbnb": "latest",
     "eslint-loader": "latest",
-    "eslint-plugin-css-modules": "^2.1.0",
+    "eslint-plugin-css-modules": "latest",
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsx-a11y": "latest",
     "eslint-plugin-react": "latest",
@@ -149,8 +149,10 @@
     "stylelint-config-standard": "latest",
     "url-loader": "latest",
     "webpack": "latest",
+    "webpack-dev-middleware": "latest",
     "webpack-hot-middleware": "latest",
-    "webpack-middleware": "latest"
+    "webpack-middleware": "latest",
+    "write-file-webpack-plugin": "latest"
   },
   "babel": {
     "presets": [
@@ -197,6 +199,7 @@
       "import/no-extraneous-dependencies": "off",
       "react/forbid-prop-types": "off",
       "react/jsx-filename-extension": "off",
+      "react/no-array-index-key": "off",
       "react/no-danger": "off",
       "react/no-unused-prop-types": "off",
       "react/prefer-stateless-function": "off",
@@ -245,9 +248,9 @@
     "lint:js": "eslint src tools",
     "lint:css": "stylelint \"src/**/*.{css,less,scss,sss}\"",
     "lint:staged": "lint-staged",
-    "lint": "npm run lint:js && npm run lint:css",
+    "lint": "yarn run lint:js && yarn run lint:css",
     "test": "mocha \"src/**/*.test.js\" --require babel-register --require test/setup.js",
-    "test:watch": "npm run test -- --reporter min --watch",
+    "test:watch": "yarn run test -- --reporter min --watch",
     "clean": "babel-node tools/run clean",
     "copy": "babel-node tools/run copy",
     "extractMessages": "babel-node tools/run extractMessages",

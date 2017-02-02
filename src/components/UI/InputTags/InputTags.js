@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './InputTags.css'; // eslint-disable-line css-modules/no-unused-or-extra-class
+import s from './InputTags.css'; // eslint-disable-line css-modules/no-unused-class
 
 class InputTags extends Component {
 
