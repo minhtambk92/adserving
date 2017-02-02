@@ -39,7 +39,7 @@
     "history": "latest",
     "intl": "latest",
     "intl-locales-supported": "latest",
-    "ionicons": "latest",
+    "ionicons": "^2.0.1",
     "isomorphic-style-loader": "latest",
     "js-beautify": "latest",
     "jsonwebtoken": "latest",
