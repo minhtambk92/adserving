@@ -269,10 +269,10 @@ class Zone extends Component {
                   <div className="tab-pane" id="shareZone">
                     <ListShare
                       list={this.props.zones.editing && this.props.zones.editing.shares}
-                      deleteShareZone={this.props.deleteShare}
+                      deleteShare={this.props.deleteShare}
                       getZone={this.props.getZone}
                       zoneId={this.props.zoneId}
-                      createShareZone={this.props.createShare}
+                      createShare={this.props.createShare}
                       setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                       setCurrentShare={this.props.setCurrentShare}
                       page={this.props.page}

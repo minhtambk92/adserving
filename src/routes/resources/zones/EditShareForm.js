@@ -12,7 +12,7 @@ class EditShareForm extends Component {
     childZone: PropTypes.object,
     getZone: PropTypes.func,
     zoneId: PropTypes.string,
-    updateShareZone: PropTypes.func,
+    updateShare: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
     setStatusShareFormEdit: PropTypes.func,
     page: PropTypes.object,
@@ -54,7 +54,7 @@ class EditShareForm extends Component {
     const description = this.inputEditShareDescription.value;
 
     if (id && name) {
-      this.props.updateShareZone({
+      this.props.updateShare({
         id,
         name,
         html,

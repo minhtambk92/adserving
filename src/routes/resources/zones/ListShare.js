@@ -12,10 +12,10 @@ class ListShare extends Component {
 
   static propTypes = {
     list: PropTypes.array,
-    deleteShareZone: PropTypes.func,
+    deleteShare: PropTypes.func,
     getZone: PropTypes.func,
     zoneId: PropTypes.string,
-    createShareZone: PropTypes.func,
+    createShare: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
     setCurrentShare: PropTypes.func,
     shares: PropTypes.object,
@@ -46,7 +46,7 @@ class ListShare extends Component {
     });
   }
 
-  duplicateShareZone(data) {
+  duplicateShare(data) {
     const name = `Copy of ${data.name}`;
     const css = data.css;
     const outputCss = '';
@@ -59,7 +59,7 @@ class ListShare extends Component {
     const description = data.description;
     if (name) {
       const zoneId = this.props.zoneId;
-      this.props.createShareZone({
+      this.props.createShare({
         name,
         html,
         css,
@@ -135,7 +135,7 @@ class ListShare extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"
-          onClick={() => this.editShareZone(rowData)}
+          onClick={() => this.editShare(rowData)}
         >Edit</Link>, cell);
       },
     }, {
@@ -144,7 +144,7 @@ class ListShare extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"
-          onClick={() => this.deleteShareZone(rowData.id)}
+          onClick={() => this.deleteShare(rowData.id)}
         >Delete</Link>, cell);
       },
     }, {
@@ -153,21 +153,21 @@ class ListShare extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"
-          onClick={() => this.duplicateShareZone(rowData)}
+          onClick={() => this.duplicateShare(rowData)}
         >Duplicate</Link>, cell);
       },
     }];
   }
 
-  deleteShareZone(id) {
+  deleteShare(id) {
     if (id) {
-      this.props.deleteShareZone(id).then(() => {
+      this.props.deleteShare(id).then(() => {
         this.props.getZone(this.props.zoneId);
       });
     }
   }
 
-  editShareZone(data) {
+  editShare(data) {
     this.props.setStatusShareFormEdit(true).then(() => {
       if (this.props.page.statusEdit === true) {
         const count = 1;
@@ -253,7 +253,7 @@ class ListShare extends Component {
                   <EditShareForm
                     id={this.state.share.id}
                     childZone={this.state.share}
-                    updateShareZone={this.props.updateShare}
+                    updateShare={this.props.updateShare}
                     getZone={this.props.getZone}
                     zoneId={this.props.zoneId}
                     setPageZoneActiveTab={this.props.setPageZoneActiveTab}
@@ -268,10 +268,10 @@ class ListShare extends Component {
             this.props.page.statusCreate === true &&
             this.state.arrCreateShare && this.state.arrCreateShare.map((count) => (
               <div className="box" key={count}>
-                <div className="shareZoneForm">
+                <div className="ShareForm">
                   <CreateShareForm
                     id={this.state.share.id}
-                    createShareZone={this.props.createShareZone}
+                    createShare={this.props.createShare}
                     getZone={this.props.getZone}
                     zoneId={this.props.zoneId}
                     setPageZoneActiveTab={this.props.setPageZoneActiveTab}
@@ -289,7 +289,7 @@ class ListShare extends Component {
               (
                 <button
                   type="button"
-                  id="createShareZone"
+                  id="createShare"
                   onClick={(event) => this.addShare(event)}
                   className="btn btn-primary"
                 >

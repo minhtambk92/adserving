@@ -11,7 +11,7 @@ class CreateShareForm extends Component {
     id: PropTypes.string,
     getZone: PropTypes.func,
     zoneId: PropTypes.string,
-    createShareZone: PropTypes.func,
+    createShare: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
     setStatusShareFormCreate: PropTypes.func,
     page: PropTypes.object,
@@ -40,7 +40,7 @@ class CreateShareForm extends Component {
     const description = this.inputCreateShareDescription.value;
     if (name) {
       const zoneId = this.props.zoneId;
-      this.props.createShareZone({
+      this.props.createShare({
         name,
         html,
         css,
