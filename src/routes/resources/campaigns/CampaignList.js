@@ -3,7 +3,6 @@ import moment from 'moment';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
 import { DataTables, ICheck } from '../../../components/UI/';
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 class CampaignList extends Component {
 
