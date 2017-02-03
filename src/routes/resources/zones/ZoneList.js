@@ -16,7 +16,6 @@ class ZoneList extends Component {
     createShare: PropTypes.func,
     zones: PropTypes.object,
     shares: PropTypes.object,
-    getShareByZoneId: PropTypes.func,
   };
 
   onTabClickZone(event) {
