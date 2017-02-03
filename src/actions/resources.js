@@ -66,8 +66,8 @@ export function getResources(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query ($where: JSON, $order: String, $limit: Int) {
-        resources(where: $where, order: $order, limit: $limit) {
+      query {
+        resources {
           id
           uniqueName
           modelName

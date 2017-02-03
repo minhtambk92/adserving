@@ -84,8 +84,8 @@ export function getCampaigns(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query($where: JSON, $order: String, $limit: Int) {
-        campaigns(where: $where, order: $order, limit: $limit) {
+      query {
+        campaigns {
           id
           advertiserId
           name

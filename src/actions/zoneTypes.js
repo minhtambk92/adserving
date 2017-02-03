@@ -43,8 +43,8 @@ export function getZoneTypes(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query ($where: JSON, $order: String, $limit: Int) {
-        zoneTypes(where: $where, order: $order, limit: $limit) {
+      query {
+        zoneTypes {
           id
           name
           value

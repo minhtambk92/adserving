@@ -99,8 +99,8 @@ export function getShares(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query ($where: JSON, $order: String, $limit: Int) {
-        shares(where: $where, order: $order, limit: $limit) {
+      query {
+        shares {
           id
           name
           html

@@ -115,8 +115,8 @@ export function getSites(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query ($where: JSON, $order: String, $limit: Int) {
-        sites(where: $where, order: $order, limit: $limit) {
+      query {
+        sites {
           id
           domain
           name

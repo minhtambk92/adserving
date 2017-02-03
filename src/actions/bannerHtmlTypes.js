@@ -43,8 +43,8 @@ export function getBannerHtmlTypes(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query ($where: JSON, $order: String, $limit: Int) {
-        bannerHtmlTypes(where: $where, order: $order, limit: $limit) {
+      query {
+        bannerHtmlTypes{
           id
           name
           value

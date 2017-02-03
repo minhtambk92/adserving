@@ -110,8 +110,8 @@ export function getBanners(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query($where: JSON, $order: String, $limit: Int) {
-        banners(where: $where, order: $order, limit: $limit) {
+      query {
+        banners {
           id
           name
           html

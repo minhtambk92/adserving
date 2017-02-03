@@ -41,8 +41,8 @@ export function getTracks(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query($where: JSON, $order: String, $limit: Int) {
-        tracks(where: $where, order: $order, limit: $limit) {
+      query {
+        tracks{
          id
          clickUrl
          impressionUrl

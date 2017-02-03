@@ -61,8 +61,8 @@ export function getRoles(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query ($where: JSON, $order: String, $limit: Int) {
-        roles(where: $where, order: $order, limit: $limit) {
+      query {
+        roles {
           id
           uniqueName
           name

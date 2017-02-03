@@ -84,8 +84,8 @@ export function getChannels(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query ($where: JSON, $order: String, $limit: Int) {
-        channels(where: $where, order: $order, limit: $limit) {
+      query {
+        channels {
           id
           name
           description

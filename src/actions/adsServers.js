@@ -42,8 +42,8 @@ export function getAdsServers(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query ($where: JSON, $order: String, $limit: Int) {
-        adsServers(where: $where, order: $order, limit: $limit) {
+      query {
+        adsServers {
           id
           name
           value

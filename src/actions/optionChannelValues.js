@@ -43,8 +43,8 @@ export function getOptionChannelValues(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query ($where: JSON, $order: String, $limit: Int) {
-        optionChannelValues(where: $where, order: $order, limit: $limit) {
+      query {
+        optionChannelValues {
           id
           name
           value

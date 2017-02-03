@@ -109,8 +109,8 @@ export function getPlacements(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query($where: JSON, $order: String, $limit: Int) {
-        placements(where: $where, order: $order, limit: $limit) {
+      query {
+        placements {
           id
           name
           width

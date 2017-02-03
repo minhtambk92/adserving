@@ -45,8 +45,8 @@ export function getCharacterSets(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query ($where: JSON, $order: String, $limit: Int) {
-        characterSets(where: $where, order: $order, limit: $limit) {
+      query {
+        characterSets {
           id
           name
           value

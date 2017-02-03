@@ -121,8 +121,8 @@ export function getZones(args = {
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
-      query ($where: JSON, $order: String, $limit: Int) {
-        zones(where: $where, order: $order, limit: $limit) {
+      query {
+        zones {
           id
           siteId
           name
