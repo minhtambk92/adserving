@@ -43,7 +43,13 @@ class Users extends Component {
   }
 
   getFilteredUsers() {
-    return _.filter(this.props.users.list, user => this.isFiltered(user));
+    let list;
+    if (this.props.users) {
+      list = _.filter(this.props.users.list, user => this.isFiltered(user));
+    } else {
+      list = [];
+    }
+    return list;
   }
 
   isFiltered(user) {

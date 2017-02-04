@@ -20,7 +20,7 @@ class CreateRoleForm extends Component {
     const uniqueName = this.inputRoleUniqueName.value;
     const name = this.inputRoleName.value;
 
-    if (uniqueName && name && status) {
+    if (uniqueName && name) {
       this.props.createRole({
         uniqueName,
         name,

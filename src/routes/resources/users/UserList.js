@@ -71,10 +71,18 @@ class UserList extends Component {
 
   render() {
     // Open the portal
+    let data = [];
+    if (this.props.list) {
+      if (this.props.list.length === 0) {
+        data = [];
+      } else {
+        data = this.props.list;
+      }
+    }
     return (
       <DataTables
         className="table table-bordered table-striped"
-        data={this.props.list}
+        data={data}
         options={{
           columns: this.dataTableOptions(),
           destroy: true,
