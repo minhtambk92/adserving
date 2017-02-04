@@ -90,7 +90,7 @@ class ListBannerOfPlacement extends Component {
             const placements = data.placements;
             banner.placements = JSON.stringify(placements.map(b => ({
               id: b.id,
-              isDeleted: true,
+              isDeleted: false,
             })));
             this.props.updateBanner(banner).then(() => {
               this.props.getPlacement(this.props.placementId);

@@ -7,7 +7,6 @@ class ListBannerNotBelongPlacement extends Component {
 
   static propTypes = {
     placementId: PropTypes.string.isRequired,
-    containerWidth: PropTypes.number,
     list: PropTypes.array,
     getPlacement: PropTypes.func,
     updatePlacement: PropTypes.func,
