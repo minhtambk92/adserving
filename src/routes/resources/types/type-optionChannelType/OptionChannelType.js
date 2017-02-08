@@ -18,6 +18,7 @@ import {
   deleteOptionChannelType,
   updateOptionChannelType,
 } from '../../../../actions/optionChannelTypes';
+import { setOptionChannelValueFilters } from '../../../../actions/optionChannelValues';
 import {
   setStatusCreateOptionChannelType,
   setStatusUpdateOptionChannelType,
@@ -40,6 +41,7 @@ class OptionChannelType extends Component {
     createOptionChannelType: PropTypes.func,
     deleteOptionChannelType: PropTypes.func,
     updateOptionChannelType: PropTypes.func,
+    setOptionChannelValueFilters: PropTypes.func,
   };
 
   componentWillMount() {
@@ -62,6 +64,7 @@ class OptionChannelType extends Component {
             createOptionChannelType={this.props.createOptionChannelType}
             deleteOptionChannelType={this.props.deleteOptionChannelType}
             updateOptionChannelType={this.props.updateOptionChannelType}
+            setOptionChannelValueFilters={this.props.setOptionChannelValueFilters}
             page={this.props.page}
           />
         </div>
@@ -75,6 +78,7 @@ const mapState = (state) => ({
   resources: state.resources,
   optionChannelTypes: state.optionChannelTypes,
   page: state.page.resources,
+  optionChannelValues: state.optionChannelValues,
 });
 
 const mapDispatch = {
@@ -84,6 +88,7 @@ const mapDispatch = {
   createOptionChannelType,
   deleteOptionChannelType,
   updateOptionChannelType,
+  setOptionChannelValueFilters,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(OptionChannelType));

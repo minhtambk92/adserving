@@ -113,7 +113,6 @@ class BannerList extends Component {
           <ICheck
             type="checkbox"
             className="inputChooseBanner"
-            name="inputChooseBanner[]"
             value={cellData}
           />,
           cell,
@@ -173,7 +172,7 @@ class BannerList extends Component {
         }}
         thead={(
           <tr>
-            <th><ICheck type="checkbox" className="inputChooseAllBanners" /></th>
+            <th>&nbsp;</th>
             <th>Name</th>
             <th>Size</th>
             <th>&nbsp;</th>
@@ -183,7 +182,7 @@ class BannerList extends Component {
         )}
         tfoot={(
           <tr>
-            <th><ICheck type="checkbox" className="inputChooseAllBanners" /></th>
+            <th>&nbsp;</th>
             <th>Name</th>
             <th>Size</th>
             <th>&nbsp;</th>

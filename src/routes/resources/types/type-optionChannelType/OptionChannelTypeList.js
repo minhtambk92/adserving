@@ -21,6 +21,7 @@ class OptionChannelTypeList extends Component {
     createOptionChannelType: PropTypes.func,
     deleteOptionChannelType: PropTypes.func,
     updateOptionChannelType: PropTypes.func,
+    setOptionChannelValueFilters: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -94,6 +95,7 @@ class OptionChannelTypeList extends Component {
         if (rowData.isSelectOption === true) {
           ReactDOM.render(<Link
             to="/resource/type/8ae8a702-5d18-4992-9518-3a44adca658c"
+            onClick={() => this.addOptionChannelValue(rowData)}
           >Add Option</Link>, cell);
         } else {
           ReactDOM.render(<Link
@@ -129,6 +131,10 @@ class OptionChannelTypeList extends Component {
       }
       this.props.statusUpdateOptionChannelType(false);
     });
+  }
+
+  addOptionChannelValue(data) {
+    this.props.setOptionChannelValueFilters({ optionChannelTypeId: data.id });
   }
 
   render() {
