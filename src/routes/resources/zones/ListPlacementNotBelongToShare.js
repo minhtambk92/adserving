@@ -61,7 +61,6 @@ class ListPlacementNotBelongToZone extends Component {
   /* eslint-disable max-len */
   pushPlacementToShare(rowData) {
  // eslint-disable-line no-unused-vars, class-methods-use-this
-    console.log(this.props.listPlacementNotBelongShare);
 
     const arr = this.props.listPlacementNotBelongShare;
     _.sumBy(arr, (o) => o.weight); // ➜ 20
