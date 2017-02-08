@@ -39,6 +39,8 @@ class ListPlacementNotBelongToZone extends Component {
       data: null,
       render: (data, type, row) => `${row.width} x ${row.height}`,
     }, {
+      data: 'weight',
+    }, {
       data: null,
       orderable: false,
       createdCell: (cell, cellData, rowData) => {
@@ -107,6 +109,7 @@ class ListPlacementNotBelongToZone extends Component {
             <th><ICheck type="checkbox" className="inputPlacementsOfZone" /></th>
             <th>Name</th>
             <th>Size(px)</th>
+            <th>Weight(%)</th>
             <th>&nbsp;</th>
           </tr>
         )}
@@ -115,6 +118,7 @@ class ListPlacementNotBelongToZone extends Component {
             <th><ICheck type="checkbox" className="inputPlacementsOfZone" /></th>
             <th>Name</th>
             <th>Size(px)</th>
+            <th>Weight(%)</th>
             <th>&nbsp;</th>
           </tr>
         )}

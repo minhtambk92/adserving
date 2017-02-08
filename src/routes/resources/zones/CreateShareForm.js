@@ -1,6 +1,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import { InputTags } from '../../../components/UI';
 import Link from '../../../components/Link';
 
@@ -15,6 +16,7 @@ class CreateShareForm extends Component {
     setPageZoneActiveTab: PropTypes.func,
     setStatusShareFormCreate: PropTypes.func,
     page: PropTypes.object,
+    list: PropTypes.array,
   };
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -28,6 +30,9 @@ class CreateShareForm extends Component {
   }
 
   createShare() {
+    const arr = this.props.list;
+    _.sumBy(arr, (o) => o.weight); // ➜ 20
+    const sumWeight = _.sumBy(arr, 'weight');// ➜ 20
     const name = this.inputCreateShareName.value;
     const css = this.inputCreateShareCSS.value;
     const outputCss = '';
@@ -38,7 +43,9 @@ class CreateShareForm extends Component {
     const classes = document.getElementById('inputCreateShareClasses').value;
     const type = this.inputCreateShareType.value;
     const description = this.inputCreateShareDescription.value;
-    if (name) {
+    /* eslint-disable radix */
+    const newWeight = sumWeight + parseInt(weight);
+    if (newWeight <= 100) {
       const zoneId = this.props.zoneId;
       this.props.createShare({
         name,

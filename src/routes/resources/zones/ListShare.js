@@ -119,7 +119,7 @@ class ListShare extends Component {
     }, {
       data: 'name',
     }, {
-      data: 'description',
+      data: 'weight',
     }, {
       data: null,
       orderable: false,
@@ -220,7 +220,7 @@ class ListShare extends Component {
                     <tr>
                       <th><ICheck type="checkbox" className="inputChooseAllShares" /></th>
                       <th>Name</th>
-                      <th>Description</th>
+                      <th>Weight</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
@@ -231,7 +231,7 @@ class ListShare extends Component {
                     <tr>
                       <th><ICheck type="checkbox" className="inputChooseAllShares" /></th>
                       <th>Name</th>
-                      <th>Description</th>
+                      <th>Weight</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
@@ -258,6 +258,7 @@ class ListShare extends Component {
                     zoneId={this.props.zoneId}
                     setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                     setStatusShareFormEdit={this.props.setStatusShareFormEdit}
+                    list={this.props.list}
                     page={this.props.page}
                   />
                 </div>
@@ -276,6 +277,7 @@ class ListShare extends Component {
                     zoneId={this.props.zoneId}
                     setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                     setStatusShareFormCreate={this.props.setStatusShareFormCreate}
+                    list={this.props.list}
                     page={this.props.page}
                   />
                 </div>
