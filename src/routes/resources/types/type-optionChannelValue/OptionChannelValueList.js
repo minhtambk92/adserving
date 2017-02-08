@@ -1,6 +1,4 @@
-/**
- * Created by Manhhailua on 11/9/16.
- */
+/* global $ */
 
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
@@ -30,6 +28,7 @@ class OptionChannelValueList extends Component {
       optionChannelValue: {},
       arrOptionChannelValue: [],
       arrCreateOptionChannelValue: [],
+      currentOptionChannelTypeId: '',
     };
   }
 
@@ -105,6 +104,10 @@ class OptionChannelValueList extends Component {
       }
       this.props.statusUpdateOptionChannelValue(false);
     });
+    const currentId = $('#inputOptionChannelTypesFilters').val();
+    if (currentId !== null && currentId !== '') {
+      this.setState({ currentOptionChannelTypeId: currentId });
+    }
   }
 
   render() {
@@ -192,6 +195,7 @@ class OptionChannelValueList extends Component {
                   id={this.state.optionChannelValue.id}
                   createOptionChannelValue={this.props.createOptionChannelValue}
                   getOptionChannelValues={this.props.getOptionChannelValues}
+                  currentOptionChannelTypeId={this.state.currentOptionChannelTypeId}
                   statusCreateOptionChannelValue={this.props.statusCreateOptionChannelValue}
                   optionChannelTypeList={this.props.optionChannelTypeList}
                   page={this.props.page}

@@ -9,6 +9,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../../../components/Layout';
@@ -17,6 +18,8 @@ import {
   createOptionChannelValue,
   deleteOptionChannelValue,
   updateOptionChannelValue,
+  getOptionChannelValueFilters,
+  setOptionChannelValueFilters,
 } from '../../../../actions/optionChannelValues';
 import {
   setStatusCreateOptionChannelValue,
@@ -24,6 +27,7 @@ import {
 } from '../../../../actions/pages/resources';
 import { getOptionChannelTypeIsSelectOption } from '../../../../actions/optionChannelTypes';
 import OptionChannelValueList from './OptionChannelValueList';
+import FilterOptionChannelTypesForm from './FilterOptionChannelTypesForm';
 import s from './OptionChannelValue.css';
 
 const pageTitle = 'Option Channel Value';
@@ -43,11 +47,41 @@ class OptionChannelValue extends Component {
     updateOptionChannelValue: PropTypes.func,
     getOptionChannelTypeIsSelectOption: PropTypes.func,
     optionChannelTypes: PropTypes.object,
+    getOptionChannelValueFilters: PropTypes.func,
+    setOptionChannelValueFilters: PropTypes.func,
   };
 
   componentWillMount() {
     this.props.getOptionChannelValues();
+    this.props.getOptionChannelValueFilters();
     this.props.getOptionChannelTypeIsSelectOption();
+  }
+
+  getFilteredOptionChannelValues() {
+    return _.filter(this.props.optionChannelValues.list,
+      optionChannelValue => this.isFiltered(optionChannelValue));
+  }
+
+  isFiltered(optionChannelValue) {
+    const { optionChannelTypeId, status } = this.props.optionChannelValues.filters;
+
+    let notMatchPlacement = false;
+    if (this.props.optionChannelTypes && this.props.optionChannelTypes.list.length > 0 &&
+        optionChannelTypeId !== undefined) {
+      notMatchPlacement = (
+        optionChannelTypeId !== undefined &&
+        typeof optionChannelValue.optionChannelType === 'object' &&
+        JSON.stringify(optionChannelValue.optionChannelType).indexOf(optionChannelTypeId) === -1);
+    } else if (this.props.optionChannelTypes && optionChannelTypeId === undefined &&
+      this.props.optionChannelTypes.list.length > 0) {
+      const id = this.props.optionChannelTypes.list[0].id;
+      notMatchPlacement = JSON.stringify(optionChannelValue.optionChannelType).indexOf(id) === -1;
+    }
+
+    const notMatchStatus = (
+      status !== undefined && status !== optionChannelValue.status
+    );
+    return !(notMatchPlacement || notMatchStatus);
   }
 
   render() {
@@ -57,8 +91,33 @@ class OptionChannelValue extends Component {
         pageSubTitle=""
       >
         <div>
+          <div className="row">
+            <section className="col-lg-12">
+              {/* BOX: FILTER */}
+              <div className="box box-default">
+                <div className="box-header with-border">
+                  <h3 className="box-title">Filter by:</h3>
+                  <div className="box-tools pull-right">
+                    <button type="button" className="btn btn-box-tool" data-widget="collapse">
+                      <i className="fa fa-minus" />
+                    </button>
+                  </div>
+                </div>
+                {/* /.box-header */}
+                <FilterOptionChannelTypesForm
+                  optionChannelTypeList={this.props.optionChannelTypes &&
+                  this.props.optionChannelTypes.list}
+                  filters={this.props.optionChannelValues.filters}
+                  setOptionChannelValueFilters={this.props.setOptionChannelValueFilters}
+                  currentOptionChannelTypeId={this.props.optionChannelValues &&
+                  this.props.optionChannelValues.filters.optionChannelTypeId}
+                />
+              </div>
+              {/* /.col */}
+            </section>
+          </div>
           <OptionChannelValueList
-            list={this.props.optionChannelValues && this.props.optionChannelValues.list}
+            list={this.getFilteredOptionChannelValues()}
             statusCreateOptionChannelValue={this.props.setStatusCreateOptionChannelValue}
             statusUpdateOptionChannelValue={this.props.setStatusUpdateOptionChannelValue}
             getOptionChannelValues={this.props.getOptionChannelValues}
@@ -92,6 +151,8 @@ const mapDispatch = {
   deleteOptionChannelValue,
   updateOptionChannelValue,
   getOptionChannelTypeIsSelectOption,
+  getOptionChannelValueFilters,
+  setOptionChannelValueFilters,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(OptionChannelValue));

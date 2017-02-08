@@ -12,7 +12,14 @@ class CreateOptionChannelValueForm extends Component {
     page: PropTypes.object,
     createOptionChannelValue: PropTypes.func,
     optionChannelTypeList: PropTypes.array,
+    currentOptionChannelTypeId: PropTypes.string,
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentOptionChannelTypeId && nextProps.currentOptionChannelTypeId !== 'null' && nextProps.currentOptionChannelTypeId !== '') {
+      this.inputOptionChannelTypeId.value = nextProps.currentOptionChannelTypeId;
+    }
+  }
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
     this.inputOptionChannelValueName.value = null;

@@ -6,7 +6,27 @@ import {
   CREATE_OPTION_CHANNEL_VALUE,
   UPDATE_OPTION_CHANNEL_VALUE,
   DELETE_OPTION_CHANNEL_VALUE,
+  SET_OPTION_CHANNEL_VALUE_FILTER,
+  GET_OPTION_CHANNEL_VALUE_FILTER,
 } from '../constants';
+
+export function setOptionChannelValueFilters(filter) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_OPTION_CHANNEL_VALUE_FILTER,
+      payload: filter,
+    });
+  };
+}
+
+export function getOptionChannelValueFilters() {
+  return async (dispatch) => {
+    dispatch({
+      type: GET_OPTION_CHANNEL_VALUE_FILTER,
+      payload: {},
+    });
+  };
+}
 
 export function getOptionChannelValue(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
