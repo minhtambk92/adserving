@@ -331,6 +331,7 @@ class Zone extends Component {
                                       this.props.placements.list,
                                       share.placements,
                                     )}
+                                  listPlacementNotBelongShare={share.placements}
                                   getZone={this.props.getZone}
                                   zoneId={this.props.zoneId}
                                   shareId={share.id}

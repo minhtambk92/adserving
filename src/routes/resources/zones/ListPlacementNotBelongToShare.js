@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import ReactDOM from 'react-dom';
 import { DataTables, ICheck } from '../../../components/UI/';
 import Link from '../../../components/Link';
@@ -13,6 +14,7 @@ class ListPlacementNotBelongToZone extends Component {
     zone: PropTypes.object,
     shares: PropTypes.object,
     setCurrentShare: PropTypes.func,
+    listPlacementNotBelongShare: PropTypes.array,
   };
 
   dataTableOptions() {
@@ -57,29 +59,38 @@ class ListPlacementNotBelongToZone extends Component {
   }
 
   /* eslint-disable max-len */
-  pushPlacementToShare(rowData) { // eslint-disable-line no-unused-vars, class-methods-use-this
+  pushPlacementToShare(rowData) {
+ // eslint-disable-line no-unused-vars, class-methods-use-this
+    console.log(this.props.listPlacementNotBelongShare);
+
+    const arr = this.props.listPlacementNotBelongShare;
+    _.sumBy(arr, (o) => o.weight); // ➜ 20
+    const sumWeight = _.sumBy(arr, 'weight');// ➜ 20
     const shareId = this.props.shareId;
     this.props.setCurrentShare(shareId);
+    /* eslint-disable radix */
+    const newWeight = sumWeight + parseInt(rowData.weight);
+    if (newWeight <= 100) {
+      if (this.props.share) {
+        const share = this.props.share;
+        const placement = this.props.share.placements;
+        placement.push(rowData);
+        share.placements = JSON.stringify(placement.map(data => ({
+          id: data.id,
+          name: data.name,
+          startTime: data.startTime,
+          endTime: data.endTime,
+          width: data.width,
+          height: data.height,
+          weight: data.weight,
+          description: data.description,
+          campaignId: data.campaignId,
+          status: data.status,
+          isDeleted: false,
+        })));
 
-    if (this.props.share) {
-      const share = this.props.share;
-      const placement = this.props.share.placements;
-      placement.push(rowData);
-      share.placements = JSON.stringify(placement.map(data => ({
-        id: data.id,
-        name: data.name,
-        startTime: data.startTime,
-        endTime: data.endTime,
-        width: data.width,
-        height: data.height,
-        weight: data.weight,
-        description: data.description,
-        campaignId: data.campaignId,
-        status: data.status,
-        isDeleted: false,
-      })));
-
-      this.props.updateShare(share);
+        this.props.updateShare(share);
+      }
     }
   }
 
