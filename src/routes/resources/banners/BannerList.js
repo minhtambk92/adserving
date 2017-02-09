@@ -52,8 +52,6 @@ class BannerList extends Component {
     const isRelative = data.isRelative;
     const isImpressionsBooked = data.isImpressionsBooked;
     const isClicksBooked = data.isClicksBooked;
-    const isActivationDate = data.isActivationDate;
-    const isExpirationDate = data.isExpirationDate;
     const adStore = data.adStore;
     const impressionsBooked = data.impressionsBooked;
     const clicksBooked = data.clicksBooked;
@@ -82,8 +80,6 @@ class BannerList extends Component {
         isRelative,
         isImpressionsBooked,
         isClicksBooked,
-        isActivationDate,
-        isExpirationDate,
         adStore,
         impressionsBooked,
         clicksBooked,

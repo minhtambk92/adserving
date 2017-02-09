@@ -21,8 +21,6 @@ class OptionBannerForm extends Component {
     super(props, context);
 
     this.state = {
-      showActivationDate: false,
-      showExpirationDate: false,
       showImpressionsBooked: false,
       showClicksBooked: false,
       countLinkTrack: 0,
@@ -40,10 +38,10 @@ class OptionBannerForm extends Component {
       isClicksBooked: false,
       checkImpressionsBooked: false,
       checkClicksBooked: false,
-      isActivationDate: false,
       isExpirationDate: false,
-      checkExpirationDate: false,
-      checkActivationDate: false,
+      isClickExpirationDate: false,
+      isActivationDate: false,
+      isClickActivationDate: false,
     };
   }
 
@@ -139,23 +137,19 @@ class OptionBannerForm extends Component {
     });
     $('#inputIsActivationDate').on('ifClicked', () => {
       const isActivationDate = document.getElementById('inputIsActivationDate').checked;
-      self.setState({ checkActivationDate: true });
+      self.setState({ isClickActivationDate: true });
       if (isActivationDate === true) {
-        self.setState({ showActivationDate: true });
         self.setState({ isActivationDate: false });
       } else if (isActivationDate === false) {
-        self.setState({ showActivationDate: false });
         self.setState({ isActivationDate: true });
       }
     });
     $('#inputIsExpirationDate').on('ifClicked', () => {
-      const showExpirationDate = document.getElementById('inputIsExpirationDate').checked;
-      self.setState({ checkExpirationDate: true });
-      if (showExpirationDate === true) {
-        self.setState({ showExpirationDate: true });
+      const isExpirationDate = document.getElementById('inputIsExpirationDate').checked;
+      self.setState({ isClickExpirationDate: true });
+      if (isExpirationDate === true) {
         self.setState({ isExpirationDate: false });
-      } else if (showExpirationDate === false) {
-        self.setState({ showExpirationDate: false });
+      } else if (isExpirationDate === false) {
         self.setState({ isExpirationDate: true });
       }
     });
@@ -166,8 +160,6 @@ class OptionBannerForm extends Component {
     const {
       isImpressionsBooked,
       isClicksBooked,
-      isActivationDate,
-      isExpirationDate,
       adStore,
       impressionsBooked,
       clicksBooked,
@@ -204,34 +196,30 @@ class OptionBannerForm extends Component {
         }
       }
     }
-    if (this.state.isActivationDate === true) {
-      this.setState({ showActivationDate: false });
-    } else if (this.state.isActivationDate === false) {
-      if (isActivationDate === true) {
-        this.setState({ showActivationDate: false });
-      } else if (isActivationDate === false) {
-        this.setState({ showActivationDate: true });
-        if (this.inputBannerActivationDate !== undefined) {
-          document.getElementById('inputBannerActivationDate').value = moment(new Date(activationDate)).format('L');
-        }
-      }
+
+    this.setState({ isActivationDate: false });
+    if (this.inputBannerActivationDate && this.inputBannerActivationDate !== undefined) {
+      document.getElementById('inputBannerActivationDate').value = moment(new Date(activationDate)).format('L');
     }
-    if (this.state.isExpirationDate === true) {
-      this.setState({ showExpirationDate: false });
-    } else if (this.state.isExpirationDate === false) {
-      if (isExpirationDate === true) {
-        this.setState({ showExpirationDate: false });
-      } else if (isExpirationDate === false) {
-        this.setState({ showExpirationDate: true });
-        if (this.inputBannerExpirationDate !== undefined) {
-          document.getElementById('inputBannerExpirationDate').value = moment(new Date(expirationDate)).format('L');
-        }
+    if (expirationDate === null) {
+      this.setState({ isExpirationDate: true });
+    } else if (expirationDate !== null) {
+      this.setState({ isExpirationDate: false });
+      if (this.inputBannerExpirationDate !== null) {
+        document.getElementById('inputBannerExpirationDate').value = moment(new Date(expirationDate)).format('L');
       }
     }
   }
 
   componentDidUpdate() {
     /* eslint-disable no-undef */
+
+    if (this.state.isClickActivationDate === true && this.state.isActivationDate === true) {
+      $('#inputIsActivationDate').iCheck('check');
+    } else {
+      $('#inputIsActivationDate').iCheck('uncheck');
+    }
+
     if (this.props.banner) {
       if (this.state.isCountView === true) {
         $('#inputBannerIsCountView').iCheck('check');
@@ -294,24 +282,13 @@ class OptionBannerForm extends Component {
         }
       }
 
-      if (this.state.isActivationDate === true) {
-        $('#inputIsActivationDate').iCheck('check');
-      } else if (this.state.isActivationDate === false) {
-        if (this.props.banner.isActivationDate === true
-          && this.state.checkActivationDate === false) {
-          $('#inputIsActivationDate').iCheck('check');
-        } else if (this.props.banner.isActivationDate === false) {
-          $('#inputIsActivationDate').iCheck('uncheck');
-        }
-      }
-
       if (this.state.isExpirationDate === true) {
         $('#inputIsExpirationDate').iCheck('check');
       } else if (this.state.isExpirationDate === false) {
-        if (this.props.banner.isExpirationDate === true &&
-          this.state.checkExpirationDate === false) {
+        if (this.props.banner.expirationDate === null &&
+          this.state.isClickExpirationDate === false) {
           $('#inputIsExpirationDate').iCheck('check');
-        } else if (this.props.banner.isExpirationDate === false) {
+        } else if (this.props.banner.expirationDate !== null) {
           $('#inputIsExpirationDate').iCheck('uncheck');
         }
       }
@@ -342,22 +319,18 @@ class OptionBannerForm extends Component {
       }
     }
     const isActivationDate = document.getElementById('inputIsActivationDate').checked;
-    let activationDate = '';
+    let activationDate = null;
     if (isActivationDate === false) {
       activationDate = new Date(moment(new Date(document.getElementById('inputBannerActivationDate').value)).format('YYYY-MM-DD 00:00:00'));
     } else if (isActivationDate === true) {
-      if (this.props.banner.isActivationDate === true) {
-        activationDate = this.props.banner.activationDate;
-      } else {
-        activationDate = new Date();
-      }
+      activationDate = new Date(moment().format('YYYY-MM-DD 00:00:00'));
     }
     const isExpirationDate = document.getElementById('inputIsExpirationDate').checked;
-    let expirationDate = new Date();
+    let expirationDate = null;
     if (isExpirationDate === false) {
       expirationDate = new Date(moment(new Date(document.getElementById('inputBannerExpirationDate').value)).format('YYYY-MM-DD 23:59:59'));
     } else if (isExpirationDate === true) {
-      expirationDate = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 23:59:59'));
+      expirationDate = null;
     }
     const banner = { id: this.props.bannerId };
     banner.isCountView = isCountView;
@@ -371,9 +344,7 @@ class OptionBannerForm extends Component {
     banner.isClicksBooked = isClicksBooked;
     banner.impressionsBooked = impressionsBooked;
     banner.clicksBooked = clicksBooked;
-    banner.isActivationDate = isActivationDate;
     banner.activationDate = activationDate;
-    banner.isExpirationDate = isExpirationDate;
     banner.expirationDate = expirationDate;
     banner.status = this.props.banner.status;
     banner.adsServerId = this.props.banner.adsServerId;
@@ -381,12 +352,10 @@ class OptionBannerForm extends Component {
     banner.weight = this.props.banner.weight;
     banner.bannerTypeId = this.props.banner.bannerType.id;
     banner.bannerHtmlTypeId = this.props.banner.bannerHtmlTypeId;
-    if (moment(new Date(activationDate)).format('x') < moment(new Date(expirationDate)).format('x')) {
-      this.props.updateBanner(banner).then(() => {
-        this.props.getBanner(this.props.bannerId);
-      });
-      this.addLinkClickAndImpression();
-    }
+    this.props.updateBanner(banner).then(() => {
+      this.props.getBanner(this.props.bannerId);
+    });
+    this.addLinkClickAndImpression();
   }
 
   addLinkClickAndImpression() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -629,7 +598,7 @@ class OptionBannerForm extends Component {
                 </div>
                 <div className="col-sm-9 checkbox">Active Immediately</div>
               </div>
-              { this.state.showActivationDate === true ? (
+              { this.state.isActivationDate === false ? (
                 <div className="form-group has-feedback">
                   <label
                     htmlFor="inputBannerActivationDate"
@@ -637,7 +606,8 @@ class OptionBannerForm extends Component {
                   >
                       &nbsp;
                   </label>
-                  <div className=" col-sm-8 date">
+                  <div className="col-sm-2">Set specific date</div>
+                  <div className=" col-sm-6 date">
                     <span className="fa fa-calendar form-control-feedback" />
                     {/* /DatePicker */}
                     <DatePicker
@@ -666,7 +636,7 @@ class OptionBannerForm extends Component {
                 </div>
                 <div className="col-sm-9 checkbox">Dont Expire</div>
               </div>
-              {this.state.showExpirationDate === true ? (
+              {this.state.isExpirationDate === false ? (
                 <div className="form-group has-feedback">
                   <label
                     htmlFor="inputBannerExpirationDate"
@@ -674,7 +644,8 @@ class OptionBannerForm extends Component {
                   >
                       &nbsp;
                   </label>
-                  <div className=" col-sm-8 date">
+                  <div className="col-sm-2">Set specific date</div>
+                  <div className=" col-sm-6 date">
                     <span className="fa fa-calendar form-control-feedback" />
                     {/* /DatePicker */}
                     <DatePicker

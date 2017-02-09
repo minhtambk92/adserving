@@ -64,8 +64,6 @@ export function getPlacement(id) {
             isRelative
             isImpressionsBooked
             isClicksBooked
-            isActivationDate
-            isExpirationDate
             adStore
             impressionsBooked
             clicksBooked
@@ -249,8 +247,6 @@ export function updatePlacement({
             isRelative
             isImpressionsBooked
             isClicksBooked
-            isActivationDate
-            isExpirationDate
             adStore
             impressionsBooked
             clicksBooked
