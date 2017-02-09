@@ -65,7 +65,6 @@ class EditBannerHtmlTypeForm extends Component {
       });
     }
     this.props.statusUpdateBannerHtmlType(false);
-    // this.props.setPageZoneActiveTab('bannerHtmlTypeZone');
   }
 
   removeEditForm() {

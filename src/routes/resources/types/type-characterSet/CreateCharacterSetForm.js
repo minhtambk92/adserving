@@ -31,7 +31,6 @@ class CreateCharacterSetForm extends Component {
       });
     }
     this.props.statusCreateCharacterSet(false);
-    // this.props.setPageZoneActiveTab('TypeBannerHtmlZone');
   }
 
   removeCreateForm() {

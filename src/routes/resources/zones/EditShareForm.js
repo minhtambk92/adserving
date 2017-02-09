@@ -1,7 +1,6 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
-import _ from 'lodash';
 import { InputTags } from '../../../components/UI';
 import Link from '../../../components/Link';
 
@@ -43,9 +42,6 @@ class EditShareForm extends Component {
   }
 
   save() {
-    const arr = this.props.list;
-    _.sumBy(arr, (o) => o.weight); // ➜ 20
-    const sumWeight = _.sumBy(arr, 'weight');// ➜ 20
     const id = $('.list-zone-share-edit').attr('id');
     const name = this.inputEditShareName.value;
     const css = this.inputEditShareCSS.value;
@@ -59,8 +55,8 @@ class EditShareForm extends Component {
     const description = this.inputEditShareDescription.value;
 
     /* eslint-disable radix */
-    const newWeight = sumWeight + parseInt(weight);
-    if (newWeight <= 100) {
+    const h = 100 - parseInt(this.props.childZone.weight);
+    if ((parseInt(h) + parseInt(weight)) <= 100) {
       this.props.updateShare({
         id,
         name,

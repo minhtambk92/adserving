@@ -48,7 +48,6 @@ class CreateAdsServerForm extends Component {
       });
     }
     this.props.statusCreateAdsServer(false);
-    // this.props.setPageZoneActiveTab('TypeBannerHtmlZone');
   }
 
   removeCreateForm() {

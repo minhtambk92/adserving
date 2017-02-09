@@ -40,10 +40,6 @@ class ListBannerOfPlacement extends Component {
     const isFixIE = data.isFixIE;
     const isDefault = data.isDefault;
     const isRelative = data.isRelative;
-    const isImpressionsBooked = data.isImpressionsBooked;
-    const isClicksBooked = data.isClicksBooked;
-    const isActivationDate = data.isActivationDate;
-    const isExpirationDate = data.isExpirationDate;
     const adStore = data.adStore;
     const impressionsBooked = data.impressionsBooked;
     const clicksBooked = data.clicksBooked;
@@ -71,10 +67,6 @@ class ListBannerOfPlacement extends Component {
         isFixIE,
         isDefault,
         isRelative,
-        isImpressionsBooked,
-        isClicksBooked,
-        isActivationDate,
-        isExpirationDate,
         adStore,
         impressionsBooked,
         clicksBooked,

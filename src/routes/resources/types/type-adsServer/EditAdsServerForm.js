@@ -61,7 +61,6 @@ class EditAdsServerForm extends Component {
       });
     }
     this.props.statusUpdateAdsServer(false);
-    // this.props.setPageZoneActiveTab('AdsServerZone');
   }
 
   removeEditForm() {

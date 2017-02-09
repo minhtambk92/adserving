@@ -52,7 +52,6 @@ class CreateBannerTypeForm extends Component {
       });
     }
     this.props.statusCreateBannerType(false);
-    // this.props.setPageZoneActiveTab('TypeBannerHtmlZone');
   }
 
   removeCreateForm() {

@@ -33,7 +33,6 @@ class CreateZoneSizeTypeForm extends Component {
       });
     }
     this.props.statusCreateZoneSizeType(false);
-    // this.props.setPageZoneActiveTab('TypeBannerHtmlZone');
   }
 
   removeCreateForm() {
