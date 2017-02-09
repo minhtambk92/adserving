@@ -36,7 +36,7 @@ class PlacementList extends Component {
     const description = data.description;
     const campaignId = data.campaignId;
     const status = data.status;
-    if (name && startTime && endTime && height && width && weight && description) {
+    if (name) {
       this.props.createPlacement({
         name,
         width,

@@ -50,8 +50,6 @@ class BannerList extends Component {
     const isFixIE = data.isFixIE;
     const isDefault = data.isDefault;
     const isRelative = data.isRelative;
-    const isImpressionsBooked = data.isImpressionsBooked;
-    const isClicksBooked = data.isClicksBooked;
     const adStore = data.adStore;
     const impressionsBooked = data.impressionsBooked;
     const clicksBooked = data.clicksBooked;
@@ -78,8 +76,6 @@ class BannerList extends Component {
         isFixIE,
         isDefault,
         isRelative,
-        isImpressionsBooked,
-        isClicksBooked,
         adStore,
         impressionsBooked,
         clicksBooked,

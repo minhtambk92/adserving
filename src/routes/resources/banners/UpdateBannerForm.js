@@ -166,8 +166,6 @@ class UpdateBannerForm extends Component {
     banner.isFixIE = this.props.banner.isFixIE;
     banner.isDefault = this.props.banner.isDefault;
     banner.isRelative = this.props.banner.isRelative;
-    banner.isImpressionsBooked = this.props.banner.isImpressionsBooked;
-    banner.isClicksBooked = this.props.banner.isClicksBooked;
     this.props.updateBanner(banner).then(() => {
       this.props.getBanner(this.props.bannerId);
     });

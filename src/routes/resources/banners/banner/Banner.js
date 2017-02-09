@@ -249,8 +249,8 @@ class Banner extends Component {
                         <div className="box">
                           <div className="box-header with-border">
                             <h3 className="box-title">
-                              List Placement Of {this.props.banners.editing ?
-                              this.props.banners.editing.name : '...'}
+                              {this.props.banners.editing ?
+                              this.props.banners.editing.name : '...'} Belong To Placements
                             </h3>
                           </div>
                           {/* /.box-header */}

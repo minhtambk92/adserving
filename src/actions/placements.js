@@ -62,8 +62,6 @@ export function getPlacement(id) {
             isFixIE
             isDefault 
             isRelative
-            isImpressionsBooked
-            isClicksBooked
             adStore
             impressionsBooked
             clicksBooked
@@ -245,8 +243,6 @@ export function updatePlacement({
             isFixIE
             isDefault 
             isRelative
-            isImpressionsBooked
-            isClicksBooked
             adStore
             impressionsBooked
             clicksBooked
