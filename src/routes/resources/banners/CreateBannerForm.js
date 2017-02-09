@@ -133,13 +133,11 @@ class CreateBannerForm extends Component {
     const isRelative = false;
     const isImpressionsBooked = true;
     const isClicksBooked = true;
-    const isActivationDate = true;
-    const isExpirationDate = true;
     const adStore = '';
     const impressionsBooked = -1;
     const clicksBooked = -1;
-    const activationDate = new Date();
-    const expirationDate = new Date(moment(new Date('12-12-2117')).format('YYYY-MM-DD 23:59:59'));
+    const activationDate = new Date(moment().format('YYYY-MM-DD 00:00:00'));
+    const expirationDate = null;
     if (name && keyword && width && description && bannerTypeId && channelId) {
       this.props.createBanner({
         name,
@@ -163,8 +161,6 @@ class CreateBannerForm extends Component {
         isRelative,
         isImpressionsBooked,
         isClicksBooked,
-        isActivationDate,
-        isExpirationDate,
         adStore,
         impressionsBooked,
         clicksBooked,

@@ -58,8 +58,6 @@ export function getBanner(id) {
           isRelative
           isImpressionsBooked
           isClicksBooked
-          isActivationDate
-          isExpirationDate
           adStore
           impressionsBooked
           clicksBooked
@@ -139,8 +137,6 @@ export function getBanners(args = {
           isRelative
           isImpressionsBooked
           isClicksBooked
-          isActivationDate
-          isExpirationDate
           adStore
           impressionsBooked
           clicksBooked
@@ -214,8 +210,6 @@ export function createBanner({
   isRelative,
   isImpressionsBooked,
   isClicksBooked,
-  isActivationDate,
-  isExpirationDate,
   adStore,
   impressionsBooked,
   clicksBooked,
@@ -249,8 +243,6 @@ export function createBanner({
           isRelative
           isImpressionsBooked
           isClicksBooked
-          isActivationDate
-          isExpirationDate
           adStore
           impressionsBooked
           clicksBooked
@@ -285,8 +277,6 @@ export function createBanner({
         isRelative,
         isImpressionsBooked,
         isClicksBooked,
-        isActivationDate,
-        isExpirationDate,
         adStore,
         impressionsBooked,
         clicksBooked,
@@ -328,8 +318,6 @@ export function updateBanner({
   isRelative,
   isImpressionsBooked,
   isClicksBooked,
-  isActivationDate,
-  isExpirationDate,
   adStore,
   impressionsBooked,
   clicksBooked,
@@ -364,8 +352,6 @@ export function updateBanner({
           isRelative
           isImpressionsBooked
           isClicksBooked
-          isActivationDate
-          isExpirationDate
           adStore
           impressionsBooked
           clicksBooked
@@ -415,8 +401,6 @@ export function updateBanner({
         isRelative,
         isImpressionsBooked,
         isClicksBooked,
-        isActivationDate,
-        isExpirationDate,
         adStore,
         impressionsBooked,
         clicksBooked,
@@ -463,8 +447,6 @@ export function deleteBanner(id) {
           isRelative
           isImpressionsBooked
           isClicksBooked
-          isActivationDate
-          isExpirationDate
           adStore
           impressionsBooked
           clicksBooked

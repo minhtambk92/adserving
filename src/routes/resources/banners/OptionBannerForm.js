@@ -560,7 +560,7 @@ class OptionBannerForm extends Component {
                     />
                   </div>
                 </div>
-              ) : ('') }
+                ) : ('') }
               {/* /Click Booked */}
               <div className="form-group">
                 <label
@@ -593,7 +593,7 @@ class OptionBannerForm extends Component {
                     />
                   </div>
                 </div>
-              ) : ('')}
+                ) : ('')}
             </form>
           </div>
         </div>
@@ -635,7 +635,7 @@ class OptionBannerForm extends Component {
                     htmlFor="inputBannerActivationDate"
                     className="col-sm-2 control-label"
                   >
-                    &nbsp;
+                      &nbsp;
                   </label>
                   <div className=" col-sm-8 date">
                     <span className="fa fa-calendar form-control-feedback" />
@@ -672,7 +672,7 @@ class OptionBannerForm extends Component {
                     htmlFor="inputBannerExpirationDate"
                     className="col-sm-2 control-label"
                   >
-                    &nbsp;
+                      &nbsp;
                   </label>
                   <div className=" col-sm-8 date">
                     <span className="fa fa-calendar form-control-feedback" />
@@ -688,7 +688,7 @@ class OptionBannerForm extends Component {
                     />
                   </div>
                 </div>
-              ) : ('')}
+                ) : ('')}
 
               <div className="col-sm-12" id="link-click-impression">
                 {this.props.banner && this.props.banner.tracks &&
@@ -715,7 +715,8 @@ class OptionBannerForm extends Component {
                   type="button"
                   id="addNewLink"
                   className="btn btn-primary"
-                >Add Tracking URL</button>
+                >Add Tracking URL
+                </button>
               </div>
             </form>
           </div>
