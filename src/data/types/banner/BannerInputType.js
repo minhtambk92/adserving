@@ -24,8 +24,6 @@ const BannerInputType = new InputObjectType({
     isFixIE: { type: new NonNull(BooleanType) },
     isDefault: { type: new NonNull(BooleanType) },
     isRelative: { type: new NonNull(BooleanType) },
-    isImpressionsBooked: { type: new NonNull(BooleanType) },
-    isClicksBooked: { type: new NonNull(BooleanType) },
     placements: { type: new List(StringType) },
   }),
 });

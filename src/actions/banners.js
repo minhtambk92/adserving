@@ -56,8 +56,6 @@ export function getBanner(id) {
           isFixIE
           isDefault 
           isRelative
-          isImpressionsBooked
-          isClicksBooked
           adStore
           impressionsBooked
           clicksBooked
@@ -135,8 +133,6 @@ export function getBanners(args = {
           isFixIE
           isDefault 
           isRelative
-          isImpressionsBooked
-          isClicksBooked
           adStore
           impressionsBooked
           clicksBooked
@@ -208,8 +204,6 @@ export function createBanner({
   isFixIE,
   isDefault,
   isRelative,
-  isImpressionsBooked,
-  isClicksBooked,
   adStore,
   impressionsBooked,
   clicksBooked,
@@ -241,8 +235,6 @@ export function createBanner({
           isFixIE
           isDefault 
           isRelative
-          isImpressionsBooked
-          isClicksBooked
           adStore
           impressionsBooked
           clicksBooked
@@ -275,8 +267,6 @@ export function createBanner({
         isFixIE,
         isDefault,
         isRelative,
-        isImpressionsBooked,
-        isClicksBooked,
         adStore,
         impressionsBooked,
         clicksBooked,
@@ -316,8 +306,6 @@ export function updateBanner({
   isFixIE,
   isDefault,
   isRelative,
-  isImpressionsBooked,
-  isClicksBooked,
   adStore,
   impressionsBooked,
   clicksBooked,
@@ -350,8 +338,6 @@ export function updateBanner({
           isFixIE
           isDefault 
           isRelative
-          isImpressionsBooked
-          isClicksBooked
           adStore
           impressionsBooked
           clicksBooked
@@ -399,8 +385,6 @@ export function updateBanner({
         isFixIE,
         isDefault,
         isRelative,
-        isImpressionsBooked,
-        isClicksBooked,
         adStore,
         impressionsBooked,
         clicksBooked,
@@ -445,8 +429,6 @@ export function deleteBanner(id) {
           isFixIE
           isDefault 
           isRelative
-          isImpressionsBooked
-          isClicksBooked
           adStore
           impressionsBooked
           clicksBooked

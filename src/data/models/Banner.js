@@ -93,19 +93,9 @@ const Banner = Model.define('Banner', {
     type: DataType.STRING,
     defaultValue: '',
   },
-  isImpressionsBooked: {
-    type: DataType.BOOLEAN,
-    defaultValue: true,
-    allowNull: false,
-  },
   impressionsBooked: {
     type: DataType.INTEGER,
     defaultValue: -1,
-  },
-  isClicksBooked: {
-    type: DataType.BOOLEAN,
-    defaultValue: true,
-    allowNull: false,
   },
   clicksBooked: {
     type: DataType.INTEGER,

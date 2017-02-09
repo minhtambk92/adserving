@@ -131,8 +131,6 @@ class CreateBannerForm extends Component {
     const isFixIE = false;
     const isDefault = false;
     const isRelative = false;
-    const isImpressionsBooked = true;
-    const isClicksBooked = true;
     const adStore = '';
     const impressionsBooked = -1;
     const clicksBooked = -1;
@@ -159,8 +157,6 @@ class CreateBannerForm extends Component {
         isFixIE,
         isDefault,
         isRelative,
-        isImpressionsBooked,
-        isClicksBooked,
         adStore,
         impressionsBooked,
         clicksBooked,
