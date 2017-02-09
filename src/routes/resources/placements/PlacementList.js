@@ -86,7 +86,7 @@ class PlacementList extends Component {
       render: data => (data ? moment(new Date(data)).format('L') : ''),
     }, {
       data: 'endTime',
-      render: data => (data ? moment(new Date(data)).format('L') : ''),
+      render: data => (data ? moment(new Date(data)).format('L') : 'Dont expire'),
     }, {
       data: null,
       orderable: false,

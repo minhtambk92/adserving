@@ -1,6 +1,9 @@
+
+/* global $ */
+
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import { DatePicker } from '../../../components/UI';
+import { DatePicker, ICheck } from '../../../components/UI';
 import Link from '../../../components/Link';
 
 class UpdatePlacementForm extends Component {
@@ -13,6 +16,41 @@ class UpdatePlacementForm extends Component {
     getPlacement: PropTypes.func,
     campaigns: PropTypes.array,
   };
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      isStartNow: false,
+      isNotExpiration: false,
+      isClickStartNow: false,
+      isClickNotExpiration: false,
+    };
+  }
+
+  componentDidMount() {
+    const self = this;
+
+    $('#inputIsPlacementStartNow').on('ifClicked', () => {
+      const isStartNow = document.getElementById('inputIsPlacementStartNow').checked;
+      self.setState({ isClickStartNow: true });
+      if (isStartNow === true) {
+        self.setState({ isStartNow: false });
+      } else if (isStartNow === false) {
+        self.setState({ isStartNow: true });
+      }
+    });
+
+    $('#inputIsPlacementNotExpiration').on('ifClicked', () => {
+      const isEndNow = document.getElementById('inputIsPlacementNotExpiration').checked;
+      self.setState({ isClickNotExpiration: true });
+      if (isEndNow === true) {
+        self.setState({ isNotExpiration: false });
+      } else if (isEndNow === false) {
+        self.setState({ isNotExpiration: true });
+      }
+    });
+  }
 
   componentWillReceiveProps(nextProps) {
     const {
@@ -28,8 +66,22 @@ class UpdatePlacementForm extends Component {
     } = nextProps.placement && (nextProps.placement || {});
 
     this.inputPlacementName.value = name;
-    document.getElementById('inputPlacementStartTime').value = moment(new Date(startTime)).format('L');
-    document.getElementById('inputPlacementEndTime').value = moment(new Date(endTime)).format('L');
+
+    this.setState({ isStartNow: false });
+    if (this.inputIsPlacementStartTime) {
+      document.getElementById('inputPlacementStartTime').value = moment(new Date(startTime)).format('L');
+    }
+
+    if (endTime === null) {
+      this.setState({ isNotExpiration: true });
+    } else if (endTime !== null) {
+      this.setState({ isNotExpiration: false });
+      if (this.inputIsPlacementEndTime !== null) {
+        document.getElementById('inputPlacementEndTime').value = moment(new Date(endTime)).format('L');
+      }
+    }
+
+
     if (width) {
       this.inputPlacementWidth.value = width;
     }
@@ -44,12 +96,44 @@ class UpdatePlacementForm extends Component {
     this.inputPlacementStatus.value = status;
   }
 
+  componentDidUpdate() {
+    /* eslint-disable no-undef */
+    if (this.state.isClickStartNow === true && this.state.isStartNow === true) {
+      $('#inputIsPlacementStartNow').iCheck('check');
+    } else {
+      $('#inputIsPlacementStartNow').iCheck('uncheck');
+    }
+
+    if (this.props.placement) {
+      if (this.state.isNotExpiration === true) {
+        $('#inputIsPlacementNotExpiration').iCheck('check');
+      } else if (this.state.isNotExpiration === false) {
+        if (this.props.placement.endTime === null && this.state.isClickNotExpiration === false) {
+          $('#inputIsPlacementNotExpiration').iCheck('check');
+        } else if (this.props.placement.endTime !== null) {
+          $('#inputIsPlacementNotExpiration').iCheck('uncheck');
+        }
+      }
+    }
+  }
+
   updatePlacement() {
     const name = this.inputPlacementName.value;
     const width = this.inputPlacementWidth.value;
     const height = this.inputPlacementHeight.value;
-    const startTime = document.getElementById('inputPlacementStartTime').value;
-    const endTime = document.getElementById('inputPlacementEndTime').value;
+    let startTime = null;
+    if (this.state.isStartNow === false) {
+      startTime = new Date(moment(new Date(document.getElementById('inputPlacementStartTime').value)).format('YYYY-MM-DD 00:00:00'));
+    } else if (this.state.isStartNow === true) {
+      startTime = new Date(moment().format('YYYY-MM-DD 00:00:00'));
+    }
+
+    let endTime = null;
+    if (this.state.isNotExpiration === true) {
+      endTime = null;
+    } else if (this.state.isNotExpiration === false) {
+      endTime = new Date(moment(new Date(document.getElementById('inputPlacementEndTime').value)).format('YYYY-MM-DD 23:59:59'));
+    }
     const weight = this.inputPlacementWeight.value;
     const description = this.inputPlacementDescription.value;
     const campaignId = this.inputCampaign.value;
@@ -61,14 +145,8 @@ class UpdatePlacementForm extends Component {
     placement.width = width;
     placement.height = height;
     placement.status = status;
-
-    if (startTime && startTime !== this.props.placement.startTime) {
-      placement.startTime = startTime;
-    }
-
-    if (endTime && endTime !== this.props.placement.endTime) {
-      placement.endTime = endTime;
-    }
+    placement.startTime = startTime;
+    placement.endTime = endTime;
 
     if (description && description !== this.props.placement.description) {
       placement.description = description;
@@ -78,14 +156,9 @@ class UpdatePlacementForm extends Component {
       placement.campaignId = campaignId;
     }
 
-    if (moment(new Date(startTime)).format('x') < moment(new Date(endTime)).format('x')) {
-      this.props.updatePlacement(placement).then(() => {
-        this.props.getPlacement(this.props.placementId);
-      });
-    } else {
-      document.getElementById('inputPlacementEndTime').value = null;
-      document.getElementById('inputPlacementEndTime').focus();
-    }
+    this.props.updatePlacement(placement).then(() => {
+      this.props.getPlacement(this.props.placementId);
+    });
   }
 
   deletePlacement() {
@@ -131,41 +204,90 @@ class UpdatePlacementForm extends Component {
           </div>
         </div>
 
-        <div className="form-group has-feedback">
+        {/* /Start Time */}
+        <div className="form-group">
           <label
-            htmlFor="inputPlacementStartTime" className="col-sm-2 control-label"
-          >
-            Start Time:
-          </label>
-          <div className=" col-sm-10 date">
-            <span className="fa fa-calendar form-control-feedback" />
-            {/* /DatePicker */}
-            <DatePicker
-              id="inputPlacementStartTime"
-              type="text"
-              className="form-control pull-right"
-              name="start"
+            htmlFor="inputIsPlacementStartNow"
+            className="col-sm-3 control-label"
+          >Start Time</label>
+          <div className="col-sm-1 checkbox">
+            <ICheck
+              type="checkbox" id="inputIsPlacementStartNow" className="form-control"
+              ref={c => {
+                this.inputIsPlacementStartNow = c;
+              }}
             />
           </div>
+          <div className="col-sm-8 checkbox">
+            Start Immediately
+          </div>
         </div>
+        {this.state.isStartNow === false ? (
+          <div className="form-group has-feedback">
+            <label
+              htmlFor="inputPlacementStartTime" className="col-sm-3 control-label"
+            >
+                &nbsp;
+            </label>
+            <div className="col-sm-2">Set specific date</div>
+            <div className=" col-sm-7 date">
+              <span className="fa fa-calendar form-control-feedback" />
+              {/* /DatePicker */}
+              <DatePicker
+                id="inputPlacementStartTime"
+                type="text"
+                className="form-control pull-right"
+                name="start"
+                ref={c => {
+                  this.inputIsPlacementStartTime = c;
+                }}
+              />
+            </div>
+          </div>
+          ) : ('')}
 
-        <div className="form-group has-feedback">
+        {/* /End Time */}
+        <div className="form-group">
           <label
-            htmlFor="inputPlacementEndTime" className="col-sm-2 control-label"
-          >
-            End Time:
-          </label>
-          <div className=" col-sm-10 date">
-            <span className="fa fa-calendar form-control-feedback" />
-            {/* /DatePicker */}
-            <DatePicker
-              id="inputPlacementEndTime"
-              type="text"
-              className="form-control pull-right"
-              name="end"
+            htmlFor="inputIsPlacementNotExpiration"
+            className="col-sm-3 control-label"
+          >End Time</label>
+          <div className="col-sm-1 checkbox">
+            <ICheck
+              type="checkbox" id="inputIsPlacementNotExpiration" className="form-control"
+              ref={c => {
+                this.inputIsPlacementNotExpiration = c;
+              }}
             />
           </div>
+          <div className="col-sm-8 checkbox">
+            Dont expire
+          </div>
         </div>
+        {this.state.isNotExpiration === false ? (
+          <div className="form-group has-feedback">
+            <label
+              htmlFor="inputPlacementEndTime"
+              className="col-sm-3 control-label"
+            >
+                &nbsp;
+            </label>
+            <div className="col-sm-2">Set specific date</div>
+            <div className=" col-sm-7 date">
+              <span className="fa fa-calendar form-control-feedback" />
+              {/* /DatePicker */}
+              <DatePicker
+                id="inputPlacementEndTime"
+                type="text"
+                className="form-control pull-right"
+                name="end"
+                ref={c => {
+                  this.inputIsPlacementEndTime = c;
+                }}
+              />
+            </div>
+          </div>
+          ) : ('')}
 
         <div className="form-group">
           <label htmlFor="inputPlacementWidth" className="col-sm-2 control-label">

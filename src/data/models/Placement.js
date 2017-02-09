@@ -50,7 +50,7 @@ const Placement = Model.define('Placement', {
   },
   endTime: {
     type: DataType.DATE,
-    defaultValue: DataType.NOW,
+    defaultValue: null,
   },
   status: {
     type: DataType.STRING,

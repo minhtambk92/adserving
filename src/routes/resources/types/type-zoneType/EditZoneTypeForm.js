@@ -75,7 +75,6 @@ class EditZoneTypeForm extends Component {
       this.props.getZoneTypes();
     });
     this.props.statusUpdateZoneType(false);
-    // this.props.setPageZoneActiveTab('ZoneTypeZone');
   }
 
   removeEditForm() {

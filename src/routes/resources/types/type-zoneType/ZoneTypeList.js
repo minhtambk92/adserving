@@ -140,7 +140,7 @@ class ZoneTypeList extends Component {
                         <ICheck type="checkbox" className="inputChooseZoneType" />
                       </th>
                       <th>Name</th>
-                      <th>Weight</th>
+                      <th>IsSize</th>
                       <th>Status</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
@@ -152,7 +152,7 @@ class ZoneTypeList extends Component {
                         <ICheck type="checkbox" className="inputChooseZoneType" />
                       </th>
                       <th>Name</th>
-                      <th>Weight</th>
+                      <th>isSize</th>
                       <th>Status</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
