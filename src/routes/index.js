@@ -27,6 +27,7 @@ export default {
     require('./admin').default,
     require('./settings').default,
     require('./resources').default,
+    require('./profile').default,
 
     // Wildcard routes, e.g. { path: '*', ... } (must go last)
     require('./notFound').default,

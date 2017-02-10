@@ -44,6 +44,10 @@ export function getUser(id) {
           status
           profile {
             displayName
+            picture
+            gender
+            location
+            website
           }
           roles {
             id

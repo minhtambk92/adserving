@@ -29,7 +29,7 @@ yarn test
 
 - test filenames MUST end with `test.js` or `yarn test` will not be able to detect them
 - test filenames SHOULD be named after the related component (e.g. create `Login.test.js` for
-`Login.js` component)
+`Profile.js` component)
 
 ### Basic example
 
