@@ -11,7 +11,7 @@ import React, { Component, PropTypes } from 'react';
 // import { defineMessages, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { logUserOut } from '../../actions/users';
+import { logUserOut, getUser } from '../../actions/users';
 import { redirect } from '../../actions/route';
 import s from './Navigation.css';
 import Link from '../Link';
@@ -50,21 +50,18 @@ class Navigation extends Component {
     user: PropTypes.object,
     logUserOut: PropTypes.func,
     redirect: PropTypes.func,
+    getUser: PropTypes.func,
+    users: PropTypes.object,
   };
+
+  componentWillMount() {
+    this.props.getUser(this.props.user.id);
+  }
+
 
   async logUserOut() {
     await this.props.logUserOut();
     this.props.redirect('/login');
-  }
-
-  renderUserPicture() {
-    const { user } = this.props;
-
-    if (user && user.profile && user.profile.picture) {
-      return user.profile.picture;
-    }
-
-    return '/default_avatar.png';
   }
 
   render() {
@@ -92,18 +89,26 @@ class Navigation extends Component {
               <li className="dropdown user user-menu">
                 <Link to="#" className="dropdown-toggle" data-toggle="dropdown">
                   <img
-                    src={this.renderUserPicture()}
+                    src={(this.props.users && this.props.users.editing &&
+                    this.props.users.editing.profile && this.props.users.editing.profile.picture ?
+                    this.props.users.editing.profile.picture : '/default_avatar.png')}
                     className="user-image" alt="User"
                   />
                   <span
                     className="hidden-xs"
-                  >{(user && user.profile) ? user.profile.displayName : ''}</span>
+                  >{this.props.users && this.props.users.editing &&
+                  this.props.users.editing.profile &&
+                  this.props.users.editing.profile.displayName ?
+                    this.props.users.editing.profile.displayName : ''}</span>
                 </Link>
                 <ul className="dropdown-menu">
                   {/* User image */}
                   <li className="user-header">
                     <img
-                      src={this.renderUserPicture()}
+                      src={(this.props.users && this.props.users.editing &&
+                      this.props.users.editing.profile &&
+                      this.props.users.editing.profile.picture ?
+                        this.props.users.editing.profile.picture : '/default_avatar.png')}
                       className="img-circle"
                       alt="User"
                     />
@@ -152,11 +157,13 @@ class Navigation extends Component {
 
 const mapState = (state) => ({
   user: state.user,
+  users: state.users,
 });
 
 const mapDispatch = {
   logUserOut,
   redirect,
+  getUser,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Navigation));

@@ -23,14 +23,9 @@ passport.use(new LocalStrategy({
     return done(null, false);
   }
 
-  const profile = await user.getProfile();
-
   return done(null, {
     id: user.id,
     email: user.email,
-    profile: {
-      displayName: profile.displayName,
-    },
   });
 }));
 

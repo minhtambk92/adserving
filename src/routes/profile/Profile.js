@@ -64,6 +64,7 @@ class Profile extends Component {
                   <SettingProfile
                     user={this.props.users && this.props.users.editing}
                     updateProfile={this.props.updateProfile}
+                    logUserIn={this.props.logUserIn}
                     getUser={this.props.getUser}
                     id={this.props.user && this.props.user.id}
                     setStatusUpdateProfileUser={this.props.setStatusUpdateProfileUser}

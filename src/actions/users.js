@@ -218,7 +218,7 @@ export function updateUser({ id, email, profile, roles, password, emailConfirmed
   };
 }
 
-export function updateProfile({ id, emailConfirmed, profile }) {
+export function updateProfile({ id, profile }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($user: UserInputType!) {
@@ -242,7 +242,6 @@ export function updateProfile({ id, emailConfirmed, profile }) {
     const { data } = await graphqlRequest(mutation, {
       user: {
         id,
-        emailConfirmed,
         profile,
       },
     });

@@ -11,6 +11,7 @@ class SettingProfile extends Component {
     id: PropTypes.string,
     getUser: PropTypes.func,
     page: PropTypes.object,
+    logUserIn: PropTypes.func,
     setStatusUpdateProfileUser: PropTypes.func,
   };
 
@@ -48,6 +49,9 @@ class SettingProfile extends Component {
 
     const user = { id: this.props.id };
     user.profile = {};
+    user.email = this.props.user.email;
+    user.emailConfirmed = this.props.user.emailConfirmed;
+    user.password = this.props.user.password;
 
     user.profile.displayName = displayName;
 
