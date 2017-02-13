@@ -1,7 +1,6 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
-import DropzoneComponent from 'react-dropzone-component/lib/react-dropzone';
 import Link from '../../components/Link';
 
 class SettingProfile extends Component {
@@ -11,25 +10,34 @@ class SettingProfile extends Component {
     updateProfile: PropTypes.func,
     id: PropTypes.string,
     getUser: PropTypes.func,
+    page: PropTypes.object,
+    setStatusUpdateProfileUser: PropTypes.func,
   };
 
   constructor(props, context) {
     super(props, context);
     this.state = {
-      imageUrl: '',
+      statusUpdateSettingProfile: false,
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.user) {
-      if (nextProps.user.profile) {
-        const picture = nextProps.user.profile.picture;
-        this.setState({ imageUrl: picture });
-        this.inputProfileName.value = nextProps.user.profile.displayName;
-        this.inputProfileGender.value = nextProps.user.profile.gender;
-        this.inputProfileLocation.value = nextProps.user.profile.location;
+    if (nextProps.page && nextProps.page.statusUpdateSettingProfile) {
+      if (nextProps.user) {
+        if (nextProps.user.profile) {
+          const status = nextProps.page.statusUpdateSettingProfile;
+          this.setState({ statusUpdateSettingProfile: status });
+          if (this.state.statusUpdateSettingProfile === true) {
+            if (this.inputProfileGender !== undefined &&
+              this.inputProfileName !== undefined && this.inputProfileGender !== undefined) {
+              this.inputProfileName.value = nextProps.user.profile.displayName;
+              this.inputProfileGender.value = nextProps.user.profile.gender;
+              this.inputProfileLocation.value = nextProps.user.profile.location;
+              this.inputProfileEmail.value = nextProps.user.email;
+            }
+          }
+        }
       }
-      this.inputProfileEmail.value = nextProps.user.email;
     }
   }
 
@@ -37,17 +45,11 @@ class SettingProfile extends Component {
     const displayName = this.inputProfileName.value;
     const gender = this.inputProfileGender.value;
     const location = this.inputProfileLocation.value;
-    const picture = this.state.imageUrl;
 
     const user = { id: this.props.id };
-    user.emailConfirmed = false;
     user.profile = {};
 
     user.profile.displayName = displayName;
-
-    if (picture && picture !== this.props.user.profile.picture) {
-      user.profile.picture = picture;
-    }
 
     if (location && location !== this.props.user.profile.location) {
       user.profile.location = location;
@@ -58,100 +60,23 @@ class SettingProfile extends Component {
     }
 
     this.props.updateProfile(user).then(() => {
-      this.props.getUser(this.props.id);
+      this.props.getUser(this.props.id).then(() => {
+        this.props.setStatusUpdateProfileUser(false);
+        this.setState({ statusUpdateSettingProfile: false });
+      });
     });
   }
-
-  changeImage() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    $('.dropzone').click();
-  }
-
-  removeAvatar() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const image = '/default_avatar.png';
-    this.setState({ imageUrl: image });
+  cancel() {
+    this.setState({ statusUpdateSettingProfile: false });
   }
 
   render() {
-    const img = this.state.imageUrl;
-    /* eslint-disable */
-    this.djsConfig = {
-      acceptedFiles: 'image/jpeg,image/png,image/gif',
-      addRemoveLinks: true,
-      init: function () {
-        const mockFile = { name: 'avatar', type: 'image/jpeg' };
-        this.options.addedfile.call(this, mockFile);
-        this.options.thumbnail.call(this, mockFile, img);
-        mockFile.previewElement.classList.add('dz-success');
-        mockFile.previewElement.classList.add('dz-complete');
-        mockFile.previewElement.classList.add('dz-processing');
-      },
-    };
-    /* eslint-enable */
-    this.componentConfig = {
-      postUrl: '/upload-banner',
-    };
-    this.callbackFail = 'fail';
-    // Simple callbacks work too, of course
-    this.callback = (e) => {
-      if (e.xhr.response) {
-        const image = e.xhr.response;
-        this.setState({ imageUrl: image });
-      }
-    };
-    this.eventHandlers = {
-      drop: this.callbackFail,
-      success: this.callback,
-    };
     return (
       <div className="row">
-        <form className="form-horizontal">
-          <div className="col-sm-12">
-            <div className="col-sm-4">
-              {/* picture */}
-              <div className="form-group">
-                <div className="col-sm-12">
-                  <div className="row">
-                    <div className="col-sm-12">
-                      <div className="box-tools pull-right">
-                        <button
-                          className="btn btn-box-tool remove-avatar"
-                          onClick={event => this.removeAvatar(event)}
-                        >
-                          <i className="fa fa-times" />
-                        </button>
-                      </div>
-                      <div
-                        id="inputProfilePicture"
-                      >
-                        <img
-                          src={(this.props.user && this.props.user.profile &&
-                          this.props.user.profile.picture &&
-                          this.props.user.profile.picture !== '') ?
-                            this.state.imageUrl : '/default_avatar.png'
-                          }
-                          alt="avatar"
-                        />
-                      </div>
-                      <button
-                        type="button"
-                        className="btn btn-default col-sm-12"
-                        onClick={() => this.changeImage()}
-                      >
-                        Change Avatar
-                      </button>
-                    </div>
-                    <div className="col-sm-12" id="uploadImage">
-                      <DropzoneComponent
-                        config={this.componentConfig}
-                        eventHandlers={this.eventHandlers}
-                        djsConfig={this.djsConfig}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-8">
+        { this.state.statusUpdateSettingProfile &&
+        this.state.statusUpdateSettingProfile === true ? (
+          <form className="form-horizontal">
+            <div className="col-sm-12">
               {/* /.Profile Name */}
               <div className="form-group">
                 <label htmlFor="inputProfileName" className="col-sm-2 control-label">Name</label>
@@ -160,6 +85,8 @@ class SettingProfile extends Component {
                     type="email"
                     className="form-control"
                     id="inputProfileName"
+                    defaultValue={this.props.user && this.props.user.profile &&
+                    this.props.user.profile.displayName ? this.props.user.profile.displayName : ''}
                     ref={c => {
                       this.inputProfileName = c;
                     }}
@@ -177,6 +104,8 @@ class SettingProfile extends Component {
                     readOnly="readOnly"
                     className="form-control"
                     id="inputEmail"
+                    defaultValue={this.props.user && this.props.user.email ?
+                      this.props.user.email : ''}
                     ref={c => {
                       this.inputProfileEmail = c;
                     }}
@@ -194,6 +123,8 @@ class SettingProfile extends Component {
                 <div className="col-sm-10">
                   <select
                     id="inputProfileGender" className="form-control"
+                    defaultValue={this.props.user && this.props.user.profile &&
+                    this.props.user.profile.gender ? this.props.user.profile.gender : ''}
                     ref={c => {
                       this.inputProfileGender = c;
                     }}
@@ -207,13 +138,18 @@ class SettingProfile extends Component {
 
               {/* /.Profile Location */}
               <div className="form-group">
-                <label htmlFor="inputProfileLocation" className="col-sm-2 control-label">Location</label>
+                <label
+                  htmlFor="inputProfileLocation"
+                  className="col-sm-2 control-label"
+                >Location</label>
                 <div className="col-sm-10">
                   <input
                     type="text"
                     className="form-control"
                     id="inputProfileLocation"
                     placeholder="Ha Noi,Viet Nam"
+                    defaultValue={this.props.user && this.props.user.profile &&
+                    this.props.user.profile.location ? this.props.user.profile.location : ''}
                     ref={c => {
                       this.inputProfileLocation = c;
                     }}
@@ -229,11 +165,17 @@ class SettingProfile extends Component {
                     onClick={() => this.saveProfile()}
                     className="btn btn-primary"
                   >Save</Link>
+                  <Link
+                    to="#"
+                    className="btn btn-default"
+                    onClick={event => this.cancel(event)}
+                  >Cancel</Link>
                 </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+
+          ) : ''}
       </div>
     );
   }

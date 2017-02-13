@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { logUserIn, getUser, updateProfile } from '../../actions/users';
 import { navigate } from '../../actions/route';
+import { setStatusUpdateProfileUser } from '../../actions/pages/users';
 import SettingProfile from './SettingProfile';
 import InformationProfile from './InformationProfile';
 import Link from '../../components/Link';
@@ -28,6 +29,8 @@ class Profile extends Component {
     getUser: PropTypes.func,
     users: PropTypes.object,
     updateProfile: PropTypes.func,
+    setStatusUpdateProfileUser: PropTypes.func,
+    page: PropTypes.object,
   };
 
   componentWillMount() {
@@ -40,6 +43,11 @@ class Profile extends Component {
           <div className="col-md-3">
             <InformationProfile
               user={this.props.users && this.props.users.editing}
+              setStatusUpdateProfileUser={this.props.setStatusUpdateProfileUser}
+              page={this.props.page}
+              updateProfile={this.props.updateProfile}
+              getUser={this.props.getUser}
+              id={this.props.user && this.props.user.id}
             />
           </div>
           {/* /.col */}
@@ -58,6 +66,8 @@ class Profile extends Component {
                     updateProfile={this.props.updateProfile}
                     getUser={this.props.getUser}
                     id={this.props.user && this.props.user.id}
+                    setStatusUpdateProfileUser={this.props.setStatusUpdateProfileUser}
+                    page={this.props.page}
                   />
                 </div>
                 {/* /.tab-pane activity */}
@@ -195,6 +205,7 @@ class Profile extends Component {
 const mapState = (state) => ({
   user: state.user,
   users: state.users,
+  page: state.page.users,
 });
 
 const mapDispatch = {
@@ -202,6 +213,7 @@ const mapDispatch = {
   navigate,
   getUser,
   updateProfile,
+  setStatusUpdateProfileUser,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Profile));

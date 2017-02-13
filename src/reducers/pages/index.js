@@ -11,6 +11,7 @@ import banners from './banners';
 import zones from './zones';
 import channels from './channels';
 import sites from './sites';
+import users from './users';
 
 export default combineReducers({
   advertisers,
@@ -21,4 +22,5 @@ export default combineReducers({
   zones,
   sites,
   resources,
+  users,
 });
