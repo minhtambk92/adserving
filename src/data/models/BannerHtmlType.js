@@ -33,6 +33,10 @@ const BannerHtmlType = Model.define('BannerHtmlType', {
     type: DataType.INTEGER,
     defaultValue: 0,
   },
+  userId: {
+    type: DataType.UUID,
+    defaultValue: null,
+  },
   status: {
     type: DataType.STRING,
     allowNull: false,

@@ -1,1 +1,22 @@
-[{"id":"cb90a8e5-259c-4edd-b603-07f28145bc18","email":"admin@admicro.vn","password":"$2a$10$Z6\/F\/tOy0KNsVxAzQotGROCgQsqrWFu6curK1PgjKKCsjhqszsmXG","emailConfirmed":"1","status":"active","createdAt":"2016-12-24 04:58:25","updatedAt":"2016-12-24 04:58:25","deletedAt":null}]
+[
+  {
+    "id": "46fb4d82-7981-452f-bcdf-a4ec1db4e374",
+    "email": "dinhquydcn92@gmail.com",
+    "password": "$2a$10$9rgeI3Byv4h0sF5T45UI9eSIGNpm\/KHuecTDwsENfvn5lfG3C5ZaW",
+    "emailConfirmed": "1",
+    "status": "active",
+    "createdAt": "2017-02-14 02:42:19",
+    "updatedAt": "2017-02-14 02:42:19",
+    "deletedAt": null
+  },
+  {
+    "id": "cb90a8e5-259c-4edd-b603-07f28145bc18",
+    "email": "admin@admicro.vn",
+    "password": "$2a$10$Z6\/F\/tOy0KNsVxAzQotGROCgQsqrWFu6curK1PgjKKCsjhqszsmXG",
+    "emailConfirmed": "1",
+    "status": "active",
+    "createdAt": "2016-12-23 21:58:25",
+    "updatedAt": "2016-12-23 21:58:25",
+    "deletedAt": null
+  }
+]

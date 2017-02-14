@@ -13,6 +13,7 @@ class EditBannerHtmlTypeForm extends Component {
     bannerHtmlType: PropTypes.object,
     updateBannerHtmlType: PropTypes.func,
     getBannerHtmlTypes: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillReceiveProps(nextProps) {

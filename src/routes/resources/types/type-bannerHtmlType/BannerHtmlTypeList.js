@@ -21,6 +21,7 @@ class BannerHtmlTypeList extends Component {
     createBannerHtmlType: PropTypes.func,
     deleteBannerHtmlType: PropTypes.func,
     updateBannerHtmlType: PropTypes.func,
+    user: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -53,8 +54,18 @@ class BannerHtmlTypeList extends Component {
         );
       },
     }, {
-      data: 'name',
-    }, {
+      data: null,
+      render: (data, type, row) => {
+        let value = '';
+        if (row.userId !== null) {
+          value = `Custom - ${row.name}`;
+        } else if (row.userId === null) {
+          value = row.name;
+        }
+        return value;
+      },
+    },
+    {
       data: 'weight',
     }, {
       data: 'status',
@@ -175,6 +186,7 @@ class BannerHtmlTypeList extends Component {
                   updateBannerHtmlType={this.props.updateBannerHtmlType}
                   statusUpdateBannerHtmlType={this.props.statusUpdateBannerHtmlType}
                   getBannerHtmlTypes={this.props.getBannerHtmlTypes}
+                  user={this.props.user}
                   page={this.props.page}
                 />
               </div>
@@ -190,6 +202,7 @@ class BannerHtmlTypeList extends Component {
                   createBannerHtmlType={this.props.createBannerHtmlType}
                   getBannerHtmlTypes={this.props.getBannerHtmlTypes}
                   statusCreateBannerHtmlType={this.props.statusCreateBannerHtmlType}
+                  user={this.props.user}
                   page={this.props.page}
                 />
               </div>

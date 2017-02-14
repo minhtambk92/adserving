@@ -18,6 +18,7 @@ export function getBannerHtmlType(id) {
           value
           weight
           status
+          userId
           createdAt
           updatedAt
         }
@@ -50,6 +51,7 @@ export function getBannerHtmlTypes(args = {
           value
           weight
           status
+          userId
           createdAt
           updatedAt
         }
@@ -78,7 +80,7 @@ export function getBannerHtmlTypes(args = {
   };
 }
 
-export function createBannerHtmlType({ name, value, weight, status }) {
+export function createBannerHtmlType({ name, value, weight, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($bannerHtmlType: BannerHtmlTypeInputTypeWithoutId!) {
@@ -88,6 +90,7 @@ export function createBannerHtmlType({ name, value, weight, status }) {
           value
           weight
           status
+          userId
           createdAt
           updatedAt
         }
@@ -99,6 +102,7 @@ export function createBannerHtmlType({ name, value, weight, status }) {
         value,
         weight,
         status,
+        userId,
       },
     });
 
@@ -111,7 +115,7 @@ export function createBannerHtmlType({ name, value, weight, status }) {
   };
 }
 
-export function updateBannerHtmlType({ id, name, value, weight, status }) {
+export function updateBannerHtmlType({ id, name, value, weight, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($bannerHtmlType: BannerHtmlTypeInputType!) {
@@ -121,6 +125,7 @@ export function updateBannerHtmlType({ id, name, value, weight, status }) {
           value
           weight
           status
+          userId
           createdAt
           updatedAt
         }
@@ -133,6 +138,7 @@ export function updateBannerHtmlType({ id, name, value, weight, status }) {
         value,
         weight,
         status,
+        userId,
       },
     });
 
@@ -155,6 +161,7 @@ export function deleteBannerHtmlType(id) {
           value
           weight
           status
+          userId
           createdAt
           updatedAt
           deletedAt

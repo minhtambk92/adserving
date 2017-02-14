@@ -11,6 +11,7 @@ class CreateBannerHtmlTypeForm extends Component {
     statusCreateBannerHtmlType: PropTypes.func,
     page: PropTypes.object,
     createBannerHtmlType: PropTypes.func,
+    user: PropTypes.object,
   };
 
   convertToSlug(Text) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -42,12 +43,14 @@ class CreateBannerHtmlTypeForm extends Component {
     const value = this.convertToSlug(name);
     const weight = this.inputBannerHtmlTypeWeight.value;
     const status = this.inputBannerHtmlTypeStatus.value;
+    const userId = this.props.user.id;
     if (name) {
       this.props.createBannerHtmlType({
         name,
         value,
         weight,
         status,
+        userId,
       });
     }
     this.props.statusCreateBannerHtmlType(false);
