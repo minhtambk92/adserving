@@ -6,7 +6,7 @@ const AdsServerInputType = new InputObjectType({
   name: 'AdsServerInputType',
   fields: () => Object.assign(attributeFields(AdsServer, {
     // Additional options
-    only: ['id', 'name', 'value', 'status'],
+    only: ['id', 'name', 'value', 'status', 'userId'],
   }), {
     // Additional fields
   }),

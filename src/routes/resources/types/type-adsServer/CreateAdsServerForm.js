@@ -11,6 +11,7 @@ class CreateAdsServerForm extends Component {
     statusCreateAdsServer: PropTypes.func,
     page: PropTypes.object,
     createAdsServer: PropTypes.func,
+    user: PropTypes.object,
   };
 
   convertToSlug(Text) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -40,11 +41,13 @@ class CreateAdsServerForm extends Component {
     const name = this.inputAdsServerName.value;
     const value = this.convertToSlug(name);
     const status = this.inputAdsServerStatus.value;
+    const userId = this.props.user.id;
     if (name) {
       this.props.createAdsServer({
         name,
         value,
         status,
+        userId,
       });
     }
     this.props.statusCreateAdsServer(false);

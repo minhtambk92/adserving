@@ -35,6 +35,10 @@ const ZoneSizeType = Model.define('ZoneSizeType', {
     allowNull: false,
     defaultValue: 0,
   },
+  userId: {
+    type: DataType.UUID,
+    defaultValue: null,
+  },
   status: {
     type: DataType.STRING,
     allowNull: false,

@@ -11,6 +11,7 @@ class CreateZoneSizeTypeForm extends Component {
     statusCreateZoneSizeType: PropTypes.func,
     page: PropTypes.object,
     createZoneSizeType: PropTypes.func,
+    user: PropTypes.object,
   };
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -24,12 +25,14 @@ class CreateZoneSizeTypeForm extends Component {
     const width = this.inputZoneSizeTypeWidth.value;
     const height = this.inputZoneSizeTypeHeight.value;
     const status = this.inputZoneSizeTypeStatus.value;
+    const userId = this.props.user.id;
     if (name) {
       this.props.createZoneSizeType({
         name,
         width,
         height,
         status,
+        userId,
       });
     }
     this.props.statusCreateZoneSizeType(false);

@@ -21,6 +21,7 @@ class AdsServerList extends Component {
     createAdsServer: PropTypes.func,
     deleteAdsServer: PropTypes.func,
     updateAdsServer: PropTypes.func,
+    user: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -53,7 +54,16 @@ class AdsServerList extends Component {
         );
       },
     }, {
-      data: 'name',
+      data: null,
+      render: (data, type, row) => {
+        let value = '';
+        if (row.userId !== null) {
+          value = `Custom - ${row.name}`;
+        } else if (row.userId === null) {
+          value = row.name;
+        }
+        return value;
+      },
     }, {
       data: 'value',
     }, {
@@ -176,6 +186,7 @@ class AdsServerList extends Component {
                   statusUpdateAdsServer={this.props.statusUpdateAdsServer}
                   getAdsServers={this.props.getAdsServers}
                   page={this.props.page}
+                  user={this.props.user}
                 />
               </div>
             </div>
@@ -191,6 +202,7 @@ class AdsServerList extends Component {
                   getAdsServers={this.props.getAdsServers}
                   statusCreateAdsServer={this.props.statusCreateAdsServer}
                   page={this.props.page}
+                  user={this.props.user}
                 />
               </div>
             </div>

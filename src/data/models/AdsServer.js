@@ -29,6 +29,10 @@ const AdsServer = Model.define('AdsServer', {
     type: DataType.STRING,
     defaultValue: '',
   },
+  userId: {
+    type: DataType.UUID,
+    defaultValue: null,
+  },
   status: {
     type: DataType.STRING,
     allowNull: false,

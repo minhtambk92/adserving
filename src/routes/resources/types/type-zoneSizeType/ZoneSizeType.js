@@ -40,6 +40,7 @@ class ZoneSizeType extends Component {
     createZoneSizeType: PropTypes.func,
     deleteZoneSizeType: PropTypes.func,
     updateZoneSizeType: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -63,6 +64,7 @@ class ZoneSizeType extends Component {
             deleteZoneSizeType={this.props.deleteZoneSizeType}
             updateZoneSizeType={this.props.updateZoneSizeType}
             page={this.props.page}
+            user={this.props.user}
           />
         </div>
       </Layout>
@@ -75,6 +77,7 @@ const mapState = (state) => ({
   resources: state.resources,
   zoneSizeTypes: state.zoneSizeTypes,
   page: state.page.resources,
+  user: state.user,
 });
 
 const mapDispatch = {

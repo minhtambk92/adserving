@@ -17,6 +17,7 @@ export function getAdsServer(id) {
           name
           value
           status
+          userId
           createdAt
           updatedAt
         }
@@ -48,6 +49,7 @@ export function getAdsServers(args = {
           name
           value
           status
+          userId
           createdAt
           updatedAt
         }
@@ -76,7 +78,7 @@ export function getAdsServers(args = {
   };
 }
 
-export function createAdsServer({ name, value, status }) {
+export function createAdsServer({ name, value, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($adsServer: AdsServerInputTypeWithoutId!) {
@@ -85,6 +87,7 @@ export function createAdsServer({ name, value, status }) {
           name
           value
           status
+          userId
           createdAt
           updatedAt
         }
@@ -95,6 +98,7 @@ export function createAdsServer({ name, value, status }) {
         name,
         value,
         status,
+        userId,
       },
     });
 
@@ -116,6 +120,7 @@ export function updateAdsServer({ id, name, value, status }) {
           name
           value
           status
+          userId
           createdAt
           updatedAt
         }
@@ -148,6 +153,7 @@ export function deleteAdsServer(id) {
           name
           value
           status
+          userId
           createdAt
           updatedAt
           deletedAt

@@ -40,6 +40,7 @@ class AdsServer extends Component {
     createAdsServer: PropTypes.func,
     deleteAdsServer: PropTypes.func,
     updateAdsServer: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -63,6 +64,7 @@ class AdsServer extends Component {
             deleteAdsServer={this.props.deleteAdsServer}
             updateAdsServer={this.props.updateAdsServer}
             page={this.props.page}
+            user={this.props.user}
           />
         </div>
       </Layout>
@@ -75,6 +77,7 @@ const mapState = (state) => ({
   resources: state.resources,
   adsServers: state.adsServers,
   page: state.page.resources,
+  user: state.user,
 });
 
 const mapDispatch = {

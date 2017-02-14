@@ -5,7 +5,7 @@ import { AdsServer } from '../../models';
 const AdsServerInputTypeWithoutId = new InputObjectType({
   name: 'AdsServerInputTypeWithoutId',
   fields: () => Object.assign(attributeFields(AdsServer, {
-    only: ['name', 'value', 'status'],
+    only: ['name', 'value', 'status', 'userId'],
   }), {
     // Additional fields
   }),
