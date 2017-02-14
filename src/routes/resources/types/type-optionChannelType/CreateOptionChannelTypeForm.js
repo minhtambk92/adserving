@@ -11,6 +11,7 @@ class CreateOptionChannelTypeForm extends Component {
     statusCreateOptionChannelType: PropTypes.func,
     page: PropTypes.object,
     createOptionChannelType: PropTypes.func,
+    user: PropTypes.object,
   };
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -23,6 +24,7 @@ class CreateOptionChannelTypeForm extends Component {
     const isInputLink = document.getElementById('inputOptionChannelTypeIsInputLink').checked;
     const isSelectOption = document.getElementById('inputOptionChannelTypeIsSelectOption').checked;
     const isVariable = document.getElementById('inputOptionChannelTypeIsVariable').checked;
+    const userId = this.props.user.id;
     if (name) {
       this.props.createOptionChannelType({
         name,
@@ -30,6 +32,7 @@ class CreateOptionChannelTypeForm extends Component {
         isSelectOption,
         isVariable,
         status,
+        userId,
       });
     }
     this.props.statusCreateOptionChannelType(false);

@@ -42,6 +42,7 @@ class OptionChannelType extends Component {
     deleteOptionChannelType: PropTypes.func,
     updateOptionChannelType: PropTypes.func,
     setOptionChannelValueFilters: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -66,6 +67,7 @@ class OptionChannelType extends Component {
             updateOptionChannelType={this.props.updateOptionChannelType}
             setOptionChannelValueFilters={this.props.setOptionChannelValueFilters}
             page={this.props.page}
+            user={this.props.user}
           />
         </div>
       </Layout>
@@ -79,6 +81,7 @@ const mapState = (state) => ({
   optionChannelTypes: state.optionChannelTypes,
   page: state.page.resources,
   optionChannelValues: state.optionChannelValues,
+  user: state.user,
 });
 
 const mapDispatch = {

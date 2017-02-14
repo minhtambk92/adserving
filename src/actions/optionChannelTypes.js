@@ -17,6 +17,7 @@ export function getOptionChannelTypeIsSelectOption() {
           isSelectOption
           isVariable
           status
+          userId
           createdAt
           updatedAt
         }
@@ -44,11 +45,13 @@ export function getOptionChannelTypes() {
           isSelectOption
           isVariable
           status
+          userId
           optionChannelValues {
             id
             name
             value
             status
+            userId
           }
           createdAt
           updatedAt
@@ -66,7 +69,8 @@ export function getOptionChannelTypes() {
   };
 }
 
-export function createOptionChannelType({ name, isInputLink, isSelectOption, isVariable, status }) {
+export function createOptionChannelType({ name, isInputLink, isSelectOption,
+  isVariable, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($optionChannelType: OptionChannelTypeInputTypeWithoutId!) {
@@ -77,6 +81,7 @@ export function createOptionChannelType({ name, isInputLink, isSelectOption, isV
           isSelectOption
           isVariable
           status
+          userId
           createdAt
           updatedAt
         }
@@ -89,6 +94,7 @@ export function createOptionChannelType({ name, isInputLink, isSelectOption, isV
         isSelectOption,
         isVariable,
         status,
+        userId,
       },
     });
 
@@ -149,6 +155,7 @@ export function deleteOptionChannelType(id) {
           isSelectOption
           isVariable
           status
+          userId
           createdAt
           updatedAt
           deletedAt

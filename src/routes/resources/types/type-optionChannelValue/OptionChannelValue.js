@@ -49,6 +49,7 @@ class OptionChannelValue extends Component {
     optionChannelTypes: PropTypes.object,
     getOptionChannelValueFilters: PropTypes.func,
     setOptionChannelValueFilters: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -128,6 +129,7 @@ class OptionChannelValue extends Component {
             optionChannelTypeList={this.props.optionChannelTypes &&
             this.props.optionChannelTypes.list}
             page={this.props.page}
+            user={this.props.user}
           />
         </div>
       </Layout>
@@ -141,6 +143,7 @@ const mapState = (state) => ({
   optionChannelValues: state.optionChannelValues,
   page: state.page.resources,
   optionChannelTypes: state.optionChannelTypes,
+  user: state.user,
 });
 
 const mapDispatch = {

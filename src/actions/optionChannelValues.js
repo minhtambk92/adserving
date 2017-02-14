@@ -38,6 +38,7 @@ export function getOptionChannelValue(id) {
           value
           status
           optionChannelTypeId
+          userId
           createdAt
           updatedAt
         }
@@ -69,6 +70,7 @@ export function getOptionChannelValues(args = {
           name
           value
           status
+          userId
           optionChannelType {
             id
             name
@@ -76,6 +78,7 @@ export function getOptionChannelValues(args = {
             isSelectOption
             isVariable
             status
+            userId
           }
           createdAt
           updatedAt
@@ -105,7 +108,7 @@ export function getOptionChannelValues(args = {
   };
 }
 
-export function createOptionChannelValue({ name, value, status, optionChannelTypeId }) {
+export function createOptionChannelValue({ name, value, status, optionChannelTypeId, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($optionChannelValue: OptionChannelValueInputTypeWithoutId!) {
@@ -114,6 +117,7 @@ export function createOptionChannelValue({ name, value, status, optionChannelTyp
           name
           value
           status
+          userId
           optionChannelType {
             id
             name
@@ -121,6 +125,7 @@ export function createOptionChannelValue({ name, value, status, optionChannelTyp
             isSelectOption
             isVariable
             status
+            userId
           }
           createdAt
           updatedAt
@@ -133,6 +138,7 @@ export function createOptionChannelValue({ name, value, status, optionChannelTyp
         value,
         status,
         optionChannelTypeId,
+        userId,
       },
     });
 
@@ -154,6 +160,7 @@ export function updateOptionChannelValue({ id, name, value, status, optionChanne
           name
           value
           status
+          userId
           optionChannelType {
             id
             name
@@ -195,6 +202,7 @@ export function deleteOptionChannelValue(id) {
           name
           value
           status
+          userId
           optionChannelTypeId
           createdAt
           updatedAt

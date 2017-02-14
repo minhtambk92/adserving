@@ -10,7 +10,7 @@ const OptionChannelTypeInputType = new InputObjectType({
   name: 'OptionChannelTypeInputType',
   fields: () => Object.assign(attributeFields(OptionChannelType, {
     // Additional options
-    only: ['id', 'name'],
+    only: ['id', 'name', 'userId'],
   }), {
     // Additional fields
     isInputLink: { type: new NonNull(BooleanType) },

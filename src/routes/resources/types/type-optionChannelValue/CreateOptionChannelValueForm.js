@@ -13,6 +13,7 @@ class CreateOptionChannelValueForm extends Component {
     createOptionChannelValue: PropTypes.func,
     optionChannelTypeList: PropTypes.array,
     currentOptionChannelTypeId: PropTypes.string,
+    user: PropTypes.object,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -49,12 +50,14 @@ class CreateOptionChannelValueForm extends Component {
     const value = this.convertToSlug(name);
     const status = this.inputOptionChannelValueStatus.value;
     const optionChannelTypeId = this.inputOptionChannelTypeId.value;
+    const userId = this.props.user.id;
     if (name) {
       this.props.createOptionChannelValue({
         name,
         value,
         status,
         optionChannelTypeId,
+        userId,
       });
     }
     this.props.statusCreateOptionChannelValue(false);

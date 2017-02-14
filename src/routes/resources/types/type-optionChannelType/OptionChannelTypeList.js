@@ -22,6 +22,7 @@ class OptionChannelTypeList extends Component {
     deleteOptionChannelType: PropTypes.func,
     updateOptionChannelType: PropTypes.func,
     setOptionChannelValueFilters: PropTypes.func,
+    user: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -54,7 +55,16 @@ class OptionChannelTypeList extends Component {
         );
       },
     }, {
-      data: 'name',
+      data: null,
+      render: (data, type, row) => {
+        let value = '';
+        if (row.userId !== null) {
+          value = `Custom - ${row.name}`;
+        } else if (row.userId === null) {
+          value = row.name;
+        }
+        return value;
+      },
     }, {
       data: null,
       render: (data, type, row) => {
@@ -209,6 +219,7 @@ class OptionChannelTypeList extends Component {
                   statusUpdateOptionChannelType={this.props.statusUpdateOptionChannelType}
                   getOptionChannelTypes={this.props.getOptionChannelTypes}
                   page={this.props.page}
+                  user={this.props.user}
                 />
               </div>
             </div>
@@ -225,6 +236,7 @@ class OptionChannelTypeList extends Component {
                   getOptionChannelTypes={this.props.getOptionChannelTypes}
                   statusCreateOptionChannelType={this.props.statusCreateOptionChannelType}
                   page={this.props.page}
+                  user={this.props.user}
                 />
               </div>
             </div>
