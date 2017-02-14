@@ -21,6 +21,7 @@ class CharacterSetList extends Component {
     createCharacterSet: PropTypes.func,
     deleteCharacterSet: PropTypes.func,
     updateCharacterSet: PropTypes.func,
+    user: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -53,7 +54,16 @@ class CharacterSetList extends Component {
         );
       },
     }, {
-      data: 'name',
+      data: null,
+      render: (data, type, row) => {
+        let value = '';
+        if (row.userId !== null) {
+          value = `Custom - ${row.name}`;
+        } else if (row.userId === null) {
+          value = row.name;
+        }
+        return value;
+      },
     }, {
       data: 'status',
     }, {
@@ -172,6 +182,7 @@ class CharacterSetList extends Component {
                   statusUpdateCharacterSet={this.props.statusUpdateCharacterSet}
                   getCharacterSets={this.props.getCharacterSets}
                   page={this.props.page}
+                  user={this.props.user}
                 />
               </div>
             </div>
@@ -187,6 +198,7 @@ class CharacterSetList extends Component {
                   getCharacterSets={this.props.getCharacterSets}
                   statusCreateCharacterSet={this.props.statusCreateCharacterSet}
                   page={this.props.page}
+                  user={this.props.user}
                 />
               </div>
             </div>

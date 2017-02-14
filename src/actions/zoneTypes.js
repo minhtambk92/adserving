@@ -18,6 +18,7 @@ export function getZoneType(id) {
           value
           isSize
           status
+          userId
           createdAt
           updatedAt
         }
@@ -50,6 +51,7 @@ export function getZoneTypes(args = {
           value
           isSize
           status
+          userId
           createdAt
           updatedAt
         }
@@ -78,7 +80,7 @@ export function getZoneTypes(args = {
   };
 }
 
-export function createZoneType({ name, value, isSize, status }) {
+export function createZoneType({ name, value, isSize, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($zoneType: ZoneTypeInputTypeWithoutId!) {
@@ -88,6 +90,7 @@ export function createZoneType({ name, value, isSize, status }) {
           value
           isSize
           status
+          userId
           createdAt
           updatedAt
         }
@@ -99,6 +102,7 @@ export function createZoneType({ name, value, isSize, status }) {
         value,
         isSize,
         status,
+        userId,
       },
     });
 
@@ -121,6 +125,7 @@ export function updateZoneType({ id, name, value, isSize, status }) {
           value
           isSize
           status
+          userId
           createdAt
           updatedAt
         }
@@ -155,6 +160,7 @@ export function deleteZoneType(id) {
           value
           isSize
           status
+          userId
           createdAt
           updatedAt
           deletedAt

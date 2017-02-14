@@ -34,6 +34,10 @@ const ZoneType = Model.define('ZoneType', {
     defaultValue: true,
     allowNull: false,
   },
+  userId: {
+    type: DataType.UUID,
+    defaultValue: null,
+  },
   status: {
     type: DataType.STRING,
     allowNull: false,

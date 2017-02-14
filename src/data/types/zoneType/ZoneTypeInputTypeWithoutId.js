@@ -5,7 +5,7 @@ import { ZoneType } from '../../models';
 const ZoneTypeInputTypeWithoutId = new InputObjectType({
   name: 'ZoneTypeInputTypeWithoutId',
   fields: () => Object.assign(attributeFields(ZoneType, {
-    only: ['name', 'value', 'isSize', 'status'],
+    only: ['name', 'value', 'isSize', 'status', 'userId'],
   }), {
     // Additional fields
   }),

@@ -20,6 +20,7 @@ export function getCharacterSet(id) {
           name
           value
           status
+          userId
           createdAt
           updatedAt
         }
@@ -51,6 +52,7 @@ export function getCharacterSets(args = {
           name
           value
           status
+          userId
           createdAt
           updatedAt
         }
@@ -79,7 +81,7 @@ export function getCharacterSets(args = {
   };
 }
 
-export function createCharacterSet({ name, value, status }) {
+export function createCharacterSet({ name, value, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($characterSet: CharacterSetInputTypeWithoutId!) {
@@ -88,6 +90,7 @@ export function createCharacterSet({ name, value, status }) {
           name
           value
           status
+          userId
           createdAt
           updatedAt
         }
@@ -98,6 +101,7 @@ export function createCharacterSet({ name, value, status }) {
         name,
         value,
         status,
+        userId,
       },
     });
 
@@ -151,6 +155,7 @@ export function deleteCharacterSet(id) {
           name
           value
           status
+          userId
           createdAt
           updatedAt
           deletedAt

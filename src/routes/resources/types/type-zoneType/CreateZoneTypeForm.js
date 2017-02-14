@@ -12,6 +12,7 @@ class CreateZoneTypeForm extends Component {
     statusCreateZoneType: PropTypes.func,
     page: PropTypes.object,
     createZoneType: PropTypes.func,
+    user: PropTypes.object,
   };
 
 
@@ -48,12 +49,14 @@ class CreateZoneTypeForm extends Component {
     const value = this.convertToSlug(name);
     const isSize = document.getElementById('inputZoneTypeIsSize').checked;
     const status = this.inputZoneTypeStatus.value;
+    const userId = this.props.user.id;
     if (name) {
       this.props.createZoneType({
         name,
         value,
         isSize,
         status,
+        userId,
       });
     }
     this.props.statusCreateZoneType(false);

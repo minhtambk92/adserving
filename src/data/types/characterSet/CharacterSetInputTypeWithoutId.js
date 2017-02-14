@@ -5,7 +5,7 @@ import { CharacterSet } from '../../models';
 const CharacterSetInputTypeWithoutId = new InputObjectType({
   name: 'CharacterSetInputTypeWithoutId',
   fields: () => Object.assign(attributeFields(CharacterSet, {
-    only: ['name', 'value', 'status'],
+    only: ['name', 'value', 'status', 'userId'],
   }), {
     // Additional fields
   }),

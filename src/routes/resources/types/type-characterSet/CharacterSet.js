@@ -40,6 +40,7 @@ class CharacterSet extends Component {
     createCharacterSet: PropTypes.func,
     deleteCharacterSet: PropTypes.func,
     updateCharacterSet: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -63,6 +64,7 @@ class CharacterSet extends Component {
             deleteCharacterSet={this.props.deleteCharacterSet}
             updateCharacterSet={this.props.updateCharacterSet}
             page={this.props.page}
+            user={this.props.user}
           />
         </div>
       </Layout>
@@ -75,6 +77,7 @@ const mapState = (state) => ({
   resources: state.resources,
   characterSets: state.characterSets,
   page: state.page.resources,
+  user: state.user,
 });
 
 const mapDispatch = {

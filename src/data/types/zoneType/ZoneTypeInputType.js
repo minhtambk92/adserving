@@ -6,7 +6,7 @@ const ZoneTypeInputType = new InputObjectType({
   name: 'ZoneTypeInputType',
   fields: () => Object.assign(attributeFields(ZoneType, {
     // Additional options
-    only: ['id', 'name', 'value', 'isSize', 'status'],
+    only: ['id', 'name', 'value', 'isSize', 'status', 'userId'],
   }), {
     // Additional fields
   }),

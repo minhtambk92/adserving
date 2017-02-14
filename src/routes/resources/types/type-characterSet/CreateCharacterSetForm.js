@@ -11,6 +11,7 @@ class CreateCharacterSetForm extends Component {
     statusCreateCharacterSet: PropTypes.func,
     page: PropTypes.object,
     createCharacterSet: PropTypes.func,
+    user: PropTypes.object,
   };
 
 
@@ -23,11 +24,13 @@ class CreateCharacterSetForm extends Component {
     const name = this.inputCharacterSetName.value;
     const value = this.inputCharacterSetValue.value;
     const status = this.inputCharacterSetStatus.value;
+    const userId = this.props.user.id;
     if (name) {
       this.props.createCharacterSet({
         name,
         value,
         status,
+        userId,
       });
     }
     this.props.statusCreateCharacterSet(false);

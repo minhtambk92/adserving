@@ -6,7 +6,7 @@ const CharacterSetInputType = new InputObjectType({
   name: 'CharacterSetInputType',
   fields: () => Object.assign(attributeFields(CharacterSet, {
     // Additional options
-    only: ['id', 'name', 'value', 'status'],
+    only: ['id', 'name', 'value', 'status', 'userId'],
   }), {
     // Additional fields
   }),

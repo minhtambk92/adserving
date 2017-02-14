@@ -21,6 +21,7 @@ class ZoneTypeList extends Component {
     createZoneType: PropTypes.func,
     deleteZoneType: PropTypes.func,
     updateZoneType: PropTypes.func,
+    user: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -53,7 +54,16 @@ class ZoneTypeList extends Component {
         );
       },
     }, {
-      data: 'name',
+      data: null,
+      render: (data, type, row) => {
+        let value = '';
+        if (row.userId !== null) {
+          value = `Custom - ${row.name}`;
+        } else if (row.userId === null) {
+          value = row.name;
+        }
+        return value;
+      },
     }, {
       data: 'isSize',
     }, {
@@ -176,6 +186,7 @@ class ZoneTypeList extends Component {
                   statusUpdateZoneType={this.props.statusUpdateZoneType}
                   getZoneTypes={this.props.getZoneTypes}
                   page={this.props.page}
+                  user={this.props.user}
                 />
               </div>
             </div>
@@ -191,6 +202,7 @@ class ZoneTypeList extends Component {
                   getZoneTypes={this.props.getZoneTypes}
                   statusCreateZoneType={this.props.statusCreateZoneType}
                   page={this.props.page}
+                  user={this.props.user}
                 />
               </div>
             </div>
