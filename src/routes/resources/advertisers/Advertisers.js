@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getAdvertisers, createAdvertiser } from '../../../actions/advertisers';
 import { setPageAdvertiserActiveTab } from '../../../actions/pages/advertisers';
+import { createActivity } from '../../../actions/activities';
 import CreateAdvertiserForm from './CreateAdvertiserForm';
 import AdvertiserList from './AdvertiserList';
 import s from './Advertisers.css';
@@ -23,6 +24,9 @@ class Advertisers extends Component {
     getAdvertisers: PropTypes.func,
     createAdvertiser: PropTypes.func,
     setPageAdvertiserActiveTab: PropTypes.func,
+    createActivity: PropTypes.func,
+    users: PropTypes.object,
+    activities: PropTypes.object,
   };
 
   componentWillMount() {
@@ -51,6 +55,9 @@ class Advertisers extends Component {
               <CreateAdvertiserForm
                 filters={this.props.advertisers.filters}
                 createAdvertiser={this.props.createAdvertiser}
+                createActivity={this.props.createActivity}
+                advertisers={this.props.advertisers}
+                users={this.props.users && this.props.users.editing}
               />
             </div>
             {/* /.col */}
@@ -87,12 +94,15 @@ class Advertisers extends Component {
 
 const mapState = (state) => ({
   advertisers: state.advertisers,
+  activities: state.activities,
+  users: state.users,
 });
 
 const mapDispatch = {
   getAdvertisers,
   createAdvertiser,
   setPageAdvertiserActiveTab,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Advertisers));

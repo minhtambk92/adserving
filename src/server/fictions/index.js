@@ -32,6 +32,7 @@ import {
   CharacterSet,
   OptionChannelType,
   OptionChannelValue,
+  Activity,
 } from '../../data/models';
 import resourcesList from './data/Resource.json';
 import menusList from './data/Menu.json';
@@ -59,6 +60,7 @@ import zoneSizeTypeList from './data/ZoneSizeType.json';
 import characterSetList from './data/CharacterSet.json';
 import optionChannelTypeList from './data/OptionChannelType.json';
 import optionChannelValueList from './data/OptionChannelValue.json';
+import activitiesList from './data/Activity.json';
 
 /* eslint-disable no-console */
 
@@ -362,6 +364,20 @@ async function trackFiction() {
   }
 }
 
+// Activity fiction
+async function activityFiction() {
+  console.log(chalk.grey('Check current number of all Activity Fiction...'));
+  const activitiesQuantity = await Activity.count();
+
+  if (activitiesQuantity === 0) {
+    console.log(chalk.red('No user found! Do a fiction...'));
+    const results = await Activity.bulkCreate(activitiesList);
+    console.log(chalk.green(`CREATED: ${results.length} all Activity => PASSED!`));
+  } else {
+    console.log(chalk.green(`FOUND: ${activitiesQuantity} all Activity. => PASSED!`));
+  }
+}
+
 
 async function fiction() {
   console.log(chalk.grey.dim('START: data fictions.'));
@@ -386,6 +402,7 @@ async function fiction() {
   await sharedFiction();
   await bannerFiction();
   await trackFiction();
+  await activityFiction();
   console.log(chalk.magenta(`DONE: data fictions.`));
 }
 

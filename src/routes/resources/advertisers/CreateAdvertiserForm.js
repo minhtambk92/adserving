@@ -9,6 +9,9 @@ class CreateAdvertiserForm extends Component {
   static propTypes = {
     filters: PropTypes.object,
     createAdvertiser: PropTypes.func,
+    createActivity: PropTypes.func,
+    advertisers: PropTypes.object,
+    users: PropTypes.object,
   };
 
   clearInput() {
@@ -55,7 +58,7 @@ class CreateAdvertiserForm extends Component {
         $('#inputAdvertiserEmail').parents('.form-group').removeClass('has-error ');
         $('#inputAdvertiserEmail').parents('.form-group').find('.col-sm-10 .help-block').remove();
       }, 2000);
-    } else if (contact && name && email && description) {
+    } else if (contact && name && email && description && reportInterval) {
       this.props.createAdvertiser({
         email,
         name,
@@ -67,6 +70,18 @@ class CreateAdvertiserForm extends Component {
         status,
       }).then(() => {
         this.clearInput();
+        if (this.props.advertisers && this.props.advertisers.list.length > 0) {
+          const userId = this.props.users.id;
+          const subject = name;
+          const subjectId = this.props.advertisers.list[0].id;
+          const action = 'created';
+          const other = JSON.stringify(this.props.advertisers.list[0]);
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
       });
     }
   }

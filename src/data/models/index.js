@@ -45,6 +45,7 @@ import ZoneSizeType from './ZoneSizeType';
 import CharacterSet from './CharacterSet';
 import OptionChannelType from './OptionChannelType';
 import OptionChannelValue from './OptionChannelValue';
+import Activity from './Activity';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -158,6 +159,20 @@ User.profile = User.hasOne(UserProfile, {
   as: 'profile',
   onUpdate: 'cascade',
   onDelete: 'cascade',
+});
+
+User.activities = User.hasMany(Activity, {
+  foreignKey: {
+    name: 'userId',
+    allowNull: false,
+  },
+});
+
+Activity.user = Activity.belongsTo(User, {
+  foreignKey: {
+    name: 'userId',
+    allowNull: false,
+  },
 });
 
 // Each user can have many meta data
@@ -425,4 +440,5 @@ export {
   CharacterSet,
   OptionChannelType,
   OptionChannelValue,
+  Activity,
 };

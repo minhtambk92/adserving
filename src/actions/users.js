@@ -49,6 +49,15 @@ export function getUser(id) {
             location
             website
           }
+          activities {
+            id
+            action
+            subject
+            subjectId
+            other
+            createdAt
+            updatedAt
+          }
           roles {
             id
             uniqueName

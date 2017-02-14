@@ -27,6 +27,7 @@ import zoneSizeTypes from './zoneSizeTypes';
 import characterSets from './characterSets';
 import optionChannelTypes from './optionChannelTypes';
 import optionChannelValues from './optionChannelValues';
+import activities from './activities';
 
 import page from './pages';
 
@@ -60,4 +61,5 @@ export default combineReducers({
   characterSets,
   optionChannelTypes,
   optionChannelValues,
+  activities,
 });

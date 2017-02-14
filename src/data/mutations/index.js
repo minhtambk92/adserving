@@ -26,6 +26,7 @@ import zoneSizeTypes from './zoneSizeTypes';
 import characterSets from './characterSets';
 import optionChannelTypes from './optionChannelTypes';
 import optionChannelValues from './optionChannelValues';
+import activities from './activities';
 
 const mutations = new ObjectType({
   name: 'Mutation',
@@ -53,6 +54,7 @@ const mutations = new ObjectType({
     ...characterSets,
     ...optionChannelTypes,
     ...optionChannelValues,
+    ...activities,
   },
 });
 

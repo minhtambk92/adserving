@@ -13,6 +13,7 @@ class InformationProfile extends Component {
     id: PropTypes.string,
     updateProfile: PropTypes.func,
     getUser: PropTypes.func,
+    setPageProfileActiveTab: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -38,6 +39,7 @@ class InformationProfile extends Component {
   }
 
   updateAbout() {
+    this.props.setPageProfileActiveTab('settings');
     this.props.setStatusUpdateProfileUser(true);
   }
 

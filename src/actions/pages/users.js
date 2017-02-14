@@ -6,6 +6,7 @@
 
 import {
   SET_STATUS_UPDATE_PROFILE_USER,
+  SET_PAGE_PROFILE_ACTIVE_TAB,
 } from '../../constants';
 
 export function setStatusUpdateProfileUser(statusUpdateSettingProfile) {
@@ -18,3 +19,15 @@ export function setStatusUpdateProfileUser(statusUpdateSettingProfile) {
     });
   };
 }
+
+export function setPageProfileActiveTab(tabName) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_PAGE_PROFILE_ACTIVE_TAB,
+      payload: {
+        tabName,
+      },
+    });
+  };
+}
+

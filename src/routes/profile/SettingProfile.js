@@ -11,7 +11,6 @@ class SettingProfile extends Component {
     id: PropTypes.string,
     getUser: PropTypes.func,
     page: PropTypes.object,
-    logUserIn: PropTypes.func,
     setStatusUpdateProfileUser: PropTypes.func,
   };
 

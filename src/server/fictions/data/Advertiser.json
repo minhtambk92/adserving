@@ -1,1 +1,44 @@
-[{"id":"c91c843c-459c-4340-94f6-3f612010f5d7","email":"contact@admicro.vn","name":"Admicro","contact":"0988333888","description":"\u0110\u01a1n v\u1ecb qu\u1ea3ng c\u00e1o admicro","isEmailReport":"0","isEmailStatus":"0","reportInterval":"7","status":"active","createdAt":"2016-12-24 04:58:25","updatedAt":"2016-12-24 04:58:25","deletedAt":null}]
+[
+  {
+    "id": "2098ce0c-b177-48e4-8cdc-b4ddc5933c95",
+    "email": "contact@zing.vn",
+    "name": "Zing",
+    "contact": "0988333888",
+    "description": "Quang cao cua zing",
+    "isEmailReport": "1",
+    "isEmailStatus": "1",
+    "reportInterval": "7",
+    "status": "active",
+    "createdAt": "2017-02-14 09:14:22",
+    "updatedAt": "2017-02-14 09:14:22",
+    "deletedAt": null
+  },
+  {
+    "id": "b6536772-4e15-4fcc-872a-8efaca5fdf4e",
+    "email": "contact@dantri.com.vn",
+    "name": "Dan Tri",
+    "contact": "0922999333",
+    "description": "Quang Cao cua dan tri",
+    "isEmailReport": "1",
+    "isEmailStatus": "1",
+    "reportInterval": "7",
+    "status": "active",
+    "createdAt": "2017-02-14 09:15:11",
+    "updatedAt": "2017-02-14 09:15:11",
+    "deletedAt": null
+  },
+  {
+    "id": "c91c843c-459c-4340-94f6-3f612010f5d7",
+    "email": "contact@admicro.vn",
+    "name": "Admicro",
+    "contact": "0988333888",
+    "description": "\u0110\u01a1n v\u1ecb qu\u1ea3ng c\u00e1o admicro",
+    "isEmailReport": "0",
+    "isEmailStatus": "0",
+    "reportInterval": "7",
+    "status": "active",
+    "createdAt": "2016-12-23 21:58:25",
+    "updatedAt": "2016-12-23 21:58:25",
+    "deletedAt": null
+  }
+]

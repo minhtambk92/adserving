@@ -11,12 +11,14 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { logUserIn, getUser, updateProfile } from '../../actions/users';
+import { getUser, updateProfile } from '../../actions/users';
 import { navigate } from '../../actions/route';
-import { setStatusUpdateProfileUser } from '../../actions/pages/users';
+import { setStatusUpdateProfileUser, setPageProfileActiveTab } from '../../actions/pages/users';
 import SettingProfile from './SettingProfile';
 import InformationProfile from './InformationProfile';
+import Activities from './Activities';
 import Link from '../../components/Link';
 import s from './Profile.css'; // eslint-disable-line css-modules/no-unused-class
 
@@ -24,18 +26,34 @@ class Profile extends Component {
 
   static propTypes = {
     user: PropTypes.object,
-    logUserIn: PropTypes.func,
     navigate: PropTypes.func,
     getUser: PropTypes.func,
     users: PropTypes.object,
     updateProfile: PropTypes.func,
     setStatusUpdateProfileUser: PropTypes.func,
     page: PropTypes.object,
+    setPageProfileActiveTab: PropTypes.func,
   };
 
-  componentWillMount() {
-    this.props.getUser(this.props.user.id);
+  componentDidMount() {
+    // Set latest active tab
+    $('.profile-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
   }
+
+  componentDidUpdate() {
+    // Set latest active tab
+    if (this.props.page.activeTab !== undefined && this.props.page.activeTab !== null) {
+      $('.profile-box ul li').removeClass('active');
+      $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+    }
+  }
+
+  onTabClick(event) {
+    event.persist();
+    this.props.setPageProfileActiveTab(event.target.getAttribute('data-id'));
+  }
+
   render() {
     return (
       <div>
@@ -48,15 +66,31 @@ class Profile extends Component {
               updateProfile={this.props.updateProfile}
               getUser={this.props.getUser}
               id={this.props.user && this.props.user.id}
+              setPageProfileActiveTab={this.props.setPageProfileActiveTab}
             />
           </div>
           {/* /.col */}
-          <div className="col-md-9">
+          <div className="col-md-9 profile-box">
             <div className="nav-tabs-custom">
               <ul className="nav nav-tabs">
-                <li className="active"><a href="#settings" data-toggle="tab">Settings</a></li>
-                <li><a href="#activity" data-toggle="tab">Activity</a></li>
-                <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+                <li className="active">
+                  <a
+                    href="#settings"
+                    data-toggle="tab"
+                    data-id="settings"
+                    onClick={event => this.onTabClick(event)}
+                  >
+                  Settings
+                  </a>
+                </li>
+                <li><a
+                  href="#activity" data-toggle="tab" data-id="activity"
+                  onClick={event => this.onTabClick(event)}
+                >Activity</a></li>
+                <li><a
+                  href="#timeline" data-toggle="tab" data-id="timeline"
+                  onClick={event => this.onTabClick(event)}
+                >Timeline</a></li>
               </ul>
               <div className="tab-content">
                 {/* /.tab-pane setting */}
@@ -64,46 +98,19 @@ class Profile extends Component {
                   <SettingProfile
                     user={this.props.users && this.props.users.editing}
                     updateProfile={this.props.updateProfile}
-                    logUserIn={this.props.logUserIn}
                     getUser={this.props.getUser}
                     id={this.props.user && this.props.user.id}
                     setStatusUpdateProfileUser={this.props.setStatusUpdateProfileUser}
                     page={this.props.page}
+                    setPageProfileActiveTab={this.props.setPageProfileActiveTab}
                   />
                 </div>
                 {/* /.tab-pane activity */}
                 <div className="tab-pane" id="activity">
                   {/* Post */}
-                  <div className="post">
-                    <div className="user-block">
-                      <img
-                        className="img-circle img-bordered-sm"
-                        src="/default_avatar.png" alt="avatar"
-                      />
-                      <span className="username">
-                        <Link to="#">Jonathan Burke Jr.</Link>
-                        <Link to="#" className="pull-right btn-box-tool"><i className="fa fa-times" /></Link>
-                      </span>
-                      <span className="description">Shared publicly - 7:30 PM today</span>
-                    </div>
-                    {/* /.user-block */}
-                    <p>
-                      Lorem ipsum represents a long-held tradition for designers,
-                      typographers and the like. Some people hate it and argue for
-                      its demise, but others ignore the hate as they create awesome
-                      tools to help create filler text for everyone from bacon lovers
-                      to Charlie Sheen fans.
-                    </p>
-                    <ul className="list-inline">
-                      <li><Link to="#" className="link-black text-sm"><i className="fa fa-share margin-r-5" /> Share</Link></li>
-                      <li><Link to="#" className="link-black text-sm"><i className="fa fa-thumbs-o-up margin-r-5" /> Like</Link>
-                      </li>
-                      <li className="pull-right">
-                        <Link to="#" className="link-black text-sm"><i className="fa fa-comments-o margin-r-5" /> Comments
-                          (5)</Link></li>
-                    </ul>
-                    <input className="form-control input-sm" type="text" placeholder="Type a comment" />
-                  </div>
+                  <Activities
+                    users={this.props.users && this.props.users.editing}
+                  />
                   {/* /.post */}
                 </div>
                 {/* /.tab-pane  timeline */}
@@ -210,11 +217,11 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = {
-  logUserIn,
   navigate,
   getUser,
   updateProfile,
   setStatusUpdateProfileUser,
+  setPageProfileActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Profile));

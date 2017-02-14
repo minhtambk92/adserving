@@ -9,6 +9,7 @@ import { attributeFields } from 'graphql-sequelize';
 import { User } from '../../models';
 import userBelongsToManyRoles from '../../queries/user/userBelongsToManyRoles';
 import userHasOneProfile from '../../queries/user/userHasOneProfile';
+import userHasManyActivities from '../../queries/user/userHasManyActivities';
 
 const UserType = new ObjectType({
   name: 'UserType',
@@ -19,6 +20,7 @@ const UserType = new ObjectType({
     // Additional fields
     roles: userBelongsToManyRoles(),
     profile: userHasOneProfile(),
+    activities: userHasManyActivities(),
   }),
 });
 
