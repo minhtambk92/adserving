@@ -38,6 +38,7 @@ class BannerType extends Component {
     setStatusCreateBannerType: PropTypes.func,
     setStatusUpdateBannerType: PropTypes.func,
     createBannerType: PropTypes.func,
+    user: PropTypes.object,
     deleteBannerType: PropTypes.func,
     updateBannerType: PropTypes.func,
   };
@@ -62,6 +63,7 @@ class BannerType extends Component {
             createBannerType={this.props.createBannerType}
             deleteBannerType={this.props.deleteBannerType}
             updateBannerType={this.props.updateBannerType}
+            user={this.props.user}
             page={this.props.page}
           />
         </div>
@@ -74,6 +76,7 @@ class BannerType extends Component {
 const mapState = (state) => ({
   resources: state.resources,
   bannerTypes: state.bannerTypes,
+  user: state.user,
   page: state.page.resources,
 });
 

@@ -21,6 +21,7 @@ class BannerTypeList extends Component {
     createBannerType: PropTypes.func,
     deleteBannerType: PropTypes.func,
     updateBannerType: PropTypes.func,
+    user: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -53,7 +54,16 @@ class BannerTypeList extends Component {
         );
       },
     }, {
-      data: 'name',
+      data: null,
+      render: (data, type, row) => {
+        let value = '';
+        if (row.userId !== null) {
+          value = `Custom - ${row.name}`;
+        } else if (row.userId === null) {
+          value = row.name;
+        }
+        return value;
+      },
     }, {
       data: 'status',
     }, {
@@ -171,6 +181,7 @@ class BannerTypeList extends Component {
                   updateBannerType={this.props.updateBannerType}
                   statusUpdateBannerType={this.props.statusUpdateBannerType}
                   getBannerTypes={this.props.getBannerTypes}
+                  user={this.props.user}
                   page={this.props.page}
                 />
               </div>
@@ -186,6 +197,7 @@ class BannerTypeList extends Component {
                   createBannerType={this.props.createBannerType}
                   getBannerTypes={this.props.getBannerTypes}
                   statusCreateBannerType={this.props.statusCreateBannerType}
+                  user={this.props.user}
                   page={this.props.page}
                 />
               </div>

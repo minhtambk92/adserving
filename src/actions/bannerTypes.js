@@ -18,6 +18,7 @@ export function getBannerType(id) {
           value
           isUpload
           status
+          userId
           createdAt
           updatedAt
         }
@@ -50,6 +51,7 @@ export function getBannerTypes(args = {
           value
           isUpload
           status
+          userId
           createdAt
           updatedAt
         }
@@ -78,7 +80,7 @@ export function getBannerTypes(args = {
   };
 }
 
-export function createBannerType({ name, value, isUpload, status }) {
+export function createBannerType({ name, value, isUpload, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const mutation = `
       mutation ($bannerType: BannerTypeInputTypeWithoutId!) {
@@ -88,6 +90,7 @@ export function createBannerType({ name, value, isUpload, status }) {
           value
           isUpload
           status
+          userId
           createdAt
           updatedAt
         }
@@ -99,6 +102,7 @@ export function createBannerType({ name, value, isUpload, status }) {
         value,
         isUpload,
         status,
+        userId,
       },
     });
 
@@ -121,6 +125,7 @@ export function updateBannerType({ id, name, value, isUpload, status }) {
           value
           isUpload
           status
+          userId
           createdAt
           updatedAt
         }
@@ -155,6 +160,7 @@ export function deleteBannerType(id) {
           value
           isUpload
           status
+          userId
           createdAt
           updatedAt
           deletedAt

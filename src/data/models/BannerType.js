@@ -33,6 +33,10 @@ const BannerType = Model.define('BannerType', {
     type: DataType.BOOLEAN,
     defaultValue: false,
   },
+  userId: {
+    type: DataType.UUID,
+    defaultValue: null,
+  },
   status: {
     type: DataType.STRING,
     allowNull: false,

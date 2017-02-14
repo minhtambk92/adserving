@@ -44,6 +44,7 @@ export function getBanner(id) {
             name
             value
             isUpload
+            userId
           }
           imageUrl
           url
@@ -121,6 +122,7 @@ export function getBanners(args = {
             name
             value
             isUpload
+            userId
           }
           imageUrl
           url
