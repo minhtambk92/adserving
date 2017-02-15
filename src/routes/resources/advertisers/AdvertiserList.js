@@ -10,6 +10,8 @@ class AdvertiserList extends Component {
     list: PropTypes.array,
     setPageAdvertiserActiveTab: PropTypes.func,
     createAdvertiser: PropTypes.func,
+    createActivity: PropTypes.func,
+    users: PropTypes.object,
   };
   onTabClickCampaign(event) {
     event.persist();
@@ -40,6 +42,19 @@ class AdvertiserList extends Component {
         reportInterval,
         description,
         status,
+      }).then(() => {
+        if (this.props.list && this.props.list.length > 0) {
+          const userId = this.props.users.id;
+          const subject = `Advertiser ${data.name}`;
+          const subjectId = this.props.list[0].id;
+          const action = 'duplicated';
+          const other = JSON.stringify(data);
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
       });
     }
   }

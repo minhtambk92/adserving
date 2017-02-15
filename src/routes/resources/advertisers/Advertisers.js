@@ -77,6 +77,8 @@ class Advertisers extends Component {
                   list={advertisers.list}
                   setPageAdvertiserActiveTab={this.props.setPageAdvertiserActiveTab}
                   createAdvertiser={this.props.createAdvertiser}
+                  createActivity={this.props.createActivity}
+                  users={this.props.users && this.props.users.editing}
                 />
               </div>
               {/* /.box-body */}
