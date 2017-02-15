@@ -72,7 +72,7 @@ class CreateAdvertiserForm extends Component {
         this.clearInput();
         if (this.props.advertisers && this.props.advertisers.list.length > 0) {
           const userId = this.props.users.id;
-          const subject = name;
+          const subject = `Advertiser ${name}`;
           const subjectId = this.props.advertisers.list[0].id;
           const action = 'created';
           const other = JSON.stringify(this.props.advertisers.list[0]);

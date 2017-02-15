@@ -23,10 +23,12 @@ import {
 } from '../../../../actions/pages/advertisers';
 import { setPageCampaignActiveTab } from '../../../../actions/pages/campaigns';
 import { createCampaign } from '../../../../actions/campaigns';
+import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activities';
 import Layout from '../../../../components/Layout';
 import CampaignList from '../../campaigns/CampaignList';
 import UpdateAdvertiserForm from '../UpdateAdvertiserForm';
 import CreateCampaignInAdvertiser from '../../campaigns/CreateCampaignForm';
+import Activities from '../Activities';
 import s from './Advertiser.css';
 
 const pageTitle = 'Advertiser';
@@ -44,10 +46,15 @@ class Advertiser extends Component {
     createCampaign: PropTypes.func,
     deleteAdvertiser: PropTypes.func,
     setPageCampaignActiveTab: PropTypes.func,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
+    getActivitiesBySubjectId: PropTypes.func,
+    users: PropTypes.object,
   };
 
   componentWillMount() {
     this.props.getAdvertiser(this.props.advertiserId);
+    this.props.getActivitiesBySubjectId(this.props.advertiserId);
   }
 
   componentDidMount() {
@@ -56,9 +63,18 @@ class Advertiser extends Component {
     $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
   }
 
+  componentDidUpdate() {
+    // Set latest active tab
+    $('.advertiser-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
   onTabClick(event) {
     event.persist();
     this.props.setPageAdvertiserActiveTab(event.target.getAttribute('data-id'));
+    if (event.target.getAttribute('data-id') === 'activity') {
+      this.props.getActivitiesBySubjectId(this.props.advertiserId);
+    }
   }
 
   render() {
@@ -90,6 +106,13 @@ class Advertiser extends Component {
                       onClick={event => this.onTabClick(event)}
                     >Add Campaign</a>
                   </li>
+                  <li>
+                    <a
+                      href="#activity" data-toggle="tab"
+                      data-id="activity"
+                      onClick={event => this.onTabClick(event)}
+                    >Activivty</a>
+                  </li>
                 </ul>
 
                 <div className="tab-content">
@@ -102,6 +125,8 @@ class Advertiser extends Component {
                           deleteAdvertiser={this.props.deleteAdvertiser}
                           advertiserId={this.props.advertiserId}
                           getAdvertiser={this.props.getAdvertiser}
+                          createActivity={this.props.createActivity}
+                          users={this.props.users && this.props.users.editing}
                         />
                       </section>
                     </div>
@@ -161,6 +186,20 @@ class Advertiser extends Component {
                       </section>
                     </div>
                   </div>
+                  <div className="tab-pane" id="activity">
+                    <div className="row">
+                      <section className="col-lg-12">
+                        <Activities
+                          activities={this.props.activities && this.props.activities.list}
+                          updateAdvertiser={this.props.updateAdvertiser}
+                          setPageAdvertiserActiveTab={this.props.setPageAdvertiserActiveTab}
+                          createActivity={this.props.createActivity}
+                          advertiser={this.props.advertisers && this.props.advertisers.editing}
+                          users={this.props.users && this.props.users.editing}
+                        />
+                      </section>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -176,6 +215,8 @@ const mapState = (state) => ({
   page: state.page.advertisers,
   advertisers: state.advertisers,
   campaigns: state.campaigns,
+  activities: state.activities,
+  users: state.users,
 });
 
 const mapDispatch = {
@@ -185,6 +226,8 @@ const mapDispatch = {
   setPageAdvertiserActiveTab,
   createCampaign,
   setPageCampaignActiveTab,
+  createActivity,
+  getActivitiesBySubjectId,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Advertiser));

@@ -35,6 +35,10 @@ class Profile extends Component {
     setPageProfileActiveTab: PropTypes.func,
   };
 
+  componentWillMount() {
+    this.props.getUser(this.props.user.id);
+  }
+
   componentDidMount() {
     // Set latest active tab
     $('.profile-box ul li').removeClass('active');

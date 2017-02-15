@@ -6,29 +6,50 @@ import {
   CREATE_ACTIVITY,
   UPDATE_ACTIVITY,
   DELETE_ACTIVITY,
-  GET_ACTIVITIES_BY_USER_ID,
+  GET_ACTIVITIES_BY_SUBJECT_ID,
 } from '../constants';
 
-export function getActivitiesByUserId(userId) {
+export function getActivitiesBySubjectId(subjectId) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
-        activities(where: {userId: "${userId}"}) {
+        activities(where: {subjectId: "${subjectId}"}) {
           id
           action
           subject
           subjectId
           other
-          userId
-          createdAt
-          updatedAt
+          user {
+            id
+            email
+            emailConfirmed
+            status
+            profile {
+              displayName
+              picture
+              gender
+              location
+              website
+            }
+            activities {
+              id
+              action
+              subject
+              subjectId
+              other
+              createdAt
+              updatedAt
+            }
+            }
+            createdAt
+            updatedAt
         }
       }`;
 
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_ACTIVITIES_BY_USER_ID,
+      type: GET_ACTIVITIES_BY_SUBJECT_ID,
       payload: {
         activities: data.activities,
       },

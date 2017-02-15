@@ -5,7 +5,7 @@ import {
   CREATE_ACTIVITY,
   UPDATE_ACTIVITY,
   DELETE_ACTIVITY,
-  GET_ACTIVITIES_BY_USER_ID,
+  GET_ACTIVITIES_BY_SUBJECT_ID,
 } from '../constants';
 
 function list(state = [], action) {
@@ -13,7 +13,7 @@ function list(state = [], action) {
     case GET_ACTIVITIES: {
       return action.payload.activities;
     }
-    case GET_ACTIVITIES_BY_USER_ID: {
+    case GET_ACTIVITIES_BY_SUBJECT_ID: {
       return action.payload.activities;
     }
     case CREATE_ACTIVITY: {

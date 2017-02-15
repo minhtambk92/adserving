@@ -12,6 +12,8 @@ class UpdateAdvertiserForm extends Component {
     advertiser: PropTypes.object,
     deleteAdvertiser: PropTypes.func,
     getAdvertiser: PropTypes.func,
+    createActivity: PropTypes.func,
+    users: PropTypes.object,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -56,6 +58,7 @@ class UpdateAdvertiserForm extends Component {
     const isEmailStatus = document.getElementById('inputAdvertiserIsEmailStatus').checked;
     const isEmailReport = document.getElementById('inputAdvertiserIsEmailReport').checked;
     const reportInterval = this.inputAdvertiserReportInterval.value;
+    const advertiserObject = this.props.advertiser;
     const advertiser = { id: this.props.advertiserId };
 
     if (email && email !== this.props.advertiser.email) {
@@ -83,12 +86,35 @@ class UpdateAdvertiserForm extends Component {
     advertiser.status = status;
 
     this.props.updateAdvertiser(advertiser).then(() => {
-      this.props.getAdvertiser(this.props.advertiserId);
+      const userId = this.props.users.id;
+      const subject = `Advertiser ${name}`;
+      const subjectId = this.props.advertiser.id;
+      const action = 'updated';
+      const other = JSON.stringify(advertiserObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getAdvertiser(this.props.advertiserId);
+        });
     });
   }
 
   deleteAdvertiser() {
-    this.props.deleteAdvertiser(this.props.advertiserId);
+    const advertiserObject = this.props.advertiser;
+    this.props.deleteAdvertiser(this.props.advertiserId).then(() => {
+      const userId = this.props.users.id;
+      const subject = `Advertiser ${advertiserObject.name}`;
+      const subjectId = this.props.advertiser.id;
+      const action = 'deleted';
+      const other = JSON.stringify(advertiserObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId });
+    });
   }
 
   render() {
