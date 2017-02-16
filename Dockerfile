@@ -24,3 +24,5 @@ ENV WEBSITE_HOSTNAME "adserving.manhhailua.com"
 ENV DATABASE_URL "mysql://root:bXy3E802rM@45.124.93.190:3307/adserving"
 
 CMD [ "node", "./build/server.js" ]
+
+EXPOSE 3000
