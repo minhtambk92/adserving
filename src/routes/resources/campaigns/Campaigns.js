@@ -19,6 +19,7 @@ import {
 } from '../../../actions/campaigns';
 import { getAdvertisers } from '../../../actions/advertisers';
 import { setPageCampaignActiveTab } from '../../../actions/pages/campaigns';
+import { createActivity } from '../../../actions/activities';
 import CreateCampaignForm from './CreateCampaignForm';
 import FilterCampaignsForm from './FilterCampaignsForm';
 import CampaignList from './CampaignList';
@@ -34,6 +35,9 @@ class Campaigns extends Component {
     getAdvertisers: PropTypes.func,
     advertisers: PropTypes.object,
     setPageCampaignActiveTab: PropTypes.func,
+    createActivity: PropTypes.func,
+    users: PropTypes.object,
+    activities: PropTypes.object,
   };
 
   componentWillMount() {
@@ -106,6 +110,9 @@ class Campaigns extends Component {
                 filters={this.props.campaigns.filters}
                 advertisers={this.props.advertisers.list}
                 createCampaign={this.props.createCampaign}
+                createActivity={this.props.createActivity}
+                users={this.props.users && this.props.users.editing}
+                campaigns={this.props.campaigns}
               />
             </div>
             {/* /.col */}
@@ -126,6 +133,8 @@ class Campaigns extends Component {
                   list={this.getFilteredCampaigns()}
                   setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
                   createCampaign={this.props.createCampaign}
+                  createActivity={this.props.createActivity}
+                  users={this.props.users && this.props.users.editing}
                 />
               </div>
               {/* /.box-body */}
@@ -143,6 +152,8 @@ class Campaigns extends Component {
 const mapState = (state) => ({
   campaigns: state.campaigns,
   advertisers: state.advertisers,
+  users: state.users,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -152,6 +163,7 @@ const mapDispatch = {
   createCampaign,
   getAdvertisers,
   setPageCampaignActiveTab,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Campaigns));

@@ -15,6 +15,8 @@ class UpdateCampaignForm extends Component {
     deleteCampaign: PropTypes.func,
     advertisers: PropTypes.array,
     getCampaign: PropTypes.func,
+    createActivity: PropTypes.func,
+    users: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -172,6 +174,7 @@ class UpdateCampaignForm extends Component {
     }
     const description = this.inputCampaignDescription.value;
     const status = this.inputCampaignStatus.value;
+    const campaignObject = this.props.campaign;
     const campaign = { id: this.props.campaignId };
 
     if (name && name !== this.props.campaign.name) {
@@ -211,12 +214,35 @@ class UpdateCampaignForm extends Component {
 
     campaign.status = status;
     this.props.updateCampaign(campaign).then(() => {
-      this.props.getCampaign(this.props.campaignId);
+      const userId = this.props.users.id;
+      const subject = `Campaign ${name}`;
+      const subjectId = this.props.campaign.id;
+      const action = 'updated';
+      const other = JSON.stringify(campaignObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getCampaign(this.props.campaignId);
+        });
     });
   }
 
   deleteCampaign() {
-    this.props.deleteCampaign(this.props.campaignId);
+    const campaignObject = this.props.campaign;
+    this.props.deleteCampaign(this.props.campaignId).then(() => {
+      const userId = this.props.users.id;
+      const subject = `Campaign ${campaignObject.name}`;
+      const subjectId = this.props.campaign.id;
+      const action = 'deleted';
+      const other = JSON.stringify(campaignObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId });
+    });
   }
 
   render() {

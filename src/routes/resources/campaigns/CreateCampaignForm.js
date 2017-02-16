@@ -14,6 +14,9 @@ class CreateCampaignForm extends Component {
     advertisers: PropTypes.array,
     advertiserId: PropTypes.string,
     getAdvertiser: PropTypes.func,
+    createActivity: PropTypes.func,
+    campaigns: PropTypes.object,
+    users: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -123,6 +126,18 @@ class CreateCampaignForm extends Component {
       description,
       status,
     }).then(() => {
+      if (this.props.campaigns && this.props.campaigns.list.length > 0) {
+        const userId = this.props.users.id;
+        const subject = `Campaign ${name}`;
+        const subjectId = this.props.campaigns.list[0].id;
+        const action = 'created';
+        const other = JSON.stringify(this.props.campaigns.list[0]);
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId });
+      }
       this.clearInput();
       this.setState({ showCPM: false });
       if (this.props.advertiserId) {

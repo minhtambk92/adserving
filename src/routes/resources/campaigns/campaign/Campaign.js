@@ -21,10 +21,13 @@ import {
 import { getAdvertisers } from '../../../../actions/advertisers';
 import { createPlacement } from '../../../../actions/placements';
 import { setPagePlacementActiveTab } from '../../../../actions/pages/placements';
+import { setPageCampaignActiveTab } from '../../../../actions/pages/campaigns';
+import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activities';
 import Layout from '../../../../components/Layout';
 import PlacementList from '../../placements/PlacementList';
 import UpdateCampaignForm from '../UpdateCampaignForm';
 import CreatePlacementInCampaign from '../../placements/CreatePlacementForm';
+import Activities from '../Activities';
 import s from './Campaign.css';
 
 const pageTitle = 'Campaign';
@@ -43,17 +46,37 @@ class Campaign extends Component {
     placements: PropTypes.object,
     createPlacement: PropTypes.func,
     setPagePlacementActiveTab: PropTypes.func,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
+    getActivitiesBySubjectId: PropTypes.func,
+    users: PropTypes.object,
+    setPageCampaignActiveTab: PropTypes.func,
   };
 
   componentWillMount() {
     this.props.getCampaign(this.props.campaignId);
     this.props.getAdvertisers();
+    this.props.getActivitiesBySubjectId(this.props.campaignId);
   }
 
   componentDidMount() {
     // Set latest active tab
     $('.campaign-edit-box ul li').removeClass('active');
     $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
+  componentDidUpdate() {
+    // Set latest active tab
+    $('.campaign-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
+  onTabClick(event) {
+    event.persist();
+    this.props.setPageCampaignActiveTab(event.target.getAttribute('data-id'));
+    if (event.target.getAttribute('data-id') === 'activity') {
+      this.props.getActivitiesBySubjectId(this.props.campaignId);
+    }
   }
 
   render() {
@@ -72,14 +95,25 @@ class Campaign extends Component {
               <div className="nav-tabs-custom campaign-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
-                    <a href="#editCampaign" data-toggle="tab">
+                    <a
+                      href="#editCampaign"
+                      data-toggle="tab"
+                      data-id="editCampaign"
+                    >
                       Edit Campaign
                     </a>
                   </li>
                   <li>
-                    <a href="#addPlacement" data-toggle="tab">
+                    <a href="#addPlacement" data-toggle="tab" data-id="addPlacement">
                       Add Placement
                     </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#activity" data-toggle="tab"
+                      data-id="activity"
+                      onClick={event => this.onTabClick(event)}
+                    >Activivty</a>
                   </li>
                 </ul>
                 <div className="tab-content">
@@ -94,6 +128,8 @@ class Campaign extends Component {
                           deleteCampaign={this.props.deleteCampaign}
                           campaignId={this.props.campaignId}
                           getCampaign={this.props.getCampaign}
+                          createActivity={this.props.createActivity}
+                          users={this.props.users && this.props.users.editing}
                         />
                         {/* /.col */}
                       </section>
@@ -156,6 +192,20 @@ class Campaign extends Component {
                       </div>
                     </div>
                   </div>
+                  <div className="tab-pane" id="activity">
+                    <div className="row">
+                      <section className="col-lg-12">
+                        <Activities
+                          activities={this.props.activities && this.props.activities.list}
+                          updateCampaign={this.props.updateCampaign}
+                          setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
+                          createActivity={this.props.createActivity}
+                          campaign={this.props.campaigns && this.props.campaigns.editing}
+                          users={this.props.users && this.props.users.editing}
+                        />
+                      </section>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -172,6 +222,8 @@ const mapState = (state) => ({
   campaigns: state.campaigns,
   placements: state.placements,
   advertisers: state.advertisers,
+  activities: state.activities,
+  users: state.users,
 });
 
 const mapDispatch = {
@@ -181,6 +233,9 @@ const mapDispatch = {
   deleteCampaign,
   createPlacement,
   setPagePlacementActiveTab,
+  getActivitiesBySubjectId,
+  createActivity,
+  setPageCampaignActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Campaign));

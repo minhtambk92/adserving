@@ -12,6 +12,8 @@ class CampaignList extends Component {
     createCampaign: PropTypes.func,
     advertiserId: PropTypes.string,
     getAdvertiser: PropTypes.func,
+    users: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   onTabClickCampaign(event) {
@@ -54,6 +56,18 @@ class CampaignList extends Component {
       description,
       status,
     }).then(() => {
+      if (this.props.list && this.props.list.length > 0) {
+        const userId = this.props.users.id;
+        const subject = `Advertiser ${data.name}`;
+        const subjectId = this.props.list[0].id;
+        const action = 'duplicated';
+        const other = JSON.stringify(data);
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId });
+      }
       if (this.props.advertiserId) {
         this.props.getAdvertiser(this.props.advertiserId);
       }
