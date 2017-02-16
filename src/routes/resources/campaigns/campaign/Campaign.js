@@ -113,7 +113,7 @@ class Campaign extends Component {
                       href="#activity" data-toggle="tab"
                       data-id="activity"
                       onClick={event => this.onTabClick(event)}
-                    >Activivty</a>
+                    >Activity</a>
                   </li>
                 </ul>
                 <div className="tab-content">

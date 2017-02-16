@@ -9,6 +9,8 @@ class SiteList extends Component {
     list: PropTypes.array,
     setPageSiteActiveTab: PropTypes.func,
     createSite: PropTypes.func,
+    users: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   onTabClickEditSite(event) {
@@ -35,7 +37,20 @@ class SiteList extends Component {
     const status = data.status;
 
     if (domain && name && email && description && status) {
-      this.props.createSite({ domain, name, email, description, status });
+      this.props.createSite({ domain, name, email, description, status }).then(() => {
+        if (this.props.list && this.props.list.length > 0) {
+          const userId = this.props.users.id;
+          const subject = `Site ${data.name}`;
+          const subjectId = this.props.list[0].id;
+          const action = 'duplicated';
+          const other = JSON.stringify(data);
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
+      });
     }
   }
 

@@ -58,7 +58,7 @@ class CampaignList extends Component {
     }).then(() => {
       if (this.props.list && this.props.list.length > 0) {
         const userId = this.props.users.id;
-        const subject = `Advertiser ${data.name}`;
+        const subject = `Campaign ${data.name}`;
         const subjectId = this.props.list[0].id;
         const action = 'duplicated';
         const other = JSON.stringify(data);

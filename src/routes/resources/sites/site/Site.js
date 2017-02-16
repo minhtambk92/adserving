@@ -21,11 +21,14 @@ import { createShare } from '../../../../actions/shares';
 import { createOptionChannel } from '../../../../actions/optionChannels';
 import { getZoneSizeTypes } from '../../../../actions/zoneSizeTypes';
 import { getZoneTypes } from '../../../../actions/zoneTypes';
+import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activities';
+import { setPageSiteActiveTab } from '../../../../actions/pages/sites';
 import Layout from '../../../../components/Layout';
 import ListZoneOfSite from '../ListZoneOfSite';
 import ListChannelOfSite from '../ListChannelOfSite';
 import UpdateSiteForm from '../UpdateSiteForm';
 import CreateZoneInSite from '../../zones/CreateZoneForm';
+import Activities from '../Activities';
 import CreateChannelForm from '../../channels/CreateChannelForm';
 import s from './Site.css';
 // import { defineMessages, FormattedRelative } from 'react-intl';
@@ -56,6 +59,11 @@ class Site extends Component {
     zoneTypes: PropTypes.object,
     getZoneSizeTypes: PropTypes.func,
     zoneSizeTypes: PropTypes.object,
+    users: PropTypes.object,
+    activities: PropTypes.object,
+    getActivitiesBySubjectId: PropTypes.func,
+    createActivity: PropTypes.func,
+    setPageSiteActiveTab: PropTypes.func,
   };
 
   componentWillMount() {
@@ -63,12 +71,26 @@ class Site extends Component {
     this.props.getChannels();
     this.props.getZoneTypes();
     this.props.getZoneSizeTypes();
+    this.props.getActivitiesBySubjectId(this.props.siteId);
   }
 
   componentDidMount() {
     // Set latest active tab
     $('.site-edit-box ul li').removeClass('active');
     $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+  componentDidUpdate() {
+    // Set latest active tab
+    $('.site-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
+  onTabClick(event) {
+    event.persist();
+    this.props.setPageSiteActiveTab(event.target.getAttribute('data-id'));
+    if (event.target.getAttribute('data-id') === 'activity') {
+      this.props.getActivitiesBySubjectId(this.props.siteId);
+    }
   }
 
   render() {
@@ -87,19 +109,35 @@ class Site extends Component {
               <div className="nav-tabs-custom site-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
-                    <a href="#editSite" data-toggle="tab">
+                    <a
+                      href="#editSite" data-toggle="tab" data-id="editSite"
+                      onClick={event => this.onTabClick(event)}
+                    >
                       Edit Site
                     </a>
                   </li>
                   <li>
-                    <a href="#addZone" data-toggle="tab">
+                    <a
+                      href="#addZone" data-toggle="tab" data-id="addZone"
+                      onClick={event => this.onTabClick(event)}
+                    >
                       Add Zone
                     </a>
                   </li>
                   <li>
-                    <a href="#addChannel" data-toggle="tab">
+                    <a
+                      href="#addChannel" data-toggle="tab" data-id="addChannel"
+                      onClick={event => this.onTabClick(event)}
+                    >
                       Add Channel
                     </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#activity" data-toggle="tab"
+                      data-id="activity"
+                      onClick={event => this.onTabClick(event)}
+                    >Activity</a>
                   </li>
                 </ul>
 
@@ -114,6 +152,8 @@ class Site extends Component {
                       getSite={this.props.getSite}
                       sites={this.props.sites}
                       checkSitesByDomain={this.props.checkSitesByDomain}
+                      createActivity={this.props.createActivity}
+                      users={this.props.users && this.props.users.editing}
                     />
                   </div>
 
@@ -229,6 +269,21 @@ class Site extends Component {
                       </div>
                     </div>
                   </div>
+
+                  <div className="tab-pane" id="activity">
+                    <div className="row">
+                      <section className="col-lg-12">
+                        <Activities
+                          activities={this.props.activities && this.props.activities.list}
+                          updateSite={this.props.updateSite}
+                          setPageSiteActiveTab={this.props.setPageSiteActiveTab}
+                          createActivity={this.props.createActivity}
+                          site={this.props.sites && this.props.sites.editing}
+                          users={this.props.users && this.props.users.editing}
+                        />
+                      </section>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -247,6 +302,8 @@ const mapState = (state) => ({
   shares: state.shares,
   zoneTypes: state.zoneTypes,
   zoneSizeTypes: state.zoneSizeTypes,
+  activities: state.activities,
+  users: state.users,
 });
 
 const mapDispatch = {
@@ -263,6 +320,9 @@ const mapDispatch = {
   createOptionChannel,
   getZoneTypes,
   getZoneSizeTypes,
+  getActivitiesBySubjectId,
+  createActivity,
+  setPageSiteActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Site));

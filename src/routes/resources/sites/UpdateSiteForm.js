@@ -11,6 +11,8 @@ class UpdateSiteForm extends Component {
     getSite: PropTypes.func,
     checkSitesByDomain: PropTypes.func,
     sites: PropTypes.object,
+    createActivity: PropTypes.func,
+    users: PropTypes.object,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -35,6 +37,7 @@ class UpdateSiteForm extends Component {
     const description = this.inputSiteDescription.value;
     const status = this.inputSiteStatus.value;
     const site = { id: this.props.siteId };
+    const siteObject = this.props.site;
     site.domain = domain;
     site.name = name;
     site.email = email;
@@ -46,7 +49,18 @@ class UpdateSiteForm extends Component {
 
     // site.status = document.getElementById('inputSiteStatus').value;
     this.props.updateSite(site).then(() => {
-      this.props.getSite(this.props.siteId);
+      const userId = this.props.users.id;
+      const subject = `Site ${name}`;
+      const subjectId = this.props.site.id;
+      const action = 'updated';
+      const other = JSON.stringify(siteObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getSite(this.props.siteId);
+        });
     });
   }
 
@@ -88,7 +102,19 @@ class UpdateSiteForm extends Component {
   }
 
   deleteSite() {
-    this.props.deleteSite(this.props.siteId);
+    const siteObject = this.props.site;
+    this.props.deleteSite(this.props.siteId).then(() => {
+      const userId = this.props.users.id;
+      const subject = `Site ${siteObject.name}`;
+      const subjectId = this.props.site.id;
+      const action = 'deleted';
+      const other = JSON.stringify(siteObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId });
+    });
   }
 
   render() {
