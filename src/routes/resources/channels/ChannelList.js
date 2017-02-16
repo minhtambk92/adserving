@@ -14,6 +14,8 @@ class ChannelList extends Component {
     optionChannels: PropTypes.object,
     createOptionChannel: PropTypes.func,
     channels: PropTypes.object,
+    users: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   onTabClickEditChannel(event) {
@@ -34,6 +36,18 @@ class ChannelList extends Component {
     const siteId = data.siteId;
     if (name && description && siteId) {
       this.props.createChannel({ name, description, status, siteId }).then(() => {
+        if (this.props.list && this.props.list.length > 0) {
+          const userId = this.props.users.id;
+          const subject = `Channel ${data.name}`;
+          const subjectId = this.props.list[0].id;
+          const action = 'duplicated';
+          const other = JSON.stringify(data);
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
         if (this.props.channels && this.props.channels.list) {
           const cId = this.props.channels.list[0].id;
           /* CREATE OPTION CHANNEL */

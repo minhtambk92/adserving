@@ -26,9 +26,12 @@ import {
 } from '../../../../actions/optionChannels';
 import { getSites } from '../../../../actions/sites';
 import { getOptionChannelTypes } from '../../../../actions/optionChannelTypes';
+import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activities';
 import Layout from '../../../../components/Layout';
 import UpdateChannelForm from '../UpdateChannelForm';
 import OptionSelectChannel from '../OptionSelectChannel';
+import Activities from '../Activities';
+import { setPageChannelActiveTab } from '../../../../actions/pages/channels';
 import FilterSiteChannel from '../FilterSiteChannel';
 import Link from '../../../../components/Link';
 import s from './Channel.css'; // eslint-disable-line css-modules/no-unused-class
@@ -53,6 +56,11 @@ class Channel extends Component {
     updateOptionChannel: PropTypes.func,
     getOptionChannelTypes: PropTypes.func,
     optionChannelTypes: PropTypes.object,
+    createActivity: PropTypes.func,
+    getActivitiesBySubjectId: PropTypes.func,
+    users: PropTypes.object,
+    activities: PropTypes.object,
+    setPageChannelActiveTab: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -106,7 +114,18 @@ class Channel extends Component {
         });
       }
     });
+    // Set latest active tab
+    $('.channel-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
     /* eslint-enable no-undef */
+  }
+
+  onTabClick(event) {
+    event.persist();
+    this.props.setPageChannelActiveTab(event.target.getAttribute('data-id'));
+    if (event.target.getAttribute('data-id') === 'activity') {
+      this.props.getActivitiesBySubjectId(this.props.channelId);
+    }
   }
 
   saveOptions() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -287,10 +306,23 @@ class Channel extends Component {
               <div className="nav-tabs-custom channel-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
-                    <a href="#editChannel" data-toggle="tab">Edit Channel</a>
+                    <a
+                      href="#editChannel" data-toggle="tab" data-id="editChannel"
+                      onClick={event => this.onTabClick(event)}
+                    >Edit Channel</a>
                   </li>
                   <li>
-                    <a href="#optionChannel" data-toggle="tab">Option Channel</a>
+                    <a
+                      href="#optionChannel" data-toggle="tab" data-id="optionChannel"
+                      onClick={event => this.onTabClick(event)}
+                    >Option Channel</a>
+                  </li>
+                  <li>
+                    <a
+                      href="#activity" data-toggle="tab"
+                      data-id="activity"
+                      onClick={event => this.onTabClick(event)}
+                    >Activity</a>
                   </li>
                 </ul>
 
@@ -303,6 +335,8 @@ class Channel extends Component {
                       channelId={this.props.channelId}
                       getChannel={this.props.getChannel}
                       sites={this.props.sites.list}
+                      createActivity={this.props.createActivity}
+                      users={this.props.users && this.props.users.editing}
                     />
                   </div>
 
@@ -423,6 +457,20 @@ class Channel extends Component {
                       ><i className="fa fa-floppy-o" /> Save</Link>
                     </div>
                   </div>
+                  <div className="tab-pane" id="activity">
+                    <div className="row">
+                      <section className="col-lg-12">
+                        <Activities
+                          activities={this.props.activities && this.props.activities.list}
+                          updateChannel={this.props.updateChannel}
+                          setPageChannelActiveTab={this.props.setPageChannelActiveTab}
+                          createActivity={this.props.createActivity}
+                          channel={this.props.channels && this.props.channels.editing}
+                          users={this.props.users && this.props.users.editing}
+                        />
+                      </section>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -440,6 +488,8 @@ const mapState = (state) => ({
   optionChannels: state.optionChannels,
   sites: state.sites,
   optionChannelTypes: state.optionChannelTypes,
+  users: state.users,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -451,6 +501,9 @@ const mapDispatch = {
   getSites,
   updateOptionChannel,
   getOptionChannelTypes,
+  getActivitiesBySubjectId,
+  createActivity,
+  setPageChannelActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Channel));

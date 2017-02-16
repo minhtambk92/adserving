@@ -10,6 +10,8 @@ class UpdateChannelForm extends Component {
     deleteChannel: PropTypes.func,
     getChannel: PropTypes.func,
     sites: PropTypes.array,
+    createActivity: PropTypes.func,
+    users: PropTypes.object,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -28,6 +30,7 @@ class UpdateChannelForm extends Component {
     const description = this.inputChannelDescription.value;
     const status = this.inputChannelStatus.value;
 
+    const channelObject = this.props.channel;
     const channel = { id: this.props.channelId };
 
     channel.name = name;
@@ -38,12 +41,35 @@ class UpdateChannelForm extends Component {
     }
 
     this.props.updateChannel(channel).then(() => {
-      this.props.getChannel(this.props.channelId);
+      const userId = this.props.users.id;
+      const subject = `Channel ${name}`;
+      const subjectId = this.props.channel.id;
+      const action = 'updated';
+      const other = JSON.stringify(channelObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getChannel(this.props.channelId);
+        });
     });
   }
 
   deleteChannel() {
-    this.props.deleteChannel(this.props.channelId);
+    const channelObject = this.props.channel;
+    this.props.deleteChannel(this.props.channelId).then(() => {
+      const userId = this.props.users.id;
+      const subject = `Channel ${channelObject.name}`;
+      const subjectId = this.props.channelId;
+      const action = 'deleted';
+      const other = JSON.stringify(channelObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId });
+    });
   }
 
   render() {

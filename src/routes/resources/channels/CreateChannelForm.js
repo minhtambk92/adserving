@@ -11,6 +11,9 @@ class CreateChannelForm extends Component {
     sites: PropTypes.array,
     siteId: PropTypes.string,
     getSite: PropTypes.func,
+    createActivity: PropTypes.func,
+    channels: PropTypes.object,
+    users: PropTypes.object,
   };
 
   clearInput() {
@@ -36,6 +39,18 @@ class CreateChannelForm extends Component {
     }
     if (name && description && siteId) {
       this.props.createChannel({ name, description, status, siteId }).then(() => {
+        if (this.props.channels && this.props.channels.list.length > 0) {
+          const userId = this.props.users.id;
+          const subject = `Channel ${name}`;
+          const subjectId = this.props.channels.list[0].id;
+          const action = 'created';
+          const other = JSON.stringify(this.props.channels.list[0]);
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
         this.clearInput();
         if (this.props.siteId) {
           this.props.getSite(this.props.siteId);

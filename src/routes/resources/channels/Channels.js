@@ -15,6 +15,7 @@ import { getChannels, createChannel, getChannelsFilters, setChannelsFilters } fr
 import { getSites } from '../../../actions/sites';
 import { setPageChannelActiveTab } from '../../../actions/pages/channels';
 import { getOptionChannelByChannelId, createOptionChannel } from '../../../actions/optionChannels';
+import { createActivity } from '../../../actions/activities';
 import CreateChannelForm from './CreateChannelForm';
 import ChannelList from './ChannelList';
 import FilterChannelForm from './FilterChannelsForm';
@@ -33,6 +34,9 @@ class Channels extends Component {
     getOptionChannelByChannelId: PropTypes.func,
     optionChannels: PropTypes.object,
     createOptionChannel: PropTypes.func,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
+    users: PropTypes.object,
   };
 
   componentWillMount() {
@@ -102,6 +106,9 @@ class Channels extends Component {
                 filters={this.props.channels.filters}
                 createChannel={this.props.createChannel}
                 sites={this.props.sites && this.props.sites.list}
+                createActivity={this.props.createActivity}
+                users={this.props.users && this.props.users.editing}
+                channels={this.props.channels}
               />
             </div>
             {/* /.col */}
@@ -125,6 +132,8 @@ class Channels extends Component {
                   optionChannels={this.props.optionChannels}
                   createOptionChannel={this.props.createOptionChannel}
                   channels={this.props.channels}
+                  createActivity={this.props.createActivity}
+                  users={this.props.users && this.props.users.editing}
                 />
               </div>
               {/* /.box-body */}
@@ -143,6 +152,8 @@ const mapState = (state) => ({
   channels: state.channels,
   sites: state.sites,
   optionChannels: state.optionChannels,
+  activities: state.activities,
+  users: state.users,
 });
 
 const mapDispatch = {
@@ -154,6 +165,7 @@ const mapDispatch = {
   setChannelsFilters,
   getOptionChannelByChannelId,
   createOptionChannel,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Channels));
