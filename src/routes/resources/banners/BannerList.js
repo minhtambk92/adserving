@@ -12,6 +12,8 @@ class BannerList extends Component {
     banners: PropTypes.object,
     tracks: PropTypes.object,
     createTrack: PropTypes.func,
+    users: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   onTabClickBanner(event) {
@@ -83,6 +85,18 @@ class BannerList extends Component {
         expirationDate,
         channelId,
       }).then(() => {
+        if (this.props.list && this.props.list.length > 0) {
+          const userId = this.props.users.id;
+          const subject = `Banner ${data.name}`;
+          const subjectId = this.props.list[0].id;
+          const action = 'duplicated';
+          const other = JSON.stringify(data);
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
         if (this.props.banners && this.props.banners.list && this.props.banners.list[0]) {
           const bannerId = this.props.banners.list[0].id;
           const arrTracks = data.tracks;

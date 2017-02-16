@@ -24,6 +24,7 @@ import { createTrack } from '../../../actions/tracks';
 import { getBannerHtmlTypes } from '../../../actions/bannerHtmlTypes';
 import { getBannerTypes } from '../../../actions/bannerTypes';
 import { getAdsServers } from '../../../actions/adsServers';
+import { createActivity } from '../../../actions/activities';
 import BannerList from './BannerList';
 import CreateBannerForm from './CreateBannerForm';
 import FilterBannersForm from './FilterBannersForm';
@@ -50,6 +51,9 @@ class Banners extends Component {
     bannerTypes: PropTypes.object,
     getAdsServers: PropTypes.func,
     adsServers: PropTypes.object,
+    activities: PropTypes.object,
+    users: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   componentWillMount() {
@@ -132,6 +136,9 @@ class Banners extends Component {
                 bannerTypeList={this.props.bannerTypes && this.props.bannerTypes.list}
                 getBannerTypes={this.props.getBannerTypes}
                 adsServerList={this.props.adsServers && this.props.adsServers.list}
+                createActivity={this.props.createActivity}
+                users={this.props.users && this.props.users.editing}
+                banners={this.props.banners && this.props.banners.list}
               />
             </div>
             {/* /.col */}
@@ -154,6 +161,8 @@ class Banners extends Component {
                   banners={this.props.banners}
                   tracks={this.props.tracks}
                   createTrack={this.props.createTrack}
+                  createActivity={this.props.createActivity}
+                  users={this.props.users && this.props.users.editing}
                 />
               </div>
               {/* /.box-body */}
@@ -177,6 +186,8 @@ const mapState = (state) => ({
   bannerHtmlTypes: state.bannerHtmlTypes,
   bannerTypes: state.bannerTypes,
   adsServers: state.adsServers,
+  activities: state.activities,
+  users: state.users,
 });
 
 const mapDispatch = {
@@ -191,6 +202,7 @@ const mapDispatch = {
   getBannerHtmlTypes,
   getBannerTypes,
   getAdsServers,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Banners));

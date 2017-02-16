@@ -27,12 +27,15 @@ import {
   deleteTrack,
   updateTrack,
 } from '../../../../actions/tracks';
+import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activities';
+import { setPageBannerActiveTab } from '../../../../actions/pages/banners';
 import Layout from '../../../../components/Layout';
 import ListPlacementNotBelongBanner from '../ListPlacementNotBelongBanner';
 import ListPlacementOfBanner from '../ListPlacementOfBanner';
 import UpdateBannerForm from '../UpdateBannerForm';
 import CreatePlacementInBanner from '../../placements/CreatePlacementForm';
 import OptionBannerForm from '../OptionBannerForm';
+import Activities from '../Activities';
 import s from './Banner.css'; // eslint-disable-line css-modules/no-unused-class
 // import { defineMessages, FormattedRelative } from 'react-intl';
 
@@ -63,6 +66,11 @@ class Banner extends Component {
     bannerTypes: PropTypes.object,
     getAdsServers: PropTypes.func,
     adsServers: PropTypes.object,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
+    users: PropTypes.object,
+    getActivitiesBySubjectId: PropTypes.func,
+    setPageBannerActiveTab: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -82,6 +90,7 @@ class Banner extends Component {
     this.props.getBannerHtmlTypes();
     this.props.getBannerTypes();
     this.props.getAdsServers();
+    this.props.getActivitiesBySubjectId(this.props.bannerId);
   }
 
   componentDidMount() {
@@ -106,6 +115,20 @@ class Banner extends Component {
       }
     } else if (placements && placements.length === 0) {
       this.setState({ arrPlacement: [] });
+    }
+  }
+
+  componentDidUpdate() {
+    // Set latest active tab
+    $('.banner-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
+  onTabClick(event) {
+    event.persist();
+    this.props.setPageBannerActiveTab(event.target.getAttribute('data-id'));
+    if (event.target.getAttribute('data-id') === 'activity') {
+      this.props.getActivitiesBySubjectId(this.props.bannerId);
     }
   }
 
@@ -171,13 +194,20 @@ class Banner extends Component {
               <div className="nav-tabs-custom banner-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
-                    <a href="#editBanner" data-toggle="tab">Edit Banner</a>
+                    <a href="#editBanner" data-toggle="tab" data-id="editBanner" onClick={event => this.onTabClick(event)}>Edit Banner</a>
                   </li>
                   <li>
-                    <a href="#optionBanner" data-toggle="tab">Option Banner</a>
+                    <a href="#optionBanner" data-toggle="tab" data-id="optionBanner" onClick={event => this.onTabClick(event)}>Option Banner</a>
                   </li>
                   <li>
-                    <a href="#addPlacement" data-toggle="tab">Add Placement</a>
+                    <a href="#addPlacement" data-toggle="tab" data-id="addPlacement" onClick={event => this.onTabClick(event)}>Add Placement</a>
+                  </li>
+                  <li>
+                    <a
+                      href="#activity" data-toggle="tab"
+                      data-id="activity"
+                      onClick={event => this.onTabClick(event)}
+                    >Activity</a>
                   </li>
                 </ul>
 
@@ -196,6 +226,8 @@ class Banner extends Component {
                       getBanner={this.props.getBanner}
                       channels={this.props.channels.list}
                       adsServerList={this.props.adsServers && this.props.adsServers.list}
+                      createActivity={this.props.createActivity}
+                      users={this.props.users && this.props.users.editing}
                     />
                   </div>
 
@@ -311,6 +343,24 @@ class Banner extends Component {
                       </div>)}
                     </div>
                   </div>
+
+                  {/* /#Activity */}
+                  <div className="tab-pane" id="activity">
+                    <div className="row">
+                      <section className="col-lg-12">
+                        <Activities
+                          activities={this.props.activities && this.props.activities.list}
+                          setPageBannerActiveTab={this.props.setPageBannerActiveTab}
+                          createActivity={this.props.createActivity}
+                          users={this.props.users && this.props.users.editing}
+                          banner={this.props.banners.editing}
+                          updateBanner={this.props.updateBanner}
+                          bannerId={this.props.bannerId}
+                          getBanner={this.props.getBanner}
+                        />
+                      </section>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -332,6 +382,8 @@ const mapState = (state) => ({
   bannerHtmlTypes: state.bannerHtmlTypes,
   bannerTypes: state.bannerTypes,
   adsServers: state.adsServers,
+  activities: state.activities,
+  users: state.users,
 });
 
 const mapDispatch = {
@@ -348,6 +400,9 @@ const mapDispatch = {
   getBannerHtmlTypes,
   getBannerTypes,
   getAdsServers,
+  createActivity,
+  getActivitiesBySubjectId,
+  setPageBannerActiveTab,
 };
 
 export default withStyles(s, style, dropZoneStyle)(connect(mapState, mapDispatch)(Banner));

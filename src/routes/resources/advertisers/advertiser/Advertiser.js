@@ -111,7 +111,7 @@ class Advertiser extends Component {
                       href="#activity" data-toggle="tab"
                       data-id="activity"
                       onClick={event => this.onTabClick(event)}
-                    >Activivty</a>
+                    >Activity</a>
                   </li>
                 </ul>
 
@@ -152,6 +152,8 @@ class Advertiser extends Component {
                                 createCampaign={this.props.createCampaign}
                                 advertiserId={this.props.advertiserId}
                                 getAdvertiser={this.props.getAdvertiser}
+                                createActivity={this.props.createActivity}
+                                users={this.props.users && this.props.users.editing}
                               />
                             </div>
                           </div>
