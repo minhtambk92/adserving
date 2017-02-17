@@ -21,7 +21,7 @@ RUN yarn run build --docker
 # ENV vars
 ENV NODE_ENV "development"
 ENV WEBSITE_HOSTNAME "adserving.quynd.com"
-ENV DATABASE_URL "mysql://root:bXy3E802rM@45.124.93.190:3307/adserving"
+ENV DATABASE_URL "mysql://root:123456@localhost:3307/adserving"
 
 CMD [ "node", "./build/server.js" ]
 
