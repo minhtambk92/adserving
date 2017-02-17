@@ -39,7 +39,7 @@ class AdsCode extends Component {
             <input
               type="text" id="inputCoreJsTemplate"
               className="form-control" placeholder="http://..."
-              defaultValue="http://corejs.manhhailua.com/build/Template.min.js"
+              defaultValue="http://corejs.codek.org/build/Template.min.js"
               ref={c => {
                 this.inputCoreJsTemplate = c;
               }}
