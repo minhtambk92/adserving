@@ -2,4 +2,7 @@
  * Created by manhhailua on 12/30/16.
  */
 
-export Permission from './Permission';
+import Permission from './Permission';
+
+// eslint-disable-next-line import/prefer-default-export
+export { Permission };

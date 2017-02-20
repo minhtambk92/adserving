@@ -2,4 +2,7 @@
  * Created by quynd on 12/29/16.
  */
 
-export Claims from './Claims';
+import Claims from './Claims';
+
+// eslint-disable-next-line import/prefer-default-export
+export { Claims };
