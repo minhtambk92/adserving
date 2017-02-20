@@ -91,7 +91,7 @@ class OptionSelectChannel extends Component {
                   <div className="col-sm-12">
                     <select
                       className="form-control inputTypeFilter"
-                      ref={c => {
+                      ref={(c) => {
                         this.inputTypeFilter = c;
                       }}
                     >
@@ -111,7 +111,7 @@ class OptionSelectChannel extends Component {
                       <div className="col-sm-9">
                         <select
                           className="form-control inputSiteFilter"
-                          ref={c => {
+                          ref={(c) => {
                             this.inputSiteFilter = c;
                           }}
                         >
@@ -123,7 +123,7 @@ class OptionSelectChannel extends Component {
                     <div className="form-group">
                       <div className="col-lg-3">&nbsp;</div>
                       <div className="col-lg-9 optionVariable" id={id}>
-                        {this.props.data && this.props.data.map((data) =>
+                        {this.props.data && this.props.data.map(data =>
                           <div className="col-sm-3" key={data.id}>
                             <label
                               htmlFor="inputChannelOptions"

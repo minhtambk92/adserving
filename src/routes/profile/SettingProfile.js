@@ -90,7 +90,7 @@ class SettingProfile extends Component {
                     id="inputProfileName"
                     defaultValue={this.props.user && this.props.user.profile &&
                     this.props.user.profile.displayName ? this.props.user.profile.displayName : ''}
-                    ref={c => {
+                    ref={(c) => {
                       this.inputProfileName = c;
                     }}
                     placeholder="Name"
@@ -109,7 +109,7 @@ class SettingProfile extends Component {
                     id="inputEmail"
                     defaultValue={this.props.user && this.props.user.email ?
                       this.props.user.email : ''}
-                    ref={c => {
+                    ref={(c) => {
                       this.inputProfileEmail = c;
                     }}
                     placeholder="Email"
@@ -128,7 +128,7 @@ class SettingProfile extends Component {
                     id="inputProfileGender" className="form-control"
                     defaultValue={this.props.user && this.props.user.profile &&
                     this.props.user.profile.gender ? this.props.user.profile.gender : ''}
-                    ref={c => {
+                    ref={(c) => {
                       this.inputProfileGender = c;
                     }}
                   >
@@ -153,7 +153,7 @@ class SettingProfile extends Component {
                     placeholder="Ha Noi,Viet Nam"
                     defaultValue={this.props.user && this.props.user.profile &&
                     this.props.user.profile.location ? this.props.user.profile.location : ''}
-                    ref={c => {
+                    ref={(c) => {
                       this.inputProfileLocation = c;
                     }}
                   />

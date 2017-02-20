@@ -158,7 +158,7 @@ class PermissionList extends Component {
         </div>
         <div className="col-sm-12" id="ChannelPermission">
           {this.props.page.statusUpdatePermission === true &&
-          this.state.arrPermission && this.state.arrPermission.map((count) => (
+          this.state.arrPermission && this.state.arrPermission.map(count => (
             <div className="box" key={count}>
               <div className="editPermission">
                 <EditPermissionForm
@@ -174,7 +174,7 @@ class PermissionList extends Component {
           ))}
           {this.props.page &&
           this.props.page.statusCreatePermission === true && this.state.arrCreatePermission
-          && this.state.arrCreatePermission.map((count) => (
+          && this.state.arrCreatePermission.map(count => (
             <div className="box" key={count}>
               <div className="createPermission">
                 <CreatePermissionForm
@@ -196,7 +196,7 @@ class PermissionList extends Component {
             <button
               type="button"
               id="create"
-              onClick={(event) => this.addPermission(event)}
+              onClick={event => this.addPermission(event)}
               className="btn btn-primary"
             >
                 Create Permission

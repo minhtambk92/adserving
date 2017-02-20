@@ -96,7 +96,7 @@ class CreateOptionChannelValueForm extends Component {
                 <input
                   type="text" className="form-control" id="inputOptionChannelValueName"
                   placeholder="Name"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputOptionChannelValueName = c;
                   }}
                 />
@@ -110,7 +110,7 @@ class CreateOptionChannelValueForm extends Component {
               <div className="col-sm-10">
                 <select
                   id="inputOptionChannelTypeId" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputOptionChannelTypeId = c;
                   }}
                 >
@@ -131,7 +131,7 @@ class CreateOptionChannelValueForm extends Component {
               <div className="col-sm-10">
                 <select
                   id="inputOptionChannelValueStatus" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputOptionChannelValueStatus = c;
                   }}
                 >

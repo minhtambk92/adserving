@@ -136,7 +136,7 @@ class ListZoneOfSite extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/zone/${rowData.id}`}
-          onClick={(event) => this.onTabClickEditZone(event)}
+          onClick={event => this.onTabClickEditZone(event)}
         >{rowData.name}</Link>, cell);
       },
     }, {
@@ -163,7 +163,7 @@ class ListZoneOfSite extends Component {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link
           to={`/resource/zone/${rowData.id}`}
-          onClick={(event) => this.onTabClickAddPlacement(event)}
+          onClick={event => this.onTabClickAddPlacement(event)}
         >Add Placement</Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },

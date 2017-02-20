@@ -51,7 +51,7 @@ class Profile extends Component {
     );
   }
 }
-const mapState = (state) => ({
+const mapState = state => ({
   resources: state.resources,
   users: state.users,
   page: state.page.resources,

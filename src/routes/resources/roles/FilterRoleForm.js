@@ -32,7 +32,7 @@ class FilterRolesForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputRolesFilterStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputRolesFilterStatus = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'status')}

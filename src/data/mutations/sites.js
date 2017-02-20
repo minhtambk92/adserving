@@ -21,7 +21,7 @@ const sites = {
       async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
-        await Site.create(args.site).then(site => {
+        await Site.create(args.site).then((site) => {
           opts.where.id = { $eq: site.id };
         });
         return opts;

@@ -86,7 +86,7 @@ class ListChannelOfSite extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/channel/${rowData.id}`}
-          onClick={(event) => this.onTabClickEditChannel(event)}
+          onClick={event => this.onTabClickEditChannel(event)}
         >{rowData.name}</Link>, cell);
       },
     }, {
@@ -96,7 +96,7 @@ class ListChannelOfSite extends Component {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         ReactDOM.render(<Link
           to={`/resource/channel/${rowData.id}`}
-          onClick={(event) => this.onTabClickOptionChannel(event)}
+          onClick={event => this.onTabClickOptionChannel(event)}
         >Option</Link>, cell);
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       },

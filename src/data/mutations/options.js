@@ -20,7 +20,7 @@ const options = {
         /* eslint-enable no-shadow */
         const opts = options;
         opts.where = options.where || {};
-        await Option.create(args.option).then(option => {
+        await Option.create(args.option).then((option) => {
           opts.where.id = { $eq: option.id };
         });
         return opts;

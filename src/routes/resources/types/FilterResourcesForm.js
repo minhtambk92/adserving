@@ -32,7 +32,7 @@ class FilterResourcesForm extends Component {
               <select
                 id="inputResourcesFilterHasMeta"
                 className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputResourcesFilterHasMeta = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'hasMeta')}
@@ -54,7 +54,7 @@ class FilterResourcesForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputResourcesFilterStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputResourcesFilterStatus = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'status')}

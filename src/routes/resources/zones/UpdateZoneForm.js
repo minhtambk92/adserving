@@ -92,13 +92,13 @@ class UpdateZoneForm extends Component {
     const isSize = arrZone[0].isSize;
     if (isSize === true) {
       event.persist();
-      this.setState((previousState) => ({
+      this.setState(previousState => ({
         ...previousState,
         checkTypeZone: true,
       }));
     } else if (isSize === false) {
       event.persist();
-      this.setState((previousState) => ({
+      this.setState(previousState => ({
         ...previousState,
         checkTypeZone: false,
       }));
@@ -224,7 +224,7 @@ class UpdateZoneForm extends Component {
             <input
               type="text" className="form-control" id="inputZoneName"
               placeholder="Dan Tri"
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneName = c;
               }}
             />
@@ -240,7 +240,7 @@ class UpdateZoneForm extends Component {
               id="inputZoneSite"
               className="form-control select2"
               style={{ width: '100%' }}
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneSite = c;
               }}
             >
@@ -262,7 +262,7 @@ class UpdateZoneForm extends Component {
               id="inputZoneType"
               className="form-control"
               onChange={event => this.onSelectZoneType(event)}
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneType = c;
               }}
             >
@@ -286,7 +286,7 @@ class UpdateZoneForm extends Component {
                   id="inputZoneSize"
                   className="form-control"
                   onChange={event => this.onSelectSize(event)}
-                  ref={c => {
+                  ref={(c) => {
                     this.inputZoneSize = c;
                   }}
                 >
@@ -318,7 +318,7 @@ class UpdateZoneForm extends Component {
                         onKeyDown={event => this.onKeyDown(event)}
                         onBlur={event => this.onBlur(event)}
                         placeholder="300"
-                        ref={c => {
+                        ref={(c) => {
                           this.inputZoneWidth = c;
                         }}
                       />
@@ -336,7 +336,7 @@ class UpdateZoneForm extends Component {
                         onKeyDown={event => this.onKeyDown(event)}
                         onBlur={event => this.onBlur(event)}
                         placeholder="300"
-                        ref={c => {
+                        ref={(c) => {
                           this.inputZoneHeight = c;
                         }}
                       />
@@ -356,7 +356,7 @@ class UpdateZoneForm extends Component {
             <textarea
               className="form-control" id="inputZoneHtml"
               rows="5" placeholder="More info..."
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneHtml = c;
               }}
             />
@@ -371,7 +371,7 @@ class UpdateZoneForm extends Component {
             <textarea
               className="form-control" id="inputZoneCss"
               rows="5" placeholder="More info..."
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneCss = c;
               }}
             />
@@ -386,7 +386,7 @@ class UpdateZoneForm extends Component {
             <select
               id="inputZoneSlot"
               className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneSlot = c;
               }}
             >
@@ -421,7 +421,7 @@ class UpdateZoneForm extends Component {
           <div className="col-sm-10">
             <select
               id="inputZoneStatus" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneStatus = c;
               }}
             >
@@ -439,7 +439,7 @@ class UpdateZoneForm extends Component {
             <textarea
               className="form-control" id="inputZoneDescription"
               rows="5" placeholder="More info..."
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneDescription = c;
               }}
             />

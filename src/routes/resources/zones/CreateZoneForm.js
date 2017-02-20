@@ -68,13 +68,13 @@ class CreateZoneForm extends Component {
     const isSize = arrZone[0].isSize;
     if (isSize === true) {
       event.persist();
-      this.setState((previousState) => ({
+      this.setState(previousState => ({
         ...previousState,
         checkTypeZone: true,
       }));
     } else if (isSize === false) {
       event.persist();
-      this.setState((previousState) => ({
+      this.setState(previousState => ({
         ...previousState,
         checkTypeZone: false,
       }));
@@ -217,7 +217,7 @@ class CreateZoneForm extends Component {
               <input
                 type="text" className="form-control" id="inputZoneName"
                 placeholder="Dan Tri"
-                ref={c => {
+                ref={(c) => {
                   this.inputZoneName = c;
                 }}
               />
@@ -234,7 +234,7 @@ class CreateZoneForm extends Component {
                   id="inputZoneSite"
                   className="form-control select2"
                   style={{ width: '100%' }}
-                  ref={c => {
+                  ref={(c) => {
                     this.inputZoneSite = c;
                   }}
                 >
@@ -257,7 +257,7 @@ class CreateZoneForm extends Component {
                 id="inputZoneType"
                 className="form-control"
                 onChange={event => this.onSelectZoneType(event)}
-                ref={c => {
+                ref={(c) => {
                   this.inputZoneType = c;
                 }}
               >
@@ -281,7 +281,7 @@ class CreateZoneForm extends Component {
                     id="inputZoneSize"
                     className="form-control"
                     onChange={event => this.onSelectSize(event)}
-                    ref={c => {
+                    ref={(c) => {
                       this.inputZoneSize = c;
                     }}
                   >
@@ -314,7 +314,7 @@ class CreateZoneForm extends Component {
                           onKeyDown={event => this.onKeyDown(event)}
                           onBlur={event => this.onBlur(event)}
                           placeholder="300"
-                          ref={c => {
+                          ref={(c) => {
                             this.inputZoneWidth = c;
                           }}
                         />
@@ -332,7 +332,7 @@ class CreateZoneForm extends Component {
                           onKeyDown={event => this.onKeyDown(event)}
                           onBlur={event => this.onBlur(event)}
                           placeholder="300"
-                          ref={c => {
+                          ref={(c) => {
                             this.inputZoneHeight = c;
                           }}
                         />
@@ -352,7 +352,7 @@ class CreateZoneForm extends Component {
               <textarea
                 className="form-control" id="inputZoneHTML"
                 rows="5" placeholder="More info..."
-                ref={c => {
+                ref={(c) => {
                   this.inputZoneHTML = c;
                 }}
               />
@@ -367,7 +367,7 @@ class CreateZoneForm extends Component {
               <textarea
                 className="form-control" id="inputZoneCSS"
                 rows="5" placeholder="More info..."
-                ref={c => {
+                ref={(c) => {
                   this.inputZoneCSS = c;
                 }}
               />
@@ -382,7 +382,7 @@ class CreateZoneForm extends Component {
               <select
                 id="inputZoneSlot"
                 className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputZoneSlot = c;
                 }}
               >
@@ -417,7 +417,7 @@ class CreateZoneForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputZoneStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputZoneStatus = c;
                 }}
               >
@@ -435,7 +435,7 @@ class CreateZoneForm extends Component {
               <textarea
                 className="form-control" id="inputZoneDescription"
                 rows="5" placeholder="More info..."
-                ref={c => {
+                ref={(c) => {
                   this.inputZoneDescription = c;
                 }}
               />

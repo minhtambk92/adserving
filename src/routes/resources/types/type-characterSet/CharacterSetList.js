@@ -172,7 +172,7 @@ class CharacterSetList extends Component {
         </div>
         <div className="col-sm-12">
           {this.props.page.statusUpdateCharacterSet === true &&
-          this.state.arrCharacterSet && this.state.arrCharacterSet.map((count) => (
+          this.state.arrCharacterSet && this.state.arrCharacterSet.map(count => (
             <div className="box" key={count}>
               <div className="editTypeBannerHtmlForm">
                 <EditCharacterSetForm
@@ -189,7 +189,7 @@ class CharacterSetList extends Component {
           ))}
           {this.props.page &&
           this.props.page.statusCreateCharacterSet === true && this.state.arrCreateCharacterSet
-          && this.state.arrCreateCharacterSet.map((count) => (
+          && this.state.arrCreateCharacterSet.map(count => (
             <div className="box" key={count}>
               <div className="CreateCharacterSetForm">
                 <CreateCharacterSetForm
@@ -210,7 +210,7 @@ class CharacterSetList extends Component {
             <button
               type="button"
               id="create"
-              onClick={(event) => this.addCharacterSet(event)}
+              onClick={event => this.addCharacterSet(event)}
               className="btn btn-primary"
             >
                 Create CharacterSet

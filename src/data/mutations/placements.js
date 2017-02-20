@@ -18,7 +18,7 @@ const placements = {
       async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
-        await Placement.create(args.placement).then(placement => {
+        await Placement.create(args.placement).then((placement) => {
           opts.where.id = { $eq: placement.id };
         });
         return opts;

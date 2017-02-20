@@ -16,7 +16,7 @@ class Activities extends Component {
     return (
       <div className="activities">
         {this.props.users && this.props.users.activities &&
-        this.props.users.activities.map((activity) => (
+        this.props.users.activities.map(activity => (
           <div className="post" key={activity.id}>
             <div className="user-block">
               <img

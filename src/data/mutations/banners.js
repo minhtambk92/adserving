@@ -18,7 +18,7 @@ const banners = {
       async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
-        await Banner.create(args.banner).then(banner => {
+        await Banner.create(args.banner).then((banner) => {
           opts.where.id = { $eq: banner.id };
         });
         return opts;

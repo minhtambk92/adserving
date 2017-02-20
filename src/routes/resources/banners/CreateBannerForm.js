@@ -75,7 +75,7 @@ class CreateBannerForm extends Component {
     const typeId = event.target.value.trim();
     const type = _.filter(this.props.bannerTypeList, { id: typeId });
     const isUpload = type[0].isUpload;
-    this.setState((previousState) => ({
+    this.setState(previousState => ({
       ...previousState,
       checkIsUpload: isUpload,
     }));
@@ -214,7 +214,7 @@ class CreateBannerForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputBannerType" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputBannerType = c;
                 }}
                 onChange={event => this.onInputChange(event)}
@@ -240,7 +240,7 @@ class CreateBannerForm extends Component {
               <input
                 type="text" className="form-control" id="inputBannerName"
                 placeholder="Dan Tri"
-                ref={c => {
+                ref={(c) => {
                   this.inputBannerName = c;
                 }}
               />
@@ -259,7 +259,7 @@ class CreateBannerForm extends Component {
                       <textarea
                         className="form-control" id="inputBannerHTML"
                         rows="5" placeholder="More info..."
-                        ref={c => {
+                        ref={(c) => {
                           this.inputBannerHTML = c;
                         }}
                       />
@@ -273,7 +273,7 @@ class CreateBannerForm extends Component {
                     <div className="col-sm-10">
                       <select
                         id="inputBannerAdsServer" className="form-control"
-                        ref={c => {
+                        ref={(c) => {
                           this.inputBannerAdsServer = c;
                         }}
                       >
@@ -296,7 +296,7 @@ class CreateBannerForm extends Component {
                     <div className="col-sm-10">
                       <select
                         id="inputBannerHtmlType" className="form-control"
-                        ref={c => {
+                        ref={(c) => {
                           this.inputBannerHtmlType = c;
                         }}
                       >
@@ -335,7 +335,7 @@ class CreateBannerForm extends Component {
                       <input
                         type="text" className="form-control" id="inputBannerUrl"
                         placeholder="http://kenh14.vn"
-                        ref={c => {
+                        ref={(c) => {
                           this.inputBannerUrl = c;
                         }}
                       />
@@ -349,7 +349,7 @@ class CreateBannerForm extends Component {
                     <div className="col-sm-10">
                       <select
                         id="inputBannerTarget" className="form-control"
-                        ref={c => {
+                        ref={(c) => {
                           this.inputBannerTarget = c;
                         }}
                       >
@@ -372,7 +372,7 @@ class CreateBannerForm extends Component {
               <input
                 type="number" className="form-control" id="inputBannerWidth"
                 placeholder="300"
-                ref={c => {
+                ref={(c) => {
                   this.inputBannerWidth = c;
                 }}
               />
@@ -387,7 +387,7 @@ class CreateBannerForm extends Component {
               <input
                 type="number" className="form-control" id="inputBannerHeight"
                 placeholder="300"
-                ref={c => {
+                ref={(c) => {
                   this.inputBannerHeight = c;
                 }}
               />
@@ -418,7 +418,7 @@ class CreateBannerForm extends Component {
               <input
                 type="number" className="form-control"
                 id="inputBannerWeight" placeholder="1"
-                ref={c => {
+                ref={(c) => {
                   this.inputBannerWeight = c;
                 }}
               />
@@ -429,7 +429,7 @@ class CreateBannerForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputChannelId" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputChannelId = c;
                 }}
               >
@@ -452,7 +452,7 @@ class CreateBannerForm extends Component {
             <div className="col-sm-10 checkbox">
               <ICheck
                 type="checkbox" id="inputBannerIsIFrame" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputBannerIsIFrame = c;
                 }}
               />
@@ -466,7 +466,7 @@ class CreateBannerForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputBannerStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputBannerStatus = c;
                 }}
               >
@@ -484,7 +484,7 @@ class CreateBannerForm extends Component {
               <textarea
                 className="form-control" id="inputBannerDescription"
                 rows="5" placeholder="More info..."
-                ref={c => {
+                ref={(c) => {
                   this.inputBannerDescription = c;
                 }}
               />

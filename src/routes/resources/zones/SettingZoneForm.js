@@ -88,7 +88,7 @@ class SettingZoneForm extends Component {
           <div className="col-sm-10 checkbox">
             <ICheck
               type="checkbox" id="inputZoneShowBannerAgain" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneShowBannerAgain = c;
               }}
             />
@@ -104,7 +104,7 @@ class SettingZoneForm extends Component {
             <select
               id="inputZoneTargetIFrame"
               className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneTargetIFrame = c;
               }}
             >
@@ -124,7 +124,7 @@ class SettingZoneForm extends Component {
             <input
               type="text" className="form-control" id="inputZoneSource"
               placeholder="Dan Tri"
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneSource = c;
               }}
             />
@@ -138,7 +138,7 @@ class SettingZoneForm extends Component {
           <div className="col-sm-10 checkbox">
             <ICheck
               type="checkbox" id="inputZoneShowTextBanner" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneShowTextBanner = c;
               }}
             />
@@ -152,7 +152,7 @@ class SettingZoneForm extends Component {
           <div className="col-sm-10 checkbox">
             <ICheck
               type="checkbox" id="inputZoneShowCampaignAgain" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneShowCampaignAgain = c;
               }}
             />
@@ -167,7 +167,7 @@ class SettingZoneForm extends Component {
             <select
               id="inputZoneThirdParty"
               className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneThirdParty = c;
               }}
             >
@@ -187,7 +187,7 @@ class SettingZoneForm extends Component {
             <select
               id="inputZoneCharacterSet"
               className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneCharacterSet = c;
               }}
             >
@@ -208,7 +208,7 @@ class SettingZoneForm extends Component {
           <div className="col-sm-10 checkbox">
             <ICheck
               type="checkbox" id="inputZoneIncludeDescription" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputZoneIncludeDescription = c;
               }}
             />

@@ -33,7 +33,7 @@ class ICheck extends Component {
 
     return (
       <input
-        ref={c => {
+        ref={(c) => {
           this.input = c;
         }}
         {...rest}
@@ -45,7 +45,7 @@ class ICheck extends Component {
     // Open the portal
     return (
       <div
-        ref={c => {
+        ref={(c) => {
           this.portal = c;
         }}
       />

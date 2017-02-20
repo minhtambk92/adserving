@@ -18,7 +18,7 @@ const zoneTypes = {
         const opts = options;
         opts.where = options.where || {};
         /* eslint-disable no-shadow */
-        await ZoneType.create(args.zoneType).then(zoneType => {
+        await ZoneType.create(args.zoneType).then((zoneType) => {
           /* eslint-enable no-shadow */
           opts.where.id = { $eq: zoneType.id };
         });

@@ -18,7 +18,7 @@ const campaigns = {
       async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
-        await Campaign.create(args.campaign).then(campaign => {
+        await Campaign.create(args.campaign).then((campaign) => {
           opts.where.id = { $eq: campaign.id };
         });
         return opts;

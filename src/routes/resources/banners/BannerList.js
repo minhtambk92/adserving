@@ -129,7 +129,7 @@ class BannerList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/banner/${rowData.id}`}
-          onClick={(event) => this.onTabClickBanner(event)}
+          onClick={event => this.onTabClickBanner(event)}
         >{cellData}</Link>, cell);
       },
     }, {
@@ -141,7 +141,7 @@ class BannerList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/banner/${rowData.id}`}
-          onClick={(event) => this.onTabClickOptionBanner(event)}
+          onClick={event => this.onTabClickOptionBanner(event)}
         >Option Banner</Link>, cell);
       },
     }, {
@@ -150,7 +150,7 @@ class BannerList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/banner/${rowData.id}`}
-          onClick={(event) => this.onTabClickNewPlacement(event)}
+          onClick={event => this.onTabClickNewPlacement(event)}
         >New Placement</Link>, cell);
       },
     }, {

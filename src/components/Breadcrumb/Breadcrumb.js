@@ -29,7 +29,7 @@ class Breadcrumb extends Component {
   }
 }
 
-const mapState = (state) => ({
+const mapState = state => ({
   menus: state.menus,
 });
 

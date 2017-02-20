@@ -144,7 +144,7 @@ class ZoneList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/zone/${rowData.id}`}
-          onClick={(event) => this.onTabClickZone(event)}
+          onClick={event => this.onTabClickZone(event)}
         >{cellData}</Link>, cell);
       },
     }, {
@@ -170,7 +170,7 @@ class ZoneList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/zone/${rowData.id}`}
-          onClick={(event) => this.onTabClickShareZone(event)}
+          onClick={event => this.onTabClickShareZone(event)}
         >Shares</Link>, cell);
       },
     }, {
@@ -179,7 +179,7 @@ class ZoneList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/zone/${rowData.id}`}
-          onClick={(event) => this.onTabClickSettingZone(event)}
+          onClick={event => this.onTabClickSettingZone(event)}
         >Settings</Link>, cell);
       },
     }, {

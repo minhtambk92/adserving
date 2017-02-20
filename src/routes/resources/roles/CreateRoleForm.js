@@ -43,7 +43,7 @@ class CreateRoleForm extends Component {
               <input
                 type="text" className="form-control" id="inputRoleUniqueName"
                 placeholder="user"
-                ref={c => {
+                ref={(c) => {
                   this.inputRoleUniqueName = c;
                 }}
               />
@@ -58,7 +58,7 @@ class CreateRoleForm extends Component {
               <input
                 type="text" className="form-control" id="inputRoleName"
                 placeholder="Role"
-                ref={c => {
+                ref={(c) => {
                   this.inputRoleName = c;
                 }}
               />

@@ -31,7 +31,7 @@ class CreateShareForm extends Component {
 
   createShare() {
     const arr = this.props.list;
-    _.sumBy(arr, (o) => o.weight); // ➜ 20
+    _.sumBy(arr, o => o.weight); // ➜ 20
     const sumWeight = _.sumBy(arr, 'weight');// ➜ 20
     const name = this.inputCreateShareName.value;
     const css = this.inputCreateShareCSS.value;
@@ -100,7 +100,7 @@ class CreateShareForm extends Component {
                 <input
                   type="text" className="form-control" id="inputCreateShareName"
                   placeholder="Name"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputCreateShareName = c;
                   }}
                 />
@@ -116,7 +116,7 @@ class CreateShareForm extends Component {
                   className="form-control"
                   rows="3" placeholder="More info..."
                   id="inputCreateShareHTML"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputCreateShareHTML = c;
                   }}
                 />
@@ -131,7 +131,7 @@ class CreateShareForm extends Component {
                 <textarea
                   className="form-control" id="inputCreateShareCSS"
                   rows="3" placeholder="More info..."
-                  ref={c => {
+                  ref={(c) => {
                     this.inputCreateShareCSS = c;
                   }}
                 />
@@ -162,7 +162,7 @@ class CreateShareForm extends Component {
                 <input
                   type="number" className="form-control" id="inputCreateShareWidth"
                   placeholder="300"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputCreateShareWidth = c;
                   }}
                 />
@@ -177,7 +177,7 @@ class CreateShareForm extends Component {
                 <input
                   type="number" className="form-control" id="inputCreateShareHeight"
                   placeholder="300"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputCreateShareHeight = c;
                   }}
                 />
@@ -192,7 +192,7 @@ class CreateShareForm extends Component {
                 <input
                   type="number" className="form-control" id="inputCreateShareWeight"
                   placeholder="100"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputCreateShareWeight = c;
                   }}
                 />
@@ -207,7 +207,7 @@ class CreateShareForm extends Component {
               <div className="col-sm-10">
                 <select
                   id="inputCreateShareType" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputCreateShareType = c;
                   }}
                 >
@@ -226,7 +226,7 @@ class CreateShareForm extends Component {
                 <textarea
                   className="form-control" id="inputCreateShareDescription"
                   rows="3" placeholder="More info..."
-                  ref={c => {
+                  ref={(c) => {
                     this.inputCreateShareDescription = c;
                   }}
                 />

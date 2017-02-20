@@ -56,7 +56,7 @@ class FilterSiteChannel extends Component {
                   <div className="col-sm-12">
                     <select
                       className="form-control inputTypeFilter"
-                      ref={c => {
+                      ref={(c) => {
                         this.inputTypeFilter = c;
                       }}
                     >
@@ -79,7 +79,7 @@ class FilterSiteChannel extends Component {
                       <div className="col-sm-9">
                         <select
                           className="form-control inputSiteFilter"
-                          ref={c => {
+                          ref={(c) => {
                             this.inputSiteFilter = c;
                           }}
                         >

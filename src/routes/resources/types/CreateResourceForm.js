@@ -53,7 +53,7 @@ class CreateResourceForm extends Component {
               <input
                 type="text" className="form-control" id="inputResourceUniqueName"
                 placeholder="user"
-                ref={c => {
+                ref={(c) => {
                   this.inputResourceUniqueName = c;
                 }}
               />
@@ -68,7 +68,7 @@ class CreateResourceForm extends Component {
               <input
                 type="text" className="form-control" id="inputResourceModelName"
                 placeholder="User"
-                ref={c => {
+                ref={(c) => {
                   this.inputResourceModelName = c;
                 }}
               />
@@ -83,7 +83,7 @@ class CreateResourceForm extends Component {
               <input
                 type="text" className="form-control" id="inputResourceName"
                 placeholder="Resource"
-                ref={c => {
+                ref={(c) => {
                   this.inputResourceName = c;
                 }}
               />
@@ -99,7 +99,7 @@ class CreateResourceForm extends Component {
               <select
                 id="inputResourceHasMeta"
                 className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputResourceHasMeta = c;
                 }}
               >
@@ -117,7 +117,7 @@ class CreateResourceForm extends Component {
               <textarea
                 className="form-control" id="inputResourceDescription"
                 placeholder="Resource description..."
-                ref={c => {
+                ref={(c) => {
                   this.inputResourceDescription = c;
                 }}
               />
@@ -133,7 +133,7 @@ class CreateResourceForm extends Component {
               <select
                 id="inputResourceStatus"
                 className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputResourceStatus = c;
                 }}
               >

@@ -112,7 +112,7 @@ class EditShareForm extends Component {
                 <input
                   type="text" className="form-control" id="inputEditShareName"
                   placeholder="Name"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputEditShareName = c;
                   }}
                 />
@@ -128,7 +128,7 @@ class EditShareForm extends Component {
                   className="form-control"
                   rows="3" placeholder="More info..."
                   id="inputEditShareHTML"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputEditShareHTML = c;
                   }}
                 />
@@ -143,7 +143,7 @@ class EditShareForm extends Component {
                 <textarea
                   className="form-control" id="inputEditShareCSS"
                   rows="3" placeholder="More info..."
-                  ref={c => {
+                  ref={(c) => {
                     this.inputEditShareCSS = c;
                   }}
                 />
@@ -158,7 +158,7 @@ class EditShareForm extends Component {
                   className="form-control" id="inputEditShareOutPutCSS"
                   rows="3" placeholder="More info..."
                   readOnly
-                  ref={c => {
+                  ref={(c) => {
                     this.inputEditShareOutPutCSS = c;
                   }}
                 />
@@ -189,7 +189,7 @@ class EditShareForm extends Component {
                 <input
                   type="number" className="form-control" id="inputEditShareWidth"
                   placeholder="300"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputEditShareWidth = c;
                   }}
                 />
@@ -204,7 +204,7 @@ class EditShareForm extends Component {
                 <input
                   type="number" className="form-control" id="inputEditShareHeight"
                   placeholder="Height"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputEditShareHeight = c;
                   }}
                 />
@@ -219,7 +219,7 @@ class EditShareForm extends Component {
                 <input
                   type="number" className="form-control" id="inputEditShareWeight"
                   placeholder="Name"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputEditShareWeight = c;
                   }}
                 />
@@ -234,7 +234,7 @@ class EditShareForm extends Component {
               <div className="col-sm-10">
                 <select
                   id="inputEditShareType" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputEditShareType = c;
                   }}
                 >
@@ -253,7 +253,7 @@ class EditShareForm extends Component {
                 <textarea
                   className="form-control" id="inputEditShareDescription"
                   rows="3" placeholder="More info..."
-                  ref={c => {
+                  ref={(c) => {
                     this.inputEditShareDescription = c;
                   }}
                 />

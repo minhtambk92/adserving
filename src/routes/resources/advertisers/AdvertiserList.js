@@ -79,7 +79,7 @@ class AdvertiserList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/advertiser/${rowData.id}`}
-          onClick={(event) => this.onTabClickAdvertiser(event)}
+          onClick={event => this.onTabClickAdvertiser(event)}
         >{cellData}</Link>, cell);
       },
     }, {
@@ -92,7 +92,7 @@ class AdvertiserList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/advertiser/${rowData.id}`}
-          onClick={(event) => this.onTabClickCampaign(event)}
+          onClick={event => this.onTabClickCampaign(event)}
         >New Campaign</Link>, cell);
       },
     }, {

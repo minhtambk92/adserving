@@ -31,7 +31,7 @@ class FilterZonesForm extends Component {
                 id="inputZonesFilterSite"
                 className="form-control select2"
                 style={{ width: '100%' }}
-                ref={c => {
+                ref={(c) => {
                   this.inputZonesFilterSite = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'siteId')}
@@ -55,7 +55,7 @@ class FilterZonesForm extends Component {
               <select
                 id="inputZonesFilterType"
                 className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputZonesFilterType = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'zoneTypeId')}
@@ -78,7 +78,7 @@ class FilterZonesForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputZonesFilterStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputZonesFilterStatus = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'status')}

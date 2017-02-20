@@ -94,7 +94,7 @@ class CampaignList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/campaign/${rowData.id}`}
-          onClick={(event) => this.onTabClickCampaign(event)}
+          onClick={event => this.onTabClickCampaign(event)}
         >{cellData}</Link>, cell);
       },
     }, {
@@ -109,7 +109,7 @@ class CampaignList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/campaign/${rowData.id}`}
-          onClick={(event) => this.onTabClickPlacement(event)}
+          onClick={event => this.onTabClickPlacement(event)}
         >New Placement</Link>, cell);
       },
     }, {

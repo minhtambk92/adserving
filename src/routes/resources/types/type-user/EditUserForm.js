@@ -124,7 +124,7 @@ class EditUserForm extends Component {
                 <input
                   type="text" className="form-control" id="inputUserEmail"
                   placeholder="contact@dantri.com.vn"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputUserEmail = c;
                   }}
                 />
@@ -144,7 +144,7 @@ class EditUserForm extends Component {
                   data-placeholder="Select roles"
                   defaultValue={this.state.currentRoles}
                   multiple
-                  ref={c => {
+                  ref={(c) => {
                     this.inputUserRoles = c;
                   }}
                 >
@@ -168,7 +168,7 @@ class EditUserForm extends Component {
                 <input
                   type="password" className="form-control" id="inputUserPassword"
                   placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputUserPassword = c;
                   }}
                 />
@@ -185,7 +185,7 @@ class EditUserForm extends Component {
                   type="password" className="form-control"
                   id="inputUserPasswordConfirmation"
                   placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputUserPasswordConfirmation = c;
                   }}
                 />
@@ -201,7 +201,7 @@ class EditUserForm extends Component {
                 <select
                   id="inputUserEmailConfirmed"
                   className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputUserEmailConfirmed = c;
                   }}
                 >
@@ -220,7 +220,7 @@ class EditUserForm extends Component {
                 <select
                   id="inputUserStatus"
                   className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputUserStatus = c;
                   }}
                 >

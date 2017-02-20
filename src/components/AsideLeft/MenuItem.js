@@ -26,6 +26,7 @@ class MenuItem extends Component {
 
   renderChildItemIcon(childItem) { // eslint-disable-line class-methods-use-this
     if (typeof childItem.icon === 'string') {
+      // eslint-disable-next-line react/no-danger
       return <i className="fa" dangerouslySetInnerHTML={{ __html: childItem.icon }} />;
     }
 

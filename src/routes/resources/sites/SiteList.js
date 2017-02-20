@@ -74,7 +74,7 @@ class SiteList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/site/${rowData.id}`}
-          onClick={(event) => this.onTabClickEditSite(event)}
+          onClick={event => this.onTabClickEditSite(event)}
         >{cellData}</Link>, cell);
       },
     }, {
@@ -87,7 +87,7 @@ class SiteList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/site/${rowData.id}`}
-          onClick={(event) => this.onTabClickAddChannel(event)}
+          onClick={event => this.onTabClickAddChannel(event)}
         >Target Channel</Link>, cell);
       },
     }, {
@@ -96,7 +96,7 @@ class SiteList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/site/${rowData.id}`}
-          onClick={(event) => this.onTabClickAddZone(event)}
+          onClick={event => this.onTabClickAddZone(event)}
         >New Zone</Link>, cell);
       },
     }, {

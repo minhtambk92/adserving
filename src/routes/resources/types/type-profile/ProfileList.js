@@ -132,7 +132,7 @@ class ProfileList extends Component {
         </div>
         <div className="col-sm-12" id="profile">
           {this.props.page.statusUpdateProfile === true &&
-          this.state.arrProfile && this.state.arrProfile.map((count) => (
+          this.state.arrProfile && this.state.arrProfile.map(count => (
             <div className="box" key={count}>
               <div className="editProfile">
                 <EditProfileForm

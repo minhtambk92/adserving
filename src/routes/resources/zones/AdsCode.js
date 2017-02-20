@@ -40,7 +40,7 @@ class AdsCode extends Component {
               type="text" id="inputCoreJsTemplate"
               className="form-control" placeholder="http://..."
               defaultValue="http://corejs.codek.org/build/Template.min.js"
-              ref={c => {
+              ref={(c) => {
                 this.inputCoreJsTemplate = c;
               }}
             />
@@ -62,7 +62,7 @@ class AdsCode extends Component {
             <textarea
               id="outputAdsCode" rows="10"
               className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.outputAdsCode = c;
               }}
             />

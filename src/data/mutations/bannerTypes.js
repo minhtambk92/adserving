@@ -19,7 +19,7 @@ const bannerTypes = {
         const opts = options;
         opts.where = options.where || {};
         /* eslint-disable no-shadow */
-        await BannerType.create(args.bannerType).then(bannerType => {
+        await BannerType.create(args.bannerType).then((bannerType) => {
           /* eslint-enable no-shadow */
           opts.where.id = { $eq: bannerType.id };
         });

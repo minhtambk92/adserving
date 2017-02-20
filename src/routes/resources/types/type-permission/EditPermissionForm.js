@@ -77,7 +77,7 @@ class EditPermissionForm extends Component {
                 <input
                   type="text" className="form-control" id="inputPermissionName"
                   placeholder="John Doe"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputPermissionName = c;
                   }}
                 />
@@ -94,7 +94,7 @@ class EditPermissionForm extends Component {
                 <select
                   id="inputPermissionStatus"
                   className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputPermissionStatus = c;
                   }}
                 >

@@ -79,7 +79,7 @@ class EditCharacterSetForm extends Component {
                 <input
                   type="text" className="form-control" id="inputCharacterSetName"
                   placeholder="Name"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputCharacterSetName = c;
                   }}
                 />
@@ -93,7 +93,7 @@ class EditCharacterSetForm extends Component {
                 <input
                   type="text" className="form-control" id="inputCharacterSetValue"
                   placeholder="Value"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputCharacterSetValue = c;
                   }}
                 />
@@ -108,7 +108,7 @@ class EditCharacterSetForm extends Component {
               <div className="col-sm-10">
                 <select
                   id="inputCharacterSetStatus" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputCharacterSetStatus = c;
                   }}
                 >

@@ -131,7 +131,7 @@ class UpdateAdvertiserForm extends Component {
             <input
               type="text" className="form-control" id="inputAdvertiserName"
               placeholder="Dan Tri"
-              ref={c => {
+              ref={(c) => {
                 this.inputAdvertiserName = c;
               }}
             />
@@ -147,7 +147,7 @@ class UpdateAdvertiserForm extends Component {
             <input
               type="text" className="form-control" id="inputAdvertiserContact"
               placeholder="0987666888"
-              ref={c => {
+              ref={(c) => {
                 this.inputAdvertiserContact = c;
               }}
             />
@@ -164,7 +164,7 @@ class UpdateAdvertiserForm extends Component {
             <input
               type="text" className="form-control" id="inputAdvertiserEmail"
               placeholder="contact@dantri.com.vn"
-              ref={c => {
+              ref={(c) => {
                 this.inputAdvertiserEmail = c;
               }}
             />
@@ -177,7 +177,7 @@ class UpdateAdvertiserForm extends Component {
           <div className="col-sm-2 checkbox">
             <ICheck
               type="checkbox" id="inputAdvertiserIsEmailStatus" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputAdvertiserIsEmailStatus = c;
               }}
             />
@@ -194,7 +194,7 @@ class UpdateAdvertiserForm extends Component {
           <div className="col-sm-2 checkbox">
             <ICheck
               type="checkbox" id="inputAdvertiserIsEmailReport" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputAdvertiserIsEmailReport = c;
               }}
             />
@@ -212,7 +212,7 @@ class UpdateAdvertiserForm extends Component {
             <input
               type="text" className="form-control" id="inputAdvertiserReportInterval"
               placeholder="7"
-              ref={c => {
+              ref={(c) => {
                 this.inputAdvertiserReportInterval = c;
               }}
             />
@@ -232,7 +232,7 @@ class UpdateAdvertiserForm extends Component {
           <div className="col-sm-10">
             <select
               id="inputAdvertiserStatus" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputAdvertiserStatus = c;
               }}
             >
@@ -252,7 +252,7 @@ class UpdateAdvertiserForm extends Component {
             <textarea
               className="form-control" id="inputAdvertiserDescription"
               rows="5" placeholder="More info..."
-              ref={c => {
+              ref={(c) => {
                 this.inputAdvertiserDescription = c;
               }}
             />

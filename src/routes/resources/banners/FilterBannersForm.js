@@ -31,7 +31,7 @@ class FilterBannersForm extends Component {
                 id="inputBannersFilterPlacement"
                 className="form-control select2"
                 style={{ width: '100%' }}
-                ref={c => {
+                ref={(c) => {
                   this.inputBannersFilterPlacement = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'placementId')}
@@ -57,7 +57,7 @@ class FilterBannersForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputBannersFilterStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputBannersFilterStatus = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'status')}

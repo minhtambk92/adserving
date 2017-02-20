@@ -68,7 +68,7 @@ class CreateUserForm extends Component {
               <input
                 type="text" className="form-control" id="inputUserEmail"
                 placeholder="contact@dantri.com.vn"
-                ref={c => {
+                ref={(c) => {
                   this.inputUserEmail = c;
                 }}
               />
@@ -84,7 +84,7 @@ class CreateUserForm extends Component {
               <input
                 type="text" className="form-control" id="inputUserDisplayName"
                 placeholder="John Doe"
-                ref={c => {
+                ref={(c) => {
                   this.inputUserDisplayName = c;
                 }}
               />
@@ -104,7 +104,7 @@ class CreateUserForm extends Component {
                 data-placeholder="Select roles"
                 defaultValue={[this.props.userFilters.roleUniqueName || 'user']}
                 multiple
-                ref={c => {
+                ref={(c) => {
                   this.inputUserRoles = c;
                 }}
               >
@@ -128,7 +128,7 @@ class CreateUserForm extends Component {
               <input
                 type="password" className="form-control" id="inputUserPassword"
                 placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                ref={c => {
+                ref={(c) => {
                   this.inputUserPassword = c;
                 }}
               />
@@ -145,7 +145,7 @@ class CreateUserForm extends Component {
                 type="password" className="form-control"
                 id="inputUserPasswordConfirmation"
                 placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                ref={c => {
+                ref={(c) => {
                   this.inputUserPasswordConfirmation = c;
                 }}
               />
@@ -161,7 +161,7 @@ class CreateUserForm extends Component {
               <select
                 id="inputUserEmailConfirmed"
                 className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputUserEmailConfirmed = c;
                 }}
               >
@@ -180,7 +180,7 @@ class CreateUserForm extends Component {
               <select
                 id="inputUserStatus"
                 className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputUserStatus = c;
                 }}
               >

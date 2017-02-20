@@ -18,7 +18,7 @@ const activities = {
       async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
-        await Activity.create(args.activity).then(activity => {
+        await Activity.create(args.activity).then((activity) => {
           opts.where.id = { $eq: activity.id };
         });
         return opts;
