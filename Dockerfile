@@ -1,4 +1,4 @@
-FROM node:6.9.5-alpine
+FROM node
 
 # Copy application files
 COPY . /usr/src/app
