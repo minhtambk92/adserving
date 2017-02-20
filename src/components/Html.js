@@ -1,7 +1,7 @@
 /**
  * React Starter Kit (https://www.reactstarterkit.com/)
  *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
+ * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
@@ -15,15 +15,26 @@ class Html extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    style: PropTypes.string,
+    styles: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      cssText: PropTypes.string.isRequired,
+    }).isRequired),
     scripts: PropTypes.arrayOf(PropTypes.string.isRequired),
+    // eslint-disable-next-line react/forbid-prop-types
     state: PropTypes.object,
     lang: PropTypes.string,
-    children: PropTypes.string,
+    children: PropTypes.string.isRequired,
+  };
+
+  static defaultProps = {
+    styles: [],
+    scripts: [],
+    state: null,
+    lang: 'en',
   };
 
   render() {
-    const { title, description, style, scripts, state, lang, children } = this.props;
+    const { title, description, styles, scripts, state, lang, children } = this.props;
     return (
       <html className="no-js" lang={lang}>
         <head>
@@ -54,10 +65,21 @@ class Html extends React.Component {
             rel="stylesheet"
             href="/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"
           />
-          {style && <style id="css" dangerouslySetInnerHTML={{ __html: style }} />}
+          {styles.map(style =>
+            <style
+              key={style.id}
+              id={style.id}
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: style.cssText }}
+            />,
+          )}
         </head>
         <body className="skin-blue sidebar-mini">
-          <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
+          <div
+            id="app"
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: children }}
+          />
           <script src="/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js" />
           <script src="/AdminLTE/plugins/jQueryUI/jquery-ui.min.js" />
           <script src="/AdminLTE/bootstrap/js/bootstrap.min.js" />
@@ -95,13 +117,15 @@ class Html extends React.Component {
           <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js" />
           {state && (
             <script
+              // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html:
               `window.APP_STATE=${serialize(state, { isJSON: true })}` }}
             />
           )}
-          {scripts && scripts.map(script => <script key={script} src={script} />)}
+          {scripts.map(script => <script key={script} src={script} />)}
           {analytics.google.trackingId &&
             <script
+              // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html:
               'window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;' +
               `ga('create','${analytics.google.trackingId}','auto');ga('send','pageview')` }}

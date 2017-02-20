@@ -1,7 +1,7 @@
 /**
  * React Starter Kit (https://www.reactstarterkit.com/)
  *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
+ * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
@@ -79,7 +79,7 @@ class Register extends Component {
               <input
                 id="inputUserFullName"
                 type="text" className="form-control" placeholder="Full name"
-                ref={c => {
+                ref={(c) => {
                   this.inputUserFullName = c;
                 }}
               />
@@ -89,7 +89,7 @@ class Register extends Component {
               <input
                 id="inputUserEmail"
                 type="email" className="form-control" placeholder="Email"
-                ref={c => {
+                ref={(c) => {
                   this.inputUserEmail = c;
                 }}
               />
@@ -99,7 +99,7 @@ class Register extends Component {
               <input
                 id="inputUserPassword"
                 type="password" className="form-control" placeholder="Password"
-                ref={c => {
+                ref={(c) => {
                   this.inputUserPassword = c;
                 }}
               />
@@ -109,7 +109,7 @@ class Register extends Component {
               <input
                 id="inputUserPasswordConfirmation"
                 type="password" className="form-control" placeholder="Retype password"
-                ref={c => {
+                ref={(c) => {
                   this.inputUserPasswordConfirmation = c;
                 }}
               />
@@ -122,7 +122,7 @@ class Register extends Component {
                     <input
                       id="inputAgreeTerms"
                       type="checkbox"
-                      ref={c => {
+                      ref={(c) => {
                         this.inputAgreeTerms = c;
                       }}
                     /> I agree to the <Link to="#">terms</Link>
@@ -162,7 +162,7 @@ class Register extends Component {
 
 }
 
-const mapState = (state) => ({
+const mapState = state => ({
   user: state.user,
   me: state.me,
 });
