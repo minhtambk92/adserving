@@ -15,6 +15,8 @@ class UpdateUserForm extends Component {
     roleList: PropTypes.array.isRequired,
     updateUser: PropTypes.func.isRequired,
     deleteUser: PropTypes.func.isRequired,
+    createActivity: PropTypes.func,
+    user: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -37,6 +39,7 @@ class UpdateUserForm extends Component {
     if (roles) {
       this.setState({ currentRoles: roles.map(role => role.uniqueName).sort() });
     }
+    this.inputUserRoles.value = this.state.currentRoles;
     this.inputUserEmailConfirmed.value = emailConfirmed;
     this.inputUserStatus.value = status;
   }
@@ -76,11 +79,35 @@ class UpdateUserForm extends Component {
       user.status = status;
     }
 
-    this.props.updateUser(user);
+    this.props.updateUser(user).then(() => {
+      const userId = this.props.user.id;
+      const subject = `User ${userEditing.profile.displayName}`;
+      const subjectId = this.props.userEditing.id;
+      const action = 'updated';
+      const data = userEditing;
+      delete data.activities;
+      const other = JSON.stringify(data);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId });
+    });
   }
 
   deleteUser() {
-    this.props.deleteUser(this.props.userId);
+    this.props.deleteUser(this.props.userId).then(() => {
+      const userId = this.props.user.id;
+      const subject = `User ${this.props.userEditing.profile.displayName}`;
+      const subjectId = this.props.userEditing.id;
+      const action = 'deleted';
+      const other = '';
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId });
+    });
   }
 
   render() {

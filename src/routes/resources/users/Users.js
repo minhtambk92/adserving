@@ -19,6 +19,7 @@ import {
   getUsersFilters,
   setUsersFilters,
 } from '../../../actions/users';
+import { createActivity } from '../../../actions/activities';
 import FilterUsersForm from './FilterUsersForm';
 import CreateUserForm from './CreateUserForm';
 import UserList from './UserList';
@@ -34,6 +35,8 @@ class Users extends Component {
     createUser: PropTypes.func,
     getUsersFilters: PropTypes.func,
     setUsersFilters: PropTypes.func,
+    createActivity: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -116,6 +119,9 @@ class Users extends Component {
                 userFilters={this.props.users.filters}
                 roleList={this.props.roles.list}
                 createUser={this.props.createUser}
+                user={this.props.user}
+                createActivity={this.props.createActivity}
+                users={this.props.users}
               />
             </div>
             {/* /.col */}
@@ -147,6 +153,7 @@ class Users extends Component {
 const mapState = state => ({
   roles: state.roles,
   users: state.users,
+  user: state.user,
 });
 
 const mapDispatch = {
@@ -155,6 +162,7 @@ const mapDispatch = {
   createUser,
   getUsersFilters,
   setUsersFilters,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Users));

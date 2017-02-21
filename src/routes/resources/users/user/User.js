@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getUser, updateUser, deleteUser } from '../../../../actions/users';
 import { getRoles } from '../../../../actions/roles';
+import { createActivity } from '../../../../actions/activities';
 import Layout from '../../../../components/Layout';
 import UpdateUserForm from '../UpdateUserForm';
 import s from './User.css';
@@ -29,6 +30,8 @@ class User extends Component {
     getUser: PropTypes.func,
     updateUser: PropTypes.func,
     deleteUser: PropTypes.func,
+    createActivity: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -73,6 +76,8 @@ class User extends Component {
                   userEditing={users.editing}
                   updateUser={updateUser}
                   deleteUser={deleteUser}
+                  createActivity={this.props.createActivity}
+                  user={this.props.user}
                 />
               </div>
               {/* /.col */}
@@ -89,6 +94,7 @@ class User extends Component {
 const mapState = state => ({
   users: state.users,
   roles: state.roles,
+  user: state.user,
 });
 
 const mapDispatch = {
@@ -96,6 +102,7 @@ const mapDispatch = {
   getUser,
   updateUser,
   deleteUser,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(User));

@@ -12,6 +12,9 @@ class CreateUserForm extends Component {
     userFilters: PropTypes.object,
     roleList: PropTypes.array.isRequired,
     createUser: PropTypes.func.isRequired,
+    user: PropTypes.object,
+    users: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   clearInput() {
@@ -48,6 +51,19 @@ class CreateUserForm extends Component {
         password,
         emailConfirmed: emailConfirmed === 'true', // Convert to boolean
         status,
+      }).then(() => {
+        if (this.props.users && this.props.users.list.length > 0) {
+          const userId = this.props.user.id;
+          const subject = `User ${displayName}`;
+          const subjectId = this.props.users.list[0].id;
+          const action = 'created';
+          const other = '';
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
       });
 
       this.clearInput();
