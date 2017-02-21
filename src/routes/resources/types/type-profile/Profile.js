@@ -11,6 +11,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../../../components/Layout';
 import { getUsers, updateProfile } from '../../../../actions/users';
 import { setStatusUpdateProfile } from '../../../../actions/pages/resources';
+import { createActivity } from '../../../../actions/activities';
 import ProfileList from './ProfileList';
 import s from './Profile.css'; // eslint-disable-line css-modules/no-unused-class
 
@@ -25,6 +26,9 @@ class Profile extends Component {
     users: PropTypes.object,
     setStatusUpdateProfile: PropTypes.func,
     updateProfile: PropTypes.func,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -45,6 +49,8 @@ class Profile extends Component {
             users={this.props.users}
             updateProfile={this.props.updateProfile}
             setStatusUpdateProfile={this.props.setStatusUpdateProfile}
+            user={this.props.user}
+            createActivity={this.props.createActivity}
           />
         </div>
       </Layout>
@@ -55,11 +61,14 @@ const mapState = (state) => ({
   resources: state.resources,
   users: state.users,
   page: state.page.resources,
+  activities: state.activities,
+  user: state.user,
 });
 
 const mapDispatch = {
   getUsers,
   setStatusUpdateProfile,
   updateProfile,
+  createActivity,
 };
 export default withStyles(s, style, dropZoneStyle)(connect(mapState, mapDispatch)(Profile));

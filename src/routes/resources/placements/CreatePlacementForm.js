@@ -20,6 +20,10 @@ class CreatePlacementForm extends Component {
     getPlacements: PropTypes.func,
     updateBanner: PropTypes.func,
     banner: PropTypes.object,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
+    campaign: PropTypes.object,
+    setPageCampaignActiveTab: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -101,9 +105,34 @@ class CreatePlacementForm extends Component {
       campaignId,
       status,
     }).then(() => {
+      if (this.props.placements && this.props.placements.length > 0) {
+        const userId = this.props.user.id;
+        const subject = `Placement ${name}`;
+        const subjectId = this.props.placements[0].id;
+        const action = 'created';
+        const other = '';
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId });
+      }
       this.clearInput();
       if (this.props.campaignId) {
-        this.props.getCampaign(this.props.campaignId);
+        this.props.getCampaign(this.props.campaignId).then(() => {
+          const userId = this.props.user.id;
+          const subject = `Placement ${name}`;
+          const subjectId = this.props.campaign.placements[0].id;
+          const action = 'created';
+          const other = '';
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId }).then(() => {
+              this.props.setPageCampaignActiveTab('addPlacement');
+            });
+        });
       } else if (this.props.bannerId && this.props.banner) {
         if (this.props.placements) {
           const placement = this.props.banner.placements;

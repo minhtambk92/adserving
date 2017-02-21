@@ -116,7 +116,7 @@ export function getUsers(args = {
       }`;
 
     const variables = Object.assign({}, args);
-    const filters = await getState().zones.filters;
+    const filters = await getState().users.filters;
 
     if (
       options.globalFilters &&

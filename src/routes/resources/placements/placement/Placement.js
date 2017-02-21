@@ -22,10 +22,13 @@ import { createTrack } from '../../../../actions/tracks';
 import { getBannerHtmlTypes } from '../../../../actions/bannerHtmlTypes';
 import { getBannerTypes } from '../../../../actions/bannerTypes';
 import { getAdsServers } from '../../../../actions/adsServers';
+import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activities';
+import { setPagePlacementActiveTab } from '../../../../actions/pages/placements';
 import Layout from '../../../../components/Layout';
 import ListBannerNotBelongPlacement from '../ListBannerNotBelongPlacement';
 import ListBannerOfPlacement from '../ListBannerOfPlacement';
 import UpdatePlacementForm from '../UpdatePlacementForm';
+import Activities from '../Activities';
 import CreateBannerForm from '../../banners/CreateBannerForm';
 import s from './Placement.css';
 
@@ -56,6 +59,11 @@ class Placement extends Component {
     getAdsServers: PropTypes.func,
     adsServers: PropTypes.object,
     updateBanner: PropTypes.func,
+    activities: PropTypes.object,
+    user: PropTypes.object,
+    getActivitiesBySubjectId: PropTypes.func,
+    createActivity: PropTypes.func,
+    setPagePlacementActiveTab: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -75,6 +83,7 @@ class Placement extends Component {
     this.props.getBannerHtmlTypes();
     this.props.getBannerTypes();
     this.props.getAdsServers();
+    this.props.getActivitiesBySubjectId(this.props.placementId);
   }
 
   componentDidMount() {
@@ -99,6 +108,20 @@ class Placement extends Component {
       }
     } else if (banners && banners.length === 0) {
       this.setState({ arrBanner: [] });
+    }
+  }
+
+  componentDidUpdate() {
+    // Set latest active tab
+    $('.placement-edit-box ul li').removeClass('active');
+    $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
+  }
+
+  onTabClick(event) {
+    event.persist();
+    this.props.setPagePlacementActiveTab(event.target.getAttribute('data-id'));
+    if (event.target.getAttribute('data-id') === 'activity') {
+      this.props.getActivitiesBySubjectId(this.props.placementId);
     }
   }
 
@@ -164,10 +187,23 @@ class Placement extends Component {
               <div className="nav-tabs-custom placement-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
-                    <a href="#editPlacement" data-toggle="tab">Edit Placement</a>
+                    <a
+                      href="#editPlacement" data-toggle="tab" data-id="editPlacement"
+                      onClick={event => this.onTabClick(event)}
+                    >Edit Placement</a>
                   </li>
                   <li>
-                    <a href="#addBanner" data-toggle="tab">Add Banner</a>
+                    <a
+                      href="#addBanner" data-toggle="tab" data-id="addBanner"
+                      onClick={event => this.onTabClick(event)}
+                    >Add Banner</a>
+                  </li>
+                  <li>
+                    <a
+                      href="#activity" data-toggle="tab"
+                      data-id="activity"
+                      onClick={event => this.onTabClick(event)}
+                    >Activity</a>
                   </li>
                 </ul>
                 <div className="tab-content">
@@ -179,6 +215,8 @@ class Placement extends Component {
                       placementId={this.props.placementId}
                       getPlacement={this.props.getPlacement}
                       campaigns={this.props.campaigns && this.props.campaigns.list}
+                      user={this.props.user}
+                      createActivity={this.props.createActivity}
                     />
                   </div>
 
@@ -204,6 +242,8 @@ class Placement extends Component {
                               updatePlacement={this.props.updatePlacement}
                               placementId={this.props.placementId}
                               placement={this.props.placements && this.props.placements.editing}
+                              createActivity={this.props.createActivity}
+                              user={this.props.user}
                             />
                           </div>
                           {/* /.box-body */}
@@ -287,12 +327,28 @@ class Placement extends Component {
                                   getBannerTypes={this.props.getBannerTypes}
                                   adsServerList={this.props.adsServers &&
                                   this.props.adsServers.list}
+                                  user={this.props.user}
+                                  createActivity={this.props.createActivity}
                                 />
                               </div>
                               {/* /.box-body */}
                             </div>
                           </div>
                         )}
+                    </div>
+                  </div>
+                  <div className="tab-pane" id="activity">
+                    <div className="row">
+                      <section className="col-lg-12">
+                        <Activities
+                          activities={this.props.activities && this.props.activities.list}
+                          updatePlacement={this.props.updatePlacement}
+                          setPagePlacementActiveTab={this.props.setPagePlacementActiveTab}
+                          createActivity={this.props.createActivity}
+                          placement={this.props.placements && this.props.placements.editing}
+                          user={this.props.user}
+                        />
+                      </section>
                     </div>
                   </div>
                 </div>
@@ -317,6 +373,8 @@ const mapState = (state) => ({
   bannerHtmlTypes: state.bannerHtmlTypes,
   bannerTypes: state.bannerTypes,
   adsServers: state.adsServers,
+  user: state.user,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -332,6 +390,9 @@ const mapDispatch = {
   getBannerTypes,
   getAdsServers,
   updateBanner,
+  createActivity,
+  getActivitiesBySubjectId,
+  setPagePlacementActiveTab,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placement));

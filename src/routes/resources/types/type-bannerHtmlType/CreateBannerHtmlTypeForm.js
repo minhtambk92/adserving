@@ -12,6 +12,7 @@ class CreateBannerHtmlTypeForm extends Component {
     page: PropTypes.object,
     createBannerHtmlType: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   convertToSlug(Text) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -51,6 +52,20 @@ class CreateBannerHtmlTypeForm extends Component {
         weight,
         status,
         userId,
+      }).then(() => {
+        if (this.props.bannerHtmlTypes && this.props.bannerHtmlTypes.list.length > 0) {
+          /* eslint-disable no-shadow */
+          const userId = this.props.user.id;
+          const subject = `Banner Html Type ${name}`;
+          const subjectId = this.props.bannerHtmlTypes.list[0].id;
+          const action = 'created';
+          const other = JSON.stringify(this.props.bannerHtmlTypes.list[0]);
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
       });
     }
     this.props.statusCreateBannerHtmlType(false);

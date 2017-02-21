@@ -2,7 +2,7 @@
   {
     "id": "5f7e89af-461c-41e9-ac37-ad96134fd821",
     "action": "created",
-    "subject": "Dan Tri",
+    "subject": " Advertiser Dan Tri",
     "subjectId": "b6536772-4e15-4fcc-872a-8efaca5fdf4e",
     "other": "{\"id\":\"b6536772-4e15-4fcc-872a-8efaca5fdf4e\",\"email\":\"contact@dantri.com.vn\",\"name\":\"Dan Tri\",\"contact\":\"0922999333\",\"isEmailReport\":true,\"isEmailStatus\":true,\"reportInterval\":7,\"description\":\"Quang Cao cua dan tri\",\"status\":\"active\",\"createdAt\":\"Tue Feb 14 2017 16:15:11 GMT+0700 (ICT)\",\"updatedAt\":\"Tue Feb 14 2017 16:15:11 GMT+0700 (ICT)\"}",
     "createdAt": "2017-02-14 09:15:12",
@@ -13,7 +13,7 @@
   {
     "id": "e664c1c8-7b5b-4f83-8892-379ce0f5ed67",
     "action": "created",
-    "subject": "Zing",
+    "subject": "Advertiser Zing",
     "subjectId": "2098ce0c-b177-48e4-8cdc-b4ddc5933c95",
     "other": "{\"id\":\"2098ce0c-b177-48e4-8cdc-b4ddc5933c95\",\"email\":\"contact@zing.vn\",\"name\":\"Zing\",\"contact\":\"0988333888\",\"isEmailReport\":true,\"isEmailStatus\":true,\"reportInterval\":7,\"description\":\"Quang cao cua zing\",\"status\":\"active\",\"createdAt\":\"Tue Feb 14 2017 16:14:22 GMT+0700 (ICT)\",\"updatedAt\":\"Tue Feb 14 2017 16:14:22 GMT+0700 (ICT)\"}",
     "createdAt": "2017-02-14 09:14:23",

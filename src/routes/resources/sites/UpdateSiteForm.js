@@ -12,7 +12,7 @@ class UpdateSiteForm extends Component {
     checkSitesByDomain: PropTypes.func,
     sites: PropTypes.object,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -49,7 +49,7 @@ class UpdateSiteForm extends Component {
 
     // site.status = document.getElementById('inputSiteStatus').value;
     this.props.updateSite(site).then(() => {
-      const userId = this.props.users.id;
+      const userId = this.props.user.id;
       const subject = `Site ${name}`;
       const subjectId = this.props.site.id;
       const action = 'updated';
@@ -104,11 +104,11 @@ class UpdateSiteForm extends Component {
   deleteSite() {
     const siteObject = this.props.site;
     this.props.deleteSite(this.props.siteId).then(() => {
-      const userId = this.props.users.id;
+      const userId = this.props.user.id;
       const subject = `Site ${siteObject.name}`;
       const subjectId = this.props.site.id;
       const action = 'deleted';
-      const other = JSON.stringify(siteObject);
+      const other = '';
       this.props.createActivity({ action,
         subject,
         subjectId,

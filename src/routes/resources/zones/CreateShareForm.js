@@ -17,6 +17,8 @@ class CreateShareForm extends Component {
     setStatusShareFormCreate: PropTypes.func,
     page: PropTypes.object,
     list: PropTypes.array,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -60,7 +62,18 @@ class CreateShareForm extends Component {
         description,
         zoneId,
       }).then(() => {
-        this.props.getZone(this.props.zoneId);
+        if (this.props.list && this.props.list.length > 0) {
+          const userId = this.props.user.id;
+          const subject = `Share ${name}`;
+          const subjectId = this.props.list[0].id;
+          const action = 'created';
+          const other = JSON.stringify(this.props.list[0]);
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
       });
     }
     this.props.setStatusShareFormCreate(false);

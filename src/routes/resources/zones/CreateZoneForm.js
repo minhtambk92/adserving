@@ -17,6 +17,9 @@ class CreateZoneForm extends Component {
     createShare: PropTypes.func,
     zoneTypeList: PropTypes.array,
     zoneSizeTypeList: PropTypes.array,
+    user: PropTypes.object,
+    site: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -178,8 +181,20 @@ class CreateZoneForm extends Component {
         status,
         description,
       }).then(() => {
-        this.clearInput();
-        const zoneId = this.props.zones[0].id;
+        if (this.props.zones && this.props.zones.length > 0) {
+          const userId = this.props.user.id;
+          const subject = `Zone ${name}`;
+          const subjectId = this.props.zones[0].id;
+          const action = 'created';
+          const other = '';
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
+        // this.clearInput();
+        const zoneId = this.props.site.zones[0].id;
         const outputCss = '';
         const weight = 100;
         const classes = '';
@@ -198,7 +213,18 @@ class CreateZoneForm extends Component {
           zoneId,
         });
         if (this.props.siteId) {
-          this.props.getSite(this.props.siteId);
+          this.props.getSite(this.props.siteId).then(() => {
+            const userId = this.props.user.id;
+            const subject = `Zone ${name}`;
+            const subjectId = this.props.site.zones[0].id;
+            const action = 'created';
+            const other = '';
+            this.props.createActivity({ action,
+              subject,
+              subjectId,
+              other,
+              userId });
+          });
         }
       });
     }

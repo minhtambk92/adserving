@@ -14,6 +14,8 @@ class UpdateZoneForm extends Component {
     setPageZoneActiveTab: PropTypes.func,
     zoneTypeList: PropTypes.array,
     zoneSizeTypeList: PropTypes.array,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -134,6 +136,7 @@ class UpdateZoneForm extends Component {
     let zoneSizeTypeId = null;
 
     const zone = { id: this.props.zoneId };
+    const zoneObject = this.props.zone;
 
     if (siteId && siteId !== this.props.zone.siteId) {
       zone.siteId = siteId;
@@ -203,13 +206,36 @@ class UpdateZoneForm extends Component {
     zone.zoneSizeTypeId = zoneSizeTypeId;
 
     this.props.updateZone(zone).then(() => {
-      this.props.getZone(this.props.zoneId);
+      const userId = this.props.user.id;
+      const subject = `Zone ${name}`;
+      const subjectId = this.props.zoneId;
+      const action = 'updated';
+      const other = JSON.stringify(zoneObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getZone(this.props.zoneId);
+        });
       this.props.setPageZoneActiveTab('editZone');
     });
   }
 
   deleteZone() {
-    this.props.deleteZone(this.props.zoneId);
+    const zoneObject = this.props.zone;
+    this.props.deleteZone(this.props.zoneId).then(() => {
+      const userId = this.props.user.id;
+      const subject = `Zone ${zoneObject.name}`;
+      const subjectId = this.props.zoneId;
+      const action = 'deleted';
+      const other = '';
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId });
+    });
   }
 
   render() {

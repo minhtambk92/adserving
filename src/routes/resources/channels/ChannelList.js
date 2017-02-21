@@ -14,7 +14,7 @@ class ChannelList extends Component {
     optionChannels: PropTypes.object,
     createOptionChannel: PropTypes.func,
     channels: PropTypes.object,
-    users: PropTypes.object,
+    user: PropTypes.object,
     createActivity: PropTypes.func,
   };
 
@@ -37,7 +37,7 @@ class ChannelList extends Component {
     if (name && description && siteId) {
       this.props.createChannel({ name, description, status, siteId }).then(() => {
         if (this.props.list && this.props.list.length > 0) {
-          const userId = this.props.users.id;
+          const userId = this.props.user.id;
           const subject = `Channel ${data.name}`;
           const subjectId = this.props.list[0].id;
           const action = 'duplicated';

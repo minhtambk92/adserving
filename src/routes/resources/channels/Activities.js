@@ -11,7 +11,7 @@ class Activities extends Component {
     updateChannel: PropTypes.func,
     setPageChannelActiveTab: PropTypes.func,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
     channel: PropTypes.object,
   };
 
@@ -20,7 +20,7 @@ class Activities extends Component {
     if (activity.other) {
       const channel = JSON.parse(activity.other);
       this.props.updateChannel(channel).then(() => {
-        const userId = this.props.users.id;
+        const userId = this.props.user.id;
         const subject = `Channel ${this.props.channel.name}`;
         const subjectId = this.props.channel.id;
         const action = 'revert';

@@ -15,6 +15,8 @@ class OptionBannerForm extends Component {
     createTrack: PropTypes.func,
     deleteTrack: PropTypes.func,
     updateTrack: PropTypes.func,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -317,6 +319,7 @@ class OptionBannerForm extends Component {
     } else if (isExpirationDate === true) {
       expirationDate = null;
     }
+    const bannerObject = this.props.banner;
     const banner = { id: this.props.bannerId };
     banner.isCountView = isCountView;
     banner.isFixIE = isFixIE;
@@ -336,7 +339,18 @@ class OptionBannerForm extends Component {
     banner.bannerTypeId = this.props.banner.bannerType.id;
     banner.bannerHtmlTypeId = this.props.banner.bannerHtmlTypeId;
     this.props.updateBanner(banner).then(() => {
-      this.props.getBanner(this.props.bannerId);
+      const userId = this.props.user.id;
+      const subject = `setting banner ${this.props.banner.name}`;
+      const subjectId = this.props.banner.id;
+      const action = 'updated';
+      const other = JSON.stringify(bannerObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getBanner(this.props.bannerId);
+        });
     });
     this.addLinkClickAndImpression();
   }

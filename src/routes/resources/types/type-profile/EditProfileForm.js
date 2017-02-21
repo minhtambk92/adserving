@@ -13,6 +13,8 @@ class EditProfileForm extends Component {
     getUsers: PropTypes.func,
     page: PropTypes.object,
     updateProfile: PropTypes.func,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -40,6 +42,7 @@ class EditProfileForm extends Component {
   }
 
   save() {
+    const profileObject = this.props.profile;
     const displayName = this.inputProfileName.value;
     const gender = this.inputProfileGender.value;
     const location = this.inputProfileLocation.value;
@@ -69,7 +72,18 @@ class EditProfileForm extends Component {
     }
 
     this.props.updateProfile(user).then(() => {
-      this.props.getUsers();
+      const userId = this.props.user.id;
+      const subject = `User ${name}`;
+      const subjectId = this.props.profile.id;
+      const action = 'updated';
+      const other = JSON.stringify(profileObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getUsers();
+        });
     });
     this.clearInput();
     this.props.setStatusUpdateProfile(false);

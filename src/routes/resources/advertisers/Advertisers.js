@@ -25,7 +25,7 @@ class Advertisers extends Component {
     createAdvertiser: PropTypes.func,
     setPageAdvertiserActiveTab: PropTypes.func,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
     activities: PropTypes.object,
   };
 
@@ -57,7 +57,7 @@ class Advertisers extends Component {
                 createAdvertiser={this.props.createAdvertiser}
                 createActivity={this.props.createActivity}
                 advertisers={this.props.advertisers}
-                users={this.props.users && this.props.users.editing}
+                user={this.props.user}
               />
             </div>
             {/* /.col */}
@@ -78,7 +78,7 @@ class Advertisers extends Component {
                   setPageAdvertiserActiveTab={this.props.setPageAdvertiserActiveTab}
                   createAdvertiser={this.props.createAdvertiser}
                   createActivity={this.props.createActivity}
-                  users={this.props.users && this.props.users.editing}
+                  user={this.props.user}
                 />
               </div>
               {/* /.box-body */}
@@ -97,7 +97,7 @@ class Advertisers extends Component {
 const mapState = (state) => ({
   advertisers: state.advertisers,
   activities: state.activities,
-  users: state.users,
+  user: state.user,
 });
 
 const mapDispatch = {

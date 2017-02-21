@@ -13,6 +13,8 @@ class SettingZoneForm extends Component {
     getZone: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
     characterSetList: PropTypes.array,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -62,6 +64,7 @@ class SettingZoneForm extends Component {
 
   updateZone() {
     const zone = { id: this.props.zoneId };
+    const zoneObject = this.props.zone;
     zone.targetIFrame = this.inputZoneTargetIFrame.value;
     zone.isIncludeDescription = document.getElementById('inputZoneIncludeDescription').checked;
     zone.isShowBannerAgain = document.getElementById('inputZoneShowBannerAgain').checked;
@@ -69,10 +72,26 @@ class SettingZoneForm extends Component {
     zone.isShowCampaignAgain = document.getElementById('inputZoneShowCampaignAgain').checked;
     zone.source = this.inputZoneSource.value;
     zone.supportThirdParty = this.inputZoneThirdParty.value;
-    zone.characterSetId = this.inputZoneCharacterSet.value;
+    const characterSet = this.inputZoneCharacterSet.value;
+    if (characterSet === 'null') {
+      zone.characterSetId = null;
+    } else if (characterSet !== 'null') {
+      zone.characterSetId = characterSet;
+    }
 
     this.props.updateZone(zone).then(() => {
-      this.props.getZone(this.props.zoneId);
+      const userId = this.props.user.id;
+      const subject = `setting zone ${this.props.zone.name}`;
+      const subjectId = this.props.zoneId;
+      const action = 'updated';
+      const other = JSON.stringify(zoneObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getZone(this.props.zoneId);
+        });
       this.props.setPageZoneActiveTab('settingZone');
     });
   }

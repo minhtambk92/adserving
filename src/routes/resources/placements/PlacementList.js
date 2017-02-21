@@ -14,6 +14,8 @@ class PlacementList extends Component {
     createPlacement: PropTypes.func,
     getCampaign: PropTypes.func,
     campaignId: PropTypes.string,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   onTabClickEditPlacement(event) {
@@ -48,6 +50,18 @@ class PlacementList extends Component {
         campaignId,
         status,
       }).then(() => {
+        if (this.props.list && this.props.list.length > 0) {
+          const userId = this.props.user.id;
+          const subject = `Placement ${data.name}`;
+          const subjectId = this.props.list[0].id;
+          const action = 'duplicated';
+          const other = JSON.stringify(data);
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
         if (this.props.campaignId) {
           this.props.getCampaign(this.props.campaignId);
         }

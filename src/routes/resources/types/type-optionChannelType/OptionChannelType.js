@@ -23,6 +23,7 @@ import {
   setStatusCreateOptionChannelType,
   setStatusUpdateOptionChannelType,
 } from '../../../../actions/pages/resources';
+import { createActivity } from '../../../../actions/activities';
 import OptionChannelTypeList from './OptionChannelTypeList';
 import s from './OptionChannelType.css';
 
@@ -43,6 +44,8 @@ class OptionChannelType extends Component {
     updateOptionChannelType: PropTypes.func,
     setOptionChannelValueFilters: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
   };
 
   componentWillMount() {
@@ -68,6 +71,7 @@ class OptionChannelType extends Component {
             setOptionChannelValueFilters={this.props.setOptionChannelValueFilters}
             page={this.props.page}
             user={this.props.user}
+            createActivity={this.props.createActivity}
           />
         </div>
       </Layout>
@@ -82,6 +86,7 @@ const mapState = (state) => ({
   page: state.page.resources,
   optionChannelValues: state.optionChannelValues,
   user: state.user,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -92,6 +97,7 @@ const mapDispatch = {
   deleteOptionChannelType,
   updateOptionChannelType,
   setOptionChannelValueFilters,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(OptionChannelType));

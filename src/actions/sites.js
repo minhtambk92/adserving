@@ -129,7 +129,7 @@ export function getSites(args = {
       }`;
 
     const variables = Object.assign({}, args);
-    const filters = await getState().zones.filters;
+    const filters = await getState().sites.filters;
 
     if (
       options.globalFilters &&

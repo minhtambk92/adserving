@@ -12,6 +12,7 @@ class CreateZoneSizeTypeForm extends Component {
     page: PropTypes.object,
     createZoneSizeType: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -33,6 +34,20 @@ class CreateZoneSizeTypeForm extends Component {
         height,
         status,
         userId,
+      }).then(() => {
+        if (this.props.zoneSizeTypes && this.props.zoneSizeTypes.list.length > 0) {
+          /* eslint-disable no-shadow */
+          const userId = this.props.user.id;
+          const subject = `Zone Size Type ${name}`;
+          const subjectId = this.props.zoneSizeTypes.list[0].id;
+          const action = 'created';
+          const other = '';
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
       });
     }
     this.props.statusCreateZoneSizeType(false);

@@ -49,7 +49,7 @@ class Campaign extends Component {
     createActivity: PropTypes.func,
     activities: PropTypes.object,
     getActivitiesBySubjectId: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
     setPageCampaignActiveTab: PropTypes.func,
   };
 
@@ -129,7 +129,7 @@ class Campaign extends Component {
                           campaignId={this.props.campaignId}
                           getCampaign={this.props.getCampaign}
                           createActivity={this.props.createActivity}
-                          users={this.props.users && this.props.users.editing}
+                          user={this.props.user}
                         />
                         {/* /.col */}
                       </section>
@@ -159,6 +159,11 @@ class Campaign extends Component {
                                 createPlacement={this.props.createPlacement}
                                 campaignId={this.props.campaignId}
                                 getCampaign={this.props.getCampaign}
+                                createActivity={this.props.createActivity}
+                                user={this.props.user}
+                                setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
+                                campaign={this.props.campaigns &&
+                                this.props.campaigns.editing}
                               />
                             </div>
                             {/* /.col */}
@@ -201,7 +206,7 @@ class Campaign extends Component {
                           setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
                           createActivity={this.props.createActivity}
                           campaign={this.props.campaigns && this.props.campaigns.editing}
-                          users={this.props.users && this.props.users.editing}
+                          user={this.props.user}
                         />
                       </section>
                     </div>
@@ -223,7 +228,7 @@ const mapState = (state) => ({
   placements: state.placements,
   advertisers: state.advertisers,
   activities: state.activities,
-  users: state.users,
+  user: state.user,
 });
 
 const mapDispatch = {

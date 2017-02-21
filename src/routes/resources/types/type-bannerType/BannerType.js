@@ -22,6 +22,7 @@ import {
   setStatusCreateBannerType,
   setStatusUpdateBannerType,
 } from '../../../../actions/pages/resources';
+import { createActivity } from '../../../../actions/activities';
 import BannerTypeList from './BannerTypeList';
 import s from './BannerType.css';
 
@@ -41,6 +42,8 @@ class BannerType extends Component {
     user: PropTypes.object,
     deleteBannerType: PropTypes.func,
     updateBannerType: PropTypes.func,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
   };
 
   componentWillMount() {
@@ -65,6 +68,7 @@ class BannerType extends Component {
             updateBannerType={this.props.updateBannerType}
             user={this.props.user}
             page={this.props.page}
+            createActivity={this.props.createActivity}
           />
         </div>
       </Layout>
@@ -78,6 +82,7 @@ const mapState = (state) => ({
   bannerTypes: state.bannerTypes,
   user: state.user,
   page: state.page.resources,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -87,6 +92,7 @@ const mapDispatch = {
   createBannerType,
   deleteBannerType,
   updateBannerType,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(BannerType));

@@ -26,6 +26,7 @@ import {
   setStatusUpdateOptionChannelValue,
 } from '../../../../actions/pages/resources';
 import { getOptionChannelTypeIsSelectOption } from '../../../../actions/optionChannelTypes';
+import { createActivity } from '../../../../actions/activities';
 import OptionChannelValueList from './OptionChannelValueList';
 import FilterOptionChannelTypesForm from './FilterOptionChannelTypesForm';
 import s from './OptionChannelValue.css';
@@ -50,6 +51,8 @@ class OptionChannelValue extends Component {
     getOptionChannelValueFilters: PropTypes.func,
     setOptionChannelValueFilters: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
   };
 
   componentWillMount() {
@@ -130,6 +133,7 @@ class OptionChannelValue extends Component {
             this.props.optionChannelTypes.list}
             page={this.props.page}
             user={this.props.user}
+            createActivity={this.props.createActivity}
           />
         </div>
       </Layout>
@@ -144,6 +148,7 @@ const mapState = (state) => ({
   page: state.page.resources,
   optionChannelTypes: state.optionChannelTypes,
   user: state.user,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -156,6 +161,7 @@ const mapDispatch = {
   getOptionChannelTypeIsSelectOption,
   getOptionChannelValueFilters,
   setOptionChannelValueFilters,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(OptionChannelValue));

@@ -22,6 +22,7 @@ class AdsServerList extends Component {
     deleteAdsServer: PropTypes.func,
     updateAdsServer: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -91,7 +92,18 @@ class AdsServerList extends Component {
 
   deleteAdsServer(data) {
     this.props.deleteAdsServer(data.id).then(() => {
-      this.props.getAdsServers();
+      const userId = this.props.user.id;
+      const subject = `AdsServer ${data.name}`;
+      const subjectId = data.id;
+      const action = 'deleted';
+      const other = '';
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getAdsServers();
+        });
     });
   }
 
@@ -187,6 +199,7 @@ class AdsServerList extends Component {
                   getAdsServers={this.props.getAdsServers}
                   page={this.props.page}
                   user={this.props.user}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>
@@ -203,6 +216,8 @@ class AdsServerList extends Component {
                   statusCreateAdsServer={this.props.statusCreateAdsServer}
                   page={this.props.page}
                   user={this.props.user}
+                  adsServers={this.props.adsServers}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>

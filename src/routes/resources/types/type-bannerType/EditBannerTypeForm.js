@@ -14,6 +14,8 @@ class EditBannerTypeForm extends Component {
     bannerType: PropTypes.object,
     updateBannerType: PropTypes.func,
     getBannerTypes: PropTypes.func,
+    createActivity: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -60,6 +62,7 @@ class EditBannerTypeForm extends Component {
   }
 
   save() {
+    const bannerTypeObject = this.props.bannerType;
     const id = this.props.id;
     const name = this.inputBannerTypeName.value;
     const value = this.convertToSlug(name);
@@ -73,7 +76,18 @@ class EditBannerTypeForm extends Component {
         value,
         status,
       }).then(() => {
-        this.props.getBannerTypes();
+        const userId = this.props.user.id;
+        const subject = `Banner Type ${name}`;
+        const subjectId = this.props.bannerType.id;
+        const action = 'updated';
+        const other = JSON.stringify(bannerTypeObject);
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId }).then(() => {
+            this.props.getBannerTypes();
+          });
       });
     }
     this.props.statusUpdateBannerType(false);

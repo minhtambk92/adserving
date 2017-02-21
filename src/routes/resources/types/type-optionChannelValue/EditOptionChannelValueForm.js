@@ -14,6 +14,8 @@ class EditOptionChannelValueForm extends Component {
     updateOptionChannelValue: PropTypes.func,
     getOptionChannelValues: PropTypes.func,
     optionChannelTypeList: PropTypes.array,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -48,6 +50,7 @@ class EditOptionChannelValueForm extends Component {
   }
 
   save() {
+    const optionChannelValueObject = this.props.optionChannelValue;
     const name = this.inputOptionChannelValueName.value;
     const status = this.inputOptionChannelValueStatus.value;
     const optionChannelTypeId = this.inputOptionChannelTypeId.value;
@@ -58,7 +61,18 @@ class EditOptionChannelValueForm extends Component {
     optionChannelValue.value = this.convertToSlug(name);
     optionChannelValue.optionChannelTypeId = optionChannelTypeId;
     this.props.updateOptionChannelValue(optionChannelValue).then(() => {
-      this.props.getOptionChannelValues();
+      const userId = this.props.user.id;
+      const subject = `Option Channel Value ${name}`;
+      const subjectId = this.props.optionChannelValue.id;
+      const action = 'updated';
+      const other = JSON.stringify(optionChannelValueObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getOptionChannelValues();
+        });
     });
     this.props.statusUpdateOptionChannelValue(false);
   }

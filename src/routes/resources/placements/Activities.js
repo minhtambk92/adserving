@@ -8,35 +8,30 @@ class Activities extends Component {
 
   static propTypes = {
     activities: PropTypes.array,
-    updateBanner: PropTypes.func,
-    setPageBannerActiveTab: PropTypes.func,
+    updatePlacement: PropTypes.func,
+    setPagePlacementActiveTab: PropTypes.func,
     createActivity: PropTypes.func,
     user: PropTypes.object,
-    banner: PropTypes.object,
-    bannerId: PropTypes.string,
-    getBanner: PropTypes.func,
+    placement: PropTypes.object,
   };
 
   revertEventUpdated(activity) { // eslint-disable-line no-unused-vars, class-methods-use-this
-    const bannerObject = this.props.banner;
+    const placementObject = this.props.placement;
     if (activity.other) {
-      const banner = JSON.parse(activity.other);
-      banner.bannerTypeId = this.props.banner.bannerType.id;
-      delete banner.placements;
-      this.props.updateBanner(banner).then(() => {
+      const placement = JSON.parse(activity.other);
+      delete placement.banners;
+      this.props.updatePlacement(placement).then(() => {
         const userId = this.props.user.id;
-        const subject = `Banner ${this.props.banner.name}`;
-        const subjectId = this.props.banner.id;
+        const subject = `Placement ${this.props.placement.name}`;
+        const subjectId = this.props.placement.id;
         const action = 'revert';
-        const other = JSON.stringify(bannerObject);
+        const other = JSON.stringify(placementObject);
         this.props.createActivity({ action,
           subject,
           subjectId,
           other,
           userId }).then(() => {
-            this.props.getBanner(this.props.bannerId).then(() => {
-              this.props.setPageBannerActiveTab('editBanner');
-            });
+            this.props.setPagePlacementActiveTab('editPlacement');
           });
       });
     }

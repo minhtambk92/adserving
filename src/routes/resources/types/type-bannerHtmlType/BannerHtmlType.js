@@ -22,6 +22,7 @@ import {
   setStatusCreateBannerHtmlType,
   setStatusUpdateBannerHtmlType,
 } from '../../../../actions/pages/resources';
+import { createActivity } from '../../../../actions/activities';
 import BannerHtmlTypeList from './BannerHtmlTypeList';
 import s from './BannerHtmlType.css';
 
@@ -41,6 +42,8 @@ class BannerHtmlType extends Component {
     createBannerHtmlType: PropTypes.func,
     deleteBannerHtmlType: PropTypes.func,
     updateBannerHtmlType: PropTypes.func,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
   };
 
   componentWillMount() {
@@ -65,6 +68,7 @@ class BannerHtmlType extends Component {
             updateBannerHtmlType={this.props.updateBannerHtmlType}
             user={this.props.user}
             page={this.props.page}
+            createActivity={this.props.createActivity}
           />
         </div>
       </Layout>
@@ -78,6 +82,7 @@ const mapState = (state) => ({
   bannerHtmlTypes: state.bannerHtmlTypes,
   page: state.page.resources,
   user: state.user,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -87,6 +92,7 @@ const mapDispatch = {
   createBannerHtmlType,
   deleteBannerHtmlType,
   updateBannerHtmlType,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(BannerHtmlType));

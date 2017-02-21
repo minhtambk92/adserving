@@ -14,6 +14,7 @@ class EditBannerHtmlTypeForm extends Component {
     updateBannerHtmlType: PropTypes.func,
     getBannerHtmlTypes: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -49,6 +50,7 @@ class EditBannerHtmlTypeForm extends Component {
   }
 
   save() {
+    const bannerHtmlTypeObject = this.props.bannerHtmlType;
     const id = this.props.id;
     const name = this.inputBannerHtmlTypeName.value;
     const value = this.convertToSlug(name);
@@ -62,7 +64,18 @@ class EditBannerHtmlTypeForm extends Component {
         value,
         status,
       }).then(() => {
-        this.props.getBannerHtmlTypes();
+        const userId = this.props.user.id;
+        const subject = `Banner Html Type ${name}`;
+        const subjectId = this.props.bannerHtmlType.id;
+        const action = 'updated';
+        const other = JSON.stringify(bannerHtmlTypeObject);
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId }).then(() => {
+            this.props.getBannerHtmlTypes();
+          });
       });
     }
     this.props.statusUpdateBannerHtmlType(false);

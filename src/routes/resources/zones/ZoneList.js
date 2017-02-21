@@ -16,6 +16,8 @@ class ZoneList extends Component {
     createShare: PropTypes.func,
     zones: PropTypes.object,
     shares: PropTypes.object,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   onTabClickZone(event) {
@@ -89,6 +91,18 @@ class ZoneList extends Component {
         status,
         description,
       }).then(() => {
+        if (this.props.list && this.props.list.length > 0) {
+          const userId = this.props.user.id;
+          const subject = `Zone ${data.name}`;
+          const subjectId = this.props.list[0].id;
+          const action = 'duplicated';
+          const other = JSON.stringify(data);
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
         const zoneId = this.props.zones.list[0].id;
         const arrShares = data.shares;
         for (let i = 0; i < arrShares.length; i += 1) {
@@ -117,6 +131,19 @@ class ZoneList extends Component {
               type,
               description,
               zoneId,
+            }).then(() => {
+              if (this.props.shares && this.props.shares.list.length > 0) {
+                const userId = this.props.user.id;
+                const subject = `Share ${name}`;
+                const subjectId = this.props.shares.list[0].id;
+                const action = 'created';
+                const other = JSON.stringify(this.props.shares.list[0]);
+                this.props.createActivity({ action,
+                  subject,
+                  subjectId,
+                  other,
+                  userId });
+              }
             });
           }
         }

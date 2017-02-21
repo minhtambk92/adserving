@@ -13,6 +13,8 @@ class ProfileList extends Component {
     users: PropTypes.object,
     updateProfile: PropTypes.func,
     setStatusUpdateProfile: PropTypes.func,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -142,6 +144,8 @@ class ProfileList extends Component {
                   setStatusUpdateProfile={this.props.setStatusUpdateProfile}
                   getUsers={this.props.getUsers}
                   page={this.props.page}
+                  user={this.props.user}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>

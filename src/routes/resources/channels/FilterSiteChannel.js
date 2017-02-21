@@ -11,12 +11,33 @@ class FilterSiteChannel extends Component {
     type: PropTypes.object,
     index: PropTypes.number,
     typeId: PropTypes.string,
+    createActivity: PropTypes.func,
+    user: PropTypes.object,
+    optionChannelId: PropTypes.string,
+    deleteOptionChannel: PropTypes.func,
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.type && nextProps.logical && nextProps.comparison) {
       this.inputTypeFilter.value = nextProps.logical;
       this.inputSiteFilter.value = nextProps.comparison;
+    }
+  }
+
+  deleteOption() { // eslint-disable-line no-unused-vars, class-methods-use-this
+    if (this.props.value && this.props.name && this.props.comparison) {
+      this.props.deleteOptionChannel(this.props.optionChannelId).then(() => {
+        const userId = this.props.user.id;
+        const subject = `Option Channel ${this.props.name}`;
+        const subjectId = this.props.optionChannelId;
+        const action = 'deleted';
+        const other = '';
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId });
+      });
     }
   }
 
@@ -41,6 +62,7 @@ class FilterSiteChannel extends Component {
               <button
                 className="btn btn-box-tool remove-option"
                 data-widget="remove"
+                onClick={event => this.deleteOption(event)}
               >
                 <i
                   className="fa fa-times"

@@ -22,6 +22,7 @@ import {
   setStatusCreateZoneType,
   setStatusUpdateZoneType,
 } from '../../../../actions/pages/resources';
+import { createActivity } from '../../../../actions/activities';
 import ZoneTypeList from './ZoneTypeList';
 import s from './ZoneType.css';
 
@@ -41,6 +42,8 @@ class ZoneType extends Component {
     deleteZoneType: PropTypes.func,
     updateZoneType: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
   };
 
   componentWillMount() {
@@ -65,6 +68,7 @@ class ZoneType extends Component {
             updateZoneType={this.props.updateZoneType}
             page={this.props.page}
             user={this.props.user}
+            createActivity={this.props.createActivity}
           />
         </div>
       </Layout>
@@ -78,6 +82,7 @@ const mapState = (state) => ({
   zoneTypes: state.zoneTypes,
   page: state.page.resources,
   user: state.user,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -87,6 +92,7 @@ const mapDispatch = {
   createZoneType,
   deleteZoneType,
   updateZoneType,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(ZoneType));

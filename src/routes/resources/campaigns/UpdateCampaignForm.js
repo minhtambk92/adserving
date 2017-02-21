@@ -16,7 +16,7 @@ class UpdateCampaignForm extends Component {
     advertisers: PropTypes.array,
     getCampaign: PropTypes.func,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -214,7 +214,7 @@ class UpdateCampaignForm extends Component {
 
     campaign.status = status;
     this.props.updateCampaign(campaign).then(() => {
-      const userId = this.props.users.id;
+      const userId = this.props.user.id;
       const subject = `Campaign ${name}`;
       const subjectId = this.props.campaign.id;
       const action = 'updated';
@@ -232,11 +232,11 @@ class UpdateCampaignForm extends Component {
   deleteCampaign() {
     const campaignObject = this.props.campaign;
     this.props.deleteCampaign(this.props.campaignId).then(() => {
-      const userId = this.props.users.id;
+      const userId = this.props.user.id;
       const subject = `Campaign ${campaignObject.name}`;
       const subjectId = this.props.campaign.id;
       const action = 'deleted';
-      const other = JSON.stringify(campaignObject);
+      const other = '';
       this.props.createActivity({ action,
         subject,
         subjectId,

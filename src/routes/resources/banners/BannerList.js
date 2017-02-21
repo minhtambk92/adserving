@@ -12,7 +12,7 @@ class BannerList extends Component {
     banners: PropTypes.object,
     tracks: PropTypes.object,
     createTrack: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
     createActivity: PropTypes.func,
   };
 
@@ -86,7 +86,7 @@ class BannerList extends Component {
         channelId,
       }).then(() => {
         if (this.props.list && this.props.list.length > 0) {
-          const userId = this.props.users.id;
+          const userId = this.props.user.id;
           const subject = `Banner ${data.name}`;
           const subjectId = this.props.list[0].id;
           const action = 'duplicated';

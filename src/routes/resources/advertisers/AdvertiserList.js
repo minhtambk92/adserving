@@ -11,7 +11,7 @@ class AdvertiserList extends Component {
     setPageAdvertiserActiveTab: PropTypes.func,
     createAdvertiser: PropTypes.func,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
   };
   onTabClickCampaign(event) {
     event.persist();
@@ -44,7 +44,7 @@ class AdvertiserList extends Component {
         status,
       }).then(() => {
         if (this.props.list && this.props.list.length > 0) {
-          const userId = this.props.users.id;
+          const userId = this.props.user.id;
           const subject = `Advertiser ${data.name}`;
           const subjectId = this.props.list[0].id;
           const action = 'duplicated';

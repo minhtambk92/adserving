@@ -22,6 +22,7 @@ class BannerTypeList extends Component {
     deleteBannerType: PropTypes.func,
     updateBannerType: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -89,7 +90,18 @@ class BannerTypeList extends Component {
 
   deleteBannerType(data) {
     this.props.deleteBannerType(data.id).then(() => {
-      this.props.getBannerTypes();
+      const userId = this.props.user.id;
+      const subject = `Banner Type ${data.name}`;
+      const subjectId = data.id;
+      const action = 'deleted';
+      const other = '';
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getBannerTypes();
+        });
     });
   }
 
@@ -183,6 +195,7 @@ class BannerTypeList extends Component {
                   getBannerTypes={this.props.getBannerTypes}
                   user={this.props.user}
                   page={this.props.page}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>
@@ -199,6 +212,8 @@ class BannerTypeList extends Component {
                   statusCreateBannerType={this.props.statusCreateBannerType}
                   user={this.props.user}
                   page={this.props.page}
+                  bannerTypes={this.props.bannerTypes}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>

@@ -17,6 +17,8 @@ class EditShareForm extends Component {
     setStatusShareFormEdit: PropTypes.func,
     page: PropTypes.object,
     list: PropTypes.array,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -43,6 +45,7 @@ class EditShareForm extends Component {
 
   save() {
     const id = $('.list-zone-share-edit').attr('id');
+    const shareObject = this.props.childZone;
     const name = this.inputEditShareName.value;
     const css = this.inputEditShareCSS.value;
     const outputCss = '';
@@ -70,10 +73,21 @@ class EditShareForm extends Component {
         type,
         description,
       }).then(() => {
-        this.props.getZone(this.props.zoneId).then(() => {
-          this.props.setPageZoneActiveTab('shareZone');
-          this.props.setStatusShareFormEdit(false);
-        });
+        const userId = this.props.user.id;
+        const subject = `Share ${name}`;
+        const subjectId = this.props.zoneId;
+        const action = 'updated';
+        const other = JSON.stringify(shareObject);
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId }).then(() => {
+            this.props.getZone(this.props.zoneId).then(() => {
+              this.props.setPageZoneActiveTab('shareZone');
+              this.props.setStatusShareFormEdit(false);
+            });
+          });
       });
     }
   }

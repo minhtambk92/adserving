@@ -22,6 +22,7 @@ import {
   setStatusCreateZoneSizeType,
   setStatusUpdateZoneSizeType,
 } from '../../../../actions/pages/resources';
+import { createActivity } from '../../../../actions/activities';
 import ZoneSizeTypeList from './ZoneSizeTypeList';
 import s from './ZoneSizeType.css';
 
@@ -41,6 +42,8 @@ class ZoneSizeType extends Component {
     deleteZoneSizeType: PropTypes.func,
     updateZoneSizeType: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
   };
 
   componentWillMount() {
@@ -65,6 +68,7 @@ class ZoneSizeType extends Component {
             updateZoneSizeType={this.props.updateZoneSizeType}
             page={this.props.page}
             user={this.props.user}
+            createActivity={this.props.createActivity}
           />
         </div>
       </Layout>
@@ -78,6 +82,7 @@ const mapState = (state) => ({
   zoneSizeTypes: state.zoneSizeTypes,
   page: state.page.resources,
   user: state.user,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -87,6 +92,7 @@ const mapDispatch = {
   createZoneSizeType,
   deleteZoneSizeType,
   updateZoneSizeType,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(ZoneSizeType));

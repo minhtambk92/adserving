@@ -12,6 +12,7 @@ class CreateOptionChannelTypeForm extends Component {
     page: PropTypes.object,
     createOptionChannelType: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   clear() { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -33,6 +34,20 @@ class CreateOptionChannelTypeForm extends Component {
         isVariable,
         status,
         userId,
+      }).then(() => {
+        if (this.props.optionChannelTypes && this.props.optionChannelTypes.list.length > 0) {
+          /* eslint-disable no-shadow */
+          const userId = this.props.user.id;
+          const subject = `Option Channel Type ${name}`;
+          const subjectId = this.props.optionChannelTypes.list[0].id;
+          const action = 'created';
+          const other = '';
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
       });
     }
     this.props.statusCreateOptionChannelType(false);

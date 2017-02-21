@@ -9,7 +9,7 @@ class SiteList extends Component {
     list: PropTypes.array,
     setPageSiteActiveTab: PropTypes.func,
     createSite: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
     createActivity: PropTypes.func,
   };
 
@@ -39,7 +39,7 @@ class SiteList extends Component {
     if (domain && name && email && description && status) {
       this.props.createSite({ domain, name, email, description, status }).then(() => {
         if (this.props.list && this.props.list.length > 0) {
-          const userId = this.props.users.id;
+          const userId = this.props.user.id;
           const subject = `Site ${data.name}`;
           const subjectId = this.props.list[0].id;
           const action = 'duplicated';

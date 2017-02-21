@@ -22,6 +22,7 @@ import {
   setStatusCreateCharacterSet,
   setStatusUpdateCharacterSet,
 } from '../../../../actions/pages/resources';
+import { createActivity } from '../../../../actions/activities';
 import CharacterSetList from './CharacterSetList';
 import s from './CharacterSet.css';
 
@@ -41,6 +42,8 @@ class CharacterSet extends Component {
     deleteCharacterSet: PropTypes.func,
     updateCharacterSet: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
   };
 
   componentWillMount() {
@@ -78,6 +81,7 @@ const mapState = (state) => ({
   characterSets: state.characterSets,
   page: state.page.resources,
   user: state.user,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -87,6 +91,7 @@ const mapDispatch = {
   createCharacterSet,
   deleteCharacterSet,
   updateCharacterSet,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(CharacterSet));

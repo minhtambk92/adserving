@@ -22,6 +22,7 @@ class ZoneTypeList extends Component {
     deleteZoneType: PropTypes.func,
     updateZoneType: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -90,8 +91,20 @@ class ZoneTypeList extends Component {
   }
 
   deleteZoneType(data) {
+    const zoneTypeObject = data;
     this.props.deleteZoneType(data.id).then(() => {
-      this.props.getZoneTypes();
+      const userId = this.props.user.id;
+      const subject = `Zone Type ${data.name}`;
+      const subjectId = data.id;
+      const action = 'deleted';
+      const other = JSON.stringify(zoneTypeObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getZoneTypes();
+        });
     });
   }
 
@@ -187,6 +200,7 @@ class ZoneTypeList extends Component {
                   getZoneTypes={this.props.getZoneTypes}
                   page={this.props.page}
                   user={this.props.user}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>
@@ -203,6 +217,8 @@ class ZoneTypeList extends Component {
                   statusCreateZoneType={this.props.statusCreateZoneType}
                   page={this.props.page}
                   user={this.props.user}
+                  zoneTypes={this.props.zoneTypes}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>

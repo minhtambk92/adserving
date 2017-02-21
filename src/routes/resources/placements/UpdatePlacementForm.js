@@ -15,6 +15,8 @@ class UpdatePlacementForm extends Component {
     deletePlacement: PropTypes.func,
     getPlacement: PropTypes.func,
     campaigns: PropTypes.array,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -138,6 +140,7 @@ class UpdatePlacementForm extends Component {
     const description = this.inputPlacementDescription.value;
     const campaignId = this.inputCampaign.value;
     const status = this.inputPlacementStatus.value;
+    const placementObject = this.props.placement;
     const placement = { id: this.props.placementId };
 
     placement.name = name;
@@ -157,12 +160,35 @@ class UpdatePlacementForm extends Component {
     }
 
     this.props.updatePlacement(placement).then(() => {
-      this.props.getPlacement(this.props.placementId);
+      const userId = this.props.user.id;
+      const subject = `Placement ${name}`;
+      const subjectId = this.props.placementId;
+      const action = 'updated';
+      const other = JSON.stringify(placementObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getPlacement(this.props.placementId);
+        });
     });
   }
 
   deletePlacement() {
-    this.props.deletePlacement(this.props.placementId);
+    const placementObject = this.props.placement;
+    this.props.deletePlacement(this.props.placementId).then(() => {
+      const userId = this.props.user.id;
+      const subject = `Placement ${placementObject.name}`;
+      const subjectId = this.props.placementId;
+      const action = 'deleted';
+      const other = '';
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId });
+    });
   }
 
   render() {

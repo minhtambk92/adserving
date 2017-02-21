@@ -21,6 +21,7 @@ class OptionChannelValueList extends Component {
     updateOptionChannelValue: PropTypes.func,
     optionChannelTypeList: PropTypes.array,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -91,7 +92,18 @@ class OptionChannelValueList extends Component {
 
   deleteOptionChannelValue(data) {
     this.props.deleteOptionChannelValue(data.id).then(() => {
-      this.props.getOptionChannelValues();
+      const userId = this.props.user.id;
+      const subject = `Option Channel Value ${data.name}`;
+      const subjectId = data.id;
+      const action = 'deleted';
+      const other = '';
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getOptionChannelValues();
+        });
     });
   }
 
@@ -192,6 +204,7 @@ class OptionChannelValueList extends Component {
                   optionChannelTypeList={this.props.optionChannelTypeList}
                   page={this.props.page}
                   user={this.props.user}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>
@@ -209,8 +222,10 @@ class OptionChannelValueList extends Component {
                   currentOptionChannelTypeId={this.state.currentOptionChannelTypeId}
                   statusCreateOptionChannelValue={this.props.statusCreateOptionChannelValue}
                   optionChannelTypeList={this.props.optionChannelTypeList}
+                  optionChannelValues={this.props.optionChannelValues}
                   page={this.props.page}
                   user={this.props.user}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>

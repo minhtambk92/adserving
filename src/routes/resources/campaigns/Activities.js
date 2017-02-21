@@ -11,7 +11,7 @@ class Activities extends Component {
     updateCampaign: PropTypes.func,
     setPageCampaignActiveTab: PropTypes.func,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
     campaign: PropTypes.object,
   };
 
@@ -20,7 +20,7 @@ class Activities extends Component {
     if (activity.other) {
       const campaign = JSON.parse(activity.other);
       this.props.updateCampaign(campaign).then(() => {
-        const userId = this.props.users.id;
+        const userId = this.props.user.id;
         const subject = `Campaign ${this.props.campaign.name}`;
         const subjectId = this.props.campaign.id;
         const action = 'revert';

@@ -12,7 +12,7 @@ class CampaignList extends Component {
     createCampaign: PropTypes.func,
     advertiserId: PropTypes.string,
     getAdvertiser: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
     createActivity: PropTypes.func,
   };
 
@@ -57,7 +57,7 @@ class CampaignList extends Component {
       status,
     }).then(() => {
       if (this.props.list && this.props.list.length > 0) {
-        const userId = this.props.users.id;
+        const userId = this.props.user.id;
         const subject = `Campaign ${data.name}`;
         const subjectId = this.props.list[0].id;
         const action = 'duplicated';

@@ -23,6 +23,7 @@ import { setPageZoneActiveTab } from '../../../actions/pages/zones';
 import { createShare, getShareByZoneId } from '../../../actions/shares';
 import { getZoneSizeTypes } from '../../../actions/zoneSizeTypes';
 import { getZoneTypes } from '../../../actions/zoneTypes';
+import { createActivity } from '../../../actions/activities';
 import CreateZoneForm from './CreateZoneForm';
 import FilterZonesForm from './FilterZonesForm';
 import ZoneList from './ZoneList';
@@ -47,6 +48,9 @@ class Zones extends Component {
     zoneTypes: PropTypes.object,
     getZoneSizeTypes: PropTypes.func,
     zoneSizeTypes: PropTypes.object,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -129,6 +133,8 @@ class Zones extends Component {
                 getZones={this.props.getZones}
                 zoneTypeList={this.props.zoneTypes && this.props.zoneTypes.list}
                 zoneSizeTypeList={this.props.zoneSizeTypes && this.props.zoneSizeTypes.list}
+                user={this.props.user}
+                createActivity={this.props.createActivity}
               />
             </div>
             {/* /.col */}
@@ -156,6 +162,8 @@ class Zones extends Component {
                     zones={this.props.zones}
                     shares={this.props.shares}
                     getShareByZoneId={this.props.getShareByZoneId}
+                    user={this.props.user}
+                    createActivity={this.props.createActivity}
                   />
                 </div>
                 {/* /.tab-pane */}
@@ -182,6 +190,8 @@ const mapState = (state) => ({
   shares: state.shares,
   zoneTypes: state.zoneTypes,
   zoneSizeTypes: state.zoneSizeTypes,
+  user: state.user,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -195,6 +205,7 @@ const mapDispatch = {
   getShareByZoneId,
   getZoneTypes,
   getZoneSizeTypes,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zones));

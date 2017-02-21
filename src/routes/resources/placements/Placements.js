@@ -19,6 +19,7 @@ import {
 } from '../../../actions/placements';
 import { getCampaigns } from '../../../actions/campaigns';
 import { setPagePlacementActiveTab } from '../../../actions/pages/placements';
+import { createActivity } from '../../../actions/activities';
 import PlacemenList from './PlacementList';
 import CreatePlacementForm from './CreatePlacementForm';
 import FilterPlacementForm from './FilterPlacementForm';
@@ -35,6 +36,9 @@ class Placements extends Component {
     campaigns: PropTypes.object,
     getCampaigns: PropTypes.func,
     setPagePlacementActiveTab: PropTypes.func,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
   };
 
   componentWillMount() {
@@ -104,6 +108,9 @@ class Placements extends Component {
                 filters={this.props.placements.filters}
                 campaigns={this.props.campaigns.list}
                 createPlacement={this.props.createPlacement}
+                user={this.props.user}
+                placements={this.props.placements && this.props.placements.list}
+                createActivity={this.props.createActivity}
               />
             </div>
             {/* /.col */}
@@ -124,6 +131,8 @@ class Placements extends Component {
                   list={this.getFilteredPlacements()}
                   setPagePlacementActiveTab={this.props.setPagePlacementActiveTab}
                   createPlacement={this.props.createPlacement}
+                  createActivity={this.props.createActivity}
+                  user={this.props.user}
                 />
               </div>
               {/* /.box-body */}
@@ -142,6 +151,8 @@ class Placements extends Component {
 const mapState = (state) => ({
   placements: state.placements,
   campaigns: state.campaigns,
+  user: state.user,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -151,6 +162,7 @@ const mapDispatch = {
   getPlacementsFilters,
   setPlacementsFilters,
   setPagePlacementActiveTab,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Placements));

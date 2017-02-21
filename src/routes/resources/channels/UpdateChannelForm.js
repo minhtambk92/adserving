@@ -11,7 +11,7 @@ class UpdateChannelForm extends Component {
     getChannel: PropTypes.func,
     sites: PropTypes.array,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -41,7 +41,7 @@ class UpdateChannelForm extends Component {
     }
 
     this.props.updateChannel(channel).then(() => {
-      const userId = this.props.users.id;
+      const userId = this.props.user.id;
       const subject = `Channel ${name}`;
       const subjectId = this.props.channel.id;
       const action = 'updated';
@@ -59,7 +59,7 @@ class UpdateChannelForm extends Component {
   deleteChannel() {
     const channelObject = this.props.channel;
     this.props.deleteChannel(this.props.channelId).then(() => {
-      const userId = this.props.users.id;
+      const userId = this.props.user.id;
       const subject = `Channel ${channelObject.name}`;
       const subjectId = this.props.channelId;
       const action = 'deleted';

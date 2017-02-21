@@ -17,7 +17,7 @@ class UpdateBannerForm extends Component {
     bannerTypes: PropTypes.object,
     adsServerList: PropTypes.array,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -170,7 +170,7 @@ class UpdateBannerForm extends Component {
     banner.isDefault = this.props.banner.isDefault;
     banner.isRelative = this.props.banner.isRelative;
     this.props.updateBanner(banner).then(() => {
-      const userId = this.props.users.id;
+      const userId = this.props.user.id;
       const subject = `Banner ${name}`;
       const subjectId = this.props.banner.id;
       const action = 'updated';
@@ -200,11 +200,11 @@ class UpdateBannerForm extends Component {
   deleteBanner() {
     const bannerObject = this.props.banner;
     this.props.deleteBanner(this.props.bannerId).then(() => {
-      const userId = this.props.users.id;
+      const userId = this.props.user.id;
       const subject = `Banner ${bannerObject.name}`;
       const subjectId = this.props.banner.id;
       const action = 'deleted';
-      const other = JSON.stringify(bannerObject);
+      const other = '';
       this.props.createActivity({ action,
         subject,
         subjectId,

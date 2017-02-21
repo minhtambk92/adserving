@@ -12,6 +12,7 @@ class CreateCharacterSetForm extends Component {
     page: PropTypes.object,
     createCharacterSet: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
 
@@ -31,6 +32,20 @@ class CreateCharacterSetForm extends Component {
         value,
         status,
         userId,
+      }).then(() => {
+        if (this.props.characterSets && this.props.characterSets.list.length > 0) {
+          /* eslint-disable no-shadow */
+          const userId = this.props.user.id;
+          const subject = `CharacterSet ${name}`;
+          const subjectId = this.props.characterSets.list[0].id;
+          const action = 'created';
+          const other = JSON.stringify(this.props.characterSets.list[0]);
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
       });
     }
     this.props.statusCreateCharacterSet(false);

@@ -58,7 +58,7 @@ class Channel extends Component {
     optionChannelTypes: PropTypes.object,
     createActivity: PropTypes.func,
     getActivitiesBySubjectId: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
     activities: PropTypes.object,
     setPageChannelActiveTab: PropTypes.func,
   };
@@ -134,21 +134,18 @@ class Channel extends Component {
     for (let i = 1; i <= length; i += 1) {
       const id = $(`#optionChannel .optionChannel-${i}`).attr('id');
       if (id) {
-        let optionChannelTypeId = null;
         /* eslint-disable object-shorthand */
         const options = _.filter(this.state.arrOption, { id: id });
         if (options[0].optionChannelType) {
-          optionChannelTypeId = options[0].optionChannelType.id;
-          const channelId = this.props.channelId;
+          const oChannel = { id: id };
           const optionChannelType = options[0].optionChannelType;
-          const logical = $(`#${id} .inputTypeFilter`).val();
-          const comparison = $(`#${id} .inputSiteFilter`).val();
-          let name = '';
-          let value = '';
+          oChannel.logical = $(`#${id} .inputTypeFilter`).val();
+          oChannel.comparison = $(`#${id} .inputSiteFilter`).val();
+          oChannel.channelId = this.props.channelId;
           if (optionChannelType) {
             if (optionChannelType.isVariable === true) {
-              name = $(`#${id} .inputChannelVariableName`).val();
-              value = $(`#${id} .inputChannelVariableValue`).val();
+              oChannel.name = $(`#${id} .inputChannelVariableName`).val();
+              oChannel.value = $(`#${id} .inputChannelVariableValue`).val();
             } else if (optionChannelType.isSelectOption === true) {
               // Update Checkbox Option Channel
               const arrSelect = [];
@@ -160,24 +157,38 @@ class Channel extends Component {
                   arrSelect.push(val);
                 }
               });
-              name = optionChannelType.name;
-              value = arrSelect.toString();
+              oChannel.name = optionChannelType.name;
+              oChannel.value = arrSelect.toString();
             } else if (optionChannelType.isInputLink === true) {
               // Update Site Option channel
-              name = optionChannelType.name;
-              value = $(`#${id} .inputChannelOptionURL`).val();
+              oChannel.name = optionChannelType.name;
+              oChannel.value = $(`#${id} .inputChannelOptionURL`).val();
             }
-            if (comparison && value) {
-              this.props.updateOptionChannel({
-                id,
-                name,
-                logical,
-                optionChannelTypeId,
-                comparison,
-                value,
-                channelId,
-              }).then(() => {
+            const op = _.filter(this.state.arrOption, { id: id });
+            const checkName = (JSON.stringify(oChannel.name) === JSON.stringify(op[0].name));
+            const checkLogical = (JSON.stringify(oChannel.logical) ===
+            JSON.stringify(op[0].logical));
+            const checkComparison = (JSON.stringify(oChannel.comparison) ===
+            JSON.stringify(op[0].comparison));
+            const checkValue = (JSON.stringify(oChannel.value) === JSON.stringify(op[0].value));
+            if (checkName === false ||
+              checkComparison === false || checkLogical === false || checkValue === false) {
+              this.props.updateOptionChannel(oChannel).then(() => {
+                const userId = this.props.user.id;
+                const subject = `Option Channel ${options.name}`;
+                const subjectId = id;
+                const action = 'updated';
+                const other = JSON.stringify(op[0]);
                 this.props.getChannel(this.props.channelId);
+                this.props.createActivity({
+                  action,
+                  subject,
+                  subjectId,
+                  other,
+                  userId,
+                }).then(() => {
+                  this.props.getChannel(this.props.channelId);
+                });
               });
             }
           }
@@ -189,7 +200,7 @@ class Channel extends Component {
           typeId = typeId.slice(0, typeId.lastIndexOf('-'));
           if (this.props.optionChannelTypes && this.props.optionChannelTypes.list) {
             const options = _.filter(this.props.optionChannelTypes.list, { id: typeId });
-            if (options[0]) {
+            if (options && options.length > 0 && options[0]) {
               const channelId = this.props.channelId;
               const logical = $(`.optionChannel-${i} .inputTypeFilter`).val();
               const comparison = $(`.optionChannel-${i} .inputSiteFilter`).val();
@@ -227,7 +238,20 @@ class Channel extends Component {
                   value,
                   channelId,
                 }).then(() => {
-                  this.props.getChannel(this.props.channelId);
+                  const userId = this.props.user.id;
+                  const subject = `Option Channel ${name}`;
+                  const subjectId = this.props.channels.editing.options[0].id;
+                  const action = 'created';
+                  const other = '';
+                  this.props.createActivity({
+                    action,
+                    subject,
+                    subjectId,
+                    other,
+                    userId,
+                  }).then(() => {
+                    this.props.getChannel(this.props.channelId);
+                  });
                 });
               }
             }
@@ -242,18 +266,20 @@ class Channel extends Component {
     const value = this.inputChannelOptions.value;
     if (this.props.optionChannelTypes && value) {
       const item = _.filter(this.props.optionChannelTypes.list, { id: value });
-      const html = item[0].name;
-      const arrOptionChannelValue = item[0].optionChannelValues;
-      if (item[0].isInputLink === true) {
-        const count = this.state.countOptionChannel + 1;
-        this.setState({ countOptionChannel: count });
-        this.addNewFilterSite(item[0], html);
-      } else if (item[0].isSelectOption === true) {
-        const count = this.state.countOptionChannel + 1;
-        this.setState({ countOptionChannel: count });
-        this.addCheckBoxSite(item[0], arrOptionChannelValue, html);
-      } else if (item[0].isVariable === true) {
-        this.addVariable(item[0], html);
+      if (item && item.length > 0 && item[0]) {
+        const html = item[0].name;
+        const arrOptionChannelValue = item[0].optionChannelValues;
+        if (item[0].isInputLink === true) {
+          const count = this.state.countOptionChannel + 1;
+          this.setState({ countOptionChannel: count });
+          this.addNewFilterSite(item[0], html);
+        } else if (item[0].isSelectOption === true) {
+          const count = this.state.countOptionChannel + 1;
+          this.setState({ countOptionChannel: count });
+          this.addCheckBoxSite(item[0], arrOptionChannelValue, html);
+        } else if (item[0].isVariable === true) {
+          this.addVariable(item[0], html);
+        }
       }
     }
     /* eslint-enable no-undef */
@@ -336,7 +362,7 @@ class Channel extends Component {
                       getChannel={this.props.getChannel}
                       sites={this.props.sites.list}
                       createActivity={this.props.createActivity}
-                      users={this.props.users && this.props.users.editing}
+                      user={this.props.user}
                     />
                   </div>
 
@@ -351,13 +377,19 @@ class Channel extends Component {
                             }}
                           >
                             {this.props.optionChannelTypes &&
+                            /* eslint-disable no-confusing-arrow */
                             this.props.optionChannelTypes.list.map((option) =>
-                              <option
-                                key={option.id}
-                                value={option.id}
-                              >
-                                {option.name}
-                              </option>,
+                              ((option.optionChannelValues &&
+                              option.isSelectOption === true && option.optionChannelValues.length)
+                              || (option.isSelectOption === false)) > 0 ?
+                                (
+                                  <option
+                                    key={option.id}
+                                    value={option.id}
+                                  >
+                                    {option.name}
+                                  </option>
+                                ) : '',
                             )}
                           </select>
                         </div>
@@ -395,6 +427,8 @@ class Channel extends Component {
                               logical={option.logical}
                               deleteOptionChannel={this.props.deleteOptionChannel}
                               optionChannelId={option.id}
+                              createActivity={this.props.createActivity}
+                              user={this.props.user}
                             />);
                           } else if (option.optionChannelType.isSelectOption === false) {
                             return (
@@ -407,6 +441,10 @@ class Channel extends Component {
                                 name={option.name}
                                 value={option.value}
                                 comparison={option.comparison}
+                                createActivity={this.props.createActivity}
+                                deleteOptionChannel={this.props.deleteOptionChannel}
+                                optionChannelId={option.id}
+                                user={this.props.user}
                               />
                             );
                           }
@@ -466,7 +504,7 @@ class Channel extends Component {
                           setPageChannelActiveTab={this.props.setPageChannelActiveTab}
                           createActivity={this.props.createActivity}
                           channel={this.props.channels && this.props.channels.editing}
-                          users={this.props.users && this.props.users.editing}
+                          user={this.props.user}
                         />
                       </section>
                     </div>
@@ -488,7 +526,7 @@ const mapState = (state) => ({
   optionChannels: state.optionChannels,
   sites: state.sites,
   optionChannelTypes: state.optionChannelTypes,
-  users: state.users,
+  user: state.user,
   activities: state.activities,
 });
 

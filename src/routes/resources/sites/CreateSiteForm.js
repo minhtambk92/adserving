@@ -6,12 +6,11 @@ import Link from '../../../components/Link';
 class CreateSiteForm extends Component {
 
   static propTypes = {
-    filters: PropTypes.object,
     createSite: PropTypes.func,
     checkSitesByDomain: PropTypes.func,
     sites: PropTypes.object,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
   };
 
   clearInput() {
@@ -45,21 +44,22 @@ class CreateSiteForm extends Component {
         $('#inputSiteEmail').parents('.form-group').removeClass('has-error ');
       }, 2000);
     }
-    if (domain && name && email && description && status) {
-      this.props.createSite({ domain, name, email, description, status });
-      if (this.props.sites && this.props.sites.list.length > 0) {
-        const userId = this.props.users.id;
-        const subject = `Site ${name}`;
-        const subjectId = this.props.sites.list[0].id;
-        const action = 'created';
-        const other = JSON.stringify(this.props.sites.list[0]);
-        this.props.createActivity({ action,
-          subject,
-          subjectId,
-          other,
-          userId });
-      }
-      this.clearInput();
+    if (domain) {
+      this.props.createSite({ domain, name, email, description, status }).then(() => {
+        if (this.props.sites && this.props.sites.list.length > 0) {
+          const userId = this.props.user.id;
+          const subject = `Site ${name}`;
+          const subjectId = this.props.sites.list[0].id;
+          const action = 'created';
+          const other = '';
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
+        this.clearInput();
+      });
     }
   }
 

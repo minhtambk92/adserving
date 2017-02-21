@@ -25,7 +25,7 @@ class CreateBannerForm extends Component {
     getBanners: PropTypes.func,
     adsServerList: PropTypes.array,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -168,11 +168,11 @@ class CreateBannerForm extends Component {
       }).then(() => {
         this.clearInput();
         if (this.props.banners && this.props.banners.length > 0) {
-          const userId = this.props.users.id;
+          const userId = this.props.user.id;
           const subject = `Banner ${name}`;
           const subjectId = this.props.banners[0].id;
           const action = 'created';
-          const other = JSON.stringify(this.props.banners[0]);
+          const other = '';
           this.props.createActivity({ action,
             subject,
             subjectId,

@@ -22,6 +22,7 @@ import {
   setStatusCreateAdsServer,
   setStatusUpdateAdsServer,
 } from '../../../../actions/pages/resources';
+import { createActivity } from '../../../../actions/activities';
 import AdsServerList from './AdsServerList';
 import s from './AdsServer.css';
 
@@ -41,6 +42,8 @@ class AdsServer extends Component {
     deleteAdsServer: PropTypes.func,
     updateAdsServer: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
+    activities: PropTypes.object,
   };
 
   componentWillMount() {
@@ -65,6 +68,7 @@ class AdsServer extends Component {
             updateAdsServer={this.props.updateAdsServer}
             page={this.props.page}
             user={this.props.user}
+            createActivity={this.props.createActivity}
           />
         </div>
       </Layout>
@@ -78,6 +82,7 @@ const mapState = (state) => ({
   adsServers: state.adsServers,
   page: state.page.resources,
   user: state.user,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -87,6 +92,7 @@ const mapDispatch = {
   createAdsServer,
   deleteAdsServer,
   updateAdsServer,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(AdsServer));

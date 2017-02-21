@@ -36,7 +36,7 @@ class Campaigns extends Component {
     advertisers: PropTypes.object,
     setPageCampaignActiveTab: PropTypes.func,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
     activities: PropTypes.object,
   };
 
@@ -111,7 +111,7 @@ class Campaigns extends Component {
                 advertisers={this.props.advertisers.list}
                 createCampaign={this.props.createCampaign}
                 createActivity={this.props.createActivity}
-                users={this.props.users && this.props.users.editing}
+                user={this.props.user}
                 campaigns={this.props.campaigns}
               />
             </div>
@@ -134,7 +134,7 @@ class Campaigns extends Component {
                   setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
                   createCampaign={this.props.createCampaign}
                   createActivity={this.props.createActivity}
-                  users={this.props.users && this.props.users.editing}
+                  users={this.props.user}
                 />
               </div>
               {/* /.box-body */}
@@ -152,7 +152,7 @@ class Campaigns extends Component {
 const mapState = (state) => ({
   campaigns: state.campaigns,
   advertisers: state.advertisers,
-  users: state.users,
+  user: state.user,
   activities: state.activities,
 });
 

@@ -11,7 +11,7 @@ class CreateAdvertiserForm extends Component {
     createAdvertiser: PropTypes.func,
     createActivity: PropTypes.func,
     advertisers: PropTypes.object,
-    users: PropTypes.object,
+    user: PropTypes.object,
   };
 
   clearInput() {
@@ -71,11 +71,11 @@ class CreateAdvertiserForm extends Component {
       }).then(() => {
         this.clearInput();
         if (this.props.advertisers && this.props.advertisers.list.length > 0) {
-          const userId = this.props.users.id;
+          const userId = this.props.user.id;
           const subject = `Advertiser ${name}`;
           const subjectId = this.props.advertisers.list[0].id;
           const action = 'created';
-          const other = JSON.stringify(this.props.advertisers.list[0]);
+          const other = '';
           this.props.createActivity({ action,
             subject,
             subjectId,

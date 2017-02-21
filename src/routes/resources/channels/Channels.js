@@ -36,7 +36,7 @@ class Channels extends Component {
     createOptionChannel: PropTypes.func,
     createActivity: PropTypes.func,
     activities: PropTypes.object,
-    users: PropTypes.object,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -107,8 +107,8 @@ class Channels extends Component {
                 createChannel={this.props.createChannel}
                 sites={this.props.sites && this.props.sites.list}
                 createActivity={this.props.createActivity}
-                users={this.props.users && this.props.users.editing}
-                channels={this.props.channels}
+                users={this.props.user}
+                channels={this.props.channels && this.props.channels.list}
               />
             </div>
             {/* /.col */}
@@ -133,7 +133,7 @@ class Channels extends Component {
                   createOptionChannel={this.props.createOptionChannel}
                   channels={this.props.channels}
                   createActivity={this.props.createActivity}
-                  users={this.props.users && this.props.users.editing}
+                  user={this.props.user}
                 />
               </div>
               {/* /.box-body */}
@@ -153,7 +153,7 @@ const mapState = (state) => ({
   sites: state.sites,
   optionChannels: state.optionChannels,
   activities: state.activities,
-  users: state.users,
+  user: state.user,
 });
 
 const mapDispatch = {

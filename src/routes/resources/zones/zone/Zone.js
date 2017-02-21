@@ -28,10 +28,12 @@ import { getZoneSizeTypes } from '../../../../actions/zoneSizeTypes';
 import { createShare, updateShare, deleteShare } from '../../../../actions/shares';
 import { getZoneTypes } from '../../../../actions/zoneTypes';
 import { getCharacterSets } from '../../../../actions/characterSets';
+import { getActivitiesBySubjectId, createActivity } from '../../../../actions/activities';
 import Layout from '../../../../components/Layout';
 import UpdateZoneForm from '../UpdateZoneForm';
 import ListPlacementOfShare from '../ListPlacementOfShare';
 import ListPlacementNotBelongToShare from '../ListPlacementNotBelongToShare';
+import Activities from '../Activities';
 import ZoneSettingForm from '../SettingZoneForm';
 import ListShare from '../ListShare';
 import AdsCode from '../AdsCode';
@@ -70,6 +72,10 @@ class Zone extends Component {
     zoneSizeTypes: PropTypes.object,
     getCharacterSets: PropTypes.func,
     characterSets: PropTypes.object,
+    user: PropTypes.object,
+    activities: PropTypes.object,
+    createActivity: PropTypes.func,
+    getActivitiesBySubjectId: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -87,6 +93,7 @@ class Zone extends Component {
     this.props.getZoneSizeTypes();
     this.props.getZone(this.props.zoneId);
     this.props.getCharacterSets();
+    this.props.getActivitiesBySubjectId(this.props.zoneId);
   }
 
   componentDidMount() {
@@ -141,6 +148,14 @@ class Zone extends Component {
     $(`a[href="#${this.props.page.activeTab}"]`).trigger('click');
   }
 
+  onTabClick(event) {
+    event.persist();
+    this.props.setPageZoneActiveTab(event.target.getAttribute('data-id'));
+    if (event.target.getAttribute('data-id') === 'activity') {
+      this.props.getActivitiesBySubjectId(this.props.zoneId);
+    }
+  }
+
   getFilteredShare() {
     const isFilter = this.inputSelectShare.value;
     let arr = [];
@@ -150,14 +165,6 @@ class Zone extends Component {
       }
     }
     this.setState({ arrShare: arr[0] });
-  }
-
-  setTabPlacement() {
-    this.props.setPageZoneActiveTab('addPlacement');
-  }
-
-  setTabShare() {
-    this.props.setPageZoneActiveTab('shareZone');
   }
 
   filterPlmNotIn(allPlacement, pob) { // eslint-disable-line no-unused-vars, class-methods-use-this
@@ -214,28 +221,51 @@ class Zone extends Component {
               <div className="nav-tabs-custom zone-edit-box">
                 <ul className="nav nav-tabs">
                   <li className="active">
-                    <a href="#editZone" data-toggle="tab">Edit</a>
+                    <a
+                      href="#editZone" data-toggle="tab"
+                      data-id="editZone"
+                      onClick={event => this.onTabClick(event)}
+                    >Edit</a>
                   </li>
                   <li>
-                    <a href="#settingZone" data-toggle="tab">Settings</a>
+                    <a
+                      href="#settingZone" data-toggle="tab"
+                      data-id="settingZone"
+                      onClick={event => this.onTabClick(event)}
+                    >Settings</a>
                   </li>
                   <li>
                     <a
                       href="#shareZone" data-toggle="tab"
-                      onClick={event => this.setTabShare(event)}
+                      data-id="shareZone"
+                      onClick={event => this.onTabClick(event)}
                     >Shares</a>
                   </li>
                   <li>
                     <a
                       href="#addPlacement" data-toggle="tab"
-                      onClick={event => this.setTabPlacement(event)}
+                      data-id="addPlacement"
+                      onClick={event => this.onTabClick(event)}
                     >Placements</a>
                   </li>
                   <li>
-                    <a href="#apiData" data-toggle="tab">API Data</a>
+                    <a
+                      href="#apiData" data-toggle="tab" data-id="apiData"
+                      onClick={event => this.onTabClick(event)}
+                    >API Data</a>
                   </li>
                   <li>
-                    <a href="#adsCode" data-toggle="tab">Code</a>
+                    <a
+                      href="#adsCode" data-toggle="tab" data-id="adsCode"
+                      onClick={event => this.onTabClick(event)}
+                    >Code</a>
+                  </li>
+                  <li>
+                    <a
+                      href="#activity" data-toggle="tab"
+                      data-id="activity"
+                      onClick={event => this.onTabClick(event)}
+                    >Activity</a>
                   </li>
                 </ul>
 
@@ -252,6 +282,8 @@ class Zone extends Component {
                       setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                       zoneTypeList={this.props.zoneTypes && this.props.zoneTypes.list}
                       zoneSizeTypeList={this.props.zoneSizeTypes && this.props.zoneSizeTypes.list}
+                      user={this.props.user}
+                      createActivity={this.props.createActivity}
                     />
                   </div>
 
@@ -263,6 +295,8 @@ class Zone extends Component {
                       getZone={this.props.getZone}
                       setPageZoneActiveTab={this.props.setPageZoneActiveTab}
                       characterSetList={this.props.characterSets && this.props.characterSets.list}
+                      user={this.props.user}
+                      createActivity={this.props.createActivity}
                     />
                   </div>
 
@@ -281,6 +315,8 @@ class Zone extends Component {
                       setStatusShareFormCreate={this.props.setStatusShareFormCreate}
                       updateShare={this.props.updateShare}
                       shareId={this.state.arrShare.id}
+                      user={this.props.user}
+                      createActivity={this.props.createActivity}
                     />
                   </div>
 
@@ -380,6 +416,20 @@ class Zone extends Component {
                   <div className="tab-pane" id="adsCode">
                     <AdsCode zone={this.props.zones.editing} />
                   </div>
+                  <div className="tab-pane" id="activity">
+                    <div className="row">
+                      <section className="col-lg-12">
+                        <Activities
+                          activities={this.props.activities && this.props.activities.list}
+                          updateZone={this.props.updateZone}
+                          setPageZoneActiveTab={this.props.setPageZoneActiveTab}
+                          createActivity={this.props.createActivity}
+                          zone={this.props.zones && this.props.zones.editing}
+                          user={this.props.user}
+                        />
+                      </section>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -401,6 +451,8 @@ const mapState = (state) => ({
   zoneTypes: state.zoneTypes,
   zoneSizeTypes: state.zoneSizeTypes,
   characterSets: state.characterSets,
+  user: state.user,
+  activities: state.activities,
 });
 
 const mapDispatch = {
@@ -422,6 +474,8 @@ const mapDispatch = {
   getZoneTypes,
   getZoneSizeTypes,
   getCharacterSets,
+  getActivitiesBySubjectId,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Zone));

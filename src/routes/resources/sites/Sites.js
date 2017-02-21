@@ -22,16 +22,16 @@ import s from './Sites.css';
 class Sites extends Component {
 
   static propTypes = {
-    sites: PropTypes.object,
     getSites: PropTypes.func,
     checkSitesByDomain: PropTypes.func,
     createSite: PropTypes.func,
     getChannels: PropTypes.func,
+    sites: PropTypes.object,
     channels: PropTypes.object,
     setPageSiteActiveTab: PropTypes.func,
     createActivity: PropTypes.func,
     activities: PropTypes.object,
-    users: PropTypes.object,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -57,12 +57,11 @@ class Sites extends Component {
               </div>
               {/* /.box-header */}
               <CreateSiteForm
-                filters={this.props.sites.filters}
                 sites={this.props.sites}
                 createSite={this.props.createSite}
                 checkSitesByDomain={this.props.checkSitesByDomain}
                 createActivity={this.props.createActivity}
-                users={this.props.users && this.props.users.editing}
+                user={this.props.user}
               />
             </div>
             {/* /.col */}
@@ -79,11 +78,11 @@ class Sites extends Component {
               {/* /.box-header */}
               <div className="box-body">
                 <SiteList
-                  list={this.props.sites.list}
+                  list={this.props.sites && this.props.sites.list}
                   setPageSiteActiveTab={this.props.setPageSiteActiveTab}
                   createSite={this.props.createSite}
                   createActivity={this.props.createActivity}
-                  users={this.props.users && this.props.users.editing}
+                  user={this.props.user}
                 />
               </div>
               {/* /.box-body */}
@@ -101,7 +100,7 @@ class Sites extends Component {
 
 const mapState = (state) => ({
   sites: state.sites,
-  users: state.users,
+  user: state.user,
   activities: state.activities,
   channels: state.channels,
 });

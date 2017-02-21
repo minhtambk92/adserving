@@ -18,6 +18,8 @@ class OptionSelectChannel extends Component {
     logical: PropTypes.string,
     index: PropTypes.number,
     typeId: PropTypes.string,
+    createActivity: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentDidMount() {
@@ -43,12 +45,12 @@ class OptionSelectChannel extends Component {
       const arr = value.split(',');
       if (nextProps.data.length > 0) {
         for (let i = 0; i < nextProps.data.length; i += 1) {
-          const id = `${nextProps.name}${nextProps.data[i].value}${nextProps.index}`;
+          const id = `${nextProps.id}${nextProps.data[i].value}${nextProps.index}`;
           $(`#${id}`).iCheck('uncheck');
         }
 
         for (let i = 0; i < arr.length; i += 1) {
-          const id = `${nextProps.name}${arr[i]}${nextProps.index}`;
+          const id = `${nextProps.id}${arr[i]}${nextProps.index}`;
           $(`#${id}`).iCheck('check');
         }
       }
@@ -57,7 +59,18 @@ class OptionSelectChannel extends Component {
 
   deleteOption() { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (this.props.value && this.props.name && this.props.comparison) {
-      this.props.deleteOptionChannel(this.props.optionChannelId);
+      this.props.deleteOptionChannel(this.props.optionChannelId).then(() => {
+        const userId = this.props.user.id;
+        const subject = `Option Channel ${this.props.name}`;
+        const subjectId = this.props.optionChannelId;
+        const action = 'deleted';
+        const other = '';
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId });
+      });
     }
   }
 
@@ -131,7 +144,7 @@ class OptionSelectChannel extends Component {
                             >
                               <ICheck
                                 type="checkbox"
-                                id={this.props.name + data.value + this.props.index}
+                                id={this.props.id + data.value + this.props.index}
                                 className="inputOption"
                                 value={data.value}
                               />

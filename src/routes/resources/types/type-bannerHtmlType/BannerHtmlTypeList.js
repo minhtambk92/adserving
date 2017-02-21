@@ -22,6 +22,7 @@ class BannerHtmlTypeList extends Component {
     deleteBannerHtmlType: PropTypes.func,
     updateBannerHtmlType: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -91,8 +92,20 @@ class BannerHtmlTypeList extends Component {
   }
 
   deleteBannerHtmlType(data) {
+    const bannerHtmlTypeObject = data;
     this.props.deleteBannerHtmlType(data.id).then(() => {
-      this.props.getBannerHtmlTypes();
+      const userId = this.props.user.id;
+      const subject = `Banner Html Type ${data.name}`;
+      const subjectId = data.id;
+      const action = 'deleted';
+      const other = JSON.stringify(bannerHtmlTypeObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getBannerHtmlTypes();
+        });
     });
   }
 
@@ -188,6 +201,7 @@ class BannerHtmlTypeList extends Component {
                   getBannerHtmlTypes={this.props.getBannerHtmlTypes}
                   user={this.props.user}
                   page={this.props.page}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>
@@ -202,8 +216,10 @@ class BannerHtmlTypeList extends Component {
                   createBannerHtmlType={this.props.createBannerHtmlType}
                   getBannerHtmlTypes={this.props.getBannerHtmlTypes}
                   statusCreateBannerHtmlType={this.props.statusCreateBannerHtmlType}
+                  bannerHtmlTypes={this.props.bannerHtmlTypes}
                   user={this.props.user}
                   page={this.props.page}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>

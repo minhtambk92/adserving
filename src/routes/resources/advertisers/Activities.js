@@ -11,7 +11,7 @@ class Activities extends Component {
     updateAdvertiser: PropTypes.func,
     setPageAdvertiserActiveTab: PropTypes.func,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
     advertiser: PropTypes.object,
   };
 
@@ -20,7 +20,7 @@ class Activities extends Component {
     if (activity.other) {
       const advertiser = JSON.parse(activity.other);
       this.props.updateAdvertiser(advertiser).then(() => {
-        const userId = this.props.users.id;
+        const userId = this.props.user.id;
         const subject = `Advertiser ${this.props.advertiser.name}`;
         const subjectId = this.props.advertiser.id;
         const action = 'revert';

@@ -11,7 +11,7 @@ class Activities extends Component {
     updateSite: PropTypes.func,
     setPageSiteActiveTab: PropTypes.func,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
     site: PropTypes.object,
   };
 
@@ -20,7 +20,7 @@ class Activities extends Component {
     if (activity.other) {
       const site = JSON.parse(activity.other);
       this.props.updateSite(site).then(() => {
-        const userId = this.props.users.id;
+        const userId = this.props.user.id;
         const subject = `Site ${this.props.site.name}`;
         const subjectId = this.props.site.id;
         const action = 'revert';

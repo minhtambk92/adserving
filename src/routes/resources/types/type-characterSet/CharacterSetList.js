@@ -22,6 +22,7 @@ class CharacterSetList extends Component {
     deleteCharacterSet: PropTypes.func,
     updateCharacterSet: PropTypes.func,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -89,7 +90,18 @@ class CharacterSetList extends Component {
 
   deleteCharacterSet(data) {
     this.props.deleteCharacterSet(data.id).then(() => {
-      this.props.getCharacterSets();
+      const userId = this.props.user.id;
+      const subject = `CharacterSet ${data.name}`;
+      const subjectId = data.id;
+      const action = 'deleted';
+      const other = '';
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getCharacterSets();
+        });
     });
   }
 
@@ -183,6 +195,7 @@ class CharacterSetList extends Component {
                   getCharacterSets={this.props.getCharacterSets}
                   page={this.props.page}
                   user={this.props.user}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>
@@ -199,6 +212,8 @@ class CharacterSetList extends Component {
                   statusCreateCharacterSet={this.props.statusCreateCharacterSet}
                   page={this.props.page}
                   user={this.props.user}
+                  createActivity={this.props.createActivity}
+                  characterSets={this.props.characterSets}
                 />
               </div>
             </div>

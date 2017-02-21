@@ -52,7 +52,7 @@ class Banners extends Component {
     getAdsServers: PropTypes.func,
     adsServers: PropTypes.object,
     activities: PropTypes.object,
-    users: PropTypes.object,
+    user: PropTypes.object,
     createActivity: PropTypes.func,
   };
 
@@ -137,7 +137,7 @@ class Banners extends Component {
                 getBannerTypes={this.props.getBannerTypes}
                 adsServerList={this.props.adsServers && this.props.adsServers.list}
                 createActivity={this.props.createActivity}
-                users={this.props.users && this.props.users.editing}
+                user={this.props.user}
                 banners={this.props.banners && this.props.banners.list}
               />
             </div>
@@ -162,7 +162,7 @@ class Banners extends Component {
                   tracks={this.props.tracks}
                   createTrack={this.props.createTrack}
                   createActivity={this.props.createActivity}
-                  users={this.props.users && this.props.users.editing}
+                  user={this.props.user}
                 />
               </div>
               {/* /.box-body */}
@@ -187,7 +187,7 @@ const mapState = (state) => ({
   bannerTypes: state.bannerTypes,
   adsServers: state.adsServers,
   activities: state.activities,
-  users: state.users,
+  user: state.user,
 });
 
 const mapDispatch = {

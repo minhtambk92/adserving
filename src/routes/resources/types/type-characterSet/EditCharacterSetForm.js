@@ -13,6 +13,8 @@ class EditCharacterSetForm extends Component {
     characterSet: PropTypes.object,
     updateCharacterSet: PropTypes.func,
     getCharacterSets: PropTypes.func,
+    createActivity: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -29,6 +31,7 @@ class EditCharacterSetForm extends Component {
   }
 
   save() {
+    const characterSetObject = this.props.characterSet;
     const id = this.props.id;
     const name = this.inputCharacterSetName.value;
     const value = this.inputCharacterSetValue.value;
@@ -40,7 +43,18 @@ class EditCharacterSetForm extends Component {
         value,
         status,
       }).then(() => {
-        this.props.getCharacterSets();
+        const userId = this.props.user.id;
+        const subject = `CharacterSet ${name}`;
+        const subjectId = this.props.characterSet.id;
+        const action = 'updated';
+        const other = JSON.stringify(characterSetObject);
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId }).then(() => {
+            this.props.getCharacterSets();
+          });
       });
     }
     this.props.statusUpdateCharacterSet(false);

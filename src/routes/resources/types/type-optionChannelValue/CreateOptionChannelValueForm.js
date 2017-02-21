@@ -14,6 +14,7 @@ class CreateOptionChannelValueForm extends Component {
     optionChannelTypeList: PropTypes.array,
     currentOptionChannelTypeId: PropTypes.string,
     user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -58,6 +59,20 @@ class CreateOptionChannelValueForm extends Component {
         status,
         optionChannelTypeId,
         userId,
+      }).then(() => {
+        if (this.props.optionChannelValues && this.props.optionChannelValues.list.length > 0) {
+          /* eslint-disable no-shadow */
+          const userId = this.props.user.id;
+          const subject = `Option Channel Value ${name}`;
+          const subjectId = this.props.optionChannelValues.list[0].id;
+          const action = 'created';
+          const other = '';
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
       });
     }
     this.props.statusCreateOptionChannelValue(false);

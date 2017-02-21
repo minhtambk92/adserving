@@ -68,7 +68,7 @@ class Banner extends Component {
     adsServers: PropTypes.object,
     createActivity: PropTypes.func,
     activities: PropTypes.object,
-    users: PropTypes.object,
+    user: PropTypes.object,
     getActivitiesBySubjectId: PropTypes.func,
     setPageBannerActiveTab: PropTypes.func,
   };
@@ -227,7 +227,7 @@ class Banner extends Component {
                       channels={this.props.channels.list}
                       adsServerList={this.props.adsServers && this.props.adsServers.list}
                       createActivity={this.props.createActivity}
-                      users={this.props.users && this.props.users.editing}
+                      user={this.props.user}
                     />
                   </div>
 
@@ -242,6 +242,8 @@ class Banner extends Component {
                       createTrack={this.props.createTrack}
                       deleteTrack={this.props.deleteTrack}
                       updateTrack={this.props.updateTrack}
+                      createActivity={this.props.createActivity}
+                      user={this.props.user}
                     />
                   </div>
 
@@ -337,6 +339,8 @@ class Banner extends Component {
                             placements={this.props.placements && this.props.placements.list}
                             updateBanner={this.props.updateBanner}
                             getBanner={this.props.getBanner}
+                            createActivity={this.props.createActivity}
+                            user={this.props.user}
                           />
                         </div>
                         {/* /.col */}
@@ -352,7 +356,7 @@ class Banner extends Component {
                           activities={this.props.activities && this.props.activities.list}
                           setPageBannerActiveTab={this.props.setPageBannerActiveTab}
                           createActivity={this.props.createActivity}
-                          users={this.props.users && this.props.users.editing}
+                          user={this.props.user}
                           banner={this.props.banners.editing}
                           updateBanner={this.props.updateBanner}
                           bannerId={this.props.bannerId}
@@ -383,7 +387,7 @@ const mapState = (state) => ({
   bannerTypes: state.bannerTypes,
   adsServers: state.adsServers,
   activities: state.activities,
-  users: state.users,
+  user: state.user,
 });
 
 const mapDispatch = {

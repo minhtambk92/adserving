@@ -23,6 +23,8 @@ class ListShare extends Component {
     setStatusShareFormEdit: PropTypes.func,
     setStatusShareFormCreate: PropTypes.func,
     updateShare: PropTypes.func,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -72,6 +74,18 @@ class ListShare extends Component {
         description,
         zoneId,
       }).then(() => {
+        if (this.props.list && this.props.list.length > 0) {
+          const userId = this.props.user.id;
+          const subject = `Share ${data.name}`;
+          const subjectId = this.props.list[0].id;
+          const action = 'duplicated';
+          const other = JSON.stringify(data);
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
         if (this.props.shares && this.props.shares.list[0]) {
           const share = this.props.shares.list[0];
           if (data.placements.length > 0) {
@@ -144,7 +158,7 @@ class ListShare extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to="#"
-          onClick={() => this.deleteShare(rowData.id)}
+          onClick={() => this.deleteShare(rowData)}
         >Delete</Link>, cell);
       },
     }, {
@@ -159,10 +173,22 @@ class ListShare extends Component {
     }];
   }
 
-  deleteShare(id) {
-    if (id) {
-      this.props.deleteShare(id).then(() => {
-        this.props.getZone(this.props.zoneId);
+  deleteShare(data) {
+    if (data.id) {
+      const shareObject = data;
+      this.props.deleteShare(data.id).then(() => {
+        const userId = this.props.user.id;
+        const subject = `Share ${data.name}`;
+        const subjectId = data.id;
+        const action = 'deleted';
+        const other = JSON.stringify(shareObject);
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId }).then(() => {
+            this.props.getZone(this.props.zoneId);
+          });
       });
     }
   }
@@ -260,6 +286,8 @@ class ListShare extends Component {
                     setStatusShareFormEdit={this.props.setStatusShareFormEdit}
                     list={this.props.list}
                     page={this.props.page}
+                    user={this.props.user}
+                    createActivity={this.props.createActivity}
                   />
                 </div>
               </div>
@@ -279,6 +307,8 @@ class ListShare extends Component {
                     setStatusShareFormCreate={this.props.setStatusShareFormCreate}
                     list={this.props.list}
                     page={this.props.page}
+                    user={this.props.user}
+                    createActivity={this.props.createActivity}
                   />
                 </div>
               </div>

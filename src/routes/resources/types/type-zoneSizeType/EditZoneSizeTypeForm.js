@@ -13,6 +13,8 @@ class EditZoneSizeTypeForm extends Component {
     zoneSizeType: PropTypes.object,
     updateZoneSizeType: PropTypes.func,
     getZoneSizeTypes: PropTypes.func,
+    createActivity: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -31,6 +33,7 @@ class EditZoneSizeTypeForm extends Component {
   }
 
   save() {
+    const zoneSizeTypeObject = this.props.zoneSizeType;
     const name = this.inputZoneSizeTypeName.value;
     const width = this.inputZoneSizeTypeWidth.value;
     const height = this.inputZoneSizeTypeHeight.value;
@@ -42,10 +45,20 @@ class EditZoneSizeTypeForm extends Component {
     zoneSizeType.height = height;
     zoneSizeType.status = status;
     this.props.updateZoneSizeType(zoneSizeType).then(() => {
-      this.props.getZoneSizeTypes();
+      const userId = this.props.user.id;
+      const subject = `Zone Size Type ${name}`;
+      const subjectId = this.props.zoneSizeType.id;
+      const action = 'updated';
+      const other = JSON.stringify(zoneSizeTypeObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getZoneSizeTypes();
+        });
     });
     this.props.statusUpdateZoneSizeType(false);
-    // this.props.setPageZoneActiveTab('ZoneSizeTypeZone');
   }
 
   removeEditForm() {

@@ -59,7 +59,7 @@ class Site extends Component {
     zoneTypes: PropTypes.object,
     getZoneSizeTypes: PropTypes.func,
     zoneSizeTypes: PropTypes.object,
-    users: PropTypes.object,
+    user: PropTypes.object,
     activities: PropTypes.object,
     getActivitiesBySubjectId: PropTypes.func,
     createActivity: PropTypes.func,
@@ -153,7 +153,7 @@ class Site extends Component {
                       sites={this.props.sites}
                       checkSitesByDomain={this.props.checkSitesByDomain}
                       createActivity={this.props.createActivity}
-                      users={this.props.users && this.props.users.editing}
+                      user={this.props.user}
                     />
                   </div>
 
@@ -181,6 +181,10 @@ class Site extends Component {
                             zoneTypeList={this.props.zoneTypes && this.props.zoneTypes.list}
                             zoneSizeTypeList={this.props.zoneSizeTypes &&
                             this.props.zoneSizeTypes.list}
+                            createActivity={this.props.createActivity}
+                            user={this.props.user}
+                            site={this.props.sites && this.props.sites.editing}
+                            createShare={this.props.createShare}
                           />
                         </div>
                         {/* /.col */}
@@ -235,6 +239,9 @@ class Site extends Component {
                             createChannel={this.props.createChannel}
                             siteId={this.props.siteId}
                             getSite={this.props.getSite}
+                            createActivity={this.props.createActivity}
+                            site={this.props.sites && this.props.sites.editing}
+                            user={this.props.user}
                           />
                         </div>
                         {/* /.col */}
@@ -279,7 +286,7 @@ class Site extends Component {
                           setPageSiteActiveTab={this.props.setPageSiteActiveTab}
                           createActivity={this.props.createActivity}
                           site={this.props.sites && this.props.sites.editing}
-                          users={this.props.users && this.props.users.editing}
+                          user={this.props.user}
                         />
                       </section>
                     </div>
@@ -303,7 +310,7 @@ const mapState = (state) => ({
   zoneTypes: state.zoneTypes,
   zoneSizeTypes: state.zoneSizeTypes,
   activities: state.activities,
-  users: state.users,
+  user: state.user,
 });
 
 const mapDispatch = {

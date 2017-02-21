@@ -13,6 +13,8 @@ class EditAdsServerForm extends Component {
     adsServer: PropTypes.object,
     updateAdsServer: PropTypes.func,
     getAdsServers: PropTypes.func,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -46,6 +48,7 @@ class EditAdsServerForm extends Component {
   }
 
   save() {
+    const adsServerObject = this.props.adsServer;
     const id = this.props.id;
     const name = this.inputAdsServerName.value;
     const value = this.convertToSlug(name);
@@ -57,7 +60,18 @@ class EditAdsServerForm extends Component {
         value,
         status,
       }).then(() => {
-        this.props.getAdsServers();
+        const userId = this.props.user.id;
+        const subject = `AdsServer ${name}`;
+        const subjectId = this.props.adsServer.id;
+        const action = 'updated';
+        const other = JSON.stringify(adsServerObject);
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId }).then(() => {
+            this.props.getAdsServers();
+          });
       });
     }
     this.props.statusUpdateAdsServer(false);

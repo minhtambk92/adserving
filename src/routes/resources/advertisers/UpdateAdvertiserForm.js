@@ -13,7 +13,7 @@ class UpdateAdvertiserForm extends Component {
     deleteAdvertiser: PropTypes.func,
     getAdvertiser: PropTypes.func,
     createActivity: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -86,7 +86,7 @@ class UpdateAdvertiserForm extends Component {
     advertiser.status = status;
 
     this.props.updateAdvertiser(advertiser).then(() => {
-      const userId = this.props.users.id;
+      const userId = this.props.user.id;
       const subject = `Advertiser ${name}`;
       const subjectId = this.props.advertiser.id;
       const action = 'updated';
@@ -104,11 +104,11 @@ class UpdateAdvertiserForm extends Component {
   deleteAdvertiser() {
     const advertiserObject = this.props.advertiser;
     this.props.deleteAdvertiser(this.props.advertiserId).then(() => {
-      const userId = this.props.users.id;
+      const userId = this.props.user.id;
       const subject = `Advertiser ${advertiserObject.name}`;
       const subjectId = this.props.advertiser.id;
       const action = 'deleted';
-      const other = JSON.stringify(advertiserObject);
+      const other = '';
       this.props.createActivity({ action,
         subject,
         subjectId,

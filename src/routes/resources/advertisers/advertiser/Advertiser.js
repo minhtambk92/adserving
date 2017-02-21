@@ -49,7 +49,7 @@ class Advertiser extends Component {
     createActivity: PropTypes.func,
     activities: PropTypes.object,
     getActivitiesBySubjectId: PropTypes.func,
-    users: PropTypes.object,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -126,7 +126,7 @@ class Advertiser extends Component {
                           advertiserId={this.props.advertiserId}
                           getAdvertiser={this.props.getAdvertiser}
                           createActivity={this.props.createActivity}
-                          users={this.props.users && this.props.users.editing}
+                          user={this.props.user}
                         />
                       </section>
                     </div>
@@ -153,7 +153,7 @@ class Advertiser extends Component {
                                 advertiserId={this.props.advertiserId}
                                 getAdvertiser={this.props.getAdvertiser}
                                 createActivity={this.props.createActivity}
-                                users={this.props.users && this.props.users.editing}
+                                user={this.props.user}
                               />
                             </div>
                           </div>
@@ -197,7 +197,7 @@ class Advertiser extends Component {
                           setPageAdvertiserActiveTab={this.props.setPageAdvertiserActiveTab}
                           createActivity={this.props.createActivity}
                           advertiser={this.props.advertisers && this.props.advertisers.editing}
-                          users={this.props.users && this.props.users.editing}
+                          user={this.props.user}
                         />
                       </section>
                     </div>
@@ -218,7 +218,7 @@ const mapState = (state) => ({
   advertisers: state.advertisers,
   campaigns: state.campaigns,
   activities: state.activities,
-  users: state.users,
+  user: state.user,
 });
 
 const mapDispatch = {
