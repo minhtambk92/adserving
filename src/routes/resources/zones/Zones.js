@@ -20,7 +20,7 @@ import {
   setZonesFilters,
 } from '../../../actions/zones';
 import { setPageZoneActiveTab } from '../../../actions/pages/zones';
-import { createShare, getShareByZoneId } from '../../../actions/shares';
+import { createShare } from '../../../actions/shares';
 import { getZoneSizeTypes } from '../../../actions/zoneSizeTypes';
 import { getZoneTypes } from '../../../actions/zoneTypes';
 import { createActivity } from '../../../actions/activities';
@@ -42,7 +42,6 @@ class Zones extends Component {
     createZone: PropTypes.func,
     setPageZoneActiveTab: PropTypes.func,
     createShare: PropTypes.func,
-    getShareByZoneId: PropTypes.func,
     shares: PropTypes.object,
     getZoneTypes: PropTypes.func,
     zoneTypes: PropTypes.object,
@@ -161,7 +160,6 @@ class Zones extends Component {
                     createShare={this.props.createShare}
                     zones={this.props.zones}
                     shares={this.props.shares}
-                    getShareByZoneId={this.props.getShareByZoneId}
                     user={this.props.user}
                     createActivity={this.props.createActivity}
                   />
@@ -202,7 +200,6 @@ const mapDispatch = {
   createZone,
   setPageZoneActiveTab,
   createShare,
-  getShareByZoneId,
   getZoneTypes,
   getZoneSizeTypes,
   createActivity,

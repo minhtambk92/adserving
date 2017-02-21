@@ -67,7 +67,7 @@ class CreateShareForm extends Component {
           const subject = `Share ${name}`;
           const subjectId = this.props.list[0].id;
           const action = 'created';
-          const other = JSON.stringify(this.props.list[0]);
+          const other = '';
           this.props.createActivity({ action,
             subject,
             subjectId,
