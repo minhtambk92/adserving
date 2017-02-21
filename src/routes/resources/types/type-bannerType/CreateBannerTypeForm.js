@@ -60,7 +60,7 @@ class CreateBannerTypeForm extends Component {
           const subject = `Banner Type ${name}`;
           const subjectId = this.props.bannerTypes.list[0].id;
           const action = 'created';
-          const other = JSON.stringify(this.props.bannerTypes.list[0]);
+          const other = '';
           this.props.createActivity({ action,
             subject,
             subjectId,

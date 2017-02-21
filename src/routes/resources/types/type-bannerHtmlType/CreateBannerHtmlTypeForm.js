@@ -59,7 +59,7 @@ class CreateBannerHtmlTypeForm extends Component {
           const subject = `Banner Html Type ${name}`;
           const subjectId = this.props.bannerHtmlTypes.list[0].id;
           const action = 'created';
-          const other = JSON.stringify(this.props.bannerHtmlTypes.list[0]);
+          const other = '';
           this.props.createActivity({ action,
             subject,
             subjectId,

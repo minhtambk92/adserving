@@ -39,7 +39,7 @@ class CreateCharacterSetForm extends Component {
           const subject = `CharacterSet ${name}`;
           const subjectId = this.props.characterSets.list[0].id;
           const action = 'created';
-          const other = JSON.stringify(this.props.characterSets.list[0]);
+          const other = '';
           this.props.createActivity({ action,
             subject,
             subjectId,

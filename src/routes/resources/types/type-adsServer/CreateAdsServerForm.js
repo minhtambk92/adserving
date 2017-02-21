@@ -56,7 +56,7 @@ class CreateAdsServerForm extends Component {
           const subject = `AdsServer ${name}`;
           const subjectId = this.props.adsServers.list[0].id;
           const action = 'created';
-          const other = JSON.stringify(this.props.adsServers.list[0]);
+          const other = '';
           this.props.createActivity({ action,
             subject,
             subjectId,
