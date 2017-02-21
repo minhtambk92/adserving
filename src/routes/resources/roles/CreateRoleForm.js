@@ -9,6 +9,9 @@ class CreateRoleForm extends Component {
 
   static propTypes = {
     createRole: PropTypes.func.isRequired,
+    createActivity: PropTypes.func,
+    user: PropTypes.object,
+    roles: PropTypes.object,
   };
 
   clearInput() {
@@ -24,6 +27,19 @@ class CreateRoleForm extends Component {
       this.props.createRole({
         uniqueName,
         name,
+      }).then(() => {
+        if (this.props.roles && this.props.roles.list.length > 0) {
+          const userId = this.props.user.id;
+          const subject = `Role: ${name}`;
+          const subjectId = this.props.roles.list[0].id;
+          const action = 'created';
+          const other = '';
+          this.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
+        }
       });
 
       this.clearInput();

@@ -14,6 +14,7 @@ import _ from 'lodash';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getRoles, createRole, getRolesFilters, setRolesFilters } from '../../../actions/roles';
 import { setUsersFilters } from '../../../actions/users';
+import { createActivity } from '../../../actions/activities';
 import CreateRoleForm from './CreateRoleForm';
 import RoleList from './RoleList';
 import s from './Roles.css';
@@ -27,6 +28,8 @@ class Roles extends Component {
     setUsersFilters: PropTypes.func,
     getRolesFilters: PropTypes.func,
     setRolesFilters: PropTypes.func,
+    createActivity: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -65,7 +68,12 @@ class Roles extends Component {
                 </div>
               </div>
               {/* /.box-header */}
-              <CreateRoleForm createRole={this.props.createRole} />
+              <CreateRoleForm
+                createRole={this.props.createRole}
+                createActivity={this.props.createActivity}
+                roles={this.props.roles}
+                user={this.props.user}
+              />
             </div>
             {/* /.col */}
           </section>
@@ -99,6 +107,7 @@ class Roles extends Component {
 
 const mapState = state => ({
   roles: state.roles,
+  user: state.user,
 });
 
 const mapDispatch = {
@@ -107,6 +116,7 @@ const mapDispatch = {
   setUsersFilters,
   getRolesFilters,
   setRolesFilters,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Roles));

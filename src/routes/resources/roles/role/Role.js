@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getRole, updateRole, deleteRole } from '../../../../actions/roles';
+import { createActivity } from '../../../../actions/activities';
 import Layout from '../../../../components/Layout';
 import Link from '../../../../components/Link';
 import s from './Role.css';
@@ -26,6 +27,8 @@ class Role extends Component {
     getRole: PropTypes.func,
     updateRole: PropTypes.func,
     deleteRole: PropTypes.func,
+    createActivity: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -52,6 +55,7 @@ class Role extends Component {
     const name = this.inputRoleName.value;
 
     const role = { id: this.props.roleId };
+    const roleObject = this.props.roles.editing;
 
     if (uniqueName && uniqueName !== this.props.roles.editing.uniqueName) {
       role.uniqueName = uniqueName;
@@ -61,11 +65,33 @@ class Role extends Component {
       role.name = name;
     }
 
-    this.props.updateRole(role);
+    this.props.updateRole(role).then(() => {
+      const userId = this.props.user.id;
+      const subject = `Role ${this.props.roles.editing.name}`;
+      const subjectId = this.props.roles.editing.id;
+      const action = 'updated';
+      const other = JSON.stringify(roleObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId });
+    });
   }
 
   deleteRole() {
-    this.props.deleteRole(this.props.roleId);
+    this.props.deleteRole(this.props.roleId).then(() => {
+      const userId = this.props.user.id;
+      const subject = `Role ${this.props.roles.editing.name}`;
+      const subjectId = this.props.roles.editing.id;
+      const action = 'deleted';
+      const other = '';
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId });
+    });
   }
 
   render() {
@@ -156,12 +182,14 @@ class Role extends Component {
 
 const mapState = state => ({
   roles: state.roles,
+  user: state.user,
 });
 
 const mapDispatch = {
   getRole,
   updateRole,
   deleteRole,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Role));
