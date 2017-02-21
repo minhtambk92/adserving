@@ -21,7 +21,7 @@ const resources = {
       async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
-        await Resource.create(args.resource).then(resource => {
+        await Resource.create(args.resource).then((resource) => {
           opts.where.id = { $eq: resource.id };
         });
         return opts;

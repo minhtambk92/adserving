@@ -35,7 +35,7 @@ class FilterUsersForm extends Component {
                 id="inputUsersFilterRole"
                 className="form-control select2"
                 style={{ width: '100%' }}
-                ref={c => {
+                ref={(c) => {
                   this.inputUsersFilterRole = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'roleUniqueName')}
@@ -60,7 +60,7 @@ class FilterUsersForm extends Component {
               <select
                 id="inputUsersFilterEmailConfirmed"
                 className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputUsersFilterEmailConfirmed = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'emailConfirmed')}
@@ -81,7 +81,7 @@ class FilterUsersForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputUsersFilterStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputUsersFilterStatus = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'status')}

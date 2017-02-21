@@ -221,7 +221,7 @@ class OptionChannelTypeList extends Component {
         </div>
         <div className="col-sm-12">
           {this.props.page.statusUpdateOptionChannelType === true &&
-          this.state.arrOptionChannelType && this.state.arrOptionChannelType.map((count) => (
+          this.state.arrOptionChannelType && this.state.arrOptionChannelType.map(count => (
             <div className="box" key={count}>
               <div className="editTypeBannerHtmlForm">
                 <EditOptionChannelTypeForm
@@ -240,7 +240,7 @@ class OptionChannelTypeList extends Component {
           {this.props.page &&
           this.props.page.statusCreateOptionChannelType === true &&
           this.state.arrCreateOptionChannelType
-          && this.state.arrCreateOptionChannelType.map((count) => (
+          && this.state.arrCreateOptionChannelType.map(count => (
             <div className="box" key={count}>
               <div className="CreateOptionChannelTypeForm">
                 <CreateOptionChannelTypeForm
@@ -265,7 +265,7 @@ class OptionChannelTypeList extends Component {
             <button
               type="button"
               id="create"
-              onClick={(event) => this.addOptionChannelType(event)}
+              onClick={event => this.addOptionChannelType(event)}
               className="btn btn-primary"
             >
                 Create Option Channel Type

@@ -158,7 +158,7 @@ class RoleList extends Component {
         </div>
         <div className="col-sm-12" id="ChannelOption">
           {this.props.page.statusUpdateRole === true &&
-          this.state.arrRole && this.state.arrRole.map((count) => (
+          this.state.arrRole && this.state.arrRole.map(count => (
             <div className="box" key={count}>
               <div className="editRole">
                 <EditRoleForm
@@ -174,7 +174,7 @@ class RoleList extends Component {
           ))}
           {this.props.page &&
           this.props.page.statusCreateRole === true && this.state.arrCreateRole
-          && this.state.arrCreateRole.map((count) => (
+          && this.state.arrCreateRole.map(count => (
             <div className="box" key={count}>
               <div className="createRole">
                 <CreateRoleForm
@@ -196,7 +196,7 @@ class RoleList extends Component {
             <button
               type="button"
               id="create"
-              onClick={(event) => this.addRole(event)}
+              onClick={event => this.addRole(event)}
               className="btn btn-primary"
             >
                 Create Role

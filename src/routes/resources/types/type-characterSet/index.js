@@ -2,4 +2,7 @@
  * Created by quynd on 12/29/16.
  */
 
-export CharacterSet from './CharacterSet';
+import CharacterSet from './CharacterSet';
+
+// eslint-disable-next-line import/prefer-default-export
+export { CharacterSet };

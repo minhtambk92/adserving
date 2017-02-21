@@ -21,7 +21,7 @@ const shares = {
       async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
-        await Share.create(args.share).then(share => {
+        await Share.create(args.share).then((share) => {
           opts.where.id = { $eq: share.id };
         });
         return opts;

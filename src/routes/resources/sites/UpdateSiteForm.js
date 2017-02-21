@@ -129,14 +129,14 @@ class UpdateSiteForm extends Component {
               type="text" className="form-control" id="inputSiteDomain"
               placeholder="http://dantri.com.vn"
               onBlur={event => this.validateDomain(event)}
-              ref={c => {
+              ref={(c) => {
                 this.inputSiteDomain = c;
               }}
             />
             <span // eslint-disable-line react/self-closing-comp
               id="inputSiteDomainErr"
               className="help-block"
-              ref={c => {
+              ref={(c) => {
                 this.inputSiteDomainError = c;
               }}
             >
@@ -153,7 +153,7 @@ class UpdateSiteForm extends Component {
             <input
               type="text" className="form-control" id="inputSiteName"
               placeholder="Dan Tri"
-              ref={c => {
+              ref={(c) => {
                 this.inputSiteName = c;
               }}
             />
@@ -168,7 +168,7 @@ class UpdateSiteForm extends Component {
             <input
               type="text" className="form-control" id="inputSiteEmail"
               placeholder="contact@dantri.com.vn"
-              ref={c => {
+              ref={(c) => {
                 this.inputSiteEmail = c;
               }}
             />
@@ -183,7 +183,7 @@ class UpdateSiteForm extends Component {
             <textarea
               className="form-control" id="inputSiteDescription"
               rows="5" placeholder="More info..."
-              ref={c => {
+              ref={(c) => {
                 this.inputSiteDescription = c;
               }}
             />
@@ -197,7 +197,7 @@ class UpdateSiteForm extends Component {
           <div className="col-sm-9">
             <select
               id="inputSiteStatus" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputSiteStatus = c;
               }}
             >

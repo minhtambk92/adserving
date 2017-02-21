@@ -158,7 +158,7 @@ class CreateCampaignForm extends Component {
               <input
                 type="text" className="form-control" id="inputCampaignName"
                 placeholder="Admicro"
-                ref={c => {
+                ref={(c) => {
                   this.inputCampaignName = c;
                 }}
               />
@@ -170,7 +170,7 @@ class CreateCampaignForm extends Component {
               <div className="col-sm-9">
                 <select
                   id="inputAdvertiser" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputAdvertiser = c;
                   }}
                 >
@@ -196,7 +196,7 @@ class CreateCampaignForm extends Component {
             <div className="col-sm-1 checkbox">
               <ICheck
                 type="checkbox" id="inputIsCampaignStartNow" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputIsCampaignStartNow = c;
                 }}
               />
@@ -235,7 +235,7 @@ class CreateCampaignForm extends Component {
             <div className="col-sm-1 checkbox">
               <ICheck
                 type="checkbox" id="inputIsCampaignEndNow" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputIsCampaignEndNow = c;
                 }}
               />
@@ -274,7 +274,7 @@ class CreateCampaignForm extends Component {
               <select
                 id="inputCampaignRevenueType" className="form-control"
                 onChange={event => this.changeRevenueType(event)}
-                ref={c => {
+                ref={(c) => {
                   this.inputCampaignRevenueType = c;
                 }}
               >
@@ -297,7 +297,7 @@ class CreateCampaignForm extends Component {
                   <input
                     type="number" className="form-control" id="inputCampaignExpireValueCPM"
                     placeholder="1000"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputCampaignExpireValueCPM = c;
                     }}
                   />
@@ -311,7 +311,7 @@ class CreateCampaignForm extends Component {
                   <input
                     type="number" className="form-control" id="inputCampaignMaxCPMPerDay"
                     placeholder="1000"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputCampaignMaxCPMPerDay = c;
                     }}
                   />
@@ -327,7 +327,7 @@ class CreateCampaignForm extends Component {
               <input
                 type="number" className="form-control" id="inputCampaignViews"
                 placeholder="1000"
-                ref={c => {
+                ref={(c) => {
                   this.inputCampaignViews = c;
                 }}
               />
@@ -339,7 +339,7 @@ class CreateCampaignForm extends Component {
               <input
                 type="number" className="form-control" id="inputCampaignViewPerSession"
                 placeholder="10"
-                ref={c => {
+                ref={(c) => {
                   this.inputCampaignViewPerSession = c;
                 }}
               />
@@ -353,7 +353,7 @@ class CreateCampaignForm extends Component {
                 type="number" className="form-control"
                 id="inputCampaignTimeResetViewCount"
                 placeholder="24"
-                ref={c => {
+                ref={(c) => {
                   this.inputCampaignTimeResetViewCount = c;
                 }}
               />
@@ -368,7 +368,7 @@ class CreateCampaignForm extends Component {
               <input
                 type="number" className="form-control" id="inputCampaignWeight"
                 placeholder="1"
-                ref={c => {
+                ref={(c) => {
                   this.inputCampaignWeight = c;
                 }}
               />
@@ -382,7 +382,7 @@ class CreateCampaignForm extends Component {
             <div className="col-sm-9">
               <select
                 id="inputCampaignStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputCampaignStatus = c;
                 }}
               >
@@ -401,7 +401,7 @@ class CreateCampaignForm extends Component {
               <textarea
                 className="form-control" id="inputCampaignDescription"
                 rows="5" placeholder="More info..."
-                ref={c => {
+                ref={(c) => {
                   this.inputCampaignDescription = c;
                 }}
               />

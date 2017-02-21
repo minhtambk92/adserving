@@ -89,7 +89,7 @@ class PlacementList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/placement/${rowData.id}`}
-          onClick={(event) => this.onTabClickEditPlacement(event)}
+          onClick={event => this.onTabClickEditPlacement(event)}
         >{cellData}</Link>, cell);
       },
     }, {
@@ -107,7 +107,7 @@ class PlacementList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/placement/${rowData.id}`}
-          onClick={(event) => this.onTabClickAddBanner(event)}
+          onClick={event => this.onTabClickAddBanner(event)}
         >New Banner</Link>, cell);
       },
     }, {

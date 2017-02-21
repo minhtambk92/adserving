@@ -189,7 +189,7 @@ class ZoneTypeList extends Component {
         </div>
         <div className="col-sm-12">
           {this.props.page.statusUpdateZoneType === true &&
-          this.state.arrZoneType && this.state.arrZoneType.map((count) => (
+          this.state.arrZoneType && this.state.arrZoneType.map(count => (
             <div className="box" key={count}>
               <div className="editTypeBannerHtmlForm">
                 <EditZoneTypeForm
@@ -207,7 +207,7 @@ class ZoneTypeList extends Component {
           ))}
           {this.props.page &&
           this.props.page.statusCreateZoneType === true && this.state.arrCreateZoneType
-          && this.state.arrCreateZoneType.map((count) => (
+          && this.state.arrCreateZoneType.map(count => (
             <div className="box" key={count}>
               <div className="CreateZoneTypeForm">
                 <CreateZoneTypeForm
@@ -231,7 +231,7 @@ class ZoneTypeList extends Component {
             <button
               type="button"
               id="create"
-              onClick={(event) => this.addZoneType(event)}
+              onClick={event => this.addZoneType(event)}
               className="btn btn-primary"
             >
                 Create Zone Type

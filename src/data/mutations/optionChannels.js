@@ -18,7 +18,7 @@ const optionChannels = {
       async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
-        await OptionChannel.create(args.optionChannel).then(optionChannel => {
+        await OptionChannel.create(args.optionChannel).then((optionChannel) => {
           opts.where.id = { $eq: optionChannel.id };
         });
         return opts;

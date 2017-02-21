@@ -30,7 +30,7 @@ class FilterPlacementsForm extends Component {
                 id="inputPlacementsFilterCampaign"
                 className="form-control select2"
                 style={{ width: '100%' }}
-                ref={c => {
+                ref={(c) => {
                   this.inputPlacementsFilterCampaign = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'campaignId')}
@@ -56,7 +56,7 @@ class FilterPlacementsForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputPlacementsFilterStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputPlacementsFilterStatus = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'status')}

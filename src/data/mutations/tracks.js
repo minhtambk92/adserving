@@ -18,7 +18,7 @@ const Tracks = {
       async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
-        await Track.create(args.track).then(track => {
+        await Track.create(args.track).then((track) => {
           opts.where.id = { $eq: track.id };
         });
         return opts;

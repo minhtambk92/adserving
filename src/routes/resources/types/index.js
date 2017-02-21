@@ -1,7 +1,7 @@
 /**
  * React Starter Kit (https://www.reactstarterkit.com/)
  *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
+ * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
@@ -28,7 +28,7 @@ function requireAll(requireContext) {
 const types = requireAll(require.context('.', true, /^(\.\/type-)[\w/]*(index)$/i));
 
 // Fetch through all modules then add them to an object as parent component
-types.forEach(type => {
+types.forEach((type) => {
   if (type.default) {
     // Default export
     // eslint-disable-next-line no-console

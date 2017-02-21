@@ -259,7 +259,7 @@ class UpdateBannerForm extends Component {
                     <div className="col-sm-8">
                       <div
                         id="inputBannerImageUrl"
-                        ref={c => {
+                        ref={(c) => {
                           this.inputBannerImageUrl = c;
                         }}
                       >
@@ -290,7 +290,7 @@ class UpdateBannerForm extends Component {
                   <input
                     type="text" className="form-control" id="inputBannerUrl"
                     placeholder="http://kenh14.vn"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputBannerUrl = c;
                     }}
                   />
@@ -304,7 +304,7 @@ class UpdateBannerForm extends Component {
                 <div className="col-sm-10">
                   <select
                     id="inputBannerTarget" className="form-control"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputBannerTarget = c;
                     }}
                   >
@@ -332,7 +332,7 @@ class UpdateBannerForm extends Component {
                   <textarea
                     className="form-control" id="inputBannerHTML"
                     rows="5" placeholder="More info..."
-                    ref={c => {
+                    ref={(c) => {
                       this.inputBannerHTML = c;
                     }}
                   />
@@ -346,7 +346,7 @@ class UpdateBannerForm extends Component {
                 <div className="col-sm-10">
                   <select
                     id="inputBannerAdsServer" className="form-control"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputBannerAdsServer = c;
                     }}
                   >
@@ -369,12 +369,12 @@ class UpdateBannerForm extends Component {
                 <div className="col-sm-10">
                   <select
                     id="inputBannerHtmlType" className="form-control"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputBannerHtmlType = c;
                     }}
                   >
                     {this.props.bannerHtmlTypeList &&
-                    this.props.bannerHtmlTypeList.map((bannerHtmlType) => (
+                    this.props.bannerHtmlTypeList.map(bannerHtmlType => (
                       <option
                         key={bannerHtmlType.id} value={bannerHtmlType.id}
                       >
@@ -397,7 +397,7 @@ class UpdateBannerForm extends Component {
             <input
               type="text" className="form-control" id="inputBannerName"
               placeholder="Banner Top"
-              ref={c => {
+              ref={(c) => {
                 this.inputBannerName = c;
               }}
             />
@@ -413,7 +413,7 @@ class UpdateBannerForm extends Component {
             <input
               type="number" className="form-control" id="inputBannerWidth"
               placeholder="300"
-              ref={c => {
+              ref={(c) => {
                 this.inputBannerWidth = c;
               }}
             />
@@ -429,7 +429,7 @@ class UpdateBannerForm extends Component {
             <input
               type="number" className="form-control" id="inputBannerHeight"
               placeholder="300"
-              ref={c => {
+              ref={(c) => {
                 this.inputBannerHeight = c;
               }}
             />
@@ -462,7 +462,7 @@ class UpdateBannerForm extends Component {
             <input
               type="number"
               className="form-control" id="inputBannerWeight" placeholder="1"
-              ref={c => {
+              ref={(c) => {
                 this.inputBannerWeight = c;
               }}
             />
@@ -474,7 +474,7 @@ class UpdateBannerForm extends Component {
           <div className="col-sm-10">
             <select
               id="inputChannelId" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputChannelId = c;
               }}
             >
@@ -498,7 +498,7 @@ class UpdateBannerForm extends Component {
           <div className="col-sm-10 checkbox">
             <ICheck
               type="checkbox" id="inputBannerIsIFrame" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputBannerIsIFrame = c;
               }}
             />
@@ -513,7 +513,7 @@ class UpdateBannerForm extends Component {
           <div className="col-sm-10">
             <select
               id="inputBannerStatus" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputBannerStatus = c;
               }}
             >
@@ -532,7 +532,7 @@ class UpdateBannerForm extends Component {
             <textarea
               className="form-control" id="inputBannerDescription"
               rows="5" placeholder="More info..."
-              ref={c => {
+              ref={(c) => {
                 this.inputBannerDescription = c;
               }}
             />

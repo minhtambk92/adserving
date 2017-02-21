@@ -190,7 +190,7 @@ class BannerHtmlTypeList extends Component {
         </div>
         <div className="col-sm-12">
           {this.props.page.statusUpdateBannerHtmlType === true &&
-          this.state.arrBannerHtmlType && this.state.arrBannerHtmlType.map((count) => (
+          this.state.arrBannerHtmlType && this.state.arrBannerHtmlType.map(count => (
             <div className="box" key={count}>
               <div className="editTypeBannerHtmlForm">
                 <EditBannerHtmlTypeForm
@@ -208,7 +208,7 @@ class BannerHtmlTypeList extends Component {
           ))}
           {this.props.page &&
           this.props.page.statusCreateBannerHtmlType === true && this.state.arrCreateBannerHtmlType
-          && this.state.arrCreateBannerHtmlType.map((count) => (
+          && this.state.arrCreateBannerHtmlType.map(count => (
             <div className="box" key={count}>
               <div className="CreateBannerHtmlTypeForm">
                 <CreateBannerHtmlTypeForm
@@ -232,7 +232,7 @@ class BannerHtmlTypeList extends Component {
             <button
               type="button"
               id="create"
-              onClick={(event) => this.addBannerHtmlType(event)}
+              onClick={event => this.addBannerHtmlType(event)}
               className="btn btn-primary"
             >
                 Create Banner Html Type

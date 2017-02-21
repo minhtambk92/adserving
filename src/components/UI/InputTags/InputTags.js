@@ -34,7 +34,7 @@ class InputTags extends Component {
     const { ...rest } = this.props;
     return (
       <input
-        ref={c => {
+        ref={(c) => {
           this.input = c;
         }}
         data-role="tagsinput"
@@ -47,7 +47,7 @@ class InputTags extends Component {
     // Open the portal
     return (
       <div
-        ref={c => {
+        ref={(c) => {
           this.portal = c;
         }}
       />

@@ -124,7 +124,7 @@ class EditZoneTypeForm extends Component {
                 <input
                   type="text" className="form-control" id="inputZoneTypeName"
                   placeholder="Name"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputZoneTypeName = c;
                   }}
                 />
@@ -138,7 +138,7 @@ class EditZoneTypeForm extends Component {
               <div className="col-sm-10 checkbox">
                 <ICheck
                   type="checkbox" id="inputZoneTypeIsSize" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputZoneTypeIsSize = c;
                   }}
                 />
@@ -153,7 +153,7 @@ class EditZoneTypeForm extends Component {
               <div className="col-sm-10">
                 <select
                   id="inputZoneTypeStatus" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputZoneTypeStatus = c;
                   }}
                 >

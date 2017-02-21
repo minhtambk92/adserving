@@ -126,7 +126,7 @@ class EditBannerTypeForm extends Component {
                 <input
                   type="text" className="form-control" id="inputBannerTypeName"
                   placeholder="Name"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputBannerTypeName = c;
                   }}
                 />
@@ -140,7 +140,7 @@ class EditBannerTypeForm extends Component {
               <div className="col-sm-10 checkbox">
                 <ICheck
                   type="checkbox" id="inputBannerTypeIsUpload" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputBannerTypeIsUpload = c;
                   }}
                 />
@@ -155,7 +155,7 @@ class EditBannerTypeForm extends Component {
               <div className="col-sm-10">
                 <select
                   id="inputBannerTypeStatus" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputBannerTypeStatus = c;
                   }}
                 >

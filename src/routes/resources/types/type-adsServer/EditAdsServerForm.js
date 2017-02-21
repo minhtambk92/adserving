@@ -110,7 +110,7 @@ class EditAdsServerForm extends Component {
                 <input
                   type="text" className="form-control" id="inputAdsServerName"
                   placeholder="Name"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputAdsServerName = c;
                   }}
                 />
@@ -125,7 +125,7 @@ class EditAdsServerForm extends Component {
               <div className="col-sm-10">
                 <select
                   id="inputAdsServerStatus" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputAdsServerStatus = c;
                   }}
                 >

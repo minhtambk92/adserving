@@ -2,4 +2,7 @@
  * Created by quynd on 12/29/16.
  */
 
-export ZoneSizeType from './ZoneSizeType';
+import ZoneSizeType from './ZoneSizeType';
+
+// eslint-disable-next-line import/prefer-default-export
+export { ZoneSizeType };

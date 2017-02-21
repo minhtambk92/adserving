@@ -177,7 +177,7 @@ class UserList extends Component {
         </div>
         <div className="col-sm-12" id="ChannelOption">
           {this.props.page.statusUpdateUser === true &&
-          this.state.arrUser && this.state.arrUser.map((count) => (
+          this.state.arrUser && this.state.arrUser.map(count => (
             <div className="box" key={count}>
               <div className="editUser">
                 <EditUserForm
@@ -194,7 +194,7 @@ class UserList extends Component {
           ))}
           {this.props.page &&
           this.props.page.statusCreateUser === true && this.state.arrCreateUser
-          && this.state.arrCreateUser.map((count) => (
+          && this.state.arrCreateUser.map(count => (
             <div className="box" key={count}>
               <div className="createUser">
                 <CreateUserForm
@@ -217,7 +217,7 @@ class UserList extends Component {
             <button
               type="button"
               id="create"
-              onClick={(event) => this.addUser(event)}
+              onClick={event => this.addUser(event)}
               className="btn btn-primary"
             >
                 Create User

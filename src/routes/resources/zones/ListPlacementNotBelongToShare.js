@@ -63,7 +63,7 @@ class ListPlacementNotBelongToZone extends Component {
  // eslint-disable-line no-unused-vars, class-methods-use-this
 
     const arr = this.props.listPlacementNotBelongShare;
-    _.sumBy(arr, (o) => o.weight); // ➜ 20
+    _.sumBy(arr, o => o.weight); // ➜ 20
     const sumWeight = _.sumBy(arr, 'weight');// ➜ 20
     const shareId = this.props.shareId;
     this.props.setCurrentShare(shareId);

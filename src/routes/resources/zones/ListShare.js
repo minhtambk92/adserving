@@ -140,7 +140,7 @@ class ListShare extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/zone/${this.props.zoneId}`}
-          onClick={(event) => this.onTabClickAddPlacement(event, rowData.id)}
+          onClick={event => this.onTabClickAddPlacement(event, rowData.id)}
         >Add Placement</Link>, cell);
       },
     }, {
@@ -273,7 +273,7 @@ class ListShare extends Component {
         <div className="col-sm-12" id="shareForm">
           {
             this.props.page.statusEdit === true &&
-            this.state.arrShare && this.state.arrShare.map((count) => (
+            this.state.arrShare && this.state.arrShare.map(count => (
               <div className="box" key={count}>
                 <div className="editShare">
                   <EditShareForm
@@ -295,7 +295,7 @@ class ListShare extends Component {
           }
           {
             this.props.page.statusCreate === true &&
-            this.state.arrCreateShare && this.state.arrCreateShare.map((count) => (
+            this.state.arrCreateShare && this.state.arrCreateShare.map(count => (
               <div className="box" key={count}>
                 <div className="ShareForm">
                   <CreateShareForm
@@ -322,7 +322,7 @@ class ListShare extends Component {
                 <button
                   type="button"
                   id="createShare"
-                  onClick={(event) => this.addShare(event)}
+                  onClick={event => this.addShare(event)}
                   className="btn btn-primary"
                 >
                   Create Share

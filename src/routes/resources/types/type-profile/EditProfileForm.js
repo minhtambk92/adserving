@@ -208,7 +208,7 @@ class EditProfileForm extends Component {
                   <input
                     type="text" className="form-control" id="inputProfileName"
                     placeholder="Perter"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputProfileName = c;
                     }}
                   />
@@ -224,7 +224,7 @@ class EditProfileForm extends Component {
                   <select
                     id="inputProfileGender"
                     className="form-control"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputProfileGender = c;
                     }}
                   >
@@ -244,7 +244,7 @@ class EditProfileForm extends Component {
                   <input
                     type="text" className="form-control" id="inputProfileWebsite"
                     placeholder="http://www.bongdaso.com"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputProfileWebsite = c;
                     }}
                   />
@@ -260,7 +260,7 @@ class EditProfileForm extends Component {
                   <input
                     type="text" className="form-control" id="inputProfileLocation"
                     placeholder="Perter"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputProfileLocation = c;
                     }}
                   />

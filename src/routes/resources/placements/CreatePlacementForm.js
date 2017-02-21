@@ -178,7 +178,7 @@ class CreatePlacementForm extends Component {
               <input
                 type="text" className="form-control" id="inputPlacementName"
                 placeholder="Admicro"
-                ref={c => {
+                ref={(c) => {
                   this.inputPlacementName = c;
                 }}
               />
@@ -190,7 +190,7 @@ class CreatePlacementForm extends Component {
               <div className="col-sm-10">
                 <select
                   id="inputCampaign" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputCampaign = c;
                   }}
                 >
@@ -212,7 +212,7 @@ class CreatePlacementForm extends Component {
             <div className="col-sm-1 checkbox">
               <ICheck
                 type="checkbox" id="inputIsPlacementStartNow" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputIsPlacementStartNow = c;
                 }}
               />
@@ -251,7 +251,7 @@ class CreatePlacementForm extends Component {
             <div className="col-sm-1 checkbox">
               <ICheck
                 type="checkbox" id="inputIsPlacementNotExpiration" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputIsPlacementNotExpiration = c;
                 }}
               />
@@ -292,7 +292,7 @@ class CreatePlacementForm extends Component {
                 type="number" className="form-control"
                 id="inputPlacementWidth"
                 placeholder="300"
-                ref={c => {
+                ref={(c) => {
                   this.inputPlacementWidth = c;
                 }}
               />
@@ -305,7 +305,7 @@ class CreatePlacementForm extends Component {
                 type="number" className="form-control"
                 id="inputPlacementHeight"
                 placeholder="300"
-                ref={c => {
+                ref={(c) => {
                   this.inputPlacementHeight = c;
                 }}
               />
@@ -320,7 +320,7 @@ class CreatePlacementForm extends Component {
               <input
                 type="number" className="form-control" id="inputPlacementWeight"
                 placeholder="1"
-                ref={c => {
+                ref={(c) => {
                   this.inputPlacementWeight = c;
                 }}
               />
@@ -334,7 +334,7 @@ class CreatePlacementForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputPlacementStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputPlacementStatus = c;
                 }}
               >
@@ -352,7 +352,7 @@ class CreatePlacementForm extends Component {
               <textarea
                 className="form-control" id="inputPlacementDescription"
                 rows="5" placeholder="More info..."
-                ref={c => {
+                ref={(c) => {
                   this.inputPlacementDescription = c;
                 }}
               />

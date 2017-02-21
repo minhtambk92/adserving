@@ -21,7 +21,7 @@ const zones = {
       async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
-        await Zone.create(args.zone).then(zone => {
+        await Zone.create(args.zone).then((zone) => {
           opts.where.id = { $eq: zone.id };
         });
         return opts;

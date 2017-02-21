@@ -40,7 +40,7 @@ class FilterOptionChannelTypesForm extends Component {
                 className="form-control select2"
                 style={{ width: '100%' }}
                 onChange={event => this.onFilterChange(event, 'optionChannelTypeId')}
-                ref={c => {
+                ref={(c) => {
                   this.inputOptionChannelTypesFilters = c;
                 }}
                 defaultValue={this.props.filters &&
@@ -65,7 +65,7 @@ class FilterOptionChannelTypesForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputOptionChannelTypesFilterStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputOptionChannelTypesFilterStatus = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'status')}

@@ -2,4 +2,7 @@
  * Created by quynd on 12/29/16.
  */
 
-export BannerHtmlType from './BannerHtmlType';
+import BannerHtmlType from './BannerHtmlType';
+
+// eslint-disable-next-line import/prefer-default-export
+export { BannerHtmlType };

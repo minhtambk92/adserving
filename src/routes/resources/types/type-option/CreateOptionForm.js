@@ -71,7 +71,7 @@ class CreateOptionForm extends Component {
                 <input
                   type="text" className="form-control" id="inputOptionName"
                   placeholder="John Doe"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputOptionName = c;
                   }}
                 />
@@ -87,7 +87,7 @@ class CreateOptionForm extends Component {
                 <input
                   type="text" className="form-control" id="inputOptionValue"
                   placeholder="share"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputOptionValue = c;
                   }}
                 />
@@ -102,7 +102,7 @@ class CreateOptionForm extends Component {
               <div className="col-sm-10 checkbox">
                 <ICheck
                   type="checkbox" id="inputOptionAutoLoad" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputOptionAutoLoad = c;
                   }}
                 />
@@ -118,7 +118,7 @@ class CreateOptionForm extends Component {
                 <select
                   id="inputOptionStatus"
                   className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputOptionStatus = c;
                   }}
                 >

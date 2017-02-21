@@ -167,7 +167,7 @@ class OptionList extends Component {
         </div>
         <div className="col-sm-12" id="ChannelOption">
           {this.props.page.statusUpdateOption === true &&
-          this.state.arrOption && this.state.arrOption.map((count) => (
+          this.state.arrOption && this.state.arrOption.map(count => (
             <div className="box" key={count}>
               <div className="editOption">
                 <EditOptionForm
@@ -183,7 +183,7 @@ class OptionList extends Component {
           ))}
           {this.props.page &&
           this.props.page.statusCreateOption === true && this.state.arrCreateOption
-          && this.state.arrCreateOption.map((count) => (
+          && this.state.arrCreateOption.map(count => (
             <div className="box" key={count}>
               <div className="createOption">
                 <CreateOptionForm
@@ -205,7 +205,7 @@ class OptionList extends Component {
             <button
               type="button"
               id="create"
-              onClick={(event) => this.addOption(event)}
+              onClick={event => this.addOption(event)}
               className="btn btn-primary"
             >
                 Create Option

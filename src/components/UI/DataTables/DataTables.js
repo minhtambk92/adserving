@@ -43,7 +43,7 @@ class DataTables extends Component {
 
     return (
       <table
-        ref={c => {
+        ref={(c) => {
           this.dataTable = c;
         }}
         {...rest}
@@ -58,7 +58,7 @@ class DataTables extends Component {
     // Open the portal
     return (
       <div
-        ref={c => {
+        ref={(c) => {
           this.portal = c;
         }}
       />

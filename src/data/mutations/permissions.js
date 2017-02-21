@@ -20,7 +20,7 @@ const permissions = {
         /* eslint-enable no-shadow */
         const opts = options;
         opts.where = options.where || {};
-        await Permission.create(args.permission).then(permission => {
+        await Permission.create(args.permission).then((permission) => {
           opts.where.id = { $eq: permission.id };
         });
         return opts;

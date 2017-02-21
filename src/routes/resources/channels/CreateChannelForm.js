@@ -84,7 +84,7 @@ class CreateChannelForm extends Component {
               <input
                 type="text" className="form-control" id="inputChannelName"
                 placeholder="Admicro"
-                ref={c => {
+                ref={(c) => {
                   this.inputChannelName = c;
                 }}
               />
@@ -97,7 +97,7 @@ class CreateChannelForm extends Component {
               <div className="col-sm-10">
                 <select
                   id="inputSiteId" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputSiteId = c;
                   }}
                 >
@@ -123,7 +123,7 @@ class CreateChannelForm extends Component {
               <textarea
                 className="form-control" id="inputChannelDescription"
                 rows="5" placeholder="More info..."
-                ref={c => {
+                ref={(c) => {
                   this.inputChannelDescription = c;
                 }}
               />
@@ -137,7 +137,7 @@ class CreateChannelForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputChannelStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputChannelStatus = c;
                 }}
               >

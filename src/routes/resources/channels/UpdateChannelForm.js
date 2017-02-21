@@ -84,7 +84,7 @@ class UpdateChannelForm extends Component {
             <input
               type="text" className="form-control" id="inputChannelName"
               placeholder="Dan Tri"
-              ref={c => {
+              ref={(c) => {
                 this.inputChannelName = c;
               }}
             />
@@ -100,7 +100,7 @@ class UpdateChannelForm extends Component {
             <textarea
               className="form-control" id="inputChannelDescription"
               rows="5" placeholder="More info..."
-              ref={c => {
+              ref={(c) => {
                 this.inputChannelDescription = c;
               }}
             />
@@ -115,7 +115,7 @@ class UpdateChannelForm extends Component {
           <div className="col-sm-10">
             <select
               id="inputChannelStatus" className="form-control"
-              ref={c => {
+              ref={(c) => {
                 this.inputChannelStatus = c;
               }}
             >

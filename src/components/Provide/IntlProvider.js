@@ -49,7 +49,7 @@ class ProvideIntl extends Component {
   }
 }
 
-const mapState = (state) => ({
+const mapState = state => ({
   intl: state.intl,
   menus: state.menus,
 });

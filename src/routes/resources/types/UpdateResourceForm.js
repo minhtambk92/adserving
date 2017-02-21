@@ -90,7 +90,7 @@ class UpdateResourceForm extends Component {
                 <input
                   type="text" className="form-control" id="inputResourceUniqueName"
                   placeholder="admin"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputResourceUniqueName = c;
                   }}
                 />
@@ -105,7 +105,7 @@ class UpdateResourceForm extends Component {
                 <input
                   type="text" className="form-control" id="inputResourceModelName"
                   placeholder="admin"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputResourceModelName = c;
                   }}
                 />
@@ -120,7 +120,7 @@ class UpdateResourceForm extends Component {
                 <input
                   type="text" className="form-control" id="inputResourceName"
                   placeholder="Administrator"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputResourceName = c;
                   }}
                 />
@@ -136,7 +136,7 @@ class UpdateResourceForm extends Component {
                 <select
                   id="inputResourceHasMeta"
                   className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputResourceHasMeta = c;
                   }}
                 >
@@ -154,7 +154,7 @@ class UpdateResourceForm extends Component {
                 <textarea
                   className="form-control" id="inputResourceDescription"
                   placeholder="Resource description..."
-                  ref={c => {
+                  ref={(c) => {
                     this.inputResourceDescription = c;
                   }}
                 />
@@ -170,7 +170,7 @@ class UpdateResourceForm extends Component {
                 <select
                   id="inputResourceStatus"
                   className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputResourceStatus = c;
                   }}
                 >

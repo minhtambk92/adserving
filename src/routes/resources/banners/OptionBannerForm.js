@@ -410,7 +410,7 @@ class OptionBannerForm extends Component {
                 <div className="col-sm-8 checkbox">
                   <ICheck
                     type="checkbox" id="inputBannerIsCountView" className="form-control"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputBannerIsCountView = c;
                     }}
                   />
@@ -424,7 +424,7 @@ class OptionBannerForm extends Component {
                 <div className="col-sm-8 checkbox">
                   <ICheck
                     type="checkbox" id="inputBannerIsFixIE" className="form-control"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputBannerIsFixIE = c;
                     }}
                   />
@@ -438,7 +438,7 @@ class OptionBannerForm extends Component {
                 <div className="col-sm-8 checkbox">
                   <ICheck
                     type="checkbox" id="inputBannerIsDefault" className="form-control"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputBannerIsDefault = c;
                     }}
                   />
@@ -452,7 +452,7 @@ class OptionBannerForm extends Component {
                 <div className="col-sm-8 checkbox">
                   <ICheck
                     type="checkbox" id="inputBannerIsRelative" className="form-control"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputBannerIsRelative = c;
                     }}
                   />
@@ -468,7 +468,7 @@ class OptionBannerForm extends Component {
                     type="text" className="form-control"
                     id="inputBannerAdStore" placeholder="1"
                     defaultValue="rd[timestamp]&rtu=-1"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputBannerAdStore = c;
                     }}
                   />
@@ -501,7 +501,7 @@ class OptionBannerForm extends Component {
                 <div className="col-sm-1 checkbox">
                   <ICheck
                     type="checkbox" id="inputIsImpressionsBooked" className="form-control"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputIsImpressionsBooked = c;
                     }}
                   />
@@ -520,7 +520,7 @@ class OptionBannerForm extends Component {
                     <input
                       type="number" className="form-control"
                       id="inputBannerImpressionsBooked" placeholder="1000"
-                      ref={c => {
+                      ref={(c) => {
                         this.inputBannerImpressionsBooked = c;
                       }}
                     />
@@ -536,7 +536,7 @@ class OptionBannerForm extends Component {
                 <div className="col-sm-1 checkbox">
                   <ICheck
                     type="checkbox" id="inputIsClicksBooked" className="form-control"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputIsClicksBooked = c;
                     }}
                   />
@@ -553,7 +553,7 @@ class OptionBannerForm extends Component {
                     <input
                       type="text" className="form-control"
                       id="inputBannerClicksBooked" placeholder="1000"
-                      ref={c => {
+                      ref={(c) => {
                         this.inputBannerClicksBooked = c;
                       }}
                     />
@@ -588,7 +588,7 @@ class OptionBannerForm extends Component {
                 <div className="col-sm-1 checkbox">
                   <ICheck
                     type="checkbox" id="inputIsActivationDate" className="form-control"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputIsActivationDate = c;
                     }}
                   />
@@ -612,7 +612,7 @@ class OptionBannerForm extends Component {
                       type="text"
                       className="form-control pull-right"
                       name="start"
-                      ref={c => {
+                      ref={(c) => {
                         this.inputBannerActivationDate = c;
                       }}
                     />
@@ -626,7 +626,7 @@ class OptionBannerForm extends Component {
                 <div className="col-sm-1 checkbox">
                   <ICheck
                     type="checkbox" id="inputIsExpirationDate" className="form-control"
-                    ref={c => {
+                    ref={(c) => {
                       this.inputIsExpirationDate = c;
                     }}
                   />
@@ -650,7 +650,7 @@ class OptionBannerForm extends Component {
                       type="text"
                       className="form-control pull-right"
                       name="end"
-                      ref={c => {
+                      ref={(c) => {
                         this.inputBannerExpirationDate = c;
                       }}
                     />
@@ -669,7 +669,7 @@ class OptionBannerForm extends Component {
                     impressionUrl={track.impressionUrl}
                   />
                 ))}
-                {this.state.arrTrack && this.state.arrTrack.map((count) => (
+                {this.state.arrTrack && this.state.arrTrack.map(count => (
                   <TrackForm
                     key={count}
                     index={count}

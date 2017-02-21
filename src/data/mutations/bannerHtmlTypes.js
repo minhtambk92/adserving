@@ -19,7 +19,7 @@ const bannerHtmlTypes = {
         const opts = options;
         opts.where = options.where || {};
         /* eslint-disable no-shadow */
-        await BannerHtmlType.create(args.bannerHtmlType).then(bannerHtmlType => {
+        await BannerHtmlType.create(args.bannerHtmlType).then((bannerHtmlType) => {
           /* eslint-enable no-shadow */
           opts.where.id = { $eq: bannerHtmlType.id };
         });

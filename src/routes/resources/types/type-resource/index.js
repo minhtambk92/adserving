@@ -2,4 +2,7 @@
  * Created by manhhailua on 12/29/16.
  */
 
-export Resource from './Resource';
+import Resource from './Resource';
+
+// eslint-disable-next-line import/prefer-default-export
+export { Resource };

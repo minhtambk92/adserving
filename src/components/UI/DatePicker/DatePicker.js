@@ -60,7 +60,7 @@ class DatePicker extends Component {
     const { ...rest } = this.props;
     return (
       <input
-        ref={c => {
+        ref={(c) => {
           this.input = c;
         }}
         {...rest}
@@ -72,7 +72,7 @@ class DatePicker extends Component {
     // Open the portal
     return (
       <div
-        ref={c => {
+        ref={(c) => {
           this.portal = c;
         }}
       />

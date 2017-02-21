@@ -21,7 +21,7 @@ const roles = {
       async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
-        await Role.create(args.role).then(role => {
+        await Role.create(args.role).then((role) => {
           opts.where.id = { $eq: role.id };
         });
         return opts;

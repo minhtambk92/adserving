@@ -30,7 +30,7 @@ class FilterChannelsForm extends Component {
                 id="inputChannelsFilterSite"
                 className="form-control select2"
                 style={{ width: '100%' }}
-                ref={c => {
+                ref={(c) => {
                   this.inputChannelsFilterSite = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'siteId')}
@@ -55,7 +55,7 @@ class FilterChannelsForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputChannelsFilterStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputChannelsFilterStatus = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'status')}

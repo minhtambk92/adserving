@@ -30,7 +30,7 @@ class FilterCampaignsForm extends Component {
                 id="inputCampaignsFilterAdvertiser"
                 className="form-control select2"
                 style={{ width: '100%' }}
-                ref={c => {
+                ref={(c) => {
                   this.inputCampaignsFilterAdvertiser = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'advertiserId')}
@@ -55,7 +55,7 @@ class FilterCampaignsForm extends Component {
             <div className="col-sm-10">
               <select
                 id="inputCampaignsFilterStatus" className="form-control"
-                ref={c => {
+                ref={(c) => {
                   this.inputCampaignsFilterStatus = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'status')}

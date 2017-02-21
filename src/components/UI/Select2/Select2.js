@@ -30,7 +30,7 @@ class Select2 extends Component {
 
     return (
       <select
-        ref={c => {
+        ref={(c) => {
           this.select = c;
         }}
         {...rest}
@@ -42,7 +42,7 @@ class Select2 extends Component {
     // Open the portal
     return (
       <div
-        ref={c => {
+        ref={(c) => {
           this.portal = c;
         }}
       />

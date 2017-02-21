@@ -188,7 +188,7 @@ class AdsServerList extends Component {
         </div>
         <div className="col-sm-12">
           {this.props.page.statusUpdateAdsServer === true &&
-          this.state.arrAdsServer && this.state.arrAdsServer.map((count) => (
+          this.state.arrAdsServer && this.state.arrAdsServer.map(count => (
             <div className="box" key={count}>
               <div className="editAdsServerForm">
                 <EditAdsServerForm
@@ -206,7 +206,7 @@ class AdsServerList extends Component {
           ))}
           {this.props.page &&
           this.props.page.statusCreateAdsServer === true && this.state.arrCreateAdsServer
-          && this.state.arrCreateAdsServer.map((count) => (
+          && this.state.arrCreateAdsServer.map(count => (
             <div className="box" key={count}>
               <div className="createAdsServerForm">
                 <CreateAdsServerForm
@@ -230,7 +230,7 @@ class AdsServerList extends Component {
             <button
               type="button"
               id="create"
-              onClick={(event) => this.addAdsServer(event)}
+              onClick={event => this.addAdsServer(event)}
               className="btn btn-primary"
             >
                 Create Ads Server

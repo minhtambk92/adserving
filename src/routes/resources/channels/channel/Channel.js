@@ -1,7 +1,7 @@
 /**
  * React Starter Kit (https://www.reactstarterkit.com/)
  *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
+ * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
@@ -372,13 +372,13 @@ class Channel extends Component {
                         <div className="col-sm-10">
                           <select
                             id="inputChannelOptions" className="form-control"
-                            ref={c => {
+                            ref={(c) => {
                               this.inputChannelOptions = c;
                             }}
                           >
                             {this.props.optionChannelTypes &&
                             /* eslint-disable no-confusing-arrow */
-                            this.props.optionChannelTypes.list.map((option) =>
+                            this.props.optionChannelTypes.list.map(option =>
                               ((option.optionChannelValues &&
                               option.isSelectOption === true && option.optionChannelValues.length)
                               || (option.isSelectOption === false)) > 0 ?
@@ -452,7 +452,7 @@ class Channel extends Component {
                         return false;
                       })}
                       {this.state.newFilterSite
-                      && this.state.newFilterSite.map((ob) => (
+                      && this.state.newFilterSite.map(ob => (
                         <FilterSiteChannel
                           key={ob.count}
                           index={ob.count}
@@ -461,7 +461,7 @@ class Channel extends Component {
                           type={ob.type}
                         />
                       ))}
-                      {this.state.arrVariable && this.state.arrVariable.map((ob) => (
+                      {this.state.arrVariable && this.state.arrVariable.map(ob => (
                         <FilterSiteChannel
                           key={ob.count}
                           index={ob.count}
@@ -469,7 +469,7 @@ class Channel extends Component {
                           type={ob.type}
                         />
                       ))}
-                      {this.state.arrCheckBox && this.state.arrCheckBox.map((ob) => (
+                      {this.state.arrCheckBox && this.state.arrCheckBox.map(ob => (
                         <OptionSelectChannel
                           key={ob.count}
                           index={ob.count}
@@ -520,7 +520,7 @@ class Channel extends Component {
 
 }
 
-const mapState = (state) => ({
+const mapState = state => ({
   page: state.page.channels,
   channels: state.channels,
   optionChannels: state.optionChannels,

@@ -94,7 +94,7 @@ class EditZoneSizeTypeForm extends Component {
                 <input
                   type="text" className="form-control" id="inputZoneSizeTypeName"
                   placeholder="Name"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputZoneSizeTypeName = c;
                   }}
                 />
@@ -111,7 +111,7 @@ class EditZoneSizeTypeForm extends Component {
                   type="number" className="form-control"
                   id="inputZoneSizeTypeWidth"
                   placeholder="300"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputZoneSizeTypeWidth = c;
                   }}
                 />
@@ -124,7 +124,7 @@ class EditZoneSizeTypeForm extends Component {
                   type="number" className="form-control"
                   id="inputZoneSizeTypeHeight"
                   placeholder="300"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputZoneSizeTypeHeight = c;
                   }}
                 />
@@ -139,7 +139,7 @@ class EditZoneSizeTypeForm extends Component {
               <div className="col-sm-10">
                 <select
                   id="inputZoneSizeTypeStatus" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputZoneSizeTypeStatus = c;
                   }}
                 >

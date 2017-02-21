@@ -114,7 +114,7 @@ class EditBannerHtmlTypeForm extends Component {
                 <input
                   type="text" className="form-control" id="inputBannerHtmlTypeName"
                   placeholder="Name"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputBannerHtmlTypeName = c;
                   }}
                 />
@@ -129,7 +129,7 @@ class EditBannerHtmlTypeForm extends Component {
                 <input
                   type="text" className="form-control" id="inputBannerHtmlTypeWeight"
                   placeholder="0"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputBannerHtmlTypeWeight = c;
                   }}
                 />
@@ -144,7 +144,7 @@ class EditBannerHtmlTypeForm extends Component {
               <div className="col-sm-10">
                 <select
                   id="inputBannerHtmlTypeStatus" className="form-control"
-                  ref={c => {
+                  ref={(c) => {
                     this.inputBannerHtmlTypeStatus = c;
                   }}
                 >

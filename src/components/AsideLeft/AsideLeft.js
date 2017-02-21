@@ -25,7 +25,7 @@ class AsideLeft extends Component {
         <section className="sidebar" style={{ height: 'auto' }}>
           {/* sidebar menu: : style can be found in sidebar.less */}
           <ul className="sidebar-menu">
-            {menus.asideLeft.items && menus.asideLeft.items.map(item => {
+            {menus.asideLeft.items && menus.asideLeft.items.map((item) => {
               if (item.type === 'header') {
                 return <li key={item.id} className="header">{item.name}</li>;
               }
@@ -45,7 +45,7 @@ class AsideLeft extends Component {
   }
 }
 
-const mapState = (state) => ({
+const mapState = state => ({
   menus: state.menus,
 });
 

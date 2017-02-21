@@ -96,7 +96,7 @@ class ChannelList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/channel/${rowData.id}`}
-          onClick={(event) => this.onTabClickEditChannel(event)}
+          onClick={event => this.onTabClickEditChannel(event)}
         >{cellData}</Link>, cell);
       },
     }, {
@@ -107,7 +107,7 @@ class ChannelList extends Component {
       createdCell: (cell, cellData, rowData) => {
         ReactDOM.render(<Link
           to={`/resource/channel/${rowData.id}`}
-          onClick={(event) => this.onTabClickOptionChannel(event)}
+          onClick={event => this.onTabClickOptionChannel(event)}
         >Option</Link>, cell);
       },
     }, {

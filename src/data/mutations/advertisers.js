@@ -18,7 +18,7 @@ const advertisers = {
       async before(options, args) {
         const opts = options;
         opts.where = options.where || {};
-        await Advertiser.create(args.advertiser).then(advertiser => {
+        await Advertiser.create(args.advertiser).then((advertiser) => {
           opts.where.id = { $eq: advertiser.id };
         });
         return opts;

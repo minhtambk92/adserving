@@ -1,7 +1,7 @@
 /**
  * React Starter Kit (https://www.reactstarterkit.com/)
  *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
+ * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
@@ -310,7 +310,7 @@ class Banner extends Component {
                           <button
                             type="button"
                             id="createBannerInPlacement"
-                            onClick={(event) => this.createPlacementInBanner(event)}
+                            onClick={event => this.createPlacementInBanner(event)}
                             className="btn btn-primary"
                           >
                             Create Placement
@@ -376,7 +376,7 @@ class Banner extends Component {
 
 }
 
-const mapState = (state) => ({
+const mapState = state => ({
   page: state.page.banners,
   banners: state.banners,
   campaigns: state.campaigns,

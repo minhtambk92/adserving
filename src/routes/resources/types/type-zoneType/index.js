@@ -2,4 +2,7 @@
  * Created by quynd on 12/29/16.
  */
 
-export ZoneType from './ZoneType';
+import ZoneType from './ZoneType';
+
+// eslint-disable-next-line import/prefer-default-export
+export { ZoneType };
