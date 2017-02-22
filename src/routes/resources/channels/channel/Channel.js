@@ -80,6 +80,7 @@ class Channel extends Component {
     this.props.getChannel(this.props.channelId);
     this.props.getSites();
     this.props.getOptionChannelTypes();
+    this.props.getActivitiesBySubjectId(this.props.channelId);
   }
 
   componentDidMount() {
@@ -175,7 +176,7 @@ class Channel extends Component {
               checkComparison === false || checkLogical === false || checkValue === false) {
               this.props.updateOptionChannel(oChannel).then(() => {
                 const userId = this.props.user.id;
-                const subject = `Option Channel ${options.name}`;
+                const subject = `Option Channel ${oChannel.name}`;
                 const subjectId = id;
                 const action = 'updated';
                 const other = JSON.stringify(op[0]);
@@ -238,20 +239,21 @@ class Channel extends Component {
                   value,
                   channelId,
                 }).then(() => {
-                  const userId = this.props.user.id;
-                  const subject = `Option Channel ${name}`;
-                  const subjectId = this.props.channels.editing.options[0].id;
-                  const action = 'created';
-                  const other = '';
-                  this.props.createActivity({
-                    action,
-                    subject,
-                    subjectId,
-                    other,
-                    userId,
-                  }).then(() => {
-                    this.props.getChannel(this.props.channelId);
-                  });
+                  this.props.getChannel(this.props.channelId);
+                  // const userId = this.props.user.id;
+                  // const subject = `Option Channel ${name}`;
+                  // const subjectId = this.props.channels.editing.options[0].id;
+                  // const action = 'created';
+                  // const other = '';
+                  // this.props.createActivity({
+                  //   action,
+                  //   subject,
+                  //   subjectId,
+                  //   other,
+                  //   userId,
+                  // }).then(() => {
+                  //   this.props.getChannel(this.props.channelId);
+                  // });
                 });
               }
             }
@@ -499,7 +501,8 @@ class Channel extends Component {
                     <div className="row">
                       <section className="col-lg-12">
                         <Activities
-                          activities={this.props.activities && this.props.activities.list}
+                          activities={this.props.activities && this.props.activities.list &&
+                          this.props.activities.list}
                           updateChannel={this.props.updateChannel}
                           setPageChannelActiveTab={this.props.setPageChannelActiveTab}
                           createActivity={this.props.createActivity}

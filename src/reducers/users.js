@@ -7,6 +7,7 @@ import {
   DELETE_USER,
   GET_USERS_FILTERS,
   SET_USERS_FILTERS,
+  GET_USER_PROFILE,
 } from '../constants';
 
 function filters(state = {}, action) {
@@ -72,6 +73,9 @@ function list(state = [], action) {
 function editing(state = {}, action) {
   switch (action.type) {
     case GET_USER: {
+      return action.payload.user;
+    }
+    case GET_USER_PROFILE: {
       return action.payload.user;
     }
     case UPDATE_USER: {

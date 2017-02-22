@@ -13,6 +13,7 @@ import {
   LOG_USER_IN,
   LOG_USER_OUT,
   UPDATE_PROFILE,
+  GET_USER_PROFILE,
 } from '../constants';
 
 export function getUsersFilters() {
@@ -34,6 +35,45 @@ export function setUsersFilters(filter) {
 }
 
 export function getUser(id) {
+  return async (dispatch, getState, { graphqlRequest }) => {
+    const query = `
+      query {
+        users(where: {id: "${id}"}, limit: 1) {
+          id
+          email
+          emailConfirmed
+          status
+          profile {
+            displayName
+            picture
+            gender
+            location
+            website
+          }
+          roles {
+            id
+            uniqueName
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+
+    const { data } = await graphqlRequest(query);
+
+    dispatch({
+      type: GET_USER,
+      payload: {
+        user: data.users.shift(),
+      },
+    });
+  };
+}
+
+export function getUserProfile(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const query = `
       query {
@@ -73,7 +113,7 @@ export function getUser(id) {
     const { data } = await graphqlRequest(query);
 
     dispatch({
-      type: GET_USER,
+      type: GET_USER_PROFILE,
       payload: {
         user: data.users.shift(),
       },

@@ -13,7 +13,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getUser, updateProfile } from '../../actions/users';
+import { getUserProfile, updateProfile } from '../../actions/users';
 import { navigate } from '../../actions/route';
 import { setStatusUpdateProfileUser, setPageProfileActiveTab } from '../../actions/pages/users';
 import SettingProfile from './SettingProfile';
@@ -27,7 +27,7 @@ class Profile extends Component {
   static propTypes = {
     user: PropTypes.object,
     navigate: PropTypes.func,
-    getUser: PropTypes.func,
+    getUserProfile: PropTypes.func,
     users: PropTypes.object,
     updateProfile: PropTypes.func,
     setStatusUpdateProfileUser: PropTypes.func,
@@ -36,7 +36,7 @@ class Profile extends Component {
   };
 
   componentWillMount() {
-    this.props.getUser(this.props.user.id);
+    this.props.getUserProfile(this.props.user.id);
   }
 
   componentDidMount() {
@@ -68,7 +68,7 @@ class Profile extends Component {
               setStatusUpdateProfileUser={this.props.setStatusUpdateProfileUser}
               page={this.props.page}
               updateProfile={this.props.updateProfile}
-              getUser={this.props.getUser}
+              getUser={this.props.getUserProfile}
               id={this.props.user && this.props.user.id}
               setPageProfileActiveTab={this.props.setPageProfileActiveTab}
             />
@@ -102,7 +102,7 @@ class Profile extends Component {
                   <SettingProfile
                     user={this.props.users && this.props.users.editing}
                     updateProfile={this.props.updateProfile}
-                    getUser={this.props.getUser}
+                    getUser={this.props.getUserProfile}
                     id={this.props.user && this.props.user.id}
                     setStatusUpdateProfileUser={this.props.setStatusUpdateProfileUser}
                     page={this.props.page}
@@ -222,7 +222,7 @@ const mapState = state => ({
 
 const mapDispatch = {
   navigate,
-  getUser,
+  getUserProfile,
   updateProfile,
   setStatusUpdateProfileUser,
   setPageProfileActiveTab,

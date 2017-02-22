@@ -22,33 +22,18 @@ class OptionSelectChannel extends Component {
     user: PropTypes.object,
   };
 
-  componentDidMount() {
-    if (this.props.index && this.props.name && this.props.value && this.props.data.length > 0) {
-      const value = this.props.value;
-      const arr = value.split(',');
-      for (let i = 0; i < this.props.data.length; i += 1) {
-        const id = `${this.props.name}${this.props.data[i].value}${this.props.index}`;
-        $(`#${id}`).iCheck('uncheck');
-      }
-
-      for (let i = 0; i < arr.length; i += 1) {
-        const id = `${this.props.name}${arr[i]}${this.props.index}`;
-        $(`#${id}`).iCheck('check');
-      }
-    }
-  }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data && nextProps.value && nextProps.name && nextProps.comparison) {
+    if (nextProps.id &&
+      nextProps.data && nextProps.value && nextProps.name && nextProps.comparison) {
       this.inputSiteFilter.value = nextProps.comparison;
       this.inputTypeFilter.value = nextProps.logical;
       const value = nextProps.value;
       const arr = value.split(',');
       if (nextProps.data.length > 0) {
-        for (let i = 0; i < nextProps.data.length; i += 1) {
-          const id = `${nextProps.id}${nextProps.data[i].value}${nextProps.index}`;
-          $(`#${id}`).iCheck('uncheck');
-        }
-
+        // for (let i = 0; i < nextProps.data.length; i += 1) {
+        //   const id = `${nextProps.id}${nextProps.data[i].value}${nextProps.index}`;
+        //   $(`#${id}`).iCheck('uncheck');
+        // }
         for (let i = 0; i < arr.length; i += 1) {
           const id = `${nextProps.id}${arr[i]}${nextProps.index}`;
           $(`#${id}`).iCheck('check');
@@ -81,7 +66,7 @@ class OptionSelectChannel extends Component {
         className={`optionChannel-${this.props.index}`}
         id={this.props.id}
       >
-        <div className="box box-solid box-primary" id={`${this.props.typeId}-${this.props.index}`}>
+        <div className="box box-solid box-primary" id={(this.props.typeId !== undefined) ? `${this.props.typeId}-${this.props.index}` : ('')}>
           <div className="box-header">
             <h3 className="box-title">{this.props.name}</h3>
             <div className="box-tools pull-right">
@@ -136,23 +121,24 @@ class OptionSelectChannel extends Component {
                     <div className="form-group">
                       <div className="col-lg-3">&nbsp;</div>
                       <div className="col-lg-9 optionVariable" id={id}>
-                        {this.props.data && this.props.data.map(data =>
-                          <div className="col-sm-3" key={data.id}>
-                            <label
-                              htmlFor="inputChannelOptions"
-                              className="control-label"
-                            >
-                              <ICheck
-                                type="checkbox"
-                                id={this.props.id + data.value + this.props.index}
-                                className="inputOption"
-                                value={data.value}
-                              />
-                              {data.name}
-                            </label>
-                          </div>,
-                        )
-                        }
+                        {this.props.data && this.props.data.map(data => (
+                          (data) ? (
+                            <div className="col-sm-3" key={data.id}>
+                              <label
+                                htmlFor="inputChannelOptions"
+                                className="control-label"
+                              >
+                                <ICheck
+                                  type="checkbox"
+                                  id={this.props.id + data.value + this.props.index}
+                                  className="inputOption"
+                                  value={data.value}
+                                />
+                                {data.name}
+                              </label>
+                            </div>) : ('')
+                          ),
+                        )}
                       </div>
                     </div>
                   </form>
