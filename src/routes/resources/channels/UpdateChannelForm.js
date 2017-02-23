@@ -63,7 +63,7 @@ class UpdateChannelForm extends Component {
       const subject = `Channel ${channelObject.name}`;
       const subjectId = this.props.channelId;
       const action = 'deleted';
-      const other = JSON.stringify(channelObject);
+      const other = '';
       this.props.createActivity({ action,
         subject,
         subjectId,

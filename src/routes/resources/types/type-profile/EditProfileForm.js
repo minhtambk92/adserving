@@ -73,7 +73,7 @@ class EditProfileForm extends Component {
 
     this.props.updateProfile(user).then(() => {
       const userId = this.props.user.id;
-      const subject = `User ${name}`;
+      const subject = `User ${displayName}`;
       const subjectId = this.props.profile.id;
       const action = 'updated';
       const other = JSON.stringify(profileObject);

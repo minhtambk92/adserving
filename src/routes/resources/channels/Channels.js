@@ -14,7 +14,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getChannels, createChannel, getChannelsFilters, setChannelsFilters } from '../../../actions/channels';
 import { getSites } from '../../../actions/sites';
 import { setPageChannelActiveTab } from '../../../actions/pages/channels';
-import { getOptionChannelByChannelId, createOptionChannel } from '../../../actions/optionChannels';
+import { createOptionChannel } from '../../../actions/optionChannels';
 import { createActivity } from '../../../actions/activities';
 import CreateChannelForm from './CreateChannelForm';
 import ChannelList from './ChannelList';
@@ -31,7 +31,6 @@ class Channels extends Component {
     sites: PropTypes.object,
     getSites: PropTypes.func,
     setPageChannelActiveTab: PropTypes.func,
-    getOptionChannelByChannelId: PropTypes.func,
     optionChannels: PropTypes.object,
     createOptionChannel: PropTypes.func,
     createActivity: PropTypes.func,
@@ -107,7 +106,7 @@ class Channels extends Component {
                 createChannel={this.props.createChannel}
                 sites={this.props.sites && this.props.sites.list}
                 createActivity={this.props.createActivity}
-                users={this.props.user}
+                user={this.props.user}
                 channels={this.props.channels && this.props.channels.list}
               />
             </div>
@@ -128,7 +127,6 @@ class Channels extends Component {
                   list={this.getFilteredChannels()}
                   setPageChannelActiveTab={this.props.setPageChannelActiveTab}
                   createChannel={this.props.createChannel}
-                  getOptionChannelByChannelId={this.props.getOptionChannelByChannelId}
                   optionChannels={this.props.optionChannels}
                   createOptionChannel={this.props.createOptionChannel}
                   channels={this.props.channels}
@@ -163,7 +161,6 @@ const mapDispatch = {
   getChannelsFilters,
   setPageChannelActiveTab,
   setChannelsFilters,
-  getOptionChannelByChannelId,
   createOptionChannel,
   createActivity,
 };

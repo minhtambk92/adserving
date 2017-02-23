@@ -108,9 +108,20 @@ class Channel extends Component {
     });
     const self = this;
     $('.remove-option').click(function handleClick() {
-      const id = $(this).parents('.row').attr('id');
-      if (id) {
-        self.props.deleteOptionChannel(id).then(() => {
+      const idOp = $(this).parents('.row').attr('id');
+      if (idOp) {
+        const options = _.filter(self.props.channels.editing.options, { id: idOp });
+        self.props.deleteOptionChannel(idOp).then(() => {
+          const userId = self.props.user.id;
+          const subject = `Option Channel ${options[0].name}`;
+          const subjectId = idOp;
+          const action = 'deleted';
+          const other = '';
+          self.props.createActivity({ action,
+            subject,
+            subjectId,
+            other,
+            userId });
           self.props.getChannel(self.props.channelId);
         });
       }

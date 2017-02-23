@@ -35,30 +35,7 @@ class CreateAdvertiserForm extends Component {
     const reportInterval = this.inputAdvertiserReportInterval.value;
     const description = this.inputAdvertiserDescription.value;
     const status = this.inputAdvertiserStatus.value;
-    if (!name) {
-      $('#inputAdvertiserName').parents('.form-group').addClass('has-error ');
-      $('#inputAdvertiserName').parents('.form-group').find('.col-sm-10').append('<span class="help-block">Please input name advertiser</span>');
-      setTimeout(() => {
-        $('#inputAdvertiserName').parents('.form-group').removeClass('has-error ');
-        $('#inputAdvertiserName').parents('.form-group').find('.col-sm-10 .help-block').remove();
-      }, 2000);
-    }
-    if (!contact) {
-      $('#inputAdvertiserContact').parents('.form-group').addClass('has-error ');
-      $('#inputAdvertiserContact').parents('.form-group').find('.col-sm-10').append('<span class="help-block">Please input contact</span>');
-      setTimeout(() => {
-        $('#inputAdvertiserContact').parents('.form-group').removeClass('has-error ');
-        $('#inputAdvertiserContact').parents('.form-group').find('.col-sm-10 .help-block').remove();
-      }, 2000);
-    }
-    if (!email) {
-      $('#inputAdvertiserEmail').parents('.form-group').addClass('has-error ');
-      $('#inputAdvertiserEmail').parents('.form-group').find('.col-sm-10').append('<span class="help-block">Please input email</span>');
-      setTimeout(() => {
-        $('#inputAdvertiserEmail').parents('.form-group').removeClass('has-error ');
-        $('#inputAdvertiserEmail').parents('.form-group').find('.col-sm-10 .help-block').remove();
-      }, 2000);
-    } else if (contact && name && email && description && reportInterval) {
+    if (contact && name && email && description && reportInterval) {
       this.props.createAdvertiser({
         email,
         name,

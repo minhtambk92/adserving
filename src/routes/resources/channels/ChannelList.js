@@ -10,7 +10,6 @@ class ChannelList extends Component {
     list: PropTypes.array,
     setPageChannelActiveTab: PropTypes.func,
     createChannel: PropTypes.func,
-    getOptionChannelByChannelId: PropTypes.func,
     optionChannels: PropTypes.object,
     createOptionChannel: PropTypes.func,
     channels: PropTypes.object,
