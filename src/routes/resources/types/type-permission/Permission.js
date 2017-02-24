@@ -22,6 +22,7 @@ import {
   setStatusCreatePermission,
   setStatusUpdatePermission,
 } from '../../../../actions/pages/resources';
+import { createActivity } from '../../../../actions/activities';
 import PermissionList from './PermissionList';
 import s from './Permission.css';
 
@@ -40,6 +41,8 @@ class Permission extends Component {
     createPermission: PropTypes.func,
     deletePermission: PropTypes.func,
     updatePermission: PropTypes.func,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   componentWillMount() {
@@ -63,6 +66,8 @@ class Permission extends Component {
             permissions={this.props.permissions}
             setStatusCreatePermission={this.props.setStatusCreatePermission}
             setStatusUpdatePermission={this.props.setStatusUpdatePermission}
+            user={this.props.user}
+            createActivity={this.props.createActivity}
           />
         </div>
       </Layout>
@@ -75,6 +80,7 @@ const mapState = state => ({
   resources: state.resources,
   permissions: state.permissions,
   page: state.page.resources,
+  user: state.user,
 });
 
 const mapDispatch = {
@@ -84,6 +90,7 @@ const mapDispatch = {
   createPermission,
   deletePermission,
   updatePermission,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Permission));

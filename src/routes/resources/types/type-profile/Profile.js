@@ -43,10 +43,9 @@ class Profile extends Component {
       >
         <div>
           <ProfileList
-            list={this.props.users.list}
+            list={this.props.users && this.props.users.list}
             page={this.props.page}
             getUsers={this.props.getUsers}
-            users={this.props.users}
             updateProfile={this.props.updateProfile}
             setStatusUpdateProfile={this.props.setStatusUpdateProfile}
             user={this.props.user}

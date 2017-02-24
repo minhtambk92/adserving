@@ -73,6 +73,9 @@ class Channel extends Component {
       arrCheckBox: [],
       arrOption: [],
       string: '',
+      createOptionSelect: false,
+      createVariable: false,
+      createLink: false,
     };
   }
 
@@ -117,11 +120,13 @@ class Channel extends Component {
           const subjectId = idOp;
           const action = 'deleted';
           const other = '';
-          self.props.createActivity({ action,
+          self.props.createActivity({
+            action,
             subject,
             subjectId,
             other,
-            userId });
+            userId,
+          });
           self.props.getChannel(self.props.channelId);
         });
       }
@@ -241,7 +246,6 @@ class Channel extends Component {
                 value = $(`.optionChannel-${i} .inputChannelOptionURL`).val();
               }
               if (comparison && value) {
-                $(`.optionChannel-${i}`).remove();
                 this.props.createOptionChannel({
                   name,
                   logical,
@@ -250,21 +254,26 @@ class Channel extends Component {
                   value,
                   channelId,
                 }).then(() => {
-                  this.props.getChannel(this.props.channelId);
-                  // const userId = this.props.user.id;
-                  // const subject = `Option Channel ${name}`;
-                  // const subjectId = this.props.channels.editing.options[0].id;
-                  // const action = 'created';
-                  // const other = '';
-                  // this.props.createActivity({
-                  //   action,
-                  //   subject,
-                  //   subjectId,
-                  //   other,
-                  //   userId,
-                  // }).then(() => {
-                  //   this.props.getChannel(this.props.channelId);
-                  // });
+                  this.props.getChannel(this.props.channelId).then(() => {
+                    const userId = this.props.user.id;
+                    const subject = `Option Channel ${name}`;
+                    const subjectId = this.props.channels.editing.options[0].id;
+                    const action = 'created';
+                    const other = '';
+                    this.props.createActivity({
+                      action,
+                      subject,
+                      subjectId,
+                      other,
+                      userId,
+                    });
+                    this.setState({ createLink: false });
+                    this.setState({ createOptionSelect: false });
+                    this.setState({ createVariable: false });
+                    this.setState({ newFilterSite: [] });
+                    this.setState({ arrVariable: [] });
+                    this.setState({ arrCheckBox: [] });
+                  });
                 });
               }
             }
@@ -284,13 +293,16 @@ class Channel extends Component {
         const arrOptionChannelValue = item[0].optionChannelValues;
         if (item[0].isInputLink === true) {
           const count = this.state.countOptionChannel + 1;
+          this.setState({ createLink: true });
           this.setState({ countOptionChannel: count });
           this.addNewFilterSite(item[0], html);
         } else if (item[0].isSelectOption === true) {
+          this.setState({ createOptionSelect: true });
           const count = this.state.countOptionChannel + 1;
           this.setState({ countOptionChannel: count });
           this.addCheckBoxSite(item[0], arrOptionChannelValue, html);
         } else if (item[0].isVariable === true) {
+          this.setState({ createVariable: true });
           this.addVariable(item[0], html);
         }
       }
@@ -464,7 +476,7 @@ class Channel extends Component {
                         }
                         return false;
                       })}
-                      {this.state.newFilterSite
+                      { this.state.createLink === true && this.state.newFilterSite
                       && this.state.newFilterSite.map(ob => (
                         <FilterSiteChannel
                           key={ob.count}
@@ -474,7 +486,8 @@ class Channel extends Component {
                           type={ob.type}
                         />
                       ))}
-                      {this.state.arrVariable && this.state.arrVariable.map(ob => (
+                      {this.state.createVariable === true &&
+                      this.state.arrVariable && this.state.arrVariable.map(ob => (
                         <FilterSiteChannel
                           key={ob.count}
                           index={ob.count}
@@ -482,7 +495,8 @@ class Channel extends Component {
                           type={ob.type}
                         />
                       ))}
-                      {this.state.arrCheckBox && this.state.arrCheckBox.map(ob => (
+                      {this.state.createOptionSelect === true &&
+                      this.state.arrCheckBox && this.state.arrCheckBox.map(ob => (
                         <OptionSelectChannel
                           key={ob.count}
                           index={ob.count}

@@ -134,7 +134,7 @@ class Campaigns extends Component {
                   setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
                   createCampaign={this.props.createCampaign}
                   createActivity={this.props.createActivity}
-                  users={this.props.user}
+                  user={this.props.user}
                 />
               </div>
               {/* /.box-body */}

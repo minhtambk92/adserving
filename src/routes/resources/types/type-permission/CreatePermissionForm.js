@@ -12,6 +12,8 @@ class CreatePermissionForm extends Component {
     getPermissions: PropTypes.func,
     page: PropTypes.object,
     createPermission: PropTypes.func,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   clearInput() {
@@ -24,6 +26,20 @@ class CreatePermissionForm extends Component {
     this.props.createPermission({
       name,
       status,
+    }).then(() => {
+      if (this.props.permissions && this.props.permissions.list.length > 0) {
+        /* eslint-disable no-shadow */
+        const userId = this.props.user.id;
+        const subject = `Permission ${name}`;
+        const subjectId = this.props.permissions.list[0].id;
+        const action = 'created';
+        const other = '';
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId });
+      }
     });
     this.clearInput();
     this.props.setStatusCreatePermission(false);

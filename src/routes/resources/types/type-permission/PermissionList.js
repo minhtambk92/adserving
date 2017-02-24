@@ -17,6 +17,8 @@ class PermissionList extends Component {
     setStatusCreatePermission: PropTypes.func,
     setStatusUpdatePermission: PropTypes.func,
     permissions: PropTypes.object,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -85,7 +87,18 @@ class PermissionList extends Component {
 
   deletePermission(data) {
     this.props.deletePermission(data.id).then(() => {
-      this.props.getPermissions();
+      const userId = this.props.user.id;
+      const subject = `Permission ${data.name}`;
+      const subjectId = data.id;
+      const action = 'deleted';
+      const other = '';
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getPermissions();
+        });
     });
   }
 
@@ -168,6 +181,8 @@ class PermissionList extends Component {
                   setStatusUpdatePermission={this.props.setStatusUpdatePermission}
                   getPermissions={this.props.getPermissions}
                   page={this.props.page}
+                  user={this.props.user}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>
@@ -184,6 +199,8 @@ class PermissionList extends Component {
                   setStatusCreatePermission={this.props.setStatusCreatePermission}
                   page={this.props.page}
                   permissions={this.props.permissions}
+                  user={this.props.user}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>

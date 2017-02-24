@@ -12,6 +12,8 @@ class EditPermissionForm extends Component {
     getPermissions: PropTypes.func,
     page: PropTypes.object,
     updatePermission: PropTypes.func,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -29,13 +31,25 @@ class EditPermissionForm extends Component {
     const name = this.inputPermissionName.value;
     const status = this.inputPermissionStatus.value;
 
+    const permissionObject = this.props.permission;
     const permission = { id: this.props.id };
 
     permission.name = name;
     permission.status = status;
 
     this.props.updatePermission(permission).then(() => {
-      this.props.getPermissions();
+      const userId = this.props.user.id;
+      const subject = `Permission ${name}`;
+      const subjectId = this.props.permission.id;
+      const action = 'updated';
+      const other = JSON.stringify(permissionObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getPermissions();
+        });
     });
 
     this.clearInput();

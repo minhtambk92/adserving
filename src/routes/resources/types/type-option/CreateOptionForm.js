@@ -13,6 +13,8 @@ class CreateOptionForm extends Component {
     getOptions: PropTypes.func,
     page: PropTypes.object,
     createOption: PropTypes.func,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   clearInput() {
@@ -31,6 +33,20 @@ class CreateOptionForm extends Component {
       value,
       autoLoad,
       status,
+    }).then(() => {
+      if (this.props.options && this.props.options.list.length > 0) {
+        /* eslint-disable no-shadow */
+        const userId = this.props.user.id;
+        const subject = `Options ${name}`;
+        const subjectId = this.props.options.list[0].id;
+        const action = 'created';
+        const other = '';
+        this.props.createActivity({ action,
+          subject,
+          subjectId,
+          other,
+          userId });
+      }
     });
     this.clearInput();
     this.props.setStatusCreateOption(false);

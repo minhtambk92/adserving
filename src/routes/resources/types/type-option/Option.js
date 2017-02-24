@@ -22,6 +22,7 @@ import {
   setStatusCreateOption,
   setStatusUpdateOption,
 } from '../../../../actions/pages/resources';
+import { createActivity } from '../../../../actions/activities';
 import OptionList from './OptionList';
 import s from './Option.css';
 
@@ -40,6 +41,8 @@ class Option extends Component {
     createOption: PropTypes.func,
     deleteOption: PropTypes.func,
     updateOption: PropTypes.func,
+    createActivity: PropTypes.func,
+    user: PropTypes.object,
   };
 
   componentWillMount() {
@@ -63,6 +66,8 @@ class Option extends Component {
             options={this.props.options}
             setStatusCreateOption={this.props.setStatusCreateOption}
             setStatusUpdateOption={this.props.setStatusUpdateOption}
+            user={this.props.user}
+            createActivity={this.props.createActivity}
           />
         </div>
       </Layout>
@@ -75,6 +80,7 @@ const mapState = state => ({
   resources: state.resources,
   options: state.options,
   page: state.page.resources,
+  user: state.user,
 });
 
 const mapDispatch = {
@@ -84,6 +90,7 @@ const mapDispatch = {
   createOption,
   deleteOption,
   updateOption,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Option));

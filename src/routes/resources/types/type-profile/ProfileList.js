@@ -10,7 +10,6 @@ class ProfileList extends Component {
     list: PropTypes.array.isRequired,
     getUsers: PropTypes.func,
     page: PropTypes.object,
-    users: PropTypes.object,
     updateProfile: PropTypes.func,
     setStatusUpdateProfile: PropTypes.func,
     user: PropTypes.object,

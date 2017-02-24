@@ -82,7 +82,7 @@ class UpdateUserForm extends Component {
     this.props.updateUser(user).then(() => {
       const userId = this.props.user.id;
       const subject = `User ${userEditing.profile.displayName}`;
-      const subjectId = this.props.userEditing.id;
+      const subjectId = userEditing.id;
       const action = 'updated';
       const data = userEditing;
       delete data.activities;

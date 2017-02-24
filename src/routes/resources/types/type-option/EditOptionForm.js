@@ -13,6 +13,8 @@ class EditOptionForm extends Component {
     getOptions: PropTypes.func,
     page: PropTypes.object,
     updateOption: PropTypes.func,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -54,13 +56,25 @@ class EditOptionForm extends Component {
     const autoLoad = document.getElementById('inputOptionAutoLoad').value;
     const status = this.inputOptionStatus.value;
 
+    const optionObject = this.props.option;
     const option = { id: this.props.id };
     option.name = name;
     option.value = value;
     option.autoLoad = autoLoad;
     option.status = status;
     this.props.updateOption(option).then(() => {
-      this.props.getOptions();
+      const userId = this.props.user.id;
+      const subject = `Option ${name}`;
+      const subjectId = this.props.option.id;
+      const action = 'updated';
+      const other = JSON.stringify(optionObject);
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getOptions();
+        });
     });
 
     this.clearInput();

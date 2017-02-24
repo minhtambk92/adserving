@@ -17,6 +17,8 @@ class OptionList extends Component {
     setStatusCreateOption: PropTypes.func,
     setStatusUpdateOption: PropTypes.func,
     options: PropTypes.object,
+    user: PropTypes.object,
+    createActivity: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -90,7 +92,18 @@ class OptionList extends Component {
 
   deleteOption(data) {
     this.props.deleteOption(data.id).then(() => {
-      this.props.getOptions();
+      const userId = this.props.user.id;
+      const subject = `Option ${data.name}`;
+      const subjectId = data.id;
+      const action = 'deleted';
+      const other = '';
+      this.props.createActivity({ action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getOptions();
+        });
     });
   }
 
@@ -177,6 +190,8 @@ class OptionList extends Component {
                   setStatusUpdateOption={this.props.setStatusUpdateOption}
                   getOptions={this.props.getOptions}
                   page={this.props.page}
+                  user={this.props.user}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>
@@ -193,6 +208,8 @@ class OptionList extends Component {
                   setStatusCreateOption={this.props.setStatusCreateOption}
                   page={this.props.page}
                   options={this.props.options}
+                  user={this.props.user}
+                  createActivity={this.props.createActivity}
                 />
               </div>
             </div>
