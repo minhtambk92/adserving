@@ -27,15 +27,12 @@ const Advertiser = Model.define('Advertiser', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   contact: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   description: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   isEmailReport: {
     type: DataType.BOOLEAN,

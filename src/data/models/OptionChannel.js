@@ -19,7 +19,6 @@ const OptionChannel = Model.define('OptionChannel', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   logical: {
     type: DataType.STRING,
@@ -37,7 +36,6 @@ const OptionChannel = Model.define('OptionChannel', {
   },
   value: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
 }, {
 

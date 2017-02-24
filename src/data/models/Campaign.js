@@ -23,7 +23,6 @@ const Campaign = Model.define('Campaign', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   startTime: {
     type: DataType.DATE,
@@ -51,7 +50,6 @@ const Campaign = Model.define('Campaign', {
   },
   description: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   revenueType: {
     type: DataType.STRING,

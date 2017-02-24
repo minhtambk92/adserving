@@ -19,11 +19,9 @@ const Activity = Model.define('Activity', {
   },
   action: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   subject: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   subjectId: {
     type: DataType.UUID,
@@ -31,7 +29,6 @@ const Activity = Model.define('Activity', {
   },
   other: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
 
 }, {
