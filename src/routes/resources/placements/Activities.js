@@ -1,3 +1,7 @@
+/**
+ * Created by quynd on 2/15/17.
+ */
+
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';

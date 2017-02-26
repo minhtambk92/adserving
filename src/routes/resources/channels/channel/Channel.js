@@ -401,15 +401,19 @@ class Channel extends Component {
                               this.inputChannelOptions = c;
                             }}
                           >
-                            {this.props.optionChannelTypes &&
+                            {
+                              this.props.optionChannelTypes &&
                               this.props.optionChannelTypes.list.map(option =>
-                              <option
-                                key={option.id}
-                                value={option.id}
-                              >
-                                {option.name}
-                              </option>,
-                            )}
+                                (
+                                  <option
+                                    key={option.id}
+                                    value={option.id}
+                                  >
+                                    {option.name}
+                                  </option>
+                                ),
+                              )
+                            }
                           </select>
                         </div>
                         <div className="col-sm-2">

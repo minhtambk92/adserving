@@ -23,6 +23,7 @@
     "graphiql": "latest",
     "graphql-relay": "latest",
     "graphql-sequelize": "latest",
+    "ionicons": "^2.0.1",
     "js-beautify": "latest",
     "less": "latest",
     "lodash": "latest",

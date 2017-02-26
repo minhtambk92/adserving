@@ -1,3 +1,7 @@
+/**
+ * Created by quynd on 2/15/17.
+ */
+
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
@@ -42,59 +46,44 @@ class Activities extends Component {
       <div className="activities">
         {this.props.activities &&
         this.props.activities.map(activity => (
-          <div className="post" key={activity.id}>
-            <div className="user-block">
-              <img
-                className="img-circle img-bordered-sm"
-                src={(activity.user &&
-                activity.user.profile && activity.user.profile.picture ?
-                  activity.user.profile.picture : '/default_avatar.png')}
-                alt="avatar"
-              />
-              <span className="username">
-                <Link to="#">{activity.user && activity.user.profile &&
-                activity.user.profile.displayName && activity.user.profile.displayName}</Link>
-                {
-                  (activity.action === 'updated' || activity.action === 'revert') ? (
-                    <Link
-                      to="#"
-                      className="pull-right btn-box-tool"
-                      onClick={() => this.revertEventUpdated(activity)}
-                    >
-                      <i className="fa fa-mail-forward" />
-                    </Link>
-                    ) : ('')
-                }
-              </span>
-              <span
-                className="description"
-              >
-                { moment(new Date(activity.createdAt)).format('lll')}
-              </span>
-                alt="avatar"
-              />
-              <span className="username">
-                <Link to="#">{activity.user && activity.user.profile &&
-                activity.user.profile.displayName && activity.user.profile.displayName}</Link>
-                {
-                  (activity.action === 'updated' || activity.action === 'revert') ? (
-                    <Link
-                      to="#"
-                      className="pull-right btn-box-tool"
-                      onClick={() => this.revertEventUpdated(activity)}
-                    >
-                      <i className="fa fa-mail-forward" />
-                    </Link>
-                    ) : ('')
-                }
-              </span>
-              <span
-                className="description"
-              >
-                { moment(new Date(activity.createdAt)).format('lll')}
-              </span>
+          (activity.user) ? (
+            <div className="post" key={activity.id}>
+              <div className="user-block">
+                <img
+                  className="img-circle img-bordered-sm"
+                  src={(activity.user &&
+                    activity.user.profile && activity.user.profile.picture ?
+                      activity.user.profile.picture : '/default_avatar.png')}
+                  alt="avatar"
+                />
+                <span className="username">
+                  <Link to="#">{activity.user && activity.user.profile &&
+                    activity.user.profile.displayName && activity.user.profile.displayName}</Link>
+                  {
+                      (activity.action === 'updated' || activity.action === 'revert') ? (
+                        <Link
+                          to="#"
+                          className="pull-right btn-box-tool"
+                          onClick={() => this.revertEventUpdated(activity)}
+                        >
+                          <i className="fa fa-mail-forward" />
+                        </Link>
+                        ) : ('')
+                    }
+                </span>
+                <span
+                  className="description"
+                >
+                  { moment(new Date(activity.createdAt)).format('lll')}
+                </span>
+              </div>
+              {/* /.user-block */}
+              <p>
+                {activity.user && activity.user.profile && activity.user.profile.displayName
+                  && activity.user.profile.displayName} { activity.action } { activity.subject }
+              </p>
             </div>
-          ) : ('')
+            ) : ('')
         ))}
       </div>
     );
