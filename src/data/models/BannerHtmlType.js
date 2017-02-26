@@ -23,11 +23,9 @@ const BannerHtmlType = Model.define('BannerHtmlType', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   value: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   weight: {
     type: DataType.INTEGER,

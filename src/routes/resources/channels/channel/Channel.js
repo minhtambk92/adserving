@@ -402,19 +402,13 @@ class Channel extends Component {
                             }}
                           >
                             {this.props.optionChannelTypes &&
-                            /* eslint-disable no-confusing-arrow */
-                            this.props.optionChannelTypes.list.map(option =>
-                              ((option.optionChannelValues &&
-                              option.isSelectOption === true && option.optionChannelValues.length)
-                              || (option.isSelectOption === false)) > 0 ?
-                                (
-                                  <option
-                                    key={option.id}
-                                    value={option.id}
-                                  >
-                                    {option.name}
-                                  </option>
-                                ) : '',
+                              this.props.optionChannelTypes.list.map(option =>
+                              <option
+                                key={option.id}
+                                value={option.id}
+                              >
+                                {option.name}
+                              </option>,
                             )}
                           </select>
                         </div>
@@ -476,7 +470,7 @@ class Channel extends Component {
                         }
                         return false;
                       })}
-                      { this.state.createLink === true && this.state.newFilterSite
+                      {this.state.newFilterSite
                       && this.state.newFilterSite.map(ob => (
                         <FilterSiteChannel
                           key={ob.count}
@@ -486,8 +480,7 @@ class Channel extends Component {
                           type={ob.type}
                         />
                       ))}
-                      {this.state.createVariable === true &&
-                      this.state.arrVariable && this.state.arrVariable.map(ob => (
+                      {this.state.arrVariable && this.state.arrVariable.map(ob => (
                         <FilterSiteChannel
                           key={ob.count}
                           index={ob.count}
@@ -495,8 +488,7 @@ class Channel extends Component {
                           type={ob.type}
                         />
                       ))}
-                      {this.state.createOptionSelect === true &&
-                      this.state.arrCheckBox && this.state.arrCheckBox.map(ob => (
+                      {this.state.arrCheckBox && this.state.arrCheckBox.map(ob => (
                         <OptionSelectChannel
                           key={ob.count}
                           index={ob.count}

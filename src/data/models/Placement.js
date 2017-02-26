@@ -27,7 +27,6 @@ const Placement = Model.define('Placement', {
   },
   description: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   width: {
     type: DataType.INTEGER,

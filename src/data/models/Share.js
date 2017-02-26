@@ -20,19 +20,15 @@ const Share = Model.define('Share', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   html: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   css: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   outputCss: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   width: {
     type: DataType.INTEGER,
@@ -46,7 +42,6 @@ const Share = Model.define('Share', {
   },
   classes: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   weight: {
     type: DataType.INTEGER,
@@ -62,7 +57,6 @@ const Share = Model.define('Share', {
   },
   description: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
 
 }, {

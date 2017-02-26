@@ -18,7 +18,6 @@ const OptionChannelType = Model.define('OptionChannelType', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   isInputLink: {
     type: DataType.BOOLEAN,

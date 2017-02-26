@@ -23,7 +23,6 @@ const ZoneSizeType = Model.define('ZoneSizeType', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   width: {
     type: DataType.INTEGER,

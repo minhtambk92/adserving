@@ -38,7 +38,6 @@ const Site = Model.define('Site', {
   },
   description: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   status: {
     type: DataType.STRING,

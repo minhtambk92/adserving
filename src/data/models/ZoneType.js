@@ -23,11 +23,9 @@ const ZoneType = Model.define('ZoneType', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   value: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   isSize: {
     type: DataType.BOOLEAN,

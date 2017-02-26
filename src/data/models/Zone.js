@@ -23,19 +23,15 @@ const Zone = Model.define('Zone', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   description: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   html: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   css: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   slot: {
     type: DataType.INTEGER,
@@ -61,7 +57,6 @@ const Zone = Model.define('Zone', {
   },
   source: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   isShowCampaignAgain: {
     type: DataType.BOOLEAN,

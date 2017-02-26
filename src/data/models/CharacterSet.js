@@ -23,11 +23,9 @@ const CharacterSet = Model.define('CharacterSet', {
   },
   name: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   value: {
     type: DataType.STRING,
-    defaultValue: '',
   },
   userId: {
     type: DataType.UUID,

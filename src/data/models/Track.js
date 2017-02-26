@@ -19,11 +19,9 @@ const Track = Model.define('Track', {
   },
   clickUrl: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
   impressionUrl: {
     type: DataType.TEXT,
-    defaultValue: '',
   },
 
 }, {
