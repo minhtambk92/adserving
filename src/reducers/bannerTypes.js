@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import {
   GET_BANNER_TYPES,
-  GET_BANNER_TYPE,
   CREATE_BANNER_TYPE,
   UPDATE_BANNER_TYPE,
   DELETE_BANNER_TYPE,
@@ -23,9 +22,6 @@ function list(state = [], action) {
 
 function editing(state = {}, action) {
   switch (action.type) {
-    case GET_BANNER_TYPE: {
-      return action.payload.bannerType;
-    }
     case UPDATE_BANNER_TYPE: {
       return action.payload.bannerType;
     }

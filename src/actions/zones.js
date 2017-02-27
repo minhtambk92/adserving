@@ -106,7 +106,7 @@ export function getZone(id) {
     dispatch({
       type: GET_ZONE,
       payload: {
-        zone: data.zones.shift(),
+        zone: data.zones[0],
       },
     });
   };

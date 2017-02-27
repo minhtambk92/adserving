@@ -48,7 +48,7 @@ export function getAdvertiser(id) {
     dispatch({
       type: GET_ADVERTISER,
       payload: {
-        advertiser: data.advertisers.shift(),
+        advertiser: data.advertisers[0],
       },
     });
   };

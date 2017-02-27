@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import {
   GET_ADS_SERVERS,
-  GET_ADS_SERVER,
   CREATE_ADS_SERVER,
   UPDATE_ADS_SERVER,
   DELETE_ADS_SERVER,
@@ -23,9 +22,6 @@ function list(state = [], action) {
 
 function editing(state = {}, action) {
   switch (action.type) {
-    case GET_ADS_SERVER: {
-      return action.payload.adsServer;
-    }
     case UPDATE_ADS_SERVER: {
       return action.payload.adsServer;
     }

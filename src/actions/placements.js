@@ -90,7 +90,7 @@ export function getPlacement(id) {
     dispatch({
       type: GET_PLACEMENT,
       payload: {
-        placement: data.placements.shift(),
+        placement: data.placements[0],
       },
     });
   };

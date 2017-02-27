@@ -53,7 +53,7 @@ export function getResource(id) {
     dispatch({
       type: GET_RESOURCE,
       payload: {
-        resource: data.resources.shift(),
+        resource: data.resources[0],
       },
     });
   };

@@ -69,7 +69,7 @@ export function getChannel(id) {
     dispatch({
       type: GET_CHANNEL,
       payload: {
-        channel: data.channels.shift(),
+        channel: data.channels[0],
       },
     });
   };

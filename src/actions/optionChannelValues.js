@@ -2,7 +2,6 @@
 
 import {
   GET_OPTION_CHANNEL_VALUES,
-  GET_OPTION_CHANNEL_VALUE,
   CREATE_OPTION_CHANNEL_VALUE,
   UPDATE_OPTION_CHANNEL_VALUE,
   DELETE_OPTION_CHANNEL_VALUE,
@@ -24,33 +23,6 @@ export function getOptionChannelValueFilters() {
     dispatch({
       type: GET_OPTION_CHANNEL_VALUE_FILTER,
       payload: {},
-    });
-  };
-}
-
-export function getOptionChannelValue(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const query = `
-      query {
-        optionChannelValues(where: {id: "${id}"}, limit: 1) {
-          id
-          name
-          value
-          status
-          optionChannelTypeId
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(query);
-
-    dispatch({
-      type: GET_OPTION_CHANNEL_VALUE,
-      payload: {
-        optionChannelValue: data.optionChannelValues.shift(),
-      },
     });
   };
 }

@@ -1,77 +1,8 @@
 import {
-  GET_TRACKS,
   CREATE_TRACK,
-  GET_TRACK_BY_BANNER_ID,
   UPDATE_TRACK,
   DELETE_TRACK,
 } from '../constants/';
-
-
-export function getTrackByBannerId(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const query = `
-      query {
-        tracks(where: {bannerId: "${id}"}) {
-         id
-         clickUrl
-         impressionUrl
-         bannerId
-         createdAt
-         updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(query);
-
-    dispatch({
-      type: GET_TRACK_BY_BANNER_ID,
-      payload: {
-        tracks: data.tracks,
-      },
-    });
-  };
-}
-
-export function getTracks(args = {
-  where: {},
-  limit: 0,
-  order: '',
-}, options = {
-  globalFilters: false,
-}) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const query = `
-      query {
-        tracks{
-         id
-         clickUrl
-         impressionUrl
-         bannerId
-         createdAt
-         updatedAt
-          }
-      }`;
-    const variables = Object.assign({}, args);
-    const filters = await getState().tracks.filters;
-
-    if (
-      options.globalFilters &&
-      variables.where === {} &&
-      Object.keys(filters).length > 0 &&
-      filters.constructor === Object
-    ) {
-      variables.where = Object.assign({}, filters);
-    }
-    const { data } = await graphqlRequest(query, variables);
-
-    dispatch({
-      type: GET_TRACKS,
-      payload: {
-        tracks: data.tracks,
-      },
-    });
-  };
-}
 
 export function createTrack({
   clickUrl,

@@ -2,37 +2,10 @@
 
 import {
   GET_ADS_SERVERS,
-  GET_ADS_SERVER,
   CREATE_ADS_SERVER,
   UPDATE_ADS_SERVER,
   DELETE_ADS_SERVER,
 } from '../constants';
-
-export function getAdsServer(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const query = `
-      query {
-        adsServers(where: {id: "${id}"}, limit: 1) {
-          id
-          name
-          value
-          status
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(query);
-
-    dispatch({
-      type: GET_ADS_SERVER,
-      payload: {
-        adsServer: data.adsServers.shift(),
-      },
-    });
-  };
-}
 
 export function getAdsServers(args = {
   where: {},

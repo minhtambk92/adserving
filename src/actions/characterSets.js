@@ -4,38 +4,11 @@
 /* eslint-disable import/prefer-default-export */
 
 import {
-  GET_CHARACTER_SET,
   GET_CHARACTER_SETS,
   CREATE_CHARACTER_SET,
   UPDATE_CHARACTER_SET,
   DELETE_CHARACTER_SET,
 } from '../constants';
-
-export function getCharacterSet(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const query = `
-      query {
-        characterSets(where: {id: "${id}"}, limit: 1) {
-          id
-          name
-          value
-          status
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(query);
-
-    dispatch({
-      type: GET_CHARACTER_SET,
-      payload: {
-        characterSet: data.characterSets.shift(),
-      },
-    });
-  };
-}
 
 export function getCharacterSets(args = {
   where: {},
