@@ -30,10 +30,6 @@ class OptionSelectChannel extends Component {
       const value = nextProps.value;
       const arr = value.split(',');
       if (nextProps.data.length > 0) {
-        // for (let i = 0; i < nextProps.data.length; i += 1) {
-        //   const id = `${nextProps.id}${nextProps.data[i].value}${nextProps.index}`;
-        //   $(`#${id}`).iCheck('uncheck');
-        // }
         for (let i = 0; i < arr.length; i += 1) {
           const id = `${nextProps.id}${arr[i]}${nextProps.index}`;
           $(`#${id}`).iCheck('check');
@@ -129,7 +125,7 @@ class OptionSelectChannel extends Component {
                             >
                               <ICheck
                                 type="checkbox"
-                                id={this.props.name + data.value + this.props.index}
+                                id={this.props.id + data.value + this.props.index}
                                 className="inputOption"
                                 value={data.value}
                               />
