@@ -21,7 +21,6 @@ import advertisers from './advertiser/advertisers';
 import sites from './site/sites';
 import zones from './zone/zones';
 import channels from './channel/channels';
-import filters from './filters';
 import optionChannels from './optionChannel/optionChannels';
 import tracks from './track/tracks';
 import shares from './share/shares';
@@ -56,7 +55,6 @@ const queries = new ObjectType({
     sites,
     zones,
     channels,
-    filters,
     optionChannels,
     tracks,
     shares,
