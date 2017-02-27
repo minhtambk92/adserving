@@ -5,7 +5,6 @@
 /* global io */
 
 import React, { Component } from 'react';
-import { host } from '../../../config';
 import fetch from '../../../core/fetch';
 
 class BulkActions extends Component {
@@ -21,7 +20,7 @@ class BulkActions extends Component {
   }
 
   componentDidMount() {
-    const socket = io(`//${host}`);
+    const socket = io(`//${window.location.host}`);
 
     socket.on('start-bulk-export-zone-data', (data) => {
       this.setState({ isNowExporting: true });

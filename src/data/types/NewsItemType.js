@@ -14,7 +14,7 @@ import {
 } from 'graphql';
 
 const NewsItemType = new ObjectType({
-  name: 'NewsItemType',
+  name: 'NewsItem',
   fields: {
     title: { type: new NonNull(StringType) },
     link: { type: new NonNull(StringType) },
