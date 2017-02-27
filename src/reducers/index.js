@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import resources from './resources';
-import menus from './menus';
 import user from './user';
-import me from './me';
 import runtime from './runtime';
 import intl from './intl';
+import resources from './resources';
+import menus from './menus';
+import me from './me';
 import advertisers from './advertisers';
 import campaigns from './campaigns';
 import placements from './placements';
@@ -31,35 +31,38 @@ import activities from './activities';
 
 import page from './pages';
 
-export default combineReducers({
-  resources,
-  menus,
-  user,
-  me,
-  runtime,
-  intl,
-  advertisers,
-  placements,
-  campaigns,
-  banners,
-  sites,
-  roles,
-  users,
-  zones,
-  channels,
-  optionChannels,
-  tracks,
-  shares,
-  page,
-  options,
-  permissions,
-  bannerHtmlTypes,
-  bannerTypes,
-  adsServers,
-  zoneTypes,
-  zoneSizeTypes,
-  characterSets,
-  optionChannelTypes,
-  optionChannelValues,
-  activities,
-});
+export default function createRootReducer({ apolloClient }) {
+  return combineReducers({
+    apollo: apolloClient.reducer(),
+    user,
+    runtime,
+    intl,
+    resources,
+    menus,
+    me,
+    advertisers,
+    placements,
+    campaigns,
+    banners,
+    sites,
+    roles,
+    users,
+    zones,
+    channels,
+    optionChannels,
+    tracks,
+    shares,
+    page,
+    options,
+    permissions,
+    bannerHtmlTypes,
+    bannerTypes,
+    adsServers,
+    zoneTypes,
+    zoneSizeTypes,
+    characterSets,
+    optionChannelTypes,
+    optionChannelValues,
+    activities,
+  });
+}

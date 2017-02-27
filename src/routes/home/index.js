@@ -8,8 +8,8 @@
  */
 
 import React from 'react';
-import Layout from '../../components/Layout';
 import Home from './Home';
+import Layout from '../../components/Layout';
 
 const title = 'Home';
 
@@ -17,7 +17,7 @@ export default {
 
   path: '/',
 
-  action() {
+  async action() {
     return {
       title,
       component: <Layout pageTitle={title} pageSubTitle="Control panel"><Home /></Layout>,

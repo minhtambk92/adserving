@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/async@^2.0.31":
+  version "2.0.38"
+  resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.38.tgz#5c369dcb14788da0621daafa8594a053b0edcb21"
+
 "@types/express-serve-static-core@*":
   version "4.0.40"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.0.40.tgz#168e82978bffc81ee7737bc60728d64733a4f37b"
@@ -14,6 +18,14 @@
   dependencies:
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
+
+"@types/graphql@^0.8.0":
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.8.6.tgz#b34fb880493ba835b0c067024ee70130d6f9bb68"
+
+"@types/isomorphic-fetch@0.0.30":
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/@types/isomorphic-fetch/-/isomorphic-fetch-0.0.30.tgz#a21717624cde9a48c2db53a4e500fc5c32a99bbc"
 
 "@types/mime@*":
   version "0.0.29"
@@ -153,6 +165,20 @@ anymatch@^1.3.0:
   dependencies:
     arrify "^1.0.0"
     micromatch "^2.1.5"
+
+apollo-client@^0.8.7:
+  version "0.8.7"
+  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-0.8.7.tgz#73f52d1dd6dfe0f07e8bfe05a8e47c4bcd3bf7a3"
+  dependencies:
+    graphql-anywhere "^2.1.0"
+    graphql-tag "^1.1.1"
+    redux "^3.4.0"
+    symbol-observable "^1.0.2"
+    whatwg-fetch "^2.0.0"
+  optionalDependencies:
+    "@types/async" "^2.0.31"
+    "@types/graphql" "^0.8.0"
+    "@types/isomorphic-fetch" "0.0.30"
 
 app-root-path@^2.0.0:
   version "2.0.1"
@@ -2010,9 +2036,9 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-dataloader-sequelize@^1.4.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/dataloader-sequelize/-/dataloader-sequelize-1.4.3.tgz#955bf2bad9b5571a21c3e5461c985fac60c145f5"
+dataloader-sequelize@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/dataloader-sequelize/-/dataloader-sequelize-1.4.4.tgz#5fcdd444b897fc93275a21b3a6c67a9cd342340e"
   dependencies:
     dataloader "^1.2.0"
     lodash "^4.15.0"
@@ -3251,16 +3277,24 @@ graphiql@latest:
     codemirror-graphql "^0.6.3"
     marked "0.3.6"
 
+graphql-anywhere@^2.0.0, graphql-anywhere@^2.1.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/graphql-anywhere/-/graphql-anywhere-2.2.0.tgz#652c3fa23a4a6cfeb98817512fb48100b97f3d5c"
+
 graphql-relay@latest:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/graphql-relay/-/graphql-relay-0.5.1.tgz#3b3e44430a24c0f636e713f43f65bd542fe02ac9"
 
 graphql-sequelize@latest:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/graphql-sequelize/-/graphql-sequelize-5.2.0.tgz#086d297c38b2616713f4bab1b09f450a2520327a"
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/graphql-sequelize/-/graphql-sequelize-5.2.1.tgz#31b55e655f884300451faa39d8c4302a5082af4e"
   dependencies:
-    dataloader-sequelize "^1.4.3"
+    dataloader-sequelize "^1.4.4"
     lodash "^4.0.0"
+
+graphql-tag@^1.1.1, graphql-tag@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-1.2.4.tgz#90c59bea41378513fd7213dc92537fcd20e4570f"
 
 graphql@^0.9.1:
   version "0.9.1"
@@ -3820,8 +3854,8 @@ js-base64@^2.1.5, js-base64@^2.1.9:
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
 
 js-beautify@latest:
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/js-beautify/-/js-beautify-1.6.9.tgz#2df88c7c8d5bba9e7ff019d7a3e7b20b83cd576a"
+  version "1.6.11"
+  resolved "https://registry.yarnpkg.com/js-beautify/-/js-beautify-1.6.11.tgz#538a22867e669250935bcdc7b90a8cd6386ddab6"
   dependencies:
     config-chain "~1.1.5"
     editorconfig "^0.13.2"
@@ -4225,9 +4259,17 @@ lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
 
+lodash.isequal@^4.1.1:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+
 lodash.isfinite@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/lodash.isfinite/-/lodash.isfinite-3.3.2.tgz#fb89b65a9a80281833f0b7478b3a5104f898ebb3"
+
+lodash.isobject@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
 
 lodash.isplainobject@^3.0.0:
   version "3.2.0"
@@ -4288,7 +4330,7 @@ lodash.once@^4.0.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
 
-lodash.pick@^4.2.1:
+lodash.pick@^4.2.1, lodash.pick@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
 
@@ -4327,7 +4369,7 @@ lodash.uniq@^4.3.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@4.12.0:
+lodash@4.12.0, lodash@^4.2.0, lodash@^4.2.1:
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.12.0.tgz#2bd6dc46a040f59e686c972ed21d93dc59053258"
 
@@ -4339,7 +4381,7 @@ lodash@^3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.1.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.6.1, lodash@latest:
+lodash@^4.0.0, lodash@^4.1.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.6.1, lodash@latest:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -4617,11 +4659,11 @@ mysql@latest:
     readable-stream "1.1.14"
     sqlstring "2.2.0"
 
-nan@2.5.0, nan@^2.3.0:
+nan@2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.5.0.tgz#aa8f1e34531d807e9e27755b234b4a6ec0c152a8"
 
-nan@~2.4.0:
+nan@^2.3.0, nan@~2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.4.0.tgz#fb3c59d45fe4effe215f0b890f8adf6eb32d2232"
 
@@ -4680,9 +4722,23 @@ node-libs-browser@^2.0.0:
     util "^0.10.3"
     vm-browserify "0.0.4"
 
-node-pre-gyp@0.6.32, node-pre-gyp@^0.6.29, node-pre-gyp@~0.6.31:
+node-pre-gyp@0.6.32:
   version "0.6.32"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.6.32.tgz#fc452b376e7319b3d255f5f34853ef6fd8fe1fd5"
+  dependencies:
+    mkdirp "~0.5.1"
+    nopt "~3.0.6"
+    npmlog "^4.0.1"
+    rc "~1.1.6"
+    request "^2.79.0"
+    rimraf "~2.5.4"
+    semver "~5.3.0"
+    tar "~2.2.1"
+    tar-pack "~3.3.0"
+
+node-pre-gyp@^0.6.29, node-pre-gyp@~0.6.31:
+  version "0.6.33"
+  resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.6.33.tgz#640ac55198f6a925972e0c16c4ac26a034d5ecc9"
   dependencies:
     mkdirp "~0.5.1"
     nopt "~3.0.6"
@@ -4789,13 +4845,17 @@ oauth@0.9.x:
   version "0.9.15"
   resolved "https://registry.yarnpkg.com/oauth/-/oauth-0.9.15.tgz#bd1fefaf686c96b75475aed5196412ff60cfb9c1"
 
-object-assign@4.1.0, object-assign@^4.0.1, object-assign@^4.1.0:
+object-assign@4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.0.tgz#7a3b3d0e98063d43f4c03f2e8ae6cd51a86883a0"
 
 object-assign@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-3.0.0.tgz#9bedd5ca0897949bca47e7ff408062d549f587f2"
+
+object-assign@^4.0.1, object-assign@^4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
 object-component@0.0.3:
   version "0.0.3"
@@ -5756,6 +5816,21 @@ react-addons-test-utils@^15.4.2:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
 
+react-apollo@^0.11.2:
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/react-apollo/-/react-apollo-0.11.2.tgz#39c134b5a18854e73a15a40a7fa2aeda27212da7"
+  dependencies:
+    graphql-anywhere "^2.0.0"
+    hoist-non-react-statics "^1.2.0"
+    invariant "^2.2.1"
+    lodash.flatten "^4.2.0"
+    lodash.isequal "^4.1.1"
+    lodash.isobject "^3.0.2"
+    lodash.pick "^4.4.0"
+    object-assign "^4.0.1"
+  optionalDependencies:
+    react-dom "0.14.x || 15.* || ^15.0.0"
+
 react-core-image-upload@latest:
   version "0.9.6"
   resolved "https://registry.yarnpkg.com/react-core-image-upload/-/react-core-image-upload-0.9.6.tgz#1d5f781ba5974e2d9f9cd575cb527090821bc928"
@@ -5767,7 +5842,7 @@ react-deep-force-update@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.0.1.tgz#4f7f6c12c3e7de42f345992a3c518236fa1ecad3"
 
-react-dom@^15.3.2, react-dom@^15.4.2:
+"react-dom@0.14.x || 15.* || ^15.0.0", react-dom@^15.3.2, react-dom@^15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.2.tgz#015363f05b0a1fd52ae9efdd3a0060d90695208f"
   dependencies:
@@ -5782,10 +5857,11 @@ react-dropzone-component@latest:
     dropzone "^4.3.0"
 
 react-dropzone@latest:
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-3.10.0.tgz#d17193f816c038a1c29f1e92411db4a12210f19b"
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-3.11.0.tgz#bfe270a5a86dd9aa7a969cdaaa7c3c44d000e64a"
   dependencies:
     attr-accept "^1.0.3"
+    react-is-deprecated "^0.1.2"
 
 react-hot-loader@^3.0.0-beta.6:
   version "3.0.0-beta.6"
@@ -5806,6 +5882,10 @@ react-intl@^2.2.3:
     intl-messageformat "^1.3.0"
     intl-relativeformat "^1.3.0"
     invariant "^2.1.1"
+
+react-is-deprecated@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-is-deprecated/-/react-is-deprecated-0.1.2.tgz#301148f86ea428fe8e673eca7a372160b7579dbd"
 
 react-proxy@^3.0.0-alpha.0:
   version "3.0.0-alpha.1"
@@ -5965,7 +6045,7 @@ redux-thunk@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
 
-redux@^3.6.0:
+redux@^3.4.0, redux@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.6.0.tgz#887c2b3d0b9bd86eca2be70571c27654c19e188d"
   dependencies:
@@ -7235,7 +7315,7 @@ weinre@^2.0.0-pre-I0Z7U9OV:
     nopt "3.0.x"
     underscore "1.7.x"
 
-whatwg-fetch@>=0.10.0, whatwg-fetch@^2.0.2:
+whatwg-fetch@>=0.10.0, whatwg-fetch@^2.0.0, whatwg-fetch@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.2.tgz#fe294d1d89e36c5be8b3195057f2e4bc74fc980e"
 
