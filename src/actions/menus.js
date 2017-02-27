@@ -91,7 +91,7 @@ export function getMenu(uniqueName, actionType, callback) {
       }`;
 
     const { data } = await graphqlRequest(query);
-    const menu = data.menus.shift();
+    const menu = data.menus[0];
 
     dispatch({
       type: actionType,
