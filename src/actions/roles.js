@@ -48,7 +48,7 @@ export function getRole(id) {
     dispatch({
       type: GET_ROLE,
       payload: {
-        role: data.roles.shift(),
+        role: data.roles[0],
       },
     });
   };

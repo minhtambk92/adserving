@@ -92,7 +92,7 @@ export function getBanner(id) {
     dispatch({
       type: GET_BANNER,
       payload: {
-        banner: data.banners.shift(),
+        banner: data.banners[0],
       },
     });
   };

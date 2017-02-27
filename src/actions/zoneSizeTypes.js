@@ -2,38 +2,10 @@
 
 import {
   GET_ZONE_SIZE_TYPES,
-  GET_ZONE_SIZE_TYPE,
   CREATE_ZONE_SIZE_TYPE,
   UPDATE_ZONE_SIZE_TYPE,
   DELETE_ZONE_SIZE_TYPE,
 } from '../constants';
-
-export function getZoneSizeType(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const query = `
-      query {
-        zoneSizeTypes(where: {id: "${id}"}, limit: 1) {
-          id
-          name
-          width
-          height
-          status
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(query);
-
-    dispatch({
-      type: GET_ZONE_SIZE_TYPE,
-      payload: {
-        zoneSizeType: data.zoneSizeTypes.shift(),
-      },
-    });
-  };
-}
 
 export function getZoneSizeTypes(args = {
   where: {},

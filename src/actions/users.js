@@ -67,7 +67,7 @@ export function getUser(id) {
     dispatch({
       type: GET_USER,
       payload: {
-        user: data.users.shift(),
+        user: data.users[0],
       },
     });
   };
@@ -115,7 +115,7 @@ export function getUserProfile(id) {
     dispatch({
       type: GET_USER_PROFILE,
       payload: {
-        user: data.users.shift(),
+        user: data.users[0],
       },
     });
   };

@@ -69,7 +69,7 @@ export function getCampaign(id) {
     dispatch({
       type: GET_CAMPAIGN,
       payload: {
-        campaign: data.campaigns.shift(),
+        campaign: data.campaigns[0],
       },
     });
   };

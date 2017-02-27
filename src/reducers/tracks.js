@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
 import {
-  GET_TRACKS,
-  GET_TRACK_BY_BANNER_ID,
   CREATE_TRACK,
   UPDATE_TRACK,
   DELETE_TRACK,
@@ -10,12 +8,6 @@ import {
 
 function list(state = [], action) {
   switch (action.type) {
-    case GET_TRACK_BY_BANNER_ID: {
-      return action.payload.tracks;
-    }
-    case GET_TRACKS: {
-      return action.payload.tracks;
-    }
     case CREATE_TRACK: {
       return [action.payload.track, ...state];
     }

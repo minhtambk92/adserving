@@ -100,7 +100,7 @@ export function getSite(id) {
     dispatch({
       type: GET_SITE,
       payload: {
-        site: data.sites.shift(),
+        site: data.sites[0],
       },
     });
   };

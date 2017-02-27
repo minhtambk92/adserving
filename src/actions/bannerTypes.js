@@ -2,38 +2,10 @@
 
 import {
   GET_BANNER_TYPES,
-  GET_BANNER_TYPE,
   CREATE_BANNER_TYPE,
   UPDATE_BANNER_TYPE,
   DELETE_BANNER_TYPE,
 } from '../constants';
-
-export function getBannerType(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const query = `
-      query {
-        bannerTypes(where: {id: "${id}"}, limit: 1) {
-          id
-          name
-          value
-          isUpload
-          status
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(query);
-
-    dispatch({
-      type: GET_BANNER_TYPE,
-      payload: {
-        bannerType: data.bannerTypes.shift(),
-      },
-    });
-  };
-}
 
 export function getBannerTypes(args = {
   where: {},

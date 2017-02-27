@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import {
   GET_CHARACTER_SETS,
-  GET_CHARACTER_SET,
   CREATE_CHARACTER_SET,
   UPDATE_CHARACTER_SET,
   DELETE_CHARACTER_SET,
@@ -23,9 +22,6 @@ function list(state = [], action) {
 
 function editing(state = {}, action) {
   switch (action.type) {
-    case GET_CHARACTER_SET: {
-      return action.payload.characterSet;
-    }
     case UPDATE_CHARACTER_SET: {
       return action.payload.characterSet;
     }
