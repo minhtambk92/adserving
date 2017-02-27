@@ -9,8 +9,6 @@
 
 /* eslint-disable global-require */
 
-import { host } from '../config';
-
 // The top-level (parent) route
 export default {
 
@@ -38,7 +36,7 @@ export default {
     const route = await next();
 
     // Provide default values for title, description etc.
-    route.title = `${route.title || 'Untitled Page'} - ${host}`;
+    route.title = `${route.title || 'Untitled Page'} - Adserving CMS`;
     route.description = route.description || '';
 
     return route;
