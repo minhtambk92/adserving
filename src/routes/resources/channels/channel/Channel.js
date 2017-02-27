@@ -196,7 +196,7 @@ class Channel extends Component {
                 const subjectId = id;
                 const action = 'updated';
                 const other = JSON.stringify(op[0]);
-                this.props.getChannel(this.props.channelId);
+                // this.props.getChannel(this.props.channelId);
                 this.props.createActivity({
                   action,
                   subject,
