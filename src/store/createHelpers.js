@@ -1,10 +1,25 @@
-import gql from 'graphql-tag';
 import fetch from '../core/fetch';
 
+const getGraphQLStringMessage = queryString => `Plain GraphQL string found.
+You should precompile GraphQL queries by require them from *.graphql file.
+Query: ${queryString.trimLeft().substring(0, 60)}`;
+
 function createGraphqlRequest(apolloClient) {
-  return function graphqlRequest(queryOrString, variables) {
-    const query =
-      typeof queryOrString === 'string' ? gql`${queryOrString}` : queryOrString;
+  return async function graphqlRequest(queryOrString, variables, options = {}) {
+    const { skipCache } = options;
+    let query = queryOrString;
+    if (typeof queryOrString === 'string') {
+      if (__DEV__) {
+        // eslint-disable-next-line no-console
+        console.trace(getGraphQLStringMessage(queryOrString));
+      }
+      const gql = await require.ensure(['graphql-tag'], require => require('graphql-tag'), 'graphql-tag');
+      query = gql([queryOrString]);
+    }
+
+    if (skipCache) {
+      return apolloClient.networkInterface.query({ query, variables });
+    }
     return apolloClient.query({ query, variables });
   };
 }
