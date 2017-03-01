@@ -40,8 +40,7 @@ import { port, auth, host, locales } from './config';
 import fiction from './server/fictions';
 import startup from './server/startup';
 
-// const app = express();
-const app = require('express')();
+const app = express();
 
 //
 // Create socket from current express instance
