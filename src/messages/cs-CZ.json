@@ -1,74 +1,42 @@
 [
   {
-    "id": "header.banner.desc",
-    "defaultMessage": "Complex web apps made easy",
-    "message": "Komplexní aplikace jednodušše",
-    "description": "Description in header",
+    "id": "home.text.moreInfo",
+    "defaultMessage": "More info",
+    "message": "",
     "files": [
-      "src/components/Header/Header.js"
+      "src/routes/home/Home.js"
     ]
   },
   {
-    "id": "header.banner.title",
-    "defaultMessage": "React",
-    "message": "React",
-    "description": "Title in page header",
+    "id": "home.title.newAdvertisers",
+    "defaultMessage": "New Advertisers",
+    "message": "",
     "files": [
-      "src/components/Header/Header.js"
+      "src/routes/home/Home.js"
     ]
   },
   {
-    "id": "header.brand",
-    "defaultMessage": "Your Company Brand",
-    "message": "Vaše firma",
-    "description": "Brand name displayed in header",
+    "id": "home.title.newBanners",
+    "defaultMessage": "New Banners",
+    "message": "",
     "files": [
-      "src/components/Header/Header.js"
+      "src/routes/home/Home.js"
     ]
   },
   {
-    "id": "navigation.about",
-    "defaultMessage": "About",
-    "message": "O nás",
-    "description": "About link in header",
+    "id": "home.title.newCampaigns",
+    "defaultMessage": "New Campaigns",
+    "message": "",
     "files": [
-      "src/components/Navigation/Navigation.js"
+      "src/routes/home/Home.js"
     ]
   },
   {
-    "id": "navigation.contact",
-    "defaultMessage": "Contact",
-    "message": "Kontakt",
-    "description": "Contact link in header",
+    "id": "home.title.newSites",
+    "defaultMessage": "New Sites",
+    "message": "",
     "files": [
-      "src/components/Navigation/Navigation.js"
-    ]
-  },
-  {
-    "id": "navigation.login",
-    "defaultMessage": "Log in",
-    "message": "Přihlásit",
-    "description": "Log in link in header",
-    "files": [
-      "src/components/Navigation/Navigation.js"
-    ]
-  },
-  {
-    "id": "navigation.signup",
-    "defaultMessage": "Sign up",
-    "message": "Registrace",
-    "description": "Sign up link in header",
-    "files": [
-      "src/components/Navigation/Navigation.js"
-    ]
-  },
-  {
-    "id": "navigation.separator.or",
-    "defaultMessage": "or",
-    "message": "nebo",
-    "description": "Last separator in list, lowercase \"or\"",
-    "files": [
-      "src/components/Navigation/Navigation.js"
+      "src/routes/home/Home.js"
     ]
   }
 ]

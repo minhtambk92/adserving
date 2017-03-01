@@ -1,74 +1,42 @@
 [
   {
-    "id": "header.banner.desc",
-    "description": "Description in header",
-    "defaultMessage": "Complex web apps made easy",
+    "id": "home.text.moreInfo",
+    "defaultMessage": "More info",
     "message": "",
     "files": [
-      "src/components/Header/Header.js"
+      "src/routes/home/Home.js"
     ]
   },
   {
-    "id": "header.banner.title",
-    "description": "Title in page header",
-    "defaultMessage": "React",
+    "id": "home.title.newAdvertisers",
+    "defaultMessage": "New Advertisers",
     "message": "",
     "files": [
-      "src/components/Header/Header.js"
+      "src/routes/home/Home.js"
     ]
   },
   {
-    "id": "header.brand",
-    "description": "Brand name displayed in header",
-    "defaultMessage": "Your Company Brand",
+    "id": "home.title.newBanners",
+    "defaultMessage": "New Banners",
     "message": "",
     "files": [
-      "src/components/Header/Header.js"
+      "src/routes/home/Home.js"
     ]
   },
   {
-    "id": "navigation.about",
-    "description": "About link in header",
-    "defaultMessage": "About",
+    "id": "home.title.newCampaigns",
+    "defaultMessage": "New Campaigns",
     "message": "",
     "files": [
-      "src/components/Navigation/Navigation.js"
+      "src/routes/home/Home.js"
     ]
   },
   {
-    "id": "navigation.contact",
-    "description": "Contact link in header",
-    "defaultMessage": "Contact",
+    "id": "home.title.newSites",
+    "defaultMessage": "New Sites",
     "message": "",
     "files": [
-      "src/components/Navigation/Navigation.js"
-    ]
-  },
-  {
-    "id": "navigation.login",
-    "description": "Log in link in header",
-    "defaultMessage": "Log in",
-    "message": "",
-    "files": [
-      "src/components/Navigation/Navigation.js"
-    ]
-  },
-  {
-    "id": "navigation.separator.or",
-    "description": "Last separator in list, lowercase \"or\"",
-    "defaultMessage": "or",
-    "message": "",
-    "files": [
-      "src/components/Navigation/Navigation.js"
-    ]
-  },
-  {
-    "id": "navigation.signup",
-    "description": "Sign up link in header",
-    "defaultMessage": "Sign up",
-    "message": "",
-    "files": [
-      "src/components/Navigation/Navigation.js"
+      "src/routes/home/Home.js"
     ]
   }
 ]

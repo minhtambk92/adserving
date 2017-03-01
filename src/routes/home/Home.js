@@ -8,9 +8,38 @@
  */
 
 import React, { Component } from 'react';
+import { defineMessages, FormattedMessage } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Link from '../../components/Link';
 import s from './Home.css';
+
+const messages = defineMessages({
+  titleNewAdvertisers: {
+    id: 'home.title.newAdvertisers',
+    defaultMessage: 'New Advertisers',
+    description: '',
+  },
+  titleNewCampaigns: {
+    id: 'home.title.newCampaigns',
+    defaultMessage: 'New Campaigns',
+    description: '',
+  },
+  titleNewSites: {
+    id: 'home.title.newSites',
+    defaultMessage: 'New Sites',
+    description: '',
+  },
+  titleNewBanners: {
+    id: 'home.title.newBanners',
+    defaultMessage: 'New Banners',
+    description: '',
+  },
+  textMoreInfo: {
+    id: 'home.text.moreInfo',
+    defaultMessage: 'More info',
+    description: '',
+  },
+});
 
 class Home extends Component {
 
@@ -22,13 +51,15 @@ class Home extends Component {
           <div className="small-box bg-aqua">
             <div className="inner">
               <h3>150</h3>
-              <p>New Advertisers</p>
+              <p><FormattedMessage {...messages.titleNewAdvertisers} /></p>
             </div>
             <div className="icon">
               <i className="ion ion-briefcase" />
             </div>
             <Link to="#" className="small-box-footer">
-              More info <i className="fa fa-arrow-circle-right" />
+              <FormattedMessage
+                {...messages.textMoreInfo}
+              /> <i className="fa fa-arrow-circle-right" />
             </Link>
           </div>
         </div>
@@ -40,13 +71,15 @@ class Home extends Component {
             <div className="inner">
               <h3>53<sup style={{ fontSize: 20 }}>%</sup>
               </h3>
-              <p>New Campaigns</p>
+              <p><FormattedMessage {...messages.titleNewCampaigns} /></p>
             </div>
             <div className="icon">
               <i className="ion ion-speakerphone" />
             </div>
             <Link to="#" className="small-box-footer">
-              More info <i className="fa fa-arrow-circle-right" />
+              <FormattedMessage
+                {...messages.textMoreInfo}
+              /> <i className="fa fa-arrow-circle-right" />
             </Link>
           </div>
         </div>
@@ -57,13 +90,15 @@ class Home extends Component {
           <div className="small-box bg-yellow">
             <div className="inner">
               <h3>44</h3>
-              <p>New Sites</p>
+              <p><FormattedMessage {...messages.titleNewSites} /></p>
             </div>
             <div className="icon">
               <i className="ion ion-android-globe" />
             </div>
             <Link to="#" className="small-box-footer">
-              More info <i className="fa fa-arrow-circle-right" />
+              <FormattedMessage
+                {...messages.textMoreInfo}
+              /> <i className="fa fa-arrow-circle-right" />
             </Link>
           </div>
         </div>
@@ -74,13 +109,15 @@ class Home extends Component {
           <div className="small-box bg-red">
             <div className="inner">
               <h3>65</h3>
-              <p>New Banners</p>
+              <p><FormattedMessage {...messages.titleNewBanners} /></p>
             </div>
             <div className="icon">
               <i className="ion ion-ribbon-b" />
             </div>
             <Link to="#" className="small-box-footer">
-              More info <i className="fa fa-arrow-circle-right" />
+              <FormattedMessage
+                {...messages.textMoreInfo}
+              /> <i className="fa fa-arrow-circle-right" />
             </Link>
           </div>
         </div>
