@@ -17,26 +17,31 @@ const messages = defineMessages({
   titleNewAdvertisers: {
     id: 'home.title.newAdvertisers',
     defaultMessage: 'New Advertisers',
+    message: 'New Advertisers',
     description: '',
   },
   titleNewCampaigns: {
     id: 'home.title.newCampaigns',
     defaultMessage: 'New Campaigns',
+    message: 'New Campaigns',
     description: '',
   },
   titleNewSites: {
     id: 'home.title.newSites',
     defaultMessage: 'New Sites',
+    message: 'New Sites',
     description: '',
   },
   titleNewBanners: {
     id: 'home.title.newBanners',
     defaultMessage: 'New Banners',
+    message: 'New Banners',
     description: '',
   },
   textMoreInfo: {
     id: 'home.text.moreInfo',
     defaultMessage: 'More info',
+    message: 'More info',
     description: '',
   },
 });
