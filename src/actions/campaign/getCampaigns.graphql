@@ -1,0 +1,21 @@
+query getCampaigns($where: SequelizeJSON) {
+  campaigns(where: $where) {
+    id
+    advertiserId
+    name
+    startTime
+    endTime
+    views
+    viewPerSession
+    timeResetViewCount
+    weight
+    revenueType
+    expireValueCPM
+    maxCPMPerDay
+    status
+    description
+    createdAt
+    updatedAt
+  }
+}
+

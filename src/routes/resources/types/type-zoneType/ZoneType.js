@@ -17,12 +17,12 @@ import {
   createZoneType,
   deleteZoneType,
   updateZoneType,
-} from '../../../../actions/zoneTypes';
+} from '../../../../actions/zoneType/zoneTypes';
 import {
   setStatusCreateZoneType,
   setStatusUpdateZoneType,
 } from '../../../../actions/pages/resources';
-import { createActivity } from '../../../../actions/activities';
+import { createActivity } from '../../../../actions/activity/activities';
 import ZoneTypeList from './ZoneTypeList';
 import s from './ZoneType.css';
 

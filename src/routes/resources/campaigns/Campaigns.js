@@ -16,10 +16,10 @@ import {
   createCampaign,
   getCampaignsFilters,
   setCampaignsFilters,
-} from '../../../actions/campaigns';
-import { getAdvertisers } from '../../../actions/advertisers';
+} from '../../../actions/campaign/campaigns';
+import { getAdvertisers } from '../../../actions/advertiser/advertisers';
 import { setPageCampaignActiveTab } from '../../../actions/pages/campaigns';
-import { createActivity } from '../../../actions/activities';
+import { createActivity } from '../../../actions/activity/activities';
 import CreateCampaignForm from './CreateCampaignForm';
 import FilterCampaignsForm from './FilterCampaignsForm';
 import CampaignList from './CampaignList';

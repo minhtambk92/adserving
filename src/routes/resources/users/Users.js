@@ -12,14 +12,14 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getRoles } from '../../../actions/roles';
+import { getRoles } from '../../../actions/role/roles';
 import {
   getUsers,
   createUser,
   getUsersFilters,
   setUsersFilters,
-} from '../../../actions/users';
-import { createActivity } from '../../../actions/activities';
+} from '../../../actions/users/users';
+import { createActivity } from '../../../actions/activity/activities';
 import FilterUsersForm from './FilterUsersForm';
 import CreateUserForm from './CreateUserForm';
 import UserList from './UserList';

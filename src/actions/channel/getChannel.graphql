@@ -1,0 +1,32 @@
+query getChanenl($id: ID!){
+  channels(where: {id: $id}, limit: 1) {
+    id
+    name
+    description
+    status
+    siteId
+    options {
+      id
+      name
+      optionChannelType {
+        id
+        name
+        isInputLink
+        isSelectOption
+        isVariable
+        status
+        optionChannelValues {
+          id
+          name
+          value
+          status
+        }
+      }
+      logical
+      comparison
+      value
+    }
+    createdAt
+    updatedAt
+  }
+}

@@ -15,7 +15,7 @@ import {
   getResource,
   updateResource,
   deleteResource,
-} from '../../../../actions/resources';
+} from '../../../../actions/resource/resources';
 import Layout from '../../../../components/Layout';
 import UpdateResourceForm from '../UpdateResourceForm';
 import s from './Resource.css';

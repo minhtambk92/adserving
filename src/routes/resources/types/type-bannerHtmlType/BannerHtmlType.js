@@ -17,12 +17,12 @@ import {
   createBannerHtmlType,
   deleteBannerHtmlType,
   updateBannerHtmlType,
-} from '../../../../actions/bannerHtmlTypes';
+} from '../../../../actions/bannerHtmlType/bannerHtmlTypes';
 import {
   setStatusCreateBannerHtmlType,
   setStatusUpdateBannerHtmlType,
 } from '../../../../actions/pages/resources';
-import { createActivity } from '../../../../actions/activities';
+import { createActivity } from '../../../../actions/activity/activities';
 import BannerHtmlTypeList from './BannerHtmlTypeList';
 import s from './BannerHtmlType.css';
 

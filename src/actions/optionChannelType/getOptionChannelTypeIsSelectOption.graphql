@@ -1,0 +1,13 @@
+query getOptionChannelTypeIsSelectOption{
+  optionChannelTypes(where: {isSelectOption: true}) {
+    id
+    name
+    isInputLink
+    isSelectOption
+    isVariable
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}

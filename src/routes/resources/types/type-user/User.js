@@ -17,8 +17,8 @@ import {
   createUser,
   deleteUser,
   updateUser,
-} from '../../../../actions/users';
-import { getRoles } from '../../../../actions/roles';
+} from '../../../../actions/users/users';
+import { getRoles } from '../../../../actions/role/roles';
 import {
   setStatusCreateUser,
   setStatusUpdateUser,

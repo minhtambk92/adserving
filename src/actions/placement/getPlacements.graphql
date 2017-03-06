@@ -1,0 +1,16 @@
+query getPermissions($where: SequelizeJSON){
+  placements (where: $where){
+    id
+    name
+    width
+    height
+    startTime
+    endTime
+    weight
+    description
+    campaignId
+    status
+    createdAt
+    updatedAt
+  }
+}

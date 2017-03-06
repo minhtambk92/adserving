@@ -9,9 +9,9 @@ import style from 'react-dropzone-component/styles/filepicker.css';
 import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../../../components/Layout';
-import { getUsers, updateProfile } from '../../../../actions/users';
+import { getUsers, updateProfile } from '../../../../actions/users/users';
 import { setStatusUpdateProfile } from '../../../../actions/pages/resources';
-import { createActivity } from '../../../../actions/activities';
+import { createActivity } from '../../../../actions/activity/activities';
 import ProfileList from './ProfileList';
 import s from './Profile.css'; // eslint-disable-line css-modules/no-unused-class
 

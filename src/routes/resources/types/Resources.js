@@ -17,7 +17,7 @@ import {
   createResource,
   getResourcesFilters,
   setResourcesFilters,
-} from '../../../actions/resources';
+} from '../../../actions/resource/resources';
 import { setCurrentPageResource } from '../../../actions/pages/resources';
 import FilterResourcesForm from './FilterResourcesForm';
 import CreateResourceForm from './CreateResourceForm';

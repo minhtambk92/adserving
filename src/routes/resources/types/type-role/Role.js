@@ -17,7 +17,7 @@ import {
   createRole,
   deleteRole,
   updateRole,
-} from '../../../../actions/roles';
+} from '../../../../actions/role/roles';
 import {
   setStatusCreateRole,
   setStatusUpdateRole,

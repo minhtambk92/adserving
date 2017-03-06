@@ -1,0 +1,33 @@
+query getAdvertiser ($id: ID!) {
+  advertisers(where: {id: $id}, limit: 1) {
+    id
+    email
+    name
+    contact
+    isEmailReport
+    isEmailStatus
+    reportInterval
+    description
+    status
+    campaigns {
+      id
+      advertiserId
+      name
+      startTime
+      endTime
+      views
+      viewPerSession
+      timeResetViewCount
+      weight
+      revenueType
+      expireValueCPM
+      maxCPMPerDay
+      description
+      status
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}

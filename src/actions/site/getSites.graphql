@@ -1,0 +1,12 @@
+query getSites($where: SequelizeJSON){
+  sites (where:$where){
+    id
+    domain
+    name
+    email
+    description
+    status
+    createdAt
+    updatedAt
+  }
+}

@@ -12,7 +12,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { registerUser } from '../../actions/users';
+import { registerUser } from '../../actions/users/users';
 import { navigate } from '../../actions/route';
 import Link from '../../components/Link';
 import s from './Register.css';

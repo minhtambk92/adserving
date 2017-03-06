@@ -1,0 +1,14 @@
+query getResources($where: SequelizeJSON){
+  resources (where: $where){
+    id
+    uniqueName
+    modelName
+    name
+    hasMeta
+    description
+    status
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

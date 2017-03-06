@@ -17,12 +17,12 @@ import {
   getCampaign,
   updateCampaign,
   deleteCampaign,
-} from '../../../../actions/campaigns';
-import { getAdvertisers } from '../../../../actions/advertisers';
-import { createPlacement } from '../../../../actions/placements';
+} from '../../../../actions/campaign/campaigns';
+import { getAdvertisers } from '../../../../actions/advertiser/advertisers';
+import { createPlacement } from '../../../../actions/placement/placements';
 import { setPagePlacementActiveTab } from '../../../../actions/pages/placements';
 import { setPageCampaignActiveTab } from '../../../../actions/pages/campaigns';
-import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activities';
+import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activity/activities';
 import Layout from '../../../../components/Layout';
 import PlacementList from '../../placements/PlacementList';
 import UpdateCampaignForm from '../UpdateCampaignForm';

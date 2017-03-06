@@ -17,13 +17,13 @@ import {
   getAdvertiser,
   updateAdvertiser,
   deleteAdvertiser,
-} from '../../../../actions/advertisers';
+} from '../../../../actions/advertiser/advertisers';
 import {
   setPageAdvertiserActiveTab,
 } from '../../../../actions/pages/advertisers';
 import { setPageCampaignActiveTab } from '../../../../actions/pages/campaigns';
-import { createCampaign } from '../../../../actions/campaigns';
-import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activities';
+import { createCampaign } from '../../../../actions/campaign/campaigns';
+import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activity/activities';
 import Layout from '../../../../components/Layout';
 import CampaignList from '../../campaigns/CampaignList';
 import UpdateAdvertiserForm from '../UpdateAdvertiserForm';

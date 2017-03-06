@@ -1,0 +1,9 @@
+query getPermissions{
+  permissions {
+    id
+    name
+    status
+    createdAt
+    updatedAt
+  }
+}

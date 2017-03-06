@@ -1,0 +1,12 @@
+query getZoneTypes($where: SequelizeJSON){
+  zoneTypes (where: $where) {
+    id
+    name
+    value
+    isSize
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}

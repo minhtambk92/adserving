@@ -22,7 +22,7 @@ import {
   setStatusCreateOption,
   setStatusUpdateOption,
 } from '../../../../actions/pages/resources';
-import { createActivity } from '../../../../actions/activities';
+import { createActivity } from '../../../../actions/activity/activities';
 import OptionList from './OptionList';
 import s from './Option.css';
 

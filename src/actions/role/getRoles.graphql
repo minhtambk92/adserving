@@ -1,0 +1,9 @@
+query getRoles($where: SequelizeJSON){
+  roles (where: $where){
+    id
+    uniqueName
+    name
+    createdAt
+    updatedAt
+  }
+}

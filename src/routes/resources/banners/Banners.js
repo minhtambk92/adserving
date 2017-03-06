@@ -16,15 +16,15 @@ import {
   createBanner,
   getBannersFilters,
   setBannersFilters,
-} from '../../../actions/banners';
-import { getPlacements } from '../../../actions/placements';
-import { getChannels } from '../../../actions/channels';
+} from '../../../actions/banner/banners';
+import { getPlacements } from '../../../actions/placement/placements';
+import { getChannels } from '../../../actions/channel/channels';
 import { setPageBannerActiveTab } from '../../../actions/pages/banners';
-import { createTrack } from '../../../actions/tracks';
-import { getBannerHtmlTypes } from '../../../actions/bannerHtmlTypes';
-import { getBannerTypes } from '../../../actions/bannerTypes';
-import { getAdsServers } from '../../../actions/adsServers';
-import { createActivity } from '../../../actions/activities';
+import { createTrack } from '../../../actions/track/tracks';
+import { getBannerHtmlTypes } from '../../../actions/bannerHtmlType/bannerHtmlTypes';
+import { getBannerTypes } from '../../../actions/bannerType/bannerTypes';
+import { getAdsServers } from '../../../actions/adsServer/adsServers';
+import { createActivity } from '../../../actions/activity/activities';
 import BannerList from './BannerList';
 import CreateBannerForm from './CreateBannerForm';
 import FilterBannersForm from './FilterBannersForm';

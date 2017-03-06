@@ -1,0 +1,55 @@
+query getPlacement($id: ID!) {
+  placements(where: {id: $id}, limit: 1) {
+    id
+    name
+    width
+    height
+    startTime
+    endTime
+    weight
+    description
+    status
+    campaignId
+    banners {
+      id
+      name
+      html
+      width
+      height
+      keyword
+      weight
+      description
+      bannerTypeId
+      imageUrl
+      url
+      target
+      isIFrame
+      status
+      adsServerId
+      bannerHtmlTypeId
+      isCountView
+      isFixIE
+      isDefault
+      isRelative
+      adStore
+      impressionsBooked
+      clicksBooked
+      activationDate
+      expirationDate
+      placements {
+        id
+        name
+      }
+      channelId
+      tracks {
+        id
+        clickUrl
+        impressionUrl
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}

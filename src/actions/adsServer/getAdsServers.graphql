@@ -1,0 +1,11 @@
+query getAdsServers($where: SequelizeJSON){
+  adsServers (where: $where){
+    id
+    name
+    value
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}

@@ -80,7 +80,7 @@ async function resourcesFiction() {
 
 // Menus fiction
 async function menusFiction() {
-  console.log(chalk.grey('Check current number of menus...'));
+  console.log(chalk.grey('Check current number of menu...'));
   const menusQuantity = await Menu.count();
 
   if (menusQuantity === 0) {

@@ -1,0 +1,24 @@
+query getUsers($where: SequelizeJSON){
+  users (where: $where){
+    id
+    email
+    emailConfirmed
+    status
+    profile {
+      displayName
+      picture
+      gender
+      website
+      location
+    }
+    roles {
+      id
+      uniqueName
+      name
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}

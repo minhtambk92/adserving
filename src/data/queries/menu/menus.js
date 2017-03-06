@@ -15,8 +15,9 @@ const menus = {
     // Additional params
   }),
   resolve: resolver(Menu, {
-    before(options) {
+    before(options, args, res) {
       const opts = options;
+      opts.where = res.body.variables;
       opts.order = options.order || [];
       opts.order.push(['createdAt', 'DESC']);
       return opts;

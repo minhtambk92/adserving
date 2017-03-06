@@ -1,0 +1,24 @@
+query getUser($id: ID!) {
+  users(where: {id: $id}) {
+    id
+    email
+    emailConfirmed
+    status
+    profile {
+      displayName
+      picture
+      gender
+      location
+      website
+    }
+    roles {
+      id
+      uniqueName
+      name
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
