@@ -17,12 +17,12 @@ import {
   createCharacterSet,
   deleteCharacterSet,
   updateCharacterSet,
-} from '../../../../actions/characterSets';
+} from '../../../../actions/characterSet/characterSets';
 import {
   setStatusCreateCharacterSet,
   setStatusUpdateCharacterSet,
 } from '../../../../actions/pages/resources';
-import { createActivity } from '../../../../actions/activities';
+import { createActivity } from '../../../../actions/activity/activities';
 import CharacterSetList from './CharacterSetList';
 import s from './CharacterSet.css';
 

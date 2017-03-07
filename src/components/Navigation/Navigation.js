@@ -11,7 +11,7 @@ import React, { Component, PropTypes } from 'react';
 // import { defineMessages, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { logUserOut, getUser } from '../../actions/users';
+import { logUserOut, getUser } from '../../actions/users/users';
 import { redirect } from '../../actions/route';
 import s from './Navigation.css';
 import Link from '../Link';

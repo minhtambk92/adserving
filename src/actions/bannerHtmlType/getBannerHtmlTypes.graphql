@@ -1,0 +1,12 @@
+query getBannerHtmlTypes($where: SequelizeJSON) {
+  bannerHtmlTypes(where: $where) {
+    id
+    name
+    value
+    weight
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}

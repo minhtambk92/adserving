@@ -14,21 +14,21 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 // import { defineMessages, FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getZone, updateZone, deleteZone } from '../../../../actions/zones';
+import { getZone, updateZone, deleteZone } from '../../../../actions/zone/zones';
 import {
   setPageZoneActiveTab,
   setCurrentShare,
   setStatusShareFormEdit,
   setStatusShareFormCreate,
 } from '../../../../actions/pages/zones';
-import { getSites } from '../../../../actions/sites';
-import { getPlacements, createPlacement, getPlacement } from '../../../../actions/placements';
-import { getCampaigns } from '../../../../actions/campaigns';
-import { getZoneSizeTypes } from '../../../../actions/zoneSizeTypes';
-import { createShare, updateShare, deleteShare } from '../../../../actions/shares';
-import { getZoneTypes } from '../../../../actions/zoneTypes';
-import { getCharacterSets } from '../../../../actions/characterSets';
-import { getActivitiesBySubjectId, createActivity } from '../../../../actions/activities';
+import { getSites } from '../../../../actions/site/sites';
+import { getPlacements, createPlacement, getPlacement } from '../../../../actions/placement/placements';
+import { getCampaigns } from '../../../../actions/campaign/campaigns';
+import { getZoneSizeTypes } from '../../../../actions/zoneSizeType/zoneSizeTypes';
+import { createShare, updateShare, deleteShare } from '../../../../actions/share/shares';
+import { getZoneTypes } from '../../../../actions/zoneType/zoneTypes';
+import { getCharacterSets } from '../../../../actions/characterSet/characterSets';
+import { getActivitiesBySubjectId, createActivity } from '../../../../actions/activity/activities';
 import Layout from '../../../../components/Layout';
 import UpdateZoneForm from '../UpdateZoneForm';
 import ListPlacementOfShare from '../ListPlacementOfShare';

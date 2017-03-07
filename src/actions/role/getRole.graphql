@@ -1,0 +1,9 @@
+query getRole($id: ID!){
+  roles(where: {id: $id}, limit: 1) {
+    id
+    uniqueName
+    name
+    createdAt
+    updatedAt
+  }
+}

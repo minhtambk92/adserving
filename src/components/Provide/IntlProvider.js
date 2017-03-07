@@ -4,7 +4,7 @@ import { IntlProvider } from 'react-intl';
 import {
   getAsideLeftMenu,
   setAsideLeftActiveItems,
-} from '../../actions/menus';
+} from '../../actions/menu/menus';
 
 class ProvideIntl extends Component {
 

@@ -17,12 +17,12 @@ import {
   createBannerType,
   deleteBannerType,
   updateBannerType,
-} from '../../../../actions/bannerTypes';
+} from '../../../../actions/bannerType/bannerTypes';
 import {
   setStatusCreateBannerType,
   setStatusUpdateBannerType,
 } from '../../../../actions/pages/resources';
-import { createActivity } from '../../../../actions/activities';
+import { createActivity } from '../../../../actions/activity/activities';
 import BannerTypeList from './BannerTypeList';
 import s from './BannerType.css';
 

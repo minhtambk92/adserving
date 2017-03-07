@@ -15,8 +15,9 @@ const characterSets = {
     // Additional params
   }),
   resolve: resolver(CharacterSet, {
-    before(options) {
+    before(options, args, res) {
       const opts = options;
+      opts.where = res.body.variables;
       opts.order = options.order || [];
       opts.order.push(['createdAt', 'DESC']);
       return opts;

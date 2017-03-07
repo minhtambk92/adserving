@@ -1,0 +1,78 @@
+query getSite($id: ID!){
+  sites(where: {id: $id}, limit: 1) {
+    id
+    domain
+    name
+    email
+    description
+    status
+    zones {
+      id
+      siteId
+      name
+      description
+      zoneType {
+        id
+        name
+        isSize
+      }
+      zoneSizeType {
+        id
+        name
+        width
+        height
+      }
+      html
+      css
+      slot
+      width
+      height
+      targetIFrame
+      isShowBannerAgain
+      source
+      isShowCampaignAgain
+      isShowTextBanner
+      characterSetId
+      supportThirdParty
+      isIncludeDescription
+      isCustomSize
+      status
+      shares {
+        id
+        name
+        html
+        css
+        outputCss
+        width
+        height
+        weight
+        classes
+        type
+        description
+      }
+      createdAt
+      updatedAt
+    }
+    channels {
+      id
+      name
+      description
+      status
+      options {
+        id
+        name
+        logical
+        optionChannelTypeId
+        comparison
+        value
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    status
+    createdAt
+    updatedAt
+  }
+}

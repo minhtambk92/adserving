@@ -10,9 +10,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getAdvertisers, createAdvertiser } from '../../../actions/advertisers';
+import { getAdvertisers, createAdvertiser } from '../../../actions/advertiser/advertisers';
 import { setPageAdvertiserActiveTab } from '../../../actions/pages/advertisers';
-import { createActivity } from '../../../actions/activities';
+import { createActivity } from '../../../actions/activity/activities';
 import CreateAdvertiserForm from './CreateAdvertiserForm';
 import AdvertiserList from './AdvertiserList';
 import s from './Advertisers.css';

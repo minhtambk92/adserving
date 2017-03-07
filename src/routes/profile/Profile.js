@@ -13,7 +13,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getUserProfile, updateProfile } from '../../actions/users';
+import { getUserProfile, updateProfile } from '../../actions/users/users';
 import { navigate } from '../../actions/route';
 import { setStatusUpdateProfileUser, setPageProfileActiveTab } from '../../actions/pages/users';
 import SettingProfile from './SettingProfile';

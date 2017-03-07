@@ -1,0 +1,20 @@
+query getOptionChannelTypes($where: SequelizeJSON){
+  optionChannelTypes (where: $where){
+    id
+    name
+    isInputLink
+    isSelectOption
+    isVariable
+    status
+    userId
+    optionChannelValues {
+      id
+      name
+      value
+      status
+      userId
+    }
+    createdAt
+    updatedAt
+  }
+}

@@ -17,13 +17,13 @@ import {
   createOptionChannelType,
   deleteOptionChannelType,
   updateOptionChannelType,
-} from '../../../../actions/optionChannelTypes';
-import { setOptionChannelValueFilters } from '../../../../actions/optionChannelValues';
+} from '../../../../actions/optionChannelType/optionChannelTypes';
+import { setOptionChannelValueFilters } from '../../../../actions/optionChannelValue/optionChannelValues';
 import {
   setStatusCreateOptionChannelType,
   setStatusUpdateOptionChannelType,
 } from '../../../../actions/pages/resources';
-import { createActivity } from '../../../../actions/activities';
+import { createActivity } from '../../../../actions/activity/activities';
 import OptionChannelTypeList from './OptionChannelTypeList';
 import s from './OptionChannelType.css';
 

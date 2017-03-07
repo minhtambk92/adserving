@@ -20,13 +20,13 @@ import {
   updateOptionChannelValue,
   getOptionChannelValueFilters,
   setOptionChannelValueFilters,
-} from '../../../../actions/optionChannelValues';
+} from '../../../../actions/optionChannelValue/optionChannelValues';
 import {
   setStatusCreateOptionChannelValue,
   setStatusUpdateOptionChannelValue,
 } from '../../../../actions/pages/resources';
-import { getOptionChannelTypeIsSelectOption } from '../../../../actions/optionChannelTypes';
-import { createActivity } from '../../../../actions/activities';
+import { getOptionChannelTypeIsSelectOption } from '../../../../actions/optionChannelType/optionChannelTypes';
+import { createActivity } from '../../../../actions/activity/activities';
 import OptionChannelValueList from './OptionChannelValueList';
 import FilterOptionChannelTypesForm from './FilterOptionChannelTypesForm';
 import s from './OptionChannelValue.css';

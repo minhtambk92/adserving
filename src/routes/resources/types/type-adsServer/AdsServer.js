@@ -17,12 +17,12 @@ import {
   createAdsServer,
   deleteAdsServer,
   updateAdsServer,
-} from '../../../../actions/adsServers';
+} from '../../../../actions/adsServer/adsServers';
 import {
   setStatusCreateAdsServer,
   setStatusUpdateAdsServer,
 } from '../../../../actions/pages/resources';
-import { createActivity } from '../../../../actions/activities';
+import { createActivity } from '../../../../actions/activity/activities';
 import AdsServerList from './AdsServerList';
 import s from './AdsServer.css';
 

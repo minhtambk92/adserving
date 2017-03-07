@@ -16,10 +16,10 @@ import {
   createPlacement,
   getPlacementsFilters,
   setPlacementsFilters,
-} from '../../../actions/placements';
-import { getCampaigns } from '../../../actions/campaigns';
+} from '../../../actions/placement/placements';
+import { getCampaigns } from '../../../actions/campaign/campaigns';
 import { setPagePlacementActiveTab } from '../../../actions/pages/placements';
-import { createActivity } from '../../../actions/activities';
+import { createActivity } from '../../../actions/activity/activities';
 import PlacemenList from './PlacementList';
 import CreatePlacementForm from './CreatePlacementForm';
 import FilterPlacementForm from './FilterPlacementForm';

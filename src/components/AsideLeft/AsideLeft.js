@@ -6,7 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import MenuItem from './MenuItem';
-import { setAsideLeftActiveItems } from '../../actions/menus';
+import { setAsideLeftActiveItems } from '../../actions/menu/menus';
 import s from './AsideLeft.css';
 
 class AsideLeft extends Component {

@@ -12,18 +12,18 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 // import { FormattedRelative } from 'react-intl';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getSites } from '../../../actions/sites';
+import { getSites } from '../../../actions/site/sites';
 import {
   getZones,
   createZone,
   getZonesFilters,
   setZonesFilters,
-} from '../../../actions/zones';
+} from '../../../actions/zone/zones';
 import { setPageZoneActiveTab } from '../../../actions/pages/zones';
-import { createShare } from '../../../actions/shares';
-import { getZoneSizeTypes } from '../../../actions/zoneSizeTypes';
-import { getZoneTypes } from '../../../actions/zoneTypes';
-import { createActivity } from '../../../actions/activities';
+import { createShare } from '../../../actions/share/shares';
+import { getZoneSizeTypes } from '../../../actions/zoneSizeType/zoneSizeTypes';
+import { getZoneTypes } from '../../../actions/zoneType/zoneTypes';
+import { createActivity } from '../../../actions/activity/activities';
 import CreateZoneForm from './CreateZoneForm';
 import FilterZonesForm from './FilterZonesForm';
 import ZoneList from './ZoneList';

@@ -2,7 +2,7 @@
   {
     "id": "home.text.moreInfo",
     "defaultMessage": "More info",
-    "message": "",
+    "message": "Hello",
     "files": [
       "src/routes/home/Home.js"
     ]
@@ -10,7 +10,7 @@
   {
     "id": "home.title.newAdvertisers",
     "defaultMessage": "New Advertisers",
-    "message": "",
+    "message": "Hello",
     "files": [
       "src/routes/home/Home.js"
     ]
@@ -18,7 +18,7 @@
   {
     "id": "home.title.newBanners",
     "defaultMessage": "New Banners",
-    "message": "",
+    "message": "Hello",
     "files": [
       "src/routes/home/Home.js"
     ]
@@ -26,7 +26,7 @@
   {
     "id": "home.title.newCampaigns",
     "defaultMessage": "New Campaigns",
-    "message": "",
+    "message": "Hello",
     "files": [
       "src/routes/home/Home.js"
     ]
@@ -34,7 +34,7 @@
   {
     "id": "home.title.newSites",
     "defaultMessage": "New Sites",
-    "message": "",
+    "message": "Hello",
     "files": [
       "src/routes/home/Home.js"
     ]

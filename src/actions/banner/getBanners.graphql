@@ -1,0 +1,57 @@
+query getBanners($where: SequelizeJSON) {
+  banners(where: $where) {
+    id
+    name
+    html
+    width
+    height
+    keyword
+    weight
+    description
+    bannerType {
+      id
+      name
+      value
+      isUpload
+      userId
+    }
+    imageUrl
+    url
+    target
+    isIFrame
+    status
+    adsServerId
+    bannerHtmlTypeId
+    isCountView
+    isFixIE
+    isDefault
+    isRelative
+    adStore
+    impressionsBooked
+    clicksBooked
+    activationDate
+    expirationDate
+    channelId
+    placements {
+      id
+      name
+      width
+      height
+      startTime
+      endTime
+      weight
+      description
+      campaignId
+      status
+      createdAt
+      updatedAt
+    }
+    tracks {
+      id
+      clickUrl
+      impressionUrl
+    }
+    createdAt
+    updatedAt
+  }
+}

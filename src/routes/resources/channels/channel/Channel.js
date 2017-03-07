@@ -18,15 +18,15 @@ import {
   getChannel,
   updateChannel,
   deleteChannel,
-} from '../../../../actions/channels';
+} from '../../../../actions/channel/channels';
 import {
   createOptionChannel,
   deleteOptionChannel,
   updateOptionChannel,
-} from '../../../../actions/optionChannels';
-import { getSites } from '../../../../actions/sites';
-import { getOptionChannelTypes } from '../../../../actions/optionChannelTypes';
-import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activities';
+} from '../../../../actions/optionChannel/optionChannels';
+import { getSites } from '../../../../actions/site/sites';
+import { getOptionChannelTypes } from '../../../../actions/optionChannelType/optionChannelTypes';
+import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activity/activities';
 import Layout from '../../../../components/Layout';
 import UpdateChannelForm from '../UpdateChannelForm';
 import OptionSelectChannel from '../OptionSelectChannel';

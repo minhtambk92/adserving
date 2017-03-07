@@ -15,19 +15,19 @@ import style from 'react-dropzone-component/styles/filepicker.css';
 import dropZoneStyle from 'dropzone/dist/min/dropzone.min.css';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { getBanner, updateBanner, deleteBanner } from '../../../../actions/banners';
-import { getBannerTypes } from '../../../../actions/bannerTypes';
-import { getCampaigns } from '../../../../actions/campaigns';
-import { createPlacement, getPlacements } from '../../../../actions/placements';
-import { getBannerHtmlTypes } from '../../../../actions/bannerHtmlTypes';
-import { getAdsServers } from '../../../../actions/adsServers';
-import { getChannels } from '../../../../actions/channels';
+import { getBanner, updateBanner, deleteBanner } from '../../../../actions/banner/banners';
+import { getBannerTypes } from '../../../../actions/bannerType/bannerTypes';
+import { getCampaigns } from '../../../../actions/campaign/campaigns';
+import { createPlacement, getPlacements } from '../../../../actions/placement/placements';
+import { getBannerHtmlTypes } from '../../../../actions/bannerHtmlType/bannerHtmlTypes';
+import { getAdsServers } from '../../../../actions/adsServer/adsServers';
+import { getChannels } from '../../../../actions/channel/channels';
 import {
   createTrack,
   deleteTrack,
   updateTrack,
-} from '../../../../actions/tracks';
-import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activities';
+} from '../../../../actions/track/tracks';
+import { createActivity, getActivitiesBySubjectId } from '../../../../actions/activity/activities';
 import { setPageBannerActiveTab } from '../../../../actions/pages/banners';
 import Layout from '../../../../components/Layout';
 import ListPlacementNotBelongBanner from '../ListPlacementNotBelongBanner';

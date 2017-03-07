@@ -1,0 +1,65 @@
+query getZone($id: ID!) {
+  zones(where: {id: $id}) {
+    id
+    siteId
+    name
+    description
+    zoneType {
+      id
+      name
+      value
+      isSize
+      status
+    }
+    zoneSizeType {
+      id
+      name
+      width
+      height
+    }
+    html
+    css
+    slot
+    width
+    height
+    targetIFrame
+    isShowBannerAgain
+    source
+    isShowCampaignAgain
+    isShowTextBanner
+    characterSetId
+    supportThirdParty
+    isCustomSize
+    isIncludeDescription
+    status
+    shares {
+      id
+      name
+      html
+      css
+      outputCss
+      width
+      height
+      weight
+      classes
+      type
+      description
+      placements {
+        id
+        name
+        width
+        height
+        startTime
+        endTime
+        weight
+        description
+        campaignId
+        status
+        createdAt
+        updatedAt
+      }
+    }
+    createdAt
+    updatedAt
+  }
+}

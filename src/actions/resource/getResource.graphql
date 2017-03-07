@@ -1,0 +1,14 @@
+query getResource($id: ID!){
+  resources(where: {id: $id}, limit: 1) {
+    id
+    uniqueName
+    modelName
+    name
+    hasMeta
+    description
+    status
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

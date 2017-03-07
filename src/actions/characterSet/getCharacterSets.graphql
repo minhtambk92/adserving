@@ -1,0 +1,11 @@
+query getCharacterSets($where: SequelizeJSON){
+  characterSets (where: $where){
+    id
+    name
+    value
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}

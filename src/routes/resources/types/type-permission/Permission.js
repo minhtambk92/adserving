@@ -17,12 +17,12 @@ import {
   createPermission,
   deletePermission,
   updatePermission,
-} from '../../../../actions/permissions';
+} from '../../../../actions/permission/permissions';
 import {
   setStatusCreatePermission,
   setStatusUpdatePermission,
 } from '../../../../actions/pages/resources';
-import { createActivity } from '../../../../actions/activities';
+import { createActivity } from '../../../../actions/activity/activities';
 import PermissionList from './PermissionList';
 import s from './Permission.css';
 

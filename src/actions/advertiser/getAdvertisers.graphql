@@ -1,0 +1,15 @@
+query getAdvertisers($where: SequelizeJSON) {
+  advertisers(where: $where) {
+    id
+    email
+    name
+    contact
+    isEmailReport
+    isEmailStatus
+    reportInterval
+    description
+    status
+    createdAt
+    updatedAt
+  }
+}

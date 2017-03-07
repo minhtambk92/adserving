@@ -1,0 +1,12 @@
+query getBannerTypes($where: SequelizeJSON){
+  bannerTypes (where: $where) {
+    id
+    name
+    value
+    isUpload
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}

@@ -10,7 +10,7 @@ const title = 'Menus Management';
 
 export default {
 
-  path: '/menus',
+  path: '/menu',
 
   children: [{
     path: '/',
