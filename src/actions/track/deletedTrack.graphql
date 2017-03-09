@@ -1,0 +1,11 @@
+mutation deletedTrack($id: ID!){
+  deletedTrack(id: $id) {
+    id
+    clickUrl
+    impressionUrl
+    bannerId
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

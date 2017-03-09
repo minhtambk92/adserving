@@ -1,0 +1,27 @@
+mutation createdZone($zone: ZoneInputTypeWithoutId!) {
+  createdZone(zone: $zone) {
+    id
+    siteId
+    name
+    zoneTypeId
+    zoneSizeTypeId
+    html
+    css
+    slot
+    width
+    height
+    isCustomSize
+    targetIFrame
+    isShowBannerAgain
+    source
+    isShowCampaignAgain
+    isShowTextBanner
+    characterSetId
+    supportThirdParty
+    isIncludeDescription
+    status
+    description
+    createdAt
+    updatedAt
+  }
+}

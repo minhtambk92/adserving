@@ -8,11 +8,13 @@ import {
 
 import queryGetAdvertisers from './getAdvertisers.graphql';
 import queryGetAdvertiser from './getAdvertiser.graphql';
+import mutationUpdatedAdvertiser from './updatedAdvertiser.graphql';
+import mutationCreatedAdvertiser from './createdAdvertiser.graphql';
+import mutationDeleteAdvertiser from './deletedAdvertiser.graphql';
 
 export function getAdvertiser(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
     const { data } = await graphqlRequest(queryGetAdvertiser, { id });
-
     dispatch({
       type: GET_ADVERTISER,
       payload: {
@@ -41,24 +43,7 @@ export function createAdvertiser({
   reportInterval, description, status,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($advertiser: AdvertiserInputTypeWithoutId!) {
-        createdAdvertiser(advertiser: $advertiser) {
-          id
-          email
-          name
-          contact
-          isEmailReport
-          isEmailStatus
-          reportInterval
-          description
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedAdvertiser, {
       advertiser: {
         email,
         name,
@@ -86,24 +71,7 @@ export function updateAdvertiser({
   reportInterval, description, status,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($advertiser: AdvertiserInputType!) {
-        updatedAdvertiser(advertiser: $advertiser) {
-          id
-          email
-          name
-          contact
-          isEmailReport
-          isEmailStatus
-          reportInterval
-          description
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedAdvertiser, {
       advertiser: {
         id,
         email,
@@ -128,25 +96,7 @@ export function updateAdvertiser({
 
 export function deleteAdvertiser(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedAdvertiser(id: "${id}") {
-          id
-          email
-          name
-          contact
-          isEmailReport
-          isEmailStatus
-          reportInterval
-          description
-          status
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeleteAdvertiser, { id });
 
     dispatch({
       type: DELETE_ADVERTISER,

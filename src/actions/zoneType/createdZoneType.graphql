@@ -1,0 +1,12 @@
+mutation createdZoneType($zoneType: ZoneTypeInputTypeWithoutId!) {
+  createdZoneType(zoneType: $zoneType) {
+    id
+    name
+    value
+    isSize
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}

@@ -1,0 +1,12 @@
+mutation updatedZoneType($zoneType: ZoneTypeInputType!) {
+  updatedZoneType(zoneType: $zoneType) {
+    id
+    name
+    value
+    isSize
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}

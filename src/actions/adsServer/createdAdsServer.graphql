@@ -1,0 +1,11 @@
+mutation createdAdsServer($adsServer: AdsServerInputTypeWithoutId!) {
+  createdAdsServer(adsServer: $adsServer) {
+    id
+    name
+    value
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}

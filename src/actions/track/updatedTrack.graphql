@@ -1,0 +1,10 @@
+mutation updatedTrack($track: TrackInputType!) {
+  updatedTrack(track: $track) {
+    id
+    clickUrl
+    impressionUrl
+    bannerId
+    createdAt
+    updatedAt
+  }
+}

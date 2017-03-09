@@ -5,8 +5,7 @@ You should precompile GraphQL queries by require them from *.graphql file.
 Query: ${queryString.trimLeft().substring(0, 60)}`;
 
 function createGraphqlRequest(apolloClient) {
-  return async function graphqlRequest(queryOrString, variables, options = {}) {
-    const { skipCache } = options;
+  return async function graphqlRequest(queryOrString, variables) {
     let query = queryOrString;
     if (typeof queryOrString === 'string') {
       if (__DEV__) {
@@ -16,11 +15,7 @@ function createGraphqlRequest(apolloClient) {
       const gql = await require.ensure(['graphql-tag'], require => require('graphql-tag'), 'graphql-tag');
       query = gql([queryOrString]);
     }
-
-    if (skipCache) {
-      return apolloClient.networkInterface.query({ query, variables });
-    }
-    return apolloClient.query({ query, variables });
+    return apolloClient.networkInterface.query({ query, variables });
   };
 }
 

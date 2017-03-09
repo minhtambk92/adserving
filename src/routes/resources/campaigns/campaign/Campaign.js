@@ -125,6 +125,7 @@ class Campaign extends Component {
                           campaign={this.props.campaigns && this.props.campaigns.editing}
                           updateCampaign={this.props.updateCampaign}
                           advertisers={this.props.advertisers && this.props.advertisers.list}
+                          setPageCampaignActiveTab={this.props.setPageCampaignActiveTab}
                           deleteCampaign={this.props.deleteCampaign}
                           campaignId={this.props.campaignId}
                           getCampaign={this.props.getCampaign}

@@ -1,0 +1,11 @@
+mutation createdCharacterSet($characterSet: CharacterSetInputTypeWithoutId!) {
+  createdCharacterSet(characterSet: $characterSet) {
+    id
+    name
+    value
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}

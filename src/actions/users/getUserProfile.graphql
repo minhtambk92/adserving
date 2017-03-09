@@ -1,5 +1,5 @@
 query getUserProfile($id: ID!){
-  users(where: {id: $id}, limit: 1) {
+  users(where: {id: $id}) {
     id
     email
     emailConfirmed

@@ -1,0 +1,12 @@
+mutation deletedCharacterSet($id: ID!){
+  deletedCharacterSet(id: $id) {
+    id
+    name
+    value
+    status
+    userId
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

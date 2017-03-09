@@ -1,0 +1,10 @@
+mutation updatedChannel($channel: ChannelInputType!) {
+  updatedChannel(channel: $channel) {
+    id
+    name
+    description
+    status
+    createdAt
+    updatedAt
+  }
+}

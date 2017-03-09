@@ -1,0 +1,12 @@
+mutation createdBannerType($bannerType: BannerTypeInputTypeWithoutId!) {
+  createdBannerType(bannerType: $bannerType) {
+    id
+    name
+    value
+    isUpload
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}

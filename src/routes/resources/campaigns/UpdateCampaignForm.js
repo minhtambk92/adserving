@@ -16,6 +16,7 @@ class UpdateCampaignForm extends Component {
     advertisers: PropTypes.array,
     getCampaign: PropTypes.func,
     createActivity: PropTypes.func,
+    setPageCampaignActiveTab: PropTypes.func,
     user: PropTypes.object,
   };
 
@@ -224,7 +225,9 @@ class UpdateCampaignForm extends Component {
         subjectId,
         other,
         userId }).then(() => {
-          this.props.getCampaign(this.props.campaignId);
+          this.props.getCampaign(this.props.campaignId).then(() => {
+            this.props.setPageCampaignActiveTab('editCampaign');
+          });
         });
     });
   }

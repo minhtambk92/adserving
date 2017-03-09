@@ -1,0 +1,14 @@
+mutation updatedResource($resource: ResourceInputType!) {
+  updatedResource(resource: $resource) {
+    id
+    uniqueName
+    modelName
+    name
+    hasMeta
+    description
+    status
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

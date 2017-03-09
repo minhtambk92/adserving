@@ -1,0 +1,10 @@
+mutation deletedPermission($id: ID!){
+  deletedPermission(id: $id) {
+    id
+    name
+    status
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

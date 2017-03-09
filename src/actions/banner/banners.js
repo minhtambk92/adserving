@@ -10,6 +10,9 @@ import {
 
 import queryGetBanner from './getBanner.graphql';
 import queryGetBanners from './getBanners.graphql';
+import mutationCreatedBanner from './createdBanner.graphql';
+import mutationUpdatedBanner from './updatedBanner.graphql';
+import mutationDeletedBanner from './deletedBanner.graphql';
 
 export function getBannersFilters() {
   return async (dispatch) => {
@@ -98,41 +101,7 @@ export function createBanner({
   channelId,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($banner: BannerInputTypeWithoutId!) {
-        createdBanner(banner: $banner) {
-          id
-          name
-          html
-          width
-          height
-          keyword
-          weight
-          description
-          bannerTypeId
-          url
-          target
-          imageUrl
-          isIFrame
-          status
-          adsServerId
-          bannerHtmlTypeId
-          isCountView
-          isFixIE
-          isDefault 
-          isRelative
-          adStore
-          impressionsBooked
-          clicksBooked
-          activationDate
-          expirationDate
-          channelId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedBanner, {
       banner: {
         name,
         html,
@@ -201,55 +170,7 @@ export function updateBanner({
   placements,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($banner: BannerInputType!) {
-       updatedBanner(banner: $banner) {
-          id
-          name
-          html
-          width
-          height
-          keyword
-          weight
-          description
-          bannerTypeId
-          imageUrl
-          url
-          target
-          isIFrame
-          status
-          adsServerId
-          bannerHtmlTypeId
-          isCountView
-          isFixIE
-          isDefault 
-          isRelative
-          adStore
-          impressionsBooked
-          clicksBooked
-          activationDate
-          expirationDate
-          channelId
-          placements {
-              id
-              name
-              width
-              height
-              startTime
-              endTime
-              weight
-              description
-              campaignId
-              status
-              createdAt
-              updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedBanner, {
       banner: {
         id,
         name,
@@ -292,42 +213,7 @@ export function updateBanner({
 
 export function deleteBanner(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedBanner(id: "${id}") {
-          id
-          name
-          html
-          width
-          height
-          keyword
-          weight
-          description
-          bannerTypeId
-          imageUrl
-          url
-          target
-          isIFrame
-          status
-          adsServerId
-          bannerHtmlTypeId
-          isCountView
-          isFixIE
-          isDefault 
-          isRelative
-          adStore
-          impressionsBooked
-          clicksBooked
-          activationDate
-          expirationDate
-          channelId
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedBanner, { id });
 
     dispatch({
       type: DELETE_BANNER,

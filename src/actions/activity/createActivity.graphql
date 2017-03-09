@@ -1,0 +1,12 @@
+mutation createActivity($activity: ActivityInputTypeWithoutId!) {
+  createdActivity(activity: $activity) {
+    id
+    action
+    subject
+    subjectId
+    other
+    userId
+    createdAt
+    updatedAt
+  }
+}

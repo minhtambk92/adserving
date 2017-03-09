@@ -14,6 +14,9 @@ import {
 
 import queryGetResource from './getResource.graphql';
 import queryGetResources from './getResources.graphql';
+import mutationCreatedResouce from './createdResource.graphql';
+import mutationUpdatedResource from './updatedResource.graphql';
+import mutationDeletedResource from './deletedResource.graphql';
 
 export function getResourcesFilters() {
   return async (dispatch) => {
@@ -74,23 +77,7 @@ export function getResources(args = {
 
 export function createResource({ uniqueName, modelName, name, hasMeta, description, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($resource: ResourceInputTypeWithoutId!) {
-        createdResource(resource: $resource) {
-          id
-          uniqueName
-          modelName
-          name
-          hasMeta
-          description
-          status
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedResouce, {
       resource: {
         uniqueName,
         modelName,
@@ -112,23 +99,7 @@ export function createResource({ uniqueName, modelName, name, hasMeta, descripti
 
 export function updateResource({ id, uniqueName, modelName, name, hasMeta, description, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($resource: ResourceInputType!) {
-        updatedResource(resource: $resource) {
-          id
-          uniqueName
-          modelName
-          name
-          hasMeta
-          description
-          status
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedResource, {
       resource: {
         id,
         uniqueName,
@@ -151,23 +122,7 @@ export function updateResource({ id, uniqueName, modelName, name, hasMeta, descr
 
 export function deleteResource(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedResource(id: "${id}") {
-          id
-          uniqueName
-          modelName
-          name
-          hasMeta
-          description
-          status
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedResource, { id });
 
     dispatch({
       type: DELETE_RESOURCE,

@@ -6,6 +6,7 @@ import {
 } from '../../constants';
 
 import queryGetActivitiesBySubjectId from './getActivitiesBySubjectId.graphql';
+import queryCreateActivity from './createActivity.graphql';
 
 export function getActivitiesBySubjectId(subjectId) {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -22,21 +23,7 @@ export function getActivitiesBySubjectId(subjectId) {
 
 export function createActivity({ action, subject, subjectId, other, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($activity: ActivityInputTypeWithoutId!) {
-        createdActivity(activity: $activity) {
-          id
-          action
-          subject
-          subjectId
-          other
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(queryCreateActivity, {
       activity: {
         action,
         subject,

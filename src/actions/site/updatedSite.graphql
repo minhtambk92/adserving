@@ -1,0 +1,12 @@
+mutation updatedSite($site: SiteInputType!) {
+  updatedSite(site: $site) {
+    id
+    domain
+    name
+    email
+    description
+    status
+    createdAt
+    updatedAt
+  }
+}

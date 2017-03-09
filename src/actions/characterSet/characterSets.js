@@ -11,6 +11,9 @@ import {
 } from '../../constants';
 
 import queryGetCharacterSets from './getCharacterSets.graphql';
+import mutationCreateCharacterSet from './createdCharacterSet.graphql';
+import mutationUpdatedCharacterSet from './updatedCharacterSet.graphql';
+import mutationDeletedCharacterSet from './deletedCharacterSet.graphql';
 
 export function getCharacterSets(args = {
   where: {},
@@ -43,20 +46,7 @@ export function getCharacterSets(args = {
 
 export function createCharacterSet({ name, value, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($characterSet: CharacterSetInputTypeWithoutId!) {
-        createdCharacterSet(characterSet: $characterSet) {
-          id
-          name
-          value
-          status
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreateCharacterSet, {
       characterSet: {
         name,
         value,
@@ -76,19 +66,7 @@ export function createCharacterSet({ name, value, status, userId }) {
 
 export function updateCharacterSet({ id, name, value, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($characterSet: CharacterSetInputType!) {
-        updatedCharacterSet(characterSet: $characterSet) {
-          id
-          name
-          value
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedCharacterSet, {
       characterSet: {
         id,
         name,
@@ -108,21 +86,7 @@ export function updateCharacterSet({ id, name, value, status }) {
 
 export function deleteCharacterSet(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedCharacterSet(id: "${id}") {
-          id
-          name
-          value
-          status
-          userId
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedCharacterSet, { id });
 
     dispatch({
       type: DELETE_CHARACTER_SET,

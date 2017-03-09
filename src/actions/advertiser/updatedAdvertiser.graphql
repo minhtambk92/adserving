@@ -1,0 +1,15 @@
+mutation updatedAdvertiser($advertiser: AdvertiserInputType!) {
+  updatedAdvertiser(advertiser: $advertiser) {
+    id
+    email
+    name
+    contact
+    isEmailReport
+    isEmailStatus
+    reportInterval
+    description
+    status
+    createdAt
+    updatedAt
+  }
+}

@@ -1,0 +1,32 @@
+mutation updatedShare($share: ShareInputType!) {
+  updatedShare(share: $share) {
+    id
+    name
+    html
+    css
+    outputCss
+    width
+    height
+    weight
+    classes
+    type
+    description
+    zoneId
+    placements {
+      id
+      name
+      width
+      height
+      startTime
+      endTime
+      weight
+      description
+      campaignId
+      status
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}

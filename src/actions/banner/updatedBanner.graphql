@@ -1,0 +1,46 @@
+mutation updatedBanner($banner: BannerInputType!) {
+  updatedBanner(banner: $banner) {
+    id
+    name
+    html
+    width
+    height
+    keyword
+    weight
+    description
+    bannerTypeId
+    imageUrl
+    url
+    target
+    isIFrame
+    status
+    adsServerId
+    bannerHtmlTypeId
+    isCountView
+    isFixIE
+    isDefault
+    isRelative
+    adStore
+    impressionsBooked
+    clicksBooked
+    activationDate
+    expirationDate
+    channelId
+    placements {
+      id
+      name
+      width
+      height
+      startTime
+      endTime
+      weight
+      description
+      campaignId
+      status
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}

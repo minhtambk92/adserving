@@ -1,0 +1,45 @@
+mutation updatedPlacement($placement: PlacementInputType!) {
+  updatedPlacement(placement: $placement) {
+    id
+    name
+    width
+    height
+    startTime
+    endTime
+    weight
+    description
+    campaignId
+    status
+    banners {
+      id
+      name
+      html
+      width
+      height
+      keyword
+      weight
+      description
+      bannerTypeId
+      imageUrl
+      url
+      target
+      isIFrame
+      status
+      adsServerId
+      bannerHtmlTypeId
+      isCountView
+      isFixIE
+      isDefault
+      isRelative
+      adStore
+      impressionsBooked
+      clicksBooked
+      activationDate
+      expirationDate
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}

@@ -1,0 +1,16 @@
+mutation deletedPlacement($id: ID!){
+  deletedPlacement(id: $id) {
+    id
+    name
+    width
+    height
+    startTime
+    endTime
+    weight
+    description
+    campaignId
+    status
+    createdAt
+    updatedAt
+  }
+}

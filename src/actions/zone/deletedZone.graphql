@@ -1,0 +1,28 @@
+mutation deletedZone($id: ID!){
+  deletedZone(id: $id) {
+    id
+    siteId
+    name
+    description
+    zoneTypeId
+    zoneSizeTypeId
+    html
+    css
+    slot
+    width
+    height
+    targetIFrame
+    isShowBannerAgain
+    source
+    isShowCampaignAgain
+    isShowTextBanner
+    characterSetId
+    supportThirdParty
+    isIncludeDescription
+    isCustomSize
+    status
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

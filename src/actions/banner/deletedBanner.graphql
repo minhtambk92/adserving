@@ -1,0 +1,33 @@
+mutation deletedBanner($id: ID!){
+  deletedBanner(id: $id) {
+    id
+    name
+    html
+    width
+    height
+    keyword
+    weight
+    description
+    bannerTypeId
+    imageUrl
+    url
+    target
+    isIFrame
+    status
+    adsServerId
+    bannerHtmlTypeId
+    isCountView
+    isFixIE
+    isDefault
+    isRelative
+    adStore
+    impressionsBooked
+    clicksBooked
+    activationDate
+    expirationDate
+    channelId
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

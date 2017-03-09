@@ -1,0 +1,12 @@
+mutation updatedZoneSizeType($zoneSizeType: ZoneSizeTypeInputType!) {
+  updatedZoneSizeType(zoneSizeType: $zoneSizeType) {
+    id
+    name
+    width
+    height
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}
