@@ -1,0 +1,21 @@
+mutation deletedUser($id: ID!){
+  deletedUser(id: $id) {
+    id
+    email
+    emailConfirmed
+    status
+    profile {
+      displayName
+    }
+    roles {
+      id
+      uniqueName
+      name
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

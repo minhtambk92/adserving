@@ -1,0 +1,13 @@
+mutation deletedSite($id: ID!){
+  deletedSite(id: $id) {
+    id
+    domain
+    name
+    email
+    description
+    status
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

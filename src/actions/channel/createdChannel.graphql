@@ -1,0 +1,11 @@
+mutation createdChannel($channel: ChannelInputTypeWithoutId!) {
+  createdChannel(channel: $channel) {
+    id
+    name
+    description
+    status
+    siteId
+    createdAt
+    updatedAt
+  }
+}

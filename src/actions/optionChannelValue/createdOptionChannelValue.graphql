@@ -1,0 +1,20 @@
+mutation createdOptionChannelValue($optionChannelValue: OptionChannelValueInputTypeWithoutId!) {
+  createdOptionChannelValue(optionChannelValue: $optionChannelValue) {
+    id
+    name
+    value
+    status
+    userId
+    optionChannelType {
+      id
+      name
+      isInputLink
+      isSelectOption
+      isVariable
+      status
+      userId
+    }
+    createdAt
+    updatedAt
+  }
+}

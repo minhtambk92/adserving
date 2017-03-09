@@ -1,0 +1,13 @@
+mutation deletedZoneSizeType($id: ID!) {
+  deletedZoneSizeType(id: $id) {
+    id
+    name
+    width
+    height
+    status
+    userId
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

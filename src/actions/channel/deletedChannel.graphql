@@ -1,0 +1,11 @@
+mutation deletedChannel($id: ID!){
+  deletedChannel(id: $id) {
+    id
+    name
+    description
+    siteId
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

@@ -1,0 +1,19 @@
+mutation deletedShare($id: ID!){
+  deletedShare(id: $id) {
+    id
+    name
+    html
+    css
+    outputCss
+    width
+    height
+    weight
+    classes
+    type
+    description
+    zoneId
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

@@ -1,0 +1,13 @@
+mutation deletedBannerHtmlType($id: ID!){
+  deletedBannerHtmlType(id: $id) {
+    id
+    name
+    value
+    weight
+    status
+    userId
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

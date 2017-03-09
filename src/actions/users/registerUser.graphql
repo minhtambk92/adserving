@@ -1,0 +1,20 @@
+mutation registerUser($user: UserInputTypeWithoutId!) {
+  createdUser(user: $user) {
+    id
+    email
+    emailConfirmed
+    status
+    profile {
+      displayName
+    }
+    roles {
+      id
+      uniqueName
+      name
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}

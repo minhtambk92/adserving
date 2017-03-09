@@ -1,0 +1,13 @@
+mutation deletedZoneType($id: ID!){
+  deletedZoneType(id: $id) {
+    id
+    name
+    value
+    isSize
+    status
+    userId
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

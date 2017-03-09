@@ -1,0 +1,16 @@
+mutation deletedAdvertiser($id: ID!){
+  deletedAdvertiser(id: $id) {
+    id
+    email
+    name
+    contact
+    isEmailReport
+    isEmailStatus
+    reportInterval
+    description
+    status
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

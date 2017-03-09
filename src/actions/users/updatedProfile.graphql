@@ -1,0 +1,17 @@
+mutation updatedProfile($user: UserInputType!) {
+  updatedUser(user: $user) {
+    id
+    email
+    emailConfirmed
+    status
+    profile {
+      displayName
+      picture
+      website
+      location
+      gender
+    }
+    createdAt
+    updatedAt
+  }
+}

@@ -1,0 +1,14 @@
+mutation createdResource($resource: ResourceInputTypeWithoutId!) {
+  createdResource(resource: $resource) {
+    id
+    uniqueName
+    modelName
+    name
+    hasMeta
+    description
+    status
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

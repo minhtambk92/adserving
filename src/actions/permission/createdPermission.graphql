@@ -1,0 +1,9 @@
+mutation createdPermission($permission: PermissionInputTypeWithoutId!) {
+  createdPermission(permission: $permission) {
+    id
+    name
+    status
+    createdAt
+    updatedAt
+  }
+}

@@ -1,0 +1,27 @@
+mutation updatedZone($zone: ZoneInputType!) {
+  updatedZone(zone: $zone) {
+    id
+    siteId
+    name
+    description
+    zoneTypeId
+    zoneSizeTypeId
+    html
+    css
+    slot
+    width
+    height
+    targetIFrame
+    isShowBannerAgain
+    source
+    isShowCampaignAgain
+    isShowTextBanner
+    characterSetId
+    supportThirdParty
+    isIncludeDescription
+    isCustomSize
+    status
+    createdAt
+    updatedAt
+  }
+}

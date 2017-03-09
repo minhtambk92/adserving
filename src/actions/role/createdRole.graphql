@@ -1,0 +1,10 @@
+mutation deletedRole($id: ID!){
+  deletedRole(id: $id) {
+    id
+    uniqueName
+    name
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

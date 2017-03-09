@@ -1,0 +1,14 @@
+mutation deletedOptionChannelType($id: ID!){
+  deletedOptionChannelType(id: $id) {
+    id
+    name
+    isInputLink
+    isSelectOption
+    isVariable
+    status
+    userId
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

@@ -1,0 +1,13 @@
+mutation deletedBannerType($id: ID!){
+  deletedBannerType(id: $id) {
+    id
+    name
+    value
+    isUpload
+    status
+    userId
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

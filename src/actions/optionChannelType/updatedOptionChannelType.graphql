@@ -1,0 +1,12 @@
+mutation updatedOptionChannelType($optionChannelType: OptionChannelTypeInputType!) {
+  updatedOptionChannelType(optionChannelType: $optionChannelType) {
+    id
+    name
+    isInputLink
+    isSelectOption
+    isVariable
+    status
+    createdAt
+    updatedAt
+  }
+}

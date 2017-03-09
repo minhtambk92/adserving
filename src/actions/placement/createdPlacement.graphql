@@ -1,0 +1,16 @@
+mutation createdPlacement($placement: PlacementInputTypeWithoutId!) {
+  createdPlacement(placement: $placement) {
+    id
+    name
+    width
+    height
+    startTime
+    endTime
+    weight
+    description
+    campaignId
+    status
+    createdAt
+    updatedAt
+  }
+}

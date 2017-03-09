@@ -1,0 +1,20 @@
+mutation updatedCampaign($campaign: CampaignInputType!) {
+  updatedCampaign(campaign: $campaign) {
+    id
+    advertiserId
+    name
+    startTime
+    endTime
+    views
+    viewPerSession
+    timeResetViewCount
+    weight
+    revenueType
+    expireValueCPM
+    maxCPMPerDay
+    description
+    status
+    createdAt
+    updatedAt
+  }
+}

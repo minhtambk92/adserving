@@ -1,0 +1,12 @@
+mutation updatedBannerHtmlType($bannerHtmlType: BannerHtmlTypeInputType!) {
+  updatedBannerHtmlType(bannerHtmlType: $bannerHtmlType) {
+    id
+    name
+    value
+    weight
+    status
+    userId
+    createdAt
+    updatedAt
+  }
+}

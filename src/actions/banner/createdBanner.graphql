@@ -1,0 +1,32 @@
+mutation createdBanner($banner: BannerInputTypeWithoutId!) {
+  createdBanner(banner: $banner) {
+    id
+    name
+    html
+    width
+    height
+    keyword
+    weight
+    description
+    bannerTypeId
+    url
+    target
+    imageUrl
+    isIFrame
+    status
+    adsServerId
+    bannerHtmlTypeId
+    isCountView
+    isFixIE
+    isDefault
+    isRelative
+    adStore
+    impressionsBooked
+    clicksBooked
+    activationDate
+    expirationDate
+    channelId
+    createdAt
+    updatedAt
+  }
+}

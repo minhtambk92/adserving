@@ -1,0 +1,13 @@
+mutation deleted($id: ID!){
+  deletedOptionChannel(id: $id) {
+    id
+    name
+    logical
+    optionChannelTypeId
+    comparison
+    value
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

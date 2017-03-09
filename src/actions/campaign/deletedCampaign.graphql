@@ -1,0 +1,20 @@
+mutation deletedCampaign($id: ID!){
+  deletedCampaign(id: $id) {
+    id
+    advertiserId
+    name
+    startTime
+    endTime
+    views
+    viewPerSession
+    timeResetViewCount
+    weight
+    revenueType
+    expireValueCPM
+    maxCPMPerDay
+    description
+    status
+    createdAt
+    updatedAt
+  }
+}

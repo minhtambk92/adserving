@@ -1,0 +1,14 @@
+mutation deletedResource($id: ID!){
+  deletedResource(id: $id) {
+    id
+    uniqueName
+    modelName
+    name
+    hasMeta
+    description
+    status
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

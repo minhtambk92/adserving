@@ -1,0 +1,10 @@
+mutation updatedCharacterSet($characterSet: CharacterSetInputType!) {
+  updatedCharacterSet(characterSet: $characterSet) {
+    id
+    name
+    value
+    status
+    createdAt
+    updatedAt
+  }
+}

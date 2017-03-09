@@ -1,0 +1,12 @@
+mutation deletedAdsServer($id: ID!){
+  deletedAdsServer(id: $id) {
+    id
+    name
+    value
+    status
+    userId
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}
