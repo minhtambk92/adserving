@@ -16,6 +16,9 @@ import {
 
 import queryGetZone from './getZone.graphql';
 import queryGetZones from './getZones.graphql';
+import mutationCreatedZone from './createdZone.graphql';
+import mutationUpdatedZone from './updatedZone.graphql';
+import mutationDeletedZone from './deletedZone.graphql';
 
 export function getZonesFilters() {
   return async (dispatch) => {
@@ -78,10 +81,15 @@ export function getZones(args = {
 }
 
 export function createZone({
-  siteId, name, zoneTypeId,
+  siteId,
+  name,
+  zoneTypeId,
   zoneSizeTypeId,
-  html, css,
-  slot, width, height,
+  html,
+  css,
+  slot,
+  width,
+  height,
   targetIFrame,
   isShowBannerAgain,
   source,
@@ -95,36 +103,7 @@ export function createZone({
   description,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($zone: ZoneInputTypeWithoutId!) {
-        createdZone(zone: $zone) {
-          id
-          siteId
-          name
-          zoneTypeId
-          zoneSizeTypeId
-          html
-          css
-          slot
-          width
-          height
-          isCustomSize
-          targetIFrame
-          isShowBannerAgain
-          source
-          isShowCampaignAgain
-          isShowTextBanner
-          characterSetId
-          supportThirdParty
-          isIncludeDescription
-          status
-          description
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedZone, {
       zone: {
         siteId,
         name,
@@ -158,8 +137,16 @@ export function createZone({
   };
 }
 export function updateZone({
-  id, siteId, name, zoneTypeId, zoneSizeTypeId,
-  html, css, slot, width, height,
+  id,
+  siteId,
+  name,
+  zoneTypeId,
+  zoneSizeTypeId,
+  html,
+  css,
+  slot,
+  width,
+  height,
   targetIFrame,
   isShowBannerAgain,
   source,
@@ -173,36 +160,7 @@ export function updateZone({
   description,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($zone: ZoneInputType!) {
-        updatedZone(zone: $zone) {
-          id
-          siteId
-          name
-          description
-          zoneTypeId
-          zoneSizeTypeId
-          html
-          css
-          slot
-          width
-          height
-          targetIFrame
-          isShowBannerAgain
-          source
-          isShowCampaignAgain
-          isShowTextBanner
-          characterSetId
-          supportThirdParty
-          isIncludeDescription
-          isCustomSize
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedZone, {
       zone: {
         id,
         siteId,
@@ -239,37 +197,7 @@ export function updateZone({
 
 export function deleteZone(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedZone(id: "${id}") {
-          id
-          siteId
-          name
-          description
-          zoneTypeId
-          zoneSizeTypeId
-          html
-          css
-          slot
-          width
-          height
-          targetIFrame
-          isShowBannerAgain
-          source
-          isShowCampaignAgain
-          isShowTextBanner
-          characterSetId
-          supportThirdParty
-          isIncludeDescription
-          isCustomSize
-          status
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedZone, { id });
 
     dispatch({
       type: DELETE_ZONE,

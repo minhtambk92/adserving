@@ -8,6 +8,9 @@ import {
 } from '../../constants';
 
 import queryGetAdsServers from './getAdsServers.graphql';
+import mutationCreatedAdsServer from './createdAdsServer.graphql';
+import mutationUpdatedAdsServer from './updatedAdsServer.graphql';
+import mutationDeletedAdsServer from './deletedAdsServer.graphql';
 
 export function getAdsServers(args = {
   where: {},
@@ -40,20 +43,7 @@ export function getAdsServers(args = {
 
 export function createAdsServer({ name, value, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($adsServer: AdsServerInputTypeWithoutId!) {
-        createdAdsServer(adsServer: $adsServer) {
-          id
-          name
-          value
-          status
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedAdsServer, {
       adsServer: {
         name,
         value,
@@ -73,20 +63,7 @@ export function createAdsServer({ name, value, status, userId }) {
 
 export function updateAdsServer({ id, name, value, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($adsServer: AdsServerInputType!) {
-        updatedAdsServer(adsServer: $adsServer) {
-          id
-          name
-          value
-          status
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedAdsServer, {
       adsServer: {
         id,
         name,
@@ -106,21 +83,7 @@ export function updateAdsServer({ id, name, value, status }) {
 
 export function deleteAdsServer(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedAdsServer(id: "${id}") {
-          id
-          name
-          value
-          status
-          userId
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedAdsServer, { id });
 
     dispatch({
       type: DELETE_ADS_SERVER,

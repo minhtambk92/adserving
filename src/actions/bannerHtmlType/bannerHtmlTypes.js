@@ -8,6 +8,9 @@ import {
 } from '../../constants';
 
 import queryGetBannerHtmlTypes from './getBannerHtmlTypes.graphql';
+import mutationCreatedBannerHtmlType from './createdBannerHtmlType.graphql';
+import mutationUpdatedBannerHtmlType from './updatedBannerHtmlType.graphql';
+import mutationDeletedBannerHtmlType from './deletedBannerhtmlType.graphql';
 
 export function getBannerHtmlTypes(args = {
   where: {},
@@ -40,21 +43,7 @@ export function getBannerHtmlTypes(args = {
 
 export function createBannerHtmlType({ name, value, weight, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($bannerHtmlType: BannerHtmlTypeInputTypeWithoutId!) {
-        createdBannerHtmlType(bannerHtmlType: $bannerHtmlType) {
-          id
-          name
-          value
-          weight
-          status
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedBannerHtmlType, {
       bannerHtmlType: {
         name,
         value,
@@ -75,21 +64,7 @@ export function createBannerHtmlType({ name, value, weight, status, userId }) {
 
 export function updateBannerHtmlType({ id, name, value, weight, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($bannerHtmlType: BannerHtmlTypeInputType!) {
-        updatedBannerHtmlType(bannerHtmlType: $bannerHtmlType) {
-          id
-          name
-          value
-          weight
-          status
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedBannerHtmlType, {
       bannerHtmlType: {
         id,
         name,
@@ -111,22 +86,7 @@ export function updateBannerHtmlType({ id, name, value, weight, status, userId }
 
 export function deleteBannerHtmlType(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedBannerHtmlType(id: "${id}") {
-          id
-          name
-          value
-          weight
-          status
-          userId
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedBannerHtmlType, { id });
 
     dispatch({
       type: DELETE_BANNER_HTML_TYPE,

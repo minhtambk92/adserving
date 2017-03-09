@@ -4,25 +4,14 @@ import {
   DELETE_OPTION_CHANNEL,
 } from '../../constants';
 
+import mutationCreatedOptionChannel from './createdOptionChannel.graphql';
+import mutationUpdatedOptionChannel from './updatedOptionChannel.graphql';
+import mutationDeletedOptionChannel from './deletedOptionChannel.graphql';
+
 export function createOptionChannel({ name, logical, optionChannelTypeId,
   comparison, value, channelId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($optionChannel: OptionChannelInputTypeWithoutId!) {
-        createdOptionChannel(optionChannel: $optionChannel) {
-          id
-          name
-          logical
-          optionChannelTypeId
-          comparison
-          value
-          channelId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedOptionChannel, {
       optionChannel: {
         name,
         logical,
@@ -45,22 +34,7 @@ export function createOptionChannel({ name, logical, optionChannelTypeId,
 export function updateOptionChannel({ id, name, logical, optionChannelTypeId,
   comparison, value, channelId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($optionChannel: OptionChannelInputType!) {
-        updatedOptionChannel(optionChannel: $optionChannel) {
-          id
-          name
-          logical
-          optionChannelTypeId
-          comparison
-          value
-          channelId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedOptionChannel, {
       optionChannel: {
         id,
         name,
@@ -83,22 +57,7 @@ export function updateOptionChannel({ id, name, logical, optionChannelTypeId,
 
 export function deleteOptionChannel(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedOptionChannel(id: "${id}") {
-          id
-          name
-          logical
-          optionChannelTypeId
-          comparison
-          value
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedOptionChannel, { id });
 
     dispatch({
       type: DELETE_OPTION_CHANNEL,

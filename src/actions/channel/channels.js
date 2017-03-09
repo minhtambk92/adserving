@@ -12,6 +12,9 @@ import {
 
 import queryGetChannel from './getChannel.graphql';
 import queryGetChannels from './getChannels.graphql';
+import mutationCreatedChannel from './createdChannel.graphql';
+import mutationUpdatedChannel from './updatedChannel.graphql';
+import mutationDeletedChannel from './deletedChannel.graphql';
 
 export function getChannelsFilters() {
   return async (dispatch) => {
@@ -75,20 +78,7 @@ export function getChannels(args = {
 
 export function createChannel({ name, description, status, siteId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($channel: ChannelInputTypeWithoutId!) {
-        createdChannel(channel: $channel) {
-          id
-          name
-          description
-          status
-          siteId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedChannel, {
       channel: {
         name,
         description,
@@ -108,19 +98,7 @@ export function createChannel({ name, description, status, siteId }) {
 
 export function updateChannel({ id, name, description, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($channel: ChannelInputType!) {
-        updatedChannel(channel: $channel) {
-          id
-          name
-          description
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedChannel, {
       channel: {
         id,
         name,
@@ -140,20 +118,7 @@ export function updateChannel({ id, name, description, status }) {
 
 export function deleteChannel(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedChannel(id: "${id}") {
-          id
-          name
-          description
-          siteId
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedChannel, { id });
 
     dispatch({
       type: DELETE_CHANNEL,

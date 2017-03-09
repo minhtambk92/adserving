@@ -4,25 +4,17 @@ import {
   DELETE_TRACK,
 } from '../../constants';
 
+import mutationCreatedTrack from './createdTrack.graphql';
+import mutationDeletedTrack from './deletedTrack.graphql';
+import mutationUpdatedTrack from './updatedTrack.graphql';
+
 export function createTrack({
   clickUrl,
   impressionUrl,
   bannerId,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($track: TrackInputTypeWithoutId!) {
-        createdTrack(track: $track) {
-         id
-         clickUrl
-         impressionUrl
-         bannerId
-         createdAt
-         updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedTrack, {
       track: {
         clickUrl,
         impressionUrl,
@@ -46,19 +38,7 @@ export function updateTrack({
   bannerId,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($track: TrackInputType!) {
-        updatedTrack(track: $track) {
-          id
-          clickUrl
-          impressionUrl
-          bannerId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedTrack, {
       track: {
         id,
         clickUrl,
@@ -78,20 +58,7 @@ export function updateTrack({
 
 export function deleteTrack(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedTrack(id: "${id}") {
-          id
-          clickUrl
-          impressionUrl
-          bannerId
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedTrack, { id });
 
     dispatch({
       type: DELETE_TRACK,

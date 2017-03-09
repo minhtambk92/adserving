@@ -6,6 +6,9 @@ import {
 } from '../../constants';
 
 import queryGetPermissions from './getPermissions.graphql';
+import mutationCreatedPermission from './createdPermission.graphql';
+import mutationUpdatedPermission from './updatedPermission.graphql';
+import mutationDeletedPermission from './deletedPermission.graphql';
 
 export function getPermissions() {
   return async (dispatch, getState, { graphqlRequest }) => {
@@ -21,21 +24,11 @@ export function getPermissions() {
 }
 
 export function createPermission({
-  name, status,
+  name,
+  status,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($permission: PermissionInputTypeWithoutId!) {
-        createdPermission(permission: $permission) {
-          id
-          name
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedPermission, {
       permission: {
         name,
         status,
@@ -52,21 +45,12 @@ export function createPermission({
 }
 
 export function updatePermission({
-  id, name, status,
+  id,
+  name,
+  status,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($permission: PermissionInputType!) {
-        updatedPermission(permission: $permission) {
-          id
-          name
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedPermission, {
       permission: {
         id,
         name,
@@ -85,19 +69,7 @@ export function updatePermission({
 
 export function deletePermission(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedPermission(id: "${id}") {
-          id
-          name
-          status
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedPermission, { id });
 
     dispatch({
       type: DELETE_PERMISSION,

@@ -1,5 +1,5 @@
 query getAdvertiser ($id: ID!) {
-  advertisers(where: {id: $id}, limit: 1) {
+  advertisers(where: {id: $id}) {
     id
     email
     name

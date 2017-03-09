@@ -19,6 +19,12 @@ import {
 import queryGetUser from './getUser.graphql';
 import queryGetUserProfile from './getUserProfile.graphql';
 import queryGetUsers from './getUsers.graphql';
+import mutationCreatedUser from './createdUser.graphql';
+import mutationRegisterUser from './registerUser.graphql';
+import mutationUpdatedProfile from './updatedProfile.graphql';
+import mutationUpdatedUser from './updatedUser.graphql';
+import mutationDeletedUser from './deletedUser.graphql';
+
 
 export function getUsersFilters() {
   return async (dispatch) => {
@@ -95,29 +101,7 @@ export function getUsers(args = {
 
 export function createUser({ email, profile, roles, password, emailConfirmed, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($user: UserInputTypeWithoutId!) {
-        createdUser(user: $user) {
-          id
-          email
-          emailConfirmed
-          status
-          profile {
-            displayName
-          }
-          roles {
-            id
-            uniqueName
-            name
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedUser, {
       user: {
         email,
         profile,
@@ -139,29 +123,7 @@ export function createUser({ email, profile, roles, password, emailConfirmed, st
 
 export function updateUser({ id, email, profile, roles, password, emailConfirmed, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($user: UserInputType!) {
-        updatedUser(user: $user) {
-          id
-          email
-          emailConfirmed
-          status
-          profile {
-            displayName
-          }
-          roles {
-            id
-            uniqueName
-            name
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedUser, {
       user: {
         id,
         email,
@@ -184,26 +146,7 @@ export function updateUser({ id, email, profile, roles, password, emailConfirmed
 
 export function updateProfile({ id, profile }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($user: UserInputType!) {
-        updatedUser(user: $user) {
-          id
-          email
-          emailConfirmed
-          status
-          profile {
-            displayName
-            picture
-            website
-            location
-            gender
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedProfile, {
       user: {
         id,
         profile,
@@ -222,30 +165,7 @@ export function updateProfile({ id, profile }) {
 
 export function deleteUser(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedUser(id: "${id}") {
-          id
-          email
-          emailConfirmed
-          status
-          profile {
-            displayName
-          }
-          roles {
-            id
-            uniqueName
-            name
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedUser, { id });
 
     dispatch({
       type: DELETE_USER,
@@ -258,29 +178,7 @@ export function deleteUser(id) {
 
 export function registerUser({ email, password, fullName }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($user: UserInputTypeWithoutId!) {
-        createdUser(user: $user) {
-          id
-          email
-          emailConfirmed
-          status
-          profile {
-            displayName
-          }
-          roles {
-            id
-            uniqueName
-            name
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationRegisterUser, {
       user: {
         email,
         roles: ['user'],

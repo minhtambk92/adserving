@@ -10,6 +10,9 @@ import {
 
 import queryGetCampaigns from './getCampaigns.graphql';
 import queryGetCampaign from './getCampaign.graphql';
+import mutationCreatedCampaign from './createdCampaign.graphql';
+import mutationUpdatedCampaign from './updatedCampaign.graphql';
+import mutationDeletedCampaign from './deletedCampaign.graphql';
 
 export function getCampaignsFilters() {
   return async (dispatch) => {
@@ -86,29 +89,7 @@ export function createCampaign({
   status,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($campaign: CampaignInputTypeWithoutId!) {
-        createdCampaign(campaign: $campaign) {
-          id
-          advertiserId
-          name
-          startTime
-          endTime
-          views
-          viewPerSession
-          timeResetViewCount
-          weight
-          revenueType
-          expireValueCPM
-          maxCPMPerDay
-          description
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedCampaign, {
       campaign: {
         advertiserId,
         name,
@@ -152,29 +133,7 @@ export function updateCampaign({
   status,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($campaign: CampaignInputType!) {
-        updatedCampaign(campaign: $campaign) {
-          id
-          advertiserId
-          name
-          startTime
-          endTime
-          views
-          viewPerSession
-          timeResetViewCount
-          weight
-          revenueType
-          expireValueCPM
-          maxCPMPerDay
-          description
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedCampaign, {
       campaign: {
         id,
         advertiserId,
@@ -204,29 +163,7 @@ export function updateCampaign({
 
 export function deleteCampaign(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedCampaign(id: "${id}") {
-           id
-          advertiserId
-          name
-          startTime
-          endTime
-          views
-          viewPerSession
-          timeResetViewCount
-          weight
-          revenueType
-          expireValueCPM
-          maxCPMPerDay
-          description
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedCampaign, { id });
 
     dispatch({
       type: DELETE_CAMPAIGN,

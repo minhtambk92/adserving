@@ -10,6 +10,9 @@ import {
 
 import queryGetPlacements from './getPlacements.graphql';
 import queryGetPlacement from './getPlacement.graphql';
+import mutationCreatedPlacement from './createdPlacement.graphql';
+import mutationUpdatedPlacement from './updatedPlacement.graphql';
+import mutationDeletedPlacement from './deletedPlacement.graphql';
 
 export function getPlacementsFilters() {
   return async (dispatch) => {
@@ -82,25 +85,7 @@ export function createPlacement({
   status,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($placement: PlacementInputTypeWithoutId!) {
-        createdPlacement(placement: $placement) {
-          id
-          name
-          width
-          height
-          startTime
-          endTime
-          weight
-          description
-          campaignId
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedPlacement, {
       placement: {
         name,
         width,
@@ -136,54 +121,7 @@ export function updatePlacement({
   banners,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($placement: PlacementInputType!) {
-        updatedPlacement(placement: $placement) {
-          id
-          name
-          width
-          height
-          startTime
-          endTime
-          weight
-          description
-          campaignId
-          status
-          banners {
-            id
-            name
-            html
-            width
-            height
-            keyword
-            weight
-            description
-            bannerTypeId
-            imageUrl
-            url
-            target
-            isIFrame
-            status
-            adsServerId
-            bannerHtmlTypeId
-            isCountView
-            isFixIE
-            isDefault 
-            isRelative
-            adStore
-            impressionsBooked
-            clicksBooked
-            activationDate
-            expirationDate
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedPlacement, {
       placement: {
         id,
         name,
@@ -210,25 +148,7 @@ export function updatePlacement({
 
 export function deletePlacement(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedPlacement(id: "${id}") {
-          id
-          name
-          width
-          height
-          startTime
-          endTime
-          weight
-          description
-          campaignId
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedPlacement, { id });
 
     dispatch({
       type: DELETE_PLACEMENT,

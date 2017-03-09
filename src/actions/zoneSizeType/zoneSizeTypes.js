@@ -8,6 +8,9 @@ import {
 } from '../../constants';
 
 import queryGetZoneSizeTypes from './getZoneSizeTypes.graphql';
+import mutationCreatedZoneSizeType from './createdZoneSizeType.graphql';
+import mutationUpdatedZoneSizeType from './updatedZoneSizeType.graphql';
+import mutationDeletedZoneSizeType from './deletedZoneSizeType.graphql';
 
 export function getZoneSizeTypes(args = {
   where: {},
@@ -40,21 +43,7 @@ export function getZoneSizeTypes(args = {
 
 export function createZoneSizeType({ name, width, height, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($zoneSizeType: ZoneSizeTypeInputTypeWithoutId!) {
-        createdZoneSizeType(zoneSizeType: $zoneSizeType) {
-          id
-          name
-          width
-          height
-          status
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedZoneSizeType, {
       zoneSizeType: {
         name,
         width,
@@ -75,21 +64,7 @@ export function createZoneSizeType({ name, width, height, status, userId }) {
 
 export function updateZoneSizeType({ id, name, width, height, status }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($zoneSizeType: ZoneSizeTypeInputType!) {
-        updatedZoneSizeType(zoneSizeType: $zoneSizeType) {
-          id
-          name
-          width
-          height
-          status
-          userId
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedZoneSizeType, {
       zoneSizeType: {
         id,
         name,
@@ -110,22 +85,7 @@ export function updateZoneSizeType({ id, name, width, height, status }) {
 
 export function deleteZoneSizeType(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedZoneSizeType(id: "${id}") {
-          id
-          name
-          width
-          height
-          status
-          userId
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedZoneSizeType, { id });
 
     dispatch({
       type: DELETE_ZONE_SIZE_TYPE,

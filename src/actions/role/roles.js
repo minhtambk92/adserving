@@ -14,6 +14,9 @@ import {
 
 import queryGetRole from './getRole.graphql';
 import queryGetRoles from './getRoles.graphql';
+import mutationCreatedRole from './createdRole.graphql';
+import mutationUpdatedRole from './updatedRole.graphql';
+import mutationDeletedRole from './deletedRole.graphql';
 
 export function getRolesFilters() {
   return async (dispatch) => {
@@ -74,18 +77,7 @@ export function getRoles(args = {
 
 export function createRole({ uniqueName, name }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($role: RoleInputTypeWithoutId!) {
-        createdRole(role: $role) {
-          id
-          uniqueName
-          name
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, { role: { uniqueName, name } });
+    const { data } = await graphqlRequest(mutationCreatedRole, { role: { uniqueName, name } });
 
     dispatch({
       type: CREATE_ROLE,
@@ -98,18 +90,7 @@ export function createRole({ uniqueName, name }) {
 
 export function updateRole({ id, uniqueName, name }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($role: RoleInputType!) {
-        updatedRole(role: $role) {
-          id
-          uniqueName
-          name
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, { role: { id, uniqueName, name } });
+    const { data } = await graphqlRequest(mutationUpdatedRole, { role: { id, uniqueName, name } });
 
     dispatch({
       type: UPDATE_ROLE,
@@ -122,19 +103,7 @@ export function updateRole({ id, uniqueName, name }) {
 
 export function deleteRole(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedRole(id: "${id}") {
-          id
-          uniqueName
-          name
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedRole, { id });
 
     dispatch({
       type: DELETE_ROLE,

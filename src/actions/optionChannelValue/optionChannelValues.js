@@ -10,6 +10,9 @@ import {
 } from '../../constants';
 
 import queryGetOptionChannelValues from './getOptionChannelValues.graphql';
+import mutationCreatedOptionChannelVaulue from './createdOptionChannelValue.graphql';
+import mutationUpdatedOptionChannelVaulue from './updatedOptionChannelValue.graphql';
+import mutationDeletedOptionChannelVaulue from './deletedOptionChannelValue.graphql';
 
 export function setOptionChannelValueFilters(filter) {
   return async (dispatch) => {
@@ -60,29 +63,7 @@ export function getOptionChannelValues(args = {
 
 export function createOptionChannelValue({ name, value, status, optionChannelTypeId, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($optionChannelValue: OptionChannelValueInputTypeWithoutId!) {
-        createdOptionChannelValue(optionChannelValue: $optionChannelValue) {
-          id
-          name
-          value
-          status
-          userId
-          optionChannelType {
-            id
-            name
-            isInputLink
-            isSelectOption
-            isVariable
-            status
-            userId
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationCreatedOptionChannelVaulue, {
       optionChannelValue: {
         name,
         value,
@@ -103,28 +84,7 @@ export function createOptionChannelValue({ name, value, status, optionChannelTyp
 
 export function updateOptionChannelValue({ id, name, value, status, optionChannelTypeId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($optionChannelValue: OptionChannelValueInputType!) {
-        updatedOptionChannelValue(optionChannelValue: $optionChannelValue) {
-          id
-          name
-          value
-          status
-          userId
-          optionChannelType {
-            id
-            name
-            isInputLink
-            isSelectOption
-            isVariable
-            status
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
+    const { data } = await graphqlRequest(mutationUpdatedOptionChannelVaulue, {
       optionChannelValue: {
         id,
         name,
@@ -145,22 +105,7 @@ export function updateOptionChannelValue({ id, name, value, status, optionChanne
 
 export function deleteOptionChannelValue(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedOptionChannelValue(id: "${id}") {
-          id
-          name
-          value
-          status
-          userId
-          optionChannelTypeId
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+    const { data } = await graphqlRequest(mutationDeletedOptionChannelVaulue, { id });
 
     dispatch({
       type: DELETE_OPTION_CHANNEL_VALUE,
