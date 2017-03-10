@@ -32,8 +32,6 @@ const advertisers = {
     },
     resolve: resolver(Advertiser, {
       async before(options, args) {
-        console.log(options);
-        console.log(args);
         const opts = options;
         opts.where = options.where || {};
         opts.where.id = { $eq: args.advertiser.id };
