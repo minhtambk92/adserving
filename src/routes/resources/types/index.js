@@ -77,7 +77,6 @@ export default {
           }),
           credentials: 'include',
         });
-
         const { data } = await resp.json();
 
         if (!data || !data.resources || data.resources.length === 0) {

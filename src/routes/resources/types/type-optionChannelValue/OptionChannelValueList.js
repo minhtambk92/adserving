@@ -147,7 +147,7 @@ class OptionChannelValueList extends Component {
         <div className="col-sm-12">
           <div className="box">
             <div className="box-header">
-              <h3 className="box-title">List Option Channel Type</h3>
+              <h3 className="box-title">List Option Channel Value</h3>
             </div>
             {/* /.box-header */}
             <div className="box-body">
