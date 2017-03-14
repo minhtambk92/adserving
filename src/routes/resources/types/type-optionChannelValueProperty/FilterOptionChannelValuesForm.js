@@ -1,25 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 
-class FilterOptionChannelTypesForm extends Component {
+class FilterOptionChannelValuesForm extends Component {
 
   static propTypes = {
     filters: PropTypes.object,
-    optionChannelTypeList: PropTypes.array.isRequired,
-    setOptionChannelValueFilters: PropTypes.func.isRequired,
-    currentOptionChannelTypeId: PropTypes.string,
+    optionChannelValueList: PropTypes.array.isRequired,
+    setOptionChannelValuePropertyFilters: PropTypes.func.isRequired,
+    currentOptionChannelValueId: PropTypes.string,
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentOptionChannelTypeId === undefined &&
-      nextProps.optionChannelTypeList.length > 0) {
-      this.inputOptionChannelTypesFilters.value = nextProps.optionChannelTypeList[0].id;
+    if (nextProps.currentOptionChannelValueId === undefined &&
+      nextProps.optionChannelValueList.length > 0) {
+      this.inputOptionChannelValuesFilters.value = nextProps.optionChannelValueList[0].id;
     }
   }
 
   onFilterChange(event, field) {
     event.persist();
 
-    this.props.setOptionChannelValueFilters({
+    this.props.setOptionChannelValuePropertyFilters({
       [field]: event.target.value,
     });
   }
@@ -31,26 +31,26 @@ class FilterOptionChannelTypesForm extends Component {
           {/* placement */}
           <div className="form-group">
             <label
-              htmlFor="inputOptionChannelTypesFilterPlacement"
+              htmlFor="inputOptionChannelValuesFilterPlacement"
               className="col-sm-2 control-label"
-            >Option Channel Type</label>
+            >Option Channel Value</label>
             <div className="col-sm-10">
               <select
-                id="inputOptionChannelTypesFilters"
+                id="inputOptionChannelValuesFilters"
                 className="form-control select2"
                 style={{ width: '100%' }}
-                onChange={event => this.onFilterChange(event, 'optionChannelTypeId')}
+                onChange={event => this.onFilterChange(event, 'optionChannelValueId')}
                 ref={(c) => {
-                  this.inputOptionChannelTypesFilters = c;
+                  this.inputOptionChannelValuesFilters = c;
                 }}
                 defaultValue={this.props.filters &&
-                          this.props.filters.optionChannelTypeId}
+                this.props.filters.optionChannelValueId}
               >
-                {this.props.optionChannelTypeList &&
-                this.props.optionChannelTypeList.map(optionChannelType => (
+                {this.props.optionChannelValueList &&
+                this.props.optionChannelValueList.map(optionChannelValue => (
                   <option
-                    key={optionChannelType.id} value={optionChannelType.id}
-                  >{optionChannelType.name}</option>
+                    key={optionChannelValue.id} value={optionChannelValue.id}
+                  >{optionChannelValue.name}</option>
                 ))}
               </select>
             </div>
@@ -58,18 +58,18 @@ class FilterOptionChannelTypesForm extends Component {
           {/* status */}
           <div className="form-group">
             <label
-              htmlFor="inputOptionChannelTypesFilterStatus"
+              htmlFor="inputOptionChannelValuesFilterStatus"
               className="col-sm-2 control-label"
             >Status</label>
             <div className="col-sm-10">
               <select
-                id="inputOptionChannelTypesFilterStatus" className="form-control"
+                id="inputOptionChannelValuesFilterStatus" className="form-control"
                 ref={(c) => {
-                  this.inputOptionChannelTypesFilterStatus = c;
+                  this.inputOptionChannelValuesFilterStatus = c;
                 }}
                 onChange={event => this.onFilterChange(event, 'status')}
                 defaultValue={this.props.filters &&
-                          this.props.filters.status}
+                this.props.filters.status}
               >
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
@@ -83,4 +83,4 @@ class FilterOptionChannelTypesForm extends Component {
   }
 }
 
-export default FilterOptionChannelTypesForm;
+export default FilterOptionChannelValuesForm;

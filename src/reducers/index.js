@@ -28,6 +28,7 @@ import characterSets from './characterSets';
 import optionChannelTypes from './optionChannelTypes';
 import optionChannelValues from './optionChannelValues';
 import activities from './activities';
+import optionChannelValueProperties from './optionChannelValueProperties';
 
 import page from './pages';
 
@@ -64,5 +65,6 @@ export default function createRootReducer({ apolloClient }) {
     optionChannelTypes,
     optionChannelValues,
     activities,
+    optionChannelValueProperties,
   });
 }

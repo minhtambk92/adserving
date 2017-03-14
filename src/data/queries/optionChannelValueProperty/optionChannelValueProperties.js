@@ -6,20 +6,18 @@ import {
   GraphQLList as List,
 } from 'graphql';
 import { resolver, defaultListArgs } from 'graphql-sequelize';
-import OptionChannelTypeType from '../../types/optionChannelType/OptionChannelTypeType';
-import { OptionChannelType } from '../../models';
+import OptionChannelValuePropertyType from '../../types/optionChannelValueProperty/OptionChannelValuePropertyType';
+import { OptionChannelValueProperty } from '../../models';
 
-const optionChannelTypes = {
-  type: new List(OptionChannelTypeType),
+const optionChannelValueProperties = {
+  type: new List(OptionChannelValuePropertyType),
   args: Object.assign(defaultListArgs(), {
     // Additional params
   }),
-  resolve: resolver(OptionChannelType, {
+  resolve: resolver(OptionChannelValueProperty, {
     before(options, args, res) {
       const opts = options;
-      if (res.body.variables !== undefined && res.body.variables !== null) {
-        opts.where = res.body.variables;
-      }
+      opts.where = res.body.variables;
       opts.order = options.order || [];
       opts.order.push(['createdAt', 'DESC']);
       return opts;
@@ -27,4 +25,4 @@ const optionChannelTypes = {
   }),
 };
 
-export default optionChannelTypes;
+export default optionChannelValueProperties;

@@ -1,6 +1,7 @@
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
+import { ICheck } from '../../../../components/UI';
 import Link from '../../../../components/Link';
 
 class CreateOptionChannelValueForm extends Component {
@@ -16,6 +17,12 @@ class CreateOptionChannelValueForm extends Component {
     user: PropTypes.object,
     createActivity: PropTypes.func,
   };
+
+  componentDidMount() {
+    /* eslint-disable no-undef */
+    $('#inputOptionChannelValueIsProperties').iCheck('check');
+    /* eslint-enable no-undef */
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentOptionChannelTypeId && nextProps.currentOptionChannelTypeId !== 'null' && nextProps.currentOptionChannelTypeId !== '') {
@@ -52,6 +59,7 @@ class CreateOptionChannelValueForm extends Component {
     const status = this.inputOptionChannelValueStatus.value;
     const optionChannelTypeId = this.inputOptionChannelTypeId.value;
     const userId = this.props.user.id;
+    const isProperties = document.getElementById('inputOptionChannelValueIsProperties').checked;
     if (name) {
       this.props.createOptionChannelValue({
         name,
@@ -59,6 +67,7 @@ class CreateOptionChannelValueForm extends Component {
         status,
         optionChannelTypeId,
         userId,
+        isProperties,
       }).then(() => {
         if (this.props.optionChannelValues && this.props.optionChannelValues.list.length > 0) {
           /* eslint-disable no-shadow */
@@ -136,6 +145,20 @@ class CreateOptionChannelValueForm extends Component {
                     >{option.name}</option>
                   ))}
                 </select>
+              </div>
+            </div>
+            <div className="form-group">
+              <label
+                htmlFor="inputOptionChannelValueIsProperties"
+                className="col-sm-2 control-label"
+              >Has Properties</label>
+              <div className="col-sm-10 checkbox">
+                <ICheck
+                  type="checkbox" id="inputOptionChannelValueIsProperties" className="form-control"
+                  ref={(c) => {
+                    this.inputOptionChannelValueIsProperties = c;
+                  }}
+                />
               </div>
             </div>
             <div className="form-group">

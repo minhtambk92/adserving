@@ -14,7 +14,7 @@ import {
   STATUS_INACTIVE,
 } from '../../constants';
 
-const OptionChannelValue = Model.define('OptionChannelValue', {
+const OptionChannelValueProperty = Model.define('OptionChannelValueProperty', {
 
   id: {
     type: DataType.UUID,
@@ -24,16 +24,9 @@ const OptionChannelValue = Model.define('OptionChannelValue', {
   name: {
     type: DataType.STRING,
   },
-  value: {
-    type: DataType.STRING,
-  },
   userId: {
     type: DataType.UUID,
     defaultValue: null,
-  },
-  isProperties: {
-    type: DataType.BOOLEAN,
-    defaultValue: true,
   },
   status: {
     type: DataType.STRING,
@@ -43,6 +36,9 @@ const OptionChannelValue = Model.define('OptionChannelValue', {
       isIn: [[STATUS_ACTIVE, STATUS_INACTIVE]],
     },
   },
+  description: {
+    type: DataType.TEXT,
+  },
 
 }, {
 
@@ -50,4 +46,4 @@ const OptionChannelValue = Model.define('OptionChannelValue', {
 
 });
 
-export default OptionChannelValue;
+export default OptionChannelValueProperty;

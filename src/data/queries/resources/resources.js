@@ -17,7 +17,7 @@ const resources = {
   resolve: resolver(Resource, {
     before(options, args, res) {
       const opts = options;
-      if (res.body.variables !== undefined) {
+      if (res.body.variables !== undefined && res.body.variables !== null) {
         opts.where = res.body.variables;
       }
       opts.order = options.order || [];

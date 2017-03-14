@@ -1,22 +1,21 @@
 import { combineReducers } from 'redux';
 import {
-  GET_OPTION_CHANNEL_VALUES,
-  CREATE_OPTION_CHANNEL_VALUE,
-  UPDATE_OPTION_CHANNEL_VALUE,
-  DELETE_OPTION_CHANNEL_VALUE,
-  SET_OPTION_CHANNEL_VALUE_FILTER,
-  GET_OPTION_CHANNEL_VALUE_FILTER,
-  GET_OPTION_CHANNEL_VALUE_IS_PROPERTIES,
+  GET_OPTION_CHANNEL_VALUE_PROPERTIES,
+  CREATE_OPTION_CHANNEL_VALUE_PROPERTY,
+  UPDATE_OPTION_CHANNEL_VALUE_PROPERTY,
+  DELETE_OPTION_CHANNEL_VALUE_PROPERTY,
+  SET_OPTION_CHANNEL_VALUE_PROPERTY_FILTER,
+  GET_OPTION_CHANNEL_VALUE_PROPERTY_FILTER,
 } from '../constants';
 
 function filters(state = {}, action) {
   switch (action.type) {
-    case GET_OPTION_CHANNEL_VALUE_FILTER: {
+    case GET_OPTION_CHANNEL_VALUE_PROPERTY_FILTER: {
       return {
         ...state,
       };
     }
-    case SET_OPTION_CHANNEL_VALUE_FILTER: {
+    case SET_OPTION_CHANNEL_VALUE_PROPERTY_FILTER: {
       const newState = Object.assign({}, state);
       const criteriaValue = Object.values(action.payload).pop();
       const criteriaKey = Object.keys(action.payload).pop();
@@ -54,14 +53,11 @@ function filters(state = {}, action) {
 
 function list(state = [], action) {
   switch (action.type) {
-    case GET_OPTION_CHANNEL_VALUES: {
-      return action.payload.optionChannelValues;
+    case GET_OPTION_CHANNEL_VALUE_PROPERTIES: {
+      return action.payload.optionChannelValueProperties;
     }
-    case GET_OPTION_CHANNEL_VALUE_IS_PROPERTIES: {
-      return action.payload.optionChannelValues;
-    }
-    case CREATE_OPTION_CHANNEL_VALUE: {
-      return [action.payload.optionChannelValue, ...state];
+    case CREATE_OPTION_CHANNEL_VALUE_PROPERTY: {
+      return [action.payload.optionChannelValueProperty, ...state];
     }
     default: {
       return state;
@@ -71,10 +67,10 @@ function list(state = [], action) {
 
 function editing(state = {}, action) {
   switch (action.type) {
-    case UPDATE_OPTION_CHANNEL_VALUE: {
-      return action.payload.optionChannelValue;
+    case UPDATE_OPTION_CHANNEL_VALUE_PROPERTY: {
+      return action.payload.optionChannelValueProperty;
     }
-    case DELETE_OPTION_CHANNEL_VALUE: {
+    case DELETE_OPTION_CHANNEL_VALUE_PROPERTY: {
       return null;
     }
     default: {
@@ -83,10 +79,10 @@ function editing(state = {}, action) {
   }
 }
 
-const optionChannelValues = combineReducers({
+const optionChannelValueProperties = combineReducers({
   list,
   filters,
   editing,
 });
 
-export default optionChannelValues;
+export default optionChannelValueProperties;

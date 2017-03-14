@@ -27,7 +27,7 @@ const Channel = Model.define('Channel', {
     defaultValue: '',
   },
   description: {
-    type: DataType.STRING,
+    type: DataType.TEXT,
   },
   status: {
     type: DataType.STRING,

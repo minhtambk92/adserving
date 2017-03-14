@@ -27,6 +27,7 @@ import characterSets from './characterSets';
 import optionChannelTypes from './optionChannelTypes';
 import optionChannelValues from './optionChannelValues';
 import activities from './activities';
+import optionChannelValueProperties from './optionChannelValueProperties';
 
 const mutations = new ObjectType({
   name: 'Mutation',
@@ -55,6 +56,7 @@ const mutations = new ObjectType({
     ...optionChannelTypes,
     ...optionChannelValues,
     ...activities,
+    ...optionChannelValueProperties,
   },
 });
 

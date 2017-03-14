@@ -1,5 +1,5 @@
-mutation deletedOptionChannelValue($id : ID!){
-  deletedOptionChannelValue(id: $id) {
+query getOptionChannelValueIsProperties{
+  optionChannelValues(where: {isProperties: true}) {
     id
     name
     value

@@ -26,6 +26,8 @@ import {
   SET_STATUS_UPDATE_OPTION_CHANNEL_TYPE,
   SET_STATUS_CREATE_OPTION_CHANNEL_VALUE,
   SET_STATUS_UPDATE_OPTION_CHANNEL_VALUE,
+  SET_STATUS_CREATE_OPTION_CHANNEL_VALUE_PROPERTY,
+  SET_STATUS_UPDATE_OPTION_CHANNEL_VALUE_PROPERTY,
 } from '../../constants';
 
 function currentPage(state = '', action) {
@@ -315,6 +317,28 @@ function statusUpdateOptionChannelValue(state = false, action) {
   }
 }
 
+function statusCreateOptionChannelValueProperty(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_CREATE_OPTION_CHANNEL_VALUE_PROPERTY: {
+      return action.payload.statusCreateOptionChannelValueProperty;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+function statusUpdateOptionChannelValueProperty(state = false, action) {
+  switch (action.type) {
+    case SET_STATUS_UPDATE_OPTION_CHANNEL_VALUE_PROPERTY: {
+      return action.payload.statusUpdateOptionChannelValueProperty;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 export default combineReducers({
   currentPage,
   statusCreateRole,
@@ -342,4 +366,6 @@ export default combineReducers({
   statusUpdateOptionChannelType,
   statusCreateOptionChannelValue,
   statusUpdateOptionChannelValue,
+  statusUpdateOptionChannelValueProperty,
+  statusCreateOptionChannelValueProperty,
 });

@@ -6,6 +6,7 @@
     "status": "active",
     "createdAt": "2017-01-20 03:21:15",
     "updatedAt": "2017-01-20 03:21:15",
+    "isProperties": "1",
     "deletedAt": null,
     "optionChannelTypeId": "e2fb2068-9430-4e69-950c-101c15a4caec"
   },
@@ -17,6 +18,7 @@
     "createdAt": "2017-01-20 03:21:31",
     "updatedAt": "2017-01-20 03:21:31",
     "deletedAt": null,
+    "isProperties": "1",
     "optionChannelTypeId": "e2fb2068-9430-4e69-950c-101c15a4caec"
   },
   {
@@ -27,6 +29,7 @@
     "createdAt": "2017-01-20 03:21:23",
     "updatedAt": "2017-01-20 03:21:23",
     "deletedAt": null,
+    "isProperties": "1",
     "optionChannelTypeId": "e2fb2068-9430-4e69-950c-101c15a4caec"
   },
   {
@@ -37,6 +40,7 @@
     "createdAt": "2017-01-20 03:20:48",
     "updatedAt": "2017-01-20 03:20:48",
     "deletedAt": null,
+    "isProperties": "1",
     "optionChannelTypeId": "e2fb2068-9430-4e69-950c-101c15a4caec"
   },
   {
@@ -47,6 +51,7 @@
     "createdAt": "2017-01-20 03:21:57",
     "updatedAt": "2017-01-20 03:21:57",
     "deletedAt": null,
+    "isProperties": "1",
     "optionChannelTypeId": "06f41550-b299-4abf-8b52-4577cc49c009"
   },
   {
@@ -57,6 +62,7 @@
     "createdAt": "2017-01-20 03:22:07",
     "updatedAt": "2017-01-20 03:22:07",
     "deletedAt": null,
+    "isProperties": "1",
     "optionChannelTypeId": "06f41550-b299-4abf-8b52-4577cc49c009"
   },
   {
@@ -64,6 +70,7 @@
     "name": "V\u0103n Ho\u00e1",
     "value": "van-hoa",
     "status": "active",
+    "isProperties": "1",
     "createdAt": "2017-01-20 03:21:45",
     "updatedAt": "2017-01-20 03:22:18",
     "deletedAt": null,
