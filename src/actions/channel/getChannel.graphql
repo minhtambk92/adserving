@@ -20,6 +20,7 @@ query getChanenl($id: ID!){
           name
           value
           status
+          isProperties
           optionChannelValueProperties {
             id
             name
