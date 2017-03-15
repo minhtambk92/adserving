@@ -444,12 +444,9 @@ class Channel extends Component {
                               id={option.id}
                               name={option.optionChannelType.name}
                               index={index + 1}
-                              value={option.value}
-                              comparison={option.comparison}
                               data={option.optionChannelType.optionChannelValues}
-                              logical={option.logical}
                               deleteOptionChannel={this.props.deleteOptionChannel}
-                              optionChannelId={option.id}
+                              option={option}
                               createActivity={this.props.createActivity}
                               user={this.props.user}
                             />);
@@ -460,13 +457,10 @@ class Channel extends Component {
                                 id={option.id}
                                 index={index + 1}
                                 type={option.optionChannelType}
-                                logical={option.logical}
-                                name={option.name}
-                                value={option.value}
-                                comparison={option.comparison}
                                 createActivity={this.props.createActivity}
                                 deleteOptionChannel={this.props.deleteOptionChannel}
-                                optionChannelId={option.id}
+                                name={option.name}
+                                option={option}
                                 user={this.props.user}
                               />
                             );
