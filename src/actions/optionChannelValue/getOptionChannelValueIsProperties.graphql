@@ -6,7 +6,15 @@ query getOptionChannelValueIsProperties{
     status
     userId
     isProperties
-    optionChannelTypeId
+    optionChannelType {
+      id
+      name
+      isInputLink
+      isSelectOption
+      isVariable
+      status
+      userId
+    }
     createdAt
     updatedAt
     deletedAt

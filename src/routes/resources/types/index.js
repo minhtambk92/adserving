@@ -76,6 +76,9 @@ export default {
             }`,
           }),
           credentials: 'include',
+        }).catch((error) => {
+          // network request failed / timeout
+          console.log(error);
         });
         const { data } = await resp.json();
 

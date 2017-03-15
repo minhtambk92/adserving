@@ -20,6 +20,12 @@ query getChanenl($id: ID!){
           name
           value
           status
+          optionChannelValueProperties {
+            id
+            name
+            description
+            status
+          }
         }
       }
       logical

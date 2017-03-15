@@ -22,6 +22,7 @@ class OptionChannelValueList extends Component {
     optionChannelTypeList: PropTypes.array,
     user: PropTypes.object,
     createActivity: PropTypes.func,
+    setOptionChannelValuePropertyFilters: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -37,6 +38,10 @@ class OptionChannelValueList extends Component {
   componentWillMount() {
     this.props.statusCreateOptionChannelValue(true);
     this.props.statusUpdateOptionChannelValue(false);
+  }
+
+  addOptionChannelValueProperty(data) {
+    this.props.setOptionChannelValuePropertyFilters({ optionChannelValueId: data.id });
   }
 
   dataTableOptions() { // eslint-disable-line class-methods-use-this
@@ -69,6 +74,21 @@ class OptionChannelValueList extends Component {
       data: 'optionChannelType.name',
     }, {
       data: 'status',
+    }, {
+      data: null,
+      orderable: false,
+      createdCell: (cell, cellData, rowData) => {
+        if (rowData.isProperties === true) {
+          ReactDOM.render(<Link
+            to="/resource/type/d64ec1e2-4016-4ae0-bb8b-7f4dbbee32c8"
+            onClick={() => this.addOptionChannelValueProperty(rowData)}
+          >Add Option</Link>, cell);
+        } else {
+          ReactDOM.render(<Link
+            to="#"
+          >&nbsp;</Link>, cell);
+        }
+      },
     }, {
       data: null,
       orderable: false,
@@ -170,6 +190,7 @@ class OptionChannelValueList extends Component {
                       <th>Status</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
+                      <th>&nbsp;</th>
                     </tr>
                   )}
                   tfoot={(
@@ -180,6 +201,7 @@ class OptionChannelValueList extends Component {
                       <th>Name</th>
                       <th>Type</th>
                       <th>Status</th>
+                      <th>&nbsp;</th>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
                     </tr>

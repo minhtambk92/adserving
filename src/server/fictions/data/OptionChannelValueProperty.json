@@ -1,0 +1,35 @@
+[
+  {
+    "id": "0b393a13-7e81-44c2-b85a-bfe028e34369",
+    "name": "Version 11",
+    "userId": "46fb4d82-7981-452f-bcdf-a4ec1db4e374",
+    "status": "active",
+    "description": "Old version 11",
+    "createdAt": "2017-03-14 05:04:38",
+    "updatedAt": "2017-03-14 05:04:38",
+    "deletedAt": null,
+    "optionChannelValueId": "8e856ba7-ef63-49ab-a78d-9f231bb18c24"
+  },
+  {
+    "id": "5aa54508-bdf6-4449-aea7-5aea92a75580",
+    "name": "CHi\u1ebfn Tranh L\u1ea1nh",
+    "userId": "46fb4d82-7981-452f-bcdf-a4ec1db4e374",
+    "status": "active",
+    "description": "Chi\u1ebfn tranh M\u1ef9 Nga",
+    "createdAt": "2017-03-14 04:39:27",
+    "updatedAt": "2017-03-14 04:39:27",
+    "deletedAt": null,
+    "optionChannelValueId": "e64e6f8e-5157-4c09-bc50-affc2a037f7b"
+  },
+  {
+    "id": "68af8747-2908-4152-8043-44f8b14c004d",
+    "name": "Version 10",
+    "userId": "46fb4d82-7981-452f-bcdf-a4ec1db4e374",
+    "status": "active",
+    "description": "Old Version 10",
+    "createdAt": "2017-03-14 05:04:19",
+    "updatedAt": "2017-03-14 05:04:19",
+    "deletedAt": null,
+    "optionChannelValueId": "8e856ba7-ef63-49ab-a78d-9f231bb18c24"
+  }
+]

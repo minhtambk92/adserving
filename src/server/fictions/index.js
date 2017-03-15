@@ -33,6 +33,7 @@ import {
   OptionChannelType,
   OptionChannelValue,
   Activity,
+  OptionChannelValueProperty,
 } from '../../data/models';
 import resourcesList from './data/Resource.json';
 import menusList from './data/Menu.json';
@@ -61,6 +62,7 @@ import characterSetList from './data/CharacterSet.json';
 import optionChannelTypeList from './data/OptionChannelType.json';
 import optionChannelValueList from './data/OptionChannelValue.json';
 import activitiesList from './data/Activity.json';
+import optionChannelValuePropertyList from './data/OptionChannelValueProperty.json';
 
 /* eslint-disable no-console */
 
@@ -278,6 +280,20 @@ async function optionChannelValueFiction() {
   }
 }
 
+// Option Channel Value Property fiction
+async function optionChannelValuePropertyFiction() {
+  console.log(chalk.grey('Check current number of option Channel Value Property...'));
+  const optionChannelValuePropertiesQuantity = await OptionChannelValueProperty.count();
+
+  if (optionChannelValuePropertiesQuantity === 0) {
+    console.log(chalk.red('No channel found! Do a fiction...'));
+    const results = await OptionChannelValueProperty.bulkCreate(optionChannelValuePropertyList);
+    console.log(chalk.green(`CREATED: ${results.length} option channel value(s). => PASSED!`));
+  } else {
+    console.log(chalk.green(`FOUND: ${optionChannelValuePropertiesQuantity} option channel Value(s). => PASSED!`));
+  }
+}
+
 // Character Set fiction
 async function characterSetFiction() {
   console.log(chalk.grey('Check current number of character set...'));
@@ -391,6 +407,7 @@ async function fiction() {
   await zoneTypeFiction();
   await optionChannelTypeFiction();
   await optionChannelValueFiction();
+  await optionChannelValuePropertyFiction();
   await zoneSizeTypeFiction();
   await advertiserFiction();
   await campaignFiction();

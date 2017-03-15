@@ -136,6 +136,31 @@ class OptionSelectChannel extends Component {
                         }
                       </div>
                     </div>
+                    <div className="form-group">
+                      <div className="col-lg-3">&nbsp;</div>
+                      <div className="col-lg-9">
+                        <div className="box-footer box-comments">
+                          <div className="box-comment">
+                            <div className="comment-text">
+                              <span className="username">
+                                Maria Gonzales
+                              </span>
+                              It is a long established fact that a reader will be distracted
+                              by the readable content of a page when looking at its layout.
+                            </div>
+                          </div>
+                          <div className="box-comment">
+                            <div className="comment-text">
+                              <span className="username">
+                                Luna Stark
+                              </span>
+                              It is a long established fact that a reader will be distracted
+                              by the readable content of a page when looking at its layout.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </form>
                 </div>
               </div>
