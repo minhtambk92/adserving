@@ -8,6 +8,7 @@
  */
 
 import React, { Children, PropTypes } from 'react';
+import deepForceUpdate from 'react-deep-force-update';
 import Provide from './Provide';
 
 const ContextType = {
@@ -68,8 +69,11 @@ class App extends React.PureComponent {
         const newIntl = state.intl;
         if (this.intl !== newIntl) {
           this.intl = newIntl;
-          console.log('Intl changed'); // eslint-disable-line no-console
-          this.forceUpdate();
+          if (__DEV__) {
+            // eslint-disable-next-line no-console
+            console.log('Intl changed — Force rendering');
+          }
+          deepForceUpdate(this);
         }
       });
     }
