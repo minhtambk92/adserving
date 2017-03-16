@@ -1,11 +1,18 @@
 import {
   GET_CAMPAIGNS,
+  GET_CAMPAIGNS_ERROR,
   CREATE_CAMPAIGN,
+  CREATE_CAMPAIGN_ERROR,
   GET_CAMPAIGN,
+  GET_CAMPAIGN_ERROR,
   UPDATE_CAMPAIGN,
+  UPDATE_CAMPAIGN_ERROR,
   DELETE_CAMPAIGN,
+  DELETE_CAMPAIGN_ERROR,
   GET_CAMPAIGNS_FILTERS,
+  GET_CAMPAIGNS_FILTERS_ERROR,
   SET_CAMPAIGNS_FILTERS,
+  SET_CAMPAIGNS_FILTERS_ERROR,
 } from '../../constants';
 
 import queryGetCampaigns from './getCampaigns.graphql';
@@ -16,32 +23,65 @@ import mutationDeletedCampaign from './deletedCampaign.graphql';
 
 export function getCampaignsFilters() {
   return async (dispatch) => {
-    dispatch({
-      type: GET_CAMPAIGNS_FILTERS,
-      payload: {},
-    });
+    try {
+      dispatch({
+        type: GET_CAMPAIGNS_FILTERS,
+        payload: {},
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_CAMPAIGNS_FILTERS_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
 export function setCampaignsFilters(filter) {
   return async (dispatch) => {
-    dispatch({
-      type: SET_CAMPAIGNS_FILTERS,
-      payload: filter,
-    });
+    try {
+      dispatch({
+        type: SET_CAMPAIGNS_FILTERS,
+        payload: filter,
+      });
+    } catch (error) {
+      dispatch({
+        type: SET_CAMPAIGNS_FILTERS_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
 export function getCampaign(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(queryGetCampaign, { id });
+    try {
+      const { data } = await graphqlRequest(queryGetCampaign, { id });
 
-    dispatch({
-      type: GET_CAMPAIGN,
-      payload: {
-        campaign: data.campaigns[0],
-      },
-    });
+      dispatch({
+        type: GET_CAMPAIGN,
+        payload: {
+          campaign: data.campaigns[0],
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_CAMPAIGN_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
@@ -51,25 +91,36 @@ export function getCampaigns(args = {
   globalFilters: false,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const variables = Object.assign({}, args);
-    const filters = await getState().campaigns.filters;
+    try {
+      const variables = Object.assign({}, args);
+      const filters = await getState().campaigns.filters;
 
-    if (
-      options.globalFilters &&
-      variables.where === {} &&
-      Object.keys(filters).length > 0 &&
-      filters.constructor === Object
-    ) {
-      variables.where = Object.assign({}, filters);
+      if (
+        options.globalFilters &&
+        variables.where === {} &&
+        Object.keys(filters).length > 0 &&
+        filters.constructor === Object
+      ) {
+        variables.where = Object.assign({}, filters);
+      }
+      const { data } = await graphqlRequest(queryGetCampaigns, variables.where);
+
+      dispatch({
+        type: GET_CAMPAIGNS,
+        payload: {
+          campaigns: data.campaigns,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_CAMPAIGNS_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
     }
-    const { data } = await graphqlRequest(queryGetCampaigns, variables.where);
-
-    dispatch({
-      type: GET_CAMPAIGNS,
-      payload: {
-        campaigns: data.campaigns,
-      },
-    });
+    return true;
   };
 }
 
@@ -89,30 +140,41 @@ export function createCampaign({
   status,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationCreatedCampaign, {
-      campaign: {
-        advertiserId,
-        name,
-        startTime,
-        endTime,
-        views,
-        viewPerSession,
-        timeResetViewCount,
-        weight,
-        revenueType,
-        expireValueCPM,
-        maxCPMPerDay,
-        description,
-        status,
-      },
-    });
+    try {
+      const { data } = await graphqlRequest(mutationCreatedCampaign, {
+        campaign: {
+          advertiserId,
+          name,
+          startTime,
+          endTime,
+          views,
+          viewPerSession,
+          timeResetViewCount,
+          weight,
+          revenueType,
+          expireValueCPM,
+          maxCPMPerDay,
+          description,
+          status,
+        },
+      });
 
-    dispatch({
-      type: CREATE_CAMPAIGN,
-      payload: {
-        campaign: data.createdCampaign,
-      },
-    });
+      dispatch({
+        type: CREATE_CAMPAIGN,
+        payload: {
+          campaign: data.createdCampaign,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: CREATE_CAMPAIGN_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
@@ -133,43 +195,66 @@ export function updateCampaign({
   status,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationUpdatedCampaign, {
-      campaign: {
-        id,
-        advertiserId,
-        name,
-        startTime,
-        endTime,
-        views,
-        viewPerSession,
-        timeResetViewCount,
-        weight,
-        revenueType,
-        expireValueCPM,
-        maxCPMPerDay,
-        description,
-        status,
-      },
-    });
+    try {
+      const { data } = await graphqlRequest(mutationUpdatedCampaign, {
+        campaign: {
+          id,
+          advertiserId,
+          name,
+          startTime,
+          endTime,
+          views,
+          viewPerSession,
+          timeResetViewCount,
+          weight,
+          revenueType,
+          expireValueCPM,
+          maxCPMPerDay,
+          description,
+          status,
+        },
+      });
 
-    dispatch({
-      type: UPDATE_CAMPAIGN,
-      payload: {
-        campaign: data.updatedCampaign,
-      },
-    });
+      dispatch({
+        type: UPDATE_CAMPAIGN,
+        payload: {
+          campaign: data.updatedCampaign,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_CAMPAIGN_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
 export function deleteCampaign(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationDeletedCampaign, { id });
+    try {
+      const { data } = await graphqlRequest(mutationDeletedCampaign, { id });
 
-    dispatch({
-      type: DELETE_CAMPAIGN,
-      payload: {
-        campaign: data.deletedCampaign,
-      },
-    });
+      dispatch({
+        type: DELETE_CAMPAIGN,
+        payload: {
+          campaign: data.deletedCampaign,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: DELETE_CAMPAIGN_ERROR,
+        payload: {
+          error,
+        },
+      });
+
+      return false;
+    }
+    return true;
   };
 }

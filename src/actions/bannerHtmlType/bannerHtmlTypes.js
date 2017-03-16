@@ -2,9 +2,13 @@
 
 import {
   GET_BANNER_HTML_TYPES,
+  GET_BANNER_HTML_TYPES_ERROR,
   CREATE_BANNER_HTML_TYPE,
+  CREATE_BANNER_HTML_TYPE_ERROR,
   UPDATE_BANNER_HTML_TYPE,
+  UPDATE_BANNER_HTML_TYPE_ERROR,
   DELETE_BANNER_HTML_TYPE,
+  DELETE_BANNER_HTML_TYPE_ERROR,
 } from '../../constants';
 
 import queryGetBannerHtmlTypes from './getBannerHtmlTypes.graphql';
@@ -18,81 +22,125 @@ export function getBannerHtmlTypes(args = {
   globalFilters: false,
 }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const variables = Object.assign({}, args);
-    const filters = await getState().bannerHtmlTypes.filters;
+    try {
+      const variables = Object.assign({}, args);
+      const filters = await getState().bannerHtmlTypes.filters;
 
-    if (
-      options.globalFilters &&
-      variables.where === {} &&
-      Object.keys(filters).length > 0 &&
-      filters.constructor === Object
-    ) {
-      variables.where = Object.assign({}, filters);
+      if (
+        options.globalFilters &&
+        variables.where === {} &&
+        Object.keys(filters).length > 0 &&
+        filters.constructor === Object
+      ) {
+        variables.where = Object.assign({}, filters);
+      }
+
+      const { data } = await graphqlRequest(queryGetBannerHtmlTypes, variables.where);
+
+      dispatch({
+        type: GET_BANNER_HTML_TYPES,
+        payload: {
+          bannerHtmlTypes: data.bannerHtmlTypes,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_BANNER_HTML_TYPES_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
     }
-
-    const { data } = await graphqlRequest(queryGetBannerHtmlTypes, variables.where);
-
-    dispatch({
-      type: GET_BANNER_HTML_TYPES,
-      payload: {
-        bannerHtmlTypes: data.bannerHtmlTypes,
-      },
-    });
+    return true;
   };
 }
 
 export function createBannerHtmlType({ name, value, weight, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationCreatedBannerHtmlType, {
-      bannerHtmlType: {
-        name,
-        value,
-        weight,
-        status,
-        userId,
-      },
-    });
+    try {
+      const { data } = await graphqlRequest(mutationCreatedBannerHtmlType, {
+        bannerHtmlType: {
+          name,
+          value,
+          weight,
+          status,
+          userId,
+        },
+      });
 
-    dispatch({
-      type: CREATE_BANNER_HTML_TYPE,
-      payload: {
-        bannerHtmlType: data.createdBannerHtmlType,
-      },
-    });
+      dispatch({
+        type: CREATE_BANNER_HTML_TYPE,
+        payload: {
+          bannerHtmlType: data.createdBannerHtmlType,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: CREATE_BANNER_HTML_TYPE_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
 export function updateBannerHtmlType({ id, name, value, weight, status, userId }) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationUpdatedBannerHtmlType, {
-      bannerHtmlType: {
-        id,
-        name,
-        value,
-        weight,
-        status,
-        userId,
-      },
-    });
+    try {
+      const { data } = await graphqlRequest(mutationUpdatedBannerHtmlType, {
+        bannerHtmlType: {
+          id,
+          name,
+          value,
+          weight,
+          status,
+          userId,
+        },
+      });
 
-    dispatch({
-      type: UPDATE_BANNER_HTML_TYPE,
-      payload: {
-        bannerHtmlType: data.updatedBannerHtmlType,
-      },
-    });
+      dispatch({
+        type: UPDATE_BANNER_HTML_TYPE,
+        payload: {
+          bannerHtmlType: data.updatedBannerHtmlType,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_BANNER_HTML_TYPE_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
 export function deleteBannerHtmlType(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationDeletedBannerHtmlType, { id });
+    try {
+      const { data } = await graphqlRequest(mutationDeletedBannerHtmlType, { id });
 
-    dispatch({
-      type: DELETE_BANNER_HTML_TYPE,
-      payload: {
-        bannerHtmlType: data.deletedBannerHtmlType,
-      },
-    });
+      dispatch({
+        type: DELETE_BANNER_HTML_TYPE,
+        payload: {
+          bannerHtmlType: data.deletedBannerHtmlType,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: DELETE_BANNER_HTML_TYPE_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }

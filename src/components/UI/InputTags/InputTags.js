@@ -7,6 +7,7 @@ class InputTags extends Component {
 
   static propTypes = {
     options: PropTypes.object,
+    data: PropTypes.string,
   };
 
   async componentDidMount() {

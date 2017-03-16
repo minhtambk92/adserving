@@ -1,0 +1,12 @@
+query checkSiteByDomain($domain: STRING!){
+  sites(where: {domain: $domain}) {
+    id
+    domain
+    name
+    email
+    description
+    status
+    createdAt
+    updatedAt
+  }
+}
