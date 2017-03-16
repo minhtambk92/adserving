@@ -17,7 +17,9 @@ const optionChannelTypes = {
   resolve: resolver(OptionChannelType, {
     before(options, args, res) {
       const opts = options;
-      opts.where = res.body.variables;
+      if (res.body.variables !== undefined && res.body.variables !== null) {
+        opts.where = res.body.variables;
+      }
       opts.order = options.order || [];
       opts.order.push(['createdAt', 'DESC']);
       return opts;

@@ -5,31 +5,30 @@ class FilterSiteChannel extends Component {
   static propTypes = {
     id: PropTypes.string,
     name: PropTypes.string,
-    comparison: PropTypes.string,
-    value: PropTypes.string,
-    logical: PropTypes.string,
     type: PropTypes.object,
     index: PropTypes.number,
     typeId: PropTypes.string,
     createActivity: PropTypes.func,
     user: PropTypes.object,
-    optionChannelId: PropTypes.string,
+    option: PropTypes.object,
     deleteOptionChannel: PropTypes.func,
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.type && nextProps.logical && nextProps.comparison) {
-      this.inputTypeFilter.value = nextProps.logical;
-      this.inputSiteFilter.value = nextProps.comparison;
+    if (nextProps.type && nextProps.option && nextProps.option.logical &&
+      nextProps.option.comparison) {
+      this.inputTypeFilter.value = nextProps.option.logical;
+      this.inputSiteFilter.value = nextProps.option.comparison;
     }
   }
 
   deleteOption() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    if (this.props.value && this.props.name && this.props.comparison) {
-      this.props.deleteOptionChannel(this.props.optionChannelId).then(() => {
+    if (this.props.option && this.props.option.value && this.props.name &&
+      this.props.option.comparison) {
+      this.props.deleteOptionChannel(this.props.id).then(() => {
         const userId = this.props.user.id;
         const subject = `Option Channel ${this.props.name}`;
-        const subjectId = this.props.optionChannelId;
+        const subjectId = this.props.id;
         const action = 'deleted';
         const other = '';
         this.props.createActivity({ action,
@@ -138,7 +137,7 @@ class FilterSiteChannel extends Component {
                                 <input
                                   type="text" className="form-control inputChannelVariableValue"
                                   placeholder="http://www.google.com"
-                                  defaultValue={this.props.value}
+                                  defaultValue={this.props.option && this.props.option.value}
                                 />
                               </div>
                             </div>
@@ -152,7 +151,7 @@ class FilterSiteChannel extends Component {
                               <input
                                 type="text" className="form-control inputChannelOptionURL"
                                 placeholder="http://www.google.com"
-                                defaultValue={this.props.value}
+                                defaultValue={this.props.option && this.props.option.value}
                               />
                             </div>
                           </div>

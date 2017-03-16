@@ -5,6 +5,7 @@ mutation updatedOptionChannel($optionChannelValue: OptionChannelValueInputType!)
     value
     status
     userId
+    isProperties
     optionChannelType {
       id
       name

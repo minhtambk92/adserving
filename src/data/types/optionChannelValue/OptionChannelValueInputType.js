@@ -9,7 +9,7 @@ const OptionChannelValueInputType = new InputObjectType({
   name: 'OptionChannelValueInputType',
   fields: () => Object.assign(attributeFields(OptionChannelValue, {
     // Additional options
-    only: ['id', 'name', 'value', 'optionChannelTypeId', 'userId'],
+    only: ['id', 'name', 'value', 'optionChannelTypeId', 'userId', 'isProperties'],
   }), {
     // Additional fields
     status: { type: new NonNull(StringType) },

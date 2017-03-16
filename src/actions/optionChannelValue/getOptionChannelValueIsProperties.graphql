@@ -1,0 +1,22 @@
+query getOptionChannelValueIsProperties{
+  optionChannelValues(where: {isProperties: true}) {
+    id
+    name
+    value
+    status
+    userId
+    isProperties
+    optionChannelType {
+      id
+      name
+      isInputLink
+      isSelectOption
+      isVariable
+      status
+      userId
+    }
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

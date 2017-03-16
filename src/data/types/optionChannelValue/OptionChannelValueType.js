@@ -2,6 +2,7 @@ import { GraphQLObjectType as ObjectType } from 'graphql';
 import { attributeFields } from 'graphql-sequelize';
 import { OptionChannelValue } from '../../models';
 import optionChannelValueBelongsToOptionChannelType from '../../queries/optionChannelValue/optionChannelValueBelongsToOptionChannelType';
+import optionChannelValueHasManyOptionChannelValueProperties from '../../queries/optionChannelValue/optionChannelValueHasManyOptionChannelValueProperties';
 
 const OptionChannelValueType = new ObjectType({
   name: 'OptionChannelValueType',
@@ -10,6 +11,7 @@ const OptionChannelValueType = new ObjectType({
   }), {
     // Additional fields
     optionChannelType: optionChannelValueBelongsToOptionChannelType(),
+    optionChannelValueProperties: optionChannelValueHasManyOptionChannelValueProperties(),
   }),
 });
 

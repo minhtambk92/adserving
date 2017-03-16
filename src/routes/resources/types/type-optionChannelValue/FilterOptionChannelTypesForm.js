@@ -46,7 +46,6 @@ class FilterOptionChannelTypesForm extends Component {
                 defaultValue={this.props.filters &&
                           this.props.filters.optionChannelTypeId}
               >
-                <option value="null">All Option Channel Type</option>
                 {this.props.optionChannelTypeList &&
                 this.props.optionChannelTypeList.map(optionChannelType => (
                   <option
@@ -72,7 +71,6 @@ class FilterOptionChannelTypesForm extends Component {
                 defaultValue={this.props.filters &&
                           this.props.filters.status}
               >
-                <option value="null">All states</option>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
               </select>

@@ -5,6 +5,7 @@ mutation deletedOptionChannelValue($id : ID!){
     value
     status
     userId
+    isProperties
     optionChannelTypeId
     createdAt
     updatedAt

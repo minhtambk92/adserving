@@ -33,6 +33,7 @@ import characterSets from './characterSet/characterSets';
 import optionChannelTypes from './optionChannelType/optionChannelTypes';
 import optionChannelValues from './optionChannelValue/optionChannelValues';
 import activities from './activity/activities';
+import optionChannelValueProperties from './optionChannelValueProperty/optionChannelValueProperties';
 
 const queries = new ObjectType({
   name: 'Query',
@@ -67,6 +68,7 @@ const queries = new ObjectType({
     optionChannelTypes,
     optionChannelValues,
     activities,
+    optionChannelValueProperties,
   },
 });
 

@@ -46,6 +46,7 @@ import CharacterSet from './CharacterSet';
 import OptionChannelType from './OptionChannelType';
 import OptionChannelValue from './OptionChannelValue';
 import Activity from './Activity';
+import OptionChannelValueProperty from './OptionChannelValueProperty';
 
 const Menu = MenuModel.scope('menus');
 const MenuHeader = MenuModel.scope('headers');
@@ -400,6 +401,15 @@ OptionChannel.optionChannelType = OptionChannel.belongsTo(OptionChannelType, {
   foreignKey: 'optionChannelTypeId',
 });
 
+OptionChannelValue.optionChannelValueProperties =
+  OptionChannelValue.hasMany(OptionChannelValueProperty, {
+    foreignKey: 'optionChannelValueId',
+  });
+
+OptionChannelValueProperty.optionChannelValue =
+  OptionChannelValueProperty.belongsTo(OptionChannelValue, {
+    foreignKey: 'optionChannelValueId',
+  });
 
 function sync(...args) {
   return sequelize.sync(...args);
@@ -441,4 +451,5 @@ export {
   OptionChannelType,
   OptionChannelValue,
   Activity,
+  OptionChannelValueProperty,
 };

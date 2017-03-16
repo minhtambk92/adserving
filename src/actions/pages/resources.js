@@ -27,6 +27,8 @@ import {
   SET_STATUS_UPDATE_OPTION_CHANNEL_TYPE,
   SET_STATUS_UPDATE_OPTION_CHANNEL_VALUE,
   SET_STATUS_CREATE_OPTION_CHANNEL_VALUE,
+  SET_STATUS_UPDATE_OPTION_CHANNEL_VALUE_PROPERTY,
+  SET_STATUS_CREATE_OPTION_CHANNEL_VALUE_PROPERTY,
 } from '../../constants';
 
 export function setCurrentPageResource(currentPage) {
@@ -310,6 +312,28 @@ export function setStatusCreateOptionChannelValue(statusCreateOptionChannelValue
       type: SET_STATUS_CREATE_OPTION_CHANNEL_VALUE,
       payload: {
         statusCreateOptionChannelValue,
+      },
+    });
+  };
+}
+
+export function setStatusUpdateOptionChannelValueProperty(statusUpdateOptionChannelValueProperty) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_UPDATE_OPTION_CHANNEL_VALUE_PROPERTY,
+      payload: {
+        statusUpdateOptionChannelValueProperty,
+      },
+    });
+  };
+}
+
+export function setStatusCreateOptionChannelValueProperty(statusCreateOptionChannelValueProperty) {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_CREATE_OPTION_CHANNEL_VALUE_PROPERTY,
+      payload: {
+        statusCreateOptionChannelValueProperty,
       },
     });
   };

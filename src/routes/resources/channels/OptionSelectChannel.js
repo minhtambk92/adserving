@@ -1,4 +1,3 @@
-
 /* global $ */
 
 import React, { Component, PropTypes } from 'react';
@@ -7,27 +6,32 @@ import { ICheck } from '../../../components/UI/';
 class OptionSelectChannel extends Component {
 
   static propTypes = {
-    options: PropTypes.object,
+    option: PropTypes.object,
     data: PropTypes.array,
     id: PropTypes.string,
     name: PropTypes.string,
-    comparison: PropTypes.string,
-    value: PropTypes.string,
-    optionChannelId: PropTypes.string,
     deleteOptionChannel: PropTypes.func,
-    logical: PropTypes.string,
     index: PropTypes.number,
     typeId: PropTypes.string,
     createActivity: PropTypes.func,
     user: PropTypes.object,
   };
 
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      showProperty: false,
+      optionChannelValueProperties: [],
+    };
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.id &&
-      nextProps.data && nextProps.value && nextProps.name && nextProps.comparison) {
-      this.inputSiteFilter.value = nextProps.comparison;
-      this.inputTypeFilter.value = nextProps.logical;
-      const value = nextProps.value;
+      nextProps.data && nextProps.option && nextProps.name) {
+      this.inputSiteFilter.value = nextProps.option.comparison;
+      this.inputTypeFilter.value = nextProps.option.logical;
+      const value = nextProps.option.value;
       const arr = value.split(',');
       if (nextProps.data.length > 0) {
         for (let i = 0; i < arr.length; i += 1) {
@@ -39,20 +43,33 @@ class OptionSelectChannel extends Component {
   }
 
   deleteOption() { // eslint-disable-line no-unused-vars, class-methods-use-this
-    if (this.props.value && this.props.name && this.props.comparison) {
-      this.props.deleteOptionChannel(this.props.optionChannelId).then(() => {
+    if (this.props.option &&
+      this.props.option.value && this.props.name && this.props.option.comparison) {
+      this.props.deleteOptionChannel(this.props.option.id).then(() => {
         const userId = this.props.user.id;
         const subject = `Option Channel ${this.props.name}`;
-        const subjectId = this.props.optionChannelId;
+        const subjectId = this.props.option.id;
         const action = 'deleted';
         const other = '';
-        this.props.createActivity({ action,
+        this.props.createActivity({
+          action,
           subject,
           subjectId,
           other,
-          userId });
+          userId,
+        });
       });
     }
+  }
+
+  hoverOption(data) {
+    if (data.isProperties === true && data.optionChannelValueProperties.length > 0) {
+      this.setState({ showProperty: true });
+      this.setState({ optionChannelValueProperties: data.optionChannelValueProperties });
+    }
+  }
+  outOption() {
+    this.setState({ showProperty: false });
   }
 
   render() {
@@ -62,7 +79,10 @@ class OptionSelectChannel extends Component {
         className={`optionChannel-${this.props.index}`}
         id={this.props.id}
       >
-        <div className="box box-solid box-primary" id={(this.props.typeId !== undefined) ? `${this.props.typeId}-${this.props.index}` : ('')}>
+        <div
+          className="box box-solid box-primary"
+          id={(this.props.typeId !== undefined) ? `${this.props.typeId}-${this.props.index}` : ('')}
+        >
           <div className="box-header">
             <h3 className="box-title">{this.props.name}</h3>
             <div className="box-tools pull-right">
@@ -118,7 +138,12 @@ class OptionSelectChannel extends Component {
                       <div className="col-lg-3">&nbsp;</div>
                       <div className="col-lg-9 optionVariable" id={id}>
                         {this.props.data && this.props.data.map(data =>
-                          <div className="col-sm-3" key={data.id}>
+                          <div
+                            className="col-sm-3" key={data.id}
+                            id={`${data.id}-icheck`}
+                            onMouseMove={() => this.hoverOption(data)}
+                            onMouseOut={() => this.outOption(data)}
+                          >
                             <label
                               htmlFor="inputChannelOptions"
                               className="control-label"
@@ -136,6 +161,26 @@ class OptionSelectChannel extends Component {
                         }
                       </div>
                     </div>
+                    { this.state.showProperty === true ? (
+                      <div className="form-group">
+                        <div className="col-lg-3">&nbsp;</div>
+                        <div className="col-lg-9">
+                          <div className="box-footer box-comments">
+                            {this.state.optionChannelValueProperties &&
+                            this.state.optionChannelValueProperties.map(properties =>
+                              <div className="box-comment" key={properties.id}>
+                                <div className="comment-text">
+                                  <span className="username">
+                                    {properties.name}
+                                  </span>
+                                  {properties.description}
+                                </div>
+                              </div>,
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      ) : ''}
                   </form>
                 </div>
               </div>

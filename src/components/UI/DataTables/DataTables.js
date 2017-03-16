@@ -4,6 +4,8 @@
 
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import s from './DataTables.css'; // eslint-disable-line css-modules/no-unused-class
 
 class DataTables extends Component {
 
@@ -66,4 +68,4 @@ class DataTables extends Component {
   }
 }
 
-export default DataTables;
+export default withStyles(s)(DataTables);

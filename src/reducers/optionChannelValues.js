@@ -6,6 +6,7 @@ import {
   DELETE_OPTION_CHANNEL_VALUE,
   SET_OPTION_CHANNEL_VALUE_FILTER,
   GET_OPTION_CHANNEL_VALUE_FILTER,
+  GET_OPTION_CHANNEL_VALUE_IS_PROPERTIES,
 } from '../constants';
 
 function filters(state = {}, action) {
@@ -54,6 +55,9 @@ function filters(state = {}, action) {
 function list(state = [], action) {
   switch (action.type) {
     case GET_OPTION_CHANNEL_VALUES: {
+      return action.payload.optionChannelValues;
+    }
+    case GET_OPTION_CHANNEL_VALUE_IS_PROPERTIES: {
       return action.payload.optionChannelValues;
     }
     case CREATE_OPTION_CHANNEL_VALUE: {

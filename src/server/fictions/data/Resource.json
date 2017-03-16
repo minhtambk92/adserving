@@ -132,6 +132,18 @@
     "deletedAt": null
   },
   {
+    "id": "d64ec1e2-4016-4ae0-bb8b-7f4dbbee32c8",
+    "uniqueName": "optionChannelValueProperty",
+    "modelName": "Option Channel Value Property",
+    "name": "Option Channel Value Property",
+    "hasMeta": "0",
+    "description": "Option Channel Value Property information",
+    "status": "active",
+    "createdAt": "2017-03-11 03:27:09",
+    "updatedAt": "2017-03-11 03:27:09",
+    "deletedAt": null
+  },
+  {
     "id": "dfcb8d05-7c80-4b93-8cca-55fcd3b6b82d",
     "uniqueName": "role",
     "modelName": "Role",

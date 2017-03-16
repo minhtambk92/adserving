@@ -1,0 +1,19 @@
+mutation updatedOptionChannelProperty($optionChannelValueProperty: OptionChannelValuePropertyInputType!) {
+  updatedOptionChannelValueProperty(optionChannelValueProperty: $optionChannelValueProperty) {
+    id
+    name
+    status
+    userId
+    optionChannelValue {
+      id
+      name
+      value
+      status
+      userId
+      isProperties
+    }
+    description
+    createdAt
+    updatedAt
+  }
+}
