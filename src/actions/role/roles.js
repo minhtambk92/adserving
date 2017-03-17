@@ -66,9 +66,12 @@ export function setRolesFilters(filter) {
 }
 
 export function getRole(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(queryGetRole, { id });
+      const { data } = await client.query({
+        query: queryGetRole,
+        variables: { id },
+      });
 
       dispatch({
         type: GET_ROLE,
