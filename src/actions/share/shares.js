@@ -26,21 +26,24 @@ export function createShare({
   description,
   zoneId,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationCreatedShare, {
-        share: {
-          name,
-          html,
-          css,
-          outputCss,
-          width,
-          height,
-          weight,
-          classes,
-          type,
-          description,
-          zoneId,
+      const { data } = await client.mutate({
+        mutation: mutationCreatedShare,
+        variables: {
+          share: {
+            name,
+            html,
+            css,
+            outputCss,
+            width,
+            height,
+            weight,
+            classes,
+            type,
+            description,
+            zoneId,
+          },
         },
       });
 
@@ -78,25 +81,29 @@ export function updateShare({
   zoneId,
   placements,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationUpdatedShare, {
-        share: {
-          id,
-          name,
-          html,
-          css,
-          outputCss,
-          width,
-          height,
-          weight,
-          classes,
-          type,
-          description,
-          zoneId,
-          placements,
+      const { data } = await client.mutate({
+        mutation: mutationUpdatedShare,
+        variables: {
+          share: {
+            id,
+            name,
+            html,
+            css,
+            outputCss,
+            width,
+            height,
+            weight,
+            classes,
+            type,
+            description,
+            zoneId,
+            placements,
+          },
         },
       });
+
       dispatch({
         type: UPDATE_SHARE,
         payload: {
@@ -117,9 +124,12 @@ export function updateShare({
 }
 
 export function deleteShare(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationDeletedShare, { id });
+      const { data } = await client.mutate({
+        mutation: mutationDeletedShare,
+        variables: { id },
+      });
 
       dispatch({
         type: DELETE_SHARE,
