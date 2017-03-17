@@ -18,9 +18,12 @@ import mutationCreatedAdvertiser from './createdAdvertiser.graphql';
 import mutationDeleteAdvertiser from './deletedAdvertiser.graphql';
 
 export function getAdvertiser(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(queryGetAdvertiser, { id });
+      const { data } = await client.query({
+        query: queryGetAdvertiser,
+        variables: { id },
+      });
       dispatch({
         type: GET_ADVERTISER,
         payload: {
@@ -41,9 +44,12 @@ export function getAdvertiser(id) {
 }
 
 export function getAdvertisers() {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(queryGetAdvertisers, { });
+      const { data } = await client.query({
+        query: queryGetAdvertisers,
+        variables: {},
+      });
 
       dispatch({
         type: GET_ADVERTISERS,
@@ -74,18 +80,21 @@ export function createAdvertiser({
   description,
   status,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationCreatedAdvertiser, {
-        advertiser: {
-          email,
-          name,
-          contact,
-          isEmailReport,
-          isEmailStatus,
-          reportInterval,
-          description,
-          status,
+      const { data } = await client.mutate({
+        mutation: mutationCreatedAdvertiser,
+        variables: {
+          advertiser: {
+            email,
+            name,
+            contact,
+            isEmailReport,
+            isEmailStatus,
+            reportInterval,
+            description,
+            status,
+          },
         },
       });
 
@@ -119,19 +128,22 @@ export function updateAdvertiser({
   description,
   status,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationUpdatedAdvertiser, {
-        advertiser: {
-          id,
-          email,
-          name,
-          contact,
-          isEmailReport,
-          isEmailStatus,
-          reportInterval,
-          description,
-          status,
+      const { data } = await client.mutate({
+        mutation: mutationUpdatedAdvertiser,
+        variables: {
+          advertiser: {
+            id,
+            email,
+            name,
+            contact,
+            isEmailReport,
+            isEmailStatus,
+            reportInterval,
+            description,
+            status,
+          },
         },
       });
 
@@ -155,9 +167,12 @@ export function updateAdvertiser({
 }
 
 export function deleteAdvertiser(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationDeleteAdvertiser, { id });
+      const { data } = await client.mutate({
+        mutation: mutationDeleteAdvertiser,
+        variables: { id },
+      });
 
       dispatch({
         type: DELETE_ADVERTISER,

@@ -64,9 +64,11 @@ export function setChannelsFilters(filter) {
 }
 
 export function getChannel(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(queryGetChannel, { id });
+      const { data } = await client.query({
+        query: queryGetChannel, variables: { id },
+      });
 
       dispatch({
         type: GET_CHANNEL,
@@ -92,7 +94,7 @@ export function getChannels(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
       const variables = Object.assign({}, args);
       const filters = await getState().channels.filters;
@@ -106,7 +108,9 @@ export function getChannels(args = {
         variables.where = Object.assign({}, filters);
       }
 
-      const { data } = await graphqlRequest(queryGetChannels, variables.where);
+      const { data } = await client.query({
+        query: queryGetChannels, variables: variables.where,
+      });
 
       dispatch({
         type: GET_CHANNELS,
@@ -128,14 +132,17 @@ export function getChannels(args = {
 }
 
 export function createChannel({ name, description, status, siteId }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationCreatedChannel, {
-        channel: {
-          name,
-          description,
-          status,
-          siteId,
+      const { data } = await client.mutate({
+        mutation: mutationCreatedChannel,
+        variables: {
+          channel: {
+            name,
+            description,
+            status,
+            siteId,
+          },
         },
       });
 
@@ -159,14 +166,17 @@ export function createChannel({ name, description, status, siteId }) {
 }
 
 export function updateChannel({ id, name, description, status }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationUpdatedChannel, {
-        channel: {
-          id,
-          name,
-          description,
-          status,
+      const { data } = await client.mutate({
+        mutation: mutationUpdatedChannel,
+        variables: {
+          channel: {
+            id,
+            name,
+            description,
+            status,
+          },
         },
       });
 
@@ -190,9 +200,11 @@ export function updateChannel({ id, name, description, status }) {
 }
 
 export function deleteChannel(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationDeletedChannel, { id });
+      const { data } = await client.mutate({
+        mutation: mutationDeletedChannel, variables: { id },
+      });
 
       dispatch({
         type: DELETE_CHANNEL,

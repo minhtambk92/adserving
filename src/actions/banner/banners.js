@@ -62,9 +62,11 @@ export function setBannersFilters(filter) {
 }
 
 export function getBanner(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(queryGetBanner, { id });
+      const { data } = await client.query({
+        query: queryGetBanner, variables: { id },
+      });
 
       dispatch({
         type: GET_BANNER,
@@ -90,7 +92,7 @@ export function getBanners(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
       const variables = Object.assign({}, args);
       const filters = await getState().banners.filters;
@@ -103,7 +105,10 @@ export function getBanners(args = {
       ) {
         variables.where = Object.assign({}, filters);
       }
-      const { data } = await graphqlRequest(queryGetBanners, variables.where);
+      const { data } = await client.query({
+        query: queryGetBanners,
+        variables: variables.where,
+      });
 
       dispatch({
         type: GET_BANNERS,
@@ -151,37 +156,41 @@ export function createBanner({
   expirationDate,
   channelId,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationCreatedBanner, {
-        banner: {
-          name,
-          html,
-          width,
-          height,
-          keyword,
-          weight,
-          description,
-          bannerTypeId,
-          url,
-          target,
-          imageUrl,
-          isIFrame,
-          status,
-          adsServerId,
-          bannerHtmlTypeId,
-          isCountView,
-          isFixIE,
-          isDefault,
-          isRelative,
-          adStore,
-          impressionsBooked,
-          clicksBooked,
-          activationDate,
-          expirationDate,
-          channelId,
-        },
-      });
+      const { data } = await client.mutate(
+        {
+          mutation: mutationCreatedBanner,
+          variables: {
+            banner: {
+              name,
+              html,
+              width,
+              height,
+              keyword,
+              weight,
+              description,
+              bannerTypeId,
+              url,
+              target,
+              imageUrl,
+              isIFrame,
+              status,
+              adsServerId,
+              bannerHtmlTypeId,
+              isCountView,
+              isFixIE,
+              isDefault,
+              isRelative,
+              adStore,
+              impressionsBooked,
+              clicksBooked,
+              activationDate,
+              expirationDate,
+              channelId,
+            },
+          },
+        });
 
       dispatch({
         type: CREATE_BANNER,
@@ -231,37 +240,40 @@ export function updateBanner({
   channelId,
   placements,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationUpdatedBanner, {
-        banner: {
-          id,
-          name,
-          html,
-          width,
-          height,
-          keyword,
-          weight,
-          description,
-          bannerTypeId,
-          url,
-          target,
-          imageUrl,
-          isIFrame,
-          status,
-          adsServerId,
-          bannerHtmlTypeId,
-          isCountView,
-          isFixIE,
-          isDefault,
-          isRelative,
-          adStore,
-          impressionsBooked,
-          clicksBooked,
-          activationDate,
-          expirationDate,
-          channelId,
-          placements,
+      const { data } = await client.mutate({
+        mutation: mutationUpdatedBanner,
+        variables: {
+          banner: {
+            id,
+            name,
+            html,
+            width,
+            height,
+            keyword,
+            weight,
+            description,
+            bannerTypeId,
+            url,
+            target,
+            imageUrl,
+            isIFrame,
+            status,
+            adsServerId,
+            bannerHtmlTypeId,
+            isCountView,
+            isFixIE,
+            isDefault,
+            isRelative,
+            adStore,
+            impressionsBooked,
+            clicksBooked,
+            activationDate,
+            expirationDate,
+            channelId,
+            placements,
+          },
         },
       });
 
@@ -285,9 +297,12 @@ export function updateBanner({
 }
 
 export function deleteBanner(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationDeletedBanner, { id });
+      const { data } = await client.mutate({
+        mutation: mutationDeletedBanner,
+        variables: { id },
+      });
 
       dispatch({
         type: DELETE_BANNER,

@@ -24,7 +24,7 @@ export function getCharacterSets(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
       const variables = Object.assign({}, args);
       const filters = await getState().characterSets.filters;
@@ -38,7 +38,10 @@ export function getCharacterSets(args = {
         variables.where = Object.assign({}, filters);
       }
 
-      const { data } = await graphqlRequest(queryGetCharacterSets, variables.where);
+      const { data } = await client.query({
+        query: queryGetCharacterSets,
+        variables: variables.where,
+      });
 
       dispatch({
         type: GET_CHARACTER_SETS,
@@ -60,16 +63,17 @@ export function getCharacterSets(args = {
 }
 
 export function createCharacterSet({ name, value, status, userId }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationCreateCharacterSet, {
-        characterSet: {
-          name,
-          value,
-          status,
-          userId,
-        },
-      });
+      const { data } = await client.mutate({ mutation: mutationCreateCharacterSet,
+        variables: {
+          characterSet: {
+            name,
+            value,
+            status,
+            userId,
+          },
+        } });
 
       dispatch({
         type: CREATE_CHARACTER_SET,
@@ -91,14 +95,17 @@ export function createCharacterSet({ name, value, status, userId }) {
 }
 
 export function updateCharacterSet({ id, name, value, status }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationUpdatedCharacterSet, {
-        characterSet: {
-          id,
-          name,
-          value,
-          status,
+      const { data } = await client.mutate({
+        mutation: mutationUpdatedCharacterSet,
+        variables: {
+          characterSet: {
+            id,
+            name,
+            value,
+            status,
+          },
         },
       });
 
@@ -122,9 +129,11 @@ export function updateCharacterSet({ id, name, value, status }) {
 }
 
 export function deleteCharacterSet(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationDeletedCharacterSet, { id });
+      const { data } = await client.mutate({
+        mutation: mutationDeletedCharacterSet, variables: { id },
+      });
 
       dispatch({
         type: DELETE_CHARACTER_SET,

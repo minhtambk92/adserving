@@ -62,9 +62,12 @@ export function setPlacementsFilters(filter) {
 }
 
 export function getPlacement(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(queryGetPlacement, { id });
+      const { data } = await client.query({
+        query: queryGetPlacement,
+        variables: { id },
+      });
 
       dispatch({
         type: GET_PLACEMENT,
@@ -90,7 +93,7 @@ export function getPlacements(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
       const variables = Object.assign({}, args);
       const filters = await getState().placements.filters;
@@ -103,7 +106,9 @@ export function getPlacements(args = {
       ) {
         variables.where = Object.assign({}, filters);
       }
-      const { data } = await graphqlRequest(queryGetPlacements, variables.where);
+      const { data } = await client.query({
+        query: queryGetPlacements, variables: variables.where,
+      });
 
       dispatch({
         type: GET_PLACEMENTS,
@@ -135,19 +140,22 @@ export function createPlacement({
   campaignId,
   status,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationCreatedPlacement, {
-        placement: {
-          name,
-          width,
-          height,
-          startTime,
-          endTime,
-          weight,
-          description,
-          campaignId,
-          status,
+      const { data } = await client.mutate({
+        mutation: mutationCreatedPlacement,
+        variables: {
+          placement: {
+            name,
+            width,
+            height,
+            startTime,
+            endTime,
+            weight,
+            description,
+            campaignId,
+            status,
+          },
         },
       });
 
@@ -182,23 +190,24 @@ export function updatePlacement({
   status,
   banners,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationUpdatedPlacement, {
-        placement: {
-          id,
-          name,
-          width,
-          height,
-          startTime,
-          endTime,
-          weight,
-          description,
-          campaignId,
-          status,
-          banners,
-        },
-      });
+      const { data } = await client.mutate({ mutation: mutationUpdatedPlacement,
+        variables: {
+          placement: {
+            id,
+            name,
+            width,
+            height,
+            startTime,
+            endTime,
+            weight,
+            description,
+            campaignId,
+            status,
+            banners,
+          },
+        } });
 
       dispatch({
         type: UPDATE_PLACEMENT,
@@ -220,9 +229,11 @@ export function updatePlacement({
 }
 
 export function deletePlacement(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationDeletedPlacement, { id });
+      const { data } = await client.mutate({
+        mutation: mutationDeletedPlacement, variables: { id },
+      });
 
       dispatch({
         type: DELETE_PLACEMENT,

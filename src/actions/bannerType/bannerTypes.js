@@ -21,7 +21,7 @@ export function getBannerTypes(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
       const variables = Object.assign({}, args);
       const filters = await getState().bannerTypes.filters;
@@ -35,7 +35,9 @@ export function getBannerTypes(args = {
         variables.where = Object.assign({}, filters);
       }
 
-      const { data } = await graphqlRequest(queryGetBannerTypes, variables.where);
+      const { data } = await client.query({
+        query: queryGetBannerTypes, variables: variables.where,
+      });
 
       dispatch({
         type: GET_BANNER_TYPES,
@@ -57,15 +59,18 @@ export function getBannerTypes(args = {
 }
 
 export function createBannerType({ name, value, isUpload, status, userId }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationCreatedBannerType, {
-        bannerType: {
-          name,
-          value,
-          isUpload,
-          status,
-          userId,
+      const { data } = await client.mutate({
+        mutation: mutationCreatedBannerType,
+        variables: {
+          bannerType: {
+            name,
+            value,
+            isUpload,
+            status,
+            userId,
+          },
         },
       });
 
@@ -89,15 +94,18 @@ export function createBannerType({ name, value, isUpload, status, userId }) {
 }
 
 export function updateBannerType({ id, name, value, isUpload, status }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationUpdatedBannerType, {
-        bannerType: {
-          id,
-          name,
-          value,
-          isUpload,
-          status,
+      const { data } = await client.mutate({
+        mutation: mutationUpdatedBannerType,
+        variables: {
+          bannerType: {
+            id,
+            name,
+            value,
+            isUpload,
+            status,
+          },
         },
       });
 
@@ -121,9 +129,11 @@ export function updateBannerType({ id, name, value, isUpload, status }) {
 }
 
 export function deleteBannerType(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationDeletedBannerType, { id });
+      const { data } = await client.mutate({
+        mutation: mutationDeletedBannerType, variables: { id },
+      });
 
       dispatch({
         type: DELETE_BANNER_TYPE,

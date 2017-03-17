@@ -27,9 +27,11 @@ import mutationDeletedSite from './deletedSite.graphql';
 import queryCheckSitesByDomain from './checkSitesByDomain.graphql';
 
 export function getSite(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(queryGetSite, { id });
+      const { data } = await client.query({
+        query: queryGetSite, variables: { id },
+      });
 
       dispatch({
         type: GET_SITE,
@@ -55,7 +57,7 @@ export function getSites(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
       const variables = Object.assign({}, args);
       const filters = await getState().sites.filters;
@@ -69,7 +71,9 @@ export function getSites(args = {
         variables.where = Object.assign({}, filters);
       }
 
-      const { data } = await graphqlRequest(queryGetSites, variables.where);
+      const { data } = await client.query({
+        query: queryGetSites, variables: variables.where,
+      });
 
       dispatch({
         type: GET_SITES,
@@ -91,9 +95,11 @@ export function getSites(args = {
 }
 
 export function checkSitesByDomain(domain) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(queryCheckSitesByDomain, { domain });
+      const { data } = await client.query({
+        query: queryCheckSitesByDomain, variables: { domain },
+      });
       dispatch({
         type: CHECK_SITE_BY_DOMAIN,
         payload: {
@@ -114,17 +120,18 @@ export function checkSitesByDomain(domain) {
 }
 
 export function createSite({ domain, name, email, description, status }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationCreatedSite, {
-        site: {
-          domain,
-          name,
-          email,
-          description,
-          status,
-        },
-      });
+      const { data } = await client.mutate({ mutation: mutationCreatedSite,
+        variables: {
+          site: {
+            domain,
+            name,
+            email,
+            description,
+            status,
+          },
+        } });
 
       dispatch({
         type: CREATE_SITE,
@@ -146,16 +153,19 @@ export function createSite({ domain, name, email, description, status }) {
 }
 
 export function updateSite({ id, domain, name, email, description, status }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationUpdatedSite, {
-        site: {
-          id,
-          domain,
-          name,
-          email,
-          description,
-          status,
+      const { data } = await client.mutate({
+        mutation: mutationUpdatedSite,
+        variables: {
+          site: {
+            id,
+            domain,
+            name,
+            email,
+            description,
+            status,
+          },
         },
       });
 
@@ -179,9 +189,11 @@ export function updateSite({ id, domain, name, email, description, status }) {
 }
 
 export function deleteSite(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationDeletedSite, { id });
+      const { data } = await client.mutate({
+        mutation: mutationDeletedSite, variables: { id },
+      });
 
       dispatch({
         type: DELETE_SITE,

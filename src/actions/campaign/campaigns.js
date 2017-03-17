@@ -62,9 +62,11 @@ export function setCampaignsFilters(filter) {
 }
 
 export function getCampaign(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(queryGetCampaign, { id });
+      const { data } = await client.query({
+        query: queryGetCampaign, variables: { id },
+      });
 
       dispatch({
         type: GET_CAMPAIGN,
@@ -90,7 +92,7 @@ export function getCampaigns(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
       const variables = Object.assign({}, args);
       const filters = await getState().campaigns.filters;
@@ -103,7 +105,9 @@ export function getCampaigns(args = {
       ) {
         variables.where = Object.assign({}, filters);
       }
-      const { data } = await graphqlRequest(queryGetCampaigns, variables.where);
+      const { data } = await client.query({
+        query: queryGetCampaigns, variables: variables.where,
+      });
 
       dispatch({
         type: GET_CAMPAIGNS,
@@ -139,23 +143,26 @@ export function createCampaign({
   description,
   status,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationCreatedCampaign, {
-        campaign: {
-          advertiserId,
-          name,
-          startTime,
-          endTime,
-          views,
-          viewPerSession,
-          timeResetViewCount,
-          weight,
-          revenueType,
-          expireValueCPM,
-          maxCPMPerDay,
-          description,
-          status,
+      const { data } = await client.mutate({
+        mutation: mutationCreatedCampaign,
+        variables: {
+          campaign: {
+            advertiserId,
+            name,
+            startTime,
+            endTime,
+            views,
+            viewPerSession,
+            timeResetViewCount,
+            weight,
+            revenueType,
+            expireValueCPM,
+            maxCPMPerDay,
+            description,
+            status,
+          },
         },
       });
 
@@ -194,24 +201,27 @@ export function updateCampaign({
   description,
   status,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationUpdatedCampaign, {
-        campaign: {
-          id,
-          advertiserId,
-          name,
-          startTime,
-          endTime,
-          views,
-          viewPerSession,
-          timeResetViewCount,
-          weight,
-          revenueType,
-          expireValueCPM,
-          maxCPMPerDay,
-          description,
-          status,
+      const { data } = await client.mutate({
+        mutation: mutationUpdatedCampaign,
+        variables: {
+          campaign: {
+            id,
+            advertiserId,
+            name,
+            startTime,
+            endTime,
+            views,
+            viewPerSession,
+            timeResetViewCount,
+            weight,
+            revenueType,
+            expireValueCPM,
+            maxCPMPerDay,
+            description,
+            status,
+          },
         },
       });
 
@@ -235,9 +245,11 @@ export function updateCampaign({
 }
 
 export function deleteCampaign(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationDeletedCampaign, { id });
+      const { data } = await client.mutate({
+        mutation: mutationDeletedCampaign, variables: { id },
+      });
 
       dispatch({
         type: DELETE_CAMPAIGN,

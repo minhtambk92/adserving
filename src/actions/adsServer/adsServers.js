@@ -21,7 +21,7 @@ export function getAdsServers(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
       const variables = Object.assign({}, args);
       const filters = await getState().adsServers.filters;
@@ -35,7 +35,9 @@ export function getAdsServers(args = {
         variables.where = Object.assign({}, filters);
       }
 
-      const { data } = await graphqlRequest(queryGetAdsServers, variables.where);
+      const { data } = await client.query({
+        query: queryGetAdsServers, variables: variables.where,
+      });
 
       dispatch({
         type: GET_ADS_SERVERS,
@@ -57,9 +59,10 @@ export function getAdsServers(args = {
 }
 
 export function createAdsServer({ name, value, status, userId }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationCreatedAdsServer, {
+      const { data } = await client.mutate({
+        mutation: mutationCreatedAdsServer,
         adsServer: {
           name,
           value,
@@ -88,9 +91,10 @@ export function createAdsServer({ name, value, status, userId }) {
 }
 
 export function updateAdsServer({ id, name, value, status }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationUpdatedAdsServer, {
+      const { data } = await client.mutate({
+        mutation: mutationUpdatedAdsServer,
         adsServer: {
           id,
           name,
@@ -119,9 +123,12 @@ export function updateAdsServer({ id, name, value, status }) {
 }
 
 export function deleteAdsServer(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationDeletedAdsServer, { id });
+      const { data } = await client.mutate({
+        mutation: mutationDeletedAdsServer,
+        variables: { id },
+      });
 
       dispatch({
         type: DELETE_ADS_SERVER,

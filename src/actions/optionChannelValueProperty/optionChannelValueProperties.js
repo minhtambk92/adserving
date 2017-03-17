@@ -65,7 +65,7 @@ export function getOptionChannelValueProperties(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
       const variables = Object.assign({}, args);
       const filters = await getState().optionChannelValueProperties.filters;
@@ -78,7 +78,9 @@ export function getOptionChannelValueProperties(args = {
       ) {
         variables.where = Object.assign({}, filters);
       }
-      const { data } = await graphqlRequest(queryGetOptionChannelValueProperties, variables.where);
+      const { data } = await client.query({
+        query: queryGetOptionChannelValueProperties, variables: variables.where,
+      });
 
       dispatch({
         type: GET_OPTION_CHANNEL_VALUE_PROPERTIES,
@@ -106,17 +108,18 @@ export function createOptionChannelValueProperty({
   userId,
   description,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationCreatedOptionChannelValue, {
-        optionChannelValueProperty: {
-          name,
-          status,
-          optionChannelValueId,
-          userId,
-          description,
-        },
-      });
+      const { data } = await client.mutate({ mutation: mutationCreatedOptionChannelValue,
+        variables: {
+          optionChannelValueProperty: {
+            name,
+            status,
+            optionChannelValueId,
+            userId,
+            description,
+          },
+        } });
 
       dispatch({
         type: CREATE_OPTION_CHANNEL_VALUE_PROPERTY,
@@ -144,17 +147,18 @@ export function updateOptionChannelValueProperty({
   status,
   optionChannelValueId,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationUpdatedOptionChannelValue, {
-        optionChannelValueProperty: {
-          id,
-          name,
-          status,
-          optionChannelValueId,
-          description,
-        },
-      });
+      const { data } = await client.mutate({ mutation: mutationUpdatedOptionChannelValue,
+        variables: {
+          optionChannelValueProperty: {
+            id,
+            name,
+            status,
+            optionChannelValueId,
+            description,
+          },
+        } });
 
       dispatch({
         type: UPDATE_OPTION_CHANNEL_VALUE_PROPERTY,
@@ -176,9 +180,11 @@ export function updateOptionChannelValueProperty({
 }
 
 export function deleteOptionChannelValueProperty(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationDeletedOptionChannelValue, { id });
+      const { data } = await client.mutate({
+        mutation: mutationDeletedOptionChannelValue, variables: { id },
+      });
 
       dispatch({
         type: DELETE_OPTION_CHANNEL_VALUE_PROPERTY,

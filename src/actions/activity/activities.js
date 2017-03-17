@@ -11,9 +11,12 @@ import queryGetActivitiesBySubjectId from './getActivitiesBySubjectId.graphql';
 import queryCreateActivity from './createActivity.graphql';
 
 export function getActivitiesBySubjectId(subjectId) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(queryGetActivitiesBySubjectId, { subjectId });
+      const { data } = await client.query({
+        query: queryGetActivitiesBySubjectId,
+        variables: { subjectId },
+      });
 
       dispatch({
         type: GET_ACTIVITIES_BY_SUBJECT_ID,
@@ -35,15 +38,18 @@ export function getActivitiesBySubjectId(subjectId) {
 }
 
 export function createActivity({ action, subject, subjectId, other, userId }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(queryCreateActivity, {
-        activity: {
-          action,
-          subject,
-          subjectId,
-          other,
-          userId,
+      const { data } = await client.mutate({
+        mutation: queryCreateActivity,
+        variables: {
+          activity: {
+            action,
+            subject,
+            subjectId,
+            other,
+            userId,
+          },
         },
       });
 

@@ -19,16 +19,19 @@ export function createOptionChannel({
   value,
   channelId,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationCreatedOptionChannel, {
-        optionChannel: {
-          name,
-          logical,
-          optionChannelTypeId,
-          comparison,
-          value,
-          channelId,
+      const { data } = await client.mutate({
+        mutation: mutationCreatedOptionChannel,
+        variables: {
+          optionChannel: {
+            name,
+            logical,
+            optionChannelTypeId,
+            comparison,
+            value,
+            channelId,
+          },
         },
       });
 
@@ -60,17 +63,20 @@ export function updateOptionChannel({
   value,
   channelId,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationUpdatedOptionChannel, {
-        optionChannel: {
-          id,
-          name,
-          logical,
-          optionChannelTypeId,
-          comparison,
-          value,
-          channelId,
+      const { data } = await client.mutate({
+        mutation: mutationUpdatedOptionChannel,
+        variables: {
+          optionChannel: {
+            id,
+            name,
+            logical,
+            optionChannelTypeId,
+            comparison,
+            value,
+            channelId,
+          },
         },
       });
 
@@ -94,9 +100,11 @@ export function updateOptionChannel({
 }
 
 export function deleteOptionChannel(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await graphqlRequest(mutationDeletedOptionChannel, { id });
+      const { data } = await client.mutate({
+        mutation: mutationDeletedOptionChannel, variables: { id },
+      });
 
       dispatch({
         type: DELETE_OPTION_CHANNEL,

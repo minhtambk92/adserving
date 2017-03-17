@@ -17,7 +17,7 @@ import {
   createOption,
   deleteOption,
   updateOption,
-} from '../../../../actions/options';
+} from '../../../../actions/option/options';
 import {
   setStatusCreateOption,
   setStatusUpdateOption,
