@@ -2,8 +2,11 @@
 
 import {
   CREATE_SHARE,
+  CREATE_SHARE_ERROR,
   UPDATE_SHARE,
+  UPDATE_SHARE_ERROR,
   DELETE_SHARE,
+  DELETE_SHARE_ERROR,
 } from '../../constants';
 
 import mutationCreatedShare from './createdShare.graphql';
@@ -24,31 +27,42 @@ export function createShare({
   zoneId,
 }) {
   return async (dispatch, getState, { client }) => {
-    const { data } = await client.mutate({
-      mutation: mutationCreatedShare,
-      variables: {
-        share: {
-          name,
-          html,
-          css,
-          outputCss,
-          width,
-          height,
-          weight,
-          classes,
-          type,
-          description,
-          zoneId,
+    try {
+      const { data } = await client.mutate({
+        mutation: mutationCreatedShare,
+        variables: {
+          share: {
+            name,
+            html,
+            css,
+            outputCss,
+            width,
+            height,
+            weight,
+            classes,
+            type,
+            description,
+            zoneId,
+          },
         },
-      },
-    });
+      });
 
-    dispatch({
-      type: CREATE_SHARE,
-      payload: {
-        share: data.createdShare,
-      },
-    });
+      dispatch({
+        type: CREATE_SHARE,
+        payload: {
+          share: data.createdShare,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: CREATE_SHARE_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
@@ -68,48 +82,70 @@ export function updateShare({
   placements,
 }) {
   return async (dispatch, getState, { client }) => {
-    const { data } = await client.mutate({
-      mutation: mutationUpdatedShare,
-      variables: {
-        share: {
-          id,
-          name,
-          html,
-          css,
-          outputCss,
-          width,
-          height,
-          weight,
-          classes,
-          type,
-          description,
-          zoneId,
-          placements,
+    try {
+      const { data } = await client.mutate({
+        mutation: mutationUpdatedShare,
+        variables: {
+          share: {
+            id,
+            name,
+            html,
+            css,
+            outputCss,
+            width,
+            height,
+            weight,
+            classes,
+            type,
+            description,
+            zoneId,
+            placements,
+          },
         },
-      },
-    });
+      });
 
-    dispatch({
-      type: UPDATE_SHARE,
-      payload: {
-        share: data.updatedShare,
-      },
-    });
+      dispatch({
+        type: UPDATE_SHARE,
+        payload: {
+          share: data.updatedShare,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_SHARE_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
 export function deleteShare(id) {
   return async (dispatch, getState, { client }) => {
-    const { data } = await client.mutate({
-      mutation: mutationDeletedShare,
-      variables: { id },
-    });
+    try {
+      const { data } = await client.mutate({
+        mutation: mutationDeletedShare,
+        variables: { id },
+      });
 
-    dispatch({
-      type: DELETE_SHARE,
-      payload: {
-        share: data.deletedShare,
-      },
-    });
+      dispatch({
+        type: DELETE_SHARE,
+        payload: {
+          share: data.deletedShare,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: DELETE_SHARE_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }

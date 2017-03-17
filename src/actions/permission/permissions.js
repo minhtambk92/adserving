@@ -11,8 +11,10 @@ import mutationUpdatedPermission from './updatedPermission.graphql';
 import mutationDeletedPermission from './deletedPermission.graphql';
 
 export function getPermissions() {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(queryGetPermissions);
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.query({
+      query: queryGetPermissions,
+    });
 
     dispatch({
       type: GET_PERMISSIONS,
@@ -27,13 +29,14 @@ export function createPermission({
   name,
   status,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationCreatedPermission, {
-      permission: {
-        name,
-        status,
-      },
-    });
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({ mutation: mutationCreatedPermission,
+      variables: {
+        permission: {
+          name,
+          status,
+        },
+      } });
 
     dispatch({
       type: CREATE_PERMISSION,
@@ -49,12 +52,15 @@ export function updatePermission({
   name,
   status,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationUpdatedPermission, {
-      permission: {
-        id,
-        name,
-        status,
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationUpdatedPermission,
+      variables: {
+        permission: {
+          id,
+          name,
+          status,
+        },
       },
     });
 
@@ -68,8 +74,9 @@ export function updatePermission({
 }
 
 export function deletePermission(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationDeletedPermission, { id });
+  return async (dispatch, getState, { client }) => {
+    const { data } =
+      await client.mutate({ mutation: mutationDeletedPermission, variables: { id } });
 
     dispatch({
       type: DELETE_PERMISSION,

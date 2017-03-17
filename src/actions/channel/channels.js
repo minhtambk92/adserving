@@ -2,12 +2,19 @@
 
 import {
   GET_CHANNEL,
+  GET_CHANNEL_ERROR,
   GET_CHANNELS,
+  GET_CHANNELS_ERROR,
   CREATE_CHANNEL,
+  CREATE_CHANNEL_ERROR,
   UPDATE_CHANNEL,
+  UPDATE_CHANNEL_ERROR,
   DELETE_CHANNEL,
+  DELETE_CHANNEL_ERROR,
   GET_CHANNELS_FILTERS,
+  GET_CHANNELS_FILTERS_ERROR,
   SET_CHANNELS_FILTERS,
+  SET_CHANNELS_FILTERS_ERROR,
 } from '../../constants';
 
 import queryGetChannel from './getChannel.graphql';
@@ -18,32 +25,67 @@ import mutationDeletedChannel from './deletedChannel.graphql';
 
 export function getChannelsFilters() {
   return async (dispatch) => {
-    dispatch({
-      type: GET_CHANNELS_FILTERS,
-      payload: {},
-    });
+    try {
+      dispatch({
+        type: GET_CHANNELS_FILTERS,
+        payload: {},
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_CHANNELS_FILTERS_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
 export function setChannelsFilters(filter) {
   return async (dispatch) => {
-    dispatch({
-      type: SET_CHANNELS_FILTERS,
-      payload: filter,
-    });
+    try {
+      dispatch({
+        type: SET_CHANNELS_FILTERS,
+        payload: filter,
+      });
+    } catch (error) {
+      dispatch({
+        type: SET_CHANNELS_FILTERS_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
 export function getChannel(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(queryGetChannel, { id });
+  return async (dispatch, getState, { client }) => {
+    try {
+      const { data } = await client.query({
+        query: queryGetChannel, variables: { id },
+      });
 
-    dispatch({
-      type: GET_CHANNEL,
-      payload: {
-        channel: data.channels[0],
-      },
-    });
+      dispatch({
+        type: GET_CHANNEL,
+        payload: {
+          channel: data.channels[0],
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_CHANNEL_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
@@ -52,79 +94,133 @@ export function getChannels(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const variables = Object.assign({}, args);
-    const filters = await getState().channels.filters;
+  return async (dispatch, getState, { client }) => {
+    try {
+      const variables = Object.assign({}, args);
+      const filters = await getState().channels.filters;
 
-    if (
-      options.globalFilters &&
-      variables.where === {} &&
-      Object.keys(filters).length > 0 &&
-      filters.constructor === Object
-    ) {
-      variables.where = Object.assign({}, filters);
+      if (
+        options.globalFilters &&
+        variables.where === {} &&
+        Object.keys(filters).length > 0 &&
+        filters.constructor === Object
+      ) {
+        variables.where = Object.assign({}, filters);
+      }
+
+      const { data } = await client.query({
+        query: queryGetChannels, variables: variables.where,
+      });
+
+      dispatch({
+        type: GET_CHANNELS,
+        payload: {
+          channels: data.channels,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_CHANNELS_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
     }
-
-    const { data } = await graphqlRequest(queryGetChannels, variables.where);
-
-    dispatch({
-      type: GET_CHANNELS,
-      payload: {
-        channels: data.channels,
-      },
-    });
+    return true;
   };
 }
 
 export function createChannel({ name, description, status, siteId }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationCreatedChannel, {
-      channel: {
-        name,
-        description,
-        status,
-        siteId,
-      },
-    });
+  return async (dispatch, getState, { client }) => {
+    try {
+      const { data } = await client.mutate({
+        mutation: mutationCreatedChannel,
+        variables: {
+          channel: {
+            name,
+            description,
+            status,
+            siteId,
+          },
+        },
+      });
 
-    dispatch({
-      type: CREATE_CHANNEL,
-      payload: {
-        channel: data.createdChannel,
-      },
-    });
+      dispatch({
+        type: CREATE_CHANNEL,
+        payload: {
+          channel: data.createdChannel,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: CREATE_CHANNEL_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
 export function updateChannel({ id, name, description, status }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationUpdatedChannel, {
-      channel: {
-        id,
-        name,
-        description,
-        status,
-      },
-    });
+  return async (dispatch, getState, { client }) => {
+    try {
+      const { data } = await client.mutate({
+        mutation: mutationUpdatedChannel,
+        variables: {
+          channel: {
+            id,
+            name,
+            description,
+            status,
+          },
+        },
+      });
 
-    dispatch({
-      type: UPDATE_CHANNEL,
-      payload: {
-        channel: data.updatedChannel,
-      },
-    });
+      dispatch({
+        type: UPDATE_CHANNEL,
+        payload: {
+          channel: data.updatedChannel,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_CHANNEL_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
 export function deleteChannel(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationDeletedChannel, { id });
+  return async (dispatch, getState, { client }) => {
+    try {
+      const { data } = await client.mutate({
+        mutation: mutationDeletedChannel, variables: { id },
+      });
 
-    dispatch({
-      type: DELETE_CHANNEL,
-      payload: {
-        channel: data.deletedChannel,
-      },
-    });
+      dispatch({
+        type: DELETE_CHANNEL,
+        payload: {
+          channel: data.deletedChannel,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: DELETE_CHANNEL_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }

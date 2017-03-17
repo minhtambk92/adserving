@@ -4,7 +4,7 @@ import {
   GET_OPTION,
   UPDATE_OPTION,
   DELETE_OPTION,
-} from '../constants';
+} from '../../constants';
 
 export function getOption(id) {
   return async (dispatch, getState, { graphqlRequest }) => {
