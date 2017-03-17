@@ -6,28 +6,50 @@
 
 import {
   SET_STATUS_UPDATE_PROFILE_USER,
+  SET_STATUS_UPDATE_PROFILE_USER_ERROR,
   SET_PAGE_PROFILE_ACTIVE_TAB,
+  SET_PAGE_PROFILE_ACTIVE_TAB_ERROR,
 } from '../../constants';
 
 export function setStatusUpdateProfileUser(statusUpdateSettingProfile) {
   return async (dispatch) => {
-    dispatch({
-      type: SET_STATUS_UPDATE_PROFILE_USER,
-      payload: {
-        statusUpdateSettingProfile,
-      },
-    });
+    try {
+      dispatch({
+        type: SET_STATUS_UPDATE_PROFILE_USER,
+        payload: {
+          statusUpdateSettingProfile,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: SET_STATUS_UPDATE_PROFILE_USER_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
 export function setPageProfileActiveTab(tabName) {
   return async (dispatch) => {
-    dispatch({
-      type: SET_PAGE_PROFILE_ACTIVE_TAB,
-      payload: {
-        tabName,
-      },
-    });
+    try {
+      dispatch({
+        type: SET_PAGE_PROFILE_ACTIVE_TAB,
+        payload: {
+          tabName,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: SET_PAGE_PROFILE_ACTIVE_TAB_ERROR,
+        payload: {
+          error,
+        },
+      });
+    }
   };
 }
 
