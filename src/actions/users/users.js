@@ -25,7 +25,6 @@ import mutationUpdatedProfile from './updatedProfile.graphql';
 import mutationUpdatedUser from './updatedUser.graphql';
 import mutationDeletedUser from './deletedUser.graphql';
 
-
 export function getUsersFilters() {
   return async (dispatch) => {
     dispatch({
@@ -45,8 +44,11 @@ export function setUsersFilters(filter) {
 }
 
 export function getUser(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(queryGetUser, { id });
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.query({
+      query: queryGetUser,
+      variables: { id },
+    });
 
     dispatch({
       type: GET_USER,
@@ -58,8 +60,11 @@ export function getUser(id) {
 }
 
 export function getUserProfile(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(queryGetUserProfile, { id });
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.query({
+      query: queryGetUserProfile,
+      variables: { id },
+    });
 
     dispatch({
       type: GET_USER_PROFILE,
@@ -75,7 +80,7 @@ export function getUsers(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     const variables = Object.assign({}, args);
     const filters = await getState().users.filters;
 
@@ -88,7 +93,10 @@ export function getUsers(args = {
       variables.where = Object.assign({}, filters);
     }
 
-    const { data } = await graphqlRequest(queryGetUsers, variables.where);
+    const { data } = await client.query({
+      query: queryGetUsers,
+      variables: variables.where,
+    });
 
     dispatch({
       type: GET_USERS,
@@ -99,16 +107,26 @@ export function getUsers(args = {
   };
 }
 
-export function createUser({ email, profile, roles, password, emailConfirmed, status }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationCreatedUser, {
-      user: {
-        email,
-        profile,
-        roles,
-        password,
-        emailConfirmed,
-        status,
+export function createUser({
+  email,
+  profile,
+  roles,
+  password,
+  emailConfirmed,
+  status,
+}) {
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationCreatedUser,
+      variables: {
+        user: {
+          email,
+          profile,
+          roles,
+          password,
+          emailConfirmed,
+          status,
+        },
       },
     });
 
@@ -121,17 +139,28 @@ export function createUser({ email, profile, roles, password, emailConfirmed, st
   };
 }
 
-export function updateUser({ id, email, profile, roles, password, emailConfirmed, status }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationUpdatedUser, {
-      user: {
-        id,
-        email,
-        profile,
-        roles,
-        password,
-        emailConfirmed,
-        status,
+export function updateUser({
+  id,
+  email,
+  profile,
+  roles,
+  password,
+  emailConfirmed,
+  status,
+}) {
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationUpdatedUser,
+      variables: {
+        user: {
+          id,
+          email,
+          profile,
+          roles,
+          password,
+          emailConfirmed,
+          status,
+        },
       },
     });
 
@@ -144,12 +173,18 @@ export function updateUser({ id, email, profile, roles, password, emailConfirmed
   };
 }
 
-export function updateProfile({ id, profile }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationUpdatedProfile, {
-      user: {
-        id,
-        profile,
+export function updateProfile({
+  id,
+  profile,
+}) {
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationUpdatedProfile,
+      variables: {
+        user: {
+          id,
+          profile,
+        },
       },
     });
 
@@ -162,10 +197,12 @@ export function updateProfile({ id, profile }) {
   };
 }
 
-
 export function deleteUser(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationDeletedUser, { id });
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationDeletedUser,
+      variables: { id },
+    });
 
     dispatch({
       type: DELETE_USER,
@@ -176,17 +213,24 @@ export function deleteUser(id) {
   };
 }
 
-export function registerUser({ email, password, fullName }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationRegisterUser, {
-      user: {
-        email,
-        roles: ['user'],
-        password,
-        emailConfirmed: 'true',
-        status: 'active',
-        profile: {
-          displayName: fullName,
+export function registerUser({
+  email,
+  password,
+  fullName,
+}) {
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationRegisterUser,
+      variables: {
+        user: {
+          email,
+          roles: ['user'],
+          password,
+          emailConfirmed: 'true',
+          status: 'active',
+          profile: {
+            displayName: fullName,
+          },
         },
       },
     });
@@ -200,7 +244,11 @@ export function registerUser({ email, password, fullName }) {
   };
 }
 
-export function logUserIn({ email, password, rememberMe }) {
+export function logUserIn({
+  email,
+  password,
+  rememberMe,
+}) {
   return async (dispatch) => {
     const res = await fetch('/login', {
       method: 'post',

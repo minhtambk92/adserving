@@ -78,7 +78,7 @@ export default {
           credentials: 'include',
         }).catch((error) => {
           // network request failed / timeout
-          console.log(error);
+          console.error(error); // eslint-disable-line no-console
         });
         const { data } = await resp.json();
 

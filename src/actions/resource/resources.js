@@ -37,8 +37,11 @@ export function setResourcesFilters(filter) {
 }
 
 export function getResource(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(queryGetResource, { id });
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.query({
+      query: queryGetResource,
+      variables: { id },
+    });
 
     dispatch({
       type: GET_RESOURCE,
@@ -52,7 +55,7 @@ export function getResource(id) {
 export function getResources(args = {
   where: {},
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     const variables = Object.assign({}, args);
     const { filters } = await getState().resources;
 
@@ -64,7 +67,10 @@ export function getResources(args = {
       variables.where = { ...filters };
     }
 
-    const { data } = await graphqlRequest(queryGetResources, variables.where);
+    const { data } = await client.query({
+      query: queryGetResources,
+      variables: variables.where,
+    });
 
     dispatch({
       type: GET_RESOURCES,
@@ -75,16 +81,26 @@ export function getResources(args = {
   };
 }
 
-export function createResource({ uniqueName, modelName, name, hasMeta, description, status }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationCreatedResouce, {
-      resource: {
-        uniqueName,
-        modelName,
-        name,
-        hasMeta: hasMeta === true,
-        description,
-        status,
+export function createResource({
+  uniqueName,
+  modelName,
+  name,
+  hasMeta,
+  description,
+  status,
+}) {
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationCreatedResouce,
+      variables: {
+        resource: {
+          uniqueName,
+          modelName,
+          name,
+          hasMeta: hasMeta === true,
+          description,
+          status,
+        },
       },
     });
 
@@ -97,17 +113,28 @@ export function createResource({ uniqueName, modelName, name, hasMeta, descripti
   };
 }
 
-export function updateResource({ id, uniqueName, modelName, name, hasMeta, description, status }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationUpdatedResource, {
-      resource: {
-        id,
-        uniqueName,
-        modelName,
-        name,
-        hasMeta: hasMeta === true,
-        description,
-        status,
+export function updateResource({
+  id,
+  uniqueName,
+  modelName,
+  name,
+  hasMeta,
+  description,
+  status,
+}) {
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationUpdatedResource,
+      variables: {
+        resource: {
+          id,
+          uniqueName,
+          modelName,
+          name,
+          hasMeta: hasMeta === true,
+          description,
+          status,
+        },
       },
     });
 
@@ -121,8 +148,11 @@ export function updateResource({ id, uniqueName, modelName, name, hasMeta, descr
 }
 
 export function deleteResource(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationDeletedResource, { id });
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationDeletedResource,
+      variables: { id },
+    });
 
     dispatch({
       type: DELETE_RESOURCE,

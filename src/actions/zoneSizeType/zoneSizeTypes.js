@@ -17,7 +17,7 @@ export function getZoneSizeTypes(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     const variables = Object.assign({}, args);
     const filters = await getState().zoneSizeTypes.filters;
 
@@ -30,7 +30,7 @@ export function getZoneSizeTypes(args = {
       variables.where = Object.assign({}, filters);
     }
 
-    const { data } = await graphqlRequest(queryGetZoneSizeTypes);
+    const { data } = await client.query({ query: queryGetZoneSizeTypes });
 
     dispatch({
       type: GET_ZONE_SIZE_TYPES,
@@ -42,14 +42,17 @@ export function getZoneSizeTypes(args = {
 }
 
 export function createZoneSizeType({ name, width, height, status, userId }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationCreatedZoneSizeType, {
-      zoneSizeType: {
-        name,
-        width,
-        height,
-        status,
-        userId,
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationCreatedZoneSizeType,
+      variables: {
+        zoneSizeType: {
+          name,
+          width,
+          height,
+          status,
+          userId,
+        },
       },
     });
 
@@ -63,14 +66,17 @@ export function createZoneSizeType({ name, width, height, status, userId }) {
 }
 
 export function updateZoneSizeType({ id, name, width, height, status }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationUpdatedZoneSizeType, {
-      zoneSizeType: {
-        id,
-        name,
-        width,
-        height,
-        status,
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationUpdatedZoneSizeType,
+      variables: {
+        zoneSizeType: {
+          id,
+          name,
+          width,
+          height,
+          status,
+        },
       },
     });
 
@@ -84,8 +90,11 @@ export function updateZoneSizeType({ id, name, width, height, status }) {
 }
 
 export function deleteZoneSizeType(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationDeletedZoneSizeType, { id });
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationDeletedZoneSizeType,
+      variables: { id },
+    });
 
     dispatch({
       type: DELETE_ZONE_SIZE_TYPE,

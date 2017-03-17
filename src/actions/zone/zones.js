@@ -39,8 +39,11 @@ export function setZonesFilters(filter) {
 }
 
 export function getZone(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(queryGetZone, { id });
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.query({
+      query: queryGetZone,
+      variables: { id },
+    });
 
     dispatch({
       type: GET_ZONE,
@@ -56,7 +59,7 @@ export function getZones(args = {
 }, options = {
   globalFilters: false,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     const variables = Object.assign({}, args);
     const filters = await getState().zones.filters;
 
@@ -69,7 +72,10 @@ export function getZones(args = {
       variables.where = Object.assign({}, filters);
     }
 
-    const { data } = await graphqlRequest(queryGetZones, variables.where);
+    const { data } = await client.query({
+      query: queryGetZones,
+      variables: variables.where,
+    });
 
     dispatch({
       type: GET_ZONES,
@@ -102,29 +108,32 @@ export function createZone({
   status,
   description,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationCreatedZone, {
-      zone: {
-        siteId,
-        name,
-        zoneTypeId,
-        zoneSizeTypeId,
-        html,
-        css,
-        width,
-        height,
-        slot,
-        targetIFrame,
-        isShowBannerAgain,
-        source,
-        isShowCampaignAgain,
-        isShowTextBanner,
-        characterSetId,
-        supportThirdParty,
-        isIncludeDescription,
-        isCustomSize,
-        status,
-        description,
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationCreatedZone,
+      variables: {
+        zone: {
+          siteId,
+          name,
+          zoneTypeId,
+          zoneSizeTypeId,
+          html,
+          css,
+          width,
+          height,
+          slot,
+          targetIFrame,
+          isShowBannerAgain,
+          source,
+          isShowCampaignAgain,
+          isShowTextBanner,
+          characterSetId,
+          supportThirdParty,
+          isIncludeDescription,
+          isCustomSize,
+          status,
+          description,
+        },
       },
     });
 
@@ -160,30 +169,33 @@ export function updateZone({
   isCustomSize,
   description,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationUpdatedZone, {
-      zone: {
-        id,
-        siteId,
-        name,
-        zoneTypeId,
-        zoneSizeTypeId,
-        html,
-        css,
-        slot,
-        width,
-        height,
-        targetIFrame,
-        isShowBannerAgain,
-        source,
-        isShowCampaignAgain,
-        isShowTextBanner,
-        characterSetId,
-        supportThirdParty,
-        isIncludeDescription,
-        isCustomSize,
-        status,
-        description,
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationUpdatedZone,
+      variables: {
+        zone: {
+          id,
+          siteId,
+          name,
+          zoneTypeId,
+          zoneSizeTypeId,
+          html,
+          css,
+          slot,
+          width,
+          height,
+          targetIFrame,
+          isShowBannerAgain,
+          source,
+          isShowCampaignAgain,
+          isShowTextBanner,
+          characterSetId,
+          supportThirdParty,
+          isIncludeDescription,
+          isCustomSize,
+          status,
+          description,
+        },
       },
     });
 
@@ -197,8 +209,11 @@ export function updateZone({
 }
 
 export function deleteZone(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationDeletedZone, { id });
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationDeletedZone,
+      variables: { id },
+    });
 
     dispatch({
       type: DELETE_ZONE,

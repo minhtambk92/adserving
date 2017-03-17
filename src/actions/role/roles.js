@@ -37,8 +37,11 @@ export function setRolesFilters(filter) {
 }
 
 export function getRole(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(queryGetRole, { id });
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.query({
+      query: queryGetRole,
+      variables: { id },
+    });
 
     dispatch({
       type: GET_ROLE,
@@ -52,7 +55,7 @@ export function getRole(id) {
 export function getRoles(args = {
   where: {},
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
+  return async (dispatch, getState, { client }) => {
     const variables = Object.assign({}, args);
     const { filters } = await getState().roles;
 
@@ -64,7 +67,10 @@ export function getRoles(args = {
       variables.where = { ...filters };
     }
 
-    const { data } = await graphqlRequest(queryGetRoles, variables.where);
+    const { data } = await client.query({
+      query: queryGetRoles,
+      variables: variables.where,
+    });
 
     dispatch({
       type: GET_ROLES,
@@ -75,9 +81,20 @@ export function getRoles(args = {
   };
 }
 
-export function createRole({ uniqueName, name }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationCreatedRole, { role: { uniqueName, name } });
+export function createRole({
+  uniqueName,
+  name,
+}) {
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationCreatedRole,
+      variables: {
+        role: {
+          uniqueName,
+          name,
+        },
+      },
+    });
 
     dispatch({
       type: CREATE_ROLE,
@@ -88,9 +105,22 @@ export function createRole({ uniqueName, name }) {
   };
 }
 
-export function updateRole({ id, uniqueName, name }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationUpdatedRole, { role: { id, uniqueName, name } });
+export function updateRole({
+  id,
+  uniqueName,
+  name,
+}) {
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationUpdatedRole,
+      variables: {
+        role: {
+          id,
+          uniqueName,
+          name,
+        },
+      },
+    });
 
     dispatch({
       type: UPDATE_ROLE,
@@ -102,8 +132,11 @@ export function updateRole({ id, uniqueName, name }) {
 }
 
 export function deleteRole(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationDeletedRole, { id });
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationDeletedRole,
+      variables: { id },
+    });
 
     dispatch({
       type: DELETE_ROLE,

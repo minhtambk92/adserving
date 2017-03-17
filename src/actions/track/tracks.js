@@ -13,12 +13,15 @@ export function createTrack({
   impressionUrl,
   bannerId,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationCreatedTrack, {
-      track: {
-        clickUrl,
-        impressionUrl,
-        bannerId,
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationCreatedTrack,
+      variables: {
+        track: {
+          clickUrl,
+          impressionUrl,
+          bannerId,
+        },
       },
     });
 
@@ -37,13 +40,16 @@ export function updateTrack({
   impressionUrl,
   bannerId,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationUpdatedTrack, {
-      track: {
-        id,
-        clickUrl,
-        impressionUrl,
-        bannerId,
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationUpdatedTrack,
+      variables: {
+        track: {
+          id,
+          clickUrl,
+          impressionUrl,
+          bannerId,
+        },
       },
     });
 
@@ -57,8 +63,11 @@ export function updateTrack({
 }
 
 export function deleteTrack(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const { data } = await graphqlRequest(mutationDeletedTrack, { id });
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationDeletedTrack,
+      variables: { id },
+    });
 
     dispatch({
       type: DELETE_TRACK,
