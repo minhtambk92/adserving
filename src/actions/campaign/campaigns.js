@@ -106,7 +106,8 @@ export function getCampaigns(args = {
         variables.where = Object.assign({}, filters);
       }
       const { data } = await client.query({
-        query: queryGetCampaigns, variables: variables.where,
+        query: queryGetCampaigns,
+        variables: variables.where,
       });
 
       dispatch({

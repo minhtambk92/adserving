@@ -17,7 +17,7 @@ const advertisers = {
   resolve: resolver(Advertiser, {
     before(options, args, res) {
       const opts = options;
-      if (res.body.variables !== {}) {
+      if (res.body !== undefined) {
         opts.where = res.body.variables;
       }
       opts.order = options.order || [];
