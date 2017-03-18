@@ -55,7 +55,9 @@ class Navigation extends Component {
   };
 
   componentWillMount() {
-    this.props.getUser(this.props.user.id);
+    if (this.props.user.id) {
+      this.props.getUser(this.props.user.id);
+    }
   }
 
 

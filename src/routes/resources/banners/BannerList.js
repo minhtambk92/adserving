@@ -90,7 +90,7 @@ class BannerList extends Component {
           const subject = `Banner ${data.name}`;
           const subjectId = this.props.list[0].id;
           const action = 'duplicated';
-          const other = JSON.stringify(data);
+          const other = JSON.stringify(data.id);
           this.props.createActivity({ action,
             subject,
             subjectId,
@@ -103,7 +103,20 @@ class BannerList extends Component {
           for (let j = 0; j < arrTracks.length; j += 1) {
             const clickUrl = arrTracks[j].clickUrl;
             const impressionUrl = arrTracks[j].impressionUrl;
-            this.props.createTrack({ clickUrl, impressionUrl, bannerId });
+            this.props.createTrack({ clickUrl, impressionUrl, bannerId }).then(() => {
+              if (this.props.tracks && this.props.tracks.list.length > 0) {
+                const userId = this.props.user.id;
+                const subject = `Track ${name}`;
+                const subjectId = this.props.tracks.list[0].id;
+                const action = 'created';
+                const other = '';
+                this.props.createActivity({ action,
+                  subject,
+                  subjectId,
+                  other,
+                  userId });
+              }
+            });
           }
         }
       });

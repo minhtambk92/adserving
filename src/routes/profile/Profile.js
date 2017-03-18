@@ -37,6 +37,7 @@ class Profile extends Component {
 
   componentWillMount() {
     this.props.getUserProfile(this.props.user.id);
+    this.props.setPageProfileActiveTab('settings');
   }
 
   componentDidMount() {
@@ -56,6 +57,9 @@ class Profile extends Component {
   onTabClick(event) {
     event.persist();
     this.props.setPageProfileActiveTab(event.target.getAttribute('data-id'));
+    if (event.target.getAttribute('data-id') === 'activity') {
+      this.props.getUserProfile(this.props.user.id);
+    }
   }
 
   render() {
