@@ -55,7 +55,7 @@ class PlacementList extends Component {
           const subject = `Placement ${data.name}`;
           const subjectId = this.props.list[0].id;
           const action = 'duplicated';
-          const other = JSON.stringify(data);
+          const other = JSON.stringify(data.id);
           this.props.createActivity({ action,
             subject,
             subjectId,

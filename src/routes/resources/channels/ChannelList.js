@@ -40,7 +40,7 @@ class ChannelList extends Component {
           const subject = `Channel ${data.name}`;
           const subjectId = this.props.list[0].id;
           const action = 'duplicated';
-          const other = JSON.stringify(data);
+          const other = JSON.stringify(data.id);
           this.props.createActivity({ action,
             subject,
             subjectId,
@@ -67,6 +67,19 @@ class ChannelList extends Component {
                 comparison,
                 value,
                 channelId,
+              }).then(() => {
+                if (this.props.optionChannels && this.props.optionChannels.list.length > 0) {
+                  const userId = this.props.user.id;
+                  const subject = `OptionChannel ${name}`;
+                  const subjectId = this.props.optionChannels.list[0].id;
+                  const action = 'created';
+                  const other = '';
+                  this.props.createActivity({ action,
+                    subject,
+                    subjectId,
+                    other,
+                    userId });
+                }
               });
             }
           }

@@ -96,7 +96,7 @@ class ZoneList extends Component {
           const subject = `Zone ${data.name}`;
           const subjectId = this.props.list[0].id;
           const action = 'duplicated';
-          const other = JSON.stringify(data);
+          const other = JSON.stringify(data.id);
           this.props.createActivity({ action,
             subject,
             subjectId,
@@ -137,7 +137,7 @@ class ZoneList extends Component {
                 const subject = `Share ${name}`;
                 const subjectId = this.props.shares.list[0].id;
                 const action = 'created';
-                const other = JSON.stringify(this.props.shares.list[0]);
+                const other = '';
                 this.props.createActivity({ action,
                   subject,
                   subjectId,
