@@ -382,15 +382,15 @@ async function trackFiction() {
 
 // Activity fiction
 async function activityFiction() {
-  console.log(chalk.grey('Check current number of all Activity Fiction...'));
+  console.log(chalk.grey('Check current number of user activities...'));
   const activitiesQuantity = await Activity.count();
 
   if (activitiesQuantity === 0) {
     console.log(chalk.red('No user found! Do a fiction...'));
     const results = await Activity.bulkCreate(activitiesList);
-    console.log(chalk.green(`CREATED: ${results.length} all Activity => PASSED!`));
+    console.log(chalk.green(`CREATED: ${results.length} user activities. => PASSED!`));
   } else {
-    console.log(chalk.green(`FOUND: ${activitiesQuantity} all Activity. => PASSED!`));
+    console.log(chalk.green(`FOUND: ${activitiesQuantity} user activities. => PASSED!`));
   }
 }
 
