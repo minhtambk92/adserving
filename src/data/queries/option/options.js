@@ -15,8 +15,11 @@ const option = {
     // Additional params
   }),
   resolve: resolver(Option, {
-    before(options) {
+    before(options, args, res) {
       const opts = options;
+      if (res.body !== undefined) {
+        opts.where = res.body.variables;
+      }
       opts.order = options.order || [];
       opts.order.push(['createdAt', 'DESC']);
       return opts;
