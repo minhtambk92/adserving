@@ -16,6 +16,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getUserProfile, updateProfile } from '../../actions/users/users';
 import { navigate } from '../../actions/route';
 import { setStatusUpdateProfileUser, setPageProfileActiveTab } from '../../actions/pages/users';
+import { createActivity, getActivitiesByUserId } from '../../actions/activity/activities';
 import SettingProfile from './SettingProfile';
 import InformationProfile from './InformationProfile';
 import Activities from './Activities';
@@ -32,11 +33,14 @@ class Profile extends Component {
     updateProfile: PropTypes.func,
     setStatusUpdateProfileUser: PropTypes.func,
     page: PropTypes.object,
+    activities: PropTypes.object,
     setPageProfileActiveTab: PropTypes.func,
+    createActivity: PropTypes.func,
+    getActivitiesByUserId: PropTypes.func,
   };
 
   componentWillMount() {
-    this.props.getUserProfile(this.props.user.id);
+    this.props.getActivitiesByUserId(this.props.user.id);
     this.props.setPageProfileActiveTab('settings');
   }
 
@@ -58,7 +62,7 @@ class Profile extends Component {
     event.persist();
     this.props.setPageProfileActiveTab(event.target.getAttribute('data-id'));
     if (event.target.getAttribute('data-id') === 'activity') {
-      this.props.getUserProfile(this.props.user.id);
+      this.props.getActivitiesByUserId(this.props.user.id);
     }
   }
 
@@ -72,9 +76,11 @@ class Profile extends Component {
               setStatusUpdateProfileUser={this.props.setStatusUpdateProfileUser}
               page={this.props.page}
               updateProfile={this.props.updateProfile}
-              getUser={this.props.getUserProfile}
+              getUserProfile={this.props.getUserProfile}
               id={this.props.user && this.props.user.id}
               setPageProfileActiveTab={this.props.setPageProfileActiveTab}
+              getActivitiesByUserId={this.props.getActivitiesByUserId}
+              createActivity={this.props.createActivity}
             />
           </div>
           {/* /.col */}
@@ -106,18 +112,20 @@ class Profile extends Component {
                   <SettingProfile
                     user={this.props.users && this.props.users.editing}
                     updateProfile={this.props.updateProfile}
-                    getUser={this.props.getUserProfile}
+                    getUserProfile={this.props.getUserProfile}
                     id={this.props.user && this.props.user.id}
                     setStatusUpdateProfileUser={this.props.setStatusUpdateProfileUser}
                     page={this.props.page}
                     setPageProfileActiveTab={this.props.setPageProfileActiveTab}
+                    activities={this.props.activities}
+                    createActivity={this.props.createActivity}
                   />
                 </div>
                 {/* /.tab-pane activity */}
                 <div className="tab-pane" id="activity">
                   {/* Post */}
                   <Activities
-                    users={this.props.users && this.props.users.editing}
+                    activities={this.props.activities && this.props.activities.list}
                   />
                   {/* /.post */}
                 </div>
@@ -221,6 +229,7 @@ class Profile extends Component {
 const mapState = state => ({
   user: state.user,
   users: state.users,
+  activities: state.activities,
   page: state.page.users,
 });
 
@@ -230,6 +239,8 @@ const mapDispatch = {
   updateProfile,
   setStatusUpdateProfileUser,
   setPageProfileActiveTab,
+  getActivitiesByUserId,
+  createActivity,
 };
 
 export default withStyles(s)(connect(mapState, mapDispatch)(Profile));

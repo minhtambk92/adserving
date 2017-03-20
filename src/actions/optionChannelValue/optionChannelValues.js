@@ -26,7 +26,9 @@ import queryOptionChannelValueIsProperties from './getOptionChannelValueIsProper
 export function getOptionChannelValueIsProperties() {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client(queryOptionChannelValueIsProperties);
+      const { data } = await client.query({
+        query: queryOptionChannelValueIsProperties,
+      });
 
       dispatch({
         type: GET_OPTION_CHANNEL_VALUE_IS_PROPERTIES,

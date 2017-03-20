@@ -12,8 +12,10 @@ class InformationProfile extends Component {
     setStatusUpdateProfileUser: PropTypes.func,
     id: PropTypes.string,
     updateProfile: PropTypes.func,
-    getUser: PropTypes.func,
+    getUserProfile: PropTypes.func,
     setPageProfileActiveTab: PropTypes.func,
+    createActivity: PropTypes.func,
+    getActivitiesByUserId: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -58,8 +60,22 @@ class InformationProfile extends Component {
     user.profile.gender = this.props.user.profile.gender;
 
     this.props.updateProfile(user).then(() => {
-      this.props.getUser(this.props.id);
       this.setState({ isChangeAvatar: false });
+      const userId = this.props.user.id;
+      const subject = 'Avatar';
+      const subjectId = this.props.user.id;
+      const action = 'updated';
+      const other = '';
+      this.props.createActivity({
+        action,
+        subject,
+        subjectId,
+        other,
+        userId }).then(() => {
+          this.props.getUserProfile(this.props.id).then(() => {
+            this.props.getActivitiesByUserId(this.props.id);
+          });
+        });
     });
   }
 
@@ -72,6 +88,7 @@ class InformationProfile extends Component {
         image = '/default_avatar.png';
       }
       this.setState({ imageUrl: image });
+      this.setState({ isChangeAvatar: false });
     }
   }
 
@@ -131,9 +148,7 @@ class InformationProfile extends Component {
             </div>
             <img
               className="profile-user-img img-responsive img-circle"
-              src={(this.props.user && this.props.user.profile &&
-              this.props.user.profile.picture &&
-              this.props.user.profile.picture !== '') ?
+              src={(this.state.imageUrl && this.state.imageUrl.trim() !== '') ?
                 this.state.imageUrl : '/default_avatar.png'
               }
               alt="avatar"

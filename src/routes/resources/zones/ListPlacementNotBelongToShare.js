@@ -1,3 +1,6 @@
+
+/* global jQuery */
+
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import ReactDOM from 'react-dom';
@@ -15,6 +18,8 @@ class ListPlacementNotBelongToZone extends Component {
     shares: PropTypes.object,
     setCurrentShare: PropTypes.func,
     listPlacementNotBelongShare: PropTypes.array,
+    getZone: PropTypes.func,
+    getPlacements: PropTypes.func,
   };
 
   dataTableOptions() {
@@ -62,7 +67,7 @@ class ListPlacementNotBelongToZone extends Component {
   pushPlacementToShare(rowData) {
  // eslint-disable-line no-unused-vars, class-methods-use-this
 
-    const arr = this.props.listPlacementNotBelongShare;
+    const arr = jQuery.extend([], this.props.listPlacementNotBelongShare);
     _.sumBy(arr, o => o.weight); // ➜ 20
     const sumWeight = _.sumBy(arr, 'weight');// ➜ 20
     const shareId = this.props.shareId;
@@ -71,10 +76,10 @@ class ListPlacementNotBelongToZone extends Component {
     const newWeight = sumWeight + parseInt(rowData.weight);
     if (newWeight <= 100) {
       if (this.props.share) {
-        const share = this.props.share;
-        const placement = this.props.share.placements;
+        const share = jQuery.extend({}, this.props.share);
+        const placement = jQuery.extend([], this.props.share.placements);
         placement.push(rowData);
-        share.placements = JSON.stringify(placement.map(data => ({
+        const placements = JSON.stringify(placement.map(data => ({
           id: data.id,
           name: data.name,
           startTime: data.startTime,
@@ -87,8 +92,13 @@ class ListPlacementNotBelongToZone extends Component {
           status: data.status,
           isDeleted: false,
         })));
+        share.placements = placements;
 
-        this.props.updateShare(share);
+        this.props.updateShare(share).then(() => {
+          this.props.getZone(this.props.zoneId).then(() => {
+            this.props.getPlacements();
+          });
+        });
       }
     }
   }

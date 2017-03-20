@@ -3,6 +3,7 @@
 import fetch from '../../core/fetch';
 import {
   GET_USER,
+  GET_USER_ERROR,
   GET_USERS,
   GET_USERS_ERROR,
   CREATE_USER,
@@ -22,6 +23,7 @@ import {
   UPDATE_PROFILE,
   UPDATE_PROFILE_ERROR,
   GET_USER_PROFILE,
+  GET_USER_PROFILE_ERROR,
 } from '../../constants';
 
 import queryGetUser from './getUser.graphql';
@@ -53,33 +55,57 @@ export function setUsersFilters(filter) {
 
 export function getUser(id) {
   return async (dispatch, getState, { client }) => {
-    const { data } = await client.query({
-      query: queryGetUser,
-      variables: { id },
-    });
+    try {
+      if (id) {
+        const { data } = await client.query({
+          query: queryGetUser,
+          variables: { id },
+        });
 
-    dispatch({
-      type: GET_USER,
-      payload: {
-        user: data.users[0],
-      },
-    });
+        dispatch({
+          type: GET_USER,
+          payload: {
+            user: data.users[0],
+          },
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: GET_USER_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 
 export function getUserProfile(id) {
   return async (dispatch, getState, { client }) => {
-    const { data } = await client.query({
-      query: queryGetUserProfile,
-      variables: { id },
-    });
+    try {
+      const { data } = await client.query({
+        query: queryGetUserProfile,
+        variables: { id },
+      });
 
-    dispatch({
-      type: GET_USER_PROFILE,
-      payload: {
-        user: data.users[0],
-      },
-    });
+      dispatch({
+        type: GET_USER_PROFILE,
+        payload: {
+          user: data.users[0],
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_USER_PROFILE_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
   };
 }
 

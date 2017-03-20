@@ -5,10 +5,40 @@ import {
   CREATE_ACTIVITY_ERROR,
   GET_ACTIVITIES_BY_SUBJECT_ID,
   GET_ACTIVITIES_BY_SUBJECT_ID_ERROR,
+  GET_ACTIVITIES_BY_USER_ID,
+  GET_ACTIVITIES_BY_USER_ID_ERROR,
 } from '../../constants';
 
 import queryGetActivitiesBySubjectId from './getActivitiesBySubjectId.graphql';
 import queryCreateActivity from './createActivity.graphql';
+import queryGetActivitiesByUserId from './getActivitiesByUserId.graphql';
+
+export function getActivitiesByUserId(userId) {
+  return async (dispatch, getState, { client }) => {
+    try {
+      const { data } = await client.query({
+        query: queryGetActivitiesByUserId,
+        variables: { userId },
+      });
+
+      dispatch({
+        type: GET_ACTIVITIES_BY_USER_ID,
+        payload: {
+          activities: data.activities,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_ACTIVITIES_BY_USER_ID_ERROR,
+        payload: {
+          error,
+        },
+      });
+      return false;
+    }
+    return true;
+  };
+}
 
 export function getActivitiesBySubjectId(subjectId) {
   return async (dispatch, getState, { client }) => {
