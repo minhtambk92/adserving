@@ -304,8 +304,10 @@ Channel.banners = Channel.hasMany(Banner, {
     name: 'channelId',
   },
 });
+
 Banner.channel = Banner.belongsTo(Channel, {
   foreignKey: 'channelId',
+  as: 'channel',
 });
 
 // Each Site can make many channels
@@ -315,6 +317,7 @@ Site.channels = Site.hasMany(Channel, {
     allowNull: false,
   },
 });
+
 Channel.site = Channel.belongsTo(Site, {
   foreignKey: 'siteId',
 });
@@ -325,6 +328,7 @@ Channel.optionChannels = Channel.hasMany(OptionChannel, {
     allowNull: false,
   },
 });
+
 OptionChannel.channel = OptionChannel.belongsTo(Channel, {
   foreignKey: 'channelId',
 });
@@ -365,6 +369,7 @@ Share.zone = Share.belongsTo(Zone, {
 ZoneType.zones = ZoneType.hasMany(Zone, {
   foreignKey: 'zoneTypeId',
 });
+
 Zone.zoneType = Zone.belongsTo(ZoneType, {
   foreignKey: 'zoneTypeId',
 });
