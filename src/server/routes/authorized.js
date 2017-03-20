@@ -10,7 +10,17 @@ import path from 'path';
 import moment from 'moment';
 import jsBeautify from 'js-beautify';
 import { host, rootPath } from '../../config';
-import { Zone, Share, Placement, Banner, Channel } from '../../data/models';
+import {
+  Zone,
+  Share,
+  Placement,
+  Banner,
+  Channel,
+  OptionChannel,
+  OptionChannelType,
+  OptionChannelValue,
+  OptionChannelValueProperty,
+} from '../../data/models';
 
 const router = express.Router(); // eslint-disable-line new-cap
 const uploadsFolderName = 'uploads';
@@ -61,6 +71,22 @@ router.post('/core-js', async (req, res) => {
           include: [{
             model: Channel,
             as: 'channel',
+            include: [{
+              model: OptionChannel,
+              as: 'options',
+              include: [{
+                model: OptionChannelType,
+                as: 'optionChannelType',
+                include: [{
+                  model: OptionChannelValue,
+                  as: 'optionChannelValues',
+                  include: [{
+                    model: OptionChannelValueProperty,
+                    as: 'optionChannelValueProperties',
+                  }],
+                }],
+              }],
+            }],
           }],
         }],
       }],
@@ -120,6 +146,22 @@ router.post('/bulk-core-js', async (req, res) => {
           include: [{
             model: Channel,
             as: 'channel',
+            include: [{
+              model: OptionChannel,
+              as: 'options',
+              include: [{
+                model: OptionChannelType,
+                as: 'optionChannelType',
+                include: [{
+                  model: OptionChannelValue,
+                  as: 'optionChannelValues',
+                  include: [{
+                    model: OptionChannelValueProperty,
+                    as: 'optionChannelValueProperties',
+                  }],
+                }],
+              }],
+            }],
           }],
         }],
       }],
