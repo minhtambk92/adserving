@@ -1,3 +1,6 @@
+
+/* global jQuery */
+
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { DataTables, ICheck } from '../../../components/UI/';
@@ -61,10 +64,10 @@ class ListPlacementOfShare extends Component {
     const shareId = this.props.shareId;
     this.props.setCurrentShare(shareId);
     if (this.props.share) {
-      const placements = this.props.share.placements;
+      const placements = jQuery.extend([], this.props.share.placements);
       placements.push(rowData);
-      const share = this.props.share;
-      share.placements = JSON.stringify(placements.map(data => ({
+      const share = jQuery.extend({}, this.props.share);
+      const placement = JSON.stringify(placements.map(data => ({
         id: data.id,
         name: data.name,
         startTime: data.startTime,
@@ -77,6 +80,7 @@ class ListPlacementOfShare extends Component {
         status: data.status,
         isDeleted: [rowData.id].indexOf(data.id) !== -1,
       })));
+      share.placements = placement;
 
       this.props.updateShare(share).then(() => {
         this.props.getZone(this.props.zoneId).then(() => {

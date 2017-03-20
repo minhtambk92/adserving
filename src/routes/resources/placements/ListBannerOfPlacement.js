@@ -1,3 +1,6 @@
+
+/* global jQuery */
+
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '../../../components/Link';
@@ -158,10 +161,10 @@ class ListBannerOfPlacement extends Component {
 
   removeBannerToPlacement(rowData) { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (this.props.placement) {
-      const banner = this.props.placement.banners;
+      const banner = jQuery.extend({}, this.props.placement.banners);
       banner.push(rowData);
-      const placement = this.props.placement;
-      placement.banners = JSON.stringify(banner.map(b => ({
+      const placement = jQuery.extend({}, this.props.placement);
+      const banners = JSON.stringify(banner.map(b => ({
         id: b.id,
         name: b.name,
         with: b.width,
@@ -169,6 +172,7 @@ class ListBannerOfPlacement extends Component {
         weight: b.weight,
         isDeleted: [rowData.id].indexOf(b.id) !== -1,
       })));
+      placement.banners = banners;
       this.props.updatePlacement(placement).then(() => {
         this.props.getPlacement(this.props.placementId).then(() => {
           this.props.getBanners();

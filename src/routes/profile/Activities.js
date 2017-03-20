@@ -2,34 +2,31 @@
 
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import Link from '../../components/Link';
 
 class Activities extends Component {
 
   static propTypes = {
     activities: PropTypes.array,
-    users: PropTypes.object,
   };
 
 
   render() {
     return (
       <div className="activities">
-        {this.props.users && this.props.users.activities &&
-        this.props.users.activities.map(activity => (
+        {this.props.activities &&
+        this.props.activities.map(activity => (
           <div className="post" key={activity.id}>
             <div className="user-block">
               <img
                 className="img-circle img-bordered-sm"
-                src={(this.props.users &&
-                this.props.users.profile && this.props.users.profile.picture ?
-                  this.props.users.profile.picture : '/default_avatar.png')}
+                src={(activity.user &&
+                activity.user.profile && activity.user.profile.picture ?
+                  activity.user.profile.picture : '/default_avatar.png')}
                 alt="avatar"
               />
               <span className="username">
-                <Link to="#">{this.props.users && this.props.users.profile &&
-                this.props.users.profile.displayName && this.props.users.profile.displayName}</Link>
-                <Link to="#" className="pull-right btn-box-tool"><i className="fa fa-times" /></Link>
+                {activity.user && activity.user.profile &&
+                activity.user.profile.displayName}
               </span>
               <span
                 className="description"
@@ -39,8 +36,8 @@ class Activities extends Component {
             </div>
             {/* /.user-block */}
             <p>
-              {this.props.users && this.props.users.profile && this.props.users.profile.displayName
-              && this.props.users.profile.displayName} { activity.action } { activity.subject }
+              {activity.user && activity.user.profile && activity.user.profile.displayName
+              && activity.user.profile.displayName} { activity.action } { activity.subject }
             </p>
           </div>
         ))}

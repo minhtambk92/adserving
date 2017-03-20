@@ -91,13 +91,15 @@ class UpdateAdvertiserForm extends Component {
       const subjectId = this.props.advertiser.id;
       const action = 'updated';
       const other = JSON.stringify(advertiserObject);
-      this.props.createActivity({ action,
+      this.props.createActivity({
+        action,
         subject,
         subjectId,
         other,
-        userId }).then(() => {
-          this.props.getAdvertiser(this.props.advertiserId);
-        });
+        userId,
+      }).then(() => {
+        this.props.getAdvertiser(this.props.advertiserId);
+      });
     });
   }
 
@@ -109,11 +111,13 @@ class UpdateAdvertiserForm extends Component {
       const subjectId = this.props.advertiser.id;
       const action = 'deleted';
       const other = '';
-      this.props.createActivity({ action,
+      this.props.createActivity({
+        action,
         subject,
         subjectId,
         other,
-        userId });
+        userId,
+      });
     });
   }
 
