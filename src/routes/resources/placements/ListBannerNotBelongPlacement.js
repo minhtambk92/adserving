@@ -1,3 +1,6 @@
+
+/* global jQuery */
+
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { DataTables, ICheck } from '../../../components/UI/';
@@ -56,10 +59,10 @@ class ListBannerNotBelongPlacement extends Component {
   /* eslint-disable max-len */
   pushBannerToPlacement(rowData) { // eslint-disable-line no-unused-vars, class-methods-use-this
     if (this.props.placement) {
-      const banner = this.props.placement.banners;
+      const banner = jQuery.extend({}, this.props.placement.banners);
       banner.push(rowData);
-      const placement = this.props.placement;
-      placement.banners = JSON.stringify(banner.map(b => ({
+      const placement = jQuery.extend({}, this.props.placement);
+      const banners = JSON.stringify(banner.map(b => ({
         id: b.id,
         name: b.name,
         with: b.width,
@@ -67,6 +70,7 @@ class ListBannerNotBelongPlacement extends Component {
         weight: b.weight,
         isDeleted: false,
       })));
+      placement.banners = banners;
       this.props.updatePlacement(placement);
     }
   }
