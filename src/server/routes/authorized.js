@@ -10,7 +10,7 @@ import path from 'path';
 import moment from 'moment';
 import jsBeautify from 'js-beautify';
 import { host, rootPath } from '../../config';
-import { Zone, Share, Placement, Banner } from '../../data/models';
+import { Zone, Share, Placement, Banner, Channel } from '../../data/models';
 
 const router = express.Router(); // eslint-disable-line new-cap
 const uploadsFolderName = 'uploads';
@@ -58,6 +58,10 @@ router.post('/core-js', async (req, res) => {
         include: [{
           model: Banner,
           as: 'banners',
+          include: [{
+            model: Channel,
+            as: 'channel',
+          }],
         }],
       }],
     }],
@@ -113,6 +117,10 @@ router.post('/bulk-core-js', async (req, res) => {
         include: [{
           model: Banner,
           as: 'banners',
+          include: [{
+            model: Channel,
+            as: 'channel',
+          }],
         }],
       }],
     }],
