@@ -24,6 +24,7 @@ export function getAdvertiser(id) {
         query: queryGetAdvertiser,
         variables: { id },
       });
+
       dispatch({
         type: GET_ADVERTISER,
         payload: {
@@ -146,8 +147,6 @@ export function updateAdvertiser({
           },
         },
       });
-
-      console.log(data);
 
       dispatch({
         type: UPDATE_ADVERTISER,
