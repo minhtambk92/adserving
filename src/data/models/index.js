@@ -284,6 +284,7 @@ BannerType.banners = BannerType.hasMany(Banner, {
     name: 'bannerTypeId',
   },
 });
+
 Banner.bannerType = Banner.belongsTo(BannerType, {
   foreignKey: 'bannerTypeId',
 });
@@ -294,6 +295,7 @@ AdsServer.banners = AdsServer.hasMany(Banner, {
     name: 'adsServerId',
   },
 });
+
 Banner.adsServer = Banner.belongsTo(AdsServer, {
   foreignKey: 'adsServerId',
 });
@@ -327,6 +329,7 @@ Channel.optionChannels = Channel.hasMany(OptionChannel, {
     name: 'channelId',
     allowNull: false,
   },
+  as: 'options',
 });
 
 OptionChannel.channel = OptionChannel.belongsTo(Channel, {
@@ -392,6 +395,7 @@ CharacterSet.zones = CharacterSet.hasMany(Zone, {
 
 OptionChannelType.optionChannelvalues = OptionChannelType.hasMany(OptionChannelValue, {
   foreignKey: 'optionChannelTypeId',
+  as: 'optionChannelValues',
 });
 
 OptionChannelValue.optionChannelType = OptionChannelValue.belongsTo(OptionChannelType, {
@@ -404,11 +408,13 @@ OptionChannelType.optionChannels = OptionChannelType.hasMany(OptionChannel, {
 
 OptionChannel.optionChannelType = OptionChannel.belongsTo(OptionChannelType, {
   foreignKey: 'optionChannelTypeId',
+  as: 'optionChannelType',
 });
 
 OptionChannelValue.optionChannelValueProperties =
   OptionChannelValue.hasMany(OptionChannelValueProperty, {
     foreignKey: 'optionChannelValueId',
+    as: 'optionChannelValueProperties',
   });
 
 OptionChannelValueProperty.optionChannelValue =
