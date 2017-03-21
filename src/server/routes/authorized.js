@@ -8,9 +8,19 @@ import fs from 'fs';
 import fetch from 'node-fetch';
 import path from 'path';
 import moment from 'moment';
-import jsBeautify from 'js-beautify';
 import { host, rootPath } from '../../config';
-import { Zone, Share, Placement, Banner, Channel } from '../../data/models';
+import {
+  Zone,
+  Share,
+  Placement,
+  Banner,
+  Channel,
+  OptionChannel,
+  OptionChannelType,
+  OptionChannelValue,
+  OptionChannelValueProperty,
+} from '../../data/models';
+import adsZoneTemplate from '../templates/adsZone.hbs';
 
 const router = express.Router(); // eslint-disable-line new-cap
 const uploadsFolderName = 'uploads';
@@ -44,7 +54,6 @@ router.post('/core-js', async (req, res) => {
   const zoneId = encodeURI(req.body.zoneId);
   const coreResponse = await fetch(encodeURI(req.body.templateFileUrl));
   let coreContent = await coreResponse.text();
-
   const zoneObject = await Zone.findOne({
     where: {
       id: zoneId,
@@ -61,6 +70,22 @@ router.post('/core-js', async (req, res) => {
           include: [{
             model: Channel,
             as: 'channel',
+            include: [{
+              model: OptionChannel,
+              as: 'options',
+              include: [{
+                model: OptionChannelType,
+                as: 'optionChannelType',
+                include: [{
+                  model: OptionChannelValue,
+                  as: 'optionChannelValues',
+                  include: [{
+                    model: OptionChannelValueProperty,
+                    as: 'optionChannelValueProperties',
+                  }],
+                }],
+              }],
+            }],
           }],
         }],
       }],
@@ -85,14 +110,14 @@ router.post('/core-js', async (req, res) => {
   fs.writeFileSync(builtCoreFile, coreContent); // Write content to file
   fs.chmodSync(builtCoreFile, 0o644); // Chmod to 644
 
-  const outputCode = `
-    <!-- Ads Zone -->
-    <zone id="${zoneId}"></zone>
-    <script src="//${host}/${coreJsFolderName}/arf-${zoneId}.min.js"></script>
-    <!-- / Ads Zone -->
-  `;
+  // Render code to place
+  const outputCode = adsZoneTemplate({
+    zoneId,
+    host,
+    coreJsFolderName,
+  });
 
-  res.send(jsBeautify.html(outputCode));
+  res.send(outputCode);
 });
 
 // Handle multiple zone data rendering
@@ -120,12 +145,27 @@ router.post('/bulk-core-js', async (req, res) => {
           include: [{
             model: Channel,
             as: 'channel',
+            include: [{
+              model: OptionChannel,
+              as: 'options',
+              include: [{
+                model: OptionChannelType,
+                as: 'optionChannelType',
+                include: [{
+                  model: OptionChannelValue,
+                  as: 'optionChannelValues',
+                  include: [{
+                    model: OptionChannelValueProperty,
+                    as: 'optionChannelValueProperties',
+                  }],
+                }],
+              }],
+            }],
           }],
         }],
       }],
     }],
   });
-
   let writableStream = null;
 
   allZones.forEach((zone, index) => {
