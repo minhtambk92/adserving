@@ -1,4 +1,5 @@
-/* global $ */
+/* global $  */
+/* global jQuery */
 
 import React, { Component, PropTypes } from 'react';
 import { ICheck } from '../../../components/UI';
@@ -58,7 +59,7 @@ class UpdateAdvertiserForm extends Component {
     const isEmailStatus = document.getElementById('inputAdvertiserIsEmailStatus').checked;
     const isEmailReport = document.getElementById('inputAdvertiserIsEmailReport').checked;
     const reportInterval = this.inputAdvertiserReportInterval.value;
-    const advertiserObject = this.props.advertiser;
+    const advertiserObject = jQuery.extend({}, this.props.advertiser);
     const advertiser = { id: this.props.advertiserId };
 
     if (email && email !== this.props.advertiser.email) {
@@ -104,7 +105,7 @@ class UpdateAdvertiserForm extends Component {
   }
 
   deleteAdvertiser() {
-    const advertiserObject = this.props.advertiser;
+    const advertiserObject = jQuery.extend({}, this.props.advertiser);
     this.props.deleteAdvertiser(this.props.advertiserId).then(() => {
       const userId = this.props.user.id;
       const subject = `Advertiser ${advertiserObject.name}`;

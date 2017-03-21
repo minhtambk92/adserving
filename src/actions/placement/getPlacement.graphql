@@ -1,5 +1,5 @@
-query getPlacement($id: ID!) {
-  placements(where: {id: $id}, limit: 1) {
+query getPlacement($where: SequelizeJSON) {
+  placements(where: $where) {
     id
     name
     width

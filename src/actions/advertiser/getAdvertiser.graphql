@@ -1,5 +1,5 @@
-query getAdvertiser ($id: ID!) {
-  advertisers(where: {id: $id}) {
+query getAdvertiser ($where: SequelizeJSON) {
+  advertisers(where: $where) {
     id
     email
     name

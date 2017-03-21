@@ -1,5 +1,5 @@
-query getBanner($id: ID!){
-  banners(where: {id: $id}, limit: 1) {
+query getBanner($where: SequelizeJSON){
+  banners(where: $where) {
     id
     name
     html

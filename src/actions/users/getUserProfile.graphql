@@ -1,5 +1,5 @@
-query getUserProfile($id: ID!){
-  users(where: {id: $id}) {
+query getUserProfile($where: SequelizeJSON){
+  users(where: $where) {
     id
     email
     emailConfirmed

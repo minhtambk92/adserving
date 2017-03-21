@@ -1,0 +1,11 @@
+mutation updateOption($option: OptionInputType!) {
+  updatedOption(option: $option) {
+    id
+    name
+    value
+    autoLoad
+    status
+    createdAt
+    updatedAt
+  }
+}

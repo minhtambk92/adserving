@@ -1,5 +1,5 @@
-query getChanenl($id: ID!){
-  channels(where: {id: $id}, limit: 1) {
+query getChanenl($where: SequelizeJSON){
+  channels(where: $where) {
     id
     name
     description

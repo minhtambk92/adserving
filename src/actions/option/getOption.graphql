@@ -1,0 +1,11 @@
+query getOption($where: SequelizeJSON){
+  options(where: $where) {
+    id
+    name
+    value
+    autoLoad
+    status
+    createdAt
+    updatedAt
+  }
+}

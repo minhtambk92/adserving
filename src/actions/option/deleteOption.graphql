@@ -1,0 +1,12 @@
+mutation deleteOption($where: SequelizeJSON){
+  deletedOption(where: $where) {
+    id
+    name
+    value
+    autoLoad
+    status
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}

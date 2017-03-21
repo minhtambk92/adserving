@@ -1,5 +1,5 @@
-query getSite($id: ID!){
-  sites(where: {id: $id}, limit: 1) {
+query getSite($where: SequelizeJSON){
+  sites(where: $where) {
     id
     domain
     name

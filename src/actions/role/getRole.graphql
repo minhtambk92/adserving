@@ -1,5 +1,5 @@
-query getRole($id: ID!){
-  roles(where: {id: $id}, limit: 1) {
+query getRole($where: SequelizeJSON){
+  roles(where: $where) {
     id
     uniqueName
     name

@@ -17,7 +17,7 @@ const users = {
   resolve: resolver(User, {
     before(options, args, res) {
       const opts = options;
-      if (res.body !== undefined) {
+      if (res.body !== undefined && res.body.variables) {
         opts.where = res.body.variables;
       }
       opts.order = options.order || [];
