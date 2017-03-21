@@ -8,8 +8,6 @@ import fs from 'fs';
 import fetch from 'node-fetch';
 import path from 'path';
 import moment from 'moment';
-import jsBeautify from 'js-beautify';
-// import handlebars from 'handlebars';
 import { host, rootPath } from '../../config';
 import {
   Zone,
@@ -22,7 +20,7 @@ import {
   OptionChannelValue,
   OptionChannelValueProperty,
 } from '../../data/models';
-// import adsZoneTemplate from '../templates/adsZone.hbs';
+import adsZoneTemplate from '../templates/adsZone.hbs';
 
 const router = express.Router(); // eslint-disable-line new-cap
 const uploadsFolderName = 'uploads';
@@ -112,16 +110,14 @@ router.post('/core-js', async (req, res) => {
   fs.writeFileSync(builtCoreFile, coreContent); // Write content to file
   fs.chmodSync(builtCoreFile, 0o644); // Chmod to 644
 
-  // console.log(adsZoneTemplate);
+  // Render code to place
+  const outputCode = adsZoneTemplate({
+    zoneId,
+    host,
+    coreJsFolderName,
+  });
 
-  const outputCode = `
-    <!-- Ads Zone -->
-    <zone id="${zoneId}"></zone>
-    <script src="//${host}/${coreJsFolderName}/arf-${zoneId}.min.js"></script>
-    <!-- / Ads Zone -->
-  `;
-
-  res.send(jsBeautify.html(outputCode));
+  res.send(outputCode);
 });
 
 // Handle multiple zone data rendering
