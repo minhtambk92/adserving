@@ -1,3 +1,6 @@
+
+/* global jQuery */
+
 import React, { Component, PropTypes } from 'react';
 import Link from '../../../components/Link';
 

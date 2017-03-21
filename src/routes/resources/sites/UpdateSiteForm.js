@@ -1,3 +1,6 @@
+
+/* global jQuery */
+
 import React, { Component, PropTypes } from 'react';
 import Link from '../../../components/Link';
 
@@ -37,7 +40,7 @@ class UpdateSiteForm extends Component {
     const description = this.inputSiteDescription.value;
     const status = this.inputSiteStatus.value;
     const site = { id: this.props.siteId };
-    const siteObject = this.props.site;
+    const siteObject = jQuery.extend({}, this.props.site);
     site.domain = domain;
     site.name = name;
     site.email = email;
@@ -102,7 +105,7 @@ class UpdateSiteForm extends Component {
   }
 
   deleteSite() {
-    const siteObject = this.props.site;
+    const siteObject = jQuery.extend({}, this.props.site);
     this.props.deleteSite(this.props.siteId).then(() => {
       const userId = this.props.user.id;
       const subject = `Site ${siteObject.name}`;

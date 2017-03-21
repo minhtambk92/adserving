@@ -1,4 +1,5 @@
 /* global $ */
+/* global jQuery */
 
 import React, { Component, PropTypes } from 'react';
 import { ICheck } from '../../../../components/UI';
@@ -62,7 +63,7 @@ class EditBannerTypeForm extends Component {
   }
 
   save() {
-    const bannerTypeObject = this.props.bannerType;
+    const bannerTypeObject = jQuery.extend({}, this.props.bannerType);
     const id = this.props.id;
     const name = this.inputBannerTypeName.value;
     const value = this.convertToSlug(name);

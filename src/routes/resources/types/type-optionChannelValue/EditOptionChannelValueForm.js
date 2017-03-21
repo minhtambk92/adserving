@@ -1,4 +1,5 @@
 /* global $ */
+/* global jQuery */
 
 import React, { Component, PropTypes } from 'react';
 import Link from '../../../../components/Link';
@@ -50,7 +51,7 @@ class EditOptionChannelValueForm extends Component {
   }
 
   save() {
-    const optionChannelValueObject = this.props.optionChannelValue;
+    const optionChannelValueObject = jQuery.extend({}, this.props.optionChannelValue);
     const name = this.inputOptionChannelValueName.value;
     const status = this.inputOptionChannelValueStatus.value;
     const optionChannelTypeId = this.inputOptionChannelTypeId.value;

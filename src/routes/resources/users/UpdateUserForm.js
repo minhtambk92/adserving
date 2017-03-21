@@ -2,6 +2,8 @@
  * Created by Manhhailua on 11/11/16.
  */
 
+/* global jQuery */
+
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import Link from '../../../components/Link';
@@ -84,7 +86,7 @@ class UpdateUserForm extends Component {
       const subject = `User ${userEditing.profile.displayName}`;
       const subjectId = userEditing.id;
       const action = 'updated';
-      const data = userEditing;
+      const data = jQuery.extend({}, userEditing);
       delete data.activities;
       const other = JSON.stringify(data);
       this.props.createActivity({ action,

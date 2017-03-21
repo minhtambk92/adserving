@@ -147,6 +147,8 @@ export function updateAdvertiser({
         },
       });
 
+      console.log(data);
+
       dispatch({
         type: UPDATE_ADVERTISER,
         payload: {
