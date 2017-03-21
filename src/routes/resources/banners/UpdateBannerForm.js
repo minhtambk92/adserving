@@ -1,3 +1,6 @@
+
+/* global jQuery */
+
 import React, { Component, PropTypes } from 'react';
 import DropzoneComponent from 'react-dropzone-component/lib/react-dropzone';
 import { InputTags, ICheck } from '../../../components/UI';
@@ -130,7 +133,7 @@ class UpdateBannerForm extends Component {
       adsServerId = null;
     }
     const status = this.inputBannerStatus.value;
-    const bannerObject = this.props.banner;
+    const bannerObject = jQuery.extend({}, this.props.banner);
     const banner = { id: this.props.bannerId };
     if (name && name !== this.props.banner.name) {
       banner.name = name;
@@ -198,7 +201,7 @@ class UpdateBannerForm extends Component {
   }
 
   deleteBanner() {
-    const bannerObject = this.props.banner;
+    const bannerObject = jQuery.extend({}, this.props.banner);
     this.props.deleteBanner(this.props.bannerId).then(() => {
       const userId = this.props.user.id;
       const subject = `Banner ${bannerObject.name}`;

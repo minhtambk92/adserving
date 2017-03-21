@@ -1,3 +1,6 @@
+
+/* global jQuery */
+
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import Link from '../../../components/Link';
@@ -136,7 +139,7 @@ class UpdateZoneForm extends Component {
     let zoneSizeTypeId = null;
 
     const zone = { id: this.props.zoneId };
-    const zoneObject = this.props.zone;
+    const zoneObject = jQuery.extend({}, this.props.zone);
 
     if (siteId && siteId !== this.props.zone.siteId) {
       zone.siteId = siteId;
@@ -223,7 +226,7 @@ class UpdateZoneForm extends Component {
   }
 
   deleteZone() {
-    const zoneObject = this.props.zone;
+    const zoneObject = jQuery.extend({}, this.props.zone);
     this.props.deleteZone(this.props.zoneId).then(() => {
       const userId = this.props.user.id;
       const subject = `Zone ${zoneObject.name}`;

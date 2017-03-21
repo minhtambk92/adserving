@@ -1,4 +1,5 @@
 /* global $ */
+/* global jQuery */
 
 import React, { Component, PropTypes } from 'react';
 import Link from '../../../../components/Link';
@@ -31,7 +32,7 @@ class EditCharacterSetForm extends Component {
   }
 
   save() {
-    const characterSetObject = this.props.characterSet;
+    const characterSetObject = jQuery.extend({}, this.props.characterSet);
     const id = this.props.id;
     const name = this.inputCharacterSetName.value;
     const value = this.inputCharacterSetValue.value;

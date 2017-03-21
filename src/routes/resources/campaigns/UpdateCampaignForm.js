@@ -1,5 +1,6 @@
 
 /* global $ */
+/* global jQuery */
 
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
@@ -175,7 +176,7 @@ class UpdateCampaignForm extends Component {
     }
     const description = this.inputCampaignDescription.value;
     const status = this.inputCampaignStatus.value;
-    const campaignObject = this.props.campaign;
+    const campaignObject = jQuery.extend({}, this.props.campaign);
     const campaign = { id: this.props.campaignId };
 
     if (name && name !== this.props.campaign.name) {
@@ -233,7 +234,7 @@ class UpdateCampaignForm extends Component {
   }
 
   deleteCampaign() {
-    const campaignObject = this.props.campaign;
+    const campaignObject = jQuery.extend({}, this.props.campaign);
     this.props.deleteCampaign(this.props.campaignId).then(() => {
       const userId = this.props.user.id;
       const subject = `Campaign ${campaignObject.name}`;

@@ -1,4 +1,5 @@
 /* global $ */
+/* global jQuery */
 
 import React, { Component, PropTypes } from 'react';
 import DropzoneComponent from 'react-dropzone-component/lib/react-dropzone';
@@ -42,7 +43,7 @@ class EditProfileForm extends Component {
   }
 
   save() {
-    const profileObject = this.props.profile;
+    const profileObject = jQuery.extend({}, this.props.profile);
     const displayName = this.inputProfileName.value;
     const gender = this.inputProfileGender.value;
     const location = this.inputProfileLocation.value;

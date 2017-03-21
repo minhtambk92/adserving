@@ -1,4 +1,5 @@
 /* global $ */
+/* global jQuery */
 
 import React, { Component, PropTypes } from 'react';
 import Link from '../../../../components/Link';
@@ -33,7 +34,7 @@ class EditZoneSizeTypeForm extends Component {
   }
 
   save() {
-    const zoneSizeTypeObject = this.props.zoneSizeType;
+    const zoneSizeTypeObject = jQuery.extend({}, this.props.zoneSizeType);
     const name = this.inputZoneSizeTypeName.value;
     const width = this.inputZoneSizeTypeWidth.value;
     const height = this.inputZoneSizeTypeHeight.value;

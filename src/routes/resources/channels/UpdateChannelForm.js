@@ -1,3 +1,6 @@
+
+/* global jQuery */
+
 import React, { Component, PropTypes } from 'react';
 import Link from '../../../components/Link';
 
@@ -30,7 +33,7 @@ class UpdateChannelForm extends Component {
     const description = this.inputChannelDescription.value;
     const status = this.inputChannelStatus.value;
 
-    const channelObject = this.props.channel;
+    const channelObject = jQuery.extend({}, this.props.channel);
     const channel = { id: this.props.channelId };
 
     channel.name = name;
@@ -57,7 +60,7 @@ class UpdateChannelForm extends Component {
   }
 
   deleteChannel() {
-    const channelObject = this.props.channel;
+    const channelObject = jQuery.extend({}, this.props.channel);
     this.props.deleteChannel(this.props.channelId).then(() => {
       const userId = this.props.user.id;
       const subject = `Channel ${channelObject.name}`;

@@ -1,4 +1,5 @@
 /* global $ */
+/* global jQuery */
 
 import React, { Component, PropTypes } from 'react';
 import { ICheck } from '../../../../components/UI';
@@ -63,7 +64,7 @@ class EditZoneTypeForm extends Component {
   }
 
   save() {
-    const zoneTypeObject = this.props.zoneType;
+    const zoneTypeObject = jQuery.extend({}, this.props.zoneType);
     const name = this.inputZoneTypeName.value;
     const value = this.convertToSlug(name);
     const isSize = document.getElementById('inputZoneTypeIsSize').checked;

@@ -24,6 +24,7 @@ export function getAdvertiser(id) {
         query: queryGetAdvertiser,
         variables: { id },
       });
+
       dispatch({
         type: GET_ADVERTISER,
         payload: {

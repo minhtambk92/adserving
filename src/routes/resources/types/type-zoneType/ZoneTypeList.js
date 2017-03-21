@@ -91,13 +91,12 @@ class ZoneTypeList extends Component {
   }
 
   deleteZoneType(data) {
-    const zoneTypeObject = data;
     this.props.deleteZoneType(data.id).then(() => {
       const userId = this.props.user.id;
       const subject = `Zone Type ${data.name}`;
       const subjectId = data.id;
       const action = 'deleted';
-      const other = JSON.stringify(zoneTypeObject);
+      const other = '';
       this.props.createActivity({ action,
         subject,
         subjectId,

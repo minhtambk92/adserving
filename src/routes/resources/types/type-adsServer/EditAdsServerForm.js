@@ -1,4 +1,5 @@
 /* global $ */
+/* global jQuery */
 
 import React, { Component, PropTypes } from 'react';
 import Link from '../../../../components/Link';
@@ -48,7 +49,7 @@ class EditAdsServerForm extends Component {
   }
 
   save() {
-    const adsServerObject = this.props.adsServer;
+    const adsServerObject = jQuery.extend({}, this.props.adsServer);
     const id = this.props.id;
     const name = this.inputAdsServerName.value;
     const value = this.convertToSlug(name);

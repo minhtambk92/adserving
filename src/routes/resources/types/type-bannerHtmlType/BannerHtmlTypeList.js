@@ -92,13 +92,12 @@ class BannerHtmlTypeList extends Component {
   }
 
   deleteBannerHtmlType(data) {
-    const bannerHtmlTypeObject = data;
     this.props.deleteBannerHtmlType(data.id).then(() => {
       const userId = this.props.user.id;
       const subject = `Banner Html Type ${data.name}`;
       const subjectId = data.id;
       const action = 'deleted';
-      const other = JSON.stringify(bannerHtmlTypeObject);
+      const other = '';
       this.props.createActivity({ action,
         subject,
         subjectId,
