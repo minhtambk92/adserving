@@ -133,6 +133,11 @@ const config = {
         exclude: /node_modules/,
         loader: 'graphql-tag/loader',
       },
+      {
+        test: /\.(handlebars|hbs)$/,
+        exclude: /node_modules/,
+        loader: 'handlebars-loader',
+      },
     ],
   },
 

@@ -9,6 +9,7 @@ import fetch from 'node-fetch';
 import path from 'path';
 import moment from 'moment';
 import jsBeautify from 'js-beautify';
+// import handlebars from 'handlebars';
 import { host, rootPath } from '../../config';
 import {
   Zone,
@@ -21,6 +22,7 @@ import {
   OptionChannelValue,
   OptionChannelValueProperty,
 } from '../../data/models';
+// import adsZoneTemplate from '../templates/adsZone.hbs';
 
 const router = express.Router(); // eslint-disable-line new-cap
 const uploadsFolderName = 'uploads';
@@ -54,7 +56,6 @@ router.post('/core-js', async (req, res) => {
   const zoneId = encodeURI(req.body.zoneId);
   const coreResponse = await fetch(encodeURI(req.body.templateFileUrl));
   let coreContent = await coreResponse.text();
-
   const zoneObject = await Zone.findOne({
     where: {
       id: zoneId,
@@ -110,6 +111,8 @@ router.post('/core-js', async (req, res) => {
   // Write file
   fs.writeFileSync(builtCoreFile, coreContent); // Write content to file
   fs.chmodSync(builtCoreFile, 0o644); // Chmod to 644
+
+  // console.log(adsZoneTemplate);
 
   const outputCode = `
     <!-- Ads Zone -->
@@ -167,7 +170,6 @@ router.post('/bulk-core-js', async (req, res) => {
       }],
     }],
   });
-
   let writableStream = null;
 
   allZones.forEach((zone, index) => {
