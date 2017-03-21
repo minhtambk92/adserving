@@ -1,0 +1,11 @@
+mutation createOption($option: OptionInputTypeWithoutId!) {
+  createdOption(option: $option) {
+    id
+    name
+    value
+    autoLoad
+    status
+    createdAt
+    updatedAt
+  }
+}

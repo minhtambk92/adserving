@@ -1,5 +1,5 @@
-query getCampaign($id: ID!){
-  campaigns(where: {id: $id}) {
+query getCampaign($where: SequelizeJSON){
+  campaigns(where: $where) {
     id
     advertiserId
     name

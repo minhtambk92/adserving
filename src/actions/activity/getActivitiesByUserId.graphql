@@ -1,5 +1,5 @@
-query getActivitiesByUserId($userId: ID!){
-  activities(where: {userId: $userId}) {
+query getActivitiesByUserId($where: SequelizeJSON){
+  activities(where: $where) {
     id
     action
     subject

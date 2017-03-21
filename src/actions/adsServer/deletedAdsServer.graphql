@@ -1,5 +1,5 @@
-mutation deletedAdsServer($id: ID!){
-  deletedAdsServer(id: $id) {
+mutation deletedAdsServer($where: SequelizeJSON){
+  deletedAdsServer(where: $where) {
     id
     name
     value

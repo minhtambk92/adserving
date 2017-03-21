@@ -1,5 +1,5 @@
-query getResource($id: ID!){
-  resources(where: {id: $id}, limit: 1) {
+query getResource($where: SequelizeJSON){
+  resources(where: $where) {
     id
     uniqueName
     modelName

@@ -1,5 +1,5 @@
-query checkSiteByDomain($domain: STRING!){
-  sites(where: {domain: $domain}) {
+query checkSiteByDomain($where: SequelizeJSON){
+  sites(where: $where) {
     id
     domain
     name

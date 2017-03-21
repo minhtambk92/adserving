@@ -6,48 +6,34 @@ import {
   DELETE_OPTION,
 } from '../../constants';
 
-export function getOption(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const query = `
-      query {
-        options(where: {id: "${id}"}, limit: 1) {
-          id
-          name
-          value
-          autoLoad
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
+import queryGetOption from './getOption.graphql';
+import queryGetOptions from './getOptions.graphql';
+import mutationCreateOption from './createOption.graphql';
+import mutationUpdateOption from './updateOption.graphql';
+import mutationDeleteOption from './deleteOption.graphql';
 
-    const { data } = await graphqlRequest(query);
+export function getOption(id) {
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.query({
+      query: queryGetOption,
+      variables: { id },
+    });
 
     dispatch({
       type: GET_OPTION,
       payload: {
-        option: data.options.shift(),
+        option: data.options[0],
       },
     });
   };
 }
 
 export function getOptions() {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const query = `
-      query {
-        options {
-          id
-          name
-          value
-          autoLoad
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(query);
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.query({
+      query: queryGetOptions,
+      variables: {},
+    });
 
     dispatch({
       type: GET_OPTIONS,
@@ -61,26 +47,16 @@ export function getOptions() {
 export function createOption({
   name, value, autoLoad, status,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($option: OptionInputTypeWithoutId!) {
-        createdOption(option: $option) {
-          id
-          name
-          value
-          autoLoad
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
-      option: {
-        name,
-        value,
-        autoLoad,
-        status,
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationCreateOption,
+      variables: {
+        option: {
+          name,
+          value,
+          autoLoad,
+          status,
+        },
       },
     });
 
@@ -96,27 +72,17 @@ export function createOption({
 export function updateOption({
   id, name, value, autoLoad, status,
 }) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation ($option: OptionInputType!) {
-        updatedOption(option: $option) {
-          id
-          name
-          value
-          autoLoad
-          status
-          createdAt
-          updatedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation, {
-      option: {
-        id,
-        name,
-        value,
-        autoLoad,
-        status,
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationUpdateOption,
+      variables: {
+        option: {
+          id,
+          name,
+          value,
+          autoLoad,
+          status,
+        },
       },
     });
 
@@ -130,22 +96,13 @@ export function updateOption({
 }
 
 export function deleteOption(id) {
-  return async (dispatch, getState, { graphqlRequest }) => {
-    const mutation = `
-      mutation {
-        deletedOption(id: "${id}") {
-          id
-          name
-          value
-          autoLoad
-          status
-          createdAt
-          updatedAt
-          deletedAt
-        }
-      }`;
-
-    const { data } = await graphqlRequest(mutation);
+  return async (dispatch, getState, { client }) => {
+    const { data } = await client.mutate({
+      mutation: mutationDeleteOption,
+      variables: {
+        id,
+      },
+    });
 
     dispatch({
       type: DELETE_OPTION,

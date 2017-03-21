@@ -1,5 +1,5 @@
-query getUser($id: ID!) {
-  users(where: {id: $id}, limit: 1) {
+query getUser($where: SequelizeJSON) {
+  users(where: $where) {
     id
     email
     emailConfirmed

@@ -1,5 +1,5 @@
-query getZone($id: ID!) {
-  zones(where: {id: $id}) {
+query getZone($where: SequelizeJSON) {
+  zones(where: $where) {
     id
     siteId
     name

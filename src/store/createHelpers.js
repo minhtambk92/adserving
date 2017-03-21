@@ -23,6 +23,8 @@ function createGraphqlRequest(apolloClient) {
       return apolloClient.networkInterface.query({ query, variables });
     }
 
+    console.log(query);
+
     let isMutation = false;
     if (query.definitions) {
       isMutation = query.definitions.some(definition => definition && (definition.operation === 'mutation'));
