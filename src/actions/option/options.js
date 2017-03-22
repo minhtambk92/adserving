@@ -14,7 +14,7 @@ import mutationDeleteOption from './deleteOption.graphql';
 
 export function getOption(id) {
   return async (dispatch, getState, { client }) => {
-    const { data } = await client.query({
+    const { data } = await client.networkInterface.query({
       query: queryGetOption,
       variables: { id },
     });
@@ -30,7 +30,7 @@ export function getOption(id) {
 
 export function getOptions() {
   return async (dispatch, getState, { client }) => {
-    const { data } = await client.query({
+    const { data } = await client.networkInterface.query({
       query: queryGetOptions,
       variables: {},
     });

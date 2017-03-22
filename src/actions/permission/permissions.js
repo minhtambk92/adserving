@@ -17,7 +17,7 @@ import mutationDeletedPermission from './deletedPermission.graphql';
 export function getPermissions() {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetPermissions,
       });
 

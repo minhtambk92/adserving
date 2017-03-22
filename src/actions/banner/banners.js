@@ -64,7 +64,7 @@ export function setBannersFilters(filter) {
 export function getBanner(id) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetBanner, variables: { id },
       });
 
@@ -105,7 +105,7 @@ export function getBanners(args = {
       ) {
         variables.where = Object.assign({}, filters);
       }
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetBanners,
         variables: variables.where,
       });

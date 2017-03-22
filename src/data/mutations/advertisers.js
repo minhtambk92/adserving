@@ -43,7 +43,6 @@ const advertisers = {
             id: args.advertiser.id,
           },
         });
-        console.log(opts);
 
         return opts;
       },

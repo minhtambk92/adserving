@@ -64,7 +64,7 @@ export function setCampaignsFilters(filter) {
 export function getCampaign(id) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetCampaign, variables: { id },
       });
 
@@ -105,7 +105,7 @@ export function getCampaigns(args = {
       ) {
         variables.where = Object.assign({}, filters);
       }
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetCampaigns,
         variables: variables.where,
       });

@@ -70,7 +70,7 @@ export function setZonesFilters(filter) {
 export function getZone(id) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetZone,
         variables: { id },
       });
@@ -113,7 +113,7 @@ export function getZones(args = {
         variables.where = Object.assign({}, filters);
       }
 
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetZones,
         variables: variables.where,
       });

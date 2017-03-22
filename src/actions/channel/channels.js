@@ -66,7 +66,7 @@ export function setChannelsFilters(filter) {
 export function getChannel(id) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetChannel, variables: { id },
       });
 
@@ -108,7 +108,7 @@ export function getChannels(args = {
         variables.where = Object.assign({}, filters);
       }
 
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetChannels, variables: variables.where,
       });
 

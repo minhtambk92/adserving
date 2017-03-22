@@ -20,7 +20,7 @@ import mutationDeletedOptionChannelType from './deletedOptionChannelType.graphql
 export function getOptionChannelTypeIsSelectOption() {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetOptionChannelTypeIsSelectOption,
       });
 
@@ -46,7 +46,7 @@ export function getOptionChannelTypeIsSelectOption() {
 export function getOptionChannelTypes() {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetOptionChannelTypes,
       });
 

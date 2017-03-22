@@ -20,7 +20,7 @@ import mutationDeleteAdvertiser from './deletedAdvertiser.graphql';
 export function getAdvertiser(id) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetAdvertiser,
         variables: { id },
       });
@@ -47,7 +47,7 @@ export function getAdvertiser(id) {
 export function getAdvertisers() {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetAdvertisers,
         variables: {},
       });
