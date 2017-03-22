@@ -19,6 +19,7 @@ import {
   OptionChannelType,
   OptionChannelValue,
   OptionChannelValueProperty,
+  Campaign,
 } from '../../data/models';
 import adsZoneTemplate from '../templates/adsZone.hbs';
 
@@ -88,6 +89,9 @@ router.post('/core-js', async (req, res) => {
             }],
           }],
         }],
+      }, {
+        model: Campaign,
+        as: 'campaign',
       }],
     }],
   });
