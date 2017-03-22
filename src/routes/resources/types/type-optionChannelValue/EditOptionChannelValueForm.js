@@ -2,6 +2,7 @@
 /* global jQuery */
 
 import React, { Component, PropTypes } from 'react';
+import { ICheck } from '../../../../components/UI';
 import Link from '../../../../components/Link';
 
 class EditOptionChannelValueForm extends Component {
@@ -19,11 +20,64 @@ class EditOptionChannelValueForm extends Component {
     createActivity: PropTypes.func,
   };
 
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      isCustomValue: false,
+    };
+  }
+
+  componentDidMount() {
+    /* eslint-disable no-undef */
+
+    const self = this;
+
+    $('#inputOptionChannelValueIsCustomValue').on('ifClicked', () => {
+      const isCustomValue = document.getElementById('inputOptionChannelValueIsCustomValue').checked;
+      if (isCustomValue === true) {
+        self.setState({ isCustomValue: false });
+      } else if (isCustomValue === false) {
+        self.setState({ isCustomValue: true });
+      }
+    });
+
+    /* eslint-enable no-undef */
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.optionChannelValue) {
       this.inputOptionChannelValueName.value = nextProps.optionChannelValue.name;
       this.inputOptionChannelValueStatus.value = nextProps.optionChannelValue.status;
       this.inputOptionChannelTypeId.value = nextProps.optionChannelValue.optionChannelType.id;
+      if (nextProps.optionChannelValue.isCustomValue === true) {
+        this.setState({ isCustomValue: true });
+        if (this.inputOptionChannelValue !== undefined && this.inputOptionChannelValue !== null) {
+          this.inputOptionChannelValue.value = nextProps.optionChannelValue.value;
+        }
+      } else {
+        this.setState({ isCustomValue: false });
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    /* eslint-disable no-undef */
+
+    if (this.props.optionChannelValue) {
+      if (this.state.isCustomValue === true) {
+        $('#inputOptionChannelValueIsCustomValue').iCheck('check');
+        if (this.props.optionChannelValue.isCustomValue === true) {
+          this.inputOptionChannelValue.value = this.props.optionChannelValue.value;
+        }
+      } else if (this.state.isCustomValue === false) {
+        if (this.props.optionChannelValue.isCustomValue === false &&
+          this.state.isCustomValue === true) {
+          $('#inputOptionChannelValueIsCustomValue').iCheck('check');
+        } else if (this.props.optionChannelValue.isCustomValue === false) {
+          $('#inputOptionChannelValueIsCustomValue').iCheck('uncheck');
+        }
+      }
     }
   }
 
@@ -59,8 +113,14 @@ class EditOptionChannelValueForm extends Component {
     const optionChannelValue = { id: this.props.id };
     optionChannelValue.name = name;
     optionChannelValue.status = status;
-    optionChannelValue.value = this.convertToSlug(name);
     optionChannelValue.optionChannelTypeId = optionChannelTypeId;
+    optionChannelValue.isCustomValue = document.getElementById('inputOptionChannelValueIsCustomValue').checked;
+    optionChannelValue.value = '';
+    if (this.state.isCustomValue === true) {
+      optionChannelValue.value = this.inputOptionChannelValue.value;
+    } else {
+      optionChannelValue.value = this.convertToSlug(name);
+    }
     this.props.updateOptionChannelValue(optionChannelValue).then(() => {
       const userId = this.props.user.id;
       const subject = `Option Channel Value ${name}`;
@@ -72,7 +132,9 @@ class EditOptionChannelValueForm extends Component {
         subjectId,
         other,
         userId }).then(() => {
-          this.props.getOptionChannelValues();
+          this.props.getOptionChannelValues().then(() => {
+            this.setState({ isCustomValue: false });
+          });
         });
     });
     this.props.statusUpdateOptionChannelValue(false);
@@ -157,6 +219,36 @@ class EditOptionChannelValueForm extends Component {
                 </select>
               </div>
             </div>
+            <div className="form-group">
+              <label
+                htmlFor="inputOptionChannelValueIsCustomValue"
+                className="col-sm-2 control-label"
+              >Custom Value</label>
+              <div className="col-sm-10 checkbox">
+                <ICheck
+                  type="checkbox" id="inputOptionChannelValueIsCustomValue" className="form-control"
+                  ref={(c) => {
+                    this.inputOptionChannelValueIsCustomValue = c;
+                  }}
+                />
+              </div>
+            </div>
+            {this.state.isCustomValue === true ? (
+              <div className="form-group">
+                <label
+                  htmlFor="inputOptionChannelValue" className="col-sm-2 control-label"
+                >Value</label>
+                <div className="col-sm-10">
+                  <input
+                    type="text" className="form-control" id="inputOptionChannelValue"
+                    placeholder="Value"
+                    ref={(c) => {
+                      this.inputOptionChannelValue = c;
+                    }}
+                  />
+                </div>
+              </div>
+              ) : ('')}
           </div>
         </div>
         <div className="box-footer">

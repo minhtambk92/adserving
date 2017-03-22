@@ -138,6 +138,7 @@ export function createOptionChannelValue({
   optionChannelTypeId,
   userId,
   isProperties,
+  isCustomValue,
 }) {
   return async (dispatch, getState, { client }) => {
     try {
@@ -151,6 +152,7 @@ export function createOptionChannelValue({
             optionChannelTypeId,
             userId,
             isProperties,
+            isCustomValue,
           },
         },
       });
@@ -180,6 +182,7 @@ export function updateOptionChannelValue({
   value,
   status,
   optionChannelTypeId,
+  isCustomValue,
 }) {
   return async (dispatch, getState, { client }) => {
     try {
@@ -192,6 +195,7 @@ export function updateOptionChannelValue({
             value,
             status,
             optionChannelTypeId,
+            isCustomValue,
           },
         },
       });

@@ -31,6 +31,10 @@ const OptionChannelValue = Model.define('OptionChannelValue', {
     type: DataType.UUID,
     defaultValue: null,
   },
+  isCustomValue: {
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  },
   isProperties: {
     type: DataType.BOOLEAN,
     defaultValue: true,
