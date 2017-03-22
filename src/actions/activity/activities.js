@@ -16,7 +16,7 @@ import queryGetActivitiesByUserId from './getActivitiesByUserId.graphql';
 export function getActivitiesByUserId(userId) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetActivitiesByUserId,
         variables: { userId },
       });
@@ -43,7 +43,7 @@ export function getActivitiesByUserId(userId) {
 export function getActivitiesBySubjectId(subjectId) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetActivitiesBySubjectId,
         variables: { subjectId },
       });

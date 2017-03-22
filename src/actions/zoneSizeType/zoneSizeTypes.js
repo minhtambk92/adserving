@@ -35,7 +35,7 @@ export function getZoneSizeTypes(args = {
         variables.where = Object.assign({}, filters);
       }
 
-      const { data } = await client.query({ query: queryGetZoneSizeTypes });
+      const { data } = await client.networkInterface.query({ query: queryGetZoneSizeTypes });
 
       dispatch({
         type: GET_ZONE_SIZE_TYPES,

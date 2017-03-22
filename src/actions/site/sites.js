@@ -29,7 +29,7 @@ import queryCheckSitesByDomain from './checkSitesByDomain.graphql';
 export function getSite(id) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetSite, variables: { id },
       });
 
@@ -71,7 +71,7 @@ export function getSites(args = {
         variables.where = Object.assign({}, filters);
       }
 
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetSites, variables: variables.where,
       });
 
@@ -97,7 +97,7 @@ export function getSites(args = {
 export function checkSitesByDomain(domain) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryCheckSitesByDomain, variables: { domain },
       });
       dispatch({

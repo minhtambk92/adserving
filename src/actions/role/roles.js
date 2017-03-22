@@ -68,7 +68,7 @@ export function setRolesFilters(filter) {
 export function getRole(id) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetRole,
         variables: { id },
       });
@@ -108,7 +108,7 @@ export function getRoles(args = {
         variables.where = { ...filters };
       }
 
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetRoles,
         variables: variables.where,
       });

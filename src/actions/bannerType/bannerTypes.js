@@ -35,7 +35,7 @@ export function getBannerTypes(args = {
         variables.where = Object.assign({}, filters);
       }
 
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetBannerTypes, variables: variables.where,
       });
 

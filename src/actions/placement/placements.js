@@ -64,7 +64,7 @@ export function setPlacementsFilters(filter) {
 export function getPlacement(id) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetPlacement,
         variables: { id },
       });
@@ -106,7 +106,7 @@ export function getPlacements(args = {
       ) {
         variables.where = Object.assign({}, filters);
       }
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetPlacements, variables: variables.where,
       });
 

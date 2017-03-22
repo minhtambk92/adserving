@@ -57,7 +57,7 @@ export function getUser(id) {
   return async (dispatch, getState, { client }) => {
     try {
       if (id) {
-        const { data } = await client.query({
+        const { data } = await client.networkInterface.query({
           query: queryGetUser,
           variables: { id },
         });
@@ -85,7 +85,7 @@ export function getUser(id) {
 export function getUserProfile(id) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetUserProfile,
         variables: { id },
       });
@@ -128,7 +128,7 @@ export function getUsers(args = {
         variables.where = Object.assign({}, filters);
       }
 
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetUsers,
         variables: variables.where,
       });

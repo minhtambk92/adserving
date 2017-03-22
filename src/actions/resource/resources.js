@@ -68,7 +68,7 @@ export function setResourcesFilters(filter) {
 export function getResource(id) {
   return async (dispatch, getState, { client }) => {
     try {
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetResource,
         variables: { id },
       });
@@ -108,7 +108,7 @@ export function getResources(args = {
         variables.where = { ...filters };
       }
 
-      const { data } = await client.query({
+      const { data } = await client.networkInterface.query({
         query: queryGetResources,
         variables: variables.where,
       });
