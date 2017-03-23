@@ -5,6 +5,7 @@ query getOptionChannelTypes($where: SequelizeJSON){
     isInputLink
     isSelectOption
     isVariable
+    isMultiSelect
     status
     userId
     optionChannelValues {

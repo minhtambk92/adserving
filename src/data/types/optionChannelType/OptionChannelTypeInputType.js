@@ -16,6 +16,7 @@ const OptionChannelTypeInputType = new InputObjectType({
     isInputLink: { type: new NonNull(BooleanType) },
     isSelectOption: { type: new NonNull(BooleanType) },
     isVariable: { type: new NonNull(BooleanType) },
+    isMultiSelect: { type: new NonNull(BooleanType) },
     status: { type: new NonNull(StringType) },
   }),
 });

@@ -34,6 +34,11 @@ const OptionChannelType = Model.define('OptionChannelType', {
     defaultValue: true,
     allowNull: false,
   },
+  isMultiSelect: {
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+    allowNull: false,
+  },
   userId: {
     type: DataType.UUID,
     defaultValue: null,

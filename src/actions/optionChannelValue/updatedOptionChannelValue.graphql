@@ -13,6 +13,7 @@ mutation updatedOptionChannel($optionChannelValue: OptionChannelValueInputType!)
       isInputLink
       isSelectOption
       isVariable
+      isMultiSelect
       status
     }
     createdAt

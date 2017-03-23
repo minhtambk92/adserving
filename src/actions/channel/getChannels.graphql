@@ -14,12 +14,15 @@ query getChannels($where: SequelizeJSON){
         isInputLink
         isSelectOption
         isVariable
+        isMultiSelect
         status
         optionChannelValues {
           id
           name
           value
           status
+          isProperties
+          isCustomValue
         }
       }
       logical

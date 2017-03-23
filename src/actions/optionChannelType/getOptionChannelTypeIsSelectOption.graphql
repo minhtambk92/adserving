@@ -1,10 +1,11 @@
-query getOptionChannelTypeIsSelectOption{
-  optionChannelTypes(where: {isSelectOption: true}) {
+query getOptionChannelTypeIsSelectOption {
+  optionChannelTypes(where: {or: [{isSelectOption: true}, {isMultiSelect: true}]}) {
     id
     name
     isInputLink
     isSelectOption
     isVariable
+    isMultiSelect
     status
     userId
     createdAt

@@ -13,6 +13,7 @@ mutation createdOptionChannelValue($optionChannelValue: OptionChannelValueInputT
       isInputLink
       isSelectOption
       isVariable
+      isMultiSelect
       status
       userId
     }

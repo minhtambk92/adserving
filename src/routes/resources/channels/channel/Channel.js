@@ -8,6 +8,7 @@
  */
 
 /* global $ */
+/* global jQuery */
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
@@ -33,6 +34,7 @@ import OptionSelectChannel from '../OptionSelectChannel';
 import Activities from '../Activities';
 import { setPageChannelActiveTab } from '../../../../actions/pages/channels';
 import FilterSiteChannel from '../FilterSiteChannel';
+import MultiSelectOption from '../MultiSelectOption';
 import Link from '../../../../components/Link';
 import s from './Channel.css'; // eslint-disable-line css-modules/no-unused-class
 
@@ -72,10 +74,12 @@ class Channel extends Component {
       arrVariable: [],
       arrCheckBox: [],
       arrOption: [],
+      arrMultiSelect: [],
       string: '',
       createOptionSelect: false,
       createVariable: false,
       createLink: false,
+      createMultiSelect: false,
     };
   }
 
@@ -180,6 +184,11 @@ class Channel extends Component {
               // Update Site Option channel
               oChannel.name = optionChannelType.name;
               oChannel.value = $(`#${id} .inputChannelOptionURL`).val();
+            } else if (optionChannelType.isMultiSelect === true) {
+              oChannel.name = optionChannelType.name;
+              const value = $(`#${id} .inputMultiSelectOption`).select2('val');
+              const v = jQuery.extend([], value);
+              oChannel.value = v;
             }
             const op = _.filter(this.state.arrOption, { id: id });
             const checkName = (JSON.stringify(oChannel.name) === JSON.stringify(op[0].name));
@@ -244,6 +253,10 @@ class Channel extends Component {
                 // Update Site Option channel
                 name = options[0].name;
                 value = $(`.optionChannel-${i} .inputChannelOptionURL`).val();
+              } else if (options[0].isMultiSelect === true) {
+                name = options[0].name;
+                value = $(`.optionChannel-${i} .inputMultiSelectOption`).select2('val');
+                value.toString();
               }
               if (comparison && value) {
                 this.props.createOptionChannel({
@@ -270,9 +283,11 @@ class Channel extends Component {
                     this.setState({ createLink: false });
                     this.setState({ createOptionSelect: false });
                     this.setState({ createVariable: false });
+                    this.setState({ createMultiSelect: false });
                     this.setState({ newFilterSite: [] });
                     this.setState({ arrVariable: [] });
                     this.setState({ arrCheckBox: [] });
+                    this.setState({ arrMultiSelect: [] });
                   });
                 });
               }
@@ -290,7 +305,7 @@ class Channel extends Component {
       const item = _.filter(this.props.optionChannelTypes.list, { id: value });
       if (item && item.length > 0 && item[0]) {
         const html = item[0].name;
-        const arrOptionChannelValue = item[0].optionChannelValues;
+        const arrOptionChannelValue = jQuery.extend([], item[0].optionChannelValues);
         if (item[0].isInputLink === true) {
           const count = this.state.countOptionChannel + 1;
           this.setState({ createLink: true });
@@ -304,6 +319,11 @@ class Channel extends Component {
         } else if (item[0].isVariable === true) {
           this.setState({ createVariable: true });
           this.addVariable(item[0], html);
+        } else if (item[0].isMultiSelect === true) {
+          this.setState({ createMultiSelect: true });
+          const count = this.state.countOptionChannel + 1;
+          this.setState({ countOptionChannel: count });
+          this.addMultiSelect(item[0], arrOptionChannelValue, html);
         }
       }
     }
@@ -336,9 +356,20 @@ class Channel extends Component {
     const ob = {};
     ob.name = name;
     ob.count = count;
-    ob.data = data;
+    ob.data = jQuery.extend([], data);
     ob.type = type;
     this.setState({ arrCheckBox: this.state.arrCheckBox.concat([ob]) });
+  }
+
+  addMultiSelect(type, data, name) { // eslint-disable-line no-unused-vars, class-methods-use-this
+    const count = this.state.countOptionChannel + 1;
+    this.setState({ countOptionChannel: count });
+    const ob = {};
+    ob.name = name;
+    ob.count = count;
+    ob.data = jQuery.extend([], data);
+    ob.type = type;
+    this.setState({ arrMultiSelect: this.state.arrMultiSelect.concat([ob]) });
   }
 
   render() {
@@ -450,13 +481,29 @@ class Channel extends Component {
                               createActivity={this.props.createActivity}
                               user={this.props.user}
                             />);
-                          } else if (option.optionChannelType.isSelectOption === false) {
+                          } else if (option.optionChannelType.isInputLink === true ||
+                            option.optionChannelType.isVariable) {
                             return (
                               <FilterSiteChannel
                                 key={option.id}
                                 id={option.id}
                                 index={index + 1}
                                 type={option.optionChannelType}
+                                createActivity={this.props.createActivity}
+                                deleteOptionChannel={this.props.deleteOptionChannel}
+                                name={option.name}
+                                option={option}
+                                user={this.props.user}
+                              />
+                            );
+                          } else if (option.optionChannelType.isMultiSelect === true) {
+                            return (
+                              <MultiSelectOption
+                                key={option.id}
+                                id={option.id}
+                                index={index + 1}
+                                value={option.value.split(',')}
+                                data={option.optionChannelType.optionChannelValues}
                                 createActivity={this.props.createActivity}
                                 deleteOptionChannel={this.props.deleteOptionChannel}
                                 name={option.name}
@@ -492,6 +539,16 @@ class Channel extends Component {
                           index={ob.count}
                           name={ob.name}
                           data={ob.data}
+                          typeId={ob.type.id}
+                        />
+                      ))}
+                      {this.state.arrMultiSelect && this.state.arrMultiSelect.map(ob => (
+                        <MultiSelectOption
+                          key={ob.count}
+                          index={ob.count}
+                          name={ob.name}
+                          data={ob.data}
+                          value={[]}
                           typeId={ob.type.id}
                         />
                       ))}

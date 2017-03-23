@@ -1,4 +1,4 @@
-query getChanenl($where: SequelizeJSON){
+query getChannel($where: SequelizeJSON){
   channels(where: $where) {
     id
     name
@@ -14,6 +14,7 @@ query getChanenl($where: SequelizeJSON){
         isInputLink
         isSelectOption
         isVariable
+        isMultiSelect
         status
         optionChannelValues {
           id
@@ -21,6 +22,7 @@ query getChanenl($where: SequelizeJSON){
           value
           status
           isProperties
+          isCustomValue
           optionChannelValueProperties {
             id
             name

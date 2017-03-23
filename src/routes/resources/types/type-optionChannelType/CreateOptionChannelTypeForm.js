@@ -25,6 +25,7 @@ class CreateOptionChannelTypeForm extends Component {
     const isInputLink = document.getElementById('inputOptionChannelTypeIsInputLink').checked;
     const isSelectOption = document.getElementById('inputOptionChannelTypeIsSelectOption').checked;
     const isVariable = document.getElementById('inputOptionChannelTypeIsVariable').checked;
+    const isMultiSelect = document.getElementById('inputOptionChannelTypeIsMultiSelect').checked;
     const userId = this.props.user.id;
     if (name) {
       this.props.createOptionChannelType({
@@ -32,6 +33,7 @@ class CreateOptionChannelTypeForm extends Component {
         isInputLink,
         isSelectOption,
         isVariable,
+        isMultiSelect,
         status,
         userId,
       }).then(() => {
@@ -97,7 +99,7 @@ class CreateOptionChannelTypeForm extends Component {
               <div className="col-sm-10">
                 <label
                   htmlFor="inputOptionChannelTypeIsInputLink"
-                  className="col-sm-4"
+                  className="col-sm-3"
                 >
                   <input
                     type="radio" name="r1" className="minimal"
@@ -107,7 +109,7 @@ class CreateOptionChannelTypeForm extends Component {
                 </label>
                 <label
                   htmlFor="inputOptionChannelTypeIsSelectOption"
-                  className="col-sm-4"
+                  className="col-sm-3"
                 >
                   <input
                     type="radio" name="r1" className="minimal"
@@ -117,13 +119,23 @@ class CreateOptionChannelTypeForm extends Component {
                 </label>
                 <label
                   htmlFor="inputOptionChannelTypeIsVariable"
-                  className="col-sm-4"
+                  className="col-sm-3"
                 >
                   <input
                     type="radio" name="r1" className="minimal"
                     id="inputOptionChannelTypeIsVariable"
                   />
                   &nbsp; Variable
+                </label>
+                <label
+                  htmlFor="inputOptionChannelTypeIsMultiSelect"
+                  className="col-sm-3"
+                >
+                  <input
+                    type="radio" name="r1" className="minimal"
+                    id="inputOptionChannelTypeIsMultiSelect"
+                  />
+                  &nbsp; Multiple Select
                 </label>
               </div>
             </div>
