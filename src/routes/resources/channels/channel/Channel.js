@@ -164,7 +164,6 @@ class Channel extends Component {
           oChannel.comparison = $(`#${id} .inputSiteFilter`).val();
           oChannel.channelId = this.props.channelId;
           if (optionChannelType) {
-            console.log(optionChannelType);
             if (optionChannelType.isVariable === true) {
               oChannel.name = $(`#${id} .inputChannelVariableName`).val();
               oChannel.value = $(`#${id} .inputChannelVariableValue`).val();
