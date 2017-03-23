@@ -88,10 +88,10 @@ router.post('/core-js', async (req, res) => {
               }],
             }],
           }],
+        }, {
+          model: Campaign,
+          as: 'campaign',
         }],
-      }, {
-        model: Campaign,
-        as: 'campaign',
       }],
     }],
   });
@@ -166,6 +166,9 @@ router.post('/bulk-core-js', async (req, res) => {
               }],
             }],
           }],
+        }, {
+          model: Campaign,
+          as: 'campaign',
         }],
       }],
     }],
