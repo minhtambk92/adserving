@@ -35,14 +35,4 @@ router.post('/login',
   },
 );
 
-router.post('/logout', (req, res) => {
-  if (!req.cookies.id_token) {
-    return res.sendStatus(403);
-  }
-
-  res.clearCookie('id_token');
-
-  return res.sendStatus(202);
-});
-
 export default router;

@@ -25,6 +25,16 @@ import adsZoneTemplate from '../templates/adsZone.hbs';
 const router = express.Router(); // eslint-disable-line new-cap
 const uploadsFolderName = 'uploads';
 
+router.post('/logout', (req, res) => {
+  if (!req.cookies.id_token) {
+    return res.sendStatus(403);
+  }
+
+  res.clearCookie('id_token');
+
+  return res.sendStatus(202);
+});
+
 // Init multer storage
 const upload = multer({
   storage: multer.diskStorage({
