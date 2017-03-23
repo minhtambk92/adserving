@@ -74,6 +74,7 @@ export function createOptionChannelType({
   isInputLink,
   isSelectOption,
   isVariable,
+  isMultiSelect,
   status,
   userId,
 }) {
@@ -87,6 +88,7 @@ export function createOptionChannelType({
             isInputLink,
             isSelectOption,
             isVariable,
+            isMultiSelect,
             status,
             userId,
           },
@@ -118,6 +120,7 @@ export function updateOptionChannelType({
   isInputLink,
   isSelectOption,
   isVariable,
+  isMultiSelect,
   status,
 }) {
   return async (dispatch, getState, { client }) => {
@@ -131,6 +134,7 @@ export function updateOptionChannelType({
             isInputLink,
             isSelectOption,
             isVariable,
+            isMultiSelect,
             status,
           },
         },

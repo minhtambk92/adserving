@@ -5,6 +5,7 @@ mutation deletedOptionChannelType($id: ID!){
     isInputLink
     isSelectOption
     isVariable
+    isMultiSelect
     status
     userId
     createdAt

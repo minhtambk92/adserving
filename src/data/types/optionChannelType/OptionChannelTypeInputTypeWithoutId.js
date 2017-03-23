@@ -5,7 +5,7 @@ import { OptionChannelType } from '../../models';
 const OptionChannelTypeInputTypeWithoutId = new InputObjectType({
   name: 'OptionChannelTypeInputTypeWithoutId',
   fields: () => Object.assign(attributeFields(OptionChannelType, {
-    only: ['name', 'isInputLink', 'isSelectOption', 'isVariable', 'status', 'userId'],
+    only: ['name', 'isInputLink', 'isSelectOption', 'isVariable', 'status', 'userId', 'isMultiSelect'],
   }), {
     // Additional fields
   }),

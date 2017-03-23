@@ -5,6 +5,7 @@ mutation updatedOptionChannelType($optionChannelType: OptionChannelTypeInputType
     isInputLink
     isSelectOption
     isVariable
+    isMultiSelect
     status
     createdAt
     updatedAt

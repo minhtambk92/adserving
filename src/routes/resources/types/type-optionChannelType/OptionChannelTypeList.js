@@ -76,6 +76,8 @@ class OptionChannelTypeList extends Component {
           typeOption = 'Select Option';
         } else if (row.isVariable === true) {
           typeOption = 'Variable';
+        } else if (row.isMultiSelect === true) {
+          typeOption = 'Multiple Select';
         }
         return typeOption;
       },
@@ -103,7 +105,7 @@ class OptionChannelTypeList extends Component {
       data: null,
       orderable: false,
       createdCell: (cell, cellData, rowData) => {
-        if (rowData.isSelectOption === true) {
+        if (rowData.isSelectOption === true || rowData.isMultiSelect === true) {
           ReactDOM.render(<Link
             to="/resource/type/8ae8a702-5d18-4992-9518-3a44adca658c"
             onClick={() => this.addOptionChannelValue(rowData)}

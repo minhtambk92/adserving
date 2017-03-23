@@ -5,6 +5,7 @@ mutation createdOptionChannelType($optionChannelType: OptionChannelTypeInputType
     isInputLink
     isSelectOption
     isVariable
+    isMultiSelect
     status
     userId
     createdAt

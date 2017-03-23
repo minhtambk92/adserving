@@ -13,6 +13,7 @@ query getOptionChannelValueIsProperties{
       isInputLink
       isSelectOption
       isVariable
+      isMultiSelect
       status
       userId
     }
