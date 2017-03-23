@@ -11,6 +11,7 @@ mutation updatedOptionChannelProperty($optionChannelValueProperty: OptionChannel
       status
       userId
       isProperties
+      isCustomValue
     }
     description
     createdAt

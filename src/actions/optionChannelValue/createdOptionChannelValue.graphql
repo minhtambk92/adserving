@@ -6,6 +6,7 @@ mutation createdOptionChannelValue($optionChannelValue: OptionChannelValueInputT
     status
     userId
     isProperties
+    isCustomValue
     optionChannelType {
       id
       name

@@ -6,6 +6,7 @@ query getOptionChannelValues($where: SequelizeJSON){
     status
     userId
     isProperties
+    isCustomValue
     optionChannelType {
       id
       name

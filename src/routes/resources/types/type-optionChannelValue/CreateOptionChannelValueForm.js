@@ -18,9 +18,29 @@ class CreateOptionChannelValueForm extends Component {
     createActivity: PropTypes.func,
   };
 
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      isCustomValue: false,
+    };
+  }
+
   componentDidMount() {
     /* eslint-disable no-undef */
     $('#inputOptionChannelValueIsProperties').iCheck('check');
+
+    const self = this;
+
+    $('#inputOptionChannelValueIsCustomValue').on('ifClicked', () => {
+      const isStartNow = document.getElementById('inputOptionChannelValueIsCustomValue').checked;
+      if (isStartNow === true) {
+        self.setState({ isCustomValue: false });
+      } else if (isStartNow === false) {
+        self.setState({ isCustomValue: true });
+      }
+    });
+
     /* eslint-enable no-undef */
   }
 
@@ -53,13 +73,29 @@ class CreateOptionChannelValueForm extends Component {
     return str;
   }
 
+  createValue() {
+    if (this.inputOptionChannelValueName.value) {
+      if (this.state.isCustomValue === false) {
+        const name = this.inputOptionChannelValueName.value;
+        const value = this.convertToSlug(name);
+        this.inputOptionChannelValueNoCustom.value = value;
+      }
+    }
+  }
+
   createOptionChannelValue() {
     const name = this.inputOptionChannelValueName.value;
-    const value = this.convertToSlug(name);
     const status = this.inputOptionChannelValueStatus.value;
     const optionChannelTypeId = this.inputOptionChannelTypeId.value;
     const userId = this.props.user.id;
     const isProperties = document.getElementById('inputOptionChannelValueIsProperties').checked;
+    const isCustomValue = document.getElementById('inputOptionChannelValueIsCustomValue').checked;
+    let value = '';
+    if (this.state.isCustomValue === true) {
+      value = this.inputOptionChannelValue.value;
+    } else {
+      value = this.convertToSlug(name);
+    }
     if (name) {
       this.props.createOptionChannelValue({
         name,
@@ -68,6 +104,7 @@ class CreateOptionChannelValueForm extends Component {
         optionChannelTypeId,
         userId,
         isProperties,
+        isCustomValue,
       }).then(() => {
         if (this.props.optionChannelValues && this.props.optionChannelValues.list.length > 0) {
           /* eslint-disable no-shadow */
@@ -76,11 +113,13 @@ class CreateOptionChannelValueForm extends Component {
           const subjectId = this.props.optionChannelValues.list[0].id;
           const action = 'created';
           const other = '';
-          this.props.createActivity({ action,
+          this.props.createActivity({
+            action,
             subject,
             subjectId,
             other,
-            userId });
+            userId,
+          });
         }
       });
     }
@@ -118,6 +157,7 @@ class CreateOptionChannelValueForm extends Component {
               >Name</label>
               <div className="col-sm-10">
                 <input
+                  onBlur={() => this.createValue()}
                   type="text" className="form-control" id="inputOptionChannelValueName"
                   placeholder="Name"
                   ref={(c) => {
@@ -161,6 +201,52 @@ class CreateOptionChannelValueForm extends Component {
                 />
               </div>
             </div>
+            <div className="form-group">
+              <label
+                htmlFor="inputOptionChannelValueIsCustomValue"
+                className="col-sm-2 control-label"
+              >Custom Value</label>
+              <div className="col-sm-10 checkbox">
+                <ICheck
+                  type="checkbox" id="inputOptionChannelValueIsCustomValue" className="form-control"
+                  ref={(c) => {
+                    this.inputOptionChannelValueIsCustomValue = c;
+                  }}
+                />
+              </div>
+            </div>
+            {this.state.isCustomValue === true ? (
+              <div className="form-group">
+                <label
+                  htmlFor="inputOptionChannelValue" className="col-sm-2 control-label"
+                >Value</label>
+                <div className="col-sm-10">
+                  <input
+                    type="text" className="form-control" id="inputOptionChannelValue"
+                    placeholder="Value"
+                    ref={(c) => {
+                      this.inputOptionChannelValue = c;
+                    }}
+                  />
+                </div>
+              </div>
+              ) : (
+                <div className="form-group">
+                  <label
+                    htmlFor="inputOptionChannelValueNoCustom" className="col-sm-2 control-label"
+                  >Value</label>
+                  <div className="col-sm-10">
+                    <input
+                      type="text" className="form-control" readOnly
+                      id="inputOptionChannelValueNoCustom"
+                      placeholder="Value"
+                      ref={(c) => {
+                        this.inputOptionChannelValueNoCustom = c;
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
             <div className="form-group">
               <label
                 htmlFor="inputOptionChannelValueStatus"
